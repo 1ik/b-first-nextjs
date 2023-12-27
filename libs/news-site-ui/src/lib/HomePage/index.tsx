@@ -28,7 +28,7 @@ export const HomePage = () => {
       />
       <NewsCard
         title="Foreign debt has increased by 39 thousand crores in one year"
-        category="Economics"
+        category="ECONOMICS"
         showCategory
         showPublishedAt
         publishedAt="59 minutes ago"

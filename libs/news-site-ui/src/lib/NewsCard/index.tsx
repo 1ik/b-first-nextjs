@@ -32,10 +32,13 @@ export const NewsCard = ({
   showDivider,
 }: INewsCard) => {
   return (
-    <div className="flex flex-col items-start gap-1">
-      {showImage ? <UIImage src={image} alt={imageAlt} /> : ''}
+    <div className="flex flex-col items-start gap-1.5">
+      {showImage ? <UIImage className="pb-1" src={image} alt={imageAlt} /> : ''}
       {showCategory ? (
-        <h5 className={`font-semibold text-base`} style={{ color: '#D00023' }}>
+        <h5
+          className={`uppercase font-semibold text-base leading-4`}
+          style={{ color: '#D00023' }}
+        >
           {category}
         </h5>
       ) : (
