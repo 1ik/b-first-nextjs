@@ -3,8 +3,9 @@ import { Header } from '../Header';
 
 export const NewsSiteRootLayout = ({ children }: any) => {
   return (
-    <div className="px-4">
-      <Header /> {children} Footer
+    <div className="px-3">
+      <Header />
+      {children}
     </div>
   );
 };

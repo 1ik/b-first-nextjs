@@ -2,3 +2,6 @@
 
 export * from './lib/news-site-ui';
 export * from './lib/NewSiteRootLayout';
+export * from './lib/HomePage';
+export * from './lib/NewsCard';
+export * from './lib/Header';

@@ -1,8 +1,8 @@
-import { NewsSiteUi } from '@bd-first/news-site-ui';
+import { HomePage } from '@bd-first/news-site-ui';
 export function Index() {
   return (
     <div className={''}>
-      <NewsSiteUi />
+      <HomePage />
     </div>
   );
 }
