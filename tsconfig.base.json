@@ -14,7 +14,12 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@bd-first/common-ui": ["libs/common-ui/src/index.ts"],
+      "@bd-first/common-ui/server": ["common-ui/src/server.ts"],
+      "@bd-first/news-site-ui": ["libs/news-site-ui/src/index.ts"],
+      "@bd-first/news-site-ui/server": ["news-site-ui/src/server.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
