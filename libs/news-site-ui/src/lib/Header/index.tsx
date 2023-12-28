@@ -1,7 +1,8 @@
 // Header of Site
+
 export const Header = () => {
   return (
-    <div className="flex justify-between items-center py-4">
+    <div className="flex items-center justify-between py-4">
       <button>
         <img
           className="h-13 w-42.5"
@@ -10,7 +11,7 @@ export const Header = () => {
         />
       </button>
       <img
-        className="h-5 w-5"
+        className="w-5 h-5"
         src="/icons/hamburger-icon.png"
         alt="bangladesh-first-site-icon"
       />
