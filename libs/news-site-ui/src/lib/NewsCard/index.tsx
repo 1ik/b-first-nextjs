@@ -1,5 +1,5 @@
 // Card contains a thubnail, title, category,time etc. of news
-import { UIImage } from '@bd-first/common-ui';
+import { Image } from '@bd-first/common-ui';
 
 type Size = 'sm' | 'md' | 'lg';
 
@@ -33,7 +33,7 @@ export const NewsCard = ({
 }: INewsCard) => {
   return (
     <div className="flex flex-col items-start gap-1.5">
-      {showImage ? <UIImage className="pb-1" src={image} alt={imageAlt} /> : ''}
+      {showImage ? <Image className="pb-1" src={image} alt={imageAlt} /> : ''}
       {showCategory ? (
         <h5
           className={`uppercase font-semibold text-base leading-4`}
@@ -73,7 +73,10 @@ export const NewsCard = ({
         ''
       )}
       {showDivider ? (
-        <hr className="w-full border-[1px] mt-1" style={{ color: '#3A3A3A' }} />
+        <hr
+          className="w-full border-[1px] mt-1"
+          style={{ color: '#3A3A3A', opacity: 0.6 }}
+        />
       ) : (
         ''
       )}

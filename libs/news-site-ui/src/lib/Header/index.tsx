@@ -2,7 +2,7 @@
 
 export const Header = () => {
   return (
-    <div className="flex items-center justify-between py-4">
+    <div className="flex items-center justify-between py-0">
       <button>
         <img
           className="h-13 w-42.5"

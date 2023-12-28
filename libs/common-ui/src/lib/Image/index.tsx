@@ -1,15 +1,15 @@
-import Image from 'next/image';
+import NextImage from 'next/image';
 
-interface UIImage {
+interface Image {
   src: string;
   alt: string;
   width: number;
   height: number;
 }
-export const UIImage = ({ src, alt, width, height, className }: any) => {
+export const Image = ({ src, alt, width, height, className }: any) => {
   return (
     <div className={`min-w-full flex w-full ${className}`}>
-      <Image
+      <NextImage
         src={src}
         alt={alt ?? ''}
         width={width ?? 360}
