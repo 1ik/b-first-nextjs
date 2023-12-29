@@ -34,7 +34,9 @@ export const NewsCard = ({
   gap,
 }: INewsCard) => {
   return (
-    <div className={`flex flex-col items-start gap-${gap ?? 1.5}`}>
+    <div
+      className={`flex flex-col items-start ${gap ? `gap-${gap}` : 'gap-1.5'}`}
+    >
       {showImage ? <Image className="pb-1" src={image} alt={imageAlt} /> : ''}
       {showCategory ? (
         <h5
