@@ -15,7 +15,11 @@ const PrevArrow = ({ className, style, onClick }: any) => {
       }}
       onClick={onClick}
     >
-      <img src="/icons/next.png" alt={'next'} />
+      <img
+        style={{ transform: `rotate(180deg)` }}
+        src="/icons/_next.png"
+        alt={'next'}
+      />
     </div>
   );
 };
@@ -32,7 +36,7 @@ const NextArrow = ({ className, style, onClick }: any) => {
       }}
       onClick={onClick}
     >
-      <img src="/icons/next.png" alt={'next'} />
+      <img src="/icons/_next.png" alt={'next'} />
     </div>
   );
 };
