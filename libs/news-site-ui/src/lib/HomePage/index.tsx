@@ -1,8 +1,26 @@
 import { NewsCard } from '../NewsCard';
 
+const featuredCategorysNews = [
+  {
+    key: 1,
+    title: '70 percent people are ready to vote for boat: Quader',
+    publishedAt: '35 minutes ago',
+  },
+  {
+    key: 1,
+    title: 'Playing with fire will burn them to death: Quader',
+    publishedAt: '46 minutes ago',
+  },
+  {
+    key: 1,
+    title: 'No anti-election speech at victory rally: Home Minister',
+    publishedAt: '46 minutes ago',
+  },
+];
+
 export const HomePage = () => {
   return (
-    <div className="w-full flex flex-col pb-6 gap-2">
+    <div className="flex flex-col w-full gap-2">
       <NewsCard
         title="Awami League develops, BNP burns people: Sheikh Hasina"
         category="Bangladesh Election"
@@ -34,6 +52,36 @@ export const HomePage = () => {
         publishedAt="59 minutes ago"
         size="md"
       />
+      <div
+        className="flex flex-col w-full gap-3 px-3 py-4"
+        style={{ backgroundColor: '#EFEFEF' }}
+      >
+        <h2
+          className="font-bold text-sm leading-4 tracking-[1px] uppercase"
+          style={{ color: '#D00023' }}
+        >
+          Bangladesh Election
+        </h2>
+        <div className="flex flex-col gap-4">
+          {featuredCategorysNews?.map((n: any, idx: any) => (
+            <NewsCard
+              key={idx}
+              title={n?.title ?? ''}
+              showPublishedAt
+              publishedAt={n?.publishedAt ?? ''}
+              size="md"
+            />
+          ))}
+        </div>
+        <a
+          href="#"
+          target="_blank"
+          className="uppercase underline font-bold text-xs tracking-[-.5px]"
+          style={{ color: '#030303' }}
+        >
+          Read More on Bangladesh Election
+        </a>
+      </div>
     </div>
   );
 };
