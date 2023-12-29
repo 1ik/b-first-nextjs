@@ -13,7 +13,7 @@ export const NewsSiteRootLayout = ({ children }: any) => {
         className="w-full border-[1px] mt-0 mb-3"
         style={{ color: '#3A3A3A', opacity: 0.6 }}
       />
-      <div className="px-3">{children}</div>
+      <div className="">{children}</div>
     </div>
   );
 };

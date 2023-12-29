@@ -43,7 +43,7 @@ const latestNews = [
 
 export const HomePage = () => {
   return (
-    <div className="flex flex-col w-full gap-2">
+    <div className="flex flex-col w-full gap-2 px-3">
       <NewsCard
         title="Awami League develops, BNP burns people: Sheikh Hasina"
         category="Bangladesh Election"
@@ -110,7 +110,7 @@ export const HomePage = () => {
       <div className="flex flex-col w-full gap-3 py-4">
         <h2
           className="font-bold text-xl leading-5 tracking-[.5px] uppercase"
-          style={{ color: '##D00023' }}
+          style={{ color: '#D00023' }}
         >
           Latest News
         </h2>
