@@ -7,14 +7,37 @@ const featuredCategorysNews = [
     publishedAt: '35 minutes ago',
   },
   {
-    key: 1,
+    key: 2,
     title: 'Playing with fire will burn them to death: Quader',
     publishedAt: '46 minutes ago',
   },
   {
-    key: 1,
+    key: 3,
     title: 'No anti-election speech at victory rally: Home Minister',
     publishedAt: '46 minutes ago',
+  },
+];
+
+const latestNews = [
+  {
+    key: 1,
+    title: 'Jatiya Party and Awami League will work for fair elections: Nanak',
+    publishedAt: '12 minutes ago',
+  },
+  {
+    key: 2,
+    title: '‘Raushan Ershad boycotted election to maintain discipline’',
+    publishedAt: '24 minutes ago',
+  },
+  {
+    key: 3,
+    title: 'JU Chhatra League is selling vegetables at a fair price',
+    publishedAt: '48 minutes ago',
+  },
+  {
+    key: 4,
+    title: 'Jatiya Party and Awami League will work for fair elections: Nanak',
+    publishedAt: '12 minutes ago',
   },
 ];
 
@@ -52,6 +75,7 @@ export const HomePage = () => {
         publishedAt="59 minutes ago"
         size="md"
       />
+      {/* Featured Category's News */}
       <div
         className="flex flex-col w-full gap-3 px-3 py-4"
         style={{ backgroundColor: '#EFEFEF' }}
@@ -81,6 +105,26 @@ export const HomePage = () => {
         >
           Read More on Bangladesh Election
         </a>
+      </div>
+      {/* Latest News Section */}
+      <div className="flex flex-col w-full gap-3 py-4">
+        <h2
+          className="font-bold text-xl leading-5 tracking-[.5px] uppercase"
+          style={{ color: '##D00023' }}
+        >
+          Latest News
+        </h2>
+        {latestNews?.map((n: any, idx: number) => (
+          <NewsCard
+            key={idx}
+            title={n?.title ?? ''}
+            showPublishedAt
+            publishedAt={n?.publishedAt ?? ''}
+            size="sm"
+            showDivider={idx !== latestNews?.length - 1}
+            gap={1}
+          />
+        ))}
       </div>
     </div>
   );

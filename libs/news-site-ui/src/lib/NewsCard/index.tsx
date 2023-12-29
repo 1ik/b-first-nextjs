@@ -16,6 +16,7 @@ interface INewsCard {
   showPublishedAt?: boolean;
   size?: Size;
   showDivider?: boolean;
+  gap?: number;
 }
 export const NewsCard = ({
   image,
@@ -30,9 +31,10 @@ export const NewsCard = ({
   showPublishedAt,
   size,
   showDivider,
+  gap,
 }: INewsCard) => {
   return (
-    <div className="flex flex-col items-start gap-1.5">
+    <div className={`flex flex-col items-start gap-${gap ?? 1.5}`}>
       {showImage ? <Image className="pb-1" src={image} alt={imageAlt} /> : ''}
       {showCategory ? (
         <h5
