@@ -9,7 +9,7 @@ interface Image {
 export const Image = ({ src, alt, width, height, className }: any) => {
   return (
     <div className={`min-w-full flex w-full ${className}`}>
-      <NextImage
+      <img
         src={src}
         alt={alt ?? ''}
         width={width ?? 360}
