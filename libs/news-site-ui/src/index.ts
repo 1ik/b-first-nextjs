@@ -6,3 +6,4 @@ export * from './lib/NewsCard';
 export * from './lib/Header';
 export * from './lib/HomePage';
 export * from './lib/DetailsPage';
+export * from './lib/CategoryPage';
