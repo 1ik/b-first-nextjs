@@ -1,4 +1,5 @@
 import { NewsCard } from '../NewsCard';
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import { Image } from '@bd-first/common-ui';
 
 const data = {
@@ -137,6 +138,35 @@ export const DetailsPage = () => {
               ))
             : ''}
         </div>
+      </div>
+      {/* Share Buttons */}
+      <div className="flex flex-col gap-2 px-3">
+        <button
+          className="flex items-center justify-center gap-3 py-2 rounded-l-md rounded-r-md "
+          style={{ backgroundColor: '#316FF6' }}
+        >
+          <img
+            className="w-4 h-4"
+            src="/icons/fb-white.png"
+            alt="bangladesh-first-site-icon"
+          />
+          <span className="text-xs font-medium" style={{ color: '#FFFFFF' }}>
+            Share on Facebook
+          </span>
+        </button>
+        <button
+          className="flex items-center justify-center gap-3 py-2 rounded-l-md rounded-r-md "
+          style={{ backgroundColor: '#25D366' }}
+        >
+          <img
+            className="w-4 h-4"
+            src="/icons/whatsapp-white.png"
+            alt="bangladesh-first-site-icon"
+          />
+          <span className="text-xs font-medium" style={{ color: '#FFFFFF' }}>
+            Share on Whatsapp
+          </span>
+        </button>
       </div>
       <hr
         className="w-full border-[1px] mt-1"
