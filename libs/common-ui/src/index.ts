@@ -3,3 +3,4 @@
 export * from './lib/common-ui';
 export * from './lib/Image';
 export * from './lib/Slider';
+export * from './lib/Divider';
