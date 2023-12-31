@@ -77,7 +77,7 @@ export const HomePage = () => {
       />
       {/* Featured Category's News */}
       <div
-        className="flex flex-col w-full gap-3 px-3 py-4"
+        className="flex flex-col w-full gap-3 px-3 py-4 my-1"
         style={{ backgroundColor: '#EFEFEF' }}
       >
         <h2
@@ -107,7 +107,7 @@ export const HomePage = () => {
         </a>
       </div>
       {/* Latest News Section */}
-      <div className="flex flex-col w-full gap-3 py-4">
+      <div className="flex flex-col w-full gap-3">
         <h2
           className="font-bold text-xl leading-5 tracking-[.5px] uppercase"
           style={{ color: '#D00023' }}
