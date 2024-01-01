@@ -4,35 +4,6 @@ import { useEffect, useState } from "react";
 import { usePathname } from 'next/navigation'
 import { getImageUrl } from "../image_utils";
 
-const newsList = [
-  {
-    key: 1,
-    category: 'Bhola',
-    title:
-      'Gas of Bhola in Dhaka in GNG form, likely to reduce low pressure problem',
-  },
-  {
-    key: 2,
-    category: 'Dhaka',
-    title: 'Fire in a moving train at Tejgaon, 4 killed',
-  },
-  {
-    key: 3,
-    category: 'Bangladesh Election',
-    title: 'Five candidates will contest against the Information Minister',
-  },
-  {
-    key: 4,
-    category: 'Bangladesh Election',
-    title: 'EC appointed 653 magistrates across the countrym',
-  },
-  {
-    key: 5,
-    category: 'Bangladesh Election',
-    title: 'BNP is trying to strengthen the blockade to obstruct the elections',
-  },
-];
-
 export const CategoryPage = () => {
   const [items, setItems] = useState<any[]>([]);
   const pathName = usePathname();
@@ -63,7 +34,7 @@ export const CategoryPage = () => {
       />}
       <div className="flex gap-4 pt-2">
         <div className="w-1/2">
-          { items.length > 0 && <NewsCard
+          { items.length > 1 && <NewsCard
             title={items[1]?.title ?? ''}
             showCategory
             category={items[1]?.category.name ?? ''}
