@@ -7,7 +7,7 @@ const { composePlugins, withNx } = require('@nx/next');
  * @type {import('@nx/next/plugins/with-nx').WithNxOptions}
  **/
 const nextConfig = {
-  output: 'export',
+  // output: 'export',
   // exportPathMap: async function (
   //   defaultPathMap,
   //   { dev, dir, outDir, distDir, buildId }
@@ -18,12 +18,14 @@ const nextConfig = {
   //     '/{slug}': { page: '/{slug}' },
   //   }
   // },
-  // nx: {
-  //   // Set this to true if you would like to use SVGR
-  //   // See: https://github.com/gregberge/svgr
-  //   svgr: false,
-  // },
+  nx: {
+    // Set this to true if you would like to use SVGR
+    // See: https://github.com/gregberge/svgr
+    svgr: false,
+  },
 };
+
+
 
 const plugins = [
   // Add more Next.js plugins to this list if needed.
