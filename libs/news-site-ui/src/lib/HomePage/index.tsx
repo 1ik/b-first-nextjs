@@ -8,13 +8,13 @@ export const HomePage = () => {
   const [latestNews, setLatest] = useState([]);
 
   useEffect(() => {
-    fetch('https://bangladeshfirst.com/api/v2/featured').then(res => res.json()).then((res) => {
+    fetch('https://panel.bangladeshfirst.com/api/v2/featured').then(res => res.json()).then((res) => {
       setFeatured(res);
     });
   }, []);
 
   useEffect(() => {
-    fetch('https://bangladeshfirst.com/api/v2/latest').then(res => res.json()).then((res) => {
+    fetch('https://panel.bangladeshfirst.com/api/v2/latest').then(res => res.json()).then((res) => {
       setLatest(res);
     });
   }, []);
@@ -26,6 +26,7 @@ export const HomePage = () => {
           if (idx === 0) {
             return <NewsCard
               key={idx}
+              url={`/news/${n.id}/${n.slug}`}
               title={n.title}
               category={n.category?.name}
               summary={n.brief}
@@ -45,6 +46,7 @@ export const HomePage = () => {
             title={n.title}
             category={n.category?.name}
             showCategory
+            url={`/news/${n.id}/${n.slug}`}
             showDivider
             showPublishedAt
             publishedAt="56 minutes ago"
@@ -99,6 +101,7 @@ export const HomePage = () => {
             key={idx}
             title={n?.title ?? ''}
             showPublishedAt
+            url={`/news/${n.id}/${n.slug}`}
             publishedAt={n?.publishedAt ?? ''}
             size="sm"
             category={n.category?.name}

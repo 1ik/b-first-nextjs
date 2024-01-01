@@ -7,11 +7,22 @@ const { composePlugins, withNx } = require('@nx/next');
  * @type {import('@nx/next/plugins/with-nx').WithNxOptions}
  **/
 const nextConfig = {
-  nx: {
-    // Set this to true if you would like to use SVGR
-    // See: https://github.com/gregberge/svgr
-    svgr: false,
-  },
+  output: 'export',
+  // exportPathMap: async function (
+  //   defaultPathMap,
+  //   { dev, dir, outDir, distDir, buildId }
+  // ) {
+  //   return {
+  //     '/': { page: '/' },
+  //     '/news/{slug}': { page: '/news/{slug}' },
+  //     '/{slug}': { page: '/{slug}' },
+  //   }
+  // },
+  // nx: {
+  //   // Set this to true if you would like to use SVGR
+  //   // See: https://github.com/gregberge/svgr
+  //   svgr: false,
+  // },
 };
 
 const plugins = [

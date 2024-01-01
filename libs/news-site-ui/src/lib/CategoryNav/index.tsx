@@ -2,13 +2,14 @@ import { Slider } from '@bd-first/common-ui';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import {useEffect, useState} from "react";
+import Link from 'next/link'
 
 
 export const CategoryNav = () => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    fetch('https://bangladeshfirst.com/api/categories').then(res => res.json()).then((res) => {
+    fetch('https://panel.bangladeshfirst.com/api/categories').then(res => res.json()).then((res) => {
       setCategories(res);
     });
   }, []);
@@ -28,7 +29,7 @@ export const CategoryNav = () => {
       >
         {categories?.map((c: any, idx: number) => (
           <div className="text-xs font-normal leading-4" key={idx}>
-            {c?.name ?? ''}
+            <Link href={'/' + c.name}>{c.name}</Link>
           </div>
         ))}
       </Slider>

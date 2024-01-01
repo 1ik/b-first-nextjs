@@ -1,5 +1,8 @@
 import { NewsCard } from '../NewsCard';
 import { Image } from '@bd-first/common-ui';
+import {usePathname} from "next/navigation";
+import {useEffect, useState} from "react";
+import {getImageUrl} from "../image_utils";
 
 const data = {
   category: 'Bangladesh Election',
@@ -64,6 +67,20 @@ const relatedArticles = [
 ];
 
 export const DetailsPage = () => {
+  const [news, setNews] = useState<any>()
+  const pathName = usePathname();
+  useEffect(() => {
+    if (!pathName) return;
+    const parts = pathName.split('/');
+    const id = parts[2];
+    fetch(`https://panel.bangladeshfirst.com/api/v2/detail/${id}`)
+      .then((res) => res.json())
+      .then((res) => setNews(res));
+
+  }, [pathName]);
+
+  if (!news) return (<div>Loading...</div>);
+
   return (
     <div className="flex flex-col w-full gap-2">
       <div className="flex flex-col gap-2 px-3">
@@ -71,11 +88,12 @@ export const DetailsPage = () => {
           className={`uppercase font-semibold text-base leading-4`}
           style={{ color: '#D00023' }}
         >
-          {data?.category ?? ''}
+          {news?.category.name ?? ''}
         </h5>
         <h1 className="text-[32px] font-black leading-7 pb-2">
-          {data?.title ?? ''}
+          {news?.title ?? ''}
         </h1>
+        {/*
         <div className="flex flex-col gap-2 pl-6">
           {data?.keyPoints && data?.keyPoints?.length > 0
             ? data?.keyPoints?.map((p: string, idx: any) => (
@@ -89,53 +107,44 @@ export const DetailsPage = () => {
               ))
             : ''}
         </div>
+        */}
         <div>
           <p
             className="text-xs font-normal leading-4 tracking-[-0.3 px]"
             style={{ color: '#1E1E1E' }}
           >
-            Publish on {data?.publishedAt ?? ''}
+            Publish on {news?.created_at ?? ''}
           </p>
           <p
             className="text-xs font-semibold leading-4  tracking-[-0.3 px]"
             style={{ color: '#1E1E1E' }}
           >
-            by {data?.publishedBy ? data.publishedBy?.name : ''}{' '}
-            {data?.publishedBy ? data.publishedBy?.name : ''}
+            by {news?.author}{' '}
           </p>
-          {data?.updatedAt ? (
+          {news?.updated_at ? (
             <p
               className="text-xs font-normal leading-4  tracking-[-0.3 px]"
               style={{ color: '#1E1E1E' }}
             >
-              Last Updated on {data?.updatedAt ?? ''}
+              Last Updated on {news?.updated_at ?? ''}
             </p>
           ) : (
             ''
           )}
         </div>
 
-        {data?.image ? (
-          <Image
+        {news?.featured_image ? (
+          <img
             className="py-2"
-            src={data?.image ?? ''}
+            src={getImageUrl(news?.featured_image || '')}
             alt={data?.imageAlt ?? ''}
           />
         ) : (
           ''
         )}
         <div className="flex flex-col gap-4">
-          {data?.paragraphs && data?.paragraphs?.length > 0
-            ? data?.paragraphs?.map((p: string, idx: any) => (
-                <p
-                  key={idx}
-                  style={{ color: '#030303' }}
-                  className="text-lg font-normal leading-6 tracking-[-.5px]"
-                >
-                  {p ?? ''}
-                </p>
-              ))
-            : ''}
+          {/*render html in react dom */}
+          <div className={'cont'} dangerouslySetInnerHTML={{__html: news.content}}></div>
         </div>
       </div>
       <hr
