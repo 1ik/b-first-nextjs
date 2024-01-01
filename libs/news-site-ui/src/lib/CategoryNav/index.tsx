@@ -1,18 +1,18 @@
 import { Slider } from '@bd-first/common-ui';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
 
-export const CategoryNav = () => {
-  const [categories, setCategories] = useState([]);
+export const CategoryNav = ({ categories }: any) => {
+  // const [categories, setCategories] = useState([]);
 
-  useEffect(() => {
-    fetch('https://panel.bangladeshfirst.com/api/categories')
-      .then((res) => res.json())
-      .then((res) => {
-        setCategories(res);
-      });
-  }, []);
+  // useEffect(() => {
+  //   fetch('https://panel.bangladeshfirst.com/api/categories')
+  //     .then((res) => res.json())
+  //     .then((res) => {
+  //       setCategories(res);
+  //     });
+  // }, []);
 
   return (
     <div
