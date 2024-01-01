@@ -71,7 +71,7 @@ export const CategoryPage = () => {
             category={n?.category.name ?? ''}
             showPublishedAt
             size="xs"
-            showDivider={idx !== newsList?.length - 1}
+            showDivider={idx !== items?.length - 1}
             gap={1}
           />
         ))}
