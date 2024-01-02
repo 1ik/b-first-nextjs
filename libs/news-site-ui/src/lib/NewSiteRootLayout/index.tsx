@@ -6,10 +6,12 @@ import { Footer } from '../Footer';
 export const NewsSiteRootLayout = ({ children }: any) => {
   return (
     <div className="pt-4">
-      <div className="px-3">
-        <Header />
-        <CategoryNav />
-      </div>
+      <nav className="sticky top-0 z-40" style={{ backgroundColor: '#FFFFFF' }}>
+        <div className="px-3">
+          <Header />
+          <CategoryNav />
+        </div>
+      </nav>
       <hr
         className="w-full border-[1px]"
         style={{ color: '#3A3A3A', opacity: 0.6 }}
