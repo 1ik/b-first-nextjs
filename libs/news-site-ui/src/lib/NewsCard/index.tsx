@@ -1,5 +1,6 @@
 // Card contains a thubnail, title, category,time etc. of news
 import { Image } from '@bd-first/common-ui';
+import {useRouter} from "next/router";
 
 type Size = 'xs' | 'sm' | 'md' | 'lg';
 
@@ -17,6 +18,7 @@ interface INewsCard {
   size?: Size;
   showDivider?: boolean;
   gap?: number;
+  url?: string;
 }
 export const NewsCard = ({
   image,
@@ -30,13 +32,20 @@ export const NewsCard = ({
   publishedAt,
   showPublishedAt,
   size,
+  url,
   showDivider,
   gap,
 }: INewsCard) => {
+  const router = useRouter();
   // xs size
   if (size === 'xs') {
     return (
       <div
+        onClick={() => {
+          if (url) {
+            router.push(url);
+          }
+        }}
         className={`flex flex-col items-start ${gap ? `gap-${gap}` : 'gap-.5'}`}
       >
         {showImage ? <Image className="pb-1" src={image} alt={imageAlt} /> : ''}
@@ -67,6 +76,11 @@ export const NewsCard = ({
 
   return (
     <div
+      onClick={() => {
+        if (url) {
+          router.push(url);
+        }
+      }}
       className={`flex flex-col items-start ${gap ? `gap-${gap}` : 'gap-1.5'}`}
     >
       {showImage ? <Image className="pb-1" src={image} alt={imageAlt} /> : ''}

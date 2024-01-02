@@ -2,7 +2,9 @@
   "name": "@bd-first/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "start": "next start --port 4200"
+  },
   "private": true,
   "dependencies": {
     "@nx/next": "17.2.7",

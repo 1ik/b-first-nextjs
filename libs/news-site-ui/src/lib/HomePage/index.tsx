@@ -1,81 +1,62 @@
 import { NewsCard } from '../NewsCard';
+import {useEffect, useState} from "react";
+import {getImageUrl} from "../image_utils";
 
-const featuredCategorysNews = [
-  {
-    key: 1,
-    title: '70 percent people are ready to vote for boat: Quader',
-    publishedAt: '35 minutes ago',
-  },
-  {
-    key: 2,
-    title: 'Playing with fire will burn them to death: Quader',
-    publishedAt: '46 minutes ago',
-  },
-  {
-    key: 3,
-    title: 'No anti-election speech at victory rally: Home Minister',
-    publishedAt: '46 minutes ago',
-  },
-];
-
-const latestNews = [
-  {
-    key: 1,
-    title: 'Jatiya Party and Awami League will work for fair elections: Nanak',
-    publishedAt: '12 minutes ago',
-  },
-  {
-    key: 2,
-    title: '‘Raushan Ershad boycotted election to maintain discipline’',
-    publishedAt: '24 minutes ago',
-  },
-  {
-    key: 3,
-    title: 'JU Chhatra League is selling vegetables at a fair price',
-    publishedAt: '48 minutes ago',
-  },
-  {
-    key: 4,
-    title: 'Jatiya Party and Awami League will work for fair elections: Nanak',
-    publishedAt: '12 minutes ago',
-  },
-];
 
 export const HomePage = () => {
+  const [featured, setFeatured] = useState([]);
+  const [latestNews, setLatest] = useState([]);
+
+  useEffect(() => {
+    fetch('https://panel.bangladeshfirst.com/api/v2/featured').then(res => res.json()).then((res) => {
+      setFeatured(res);
+    });
+  }, []);
+
+  useEffect(() => {
+    fetch('https://panel.bangladeshfirst.com/api/v2/latest').then(res => res.json()).then((res) => {
+      setLatest(res);
+    });
+  }, []);
+
   return (
     <div className="flex flex-col w-full gap-2 px-3">
-      <NewsCard
-        title="Awami League develops, BNP burns people: Sheikh Hasina"
-        category="Bangladesh Election"
-        summary="She said, “Those who are burning innocent people in the name of blockade are the ones who want to disrupt the elections”"
-        image="/images/sheikh-hasina.png"
-        imageAlt="sheikh-hasina"
-        showImage
-        showCategory
-        showDivider
-        showPublishedAt
-        showSummary
-        publishedAt="28 minutes ago"
-        size="lg"
-      />
-      <NewsCard
-        title="BKMEA's letter to buyers asking for increased price on ready-made garments"
-        category="BUSINESS"
-        showCategory
-        showDivider
-        showPublishedAt
-        publishedAt="56 minutes ago"
-        size="md"
-      />
-      <NewsCard
-        title="Foreign debt has increased by 39 thousand crores in one year"
-        category="ECONOMICS"
-        showCategory
-        showPublishedAt
-        publishedAt="59 minutes ago"
-        size="md"
-      />
+      {
+        featured?.map((n: any, idx: any) => {
+          if (idx === 0) {
+            return <NewsCard
+              key={idx}
+              url={`/news/${n.id}/${n.slug}`}
+              title={n.title}
+              category={n.category?.name}
+              summary={n.brief}
+              image={getImageUrl(n.featured_image)}
+              imageAlt={n.title}
+              showImage
+              showCategory
+              showDivider
+              showPublishedAt
+              showSummary
+              publishedAt="28 minutes ago"
+              size="lg"
+            />
+          }
+          return  <NewsCard
+            key={idx}
+            title={n.title}
+            category={n.category?.name}
+            showCategory
+            url={`/news/${n.id}/${n.slug}`}
+            showDivider
+            showPublishedAt
+            publishedAt="56 minutes ago"
+            size="md"
+          />
+        })
+      }
+
       {/* Featured Category's News */}
+      {/*
       <div
         className="flex flex-col w-full gap-3 px-3 py-4 my-1"
         style={{ backgroundColor: '#EFEFEF' }}
@@ -106,6 +87,7 @@ export const HomePage = () => {
           Read More on Bangladesh Election
         </a>
       </div>
+      */}
       {/* Latest News Section */}
       <div className="flex flex-col w-full gap-3">
         <h2
@@ -119,8 +101,10 @@ export const HomePage = () => {
             key={idx}
             title={n?.title ?? ''}
             showPublishedAt
+            url={`/news/${n.id}/${n.slug}`}
             publishedAt={n?.publishedAt ?? ''}
             size="sm"
+            category={n.category?.name}
             showDivider={idx !== latestNews?.length - 1}
             gap={1}
           />
