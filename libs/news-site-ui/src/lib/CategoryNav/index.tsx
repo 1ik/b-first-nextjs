@@ -1,19 +1,9 @@
 import { Slider } from '@bd-first/common-ui';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import {useEffect, useState} from "react";
-import Link from 'next/link'
+import Link from 'next/link';
 
-
-export const CategoryNav = () => {
-  const [categories, setCategories] = useState([]);
-
-  useEffect(() => {
-    fetch('https://panel.bangladeshfirst.com/api/categories').then(res => res.json()).then((res) => {
-      setCategories(res);
-    });
-  }, []);
-
+export const CategoryNav = ({ categories }: any) => {
   return (
     <div
       style={{ maxWidth: '100%', display: 'flex', justifyContent: 'center' }}
