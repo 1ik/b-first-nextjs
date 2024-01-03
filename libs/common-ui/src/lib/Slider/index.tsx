@@ -5,7 +5,7 @@ import './slider-styles.scss';
 
 const PrevArrow = ({ className, style, onClick }: any) => {
   return (
-    <div
+    <button
       className={className}
       style={{
         ...style,
@@ -20,13 +20,13 @@ const PrevArrow = ({ className, style, onClick }: any) => {
         src="/icons/_next.png"
         alt={'next'}
       />
-    </div>
+    </button>
   );
 };
 
 const NextArrow = ({ className, style, onClick }: any) => {
   return (
-    <div
+    <button
       className={className}
       style={{
         ...style,
@@ -37,7 +37,7 @@ const NextArrow = ({ className, style, onClick }: any) => {
       onClick={onClick}
     >
       <img src="/icons/_next.png" alt={'next'} />
-    </div>
+    </button>
   );
 };
 

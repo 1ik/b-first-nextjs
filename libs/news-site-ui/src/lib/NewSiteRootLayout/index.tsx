@@ -3,13 +3,13 @@ import { Header } from '../Header';
 import { CategoryNav } from '../CategoryNav';
 import { Footer } from '../Footer';
 
-export const NewsSiteRootLayout = ({ children }: any) => {
+export const NewsSiteRootLayout = ({ children, categories }: any) => {
   return (
     <div className="pt-4">
       <nav className="sticky top-0 z-40" style={{ backgroundColor: '#FFFFFF' }}>
         <div className="px-3">
           <Header />
-          <CategoryNav />
+          <CategoryNav categories={categories} />
         </div>
       </nav>
       <hr

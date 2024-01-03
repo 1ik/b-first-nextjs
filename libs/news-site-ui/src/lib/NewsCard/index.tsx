@@ -1,6 +1,6 @@
 // Card contains a thubnail, title, category,time etc. of news
 import { Image } from '@bd-first/common-ui';
-import {useRouter} from "next/router";
+import { useRouter } from 'next/router';
 
 type Size = 'xs' | 'sm' | 'md' | 'lg';
 

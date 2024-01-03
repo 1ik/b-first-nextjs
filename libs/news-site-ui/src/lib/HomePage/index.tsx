@@ -1,30 +1,29 @@
 import { NewsCard } from '../NewsCard';
-import {useEffect, useState} from "react";
-import {getImageUrl} from "../image_utils";
+// import {useEffect, useState} from "react";
+import { getImageUrl } from '../image_utils';
 
+export const HomePage = ({ featured, latestNews }: any) => {
+  // const [featured, setFeatured] = useState([]);
+  // const [latestNews, setLatest] = useState([]);
 
-export const HomePage = () => {
-  const [featured, setFeatured] = useState([]);
-  const [latestNews, setLatest] = useState([]);
+  // useEffect(() => {
+  //   fetch('https://panel.bangladeshfirst.com/api/v2/featured').then(res => res.json()).then((res) => {
+  //     setFeatured(res);
+  //   });
+  // }, []);
 
-  useEffect(() => {
-    fetch('https://panel.bangladeshfirst.com/api/v2/featured').then(res => res.json()).then((res) => {
-      setFeatured(res);
-    });
-  }, []);
-
-  useEffect(() => {
-    fetch('https://panel.bangladeshfirst.com/api/v2/latest').then(res => res.json()).then((res) => {
-      setLatest(res);
-    });
-  }, []);
+  // useEffect(() => {
+  //   fetch('https://panel.bangladeshfirst.com/api/v2/latest').then(res => res.json()).then((res) => {
+  //     setLatest(res);
+  //   });
+  // }, []);
 
   return (
     <div className="flex flex-col w-full gap-2 px-3">
-      {
-        featured?.map((n: any, idx: any) => {
-          if (idx === 0) {
-            return <NewsCard
+      {featured?.map((n: any, idx: any) => {
+        if (idx === 0) {
+          return (
+            <NewsCard
               key={idx}
               url={`/news/${n.id}/${n.slug}`}
               title={n.title}
@@ -40,8 +39,10 @@ export const HomePage = () => {
               publishedAt="28 minutes ago"
               size="lg"
             />
-          }
-          return  <NewsCard
+          );
+        }
+        return (
+          <NewsCard
             key={idx}
             title={n.title}
             category={n.category?.name}
@@ -52,8 +53,8 @@ export const HomePage = () => {
             publishedAt="56 minutes ago"
             size="md"
           />
-        })
-      }
+        );
+      })}
 
       {/* Featured Category's News */}
       {/*
