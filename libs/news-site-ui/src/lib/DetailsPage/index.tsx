@@ -1,9 +1,13 @@
 import { NewsCard } from '../NewsCard';
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import { Image } from '@bd-first/common-ui';
-import {usePathname} from "next/navigation";
-import {useEffect, useState} from "react";
-import {getImageUrl} from "../image_utils";
+import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { getImageUrl } from '../image_utils';
+import { Merriweather, Roboto } from 'next/font/google';
+
+const merriweather = Merriweather({ weight: ['900', '400'], preload: false });
+const roboto = Roboto({ weight: ['900', '400'], preload: false });
 
 const data = {
   category: 'Bangladesh Election',
@@ -68,7 +72,7 @@ const relatedArticles = [
 ];
 
 export const DetailsPage = () => {
-  const [news, setNews] = useState<any>()
+  const [news, setNews] = useState<any>();
   const pathName = usePathname();
   useEffect(() => {
     if (!pathName) return;
@@ -77,21 +81,22 @@ export const DetailsPage = () => {
     fetch(`https://panel.bangladeshfirst.com/api/v2/detail/${id}`)
       .then((res) => res.json())
       .then((res) => setNews(res));
-
   }, [pathName]);
 
-  if (!news) return (<div>Loading...</div>);
+  if (!news) return <div>Loading...</div>;
 
   return (
     <div className="flex flex-col w-full gap-2">
-      <div className="flex flex-col gap-2 px-3">
+      <div className="flex flex-col gap-0 px-3">
         <h5
-          className={`uppercase font-semibold text-base leading-4`}
+          className={`uppercase font-semibold text-[16px] leading-[21.5px]`}
           style={{ color: '#D00023' }}
         >
           {news?.category.name ?? ''}
         </h5>
-        <h1 className="text-[32px] font-black leading-7 pb-2">
+        <h1
+          className={`${merriweather.className} text-[28px] font-black leading-[35.2px] pb-2.5`}
+        >
           {news?.title ?? ''}
         </h1>
         {/*
@@ -109,22 +114,22 @@ export const DetailsPage = () => {
             : ''}
         </div>
         */}
-        <div>
+        <div className={`flex flex-col gap-0.5`}>
           <p
-            className="text-xs font-normal leading-4 tracking-[-0.3 px]"
+            className={`${roboto.className} text-[14px] font-normal leading-[16.5px] tracking-[-0.3 px]`}
             style={{ color: '#1E1E1E' }}
           >
             Publish on {news?.created_at ?? ''}
           </p>
           <p
-            className="text-xs font-semibold leading-4  tracking-[-0.3 px]"
+            className={`${roboto.className} text-[14px] font-semibold leading-[16.5px]  tracking-[-0.3 px]`}
             style={{ color: '#1E1E1E' }}
           >
             by {news?.author}{' '}
           </p>
           {news?.updated_at ? (
             <p
-              className="text-xs font-normal leading-4  tracking-[-0.3 px]"
+              className={`${roboto.className} text-[14px] font-normal leading-[16.5px]  tracking-[-0.3 px]`}
               style={{ color: '#1E1E1E' }}
             >
               Last Updated on {news?.updated_at ?? ''}
@@ -145,7 +150,10 @@ export const DetailsPage = () => {
         )}
         <div className="flex flex-col gap-4">
           {/*render html in react dom */}
-          <div className={'cont'} dangerouslySetInnerHTML={{__html: news.content}}></div>
+          <div
+            className={'cont'}
+            dangerouslySetInnerHTML={{ __html: news.content }}
+          ></div>
         </div>
       </div>
       {/* Share Buttons */}
@@ -179,11 +187,11 @@ export const DetailsPage = () => {
       </div>
       <hr
         className="w-full border-[1px] mt-1"
-        style={{ color: '#3A3A3A', opacity: 0.6 }}
+        style={{ color: '#000', opacity: 1 }}
       />
       {/* You might be interested in section */}
-      <div className="flex flex-col w-full gap-4 px-3">
-        <h5 className="font-semibold leading-6 tracking-[-.3px]">
+      <div className="flex flex-col w-full gap-2.5 px-3">
+        <h5 className="font-semibold text-[21px] leading-[24.5px] tracking-[-.3px]">
           You might be interested in
         </h5>
         <div className="flex flex-col gap-2">
@@ -195,17 +203,18 @@ export const DetailsPage = () => {
               title={n?.title ?? ''}
               showCategory
               category={n?.category ?? ''}
+              gap={0.5}
             />
           ))}
         </div>
       </div>
       <hr
         className="w-full border-[1px] mt-1"
-        style={{ color: '#3A3A3A', opacity: 0.6 }}
+        style={{ borderColor: '#3A3A3A', opacity: 0.6 }}
       />
       {/* Related Articles section */}
-      <div className="flex flex-col w-full gap-4 px-3">
-        <h5 className="font-semibold leading-6 tracking-[-.3px]">
+      <div className="flex flex-col w-full gap-2.5 px-3">
+        <h5 className="font-semibold text-[21px] leading-[24.5px] tracking-[-.3px]">
           Related Articles
         </h5>
         <div className="flex flex-col gap-2">
@@ -217,6 +226,7 @@ export const DetailsPage = () => {
               title={n?.title ?? ''}
               showCategory
               category={n?.category ?? ''}
+              gap={0.5}
             />
           ))}
         </div>

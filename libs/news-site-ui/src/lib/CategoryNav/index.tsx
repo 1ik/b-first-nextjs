@@ -18,7 +18,14 @@ export const CategoryNav = ({ categories }: any) => {
         slidesToShow={2}
       >
         {categories?.map((c: any, idx: number) => (
-          <div className="text-xs font-normal leading-4" key={idx}>
+          <div
+            style={{
+              color: '#030303',
+              fontFamily: "'Helvetica Neue', 'sans-serif'",
+            }}
+            className="text-[14px] font-normal leading-[16.7px]"
+            key={idx}
+          >
             <Link href={'/' + c.name}>{c.name}</Link>
           </div>
         ))}

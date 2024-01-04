@@ -2,7 +2,10 @@ export const Footer = () => {
   return (
     <div
       className="flex flex-col items-center justify-center gap-3 px-6 pt-4 pb-8"
-      style={{ backgroundColor: '#EDEDED' }}
+      style={{
+        backgroundColor: '#EDEDED',
+        fontFamily: "'Helvetica Neue', sans-serif",
+      }}
     >
       <img
         className="h-13 w-42.5"
@@ -10,7 +13,7 @@ export const Footer = () => {
         alt="bangladesh-first-site-icon"
       />
       <h6
-        className="text-sm font-normal leading-4"
+        className="text-[18px] font-normal leading-[21.4px]"
         style={{ color: '#000000' }}
       >
         115 Kazi Nazrul Islam Avenue, Level 12, Banglamotor, Dhaka 1000,
@@ -18,7 +21,7 @@ export const Footer = () => {
       </h6>
       <div className="flex flex-col items-center gap-1">
         <h5
-          className="flex flex-col text-base font-bold"
+          className="flex flex-col text-[18px] font-bold leading-[22px]"
           style={{ color: '#000000' }}
         >
           Newsroom
@@ -44,7 +47,10 @@ export const Footer = () => {
 
 // Small Text
 const SmallText = ({ text }: any) => (
-  <h6 className="text-sm font-normal leading-4" style={{ color: '#000000' }}>
+  <h6
+    className="text-[18px] font-normal leading-[22px]"
+    style={{ color: '#000000' }}
+  >
     {text}
   </h6>
 );

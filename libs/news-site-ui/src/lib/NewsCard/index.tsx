@@ -1,6 +1,11 @@
+/* eslint-disable @nx/enforce-module-boundaries */
 // Card contains a thubnail, title, category,time etc. of news
 import { Image } from '@bd-first/common-ui';
 import { useRouter } from 'next/router';
+import { Merriweather, Roboto } from 'next/font/google';
+
+const merriweather = Merriweather({ weight: ['900', '400'], preload: false });
+const roboto = Roboto({ weight: ['900', '400'], preload: false });
 
 type Size = 'xs' | 'sm' | 'md' | 'lg';
 
@@ -51,21 +56,27 @@ export const NewsCard = ({
         {showImage ? <Image className="pb-1" src={image} alt={imageAlt} /> : ''}
         {showCategory ? (
           <h5
-            className={`uppercase font-semibold text-xs leading-3`}
-            style={{ color: '#D00023' }}
+            className={`uppercase font-semibold text-[13px] leading-[17.5px] pt-1`}
+            style={{
+              color: '#D00023',
+            }}
           >
             {category}
           </h5>
         ) : (
           ''
         )}
-        <h2 className={`tracking-[-.3px] leading-5 font-black ${'text-base'} `}>
+        <h2
+          className={`${
+            merriweather.className
+          }tracking-[-.3px] leading-5 font-black ${'text-base'} `}
+        >
           {title}
         </h2>
         {showDivider ? (
           <hr
             className="w-full border-[1px] mt-1"
-            style={{ color: '#3A3A3A', opacity: 0.6 }}
+            style={{ borderColor: '#3A3A3A', opacity: 0.6 }}
           />
         ) : (
           ''
@@ -86,8 +97,10 @@ export const NewsCard = ({
       {showImage ? <Image className="pb-1" src={image} alt={imageAlt} /> : ''}
       {showCategory ? (
         <h5
-          className={`uppercase font-semibold text-base leading-4`}
-          style={{ color: '#D00023' }}
+          className={`uppercase font-semibold text-[16px] leading-[21.5px] pt-0.5`}
+          style={{
+            color: '#D00023',
+          }}
         >
           {category}
         </h5>
@@ -95,17 +108,22 @@ export const NewsCard = ({
         ''
       )}
       <h1
-        className={`tracking-[-.3px] leading-[28px] font-black ${
-          size === 'lg' ? 'text-xl' : size === 'sm' ? 'text-base' : 'text-lg'
+        className={`${merriweather.className} tracking-[-.3px] font-black ${
+          size === 'lg'
+            ? 'text-[24px] leading-[30px]'
+            : size === 'sm'
+            ? 'text-[18px] leading-[22.5px]'
+            : 'text-[18px] leading-[22px]'
         } `}
       >
         {title}
       </h1>
       {showSummary ? (
         <p
-          className="font-normal leading-4 text-sm tracking-[-0.5px]"
+          className="font-normal pt-.5 leading-[19px] text-[16px] tracking-[-0.5px]"
           style={{
             color: '#030303',
+            fontFamily: "font-family: 'Helvetica Neue', sans-serif",
           }}
         >
           {summary ?? ''}
@@ -115,7 +133,9 @@ export const NewsCard = ({
       )}
       {showPublishedAt ? (
         <span
-          className={`font-normal text-sm ${size === 'md' ? 'pt-1' : 'pt=0'} `}
+          className={`${roboto.className} font-normal text-[14px] ${
+            size === 'md' ? 'pt-1' : 'pt-0'
+          } `}
         >
           {publishedAt}
         </span>
@@ -125,7 +145,7 @@ export const NewsCard = ({
       {showDivider ? (
         <hr
           className="w-full border-[1px] mt-1"
-          style={{ color: '#3A3A3A', opacity: 0.6 }}
+          style={{ borderColor: '#3A3A3A', opacity: 0.6 }}
         />
       ) : (
         ''
