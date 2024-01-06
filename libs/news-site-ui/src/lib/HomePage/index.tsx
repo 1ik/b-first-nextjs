@@ -38,6 +38,7 @@ export const HomePage = ({ featured, latestNews }: any) => {
               showSummary
               publishedAt="28 minutes ago"
               size="lg"
+              gap={1}
             />
           );
         }
