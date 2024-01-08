@@ -2,7 +2,7 @@
 // Card contains a thubnail, title, category,time etc. of news
 import { Image } from '@bd-first/common-ui';
 import { useRouter } from 'next/router';
-import { Merriweather, Roboto } from 'next/font/google';
+import { Merriweather, Roboto } from '@next/font/google';
 
 const merriweather = Merriweather({ weight: ['900', '400'], preload: false });
 const roboto = Roboto({ weight: ['900', '400'], preload: false });

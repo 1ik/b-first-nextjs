@@ -4,7 +4,7 @@ import { Image } from '@bd-first/common-ui';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { getImageUrl } from '../image_utils';
-import { Merriweather, Roboto } from 'next/font/google';
+import { Merriweather, Roboto } from '@next/font/google';
 
 const merriweather = Merriweather({ weight: ['900', '400'], preload: false });
 const roboto = Roboto({ weight: ['900', '400'], preload: false });
