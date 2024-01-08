@@ -9,18 +9,10 @@ export interface AnalyticsProps {
 export function Analytics(props: AnalyticsProps) {
   const src = `https://www.googletagmanager.com/gtag/js?id=${props.GA_MEASUREMENT_ID}`;
   return (
-    <Head>
-      <Script key={'GA_MEASUREMENT_ID'} src={src} />
-      <Script id="google-analytics">
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-
-          gtag('config', '${props.GA_MEASUREMENT_ID}');
-        `}
-      </Script>
-    </Head>
+    <script
+      async
+      src={`https://www.googletagmanager.com/gtag/js?id=`}
+    />
   );
 }
 
