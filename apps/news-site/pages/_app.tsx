@@ -22,11 +22,16 @@ function CustomApp({
 }: AppProps & AppOwnProps) {
 
   return (
-    <main className="app">
-      <NewsSiteRootLayout categories={categories}>
-        <Component {...pageProps} />
-      </NewsSiteRootLayout>
-    </main>
+    <>
+      <Head>
+        <title>BangladeshFirst</title>
+      </Head>
+      <main className="app">
+        <NewsSiteRootLayout categories={categories}>
+          <Component {...pageProps} />
+        </NewsSiteRootLayout>
+      </main>
+    </>
   );
 }
 
