@@ -3,20 +3,6 @@ import { NewsCard } from '../NewsCard';
 import { getImageUrl } from '../image_utils';
 
 export const HomePage = ({ featured, latestNews }: any) => {
-  // const [featured, setFeatured] = useState([]);
-  // const [latestNews, setLatest] = useState([]);
-
-  // useEffect(() => {
-  //   fetch('https://panel.bangladeshfirst.com/api/v2/featured').then(res => res.json()).then((res) => {
-  //     setFeatured(res);
-  //   });
-  // }, []);
-
-  // useEffect(() => {
-  //   fetch('https://panel.bangladeshfirst.com/api/v2/latest').then(res => res.json()).then((res) => {
-  //     setLatest(res);
-  //   });
-  // }, []);
 
   return (
     <div className="flex flex-col w-full gap-2 px-3">

@@ -1,4 +1,5 @@
 import { HomePage } from '@bd-first/news-site-ui';
+import SlideOver from "../../../libs/components/slide-over/src/lib/slide-over";
 
 export const getServerSideProps = async () => {
   const [featuredRes, latestNewsRes] = await Promise.all([
@@ -15,7 +16,8 @@ export const getServerSideProps = async () => {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function Index({ featured, latestNews }: any) {
   return (
-    <div className={''}>
+    <div data-theme="light" className={''}>
+      <SlideOver />
       <HomePage featured={featured} latestNews={latestNews} />
     </div>
   );
