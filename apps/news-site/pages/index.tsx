@@ -1,4 +1,5 @@
 import { HomePage } from '@bd-first/news-site-ui';
+import {Analytics} from "@bd-first/analytics";
 
 export const getServerSideProps = async () => {
   const [featuredRes, latestNewsRes] = await Promise.all([
@@ -15,9 +16,12 @@ export const getServerSideProps = async () => {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function Index({ featured, latestNews }: any) {
   return (
-    <div className={''}>
-      <HomePage featured={featured} latestNews={latestNews} />
-    </div>
+    <>
+      <Analytics GA_MEASUREMENT_ID={'G-BBBTLRLJ12'} />
+      <div className={''}>
+        <HomePage featured={featured} latestNews={latestNews} />
+      </div>
+    </>
   );
 }
 
