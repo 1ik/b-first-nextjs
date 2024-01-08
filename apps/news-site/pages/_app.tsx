@@ -3,14 +3,24 @@ import App, { AppContext, AppInitialProps, AppProps } from 'next/app';
 import Head from 'next/head';
 import './styles.css';
 import { NewsSiteRootLayout } from '@bd-first/news-site-ui';
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import {pageview} from "./lib/gtag";
 
 type AppOwnProps = { categories: any };
+
+declare global {
+  interface Window {
+    gtag: any;
+  }
+}
 
 function CustomApp({
   Component,
   pageProps,
   categories,
 }: AppProps & AppOwnProps) {
+
   return (
     <>
       <Head>
