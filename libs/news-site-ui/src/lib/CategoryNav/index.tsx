@@ -1,7 +1,4 @@
 import { Slider } from '@bd-first/common-ui';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import Link from 'next/link';
 
 export const CategoryNav = ({ categories }: any) => {
   return (
@@ -26,7 +23,7 @@ export const CategoryNav = ({ categories }: any) => {
             className="text-[14px] font-normal leading-[16.7px]"
             key={idx}
           >
-            <Link href={'/' + c.name}>{c.name}</Link>
+            <a href={'/' + c?.name}>{c?.name}</a>
           </div>
         ))}
       </Slider>
