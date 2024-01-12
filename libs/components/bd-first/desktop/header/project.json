@@ -1,0 +1,33 @@
+{
+  "name": "components-bd-first-desktop-header",
+  "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/components/bd-first/desktop/header/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "build": {
+      "executor": "@nx/rollup:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/components/bd-first/desktop/header",
+        "tsConfig": "libs/components/bd-first/desktop/header/tsconfig.lib.json",
+        "project": "libs/components/bd-first/desktop/header/package.json",
+        "entryFile": "libs/components/bd-first/desktop/header/src/index.ts",
+        "external": ["react", "react-dom", "react/jsx-runtime"],
+        "rollupConfig": "@nx/react/plugins/bundle-rollup",
+        "compiler": "swc",
+        "assets": [
+          {
+            "glob": "libs/components/bd-first/desktop/header/README.md",
+            "input": ".",
+            "output": "."
+          }
+        ]
+      }
+    }
+  }
+}
