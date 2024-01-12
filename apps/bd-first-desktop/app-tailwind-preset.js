@@ -6,10 +6,10 @@ module.exports = {
       SecondaryRed: '#D00023',
       PrimaryWhite: '#FFFFFF',
       SecondaryWhite: '',
-      PrimaryBlack: '#030303',
-      SecondaryBlack: '',
+      PrimaryBlack: '#000000',
+      SecondaryBlack: '#030303',
       PrimaryGery: '',
-      SecondaryGery: '',
+      SecondaryGery: '#EDEDED',
     },
   },
 };

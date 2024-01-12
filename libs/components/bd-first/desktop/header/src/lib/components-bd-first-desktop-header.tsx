@@ -58,7 +58,7 @@ export function DesktopHeader({
             style={{
               fontFamily: "'Helvetica Neue', 'sans-serif'",
             }}
-            className="text-[14px] font-[400] leading-[16.7px] text-PrimaryBlack"
+            className="text-[14px] font-[400] leading-[16.7px] text-SecondaryBlack"
             key={idx}
           >
             <a href={'/' + c?.name}>{c?.name}</a>
