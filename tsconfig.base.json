@@ -17,6 +17,12 @@
     "paths": {
       "@bd-first/common-ui": ["libs/common-ui/src/index.ts"],
       "@bd-first/common-ui/server": ["common-ui/src/server.ts"],
+      "@bd-first/components/bd-first/desktop/footer": [
+        "libs/components/bd-first/desktop/footer/src/index.ts"
+      ],
+      "@bd-first/components/bd-first/desktop/footer/server": [
+        "libs/components/bd-first/desktop/footer/src/server.ts"
+      ],
       "@bd-first/components/bd-first/desktop/header": [
         "libs/components/bd-first/desktop/header/src/index.ts"
       ],

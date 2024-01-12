@@ -3,6 +3,7 @@ import App, { AppContext, AppInitialProps, AppProps } from 'next/app';
 import Head from 'next/head';
 import './styles.css';
 import { DesktopHeader } from '@bd-first/components/bd-first/desktop/header';
+import { Footer } from '@bd-first/components/bd-first/desktop/footer';
 
 type AppOwnProps = { categories: any };
 
@@ -17,19 +18,20 @@ function CustomApp({
         <title>BangladeshFirst</title>
       </Head>
       <main className="app">
-        <nav
-          className="sticky top-0 z-40"
-          style={{ backgroundColor: '#FFFFFF' }}
-        >
+        <nav className="sticky top-0 z-40 bg-PrimaryWhite">
           <div className="px-0">
             <DesktopHeader
-              siteLogoUrl=""
+              siteLogoUrl="/icons/bangladesh-first-logo.png"
               categories={categories ?? []}
               sidebarMenuItems={[]}
             />
           </div>
         </nav>
         <Component {...pageProps} />
+        <Footer
+          siteLogoUrl="/icons/bangladesh-first-logo.png"
+          siteUrl={'www.bangladeshfirst.com'}
+        />
       </main>
     </>
   );
