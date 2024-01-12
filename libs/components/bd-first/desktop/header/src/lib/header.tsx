@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { Divider } from '@bd-first/common-ui';
+import { Drawer } from '@bd-first/components/common/drawer';
 
 interface IDesktopHeaderProps {
   siteLogoUrl: string;
@@ -66,6 +67,15 @@ export function DesktopHeader({
         ))}
       </div>
       <Divider />
+      {isNavOpen ? (
+        <Drawer
+          headContent={<span>Header Content</span>}
+          bodyContent={<span>Body Content</span>}
+          onClose={() => setIsNavOpen(false)}
+        />
+      ) : (
+        ''
+      )}
     </div>
   );
 }

@@ -29,6 +29,12 @@
       "@bd-first/components/bd-first/desktop/header/server": [
         "libs/components/bd-first/desktop/header/src/server.ts"
       ],
+      "@bd-first/components/common/drawer": [
+        "libs/components/common/drawer/src/index.ts"
+      ],
+      "@bd-first/components/common/drawer/server": [
+        "libs/components/common/drawer/src/server.ts"
+      ],
       "@bd-first/news-site-ui": ["libs/news-site-ui/src/index.ts"],
       "@bd-first/news-site-ui/server": ["news-site-ui/src/server.ts"],
       "@bd-first/pages/bd-first/desktop/homepage-1": [
