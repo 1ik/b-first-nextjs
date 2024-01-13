@@ -8,8 +8,15 @@ module.exports = {
       SecondaryWhite: '',
       PrimaryBlack: '#000000',
       SecondaryBlack: '#030303',
-      PrimaryGery: '',
+      BlackL3: '#1E1E1E',
+      PrimaryGery: '#D7D7D7',
       SecondaryGery: '#EDEDED',
+    },
+    fontFamily: {
+      AvenirNextCondensed: ['Avenir Next Condensed', 'sans-serif'],
+      Merriweather: ['Merriweather', 'sans-serif'],
+      Roboto: ['Roboto', 'sans-serif'],
+      HelveticaNeue: ['Helvetica Neue', 'sans-serif'],
     },
   },
 };

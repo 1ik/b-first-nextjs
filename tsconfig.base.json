@@ -17,6 +17,18 @@
     "paths": {
       "@bd-first/common-ui": ["libs/common-ui/src/index.ts"],
       "@bd-first/common-ui/server": ["common-ui/src/server.ts"],
+      "@bd-first/components/bd-first/card-2": [
+        "libs/components/bd-first/card-2/src/index.ts"
+      ],
+      "@bd-first/components/bd-first/card-2/server": [
+        "libs/components/bd-first/card-2/src/server.ts"
+      ],
+      "@bd-first/components/bd-first/card1": [
+        "libs/components/bd-first/card1/src/index.ts"
+      ],
+      "@bd-first/components/bd-first/card1/server": [
+        "libs/components/bd-first/card1/src/server.ts"
+      ],
       "@bd-first/components/bd-first/desktop/footer": [
         "libs/components/bd-first/desktop/footer/src/index.ts"
       ],
@@ -28,6 +40,12 @@
       ],
       "@bd-first/components/bd-first/desktop/header/server": [
         "libs/components/bd-first/desktop/header/src/server.ts"
+      ],
+      "@bd-first/components/common/divider": [
+        "libs/components/common/divider/src/index.ts"
+      ],
+      "@bd-first/components/common/divider/server": [
+        "libs/components/common/divider/src/server.ts"
       ],
       "@bd-first/components/common/drawer": [
         "libs/components/common/drawer/src/index.ts"

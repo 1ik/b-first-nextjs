@@ -7,11 +7,7 @@ interface IProps {
   size?: TSize;
 }
 
-export const CategoryText = ({
-  className = '',
-  title,
-  size = 'md',
-}: IProps) => {
+export const TitleText = ({ className = '', title, size = 'md' }: IProps) => {
   const sizeClasses = {
     xs: 'font-black text-[18px] leading-[23px] tracking-[-.3px]',
     sm: 'font-black text-[22px] leading-[26px] tracking-[-.3px]',

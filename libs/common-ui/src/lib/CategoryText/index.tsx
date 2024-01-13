@@ -2,9 +2,9 @@ import React from 'react';
 
 type TSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 interface IProps {
-  className: string;
+  className?: string;
   category: string;
-  size: TSize;
+  size?: TSize;
 }
 
 export const CategoryText = ({
