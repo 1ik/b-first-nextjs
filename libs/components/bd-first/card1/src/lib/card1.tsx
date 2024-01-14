@@ -6,40 +6,50 @@ import {
   Image,
 } from '@bd-first/common-ui';
 
+type TSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+
+interface ITitleTextProps {
+  className?: string;
+  size?: TSize;
+}
+
 interface IProps {
+  className?: string;
   category?: string;
   title?: string;
   summary1?: string;
   publishedAt?: string;
+  showImage?: boolean;
   imageUrl?: string;
   imageAlt?: string;
   summary2?: string;
+  titleProps?: ITitleTextProps;
 }
 
 export function Card1({
+  className = '',
   category,
-  title,
-  summary1,
+  title = '',
+  summary1 = '',
   publishedAt,
+  showImage,
   imageUrl,
   imageAlt,
-  summary2,
+  summary2 = '',
+  titleProps = { size: 'lg', className: '' },
 }: IProps) {
   return (
-    <div className={'flex flex-col justify-start'}>
+    <div className={`flex flex-col justify-start ${className}`}>
       <CategoryText category={category ?? ''} />
       <TitleText
-        size="lg"
-        title="Awami League develops, BNP burns people: Sheikh Hasina"
-        className="py-1"
+        size={titleProps.size}
+        title={title}
+        className={`py-1 ${titleProps.className}`}
       />
-      <SummaryText text="She said, “Those who are burning innocent people in the name of blockade are the ones who want to disrupt the elections”" />
-      <PublishingTimeText text="28 minutes ago" className="py-2" />
-      <Image src="/images/sheikh-hasina.png" alt="sheikh-hasina" />
-      <SummaryText
-        text="Picture: She said, “Those who are burning innocent people in the name of blockade are the ones who want to disrupt the elections”"
-        className="py-1"
-      />
+      <SummaryText text={summary1} />
+      <PublishingTimeText text={publishedAt ?? ''} className="py-2" />
+      {showImage ? <Image src={imageUrl} alt={imageAlt} /> : ''}
+      {summary2 ? <SummaryText text={summary2} /> : ''}
     </div>
   );
 }
