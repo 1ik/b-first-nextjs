@@ -77,12 +77,12 @@ export function Card3({
         ) : (
           ''
         )}
-        {showDivider ? (
-          <Divider color="gray" orientation="horizontal" {...dividerProps} />
-        ) : (
-          ''
-        )}
       </div>
+      {showDivider ? (
+        <Divider color="gray" orientation="horizontal" {...dividerProps} />
+      ) : (
+        ''
+      )}
     </div>
   );
 }

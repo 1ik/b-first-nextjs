@@ -61,6 +61,12 @@
       ],
       "@bd-first/news-site-ui": ["libs/news-site-ui/src/index.ts"],
       "@bd-first/news-site-ui/server": ["news-site-ui/src/server.ts"],
+      "@bd-first/pages/bd-first/desktop/category-page-1": [
+        "libs/pages/bd-first/desktop/category-page-1/src/index.ts"
+      ],
+      "@bd-first/pages/bd-first/desktop/category-page-1/server": [
+        "libs/pages/bd-first/desktop/category-page-1/src/server.ts"
+      ],
       "@bd-first/pages/bd-first/desktop/homepage-1": [
         "libs/pages/bd-first/desktop/homepage-1/src/index.ts"
       ],
