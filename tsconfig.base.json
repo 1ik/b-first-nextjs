@@ -23,6 +23,12 @@
       "@bd-first/components/bd-first/card-2/server": [
         "libs/components/bd-first/card-2/src/server.ts"
       ],
+      "@bd-first/components/bd-first/card-3": [
+        "libs/components/bd-first/card-3/src/index.ts"
+      ],
+      "@bd-first/components/bd-first/card-3/server": [
+        "libs/components/bd-first/card-3/src/server.ts"
+      ],
       "@bd-first/components/bd-first/card1": [
         "libs/components/bd-first/card1/src/index.ts"
       ],

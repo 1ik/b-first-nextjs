@@ -1,10 +1,79 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Divider } from '@bd-first/components/common/divider';
 import { Card1 } from '@bd-first/components/bd-first/card1';
 import { Card2 } from '@bd-first/components/bd-first/card-2';
+import { Card3 } from '@bd-first/components/bd-first/card-3';
+import { CategoryText } from '@bd-first/common-ui';
+
+const dummyData1 = [
+  {
+    showImage: true,
+    imageAlt: 'sheikh-hasina',
+    imageUrl: '/images/sheikh-hasina.png',
+    category: 'Economics',
+    title: 'Shahbagh, Karwan Bazar metro stations open today',
+    showPublishedAt: true,
+    publishedAt: '59 minutes ago',
+  },
+  {
+    showImage: false,
+    imageAlt: 'sheikh-hasina',
+    imageUrl: '/images/sheikh-hasina.png',
+    category: 'Economics',
+    title: 'Foreign debt has increased by 39 thousand crores in one year',
+    showPublishedAt: true,
+    publishedAt: '1h 3m ago',
+  },
+  {
+    showImage: false,
+    imageAlt: 'sheikh-hasina',
+    imageUrl: '/images/sheikh-hasina.png',
+    category: 'Economics',
+    title: 'Foreign debt has increased by 39 thousand crores in one year',
+    showPublishedAt: true,
+    publishedAt: '1h 10m ago',
+  },
+  {
+    showImage: false,
+    imageAlt: 'sheikh-hasina',
+    imageUrl: '/images/sheikh-hasina.png',
+    category: 'Economics',
+    title: 'Foreign debt has increased by 39 thousand crores in one year',
+    showPublishedAt: true,
+    publishedAt: '1h 32m ago',
+  },
+  {
+    showImage: false,
+    imageAlt: 'sheikh-hasina',
+    imageUrl: '/images/sheikh-hasina.png',
+    category: 'Economics',
+    title: 'Foreign debt has increased by 39 thousand crores in one year',
+    showPublishedAt: true,
+    publishedAt: '1h 54m ago',
+  },
+  {
+    showImage: false,
+    imageAlt: 'sheikh-hasina',
+    imageUrl: '/images/sheikh-hasina.png',
+    category: 'Economics',
+    title: 'Foreign debt has increased by 39 thousand crores in one year',
+    showPublishedAt: true,
+    publishedAt: '1h 32m ago',
+  },
+  {
+    showImage: false,
+    imageAlt: 'sheikh-hasina',
+    imageUrl: '/images/sheikh-hasina.png',
+    category: 'Economics',
+    title: 'Foreign debt has increased by 39 thousand crores in one year',
+    showPublishedAt: true,
+    publishedAt: '1h 54m ago',
+  },
+];
 
 export function Homepage1() {
   return (
-    <div className={'px-24 py-2'}>
+    <div className={'px-[96px] md:px-[128px] lg:px-[160px] xl:px-[224px] py-2'}>
       <div className="flex gap-2">
         {/* Left Section */}
         <div className="flex flex-col w-2/3 px-2">
@@ -46,8 +115,23 @@ export function Homepage1() {
             </div>
           </div>
           <Divider />
-          <div>loading....</div>
-          <Divider />
+          <div className="py-3">
+            <Card3
+              className={`gap-12`}
+              direction="flex-row-reverse "
+              contentWrapperClass={`w-1/3`}
+              imageWrapperClass={`w-2/3`}
+              showImage={true}
+              imageUrl="/images/sheikh-hasina.png"
+              imageAlt="sheikh-hasina"
+              category={'National'}
+              title={`BKMEA's letter to buyers asking for increased price on ready-made garments`}
+              titleProps={{ size: 'md' }}
+              showPublishedAt={false}
+              summary={`She said, “Those who are burning innocent people in the name of blockade are the ones who want to disrupt the elections”`}
+            />
+          </div>
+          <Divider color="gray" />
           <div className="flex gap-4">
             <Card2
               category="SAVAR"
@@ -77,8 +161,23 @@ export function Homepage1() {
             Read More on National
           </a>
           <Divider orientation="vertical" />
-          Loading...
-          <Divider color="gray" orientation="vertical" />
+          <div className="py-3">
+            <Card3
+              className={`gap-12`}
+              direction="flex-row-reverse "
+              contentWrapperClass={`w-1/3`}
+              imageWrapperClass={`w-2/3`}
+              showImage={true}
+              imageUrl="/images/sheikh-hasina.png"
+              imageAlt="sheikh-hasina"
+              category={'National'}
+              title={`BKMEA's letter to buyers asking for increased price on ready-made garments`}
+              titleProps={{ size: 'md' }}
+              showPublishedAt={false}
+              summary={`She said, “Those who are burning innocent people in the name of blockade are the ones who want to disrupt the elections”`}
+            />
+          </div>
+          <Divider color="gray" />
           <div className="flex gap-4">
             <Card2
               category="BANGLADESH CRICKET"
@@ -113,7 +212,47 @@ export function Homepage1() {
         <Divider orientation="vertical" />
 
         {/* Right Section */}
-        <div className="flex w-1/3">2nd</div>
+        <div className="flex flex-col w-1/3 gap-2 px-2">
+          {/* First Sub Section */}
+          <Divider color="red" orientation="horizontal" />
+          <CategoryText category="Latest" />
+          <div className="flex flex-col overflow-auto max-h-[900px]">
+            {dummyData1?.map((d: any, idx: number) => (
+              <Card3
+                key={idx}
+                showImage={d?.showImage ?? false}
+                imageAlt={d?.imageAlt ?? ''}
+                imageUrl={d?.imageUrl ?? ''}
+                category={d?.category ?? ''}
+                title={d?.title ?? ''}
+                showPublishedAt={d?.showPublishedAt ?? false}
+                publishedAt={d?.publishedAt ?? ''}
+                showDivider={dummyData1?.length - 1 !== idx}
+                dividerProps={{ className: 'mt-2 mb-2' }}
+              />
+            ))}
+          </div>
+          {/* 2nd Sub Section */}
+          <Divider color="black" orientation="horizontal" />
+          <CategoryText category="EDITOR’s Pick" />
+          <div className="flex flex-col overflow-auto max-h-[900px]">
+            {dummyData1?.map((d: any, idx: number) => (
+              <Card3
+                key={idx}
+                showImage={d?.showImage ?? false}
+                imageAlt={d?.imageAlt ?? ''}
+                imageUrl={d?.imageUrl ?? ''}
+                category={d?.category ?? ''}
+                title={d?.title ?? ''}
+                showPublishedAt={d?.showPublishedAt ?? false}
+                publishedAt={d?.publishedAt ?? ''}
+                showDivider={dummyData1?.length - 1 !== idx}
+                dividerProps={{ className: 'mt-2 mb-2' }}
+              />
+            ))}
+          </div>
+          <Divider color="black" orientation="horizontal" />
+        </div>
       </div>
     </div>
   );
