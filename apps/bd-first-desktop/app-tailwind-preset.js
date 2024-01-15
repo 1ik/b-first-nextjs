@@ -11,6 +11,7 @@ module.exports = {
       BlackL3: '#1E1E1E',
       PrimaryGery: '#D7D7D7',
       SecondaryGery: '#EDEDED',
+      GrayL3: '#FAFAFA',
     },
     fontFamily: {
       AvenirNextCondensed: ['Avenir Next Condensed', 'sans-serif'],

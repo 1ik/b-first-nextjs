@@ -7,3 +7,4 @@ export * from './lib/CategoryText';
 export * from './lib/TitleText';
 export * from './lib/SummaryText';
 export * from './lib/PublishingTimeText';
+export * from './lib/BulletText';

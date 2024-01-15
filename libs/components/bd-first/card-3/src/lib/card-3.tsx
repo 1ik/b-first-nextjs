@@ -20,6 +20,12 @@ interface IDividerProps {
   size?: 'sm' | 'md' | 'lg';
 }
 
+type TDirection =
+  | 'flex-row'
+  | 'flex-col'
+  | 'flex-row-reverse'
+  | 'flex-col-reverse';
+
 interface IProps {
   className?: string;
   contentWrapperClass?: string;
@@ -27,7 +33,7 @@ interface IProps {
   category?: string;
   title?: string;
   summary?: string;
-  showPublishedAt: boolean;
+  showPublishedAt?: boolean;
   publishedAt?: string;
   showImage?: boolean;
   imageUrl?: string;
@@ -35,7 +41,8 @@ interface IProps {
   titleProps?: ITitleTextProps;
   showDivider?: boolean;
   dividerProps?: IDividerProps;
-  direction?: string;
+  direction?: TDirection;
+  showCategory?: boolean;
 }
 
 export function Card3({
@@ -45,9 +52,10 @@ export function Card3({
   category,
   title = '',
   summary = '',
-  showPublishedAt,
+  showPublishedAt = false,
   publishedAt,
   showImage,
+  showCategory = false,
   imageUrl,
   imageAlt,
   titleProps = { size: 'xs', className: '' },
@@ -65,7 +73,11 @@ export function Card3({
         ''
       )}
       <div className={`${contentWrapperClass}`}>
-        <CategoryText category={category ?? ''} size="lg" />
+        {showCategory ? (
+          <CategoryText category={category ?? ''} size="lg" />
+        ) : (
+          ''
+        )}
         <TitleText
           size={titleProps.size}
           title={title}

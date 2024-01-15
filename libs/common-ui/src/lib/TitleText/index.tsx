@@ -18,7 +18,7 @@ export const TitleText = ({ className = '', title, size = 'md' }: IProps) => {
 
   return (
     <h1
-      className={`font-Merriweather text-SecondaryBlack ${sizeClasses[size]} ${className}`}
+      className={`${className} ${sizeClasses[size]} font-Merriweather text-SecondaryBlack`}
     >
       {title}
     </h1>

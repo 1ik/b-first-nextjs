@@ -1,0 +1,33 @@
+{
+  "name": "pages-bd-first-desktop-details-page-1",
+  "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/pages/bd-first/desktop/details-page-1/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "build": {
+      "executor": "@nx/rollup:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/pages/bd-first/desktop/details-page-1",
+        "tsConfig": "libs/pages/bd-first/desktop/details-page-1/tsconfig.lib.json",
+        "project": "libs/pages/bd-first/desktop/details-page-1/package.json",
+        "entryFile": "libs/pages/bd-first/desktop/details-page-1/src/index.ts",
+        "external": ["react", "react-dom", "react/jsx-runtime"],
+        "rollupConfig": "@nx/react/plugins/bundle-rollup",
+        "compiler": "swc",
+        "assets": [
+          {
+            "glob": "libs/pages/bd-first/desktop/details-page-1/README.md",
+            "input": ".",
+            "output": "."
+          }
+        ]
+      }
+    }
+  }
+}
