@@ -5,12 +5,14 @@ interface IProps {
   className?: string;
   category: string;
   size?: TSize;
+  color?: 'red' | 'black';
 }
 
 export const CategoryText = ({
   className = '',
   category,
   size = 'md',
+  color = 'red',
 }: IProps) => {
   const sizeClasses = {
     xs: '',
@@ -20,9 +22,14 @@ export const CategoryText = ({
     xl: 'font-semibold text-[48px] leading-[65px]',
   };
 
+  const colorClasses: any = {
+    red: 'text-SecondaryRed',
+    black: 'text-SecondaryBlack',
+  };
+
   return (
     <h5
-      className={`uppercase ${sizeClasses[size]} text-SecondaryRed font-AvenirNextCondensed pt-1 ${className}`}
+      className={`uppercase ${sizeClasses[size]} ${colorClasses[color]} font-AvenirNextCondensed pt-1 ${className}`}
     >
       {category}
     </h5>

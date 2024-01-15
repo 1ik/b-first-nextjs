@@ -30,6 +30,7 @@ interface IProps {
   className?: string;
   contentWrapperClass?: string;
   imageWrapperClass?: string;
+  imageClass?: string;
   category?: string;
   title?: string;
   summary?: string;
@@ -43,14 +44,17 @@ interface IProps {
   dividerProps?: IDividerProps;
   direction?: TDirection;
   showCategory?: boolean;
+  showSummary?: boolean;
 }
 
 export function Card3({
   className = '',
   contentWrapperClass = '',
   imageWrapperClass = '',
+  imageClass = '',
   category,
   title = '',
+  showSummary = false,
   summary = '',
   showPublishedAt = false,
   publishedAt,
@@ -67,23 +71,19 @@ export function Card3({
     <div className={`flex justify-start ${direction} ${className}`}>
       {showImage ? (
         <div className={`${imageWrapperClass}`}>
-          <Image src={imageUrl} alt={imageAlt} />
+          <Image src={imageUrl} alt={imageAlt} className={imageClass} />
         </div>
       ) : (
         ''
       )}
       <div className={`${contentWrapperClass}`}>
-        {showCategory ? (
-          <CategoryText category={category ?? ''} size="lg" />
-        ) : (
-          ''
-        )}
+        {showCategory ? <CategoryText category={category ?? ''} /> : ''}
         <TitleText
           size={titleProps.size}
           title={title}
           className={`py-1 ${titleProps.className}`}
         />
-        <SummaryText text={summary} />
+        {showSummary ? <SummaryText text={summary} /> : ''}
         {showPublishedAt ? (
           <PublishingTimeText text={publishedAt ?? ''} className="py-2" />
         ) : (

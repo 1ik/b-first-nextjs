@@ -5,11 +5,20 @@ interface Image {
   alt: string;
   width: number;
   height: number;
+  imageClass?: string;
 }
-export const Image = ({ src, alt, width, height, className }: any) => {
+export const Image = ({
+  src,
+  alt,
+  width,
+  height,
+  className,
+  imageClasses = '',
+}: any) => {
   return (
     <div className={`min-w-full flex w-full ${className}`}>
       <img
+        className={imageClasses}
         src={src}
         alt={alt ?? ''}
         width={width ?? 360}

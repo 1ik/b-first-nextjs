@@ -134,7 +134,7 @@ export function DetailsPage1() {
             <CategoryText category="Most REaD on National" />
             <div className="flex flex-col gap-2">
               {dummyData1?.map((d: any, idx: number) => (
-                <div className="flex items-center gap-3">
+                <div key={idx} className="flex items-center gap-3">
                   <TitleText
                     title={`${idx + 1}`}
                     size="lg"
