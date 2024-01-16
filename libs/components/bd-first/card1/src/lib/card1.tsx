@@ -49,7 +49,7 @@ export function Card1({
       <SummaryText text={summary1} />
       <PublishingTimeText text={publishedAt ?? ''} className="py-2" />
       {showImage ? <Image src={imageUrl} alt={imageAlt} /> : ''}
-      {summary2 ? <SummaryText text={summary2} /> : ''}
+      {summary2 ? <SummaryText text={summary2} className="pt-2" /> : ''}
     </div>
   );
 }
