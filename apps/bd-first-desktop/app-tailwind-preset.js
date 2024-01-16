@@ -14,10 +14,10 @@ module.exports = {
       GrayL3: '#FAFAFA',
     },
     fontFamily: {
-      AvenirNextCondensed: ['Avenir Next Condensed', 'sans-serif'],
-      Merriweather: ['Merriweather', 'sans-serif'],
+      AvenirNextCondensed: ['Roboto Condensed', 'sans-serif'],
+      Merriweather: ['Merriweather', 'serif'],
       Roboto: ['Roboto', 'sans-serif'],
-      HelveticaNeue: ['Helvetica Neue', 'sans-serif'],
+      HelveticaNeue: ['Helvetica Neue', 'serif'],
     },
   },
 };

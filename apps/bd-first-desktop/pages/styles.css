@@ -1,6 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Fonts */
+@import url('https://fonts.cdnfonts.com/css/helvetica-neue-55');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;900&family=Roboto+Condensed&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;900&family=Roboto&display=swap');
+
 html {
   -webkit-text-size-adjust: 100%;
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
@@ -30,5 +37,35 @@ pre {
   border-color: currentColor;
 }
 
-/* Fonts */
-@import url('https://fonts.cdnfonts.com/css/helvetica-neue-55');
+/* Scrollbar Styls */
+:root {
+  --primary: #f1f1f1;
+  --secondary: #c5c5c5;
+  --tertiary: #c5c5c5;
+}
+
+/* Firefox */
+/* * {
+  scrollbar-width: auto;
+  scrollbar-color: var(--secondary) var(--primary);
+} */
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--primary);
+  border-radius: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--secondary);
+  border-radius: 14px;
+  border: 2px solid var(--primary);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--tertiary);
+}

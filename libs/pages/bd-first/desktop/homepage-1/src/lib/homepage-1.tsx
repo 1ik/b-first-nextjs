@@ -118,7 +118,7 @@ export function Homepage1() {
           <div className="py-3">
             <Card3
               className={`gap-12`}
-              direction="flex-row-reverse "
+              direction="flex-row-reverse"
               contentWrapperClass={`w-1/3`}
               imageWrapperClass={`w-2/3`}
               showImage={true}
@@ -164,7 +164,7 @@ export function Homepage1() {
           <div className="py-3">
             <Card3
               className={`gap-12`}
-              direction="flex-row-reverse "
+              direction="flex-row-reverse"
               contentWrapperClass={`w-1/3`}
               imageWrapperClass={`w-2/3`}
               showImage={true}
@@ -212,44 +212,52 @@ export function Homepage1() {
         <Divider orientation="vertical" />
 
         {/* Right Section */}
-        <div className="flex flex-col w-1/3 gap-2 px-2">
-          {/* First Sub Section */}
+        <div className="flex flex-col w-1/3 px-2">
           <Divider color="red" orientation="horizontal" />
-          <CategoryText category="Latest" />
-          <div className="flex flex-col overflow-auto max-h-[900px]">
-            {dummyData1?.map((d: any, idx: number) => (
-              <Card3
-                key={idx}
-                showImage={d?.showImage ?? false}
-                imageAlt={d?.imageAlt ?? ''}
-                imageUrl={d?.imageUrl ?? ''}
-                category={d?.category ?? ''}
-                title={d?.title ?? ''}
-                showPublishedAt={d?.showPublishedAt ?? false}
-                publishedAt={d?.publishedAt ?? ''}
-                showDivider={dummyData1?.length - 1 !== idx}
-                dividerProps={{ className: 'mt-2 mb-2' }}
-              />
-            ))}
+          <div className="flex flex-col gap-2">
+            {/* First Sub Section */}
+            <CategoryText category="Latest" />
+            <div className="flex flex-col overflow-auto max-h-[900px] pr-2">
+              {dummyData1?.map((d: any, idx: number) => (
+                <Card3
+                  key={idx}
+                  showCategory
+                  showImage={d?.showImage ?? false}
+                  imageAlt={d?.imageAlt ?? ''}
+                  imageUrl={d?.imageUrl ?? ''}
+                  category={d?.category ?? ''}
+                  title={d?.title ?? ''}
+                  titleProps={{ size: 'xs' }}
+                  showPublishedAt={d?.showPublishedAt ?? false}
+                  publishedAt={d?.publishedAt ?? ''}
+                  showDivider={dummyData1?.length - 1 !== idx}
+                  dividerProps={{ className: 'mt-2 mb-2' }}
+                />
+              ))}
+            </div>
           </div>
           {/* 2nd Sub Section */}
-          <Divider color="black" orientation="horizontal" />
-          <CategoryText category="EDITOR’s Pick" />
-          <div className="flex flex-col overflow-auto max-h-[900px]">
-            {dummyData1?.map((d: any, idx: number) => (
-              <Card3
-                key={idx}
-                showImage={d?.showImage ?? false}
-                imageAlt={d?.imageAlt ?? ''}
-                imageUrl={d?.imageUrl ?? ''}
-                category={d?.category ?? ''}
-                title={d?.title ?? ''}
-                showPublishedAt={d?.showPublishedAt ?? false}
-                publishedAt={d?.publishedAt ?? ''}
-                showDivider={dummyData1?.length - 1 !== idx}
-                dividerProps={{ className: 'mt-2 mb-2' }}
-              />
-            ))}
+          <Divider color="black" orientation="horizontal" className="mb-2" />
+          <div className="flex flex-col gap-2">
+            <CategoryText category="EDITOR’s Pick" />
+            <div className="flex flex-col overflow-auto max-h-[900px] pr-2">
+              {dummyData1?.map((d: any, idx: number) => (
+                <Card3
+                  key={idx}
+                  showImage={d?.showImage ?? false}
+                  imageAlt={d?.imageAlt ?? ''}
+                  imageUrl={d?.imageUrl ?? ''}
+                  category={d?.category ?? ''}
+                  title={d?.title ?? ''}
+                  titleProps={{ size: 'xs' }}
+                  showCategory
+                  showPublishedAt={d?.showPublishedAt ?? false}
+                  publishedAt={d?.publishedAt ?? ''}
+                  showDivider={dummyData1?.length - 1 !== idx}
+                  dividerProps={{ className: 'mt-2 mb-2' }}
+                />
+              ))}
+            </div>
           </div>
           <Divider color="black" orientation="horizontal" />
         </div>
