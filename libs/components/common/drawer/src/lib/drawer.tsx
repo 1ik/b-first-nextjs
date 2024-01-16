@@ -16,7 +16,7 @@ export const Drawer = ({
 }: IProps) => (
   <div
     style={{ minWidth: width ?? '347px' }}
-    className="absolute top-0 z-50 min-h-screen overflow-hidden bg-PrimaryWhite"
+    className="absolute top-0 z-50 min-h-screen overflow-hidden shadow-xl bg-PrimaryWhite"
   >
     <div className="flex items-center justify-between px-3 mt-1">
       {headContent}
