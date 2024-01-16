@@ -18,7 +18,7 @@ export const Drawer = ({
     style={{ minWidth: width ?? '347px' }}
     className="absolute top-0 z-50 min-h-screen overflow-hidden bg-PrimaryWhite"
   >
-    <div className="flex items-center justify-between px-3 pb-2 mt-1">
+    <div className="flex items-center justify-between px-3 mt-1">
       {headContent}
       <button onClick={onClose}>
         <img src="/icons/close.png" alt="close" className="w-5 h-5" />
