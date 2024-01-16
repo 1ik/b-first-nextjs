@@ -119,14 +119,21 @@ export function DetailsPage1() {
               title="Taiwan elections: mainland Chinese reporters on short-term permits can ‘only observe’ as island votes for new president"
             />
             <Image src={'/images/sheikh-hasina.png'} alt={'sheikh-hasina'} />
-            <span className="font-Merriweather font-normal text-[13px] leading-[16.5px]">
+            <span className="font-Merriweather font-normal text-[13px] leading-[16.5px] pt-1.5 pb-2.5">
               Pic: Sheikh Hasina during her speech in Sunamgang sylhet.
             </span>
-            <p className="font-normal text-[19.2px] leading-[24px] tracking-[-.5px]">
-              Awami League President and Prime Minister Sheikh Hasina has
-              commented that 'voting is the constitutional right of the people
-              and no one has the right to prevent them from voting'.
-            </p>
+            <div className="flex flex-col gap-4">
+              <p className="font-normal text-[19.2px] leading-[24px] tracking-[-.5px]">
+                Awami League President and Prime Minister Sheikh Hasina has
+                commented that 'voting is the constitutional right of the people
+                and no one has the right to prevent them from voting'.
+              </p>
+              <p className="font-normal text-[19.2px] leading-[24px] tracking-[-.5px]">
+                Awami League President and Prime Minister Sheikh Hasina has
+                commented that 'voting is the constitutional right of the people
+                and no one has the right to prevent them from voting'.
+              </p>
+            </div>
           </div>
           {/* News Details End */}
           <Divider color="gray" className="mt-2 mb-1" />
@@ -156,7 +163,7 @@ export function DetailsPage1() {
           <Divider color="gray" className="mt-2 mb-1" />
         </div>
         {/* Right Section */}
-        <div className="flex flex-col w-1/4 pt-1">
+        <div className="flex flex-col w-1/4 pt-2">
           <Image src={'/images/rectangle-17.png'} alt={'add-image'} />
         </div>
       </div>
