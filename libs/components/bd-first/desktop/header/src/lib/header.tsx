@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from 'react';
-import Link from 'next/link';
 import { Divider } from '@bd-first/common-ui';
 import { Drawer } from '@bd-first/components/common/drawer';
 
@@ -42,13 +41,13 @@ export function DesktopHeader({
           </button>
         </div>
         <div className="h-full">
-          <Link href={'/'}>
+          <a href={'/'}>
             <img
               className="h-16 w-65"
               src="/icons/bangladesh-first-logo.png"
               alt="bangladesh-first-site-icon"
             />
-          </Link>
+          </a>
         </div>
         <div className="flex items-center gap-1">
           <button className="flex items-center justify-center gap-2 px-2 py-1 border-[1px] border-SecondaryRed rounded-sm">
@@ -60,10 +59,7 @@ export function DesktopHeader({
       <div className="flex justify-center gap-2">
         {categories?.map((c: any, idx: number) => (
           <div
-            style={{
-              fontFamily: "'Helvetica Neue', 'sans-serif'",
-            }}
-            className="text-[14px] font-[400] leading-[16.7px] text-SecondaryBlack"
+            className="text-[14px] font-[400] leading-[16.7px] text-SecondaryBlack font-HelveticaNeue"
             key={idx}
           >
             <a href={'/' + c?.name}>{c?.name}</a>
