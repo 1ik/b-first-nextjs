@@ -118,10 +118,10 @@ export function DetailsPage1() {
               size="xl"
               title="Taiwan elections: mainland Chinese reporters on short-term permits can ‘only observe’ as island votes for new president"
             />
-            <div className="py-2">
-              <button className="rounded-[4px] flex w-auto items-center justify-center gap-2 px-12 py-1.5 border-[1.5px] border-SecondaryRed ">
+            <div className="pb-2.5 pt-1">
+              <button className="rounded-[4px] flex w-auto items-center justify-center gap-2 px-6 py-1.5 border-[1.5px] border-SecondaryRed ">
                 <img src={'/icons/audio-icon.png'} />
-                <span className="mt-0 text-[16px] font-Roboto leading-[18.5px] tracking-[-.5px] font-medium">
+                <span className="text-[16px] font-Roboto leading-[18.5px] tracking-[-.5px] font-medium">
                   Listen to this article
                 </span>
               </button>
