@@ -29,7 +29,7 @@ export const CategoryText = ({
 
   return (
     <h5
-      className={`uppercase ${sizeClasses[size]} ${colorClasses[color]} font-AvenirNextCondensed pt-1 ${className} tracking-[2px]`}
+      className={`uppercase ${sizeClasses[size]} ${colorClasses[color]} font-AvenirNextCondensed pt-1 ${className} tracking-[1.5px]`}
     >
       {category}
     </h5>
