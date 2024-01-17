@@ -18,6 +18,7 @@ interface ITitleTextProps {
 interface IDividerProps {
   className?: string;
   size?: 'sm' | 'md' | 'lg';
+  color?: 'black' | 'gray';
 }
 
 type TDirection =

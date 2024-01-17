@@ -235,9 +235,15 @@ export function Homepage1() {
                 />
               ))}
             </div>
+            <div className="pr-3">
+              <Divider
+                color="black"
+                orientation="horizontal"
+                className="mb-2"
+              />
+            </div>
           </div>
           {/* 2nd Sub Section */}
-          <Divider color="black" orientation="horizontal" className="mb-2" />
           <div className="flex flex-col gap-2">
             <CategoryText category="EDITOR’s Pick" />
             <div className="flex flex-col overflow-auto max-h-[900px] pr-2">
@@ -259,7 +265,9 @@ export function Homepage1() {
               ))}
             </div>
           </div>
-          <Divider color="black" orientation="horizontal" />
+          <div className="pt-2 pr-3">
+            <Divider color="black" orientation="horizontal" className="my-3" />
+          </div>
         </div>
       </div>
     </div>

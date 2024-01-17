@@ -9,7 +9,7 @@ interface IProps {
 export const BulletText = ({ className = '', text, size = 'md' }: IProps) => {
   const sizeClasses: any = {
     md: {
-      text: `font-semibold text-SecondaryBlack text-[16px leading-[18.75px]`,
+      text: `font-semibold text-SecondaryBlack text-[16px] leading-[18.75px]`,
       image: `h-[8px] w-[8px] mt-1`,
     },
   };

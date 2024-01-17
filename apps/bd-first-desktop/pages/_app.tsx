@@ -56,6 +56,24 @@ function CustomApp({
       <Head>
         <title>BangladeshFirst</title>
       </Head>
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" />
+      <link
+        href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;900&display=swap"
+        rel="stylesheet"
+      ></link>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap"
+        rel="stylesheet"
+      ></link>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+        rel="stylesheet"
+      ></link>
+      <link
+        href="https://fonts.cdnfonts.com/css/helvetica-neue-55"
+        rel="stylesheet"
+      ></link>
       <main className="app">
         <nav className="sticky top-0 z-40 bg-PrimaryWhite">
           <div className="px-0">
