@@ -92,7 +92,7 @@ export const NewsCard = ({
           router.push(url);
         }
       }}
-      className={`flex flex-col items-start ${gap ? `gap-${gap}` : 'gap-1.5'}`}
+      className={`flex flex-col items-start cursor-pointer ${gap ? `gap-${gap}` : 'gap-1.5'}`}
     >
       {showImage ? <Image className="pb-1" src={image} alt={imageAlt} /> : ''}
       {showCategory ? (
