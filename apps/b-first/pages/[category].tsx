@@ -9,12 +9,12 @@ export default function Component() {
               <div className="flex flex-row">
                 <ul className="navbar hidden lg:flex lg:flex-row text-gray-400 text-sm items-center font-bold">
                   <li className="active relative border-l border-gray-800 hover:bg-gray-900">
-                    <a className="block py-3 px-6 border-b-2 border-transparent" href="index.html">
+                    <a className="block py-3 px-6 border-b-2 border-transparent" href="/national">
                       National
                     </a>
                   </li>
                   <li className="active relative border-l border-gray-800 hover:bg-gray-900">
-                    <a className="block py-3 px-6 border-b-2 border-transparent" href="index.html">
+                    <a className="block py-3 px-6 border-b-2 border-transparent" href="politics">
                       Politics
                     </a>
                   </li>
@@ -24,8 +24,13 @@ export default function Component() {
                     </a>
                   </li>
                   <li className="active relative border-l border-gray-800 hover:bg-gray-900">
-                    <a className="block py-3 px-6 border-b-2 border-transparent" href="index.html">
+                    <a className="block py-3 px-6 border-b-2 border-transparent" href="sports">
                       Sports
+                    </a>
+                  </li>
+                  <li className="active relative border-l border-gray-800 hover:bg-gray-900">
+                    <a className="block py-3 px-6 border-b-2 border-transparent" href="sports">
+                      Business
                     </a>
                   </li>
                 </ul>
