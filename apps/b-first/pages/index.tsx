@@ -1,6 +1,6 @@
 import { getImageUrl } from "../../../libs/news-site-ui/src/lib/image_utils";
 
-function SquareGrid({ items }) {
+function SquareGrid({ items }: { items: any[] }) {
   return (
     <div className="flex flex-row flex-wrap -mx-3">
       {items.map((item, idx) => {
@@ -28,7 +28,7 @@ function SquareGrid({ items }) {
   );
 }
 
-function BlockNews({ items, title }) {
+function BlockNews({ items, title }: { items: any[]; title: string }) {
   return (
     <>
       <div className="bg-white">
@@ -66,7 +66,7 @@ function BlockNews({ items, title }) {
   );
 }
 
-function FeaturedItems({ items }) {
+function FeaturedItems({ items }: { items: any[] }) {
   if (!items.length) {
     return <></>;
   }
@@ -201,7 +201,7 @@ function FeaturedItems({ items }) {
   );
 }
 
-function BlockNews2({ items, latest, title }) {
+function BlockNews2({ items, latest, title }: { items: any[]; title: string; latest: any[] }) {
   if (!items.length) {
     return <></>;
   }
@@ -256,7 +256,7 @@ function BlockNews2({ items, latest, title }) {
   );
 }
 
-function BlockNews3({ items, title }) {
+function BlockNews3({ items, title }: { items: any[]; title: string }) {
   if (!items?.length) {
     return <></>;
   }
