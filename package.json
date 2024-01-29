@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "next start --port 4200"
+    "start": "nx serve b-first --port 4200"
   },
   "private": true,
   "dependencies": {
