@@ -6,7 +6,7 @@ export default class SiteDocument extends Document {
     return (
       <Html lang={"en"}>
         <Head>
-          <link rel="stylesheet" href="/dist/css/style.css" />
+          <link rel="stylesheet" href="/global/css/style.css" />
           <Analytics id={"G-BBBTLRLJ12"} />
         </Head>
 
@@ -17,7 +17,7 @@ export default class SiteDocument extends Document {
           <script src="/vendors/glightbox/dist/js/glightbox.min.js"></script>
           <script src="/vendors/@splidejs/splide/dist/js/splide.min.js"></script>
           <script src="/vendors/@splidejs/splide-extension-video/dist/js/splide-extension-video.min.js"></script>
-          <script src="/dist/js/scripts.js"></script>
+          <script src="/global/js/scripts.js"></script>
         </body>
       </Html>
     );
