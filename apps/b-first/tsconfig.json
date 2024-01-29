@@ -20,6 +20,7 @@
   },
   "include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "next-env.d.ts"],
   "exclude": [
+    "public",
     "node_modules",
     "jest.config.ts",
     "src/**/*.spec.ts",
