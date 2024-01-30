@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* override some css done in the theme */
+.post-number li a::before {
+  width: unset !important;
+  margin-right: 1rem !important;
+}

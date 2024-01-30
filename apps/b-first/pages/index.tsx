@@ -1,4 +1,5 @@
 import { getImageUrl } from "../../../libs/news-site-ui/src/lib/image_utils";
+import { maxText } from "./utils";
 
 function SquareGrid({ items }: { items: any[] }) {
   return (
@@ -7,14 +8,19 @@ function SquareGrid({ items }: { items: any[] }) {
         return (
           <div className="flex-shrink max-w-full w-full sm:w-1/3 px-3 pb-3 pt-3 sm:pt-0 border-b-2 sm:border-b-0 border-dotted border-gray-100">
             <div className="flex flex-row sm:block hover-img">
-              <a href="">
-                <img className="max-w-full w-full mx-auto" src={getImageUrl(item.featured_image)} alt="alt title" />
-              </a>
-              <div className="py-0 sm:py-3 pl-3 sm:pl-0">
+              <div className="w-[100%] hidden md:block">
+                <img className="object-fill" src={getImageUrl(item.featured_image)} alt={item.title} />
+              </div>
+
+              <div className="w-[40%] md:hidden">
+                <img className="object-fill" src={getImageUrl(item.featured_image)} alt={item.title} />
+              </div>
+
+              <div className="py-0 sm:py-3 pl-3 sm:pl-0 flex-1">
                 <h3 className="text-lg font-bold leading-tight mb-2">
-                  <a href="#">{item.title}</a>
+                  <a href="#">{maxText(item.title, 50)}</a>
                 </h3>
-                <p className="hidden md:block text-gray-600 leading-tight mb-1">{item.brief}</p>
+                <p className="hidden md:block text-gray-600 leading-tight mb-1">{maxText(item.brief, 90)}</p>
                 <a className="text-gray-500" href="#">
                   <span className="inline-block h-3 border-l-2 border-red-600 mr-2" />
                   {item.category?.name}
@@ -36,12 +42,14 @@ function BlockNews({ items, title }: { items: any[]; title: string }) {
           <div className="flex flex-row flex-wrap">
             {/* Left */}
             <div className="flex-shrink max-w-full w-full lg:w-2/3 overflow-hidden">
-              <div className="w-full py-3">
-                <h2 className="text-gray-800 text-2xl font-bold">
-                  <span className="inline-block h-5 border-l-3 border-red-600 mr-2" />
-                  {title}
-                </h2>
-              </div>
+              {title && (
+                <div className="w-full py-3">
+                  <h2 className="text-gray-800 text-2xl font-bold">
+                    <span className="inline-block h-5 border-l-3 border-red-600 mr-2" />
+                    {title}
+                  </h2>
+                </div>
+              )}
               <SquareGrid items={items} />
             </div>
             {/* right */}
@@ -79,7 +87,7 @@ function FeaturedItems({ items }: { items: any[] }) {
           <div className="flex flex-row flex-wrap">
             {/*Start left cover*/}
             <div className="flex-shrink max-w-full w-full lg:w-1/2 pb-1 lg:pb-0 lg:pr-1">
-              <div className="relative hover-img max-h-98 overflow-hidden">
+              <div className="relative hover-img overflow-hidden">
                 <a href="#">
                   <img
                     className="max-w-full w-full mx-auto h-auto"
@@ -302,7 +310,9 @@ function BlockNews3({ items, title }: { items: any[]; title: string }) {
                   </div>
                 </div>
 
-                <SquareGrid items={items.slice(1, 7)} />
+                <div className="pl-3">
+                  <SquareGrid items={items.slice(1, 7)} />
+                </div>
               </div>
             </div>
             {/* sidebar */}
@@ -757,7 +767,7 @@ export default function Index({ featured, latestNews, bangladesh, politics }: an
       <MobileMenu />
       <main id="content">
         <FeaturedItems items={featured} />
-        <BlockNews items={featured.slice(5)} title={"Top News"} />
+        <BlockNews items={featured.slice(5)} title={""} />
         <BlockNews2 items={bangladesh.data.slice(0, 6)} latest={latestNews.slice(0, 5)} title={"Bangladesh"} />
         <BlockNews3 items={politics.data} title={"Politics"} />
       </main>
