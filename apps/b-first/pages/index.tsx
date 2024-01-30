@@ -89,7 +89,7 @@ function FeaturedItems({ items }: { items: any[] }) {
                 </a>
                 <div className="absolute px-5 pt-8 pb-5 bottom-0 w-full bg-gradient-cover">
                   <a href="#">
-                    <h2 className="text-3xl font-bold capitalize text-white mb-3">{items[0].title}</h2>
+                    <h2 className="text-3xl font-bold capitalize text-white">{items[0].title}</h2>
                   </a>
                   <p className="text-gray-100 hidden sm:inline-block">{items[0].brief}</p>
                   <div className="pt-2">
