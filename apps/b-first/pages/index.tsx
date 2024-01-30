@@ -59,7 +59,7 @@ function BlockNews({ items, title }: { items: any[]; title: string }) {
               <SquareGrid items={items} />
             </div>
             {/* right */}
-            <div className="flex-shrink max-w-full w-full lg:w-1/3 lg:pl-8 lg:pt-14 lg:pb-8 order-first lg:order-last">
+            <div className="flex-shrink max-w-full w-full lg:w-1/3 lg:pl-8 lg:pb-8 order-first lg:order-last">
               <div className="w-full bg-gray-50 h-full">
                 <div className="text-sm py-6 sticky">
                   <div className="w-full text-center">
