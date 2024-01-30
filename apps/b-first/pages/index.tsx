@@ -1,5 +1,11 @@
 import { getImageUrl } from "../../../libs/news-site-ui/src/lib/image_utils";
-import { maxText } from "./utils";
+
+export const maxText = (text: string, length = 10) => {
+  if (text.length > length) {
+    return `${text.substr(0, length)}...`;
+  }
+  return text;
+};
 
 function SquareGrid({ items }: { items: any[] }) {
   return (
