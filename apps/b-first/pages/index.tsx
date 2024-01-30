@@ -105,7 +105,7 @@ function FeaturedItems({ items }: { items: any[] }) {
             <div className="flex-shrink max-w-full w-full lg:w-1/2">
               <div className="box-one flex flex-row flex-wrap">
                 <article className="flex-shrink max-w-full w-full sm:w-1/2">
-                  <div className="relative hover-img max-h-48 overflow-hidden">
+                  <div className="relative hover-img">
                     <a href="#">
                       <img
                         className="max-w-full w-full mx-auto h-auto"
@@ -127,7 +127,7 @@ function FeaturedItems({ items }: { items: any[] }) {
                   </div>
                 </article>
                 <article className="flex-shrink max-w-full w-full sm:w-1/2">
-                  <div className="relative hover-img max-h-48 overflow-hidden">
+                  <div className="relative hover-img">
                     <a href="#">
                       <img
                         className="max-w-full w-full mx-auto h-auto"
@@ -149,7 +149,7 @@ function FeaturedItems({ items }: { items: any[] }) {
                   </div>
                 </article>
                 <article className="flex-shrink max-w-full w-full sm:w-1/2">
-                  <div className="relative hover-img max-h-48 overflow-hidden">
+                  <div className="relative hover-img">
                     <a href="#">
                       <img
                         className="max-w-full w-full mx-auto h-auto"
@@ -171,7 +171,7 @@ function FeaturedItems({ items }: { items: any[] }) {
                   </div>
                 </article>
                 <article className="flex-shrink max-w-full w-full sm:w-1/2">
-                  <div className="relative hover-img max-h-48 overflow-hidden">
+                  <div className="relative hover-img">
                     <a href="#">
                       <img
                         className="max-w-full w-full mx-auto h-auto"
