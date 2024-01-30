@@ -5,5 +5,5 @@ export const getImageUrl = (path: string, w?: number, h?: number) => {
   if (!h) {
     h = 200;
   }
-  return `https://imaginary.bangladeshfirst.com/crop?width=${w}&height=${h}&quality=20&type=webp&path=${path}`;
+  return `https://imaginary.bangladeshfirst.com/crop?width=${w}&height=${h}&quality=80&type=webp&path=${path}`;
 };
