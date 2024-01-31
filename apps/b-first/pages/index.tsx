@@ -766,7 +766,68 @@ export function MobileMenu() {
   );
 }
 
-export default function Index({ featured, latestNews, bangladesh, politics }: any) {
+export function Slider(props: { items: any[]; title: string }) {
+  return (
+    <>
+      {/* slider news */}
+      <div
+        className="relative bg-gray-50"
+        style={{
+          backgroundSize: "cover",
+          backgroundPosition: "center center",
+          backgroundAttachment: "fixed",
+        }}
+      >
+        <div className="bg-black bg-opacity-70">
+          <div className="xl:container mx-auto px-3 sm:px-4 xl:px-2">
+            <div className="flex flex-row flex-wrap">
+              <div className="flex-shrink max-w-full w-full py-12 overflow-hidden">
+                <div className="w-full py-3">
+                  <h2 className="text-white text-2xl font-bold text-shadow-black">
+                    <span className="inline-block h-5 border-l-3 border-red-600 mr-2" />
+                    {props.title}
+                  </h2>
+                </div>
+                <div id="post-carousel" className="splide">
+                  <div className="splide__track">
+                    <ul className="splide__list">
+                      {props.items.map((item) => (
+                        <li className="splide__slide">
+                          <div className="w-full pb-3">
+                            <div className="hover-img bg-white">
+                              <a href="">
+                                <img
+                                  className="max-w-full w-full mx-auto"
+                                  src={getImageUrl(item.featured_image)}
+                                  alt="alt title"
+                                />
+                              </a>
+                              <div className="py-3 px-6">
+                                <h3 className="text-lg font-bold leading-tight mb-2">
+                                  <a href="#">{item.title}</a>
+                                </h3>
+                                <a className="text-gray-500" href="#">
+                                  <span className="inline-block h-3 border-l-2 border-red-600 mr-2" />
+                                  {item.category.name}
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+export default function Index({ featured, latestNews, bangladesh, politics, world }: any) {
   return (
     <>
       <Header />
@@ -774,6 +835,7 @@ export default function Index({ featured, latestNews, bangladesh, politics }: an
       <main id="content">
         <FeaturedItems items={featured} />
         <BlockNews items={featured.slice(5)} title={""} />
+        <Slider items={world.data.slice(0, 6)} title={"World"} />
         <BlockNews2 items={bangladesh.data.slice(0, 6)} latest={latestNews.slice(0, 5)} title={"Bangladesh"} />
         <BlockNews3 items={politics.data} title={"Politics"} />
       </main>
@@ -784,17 +846,19 @@ export default function Index({ featured, latestNews, bangladesh, politics }: an
 }
 
 export const getServerSideProps = async () => {
-  const [featuredRes, latestNewsRes, bangladeshNews, politicsNews] = await Promise.all([
+  const [featuredRes, latestNewsRes, bangladeshNews, politicsNews, worldNews] = await Promise.all([
     fetch("https://panel.bangladeshfirst.com/api/v2/featured"),
     fetch("https://panel.bangladeshfirst.com/api/v2/latest"),
     fetch("https://panel.bangladeshfirst.com/api/v2/category/Bangladesh?page=1&size=10"),
     fetch("https://panel.bangladeshfirst.com/api/v2/category/Politics?page=1&size=15"),
+    fetch("https://panel.bangladeshfirst.com/api/v2/category/World?page=1&size=15"),
   ]);
 
   const featured: unknown = await featuredRes.json();
   const latestNews: unknown = await latestNewsRes.json();
   const bangladesh = await bangladeshNews.json();
   const politics = await politicsNews.json();
+  const world = await worldNews.json();
 
-  return { props: { featured, latestNews, bangladesh, politics } };
+  return { props: { featured, latestNews, bangladesh, politics, world } };
 };

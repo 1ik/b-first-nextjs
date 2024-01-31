@@ -320,7 +320,10 @@
   myMobile();
   myOpen();
   myLightbox();
-  mySplidejs();
   mySplidevideo();
   myCustom();
+
+  setTimeout(() => {
+    mySplidejs();
+  }, 1000);
 })();
