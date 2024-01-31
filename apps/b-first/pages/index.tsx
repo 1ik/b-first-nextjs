@@ -93,8 +93,8 @@ function FeaturedItems({ items }: { items: any[] }) {
           <div className="flex flex-row flex-wrap">
             {/*Start left cover*/}
             <div className="flex-shrink max-w-full w-full lg:w-1/2 pb-1 lg:pb-0 lg:pr-1">
-              <div className="relative hover-img overflow-hidden">
-                <a href="#">
+              <div className="relative overflow-hidden ">
+                <a href="#" className="filter brightness-50 hover:grayscale contrast-100">
                   <img
                     className="max-w-full w-full mx-auto h-auto"
                     src={getImageUrl(items[0].featured_image)}
@@ -103,7 +103,7 @@ function FeaturedItems({ items }: { items: any[] }) {
                 </a>
                 <div className="absolute px-5 pt-8 pb-5 bottom-0 w-full bg-gradient-cover">
                   <a href="#">
-                    <h2 className="text-3xl font-bold capitalize text-white">{items[0].title}</h2>
+                    <h2 className="text-3xl font-bold text-white">{items[0].title}</h2>
                   </a>
                   <p className="text-gray-100 hidden sm:inline-block">{items[0].brief}</p>
                   <div className="pt-2">
@@ -121,15 +121,17 @@ function FeaturedItems({ items }: { items: any[] }) {
                 <article className="flex-shrink max-w-full w-full sm:w-1/2">
                   <div className="relative hover-img">
                     <a href="#">
-                      <img
-                        className="max-w-full w-full mx-auto h-auto"
-                        src={getImageUrl(items[1].featured_image)}
-                        alt="Image description"
-                      />
+                      <div className="filter brightness-50 hover:grayscale contrast-100">
+                        <img
+                          className="max-w-full w-full mx-auto h-auto"
+                          src={getImageUrl(items[1].featured_image)}
+                          alt="Image description"
+                        />
+                      </div>
                     </a>
                     <div className="absolute px-4 pt-7 pb-4 bottom-0 w-full bg-gradient-cover">
                       <a href="#">
-                        <h2 className="text-lg font-bold capitalize leading-tight text-white mb-1">{items[1].title}</h2>
+                        <h2 className="text-lg font-bold leading-tight text-white mb-1">{items[1].title}</h2>
                       </a>
                       <div className="pt-1">
                         <div className="text-gray-100">
@@ -143,15 +145,17 @@ function FeaturedItems({ items }: { items: any[] }) {
                 <article className="flex-shrink max-w-full w-full sm:w-1/2">
                   <div className="relative hover-img">
                     <a href="#">
-                      <img
-                        className="max-w-full w-full mx-auto h-auto"
-                        src={getImageUrl(items[2].featured_image)}
-                        alt="Image description"
-                      />
+                      <div className="filter brightness-50 hover:grayscale contrast-100">
+                        <img
+                          className="max-w-full w-full mx-auto h-auto"
+                          src={getImageUrl(items[2].featured_image)}
+                          alt="Image description"
+                        />
+                      </div>
                     </a>
                     <div className="absolute px-4 pt-7 pb-4 bottom-0 w-full bg-gradient-cover">
                       <a href="#">
-                        <h2 className="text-lg font-bold capitalize leading-tight text-white mb-1">{items[2].title}</h2>
+                        <h2 className="text-lg font-bold leading-tight text-white mb-1">{items[2].title}</h2>
                       </a>
                       <div className="pt-1">
                         <div className="text-gray-100">
@@ -165,15 +169,17 @@ function FeaturedItems({ items }: { items: any[] }) {
                 <article className="flex-shrink max-w-full w-full sm:w-1/2">
                   <div className="relative hover-img">
                     <a href="#">
-                      <img
-                        className="max-w-full w-full mx-auto h-auto"
-                        src={getImageUrl(items[3].featured_image)}
-                        alt="Image description"
-                      />
+                      <div className="filter brightness-50 hover:grayscale contrast-100">
+                        <img
+                          className="max-w-full w-full mx-auto h-auto"
+                          src={getImageUrl(items[3].featured_image)}
+                          alt="Image description"
+                        />
+                      </div>
                     </a>
                     <div className="absolute px-4 pt-7 pb-4 bottom-0 w-full bg-gradient-cover">
                       <a href="#">
-                        <h2 className="text-lg font-bold capitalize leading-tight text-white mb-1">{items[3].title}</h2>
+                        <h2 className="text-lg font-bold leading-tight text-white mb-1">{items[3].title}</h2>
                       </a>
                       <div className="pt-1">
                         <div className="text-gray-100">
@@ -187,15 +193,17 @@ function FeaturedItems({ items }: { items: any[] }) {
                 <article className="flex-shrink max-w-full w-full sm:w-1/2">
                   <div className="relative hover-img">
                     <a href="#">
-                      <img
-                        className="max-w-full w-full mx-auto h-auto"
-                        src={getImageUrl(items[4].featured_image)}
-                        alt="Image description"
-                      />
+                      <div className="filter brightness-50 hover:grayscale contrast-100">
+                        <img
+                          className="max-w-full w-full mx-auto h-auto"
+                          src={getImageUrl(items[4].featured_image)}
+                          alt="Image description"
+                        />
+                      </div>
                     </a>
                     <div className="absolute px-4 pt-7 pb-4 bottom-0 w-full bg-gradient-cover">
                       <a href="#">
-                        <h2 className="text-lg font-bold capitalize leading-tight text-white mb-1">{items[4].title}</h2>
+                        <h2 className="text-lg font-bold leading-tight text-white mb-1">{items[4].title}</h2>
                       </a>
                       <div className="pt-1">
                         <div className="text-gray-100">
@@ -793,26 +801,7 @@ export function Slider(props: { items: any[]; title: string }) {
                     <ul className="splide__list">
                       {props.items.map((item) => (
                         <li className="splide__slide">
-                          <div className="w-full pb-3">
-                            <div className="hover-img bg-white">
-                              <a href="">
-                                <img
-                                  className="max-w-full w-full mx-auto"
-                                  src={getImageUrl(item.featured_image)}
-                                  alt="alt title"
-                                />
-                              </a>
-                              <div className="py-3 px-6">
-                                <h3 className="text-lg font-bold leading-tight mb-2">
-                                  <a href="#">{item.title}</a>
-                                </h3>
-                                <a className="text-gray-500" href="#">
-                                  <span className="inline-block h-3 border-l-2 border-red-600 mr-2" />
-                                  {item.category.name}
-                                </a>
-                              </div>
-                            </div>
-                          </div>
+                          <Card item={item} />
                         </li>
                       ))}
                     </ul>
@@ -824,6 +813,28 @@ export function Slider(props: { items: any[]; title: string }) {
         </div>
       </div>
     </>
+  );
+}
+
+export function Card(props: { item: any }) {
+  const { item } = props;
+  return (
+    <div className="w-full pb-3">
+      <div className="hover-img bg-white">
+        <a href="">
+          <img className="max-w-full w-full mx-auto" src={getImageUrl(item.featured_image)} alt="alt title" />
+        </a>
+        <div className="py-3 px-6">
+          <h3 className="text-lg font-bold leading-tight mb-2">
+            <a href="#">{maxText(item.title, 60)}</a>
+          </h3>
+          <a className="text-gray-500" href="#">
+            <span className="inline-block h-3 border-l-2 border-red-600 mr-2" />
+            {item.category.name}
+          </a>
+        </div>
+      </div>
+    </div>
   );
 }
 
