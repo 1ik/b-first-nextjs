@@ -846,9 +846,9 @@ export default function Index({ featured, latestNews, bangladesh, politics, worl
       <main id="content">
         <FeaturedItems items={featured} />
         <BlockNews items={featured.slice(5)} title={""} />
-        <Slider items={world.data.slice(0, 6)} title={"World"} />
-        <BlockNews2 items={bangladesh.data.slice(0, 6)} latest={latestNews.slice(0, 5)} title={"Bangladesh"} />
-        <BlockNews3 items={politics.data} title={"Politics"} />
+        <Slider items={world.slice(0, 6)} title={"World"} />
+        <BlockNews2 items={bangladesh.slice(0, 6)} latest={latestNews.slice(0, 5)} title={"Bangladesh"} />
+        <BlockNews3 items={politics} title={"Politics"} />
       </main>
       <BackToTop />
       <Footer />
@@ -860,16 +860,19 @@ export const getServerSideProps = async () => {
   const [featuredRes, latestNewsRes, bangladeshNews, politicsNews, worldNews] = await Promise.all([
     fetch("https://panel.bangladeshfirst.com/api/v2/featured"),
     fetch("https://panel.bangladeshfirst.com/api/v2/latest"),
-    fetch("https://panel.bangladeshfirst.com/api/v2/category/Bangladesh?page=1&size=10"),
-    fetch("https://panel.bangladeshfirst.com/api/v2/category/Politics?page=1&size=15"),
-    fetch("https://panel.bangladeshfirst.com/api/v2/category/World?page=1&size=15"),
+    fetch("https://panel.bangladeshfirst.com/api/v2/category/Bangladesh?page=1&size=20"),
+    fetch("https://panel.bangladeshfirst.com/api/v2/category/Politics?page=1&size=20"),
+    fetch("https://panel.bangladeshfirst.com/api/v2/category/World?page=1&size=20"),
   ]);
 
-  const featured: unknown = await featuredRes.json();
-  const latestNews: unknown = await latestNewsRes.json();
-  const bangladesh = await bangladeshNews.json();
-  const politics = await politicsNews.json();
-  const world = await worldNews.json();
+  const featured: any[] = await featuredRes.json();
+  const latestNews: any[] = await latestNewsRes.json();
+
+  const filterFn = (item: any) => !featured.find((f) => f.id === item.id) && !latestNews.find((f) => f.id === item.id);
+
+  let bangladesh = (await bangladeshNews.json()).data.filter(filterFn);
+  let politics = (await politicsNews.json()).data.filter(filterFn);
+  let world = (await worldNews.json()).data.filter(filterFn);
 
   return { props: { featured, latestNews, bangladesh, politics, world } };
 };
