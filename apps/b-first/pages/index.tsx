@@ -261,7 +261,7 @@ export function BlockNews2({ items, latest, title }: { items: any[]; title: stri
                   {latest.map((item) => {
                     return (
                       <li className="border-b border-gray-100 hover:bg-gray-50">
-                        <a className="text-lg font-bold px-6 py-3 flex flex-row items-center" href="#">
+                        <a className="text-lg font-bold px-6 py-3 flex flex-row items-center" href={newsUrl(item)}>
                           {item.title}
                         </a>
                       </li>
