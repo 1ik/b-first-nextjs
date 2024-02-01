@@ -75,7 +75,7 @@ export function Index({ news, categoryNews, latestNews, featured }: any) {
                     <p className="text-sm italic pt-7">{news.brief}</p>
                   </div>
 
-                  <div className="max-w-2xl pb-6">
+                  <div className="max-w-4xl pb-6">
                     <CardCaption item={news} />
                   </div>
                   <div className="detail block mt-4 lg:pr-12">
