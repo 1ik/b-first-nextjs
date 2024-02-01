@@ -129,7 +129,7 @@ export function FeaturedItems({ items }: { items: any[] }) {
               <div className="box-one flex flex-row flex-wrap">
                 <article className="flex-shrink max-w-full w-full sm:w-1/2">
                   <div className="relative hover-img">
-                    <a href="#">
+                    <a href={newsUrl(items[1])}>
                       <div className="filter brightness-50 hover:grayscale contrast-100">
                         <img
                           className="max-w-full w-full mx-auto h-auto"
@@ -139,7 +139,7 @@ export function FeaturedItems({ items }: { items: any[] }) {
                       </div>
                     </a>
                     <div className="absolute px-4 pt-7 pb-4 bottom-0 w-full bg-gradient-cover">
-                      <a href="#">
+                      <a href={newsUrl(items[1])}>
                         <h2 className="text-lg font-bold leading-tight text-white mb-1">{items[1].title}</h2>
                       </a>
                       <div className="pt-1">
@@ -163,7 +163,7 @@ export function FeaturedItems({ items }: { items: any[] }) {
                       </div>
                     </a>
                     <div className="absolute px-4 pt-7 pb-4 bottom-0 w-full bg-gradient-cover">
-                      <a href="#">
+                      <a href={newsUrl(items[2])}>
                         <h2 className="text-lg font-bold leading-tight text-white mb-1">{items[2].title}</h2>
                       </a>
                       <div className="pt-1">
@@ -177,7 +177,7 @@ export function FeaturedItems({ items }: { items: any[] }) {
                 </article>
                 <article className="flex-shrink max-w-full w-full sm:w-1/2">
                   <div className="relative hover-img">
-                    <a href="#">
+                    <a href={newsUrl(items[3])}>
                       <div className="filter brightness-50 hover:grayscale contrast-100">
                         <img
                           className="max-w-full w-full mx-auto h-auto"
@@ -187,7 +187,7 @@ export function FeaturedItems({ items }: { items: any[] }) {
                       </div>
                     </a>
                     <div className="absolute px-4 pt-7 pb-4 bottom-0 w-full bg-gradient-cover">
-                      <a href="#">
+                      <a href={newsUrl(items[3])}>
                         <h2 className="text-lg font-bold leading-tight text-white mb-1">{items[3].title}</h2>
                       </a>
                       <div className="pt-1">
@@ -201,7 +201,7 @@ export function FeaturedItems({ items }: { items: any[] }) {
                 </article>
                 <article className="flex-shrink max-w-full w-full sm:w-1/2">
                   <div className="relative hover-img">
-                    <a href="#">
+                    <a href={newsUrl(items[4])}>
                       <div className="filter brightness-50 hover:grayscale contrast-100">
                         <img
                           className="max-w-full w-full mx-auto h-auto"
@@ -211,7 +211,7 @@ export function FeaturedItems({ items }: { items: any[] }) {
                       </div>
                     </a>
                     <div className="absolute px-4 pt-7 pb-4 bottom-0 w-full bg-gradient-cover">
-                      <a href="#">
+                      <a href={newsUrl(items[4])}>
                         <h2 className="text-lg font-bold leading-tight text-white mb-1">{items[4].title}</h2>
                       </a>
                       <div className="pt-1">

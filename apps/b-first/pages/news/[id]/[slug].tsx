@@ -75,10 +75,10 @@ export function Index({ news, categoryNews, latestNews, featured }: any) {
                     <p className="text-sm italic pt-7">{news.brief}</p>
                   </div>
 
-                  <div className="max-w-2xl">
+                  <div className="max-w-2xl pb-6">
                     <CardCaption item={news} />
                   </div>
-                  <div className="detail block mt-4">
+                  <div className="detail block mt-4 lg:pr-12">
                     <div dangerouslySetInnerHTML={{ __html: news.content }}></div>
                   </div>
                   <div className="w-full border text-center p-6 flex flex-col justify-around">
