@@ -95,7 +95,7 @@ export function Index({ news, categoryNews, latestNews, featured }: any) {
                   <div className="flex flex-col gap-4 pr-6">
                     {categoryNews?.data
                       ?.filter((m: any) => m.id != news.id)
-                      .splice(0, 4)
+                      .slice(0, 5)
                       .map((n: any, idx: any) => (
                         <div className="flex flex-col border-b pb-2 hover:bg-gray-50">
                           <a href={newsUrl(n)} className="hover:bg-gray-100">
