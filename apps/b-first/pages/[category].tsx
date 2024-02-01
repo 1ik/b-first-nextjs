@@ -1,44 +1,75 @@
+import { useRouter } from "next/router";
+import { Header, SquareGrid } from ".";
+import { useEffect, useState } from 'react';
+
+
 export default function Component() {
+
+  const router = useRouter();
+
+  const { category } = router.query;
+  const [categoryData, setCategoryData] = useState(null);
+
+  useEffect(() => {
+    const categoryRes = async () => {
+      try {
+        const response = await fetch(`https://panel.bangladeshfirst.com/api/v2/category/${category}?page=1&size=100`);
+        const data = await response.json();
+        setCategoryData(data);
+      }
+      catch (error) {
+        console.log(error);
+      }
+    };
+
+    if (category) {
+      categoryRes();
+    }
+  }, [category]);
+
+  if (!categoryData) {
+    return <div>Loading...</div>;
+  }
+
+  // console.log(categoryData);
+
   return (
     <div className="text-gray-700 pt-9 sm:pt-10">
-      <header className="fixed top-0 left-0 right-0 z-50">
-        <nav className="bg-black">
-          <div className="xl:container mx-auto px-3 sm:px-4 xl:px-2">
-            <div className="flex justify-between">
-              <div className="mx-w-10 text-2xl font-bold capitalize text-white flex items-center">Tailnews</div>
-              <div className="flex flex-row">
-                <ul className="navbar hidden lg:flex lg:flex-row text-gray-400 text-sm items-center font-bold">
-                  <li className="active relative border-l border-gray-800 hover:bg-gray-900">
-                    <a className="block py-3 px-6 border-b-2 border-transparent" href="/national">
-                      National
-                    </a>
-                  </li>
-                  <li className="active relative border-l border-gray-800 hover:bg-gray-900">
-                    <a className="block py-3 px-6 border-b-2 border-transparent" href="politics">
-                      Politics
-                    </a>
-                  </li>
-                  <li className="active relative border-l border-gray-800 hover:bg-gray-900">
-                    <a className="block py-3 px-6 border-b-2 border-transparent" href="index.html">
-                      Business
-                    </a>
-                  </li>
-                  <li className="active relative border-l border-gray-800 hover:bg-gray-900">
-                    <a className="block py-3 px-6 border-b-2 border-transparent" href="sports">
-                      Sports
-                    </a>
-                  </li>
-                  <li className="active relative border-l border-gray-800 hover:bg-gray-900">
-                    <a className="block py-3 px-6 border-b-2 border-transparent" href="sports">
-                      Business
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </nav>
-      </header>
+      <Header></Header>
+      <SquareGrid items={categoryData.data.slice(0, 15)}></SquareGrid>
+      
     </div>
   );
 }
+
+
+
+// export default function Component(data) {
+
+
+
+//   return (
+//     <div className="text-gray-700 pt-9 sm:pt-10">
+//       {/* <Header></Header>
+//       <SquareGrid items={data.data.slice(0, 15)}></SquareGrid> */}
+//     </div>
+//   );
+
+// }
+
+
+
+
+// export const getServerSideProps = async () => {
+
+//   const [categoryRes] = await Promise.all([
+//     fetch('https://panel.bangladeshfirst.com/api/v2/category/Politics?page=1&size=10')
+//   ]);
+
+
+//   const data = await categoryRes.json();
+
+//   console.log(data);
+
+//   return { props: { data } };
+// };

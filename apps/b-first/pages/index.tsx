@@ -1,11 +1,11 @@
 import { getImageUrl } from "../../../libs/news-site-ui/src/lib/image_utils";
 
-function SquareGrid({ items }: { items: any[] }) {
+export function SquareGrid({ items }: { items: any[] }) {
   return (
     <div className="flex flex-row flex-wrap -mx-3">
       {items.map((item, idx) => {
         return (
-          <div className="flex-shrink max-w-full w-full sm:w-1/3 px-3 pb-3 pt-3 sm:pt-0 border-b-2 sm:border-b-0 border-dotted border-gray-100">
+          <div className="flex-shrink max-w-full w-full sm:w-1/5 px-3 pb-3 pt-3 sm:pt-0 border-b-2 sm:border-b-0 border-dotted border-gray-100">
             <div className="flex flex-row sm:block hover-img">
               <a href="">
                 <img className="max-w-full w-full mx-auto" src={getImageUrl(item.featured_image)} alt="alt title" />
@@ -14,7 +14,7 @@ function SquareGrid({ items }: { items: any[] }) {
                 <h3 className="text-lg font-bold leading-tight mb-2">
                   <a href="#">{item.title}</a>
                 </h3>
-                <p className="hidden md:block text-gray-600 leading-tight mb-1">{item.brief}</p>
+                {/* <p className="hidden md:block text-gray-600 leading-tight mb-1">{item.brief}</p> */}
                 <a className="text-gray-500" href="#">
                   <span className="inline-block h-3 border-l-2 border-red-600 mr-2" />
                   {item.category?.name}
@@ -89,7 +89,7 @@ function FeaturedItems({ items }: { items: any[] }) {
                 </a>
                 <div className="absolute px-5 pt-8 pb-5 bottom-0 w-full bg-gradient-cover">
                   <a href="#">
-                    <h2 className="text-3xl font-bold capitalize text-white mb-3">{items[0].title}</h2>
+                    <h2 className="text-3xl font-bold capitalize text-white mb-0">{items[0].title}</h2>
                   </a>
                   <p className="text-gray-100 hidden sm:inline-block">{items[0].brief}</p>
                   <div className="pt-2">
