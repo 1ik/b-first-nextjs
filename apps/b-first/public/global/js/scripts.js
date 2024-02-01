@@ -259,7 +259,7 @@
         arrows: true,
         type: "loop",
         drag: "free",
-        perPage: 3,
+        perPage: 4,
         perMove: 1,
         gap: 24,
         breakpoints: {
@@ -320,7 +320,10 @@
   myMobile();
   myOpen();
   myLightbox();
-  mySplidejs();
   mySplidevideo();
   myCustom();
+
+  setTimeout(() => {
+    mySplidejs();
+  }, 1000);
 })();

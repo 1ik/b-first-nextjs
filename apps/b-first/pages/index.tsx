@@ -1,4 +1,12 @@
 import { getImageUrl } from "../../../libs/news-site-ui/src/lib/image_utils";
+import { newsUrl } from "../../../libs/settings/analytics/src/lib/util";
+
+export const maxText = (text: string, length = 10) => {
+  if (text.length > length) {
+    return `${text.substr(0, length)}...`;
+  }
+  return text;
+};
 
 export function SquareGrid({ items }: { items: any[] }) {
   return (
@@ -7,15 +15,26 @@ export function SquareGrid({ items }: { items: any[] }) {
         return (
           <div className="flex-shrink max-w-full w-full sm:w-1/5 px-3 pb-3 pt-3 sm:pt-0 border-b-2 sm:border-b-0 border-dotted border-gray-100">
             <div className="flex flex-row sm:block hover-img">
-              <a href="">
-                <img className="max-w-full w-full mx-auto" src={getImageUrl(item.featured_image)} alt="alt title" />
-              </a>
-              <div className="py-0 sm:py-3 pl-3 sm:pl-0">
+              <div className="w-[100%] hidden md:block">
+                <a href={newsUrl(item)}>
+                  <img className="object-fill" src={getImageUrl(item.featured_image)} alt={item.title} />
+                </a>
+              </div>
+
+              <div className="w-[40%] md:hidden">
+                <a href={newsUrl(item)}>
+                  <img className="object-fill" src={getImageUrl(item.featured_image)} alt={item.title} />
+                </a>
+              </div>
+
+              <div className="py-0 sm:py-3 pl-3 sm:pl-0 flex-1">
                 <h3 className="text-lg font-bold leading-tight mb-2">
-                  <a href="#">{item.title}</a>
+                  <a href={newsUrl(item)}>{maxText(item.title, 50)}</a>
                 </h3>
-                {/* <p className="hidden md:block text-gray-600 leading-tight mb-1">{item.brief}</p> */}
-                <a className="text-gray-500" href="#">
+                <a href={newsUrl(item)} className="hidden md:block text-gray-600 leading-tight mb-1">
+                  {maxText(item.brief, 90)}
+                </a>
+                <a className="text-gray-500" href={newsUrl(item)}>
                   <span className="inline-block h-3 border-l-2 border-red-600 mr-2" />
                   {item.category?.name}
                 </a>
@@ -28,37 +47,41 @@ export function SquareGrid({ items }: { items: any[] }) {
   );
 }
 
-function BlockNews({ items, title }: { items: any[]; title: string }) {
+export function BlockNews({ items, title, showAd = true }: { items: any[]; title: string; showAd?: boolean }) {
   return (
     <>
       <div className="bg-white">
         <div className="xl:container mx-auto px-3 sm:px-4 xl:px-2">
           <div className="flex flex-row flex-wrap">
             {/* Left */}
-            <div className="flex-shrink max-w-full w-full lg:w-2/3 overflow-hidden">
-              <div className="w-full py-3">
-                <h2 className="text-gray-800 text-2xl font-bold">
-                  <span className="inline-block h-5 border-l-3 border-red-600 mr-2" />
-                  {title}
-                </h2>
-              </div>
+            <div className={`flex-shrink max-w-full w-full ${showAd ? "lg:w-2/3" : ""} overflow-hidden`}>
+              {title && (
+                <div className="w-full py-3">
+                  <h2 className="text-gray-800 text-2xl font-bold">
+                    <span className="inline-block h-5 border-l-3 border-red-600 mr-2" />
+                    {title}
+                  </h2>
+                </div>
+              )}
               <SquareGrid items={items} />
             </div>
             {/* right */}
-            <div className="flex-shrink max-w-full w-full lg:w-1/3 lg:pl-8 lg:pt-14 lg:pb-8 order-first lg:order-last">
-              <div className="w-full bg-gray-50 h-full">
-                <div className="text-sm py-6 sticky">
-                  <div className="w-full text-center">
-                    <a className="uppercase" href="#">
-                      Advertisement
-                    </a>
-                    <a href="#">
-                      <img className="mx-auto" src="/img/ads/250.jpg" alt="advertisement area" />
-                    </a>
+            {showAd && (
+              <div className="flex-shrink max-w-full w-full lg:w-1/3 lg:pl-8 lg:pb-8 order-first lg:order-last">
+                <div className="w-full bg-gray-50 h-full">
+                  <div className="text-sm py-6 sticky">
+                    <div className="w-full text-center">
+                      <a className="uppercase" href="#">
+                        Advertisement
+                      </a>
+                      <a href="#">
+                        <img className="mx-auto" src="/img/ads/250.jpg" alt="advertisement area" />
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </div>
@@ -66,7 +89,7 @@ function BlockNews({ items, title }: { items: any[]; title: string }) {
   );
 }
 
-function FeaturedItems({ items }: { items: any[] }) {
+export function FeaturedItems({ items }: { items: any[] }) {
   if (!items.length) {
     return <></>;
   }
@@ -79,8 +102,8 @@ function FeaturedItems({ items }: { items: any[] }) {
           <div className="flex flex-row flex-wrap">
             {/*Start left cover*/}
             <div className="flex-shrink max-w-full w-full lg:w-1/2 pb-1 lg:pb-0 lg:pr-1">
-              <div className="relative hover-img max-h-98 overflow-hidden">
-                <a href="#">
+              <div className="relative overflow-hidden ">
+                <a href={newsUrl(items[0])} className="filter brightness-50 hover:grayscale contrast-100">
                   <img
                     className="max-w-full w-full mx-auto h-auto"
                     src={getImageUrl(items[0].featured_image)}
@@ -88,8 +111,8 @@ function FeaturedItems({ items }: { items: any[] }) {
                   />
                 </a>
                 <div className="absolute px-5 pt-8 pb-5 bottom-0 w-full bg-gradient-cover">
-                  <a href="#">
-                    <h2 className="text-3xl font-bold capitalize text-white mb-0">{items[0].title}</h2>
+                  <a href={newsUrl(items[0])}>
+                    <h2 className="text-3xl font-bold text-white">{items[0].title}</h2>
                   </a>
                   <p className="text-gray-100 hidden sm:inline-block">{items[0].brief}</p>
                   <div className="pt-2">
@@ -105,17 +128,19 @@ function FeaturedItems({ items }: { items: any[] }) {
             <div className="flex-shrink max-w-full w-full lg:w-1/2">
               <div className="box-one flex flex-row flex-wrap">
                 <article className="flex-shrink max-w-full w-full sm:w-1/2">
-                  <div className="relative hover-img max-h-48 overflow-hidden">
-                    <a href="#">
-                      <img
-                        className="max-w-full w-full mx-auto h-auto"
-                        src={getImageUrl(items[1].featured_image)}
-                        alt="Image description"
-                      />
+                  <div className="relative hover-img">
+                    <a href={newsUrl(items[1])}>
+                      <div className="filter brightness-50 hover:grayscale contrast-100">
+                        <img
+                          className="max-w-full w-full mx-auto h-auto"
+                          src={getImageUrl(items[1].featured_image)}
+                          alt="Image description"
+                        />
+                      </div>
                     </a>
                     <div className="absolute px-4 pt-7 pb-4 bottom-0 w-full bg-gradient-cover">
-                      <a href="#">
-                        <h2 className="text-lg font-bold capitalize leading-tight text-white mb-1">{items[1].title}</h2>
+                      <a href={newsUrl(items[1])}>
+                        <h2 className="text-lg font-bold leading-tight text-white mb-1">{items[1].title}</h2>
                       </a>
                       <div className="pt-1">
                         <div className="text-gray-100">
@@ -127,17 +152,19 @@ function FeaturedItems({ items }: { items: any[] }) {
                   </div>
                 </article>
                 <article className="flex-shrink max-w-full w-full sm:w-1/2">
-                  <div className="relative hover-img max-h-48 overflow-hidden">
+                  <div className="relative hover-img">
                     <a href="#">
-                      <img
-                        className="max-w-full w-full mx-auto h-auto"
-                        src={getImageUrl(items[2].featured_image)}
-                        alt="Image description"
-                      />
+                      <div className="filter brightness-50 hover:grayscale contrast-100">
+                        <img
+                          className="max-w-full w-full mx-auto h-auto"
+                          src={getImageUrl(items[2].featured_image)}
+                          alt="Image description"
+                        />
+                      </div>
                     </a>
                     <div className="absolute px-4 pt-7 pb-4 bottom-0 w-full bg-gradient-cover">
-                      <a href="#">
-                        <h2 className="text-lg font-bold capitalize leading-tight text-white mb-1">{items[2].title}</h2>
+                      <a href={newsUrl(items[2])}>
+                        <h2 className="text-lg font-bold leading-tight text-white mb-1">{items[2].title}</h2>
                       </a>
                       <div className="pt-1">
                         <div className="text-gray-100">
@@ -149,17 +176,19 @@ function FeaturedItems({ items }: { items: any[] }) {
                   </div>
                 </article>
                 <article className="flex-shrink max-w-full w-full sm:w-1/2">
-                  <div className="relative hover-img max-h-48 overflow-hidden">
-                    <a href="#">
-                      <img
-                        className="max-w-full w-full mx-auto h-auto"
-                        src={getImageUrl(items[3].featured_image)}
-                        alt="Image description"
-                      />
+                  <div className="relative hover-img">
+                    <a href={newsUrl(items[3])}>
+                      <div className="filter brightness-50 hover:grayscale contrast-100">
+                        <img
+                          className="max-w-full w-full mx-auto h-auto"
+                          src={getImageUrl(items[3].featured_image)}
+                          alt="Image description"
+                        />
+                      </div>
                     </a>
                     <div className="absolute px-4 pt-7 pb-4 bottom-0 w-full bg-gradient-cover">
-                      <a href="#">
-                        <h2 className="text-lg font-bold capitalize leading-tight text-white mb-1">{items[3].title}</h2>
+                      <a href={newsUrl(items[3])}>
+                        <h2 className="text-lg font-bold leading-tight text-white mb-1">{items[3].title}</h2>
                       </a>
                       <div className="pt-1">
                         <div className="text-gray-100">
@@ -171,17 +200,19 @@ function FeaturedItems({ items }: { items: any[] }) {
                   </div>
                 </article>
                 <article className="flex-shrink max-w-full w-full sm:w-1/2">
-                  <div className="relative hover-img max-h-48 overflow-hidden">
-                    <a href="#">
-                      <img
-                        className="max-w-full w-full mx-auto h-auto"
-                        src={getImageUrl(items[4].featured_image)}
-                        alt="Image description"
-                      />
+                  <div className="relative hover-img">
+                    <a href={newsUrl(items[4])}>
+                      <div className="filter brightness-50 hover:grayscale contrast-100">
+                        <img
+                          className="max-w-full w-full mx-auto h-auto"
+                          src={getImageUrl(items[4].featured_image)}
+                          alt="Image description"
+                        />
+                      </div>
                     </a>
                     <div className="absolute px-4 pt-7 pb-4 bottom-0 w-full bg-gradient-cover">
-                      <a href="#">
-                        <h2 className="text-lg font-bold capitalize leading-tight text-white mb-1">{items[4].title}</h2>
+                      <a href={newsUrl(items[4])}>
+                        <h2 className="text-lg font-bold leading-tight text-white mb-1">{items[4].title}</h2>
                       </a>
                       <div className="pt-1">
                         <div className="text-gray-100">
@@ -201,7 +232,7 @@ function FeaturedItems({ items }: { items: any[] }) {
   );
 }
 
-function BlockNews2({ items, latest, title }: { items: any[]; title: string; latest: any[] }) {
+export function BlockNews2({ items, latest, title }: { items: any[]; title: string; latest: any[] }) {
   if (!items.length) {
     return <></>;
   }
@@ -230,7 +261,7 @@ function BlockNews2({ items, latest, title }: { items: any[]; title: string; lat
                   {latest.map((item) => {
                     return (
                       <li className="border-b border-gray-100 hover:bg-gray-50">
-                        <a className="text-lg font-bold px-6 py-3 flex flex-row items-center" href="#">
+                        <a className="text-lg font-bold px-6 py-3 flex flex-row items-center" href={newsUrl(item)}>
                           {item.title}
                         </a>
                       </li>
@@ -256,7 +287,7 @@ function BlockNews2({ items, latest, title }: { items: any[]; title: string; lat
   );
 }
 
-function BlockNews3({ items, title }: { items: any[]; title: string }) {
+export function BlockNews3({ items, title }: { items: any[]; title: string }) {
   if (!items?.length) {
     return <></>;
   }
@@ -302,7 +333,9 @@ function BlockNews3({ items, title }: { items: any[]; title: string }) {
                   </div>
                 </div>
 
-                <SquareGrid items={items.slice(1, 7)} />
+                <div className="pl-3">
+                  <SquareGrid items={items.slice(1, 7)} />
+                </div>
               </div>
             </div>
             {/* sidebar */}
@@ -359,7 +392,7 @@ function BlockNews3({ items, title }: { items: any[]; title: string }) {
   );
 }
 
-function BackToTop() {
+export function BackToTop() {
   return (
     <a
       href="#"
@@ -378,7 +411,7 @@ function BackToTop() {
   );
 }
 
-function Footer() {
+export function Footer() {
   return (
     <>
       {/* =========={ FOOTER }==========  */}
@@ -750,16 +783,95 @@ export function MobileMenu() {
   );
 }
 
-export default function Index({ featured, latestNews, bangladesh, politics }: any) {
+export function Slider(props: { items: any[]; title: string }) {
+  return (
+    <>
+      {/* slider news */}
+      <div
+        className="relative bg-gray-50"
+        style={{
+          backgroundSize: "cover",
+          backgroundPosition: "center center",
+          backgroundAttachment: "fixed",
+        }}
+      >
+        <div className="bg-black bg-opacity-70">
+          <div className="xl:container mx-auto px-3 sm:px-4 xl:px-2">
+            <div className="flex flex-row flex-wrap">
+              <div className="flex-shrink max-w-full w-full py-12 overflow-hidden">
+                <div className="w-full py-3">
+                  <h2 className="text-white text-2xl font-bold text-shadow-black">
+                    <span className="inline-block h-5 border-l-3 border-red-600 mr-2" />
+                    {props.title}
+                  </h2>
+                </div>
+                <div id="post-carousel" className="splide">
+                  <div className="splide__track">
+                    <ul className="splide__list">
+                      {props.items.map((item) => (
+                        <li className="splide__slide">
+                          <Card item={item} />
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+export function Card(props: { item: any }) {
+  const { item } = props;
+  return (
+    <div className="w-full pb-3">
+      <div className="hover-img bg-white">
+        <a href={newsUrl(item)}>
+          <img className="max-w-full w-full mx-auto" src={getImageUrl(item.featured_image)} alt="alt title" />
+        </a>
+        <div className="py-3 px-6">
+          <h3 className="text-lg font-bold leading-tight mb-2">
+            <a href={newsUrl(item)}>{maxText(item.title, 60)}</a>
+          </h3>
+          <a className="text-gray-500" href={`/${item.category.name}`}>
+            <span className="inline-block h-3 border-l-2 border-red-600 mr-2" />
+            {item.category.name}
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function CardCaption(props: { item: any }) {
+  const { item } = props;
+  return (
+    <div className="hover-img bg-gray-100">
+      <a href="">
+        <img className="max-w-full w-full mx-auto" src={getImageUrl(item.featured_image)} alt="alt title" />
+      </a>
+      <div className="py-3 px-6">
+        <span className="font-black font-semibold">{item.featured_image_caption}</span>
+      </div>
+    </div>
+  );
+}
+
+export default function Index({ featured, latestNews, bangladesh, politics, world }: any) {
   return (
     <>
       <Header />
       <MobileMenu />
       <main id="content">
         <FeaturedItems items={featured} />
-        <BlockNews items={featured.slice(5)} title={"Top News"} />
-        <BlockNews2 items={bangladesh.data.slice(0, 6)} latest={latestNews.slice(0, 5)} title={"Bangladesh"} />
-        <BlockNews3 items={politics.data} title={"Politics"} />
+        <BlockNews items={featured.slice(5)} title={""} />
+        <Slider items={world.slice(0, 6)} title={"World"} />
+        <BlockNews2 items={bangladesh.slice(0, 6)} latest={latestNews.slice(0, 5)} title={"Bangladesh"} />
+        <BlockNews3 items={politics} title={"Politics"} />
       </main>
       <BackToTop />
       <Footer />
@@ -768,17 +880,22 @@ export default function Index({ featured, latestNews, bangladesh, politics }: an
 }
 
 export const getServerSideProps = async () => {
-  const [featuredRes, latestNewsRes, bangladeshNews, politicsNews] = await Promise.all([
+  const [featuredRes, latestNewsRes, bangladeshNews, politicsNews, worldNews] = await Promise.all([
     fetch("https://panel.bangladeshfirst.com/api/v2/featured"),
     fetch("https://panel.bangladeshfirst.com/api/v2/latest"),
-    fetch("https://panel.bangladeshfirst.com/api/v2/category/Bangladesh?page=1&size=10"),
-    fetch("https://panel.bangladeshfirst.com/api/v2/category/Politics?page=1&size=15"),
+    fetch("https://panel.bangladeshfirst.com/api/v2/category/Bangladesh?page=1&size=20"),
+    fetch("https://panel.bangladeshfirst.com/api/v2/category/Politics?page=1&size=20"),
+    fetch("https://panel.bangladeshfirst.com/api/v2/category/World?page=1&size=20"),
   ]);
 
-  const featured: unknown = await featuredRes.json();
-  const latestNews: unknown = await latestNewsRes.json();
-  const bangladesh = await bangladeshNews.json();
-  const politics = await politicsNews.json();
+  const featured: any[] = await featuredRes.json();
+  const latestNews: any[] = await latestNewsRes.json();
 
-  return { props: { featured, latestNews, bangladesh, politics } };
+  const filterFn = (item: any) => !featured.find((f) => f.id === item.id) && !latestNews.find((f) => f.id === item.id);
+
+  let bangladesh = (await bangladeshNews.json()).data.filter(filterFn);
+  let politics = (await politicsNews.json()).data.filter(filterFn);
+  let world = (await worldNews.json()).data.filter(filterFn);
+
+  return { props: { featured, latestNews, bangladesh, politics, world } };
 };

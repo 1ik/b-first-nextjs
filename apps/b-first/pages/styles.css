@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* override some css done in the theme */
+.post-number li a::before {
+  width: unset !important;
+  margin-right: 1rem !important;
+}
+
+.detail p {
+  text-align: left !important;
+  line-height: 1.7rem !important;
+  padding-bottom: 1rem;
+}

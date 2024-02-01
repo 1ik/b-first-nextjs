@@ -13,10 +13,10 @@ export default class SiteDocument extends Document {
         <body className={"text-gray-700 pt-9 sm:pt-10"}>
           <Main />
           <NextScript />
-          <script src="/vendors/hc-sticky/dist/hc-sticky.js"></script>
-          <script src="/vendors/glightbox/dist/js/glightbox.min.js"></script>
-          <script src="/vendors/@splidejs/splide/dist/js/splide.min.js"></script>
-          <script src="/vendors/@splidejs/splide-extension-video/dist/js/splide-extension-video.min.js"></script>
+          <script src="/global/js/hc-sticky.js"></script>
+          <script src="/global/js/glightbox.min.js"></script>
+          <script src="/global/js/splide.min.js"></script>
+          <script src="/global/js/splide-extension-video.js"></script>
           <script src="/global/js/scripts.js"></script>
         </body>
       </Html>
