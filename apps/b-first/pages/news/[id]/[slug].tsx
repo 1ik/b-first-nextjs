@@ -90,7 +90,7 @@ export function Index({ news, categoryNews, latestNews, featured }: any) {
                   </div>
                 </div>
                 {/*right*/}
-                <div className="flex-shrink max-w-full w-full lg:w-1/3 sm:pl-3 lg:pl-8 lg:pb-8 order-last bg-gray-50">
+                <div className="flex-shrink max-w-full w-full lg:w-1/3 sm:pl-5 lg:pl-8 lg:pb-8 order-last bg-gray-50">
                   <h2 className="text-xl font-normal pb-6 pt-6">More From {news.category.name}</h2>
                   <div className="flex flex-col gap-4 pr-6">
                     {categoryNews?.data
