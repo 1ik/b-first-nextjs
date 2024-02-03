@@ -1,75 +1,57 @@
 import { useRouter } from "next/router";
-import { Header, SquareGrid } from ".";
+import { BackToTop, Footer, Header, SquareGrid } from ".";
 import { useEffect, useState } from 'react';
 
 
-export default function Component() {
 
-  const router = useRouter();
-
-  const { category } = router.query;
-  const [categoryData, setCategoryData] = useState(null);
-
-  useEffect(() => {
-    const categoryRes = async () => {
-      try {
-        const response = await fetch(`https://panel.bangladeshfirst.com/api/v2/category/${category}?page=1&size=100`);
-        const data = await response.json();
-        setCategoryData(data);
+function fetchData(category) {
+  return fetch(`https://panel.bangladeshfirst.com/api/v2/category/${category}?page=1&size=100`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Failed to fetch data');
       }
-      catch (error) {
-        console.log(error);
-      }
-    };
+      return response.json();
+    });
+}
 
-    if (category) {
-      categoryRes();
-    }
-  }, [category]);
+export default function Component({ categoryData }) {
+  const [visible, setVisible] = useState(15);
+
+  const handleShowMore = () => {
+    setVisible(visible + 15);
+  };
 
   if (!categoryData) {
     return <div>Loading...</div>;
   }
 
-  // console.log(categoryData);
+  const className = 'sm:w-1/5';
 
   return (
     <div className="text-gray-700 pt-9 sm:pt-10">
       <Header></Header>
-      <SquareGrid items={categoryData.data.slice(0, 15)}></SquareGrid>
-      
+      <div className="md-container mx-auto">
+        <SquareGrid items={categoryData.data.slice(0, visible)} gridClass={className}></SquareGrid>
+        {visible < categoryData.data.length && (
+          <div className="flex justify-center items-center w-full">
+            <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mb-5" onClick={handleShowMore}>Show more</button>
+          </div>
+        )}
+      </div>
+      <Footer></Footer>
+      <BackToTop></BackToTop>
     </div>
   );
 }
 
+export async function getServerSideProps(context) {
+  try {
+    const category = context.params.category;
+    const categoryData = await fetchData(category);
 
-
-// export default function Component(data) {
-
-
-
-//   return (
-//     <div className="text-gray-700 pt-9 sm:pt-10">
-//       {/* <Header></Header>
-//       <SquareGrid items={data.data.slice(0, 15)}></SquareGrid> */}
-//     </div>
-//   );
-
-// }
-
-
-
-
-// export const getServerSideProps = async () => {
-
-//   const [categoryRes] = await Promise.all([
-//     fetch('https://panel.bangladeshfirst.com/api/v2/category/Politics?page=1&size=10')
-//   ]);
-
-
-//   const data = await categoryRes.json();
-
-//   console.log(data);
-
-//   return { props: { data } };
-// };
+    return { props: { categoryData } };
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    return { props: { categoryData: null } };
+  }
+}

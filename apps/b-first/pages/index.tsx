@@ -8,12 +8,13 @@ export const maxText = (text: string, length = 10) => {
   return text;
 };
 
-export function SquareGrid({ items }: { items: any[] }) {
+    export function SquareGrid({ items, gridClass }: { items: any[]; gridClass: string}) {
+
   return (
     <div className="flex flex-row flex-wrap -mx-3">
       {items.map((item, idx) => {
         return (
-          <div className="flex-shrink max-w-full w-full sm:w-1/5 px-3 pb-3 pt-3 sm:pt-0 border-b-2 sm:border-b-0 border-dotted border-gray-100">
+          <div className={`flex-shrink max-w-full w-full ${gridClass} px-3 pb-3 pt-3 sm:pt-0 border-b-2 sm:border-b-0 border-dotted border-gray-100`}>
             <div className="flex flex-row sm:block hover-img">
               <div className="w-[100%] hidden md:block">
                 <a href={newsUrl(item)}>
@@ -48,10 +49,11 @@ export function SquareGrid({ items }: { items: any[] }) {
 }
 
 export function BlockNews({ items, title, showAd = true }: { items: any[]; title: string; showAd?: boolean }) {
+  const className = 'sm:w-1/3';
   return (
     <>
       <div className="bg-white">
-        <div className="xl:container mx-auto px-3 sm:px-4 xl:px-2">
+        <div className="md-container xl:container mx-auto px-3 sm:px-4 xl:px-2">
           <div className="flex flex-row flex-wrap">
             {/* Left */}
             <div className={`flex-shrink max-w-full w-full ${showAd ? "lg:w-2/3" : ""} overflow-hidden`}>
@@ -63,7 +65,7 @@ export function BlockNews({ items, title, showAd = true }: { items: any[]; title
                   </h2>
                 </div>
               )}
-              <SquareGrid items={items} />
+              <SquareGrid items={items} gridClass={className} />
             </div>
             {/* right */}
             {showAd && (
@@ -97,7 +99,7 @@ export function FeaturedItems({ items }: { items: any[] }) {
     <>
       {/* hero big grid */}
       <div className="bg-white py-6">
-        <div className="xl:container mx-auto px-3 sm:px-4 xl:px-2">
+        <div className="md-container xl:container mx-auto px-3 sm:px-4 xl:px-2">
           {/* big grid 1 */}
           <div className="flex flex-row flex-wrap">
             {/*Start left cover*/}
@@ -236,9 +238,11 @@ export function BlockNews2({ items, latest, title }: { items: any[]; title: stri
   if (!items.length) {
     return <></>;
   }
+
+  const className = 'sm:w-1/3';
   return (
     <div className="bg-gray-50 py-6">
-      <div className="xl:container mx-auto px-3 sm:px-4 xl:px-2">
+      <div className="md-container xl:container mx-auto px-3 sm:px-4 xl:px-2">
         <div className="flex flex-row flex-wrap">
           {/* Left */}
           <div className="flex-shrink max-w-full w-full lg:w-2/3  overflow-hidden">
@@ -248,7 +252,7 @@ export function BlockNews2({ items, latest, title }: { items: any[]; title: stri
                 {title}
               </h2>
             </div>
-            <SquareGrid items={items} />
+            <SquareGrid items={items} gridClass={className} />
           </div>
           {/* right */}
           <div className="flex-shrink max-w-full w-full lg:w-1/3 lg:pl-8 lg:pt-14 lg:pb-8 order-first lg:order-last">
@@ -291,11 +295,13 @@ export function BlockNews3({ items, title }: { items: any[]; title: string }) {
   if (!items?.length) {
     return <></>;
   }
+
+  const className = 'sm:w-1/3';
   return (
     <>
       {/* block news */}
       <div className="bg-gray-50 py-6">
-        <div className="xl:container mx-auto px-3 sm:px-4 xl:px-2">
+        <div className="md-container xl:container mx-auto px-3 sm:px-4 xl:px-2">
           <div className="flex flex-row flex-wrap">
             {/* post */}
             <div className="flex-shrink max-w-full w-full lg:w-2/3 ">
@@ -334,7 +340,7 @@ export function BlockNews3({ items, title }: { items: any[]; title: string }) {
                 </div>
 
                 <div className="pl-3">
-                  <SquareGrid items={items.slice(1, 7)} />
+                  <SquareGrid items={items.slice(1, 7)} gridClass={className} />
                 </div>
               </div>
             </div>
@@ -418,7 +424,7 @@ export function Footer() {
       <footer className="bg-black text-gray-400">
         {/*Footer content*/}
         <div id="footer-content" className="relative pt-8 xl:pt-16 pb-6 xl:pb-12">
-          <div className="xl:container mx-auto px-3 sm:px-4 xl:px-2 overflow-hidden">
+          <div className="md-container xl:container mx-auto px-3 sm:px-4 xl:px-2 overflow-hidden">
             <div className="flex flex-wrap flex-row lg:justify-between -mx-3">
               <div className="flex-shrink max-w-full w-full lg:w-2/5 px-3 lg:pr-16">
                 <div className="flex items-center mb-2">
@@ -611,10 +617,12 @@ export function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 border-b-2">
       <nav className="bg-white">
-        <div className="xl:container mx-auto px-3 sm:px-4 xl:px-2">
+        <div className="md-container xl:container mx-auto px-3 sm:px-4 xl:px-2">
           <div className="flex justify-between">
             <div className="mx-w-10 text-2xl font-bold capitalize text-white flex items-center">
-              <img src="/img/logo.svg" alt="" />
+              <a href="/">
+                <img src="/img/logo.svg" alt="" />
+              </a>
             </div>
 
             <div className="flex flex-row">
@@ -796,7 +804,7 @@ export function Slider(props: { items: any[]; title: string }) {
         }}
       >
         <div className="bg-black bg-opacity-70">
-          <div className="xl:container mx-auto px-3 sm:px-4 xl:px-2">
+          <div className="md-container xl:container mx-auto px-3 sm:px-4 xl:px-2">
             <div className="flex flex-row flex-wrap">
               <div className="flex-shrink max-w-full w-full py-12 overflow-hidden">
                 <div className="w-full py-3">
