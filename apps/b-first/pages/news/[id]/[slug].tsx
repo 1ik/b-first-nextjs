@@ -54,7 +54,7 @@ export function BreadCrumb({ category }: any) {
 export function Index({ news, categoryNews, latestNews, featured }: any) {
   return (
     <>
-      <Header />
+      <Header category={news?.category.name} />
       <MobileMenu />
       <main id="content">
         <div className="bg-white mt-10">

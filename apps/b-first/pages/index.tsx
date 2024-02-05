@@ -656,7 +656,7 @@ export function Footer() {
   );
 }
 
-export function Header() {
+export function Header({ category }: { category: string }) {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 border-b-2">
       <nav className="bg-white">
@@ -670,28 +670,34 @@ export function Header() {
 
             <div className="flex flex-row">
               <ul className="navbar hidden lg:flex lg:flex-row text-gray-400 text-sm items-center font-bold">
-                <li className="active relative border-l hover:bg-gray-900">
+                <li className={`relative border-l hover:bg-gray-900 ${category === "Bangladesh" ? "active" : null}`}>
                   <a className="block py-3 px-6 border-b-2 border-transparent" href="/Bangladesh">
                     Bangladesh
                   </a>
                 </li>
-                <li className="relative border-l hover:bg-gray-900">
+                <li className={`relative border-l hover:bg-gray-900 ${category === "World" ? "active" : null}`}>
                   <a className="block py-3 px-6 border-b-2 border-transparent" href="/World">
                     World
                   </a>
                 </li>
-                <li className="relative border-l hover:bg-gray-900">
+                <li className={`relative border-l hover:bg-gray-900 ${category === "Politics" ? "active" : null}`}>
                   <a className="block py-3 px-6 border-b-2 border-transparent" href="/Politics">
                     Politics
                   </a>
                 </li>
-                <li className="relative border-l hover:bg-gray-900">
+                <li className={`relative border-l hover:bg-gray-900 ${category === "Sports" ? "active" : null}`}>
                   <a className="block py-3 px-6 border-b-2 border-transparent" href="/Sports">
                     Sports
                   </a>
                 </li>
 
-                <li className="dropdown relative border-l border-r hover:bg-gray-900">
+                <li
+                  className={`dropdown relative border-l border-r hover:bg-gray-900 ${
+                    ["Corporates", "Tech", "Opinion", "Features", "Lifestyle", "Education", "Search"].includes(category)
+                      ? "active"
+                      : null
+                  }`}
+                >
                   <a className="block py-3 px-6 border-b-2 border-transparent" href="#">
                     More
                   </a>
