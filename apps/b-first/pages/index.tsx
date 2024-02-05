@@ -8,13 +8,14 @@ export const maxText = (text: string, length = 10) => {
   return text;
 };
 
-    export function SquareGrid({ items, gridClass }: { items: any[]; gridClass: string}) {
-
+export function SquareGrid({ items, gridClass }: { items: any[]; gridClass: string }) {
   return (
     <div className="flex flex-row flex-wrap -mx-3">
       {items.map((item, idx) => {
         return (
-          <div className={`flex-shrink max-w-full w-full ${gridClass} px-3 pb-3 pt-3 sm:pt-0 border-b-2 sm:border-b-0 border-dotted border-gray-100`}>
+          <div
+            className={`flex-shrink max-w-full w-full ${gridClass} px-3 pb-3 pt-3 sm:pt-0 border-b-2 sm:border-b-0 border-dotted border-gray-100`}
+          >
             <div className="flex flex-row sm:block hover-img">
               <div className="w-[100%] hidden md:block">
                 <a href={newsUrl(item)}>
@@ -49,7 +50,7 @@ export const maxText = (text: string, length = 10) => {
 }
 
 export function BlockNews({ items, title, showAd = true }: { items: any[]; title: string; showAd?: boolean }) {
-  const className = 'sm:w-1/3';
+  const className = "sm:w-1/3";
   return (
     <>
       <div className="bg-white">
@@ -104,7 +105,7 @@ export function FeaturedItems({ items }: { items: any[] }) {
           <div className="flex flex-row flex-wrap">
             {/*Start left cover*/}
             <div className="flex-shrink max-w-full w-full lg:w-1/2 pb-1 lg:pb-0 lg:pr-1">
-              <div className="relative overflow-hidden ">
+              <div className="relative h-full overflow-hidden ">
                 <a href={newsUrl(items[0])} className="filter brightness-50 hover:grayscale contrast-100">
                   <img
                     className="max-w-full w-full mx-auto h-auto"
@@ -128,8 +129,38 @@ export function FeaturedItems({ items }: { items: any[] }) {
             </div>
             {/*Start box news*/}
             <div className="flex-shrink max-w-full w-full lg:w-1/2">
-              <div className="box-one flex flex-row flex-wrap">
-                <article className="flex-shrink max-w-full w-full sm:w-1/2">
+              <div className="flex gap-1 flex-row flex-wrap">
+                {items.map((news, index) => {
+                  if (index >= 1 && index <= 4) {
+                    return (
+                      <article key={index} className="flex-shrink max-w-full w-full sm:w-[calc(50%-2px)]">
+                        <div className="relative hover-img">
+                          <a href={newsUrl(news)}>
+                            <div className="filter brightness-50 hover:grayscale contrast-100">
+                              <img
+                                className="max-w-full w-full mx-auto h-auto"
+                                src={getImageUrl(news.featured_image)}
+                                alt="Image description"
+                              />
+                            </div>
+                          </a>
+                          <div className="absolute px-4 pt-7 pb-4 bottom-0 w-full bg-gradient-cover">
+                            <a href={newsUrl(news)}>
+                              <h2 className="text-lg font-bold leading-tight text-white mb-1">{news.title}</h2>
+                            </a>
+                            <div className="pt-1">
+                              <div className="text-gray-100">
+                                <div className="inline-block h-3 border-l-2 border-red-600 mr-2" />
+                                {news.category?.name}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </article>
+                    );
+                  }
+                })}
+                {/* <article className="flex-shrink max-w-full w-full sm:w-[calc(50%-2px)]">
                   <div className="relative hover-img">
                     <a href={newsUrl(items[1])}>
                       <div className="filter brightness-50 hover:grayscale contrast-100">
@@ -153,7 +184,7 @@ export function FeaturedItems({ items }: { items: any[] }) {
                     </div>
                   </div>
                 </article>
-                <article className="flex-shrink max-w-full w-full sm:w-1/2">
+                <article className="flex-shrink max-w-full w-full sm:w-[calc(50%-2px)]">
                   <div className="relative hover-img">
                     <a href="#">
                       <div className="filter brightness-50 hover:grayscale contrast-100">
@@ -177,7 +208,7 @@ export function FeaturedItems({ items }: { items: any[] }) {
                     </div>
                   </div>
                 </article>
-                <article className="flex-shrink max-w-full w-full sm:w-1/2">
+                <article className="flex-shrink max-w-full w-full sm:w-[calc(50%-2px)]">
                   <div className="relative hover-img">
                     <a href={newsUrl(items[3])}>
                       <div className="filter brightness-50 hover:grayscale contrast-100">
@@ -201,7 +232,7 @@ export function FeaturedItems({ items }: { items: any[] }) {
                     </div>
                   </div>
                 </article>
-                <article className="flex-shrink max-w-full w-full sm:w-1/2">
+                <article className="flex-shrink max-w-full w-full sm:w-[calc(50%-2px)]">
                   <div className="relative hover-img">
                     <a href={newsUrl(items[4])}>
                       <div className="filter brightness-50 hover:grayscale contrast-100">
@@ -224,7 +255,7 @@ export function FeaturedItems({ items }: { items: any[] }) {
                       </div>
                     </div>
                   </div>
-                </article>
+                </article> */}
               </div>
             </div>
           </div>
@@ -239,7 +270,7 @@ export function BlockNews2({ items, latest, title }: { items: any[]; title: stri
     return <></>;
   }
 
-  const className = 'sm:w-1/3';
+  const className = "sm:w-1/3";
   return (
     <div className="bg-gray-50 py-6">
       <div className="md-container xl:container mx-auto px-3 sm:px-4 xl:px-2">
@@ -291,12 +322,12 @@ export function BlockNews2({ items, latest, title }: { items: any[]; title: stri
   );
 }
 
-export function BlockNews3({ items, title }: { items: any[]; title: string }) {
+export function BlockNews3({ items, title, popular }: { items: any[]; title: string; popular: any[] }) {
   if (!items?.length) {
     return <></>;
   }
 
-  const className = 'sm:w-1/3';
+  const className = "sm:w-1/3";
   return (
     <>
       {/* block news */}
@@ -315,7 +346,7 @@ export function BlockNews3({ items, title }: { items: any[]; title: string }) {
                 <div className="flex-shrink max-w-full w-full px-3 pb-5">
                   <div className="relative hover-img max-h-98 overflow-hidden">
                     {/*thumbnail*/}
-                    <a href="#">
+                    <a href={newsUrl(items[0])}>
                       <img
                         className="max-w-full w-full mx-auto h-auto"
                         src={getImageUrl(items[0].featured_image)}
@@ -324,7 +355,7 @@ export function BlockNews3({ items, title }: { items: any[]; title: string }) {
                     </a>
                     <div className="absolute px-5 pt-8 pb-5 bottom-0 w-full bg-gradient-cover">
                       {/*title*/}
-                      <a href="#">
+                      <a href={newsUrl(items[0])}>
                         <h2 className="text-3xl font-bold capitalize text-white mb-3">{items[0].title}</h2>
                       </a>
                       <p className="text-gray-100 hidden sm:inline-block">{items[0].brief}</p>
@@ -352,6 +383,7 @@ export function BlockNews3({ items, title }: { items: any[]; title: string }) {
                     <h2 className="text-lg font-bold">Most Popular</h2>
                   </div>
                   <ul className="post-number">
+                    {/* 
                     <li className="border-b border-gray-100 hover:bg-gray-50">
                       <a className="text-lg font-bold px-6 py-3 flex flex-row items-center" href="#">
                         Why the world would end without political polls
@@ -377,6 +409,17 @@ export function BlockNews3({ items, title }: { items: any[]; title: string }) {
                         ZF plans $14 billion autonomous vehicle push, concept van
                       </a>
                     </li>
+                   */}
+
+                    {popular.map((item, index) => {
+                      return (
+                        <li key={index} className="border-b border-gray-100 hover:bg-gray-50">
+                          <a className="text-lg font-bold px-6 py-3 flex flex-row items-center" href={newsUrl(item)}>
+                            {item.title}
+                          </a>
+                        </li>
+                      );
+                    })}
                   </ul>
                 </div>
               </div>
@@ -883,7 +926,7 @@ export default function Index({ featured, latestNews, bangladesh, politics, worl
         <BlockNews items={featured.slice(5)} title={""} />
         <Slider items={world.slice(0, 6)} title={"World"} />
         <BlockNews2 items={bangladesh.slice(0, 6)} latest={latestNews.slice(0, 5)} title={"Bangladesh"} />
-        <BlockNews3 items={politics} title={"Politics"} />
+        <BlockNews3 items={politics} title={"Politics"} popular={latestNews.slice(6, 11)} />
       </main>
       <BackToTop />
       <Footer />
