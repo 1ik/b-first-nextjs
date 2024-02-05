@@ -60,7 +60,7 @@ export function Index({ news, categoryNews, latestNews, featured }: any) {
         <div className="bg-white mt-10">
           <div className="xl:container mx-auto px-3 sm:px-4 xl:px-2">
             <div className="flex flex-col flex-wrap">
-              <div className="flex flex-row flex-wrap">
+              <div className="md-container mx-auto flex flex-row flex-wrap">
                 {/*left*/}
                 <div className="flex-shrink max-w-full w-full lg:w-2/3 overflow-hidden pr-6">
                   <BreadCrumb category={news?.category.name} />

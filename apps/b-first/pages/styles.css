@@ -13,3 +13,14 @@
   line-height: 1.7rem !important;
   padding-bottom: 1rem;
 }
+
+@media (min-width: 700px) and (min-width: 1270px){
+  .md-container{
+    max-width: 90% !important;
+  }
+}
+
+.img-size{
+  height: 90px;
+  width: 160px;
+}
