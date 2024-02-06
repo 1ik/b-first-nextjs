@@ -24,3 +24,7 @@
   height: 90px;
   width: 160px;
 }
+
+.custom-z-index{
+  z-index: 0 !important;
+}

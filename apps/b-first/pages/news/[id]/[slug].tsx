@@ -1,5 +1,6 @@
 import { BackToTop, BlockNews, CardCaption, Footer, Header, MobileMenu } from "../../index";
 import { newsUrl } from "../../../../../libs/settings/analytics/src/lib/util";
+import Head from "next/head";
 
 export function BreadCrumb({ category }: any) {
   return (
@@ -54,6 +55,9 @@ export function BreadCrumb({ category }: any) {
 export function Index({ news, categoryNews, latestNews, featured }: any) {
   return (
     <>
+      <Head>
+        <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=65bf1f0a2bb34700194aa4e2&product=inline-share-buttons' async></script>
+      </Head>
       <Header />
       <MobileMenu />
       <main id="content">
@@ -70,8 +74,13 @@ export function Index({ news, categoryNews, latestNews, featured }: any) {
                   </h2>
 
                   <div className="news-meta border-1 border-b mb-4 pb-3">
-                    <p className="font-semibold">{news.author}</p>
-                    <p className="font-light text-sm">{news.created_at}</p>
+                    <div className="flex justify-between">
+                      <div>
+                        <p className="font-semibold">{news.author}</p>
+                        <p className="font-light text-sm">{news.created_at}</p>
+                      </div>
+                      <div className="sharethis-inline-share-buttons custom-z-index pb-2"></div>
+                    </div>
                     <p className="text-sm italic pt-7">{news.brief}</p>
                   </div>
 
