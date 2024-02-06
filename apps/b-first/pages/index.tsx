@@ -2,49 +2,94 @@ import { getImageUrl } from "../../../libs/news-site-ui/src/lib/image_utils";
 import { newsUrl } from "../../../libs/settings/analytics/src/lib/util";
 
 export const maxText = (text: string, length = 10) => {
-  if (text.length > length) {
+  if (text?.length > length) {
     return `${text.substr(0, length)}...`;
   }
   return text;
 };
 
-export function SquareGrid({ items, gridClass }: { items: any[]; gridClass: string }) {
+export function SquareGrid({
+  items,
+  gridClass,
+  showBannerAdd = false,
+}: {
+  items: any[];
+  gridClass: string;
+  showBannerAdd?: boolean;
+}) {
   return (
     <div className="flex flex-row flex-wrap -mx-3">
       {items.map((item, idx) => {
         return (
-          <div
-            className={`flex-shrink max-w-full w-full ${gridClass} px-3 pb-3 pt-3 sm:pt-0 border-b-2 sm:border-b-0 border-dotted border-gray-100`}
-          >
-            <div className="flex flex-row sm:block hover-img">
-              <div className="w-[100%] hidden md:block">
-                <a href={newsUrl(item)}>
-                  <img className="object-fill" src={getImageUrl(item.featured_image)} alt={item.title} />
-                </a>
+          <>
+            <div
+              className={`flex-shrink max-w-full w-full lg:pl-8 lg:pb-8 ${
+                showBannerAdd && idx > 0 && idx % 8 === 0 ? "block" : "hidden"
+              }`}
+            >
+              <div className="w-full bg-gray-50 h-full">
+                <div className="text-sm py-6 sticky">
+                  <div className="w-full text-center">
+                    <a className="uppercase" href="#">
+                      Advertisement
+                    </a>
+                    <a href="#">
+                      <img className="mx-auto" src="/img/ads/ads_728.jpg" alt="advertisement area" />
+                    </a>
+                  </div>
+                </div>
               </div>
+            </div>
+            <div
+              key={idx}
+              className={`flex-shrink max-w-full w-full ${gridClass} px-3 pb-3 pt-3 sm:pt-0 border-b-2 sm:border-b-0 border-dotted border-gray-100`}
+            >
+              <div className="flex flex-row sm:block hover-img">
+                <div className="w-[100%] hidden md:block">
+                  <a href={newsUrl(item)}>
+                    <img className="object-fill" src={getImageUrl(item.featured_image)} alt={item.title} />
+                  </a>
+                </div>
 
-              <div className="w-[40%] md:hidden">
-                <a href={newsUrl(item)}>
-                  <img className="object-fill" src={getImageUrl(item.featured_image)} alt={item.title} />
-                </a>
+                <div className="w-[40%] md:hidden">
+                  <a href={newsUrl(item)}>
+                    <img className="object-fill" src={getImageUrl(item.featured_image)} alt={item.title} />
+                  </a>
+                </div>
+
+                <div className="py-0 sm:py-3 pl-3 sm:pl-0 flex-1">
+                  <h3 className="text-lg font-bold leading-tight mb-2">
+                    <a href={newsUrl(item)}>{maxText(item.title, 50)}</a>
+                  </h3>
+                  <a href={newsUrl(item)} className="hidden md:block text-gray-600 leading-tight mb-1">
+                    {maxText(item.brief, 90)}
+                  </a>
+                  <a className="text-gray-500" href={newsUrl(item)}>
+                    <span className="inline-block h-3 border-l-2 border-red-600 mr-2" />
+                    {item.category?.name}
+                  </a>
+                </div>
               </div>
-
-              <div className="py-0 sm:py-3 pl-3 sm:pl-0 flex-1">
-                <h3 className="text-lg font-bold leading-tight mb-2">
-                  <a href={newsUrl(item)}>{maxText(item.title, 50)}</a>
-                </h3>
-                <a href={newsUrl(item)} className="hidden md:block text-gray-600 leading-tight mb-1">
-                  {maxText(item.brief, 90)}
+            </div>
+          </>
+        );
+      })}
+      {showBannerAdd && items.length <= 8 && (
+        <div className={`flex-shrink max-w-full w-full lg:pl-8 lg:pb-8`}>
+          <div className="w-full bg-gray-50 h-full">
+            <div className="text-sm py-6 sticky">
+              <div className="w-full text-center">
+                <a className="uppercase" href="#">
+                  Advertisement
                 </a>
-                <a className="text-gray-500" href={newsUrl(item)}>
-                  <span className="inline-block h-3 border-l-2 border-red-600 mr-2" />
-                  {item.category?.name}
+                <a href="#">
+                  <img className="mx-auto" src="/img/ads/ads_728.jpg" alt="advertisement area" />
                 </a>
               </div>
             </div>
           </div>
-        );
-      })}
+        </div>
+      )}
     </div>
   );
 }
@@ -108,14 +153,16 @@ export function FeaturedItems({ items }: { items: any[] }) {
               <div className="relative h-full overflow-hidden ">
                 <a href={newsUrl(items[0])} className="filter brightness-50 hover:grayscale contrast-100">
                   <img
-                    className="max-w-full w-full mx-auto h-auto"
+                    className="max-w-full w-full mx-auto h-full object-cover"
                     src={getImageUrl(items[0].featured_image)}
                     alt="Image description"
                   />
                 </a>
                 <div className="absolute px-5 pt-8 pb-5 bottom-0 w-full bg-gradient-cover">
                   <a href={newsUrl(items[0])}>
-                    <h2 className="text-3xl font-bold text-white">{items[0].title}</h2>
+                    <h2 className="xl:text-3xl lg:text-2xl sm:text-2xl text-lg md:text-3xl font-bold text-white">
+                      {items[0].title}
+                    </h2>
                   </a>
                   <p className="text-gray-100 hidden sm:inline-block">{items[0].brief}</p>
                   <div className="pt-2">
@@ -134,11 +181,11 @@ export function FeaturedItems({ items }: { items: any[] }) {
                   if (index >= 1 && index <= 4) {
                     return (
                       <article key={index} className="flex-shrink max-w-full w-full sm:w-[calc(50%-2px)]">
-                        <div className="relative hover-img">
+                        <div className="relative h-full hover-img">
                           <a href={newsUrl(news)}>
-                            <div className="filter brightness-50 hover:grayscale contrast-100">
+                            <div className="filter h-full brightness-50 hover:grayscale contrast-100">
                               <img
-                                className="max-w-full w-full mx-auto h-auto"
+                                className="max-w-full object-cover h-full w-full mx-auto"
                                 src={getImageUrl(news.featured_image)}
                                 alt="Image description"
                               />
@@ -866,7 +913,7 @@ export function Slider(props: { items: any[]; title: string }) {
                   <div className="splide__track">
                     <ul className="splide__list">
                       {props.items.map((item) => (
-                        <li className="splide__slide">
+                        <li className="splide__slide flex">
                           <Card item={item} />
                         </li>
                       ))}
@@ -886,9 +933,13 @@ export function Card(props: { item: any }) {
   const { item } = props;
   return (
     <div className="w-full pb-3">
-      <div className="hover-img bg-white">
+      <div className="hover-img h-full bg-white">
         <a href={newsUrl(item)}>
-          <img className="max-w-full w-full mx-auto" src={getImageUrl(item.featured_image)} alt="alt title" />
+          <img
+            className="max-w-full h-full object-cover w-full mx-auto"
+            src={getImageUrl(item.featured_image)}
+            alt="alt title"
+          />
         </a>
         <div className="py-3 px-6">
           <h3 className="text-lg font-bold leading-tight mb-2">
@@ -923,6 +974,7 @@ export function CardCaption(props: { item: any }) {
 }
 
 export default function Index({ featured, latestNews, bangladesh, politics, world }: any) {
+  console.log(featured);
   return (
     <>
       <Header />

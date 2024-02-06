@@ -12,23 +12,45 @@ function fetchData(category) {
 }
 
 export default function Component({ categoryData, category }) {
-  const [visible, setVisible] = useState(15);
+  const [visible, setVisible] = useState(12);
 
   const handleShowMore = () => {
-    setVisible(visible + 15);
+    setVisible(visible + 12);
   };
 
   if (!categoryData) {
     return <div>Loading...</div>;
   }
 
-  const className = "sm:w-1/5";
+  const className = "sm:w-1/4";
 
   return (
     <div className="text-gray-700 pt-9 sm:pt-10">
       <Header category={category}></Header>
       <div className="md-container mx-auto">
-        <SquareGrid items={categoryData.data.slice(0, visible)} gridClass={className}></SquareGrid>
+        <div className="flex">
+          <div className="flex-shrink max-w-full w-full lg:w-[75%]">
+            <SquareGrid
+              showBannerAdd={true}
+              items={categoryData.data?.slice(0, visible)}
+              gridClass={className}
+            ></SquareGrid>
+          </div>
+          <div className="flex-shrink max-w-full w-full lg:w-[25%] lg:pl-8 lg:pb-8 order-first lg:order-last">
+            <div className="w-full bg-gray-50 h-full">
+              <div className="text-sm py-6 sticky">
+                <div className="w-full text-center">
+                  <a className="uppercase" href="#">
+                    Advertisement
+                  </a>
+                  <a href="#">
+                    <img className="mx-auto" src="/img/ads/250.jpg" alt="advertisement area" />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         {visible < categoryData.data.length && (
           <div className="flex justify-center items-center w-full">
             <button
