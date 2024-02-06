@@ -1,20 +1,23 @@
-import { useRouter } from "next/router";
 import { BackToTop, Footer, Header, SquareGrid } from ".";
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 
 
-function fetchData(category) {
-  return fetch(`https://panel.bangladeshfirst.com/api/v2/category/${category}?page=1&size=100`)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Failed to fetch data');
-      }
-      return response.json();
-    });
-}
+const fetchData = async (category: string) => {
+  const categoryResponse = await fetch(`https://panel.bangladeshfirst.com/api/v2/category/${category}?page=1&size=100`)
+  console.log(categoryResponse);
+  if (!categoryResponse.ok) {
+    throw new Error('Failed to fetch data');
+  }
+  let categoryData: any[] = (await categoryResponse.json());
 
-export default function Component({ categoryData }) {
+  console.log(categoryData)
+
+  return { props: { categoryData } };
+};
+
+
+export default function Component( categoryData: any ) {
   const [visible, setVisible] = useState(15);
 
   const handleShowMore = () => {
@@ -27,12 +30,22 @@ export default function Component({ categoryData }) {
 
   const className = 'sm:w-1/5';
 
+  const data = categoryData.categoryData.props.categoryData.data;
+  // console.log(categoryData);
+  // console.log(categoryData.categoryData);
+  // console.log(categoryData.categoryData.props);
+  // console.log(categoryData.categoryData.props.categoryData);
+  console.log(data);
+
+
+  // const data = categoryData.categoryData.data;
+
   return (
     <div className="text-gray-700 pt-9 sm:pt-10">
       <Header></Header>
       <div className="md-container mx-auto">
-        <SquareGrid items={categoryData.data.slice(0, visible)} gridClass={className}></SquareGrid>
-        {visible < categoryData.data.length && (
+        <SquareGrid items={data.slice(0, visible)} gridClass={className}></SquareGrid>
+        {visible < data.length && (
           <div className="flex justify-center items-center w-full">
             <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mb-5" onClick={handleShowMore}>Show more</button>
           </div>
@@ -44,7 +57,7 @@ export default function Component({ categoryData }) {
   );
 }
 
-export async function getServerSideProps(context) {
+export const getServerSideProps = async (context: any) => {
   try {
     const category = context.params.category;
     const categoryData = await fetchData(category);
