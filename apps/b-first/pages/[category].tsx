@@ -1,8 +1,6 @@
 import { BackToTop, Footer, Header, SquareGrid } from ".";
 import { useState } from 'react';
 
-
-
 const fetchData = async (category: string) => {
   const categoryResponse = await fetch(`https://panel.bangladeshfirst.com/api/v2/category/${category}?page=1&size=100`)
   console.log(categoryResponse);
@@ -11,11 +9,8 @@ const fetchData = async (category: string) => {
   }
   let categoryData: any[] = (await categoryResponse.json());
 
-  console.log(categoryData)
-
   return { props: { categoryData } };
 };
-
 
 export default function Component( categoryData: any ) {
   const [visible, setVisible] = useState(15);
@@ -31,14 +26,6 @@ export default function Component( categoryData: any ) {
   const className = 'sm:w-1/5';
 
   const data = categoryData.categoryData.props.categoryData.data;
-  // console.log(categoryData);
-  // console.log(categoryData.categoryData);
-  // console.log(categoryData.categoryData.props);
-  // console.log(categoryData.categoryData.props.categoryData);
-  console.log(data);
-
-
-  // const data = categoryData.categoryData.data;
 
   return (
     <div className="text-gray-700 pt-9 sm:pt-10">
