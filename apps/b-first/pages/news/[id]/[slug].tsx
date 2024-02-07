@@ -1,6 +1,5 @@
 import { BackToTop, BlockNews, CardCaption, Footer, Header, MobileMenu } from "../../index";
 import { newsUrl } from "../../../../../libs/settings/analytics/src/lib/util";
-import Head from "next/head";
 
 export function BreadCrumb({ category }: any) {
   return (
@@ -55,9 +54,6 @@ export function BreadCrumb({ category }: any) {
 export function Index({ news, categoryNews, latestNews, featured }: any) {
   return (
     <>
-      <Head>
-        <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=65bf1f0a2bb34700194aa4e2&product=inline-share-buttons' async></script>
-      </Head>
       <Header />
       <MobileMenu />
       <main id="content">
