@@ -1,5 +1,10 @@
-import { BackToTop, BlockNews, CardCaption, Footer, Header, MobileMenu } from "../../index";
+import Header from "apps/b-first/components/Header/Header";
 import { newsUrl } from "../../../../../libs/settings/analytics/src/lib/util";
+import MobileMenu from "apps/b-first/components/MobileMenu/MobileMenu";
+import CardCaption from "apps/b-first/components/CardCaption/CardCaption";
+import BlockNews from "apps/b-first/components/BlockNews/BlockNews";
+import Footer from "apps/b-first/components/Footer/Footer";
+import BackToTop from "apps/b-first/components/BackToTop/BackToTop";
 
 export function BreadCrumb({ category }: any) {
   return (

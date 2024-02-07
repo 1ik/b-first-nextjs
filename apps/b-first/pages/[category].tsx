@@ -1,6 +1,9 @@
 import { useRouter } from "next/router";
-import { BackToTop, Footer, Header, SquareGrid } from ".";
 import { useEffect, useState } from 'react';
+import Header from "../components/Header/Header";
+import SquareGrid from "../components/SquareGrid/SquareGrid";
+import Footer from "../components/Footer/Footer";
+import BackToTop from "../components/BackToTop/BackToTop";
 
 
 
