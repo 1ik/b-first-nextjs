@@ -892,7 +892,7 @@ export default function Index({ featured, latestNews, bangladesh, politics, worl
         <BlockNews items={featured.slice(5)} title={""} />
         <Slider items={world.slice(0, 6)} title={"World"} />
         <BlockNews2 items={bangladesh.slice(0, 6)} latest={latestNews.slice(0, 5)} title={"Bangladesh"} />
-        <BlockNews3 items={politics} title={"Politics"} />
+        <BlockNews3 items={politics} latest={latestNews.slice(6, 11)} title={"Politics"} />
       </main>
       <BackToTop />
       <Footer />
