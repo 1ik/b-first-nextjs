@@ -5,6 +5,14 @@ import CardCaption from "apps/b-first/components/CardCaption/CardCaption";
 import BlockNews from "apps/b-first/components/BlockNews/BlockNews";
 import Footer from "apps/b-first/components/Footer/Footer";
 import BackToTop from "apps/b-first/components/BackToTop/BackToTop";
+import Head from "next/head";
+import { getImageUrl } from "libs/news-site-ui/src/lib/image_utils";
+import { FacebookShareButton, WhatsappShareButton } from "react-share";
+import { FaFacebookF, FaWhatsapp } from "react-icons/fa";
+import { MdContentCopy } from "react-icons/md";
+import { useRouter } from "next/router";
+import {useState} from "react";
+
 
 export function BreadCrumb({ category }: any) {
   return (
@@ -57,8 +65,26 @@ export function BreadCrumb({ category }: any) {
 }
 
 export function Index({ news, categoryNews, latestNews, featured }: any) {
+  const router = useRouter();
+  const [copied, setCopied] = useState(false);
+  function copyToClipboard() {
+    const currentUrl = window.location.href;
+    navigator.clipboard.writeText(currentUrl);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1000);
+  }
+
   return (
     <>
+      <Head>
+        <meta property="og:image" content={getImageUrl(news.featured_image, 1600, 900)} />
+        <meta property="og:title" content={news?.title} />
+        <meta property="og:description" content={news.brief} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:url" content={`https://bangladeshfirst.com${router.asPath}`} />
+        <meta property="og:type" content="article" />
+      </Head>
       <Header />
       <MobileMenu />
       <main id="content">
@@ -75,8 +101,21 @@ export function Index({ news, categoryNews, latestNews, featured }: any) {
                   </h2>
 
                   <div className="news-meta border-1 border-b mb-4 pb-3">
-                    <p className="font-semibold">{news.author}</p>
-                    <p className="font-light text-sm">{news.created_at}</p>
+                    <div className="flex justify-between">
+                      <div>
+                        <p className="font-semibold">{news.author}</p>
+                        <p className="font-light text-sm">{news.created_at}</p>
+                      </div>
+                      <div className="text-xl flex items-center gap-6">
+                        <FacebookShareButton url={`https://bangladeshfirst.com${router.asPath}`}>
+                          <FaFacebookF className="hover:text-black text-blue-600" />
+                        </FacebookShareButton>
+                        <WhatsappShareButton url={`https://bangladeshfirst.com${router.asPath}`}>
+                          <FaWhatsapp className="hover:text-black text-lime-500"></FaWhatsapp>
+                        </WhatsappShareButton>
+                        {copied ? <span className="text-sm">Copied!</span> : <button onClick={copyToClipboard}><MdContentCopy title="Copy to clipboard" className="hover:text-black text-red-600" /></button>}
+                      </div>
+                    </div>
                     <p className="text-sm italic pt-7">{news.brief}</p>
                   </div>
 
