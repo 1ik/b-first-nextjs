@@ -16,7 +16,10 @@ const FeaturedItems = ({ items }: { items: any[] }) => {
             {/*Start left cover*/}
             <div className="flex-shrink max-w-full w-full lg:w-1/2 pb-1 lg:pb-0 lg:pr-1">
               <div className="relative h-full overflow-hidden ">
-                <a href={newsUrl(items[0])} className="filter brightness-50 hover:grayscale contrast-100">
+                <a
+                  href={newsUrl(items[0])}
+                  className="filter bg-gradient-to-b from-black/10 to-black brightness-75 hover:grayscale contrast-100"
+                >
                   <img
                     className="max-w-full w-full mx-auto h-full object-cover"
                     src={getImageUrl(items[0].featured_image)}
@@ -48,7 +51,7 @@ const FeaturedItems = ({ items }: { items: any[] }) => {
                       <article key={index} className="flex-shrink max-w-full w-full sm:w-[calc(50%-2px)]">
                         <div className="relative h-full hover-img">
                           <a href={newsUrl(news)}>
-                            <div className="filter h-full brightness-50 hover:grayscale contrast-100">
+                            <div className="filter h-full bg-gradient-to-b from-black/5 to-black brightness-75 hover:grayscale contrast-100">
                               <img
                                 className="max-w-full object-cover h-full w-full mx-auto"
                                 src={getImageUrl(news.featured_image)}
