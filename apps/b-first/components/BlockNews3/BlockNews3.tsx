@@ -93,11 +93,8 @@ const BlockNews3 = ({ items, title }: { items: any[]; title: string }) => {
                             </div>
                             <div className="text-sm py-6 sticky">
                                 <div className="w-full text-center">
-                                    <a className="uppercase" href="#">
-                                        Advertisement
-                                    </a>
                                     <a href="#">
-                                        <img className="mx-auto" src="/img/ads/250.jpg" alt="advertisement area" />
+                                        <img className="mx-auto" src="/img/ads/walton-ads.jpeg" alt="advertisement area" />
                                     </a>
                                 </div>
                             </div>

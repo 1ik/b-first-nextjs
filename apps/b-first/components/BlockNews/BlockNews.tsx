@@ -26,11 +26,8 @@ const BlockNews = ({ items, title, showAd = true }: { items: any[]; title: strin
                                 <div className="w-full bg-gray-50 h-full">
                                     <div className="text-sm py-6 sticky">
                                         <div className="w-full text-center">
-                                            <a className="uppercase" href="#">
-                                                Advertisement
-                                            </a>
                                             <a href="#">
-                                                <img className="mx-auto" src="/img/ads/250.jpg" alt="advertisement area" />
+                                                <img className="mx-auto" src="/img/ads/ibbl.gif" alt="advertisement area" />
                                             </a>
                                         </div>
                                     </div>

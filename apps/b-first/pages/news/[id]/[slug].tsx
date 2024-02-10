@@ -86,9 +86,8 @@ export function Index({ news, categoryNews, latestNews, featured }: any) {
                   <div className="detail block mt-4 lg:pr-12">
                     <div dangerouslySetInnerHTML={{ __html: news.content }}></div>
                   </div>
-                  <div className="w-full border text-center p-6 flex flex-col justify-around">
-                    <p className="pb-3">ADVERTISEMENT</p>
-                    <img src="https://placehold.co/468x60" alt="Ad" />
+                  <div className="w-full border p-6">
+                    <img src="/img/ads/banner_ibbl.gif" alt="Ad" />
                   </div>
                   <div className="w-full block flex flex-col border-b my-6">
                     <BlockNews items={featured.slice(5)} title={"Featured"} showAd={false} />
