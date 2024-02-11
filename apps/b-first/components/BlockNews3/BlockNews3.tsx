@@ -3,7 +3,7 @@ import React from "react";
 import SquareGrid from "../SquareGrid/SquareGrid";
 import { newsUrl } from "libs/settings/analytics/src/lib/util";
 
-const BlockNews3 = ({ items, latest, title }: { items: any[]; title: string }) => {
+const BlockNews3 = ({ items, latest, title }: { items: any[]; title: string; latest: any[] }) => {
   if (!items?.length) {
     return <></>;
   }
