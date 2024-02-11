@@ -85,7 +85,7 @@ export function Index({ news, categoryNews, latestNews, featured }: any) {
         <meta property="og:url" content={`https://bangladeshfirst.com${router.asPath}`} />
         <meta property="og:type" content="article" />
       </Head>
-      <Header />
+      <Header category={news?.category.name} />
       <MobileMenu />
       <main id="content">
         <div className="bg-white mt-10">
@@ -113,7 +113,13 @@ export function Index({ news, categoryNews, latestNews, featured }: any) {
                         <WhatsappShareButton url={`https://bangladeshfirst.com${router.asPath}`}>
                           <FaWhatsapp className="hover:text-black text-lime-500"></FaWhatsapp>
                         </WhatsappShareButton>
-                        {copied ? <span className="text-sm">Copied!</span> : <button onClick={copyToClipboard}><MdContentCopy title="Copy to clipboard" className="hover:text-black text-red-600" /></button>}
+                        {copied ? (
+                          <span className="text-sm">Copied!</span>
+                        ) : (
+                          <button onClick={copyToClipboard}>
+                            <MdContentCopy title="Copy to clipboard" className="hover:text-black text-red-600" />
+                          </button>
+                        )}
                       </div>
                     </div>
                     <p className="text-sm italic pt-7">{news.brief}</p>

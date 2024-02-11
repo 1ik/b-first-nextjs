@@ -20,7 +20,7 @@ export default function Component( {categoryData}: any ) {
 
   return (
     <div className="text-gray-700 pt-9 sm:pt-10">
-      <Header />
+      <Header category={data[0].category?.name}/>
       <div className="md-container mx-auto">
         <SquareGrid items={data.slice(0, visible)} gridClass={className} />
         {visible < data.length && (
