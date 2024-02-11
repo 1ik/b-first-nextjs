@@ -3,7 +3,7 @@ import React from "react";
 import SquareGrid from "../SquareGrid/SquareGrid";
 import { newsUrl } from "libs/settings/analytics/src/lib/util";
 
-const BlockNews3 = ({ items, latest, title }: { items: any[]; title: string }) => {
+const BlockNews3 = ({ items, latest, title }: { items: any[]; title: string; latest: any[] }) => {
   if (!items?.length) {
     return <></>;
   }
@@ -27,7 +27,7 @@ const BlockNews3 = ({ items, latest, title }: { items: any[]; title: string }) =
                 <div className="flex-shrink max-w-full w-full px-3 pb-5">
                   <div className="relative hover-img max-h-98 overflow-hidden">
                     {/*thumbnail*/}
-                    <a href="#">
+                    <a href={newsUrl(items[0])}>
                       <img
                         className="max-w-full w-full mx-auto h-auto"
                         src={getImageUrl(items[0].featured_image)}
@@ -36,7 +36,7 @@ const BlockNews3 = ({ items, latest, title }: { items: any[]; title: string }) =
                     </a>
                     <div className="absolute px-5 pt-8 pb-5 bottom-0 w-full bg-gradient-cover">
                       {/*title*/}
-                      <a href="#">
+                      <a href={newsUrl(items[0])}>
                         <h2 className="text-3xl font-bold capitalize text-white mb-3">{items[0].title}</h2>
                       </a>
                       <p className="text-gray-100 hidden sm:inline-block">{items[0].brief}</p>
