@@ -3,7 +3,7 @@ import React from "react";
 import SquareGrid from "../SquareGrid/SquareGrid";
 import { newsUrl } from "libs/settings/analytics/src/lib/util";
 
-const BlockNews3 = ({ items, title }: { items: any[]; title: string }) => {
+const BlockNews3 = ({ items, latest, title }: { items: any[]; title: string }) => {
   if (!items?.length) {
     return <></>;
   }
@@ -64,7 +64,16 @@ const BlockNews3 = ({ items, title }: { items: any[]; title: string }) => {
                     <h2 className="text-lg font-bold">Most Popular</h2>
                   </div>
                   <ul className="post-number">
-                    <li className="border-b border-gray-100 hover:bg-gray-50">
+                    {latest.map((item) => {
+                      return (
+                        <li className="border-b border-gray-100 hover:bg-gray-50">
+                          <a className="text-lg font-bold px-6 py-3 flex flex-row items-center" href={newsUrl(item)}>
+                            {item.title}
+                          </a>
+                        </li>
+                      );
+                    })}
+                    {/* <li className="border-b border-gray-100 hover:bg-gray-50">
                       <a className="text-lg font-bold px-6 py-3 flex flex-row items-center" href="#">
                         Why the world would end without political polls
                       </a>
@@ -88,7 +97,7 @@ const BlockNews3 = ({ items, title }: { items: any[]; title: string }) => {
                       <a className="text-lg font-bold px-6 py-3 flex flex-row items-center" href="#">
                         ZF plans $14 billion autonomous vehicle push, concept van
                       </a>
-                    </li>
+                    </li> */}
                   </ul>
                 </div>
               </div>
