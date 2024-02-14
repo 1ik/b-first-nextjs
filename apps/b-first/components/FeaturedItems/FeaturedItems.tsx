@@ -44,7 +44,7 @@ const FeaturedItems = ({ items }: { items: any[] }) => {
             </div>
             {/*Start box news*/}
             <div className="flex-shrink max-w-full w-full lg:w-1/2">
-              <div className="flex gap-1 flex-row flex-wrap">
+              <div className="flex h-full gap-1 flex-row flex-wrap">
                 {items.map((news, index) => {
                   if (index >= 1 && index <= 4) {
                     return (
