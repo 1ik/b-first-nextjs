@@ -1,5 +1,5 @@
-import { newsUrl } from "../../../../libs/settings/analytics/src/lib/util";
 import { getImageUrl } from "../../image_utils";
+import { newsUrl } from "../../util";
 
 const FeaturedItems = ({ items }: { items: any[] }) => {
   if (!items.length) {

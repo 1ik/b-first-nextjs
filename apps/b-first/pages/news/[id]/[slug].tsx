@@ -10,8 +10,8 @@ import { useState } from "react";
 import { FaFacebookF, FaWhatsapp } from "react-icons/fa";
 import { MdContentCopy } from "react-icons/md";
 import { FacebookShareButton, WhatsappShareButton } from "react-share";
-import { newsUrl } from "../../../../../libs/settings/analytics/src/lib/util";
 import { getImageUrl } from "../../../image_utils";
+import { newsUrl } from "../../../util";
 
 export function BreadCrumb({ category }: any) {
   return (
