@@ -1,7 +1,6 @@
 import { getImageUrl } from "../../../../libs/news-site-ui/src/lib/image_utils";
 import { newsUrl } from "../../../../libs/settings/analytics/src/lib/util";
 import React from "react";
-import MaxText from "../MaxText/MaxText";
 
 const SquareGrid = ({ items, gridClass }: { items: any[]; gridClass: string }) => {
   return (
@@ -10,7 +9,7 @@ const SquareGrid = ({ items, gridClass }: { items: any[]; gridClass: string }) =
         {items.map((item, idx) => {
           return (
             <div
-              className={`flex-shrink max-w-full w-full ${gridClass} px-3 pb-3 pt-3 sm:pt-0 border-b-2 sm:border-b-0 border-dotted border-gray-100`}
+              key={idx} className={`flex-shrink max-w-full w-full ${gridClass} px-3 pb-3 pt-3 sm:pt-0 border-b-2 sm:border-b-0 border-dotted border-gray-100`}
             >
               <div className="flex h-full flex-row sm:flex-col hover-img">
                 <div className="w-[100%] hidden md:block">
