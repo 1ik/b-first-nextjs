@@ -1,6 +1,5 @@
-import { getImageUrl } from "../../../../libs/news-site-ui/src/lib/image_utils";
 import { newsUrl } from "../../../../libs/settings/analytics/src/lib/util";
-import React from "react";
+import { getImageUrl } from "../../image_utils";
 
 const FeaturedItems = ({ items }: { items: any[] }) => {
   if (!items.length) {

@@ -1,7 +1,6 @@
-import { getImageUrl } from "../../../../libs/news-site-ui/src/lib/image_utils";
-import { newsUrl } from "../../../../libs/settings/analytics/src/lib/util";
 import React from "react";
-import MaxText from "../MaxText/MaxText";
+import { getImageUrl } from "../../image_utils";
+import { newsUrl } from "../../util";
 
 const Card = (props: { item: any }) => {
   const { item } = props;
