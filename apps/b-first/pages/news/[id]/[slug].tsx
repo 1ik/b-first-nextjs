@@ -1,18 +1,17 @@
-import Header from "apps/b-first/components/Header/Header";
-import { newsUrl } from "../../../../../libs/settings/analytics/src/lib/util";
-import MobileMenu from "apps/b-first/components/MobileMenu/MobileMenu";
-import CardCaption from "apps/b-first/components/CardCaption/CardCaption";
-import BlockNews from "apps/b-first/components/BlockNews/BlockNews";
-import Footer from "apps/b-first/components/Footer/Footer";
 import BackToTop from "apps/b-first/components/BackToTop/BackToTop";
+import BlockNews from "apps/b-first/components/BlockNews/BlockNews";
+import CardCaption from "apps/b-first/components/CardCaption/CardCaption";
+import Footer from "apps/b-first/components/Footer/Footer";
+import Header from "apps/b-first/components/Header/Header";
+import MobileMenu from "apps/b-first/components/MobileMenu/MobileMenu";
 import Head from "next/head";
-import { getImageUrl } from "libs/news-site-ui/src/lib/image_utils";
-import { FacebookShareButton, WhatsappShareButton } from "react-share";
+import { useRouter } from "next/router";
+import { useState } from "react";
 import { FaFacebookF, FaWhatsapp } from "react-icons/fa";
 import { MdContentCopy } from "react-icons/md";
-import { useRouter } from "next/router";
-import {useState} from "react";
-
+import { FacebookShareButton, WhatsappShareButton } from "react-share";
+import { getImageUrl } from "../../../image_utils";
+import { newsUrl } from "../../../util";
 
 export function BreadCrumb({ category }: any) {
   return (

@@ -1,5 +1,5 @@
-import { getImageUrl } from "../../../../libs/news-site-ui/src/lib/image_utils";
-import { newsUrl } from "../../../../libs/settings/analytics/src/lib/util";
+import { getImageUrl } from "../../image_utils";
+import { newsUrl } from "../../util";
 import React from "react";
 
 const SquareGrid = ({ items, gridClass }: { items: any[]; gridClass: string }) => {
