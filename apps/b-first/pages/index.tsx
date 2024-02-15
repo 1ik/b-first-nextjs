@@ -1,5 +1,3 @@
-import { getImageUrl } from "../../../libs/news-site-ui/src/lib/image_utils";
-import { newsUrl } from "../../../libs/settings/analytics/src/lib/util";
 import BackToTop from "../components/BackToTop/BackToTop";
 import BlockNews from "../components/BlockNews/BlockNews";
 import BlockNews2 from "../components/BlockNews2/BlockNews2";

@@ -1,7 +1,7 @@
-import { getImageUrl } from "../../../../libs/news-site-ui/src/lib/image_utils";
+import { getImageUrl } from "../../image_utils";
 import React from "react";
 import SquareGrid from "../SquareGrid/SquareGrid";
-import { newsUrl } from "libs/settings/analytics/src/lib/util";
+import { newsUrl } from "../../util";
 
 const BlockNews3 = ({ items, latest, title }: { items: any[]; title: string; latest: any[] }) => {
   if (!items?.length) {
