@@ -1,1 +1,0 @@
-export const newsUrl = (news: any) => `/news/${news.id}/${news.slug}`;
