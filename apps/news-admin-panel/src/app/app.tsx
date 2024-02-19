@@ -1,9 +1,10 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 
-import { MdChevronRight } from "react-icons/md";
+import { useState } from "react";
 import { IoMenuSharp } from "react-icons/io5";
+import { MdChevronRight } from "react-icons/md";
 import { Route, Routes, useLocation } from "react-router-dom";
-import React, { useState } from "react";
+import { AddEditAuthorLazy, AuthorsListLazy } from "./internal/authors";
 import { AddEditLazy, ListLazy } from "./internal/categories";
 
 export const NavBar = () => {
@@ -38,6 +39,7 @@ export const NavBar = () => {
 
 const _links = [
   { name: "Categories", href: "/categories", isActive: true },
+  { name: "Authors", href: "/authors" },
   { name: "Tags", href: "/tags" },
   { name: "Stories", href: "/stories" },
 ];
@@ -95,6 +97,8 @@ export function App() {
             <Routes>
               <Route path="/categories" element={<ListLazy />} />
               <Route path="/categories/add" element={<AddEditLazy />} />
+              <Route path="/authors" element={<AuthorsListLazy />} />
+              <Route path="/authors/add" element={<AddEditAuthorLazy />} />
             </Routes>
           </div>
         </div>
