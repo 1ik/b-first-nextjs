@@ -1,51 +1,57 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Breadcrumb, DeleteAction, EditAction } from "../../components";
 
 export default function List() {
-  const categories = [
-    {
-      id: 1,
-      name: "World",
-      createdAt: "Feb 18 2024 10:12 AM",
-      updatedAt: "Feb 18 2024 10:12 AM",
-    },
-    {
-      id: 2,
-      name: "Bangladesh",
-      createdAt: "Feb 18 2024 10:12 AM",
-      updatedAt: "Feb 18 2024 10:12 AM",
-    },
-    {
-      id: 3,
-      name: "Sports",
-      createdAt: "Feb 18 2024 10:12 AM",
-      updatedAt: "Feb 18 2024 10:12 AM",
-    },
-    {
-      id: 5,
-      name: "Economy",
-      createdAt: "Feb 18 2024 10:12 AM",
-      updatedAt: "Feb 18 2024 10:12 AM",
-    },
-    {
-      id: 6,
-      name: "Feature",
-      createdAt: "Feb 18 2024 10:12 AM",
-      updatedAt: "Feb 18 2024 10:12 AM",
-    },
-    {
-      id: 7,
-      name: "Politics",
-      createdAt: "Feb 18 2024 10:12 AM",
-      updatedAt: "Feb 18 2024 10:12 AM",
-    },
-    {
-      id: 8,
-      name: "Education",
-      createdAt: "Feb 18 2024 10:12 AM",
-      updatedAt: "Feb 18 2024 10:12 AM",
-    },
-  ];
+  const [categories, setCategories] = useState([]);
+
+  const handleDeleteCategory = async function (id: number) {
+    if (!window.confirm("Do you want to delete the category ?")) return;
+    try {
+      const response = await fetch(`https://backend.bangladeshfirst.com/api/v1/categories/${id}`, {
+        method: "DELETE",
+        headers: { Authorization: "Bearer 80|Ow72oPI9zesAOuEvWoGFAGUzYnJ3BIueZdSf5YVhbb69ed1b" },
+      });
+      if (!response.ok) throw new Error("Could not delete the author");
+      setCategories(categories.filter(category => ((category as { id: number }).id) !== id));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("https://backend.bangladeshfirst.com/api/v1/categories", {
+          method: "GET",
+          headers: { Authorization: "Bearer 80|Ow72oPI9zesAOuEvWoGFAGUzYnJ3BIueZdSf5YVhbb69ed1b" },
+        });
+        if (!response.ok) {
+          throw new Error("Failed to fetch data");
+        }
+        const data = await response.json();
+        setCategories(data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const dateFormatter = (dateString: string) => {
+    const date = new Date(dateString);
+
+    const formattedDate = new Intl.DateTimeFormat("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      hour12: true,
+    }).format(date);
+    return formattedDate.replace(/,/g, "");
+  };
+
   return (
     <div className="overflow-x-auto flex flex-col">
       <div className="inline-flex h-10 justify-between items-center px-4 py-2 w-full border-b">
@@ -69,14 +75,18 @@ export default function List() {
         </thead>
         <tbody>
           {categories.map((category) => (
-            <tr key={category.id}>
-              <td>{category.id}</td>
-              <td>{category.name}</td>
-              <td>{category.createdAt}</td>
-              <td>{category.updatedAt}</td>
+            <tr key={(category as { id: number }).id}>
+              <td>{(category as { id: number }).id}</td>
+              <td>{(category as { name: string }).name}</td>
+              <td>{dateFormatter((category as { created_at: string }).created_at)}</td>
+              <td>{dateFormatter((category as { updated_at: string }).updated_at)}</td>
               <td className="flex flex-row justify-end gap-2">
-                <EditAction />
-                <DeleteAction />
+                <button>
+                  <EditAction />
+                </button>
+                <button onClick={() => handleDeleteCategory((category as { id: number }).id)}>
+                  <DeleteAction />
+                </button>
               </td>
             </tr>
           ))}
