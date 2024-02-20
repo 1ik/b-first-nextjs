@@ -145,7 +145,7 @@ export function Index({ news, categoryNews, latestNews, featured }: any) {
                       ?.filter((m: any) => m.id != news.id)
                       .slice(0, 5)
                       .map((n: any, idx: any) => (
-                        <div className="flex flex-col border-b pb-2 hover:bg-gray-50">
+                        <div key={idx} className="flex flex-col border-b pb-2 hover:bg-gray-50">
                           <a href={newsUrl(n)} className="hover:bg-gray-100">
                             <h4 className="font-extrabold text-xl">{n.title}</h4>
                             <p className="font-light ">{n.brief}</p>
@@ -161,7 +161,7 @@ export function Index({ news, categoryNews, latestNews, featured }: any) {
                       ?.filter((m: any) => m.id != news.id)
                       .splice(0, 10)
                       .map((n: any, idx: any) => (
-                        <div className="flex flex-col border-b pb-2 hover:bg-gray-50">
+                        <div key={idx} className="flex flex-col border-b pb-2 hover:bg-gray-50">
                           <a href={newsUrl(n)} className="hover:bg-gray-100">
                             <h4 className="font-extrabold text-xl">{n.title}</h4>
                             <p className="font-light ">{n.brief}</p>
