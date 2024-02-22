@@ -85,7 +85,7 @@ export function Index({ news, categoryNews, latestNews, featured }: any) {
         <meta property="og:type" content="article" />
       </Head>
       <Header category={news?.category.name} />
-      <MobileMenu />
+      <MobileMenu category={news?.category.name} />
       <main id="content">
         <div className="bg-white mt-10">
           <div className="xl:container mx-auto px-3 sm:px-4 xl:px-2">
