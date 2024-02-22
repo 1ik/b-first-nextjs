@@ -1,6 +1,6 @@
 import React from 'react';
 
-const MobileMenu = () => {
+const MobileMenu = ({category}: {category:string}) => {
     return (
         <>
             {/* Mobile menu */}
@@ -38,24 +38,54 @@ const MobileMenu = () => {
                         {/*navigation*/}
                         <nav className="relative flex flex-wrap">
                             <ul id="side-menu" className="w-full float-none flex flex-col">
-                                <li className="relative">
+                                <li className={`relative ${category === "Bangladesh" ? "border-b-2 border-red-700" : null}`}>
                                     <a href="/Bangladesh" className="block py-2 px-5 border-b border-gray-100 hover:bg-gray-50">
                                         Bangladesh
                                     </a>
                                 </li>
-                                <li className="relative">
+                                <li className={`relative ${category === "World" ? "border-b-2 border-red-700" : null}`}>
                                     <a href="/World" className="block py-2 px-5 border-b border-gray-100 hover:bg-gray-50">
                                         World
                                     </a>
                                 </li>
-                                <li className="relative">
+                                <li className={`relative ${category === "Politics" ? "border-b-2 border-red-700" : null}`}>
                                     <a href="/Politics" className="block py-2 px-5 border-b border-gray-100 hover:bg-gray-50">
                                         Politics
                                     </a>
                                 </li>
-                                <li className="relative">
+                                <li className={`relative ${category === "Sports" ? "border-b-2 border-red-700" : null}`}>
                                     <a href="/Sports" className="block py-2 px-5 border-b border-gray-100 hover:bg-gray-50">
                                         Sports
+                                    </a>
+                                </li>
+                                <li className={`relative ${category === "Corporates" ? "border-b-2 border-red-700" : null}`}>
+                                    <a href="/Corporates" className="block py-2 px-5 border-b border-gray-100 hover:bg-gray-50">
+                                        Corporates
+                                    </a>
+                                </li>
+                                <li className={`relative ${category === "Tech" ? "border-b-2 border-red-700" : null}`}>
+                                    <a href="/Tech" className="block py-2 px-5 border-b border-gray-100 hover:bg-gray-50">
+                                        Tech
+                                    </a>
+                                </li>
+                                <li className={`relative ${category === "Opinion" ? "border-b-2 border-red-700" : null}`}>
+                                    <a href="/Opinion" className="block py-2 px-5 border-b border-gray-100 hover:bg-gray-50">
+                                        Opinion
+                                    </a>
+                                </li>
+                                <li className={`relative ${category === "Features" ? "border-b-2 border-red-700" : null}`}>
+                                    <a href="/Features" className="block py-2 px-5 border-b border-gray-100 hover:bg-gray-50">
+                                        Features
+                                    </a>
+                                </li>
+                                <li className={`relative ${category === "Lifestyle" ? "border-b-2 border-red-700" : null}`}>
+                                    <a href="/Lifestyle" className="block py-2 px-5 border-b border-gray-100 hover:bg-gray-50">
+                                        Lifestyle
+                                    </a>
+                                </li>
+                                <li className={`relative ${category === "Education" ? "border-b-2 border-red-700" : null}`}>
+                                    <a href="/Education" className="block py-2 px-5 border-b border-gray-100 hover:bg-gray-50">
+                                        Education
                                     </a>
                                 </li>
                             </ul>

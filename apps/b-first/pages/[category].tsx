@@ -3,6 +3,7 @@ import Header from '../components/Header/Header';
 import SquareGrid from '../components/SquareGrid/SquareGrid';
 import Footer from '../components/Footer/Footer';
 import BackToTop from '../components/BackToTop/BackToTop';
+import MobileMenu from '../components/MobileMenu/MobileMenu';
 
 export default function Component( {categoryData}: any ) {
   const [visible, setVisible] = useState(15);
@@ -21,6 +22,7 @@ export default function Component( {categoryData}: any ) {
   return (
     <div className="text-gray-700 pt-9 sm:pt-10">
       <Header category={data[0].category?.name}/>
+      <MobileMenu category={data[0].category?.name}/>
       <div className="md-container mx-auto">
         <SquareGrid items={data.slice(0, visible)} gridClass={className} />
         {visible < data.length && (
