@@ -441,9 +441,9 @@ export default function AddEdit() {
                                 const data = await response.json();
                                 console.log(data);
                                 callback(`${baseUrl}/storage/${data.url}`, {
-                                  title: "test",
-                                  width: "1280",
-                                  height: "720",
+                                  // title: "test",
+                                  // width: "1280",
+                                  // height: "720",
                                 });
                               } catch (error) {
                                 console.log(error);
