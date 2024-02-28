@@ -1,1 +1,1 @@
-export const newsUrl = (news: any) => `/news/${news.id}/${news.slug}`;
+export const newsUrl = (news: any) => `/news/${news.id}/${news.slug.replace(/[^\w\s-]/g, "")}`;
