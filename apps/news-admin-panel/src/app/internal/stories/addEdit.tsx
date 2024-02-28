@@ -132,7 +132,7 @@ export default function AddEdit() {
     const newStory = {
       title: data.headline,
       meta: {
-        image_url: featuredImgURL,
+        featured_image: featuredImgURL,
         newsType: data.newsType,
         shoulder: data.shoulder,
         subhead: data.subhead,
