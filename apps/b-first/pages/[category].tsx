@@ -4,6 +4,7 @@ import SquareGrid from '../components/SquareGrid/SquareGrid';
 import Footer from '../components/Footer/Footer';
 import BackToTop from '../components/BackToTop/BackToTop';
 import MobileMenu from '../components/MobileMenu/MobileMenu';
+import CustomError from '../components/CustomError/CustomError';
 
 export default function Component( {categoryData}: any ) {
   const [visible, setVisible] = useState(15);
@@ -11,6 +12,10 @@ export default function Component( {categoryData}: any ) {
   const handleShowMore = () => {
     setVisible(visible + 15);
   };
+
+  if(!Object.keys(categoryData).length) {
+    return <CustomError/>
+  }
 
   if (!categoryData) {
     return <div>Loading...</div>;
