@@ -124,31 +124,31 @@ export default function StoryPreview() {
 
   const handleUpdateStory = async function (data: any) {
     /* ==== errors handling ==== */
-    if (!body) {
-      return setErr((cur) => ({ ...cur, body: "Body is required" }));
-    } else {
-      setErr((cur) => ({ ...cur, body: "" }));
-    }
-    if (!selectedTags.length) {
-      return setErr((cur) => ({ ...cur, tags: "Tag is required" }));
-    } else {
-      setErr((cur) => ({ ...cur, tags: "" }));
-    }
-    if (!selectedAuthors.length) {
-      return setErr((cur) => ({ ...cur, authors: "Author is required" }));
-    } else {
-      setErr((cur) => ({ ...cur, authors: "" }));
-    }
-    if (!selectedCategories.length) {
-      return setErr((cur) => ({ ...cur, categories: "Category is required" }));
-    } else {
-      setErr((cur) => ({ ...cur, categories: "" }));
-    }
-    if (!featuredImg) {
-      return setErr((cur) => ({ ...cur, featuredImg: "Featured Image is required" }));
-    } else {
-      setErr((cur) => ({ ...cur, featuredImg: "" }));
-    }
+    // if (!body) {
+    //   return setErr((cur) => ({ ...cur, body: "Body is required" }));
+    // } else {
+    //   setErr((cur) => ({ ...cur, body: "" }));
+    // }
+    // if (!selectedTags.length) {
+    //   return setErr((cur) => ({ ...cur, tags: "Tag is required" }));
+    // } else {
+    //   setErr((cur) => ({ ...cur, tags: "" }));
+    // }
+    // if (!selectedAuthors.length) {
+    //   return setErr((cur) => ({ ...cur, authors: "Author is required" }));
+    // } else {
+    //   setErr((cur) => ({ ...cur, authors: "" }));
+    // }
+    // if (!selectedCategories.length) {
+    //   return setErr((cur) => ({ ...cur, categories: "Category is required" }));
+    // } else {
+    //   setErr((cur) => ({ ...cur, categories: "" }));
+    // }
+    // if (!featuredImg) {
+      //   return setErr((cur) => ({ ...cur, featuredImg: "Featured Image is required" }));
+      // } else {
+        //   setErr((cur) => ({ ...cur, featuredImg: "" }));
+        // }
 
     /* ======= updating story ======== */
     const updateStory = {
@@ -224,6 +224,8 @@ export default function StoryPreview() {
       setSelectedAuthors((data as any).storyData?.story.authors);
       setSelectedCategories((data as any).storyData?.story.categories);
       setImagesList((data as any).imagesList.media_images.data);
+      setBody((data as any).storyData.story.content)
+      setFeaturedImgURL((data as any).storyData.story.meta.featured_image)
       setLoading(false);
     })();
   }, []);
@@ -344,7 +346,7 @@ export default function StoryPreview() {
                   <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus:ring-gray-300 w-full pl-2">
                     <input
                     defaultValue={(story as {story:any}).story.title}
-                      {...register("headline", { required: "Headline is required" })}
+                      {...register("headline")}
                       type="text"
                       name="headline"
                       id="headline"
@@ -421,7 +423,7 @@ export default function StoryPreview() {
                 <div className="mt-2">
                   <textarea
                   defaultValue={(story as {story:any}).story.meta.intro}
-                    {...register("intro", { required: "Intro is required" })}
+                    {...register("intro")}
                     id="intro"
                     name="intro"
                     rows={3}
@@ -556,7 +558,7 @@ export default function StoryPreview() {
                   Browse
                 </button>
                 <p className="text-sm text-red-700">{err.featuredImg}</p>
-                <img className='md:w-1/2 w-full mt-4' src={`https://bfirst.sgp1.cdn.digitaloceanspaces.com/${!featuredImgURL ?(story as {story:any}).story.meta.featured_image:featuredImgURL}`} alt="" />
+                <img className='md:w-1/2 w-full mt-4' src={`https://bfirst.sgp1.cdn.digitaloceanspaces.com/${featuredImgURL}`} alt="" />
               </div>
             </div>
           </div>

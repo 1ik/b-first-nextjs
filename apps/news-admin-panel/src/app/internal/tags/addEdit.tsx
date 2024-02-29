@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Breadcrumb } from "../../components";
 import { useNavigate } from "react-router-dom";
+import { token } from "../../token_utils";
 
 export default function AddEdit() {
   const [tagName, setTagName] = useState("");
@@ -14,7 +15,7 @@ export default function AddEdit() {
       const response = await fetch("https://backend.bangladeshfirst.com/api/v1/tags", {
         method: "POST",
         headers: {
-          Authorization: "Bearer 3|KgHSFiBKye5bfM73JPi5VJDo6wNrHAKsUtys5Dme11e09b6a",
+          Authorization: token,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({

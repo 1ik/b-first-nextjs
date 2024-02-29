@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { Breadcrumb } from "../../components";
 import { useNavigate } from "react-router";
+import { token } from "../../token_utils";
 
 export default function List() {
   const [stories, setStories] = useState([]);
+  const [totalPage, setTotalPage] = useState(1);
 
   // pagination
   const [currentPage, setCurrentPage] = useState(1);
@@ -14,13 +16,14 @@ export default function List() {
       try {
         const response = await fetch(`https://backend.bangladeshfirst.com/api/v1/stories?page=${currentPage}&size=20`, {
           method: "GET",
-          headers: { Authorization: "Bearer 3|KgHSFiBKye5bfM73JPi5VJDo6wNrHAKsUtys5Dme11e09b6a" },
+          headers: { Authorization: token },
         });
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
         const data = await response.json();
         setStories(data.data);
+        setTotalPage(data.meta.last_page);
       } catch (error) {
         console.log(error);
       }
@@ -32,12 +35,16 @@ export default function List() {
   const navigate = useNavigate();
 
   const handleNextPage = () => {
-    setCurrentPage(currentPage + 1);
+    setCurrentPage((curr)=> curr + 1);
   };
 
   const handlePrevPage = () => {
-    setCurrentPage(currentPage - 1);
+    setCurrentPage((curr)=> curr - 1);
   };
+
+  const handleLastPage = () => {
+    setCurrentPage(totalPage);
+  }
 
   const dateFormatter = (dateString: string) => {
     const date = new Date(dateString);
@@ -93,9 +100,10 @@ export default function List() {
           ))}
         </tbody>
       </table>
-      <div className="flex justify-between w-1/3 m-auto bg-gray-300 mb-10 mt-5 p-2 rounded font-semibold">
-          <button className="hover:text-white" onClick={handlePrevPage} disabled={currentPage === 1}>Previous Page</button>
-          <button className="hover:text-white" onClick={handleNextPage}>Next Page</button>
+      <div className="flex justify-between w-1/3 m-auto  mb-10 mt-5 p-2 font-semibold">
+          <button className="hover:text-white bg-gray-300 px-2 py-1 rounded w-32" onClick={handlePrevPage} disabled={currentPage === 1}>Previous Page</button>
+          <button className="hover:text-white bg-gray-300 px-2 py-1 rounded w-32" onClick={handleNextPage} disabled={currentPage === totalPage}>Next Page</button>
+          <button className="hover:text-white bg-gray-300 px-2 py-1 rounded w-32" onClick={handleLastPage} disabled={currentPage === totalPage}>Last Page</button>
         </div>
     </div>
   );

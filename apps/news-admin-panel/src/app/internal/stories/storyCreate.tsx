@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { Breadcrumb } from "../../components";
+import { token } from "../../token_utils";
 
 const baseUrl = "https://backend.bangladeshfirst.com";
-const token = "Bearer 3|KgHSFiBKye5bfM73JPi5VJDo6wNrHAKsUtys5Dme11e09b6a"
 
 const fetchData = async function () {
   try {
@@ -36,7 +36,7 @@ const fetchData = async function () {
   }
 };
 
-export default function AddEdit() {
+export default function StoryCreate() {
   const [mediaModalToShow, setMediaModalToShow] = useState("upload");
   const navigate = useNavigate();
 
