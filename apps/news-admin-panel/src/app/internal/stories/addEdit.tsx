@@ -5,19 +5,21 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { Breadcrumb } from "../../components";
 
+const baseUrl = "https://backend.bangladeshfirst.com";
+
 const fetchData = async function () {
   try {
     const [authorsRes, categoriesRes, tagsRes, imagesRes] = await Promise.all([
-      fetch(`https://backend.bangladeshfirst.com/api/v1/authors`, {
+      fetch(`${baseUrl}/api/v1/authors`, {
         headers: { Authorization: "Bearer 80|Ow72oPI9zesAOuEvWoGFAGUzYnJ3BIueZdSf5YVhbb69ed1b" },
       }),
-      fetch(`https://backend.bangladeshfirst.com/api/v1/categories`, {
+      fetch(`${baseUrl}/api/v1/categories`, {
         headers: { Authorization: "Bearer 80|Ow72oPI9zesAOuEvWoGFAGUzYnJ3BIueZdSf5YVhbb69ed1b" },
       }),
-      fetch(`https://backend.bangladeshfirst.com/api/v1/tags`, {
+      fetch(`${baseUrl}/api/v1/tags`, {
         headers: { Authorization: "Bearer 80|Ow72oPI9zesAOuEvWoGFAGUzYnJ3BIueZdSf5YVhbb69ed1b" },
       }),
-      fetch(`https://backend.bangladeshfirst.com/api/v1/media-image-list`, {
+      fetch(`${baseUrl}/api/v1/media-image-list`, {
         headers: { Authorization: "Bearer 80|Ow72oPI9zesAOuEvWoGFAGUzYnJ3BIueZdSf5YVhbb69ed1b" },
       }),
     ]);
@@ -81,7 +83,7 @@ export default function AddEdit() {
 
   const handleAddTag = async function () {
     try {
-      const response = await fetch("https://backend.bangladeshfirst.com/api/v1/tags", {
+      const response = await fetch(`${baseUrl}/api/v1/tags`, {
         method: "POST",
         headers: {
           Authorization: "Bearer 80|Ow72oPI9zesAOuEvWoGFAGUzYnJ3BIueZdSf5YVhbb69ed1b",
@@ -130,7 +132,7 @@ export default function AddEdit() {
     const newStory = {
       title: data.headline,
       meta: {
-        image_url: featuredImgURL,
+        featured_image: featuredImgURL,
         newsType: data.newsType,
         shoulder: data.shoulder,
         subhead: data.subhead,
@@ -144,7 +146,7 @@ export default function AddEdit() {
     };
 
     try {
-      const response = await fetch("https://backend.bangladeshfirst.com/api/v1/stories", {
+      const response = await fetch(`${baseUrl}/api/v1/stories`, {
         method: "POST",
         headers: {
           Authorization: "Bearer 80|Ow72oPI9zesAOuEvWoGFAGUzYnJ3BIueZdSf5YVhbb69ed1b",
@@ -170,7 +172,7 @@ export default function AddEdit() {
     formData.append("image", featuredImg);
 
     try {
-      const response = await fetch("https://backend.bangladeshfirst.com/api/v1/media-upload-image", {
+      const response = await fetch(`${baseUrl}/api/v1/media-upload-image`, {
         method: "POST",
         headers: {
           Authorization: "Bearer 80|Ow72oPI9zesAOuEvWoGFAGUzYnJ3BIueZdSf5YVhbb69ed1b",
@@ -275,12 +277,7 @@ export default function AddEdit() {
                 <label htmlFor="news-type" className="block text-sm font-medium leading-6 text-gray-900">
                   News Type*
                 </label>
-                <select
-                  {...register("newsType", { required: "News type is required" })}
-                  className="block rounded-md border border-gray-300"
-                  name="news-type"
-                  id="news-type"
-                >
+                <select {...register("newsType")} className="block rounded-md border border-gray-300">
                   <option value="print">Print</option>
                   <option value="online">Online</option>
                 </select>
@@ -364,6 +361,39 @@ export default function AddEdit() {
                 </div>
               </div>
 
+              {/* ==== author ==== */}
+              <div className="col-span-4">
+                <label htmlFor="author" className="block text-sm font-medium leading-6 text-gray-900">
+                  Author*
+                </label>
+                <Multiselect
+                  options={authors}
+                  displayValue="name"
+                  avoidHighlightFirstOption={true}
+                  onSelect={(list) => setSelectedAuthors(list)}
+                  onRemove={(list) => setSelectedAuthors(list)}
+                  placeholder="Select Authors"
+                />
+                <p className="text-sm text-red-700">{err.authors}</p>
+              </div>
+
+              {/* ==== intro ===== */}
+              <div className="col-span-4 sm:col-span-full">
+                <label htmlFor="intro" className="block text-sm font-medium leading-6 text-gray-900">
+                  Intro*
+                </label>
+                <div className="mt-2">
+                  <textarea
+                    {...register("intro", { required: "Intro is required" })}
+                    id="intro"
+                    name="intro"
+                    rows={3}
+                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-300 sm:text-sm sm:leading-6"
+                  />
+                </div>
+                <p className="text-sm text-red-700">{errors.intro && (errors.intro.message as string)}</p>
+              </div>
+
               {/* ==== text editor ==== */}
               <div className="col-span-4 sm:col-span-full">
                 <label htmlFor="body" className="block text-sm font-medium leading-6 text-gray-900">
@@ -382,6 +412,48 @@ export default function AddEdit() {
                           "anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss",
                         toolbar:
                           "undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat",
+                        file_picker_callback: (callback, value, meta) => {
+                          const input = document.createElement("input");
+                          input.setAttribute("type", "file");
+                          input.setAttribute("accept", "image/*");
+
+                          input.addEventListener("change", (e: any) => {
+                            if (!e.target) return;
+                            const file = e.target.files[0];
+
+                            const reader = new FileReader();
+
+                            reader.addEventListener("load", async function () {
+                              const formData = new FormData();
+                              formData.append("image", file);
+
+                              try {
+                                const response = await fetch(`${baseUrl}/api/v1/media-upload-image`, {
+                                  method: "POST",
+                                  headers: {
+                                    Authorization: "Bearer 80|Ow72oPI9zesAOuEvWoGFAGUzYnJ3BIueZdSf5YVhbb69ed1b",
+                                  },
+                                  body: formData,
+                                });
+
+                                if (!response.ok) throw new Error("Could not upload image");
+
+                                const data = await response.json();
+                                console.log(data);
+                                callback(`${baseUrl}/storage/${data.url}`, {
+                                  // title: "test",
+                                  // width: "1280",
+                                  // height: "720",
+                                });
+                              } catch (error) {
+                                console.log(error);
+                              }
+                            });
+                            reader.readAsDataURL(file);
+                          });
+
+                          input.click();
+                        },
                         tinycomments_mode: "embedded",
                         tinycomments_author: "Author name",
                         mergetags_list: [
@@ -393,23 +465,6 @@ export default function AddEdit() {
                   </div>
                 </div>
                 <p className="text-sm text-red-700">{err.body}</p>
-              </div>
-
-              {/* ==== intro ===== */}
-              <div className="col-span-4 sm:col-span-full">
-                <label htmlFor="intro" className="block text-sm font-medium leading-6 text-gray-900">
-                  Intro*
-                </label>
-                <div className="mt-2">
-                  <textarea
-                    {...register("intro", { required: "Intro is required" })}
-                    id="intro"
-                    name="intro"
-                    rows={3}
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-300 sm:text-sm sm:leading-6"
-                  />
-                </div>
-                <p className="text-sm text-red-700">{errors.intro && (errors.intro.message as string)}</p>
               </div>
 
               {/* ==== tags ==== */}
@@ -442,22 +497,6 @@ export default function AddEdit() {
                   )}
                 </div>
                 <p className="text-sm text-red-700">{err.tags}</p>
-              </div>
-
-              {/* ==== author ==== */}
-              <div className="col-span-4">
-                <label htmlFor="author" className="block text-sm font-medium leading-6 text-gray-900">
-                  Author*
-                </label>
-                <Multiselect
-                  options={authors}
-                  displayValue="name"
-                  avoidHighlightFirstOption={true}
-                  onSelect={(list) => setSelectedAuthors(list)}
-                  onRemove={(list) => setSelectedAuthors(list)}
-                  placeholder="Select Authors"
-                />
-                <p className="text-sm text-red-700">{err.authors}</p>
               </div>
 
               {/* ==== category ==== */}
