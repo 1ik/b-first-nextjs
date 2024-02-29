@@ -6,7 +6,7 @@ import { MdChevronRight } from "react-icons/md";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { AddEditAuthorLazy, AuthorsListLazy } from "./internal/authors";
 import { AddEditLazy, ListLazy } from "./internal/categories";
-import { AddEditStoriesLazy, StoriesListLazy } from "./internal/stories";
+import { AddEditStoriesLazy, StoriesListLazy, StoryPreviewLazy } from "./internal/stories";
 import { AddEditTagsLazy, TagsListLazy } from "./internal/tags";
 
 export const NavBar = () => {
@@ -105,6 +105,8 @@ export function App() {
               <Route path="/stories/create-story" element={<AddEditStoriesLazy />} />
               <Route path="/tags" element={<TagsListLazy/>} />
               <Route path="/tags/add" element={<AddEditTagsLazy />} />
+              <Route path="/stories/:storyId" element={<StoryPreviewLazy />} />
+              
             </Routes>
           </div>
         </div>

@@ -14,7 +14,7 @@ export default function AddEdit() {
       const response = await fetch("https://backend.bangladeshfirst.com/api/v1/tags", {
         method: "POST",
         headers: {
-          Authorization: "Bearer 80|Ow72oPI9zesAOuEvWoGFAGUzYnJ3BIueZdSf5YVhbb69ed1b",
+          Authorization: "Bearer 3|KgHSFiBKye5bfM73JPi5VJDo6wNrHAKsUtys5Dme11e09b6a",
           "Content-Type": "application/json",
         },
         body: JSON.stringify({

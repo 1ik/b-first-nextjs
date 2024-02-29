@@ -9,7 +9,7 @@ export default function List() {
     try {
       const response = await fetch(`https://backend.bangladeshfirst.com/api/v1/tags/${id}`, {
         method: "DELETE",
-        headers: { Authorization: "Bearer 80|Ow72oPI9zesAOuEvWoGFAGUzYnJ3BIueZdSf5YVhbb69ed1b" },
+        headers: { Authorization: "Bearer 3|KgHSFiBKye5bfM73JPi5VJDo6wNrHAKsUtys5Dme11e09b6a" },
       });
       if (!response.ok) throw new Error("Could not delete the tag");
       setTags(tags.filter(tag => ((tag as { id: number }).id) !== id));
@@ -23,7 +23,7 @@ export default function List() {
       try {
         const response = await fetch("https://backend.bangladeshfirst.com/api/v1/tags", {
           method: "GET",
-          headers: { Authorization: "Bearer 80|Ow72oPI9zesAOuEvWoGFAGUzYnJ3BIueZdSf5YVhbb69ed1b" },
+          headers: { Authorization: "Bearer 3|KgHSFiBKye5bfM73JPi5VJDo6wNrHAKsUtys5Dme11e09b6a" },
         });
         if (!response.ok) {
           throw new Error("Failed to fetch data");
