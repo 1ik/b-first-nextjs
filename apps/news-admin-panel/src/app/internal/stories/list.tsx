@@ -1,14 +1,18 @@
 import { useEffect, useState } from "react";
-import { Breadcrumb, DeleteAction, EditAction } from "../../components";
+import { Breadcrumb } from "../../components";
 import { useNavigate } from "react-router";
 
 export default function List() {
   const [stories, setStories] = useState([]);
 
+  // pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("https://backend.bangladeshfirst.com/api/v1/stories", {
+        const response = await fetch(`https://backend.bangladeshfirst.com/api/v1/stories?page=${currentPage}&size=20`, {
           method: "GET",
           headers: { Authorization: "Bearer 3|KgHSFiBKye5bfM73JPi5VJDo6wNrHAKsUtys5Dme11e09b6a" },
         });
@@ -23,9 +27,17 @@ export default function List() {
     };
 
     fetchData();
-  }, []);
+  }, [currentPage]);
 
   const navigate = useNavigate();
+
+  const handleNextPage = () => {
+    setCurrentPage(currentPage + 1);
+  };
+
+  const handlePrevPage = () => {
+    setCurrentPage(currentPage - 1);
+  };
 
   const dateFormatter = (dateString: string) => {
     const date = new Date(dateString);
@@ -59,7 +71,7 @@ export default function List() {
             <th>Name</th>
             <th>Created At</th>
             <th>Updated At</th>
-            <th className="text-right">Action</th>
+            {/* <th className="text-right">Action</th> */}
           </tr>
         </thead>
         <tbody>
@@ -69,18 +81,22 @@ export default function List() {
               <td className="cursor-pointer" onClick = {()=> navigate(`/stories/${(story as { id: number }).id}`)}>{(story as { title: string }).title}</td>
               <td>{dateFormatter((story as { created_at: string }).created_at)}</td>
               <td>{dateFormatter((story as { updated_at: string }).updated_at)}</td>
-              <td className="flex flex-row justify-end gap-2">
+              {/* <td className="flex flex-row justify-end gap-2">
                 <button>
                   <EditAction />
                 </button>
                 <button>
                   <DeleteAction />
                 </button>
-              </td>
+              </td> */}
             </tr>
           ))}
         </tbody>
       </table>
+      <div className="flex justify-between w-1/3 m-auto bg-gray-300 mb-10 mt-5 p-2 rounded font-semibold">
+          <button className="hover:text-white" onClick={handlePrevPage} disabled={currentPage === 1}>Previous Page</button>
+          <button className="hover:text-white" onClick={handleNextPage}>Next Page</button>
+        </div>
     </div>
   );
 }

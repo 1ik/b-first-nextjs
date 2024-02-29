@@ -84,6 +84,7 @@ export default function StoryPreview() {
   const [authors, setAuthors] = useState([]);
   const [selectedAuthors, setSelectedAuthors] = useState([]);
 
+
   const [showAddTagBtn, setShowAddTagBtn] = useState(false);
   const [shwoModal, setShowModal] = useState(false);
 
@@ -121,7 +122,7 @@ export default function StoryPreview() {
     }
   };
 
-  const handleAddStory = async function (data: any) {
+  const handleUpdateStory = async function (data: any) {
     /* ==== errors handling ==== */
     if (!body) {
       return setErr((cur) => ({ ...cur, body: "Body is required" }));
@@ -149,8 +150,8 @@ export default function StoryPreview() {
       setErr((cur) => ({ ...cur, featuredImg: "" }));
     }
 
-    /* ======= creating story ======== */
-    const newStory = {
+    /* ======= updating story ======== */
+    const updateStory = {
       title: data.headline,
       meta: {
         featured_image: featuredImgURL,
@@ -167,16 +168,16 @@ export default function StoryPreview() {
     };
 
     try {
-      const response = await fetch(`${baseUrl}/api/v1/stories`, {
-        method: "POST",
+      const response = await fetch(`${baseUrl}/api/v1/stories/${storyId}`, {
+        method: "PUT",
         headers: {
           Authorization: token,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(newStory),
+        body: JSON.stringify(updateStory),
       });
 
-      if (!response.ok) throw new Error("Could not create story");
+      if (!response.ok) throw new Error("Could not update story");
 
       navigate("/stories");
     } catch (error) {
@@ -219,9 +220,9 @@ export default function StoryPreview() {
       setAuthors((data as any).authorsData.data);
       setCategories((data as any).categoriesData.data);
       setTags((data as any).tagsData.data);
-      setSelectedTags((data as any).storyData?.tags);
-      setSelectedAuthors((data as any).storyData?.authors);
-      setSelectedCategories((data as any).storyData?.categories);
+      setSelectedTags((data as any).storyData?.story.tags);
+      setSelectedAuthors((data as any).storyData?.story.authors);
+      setSelectedCategories((data as any).storyData?.story.categories);
       setImagesList((data as any).imagesList.media_images.data);
       setLoading(false);
     })();
@@ -297,7 +298,7 @@ export default function StoryPreview() {
         {/* ======================= pop-up modal end ===================== */}
 
         {/*content*/}
-        <form onSubmit={handleSubmit(handleAddStory)}>
+        <form onSubmit={handleSubmit(handleUpdateStory)}>
           <div className="flex-1 w-full pb-6">
             <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
               {/* ==== news type ==== */}
@@ -363,7 +364,7 @@ export default function StoryPreview() {
                 <div className="mt-2">
                   <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus:ring-gray-300 w-full pl-2">
                     <input
-                     defaultValue={(story as {story:any}).story.meta.headline}
+                     defaultValue={(story as {story:any}).story.meta.subhead}
                       {...register("subhead")}
                       type="text"
                       name="subhead"
@@ -461,30 +462,8 @@ export default function StoryPreview() {
                             const reader = new FileReader();
 
                             reader.addEventListener("load", async function () {
-                              const formData = new FormData();
-                              formData.append("image", file);
-
-                              try {
-                                const response = await fetch(`${baseUrl}/api/v1/media-upload-image`, {
-                                  method: "POST",
-                                  headers: {
-                                    Authorization: token,
-                                  },
-                                  body: formData,
-                                });
-
-                                if (!response.ok) throw new Error("Could not upload image");
-
-                                const data = await response.json();
-                                console.log(data);
-                                callback(`${baseUrl}/storage/${data.url}`, {
-                                  // title: "test",
-                                  // width: "1280",
-                                  // height: "720",
-                                });
-                              } catch (error) {
-                                console.log(error);
-                              }
+                              const base64image = reader.result as string;
+                              callback(base64image, {title: file.name})
                             });
                             reader.readAsDataURL(file);
                           });
@@ -577,7 +556,7 @@ export default function StoryPreview() {
                   Browse
                 </button>
                 <p className="text-sm text-red-700">{err.featuredImg}</p>
-                <img className='md:w-1/2 w-full mt-4' src={`https://bfirst.sgp1.cdn.digitaloceanspaces.com/${(story as {story:any}).story.meta.featured_image}`} alt="test" />
+                <img className='md:w-1/2 w-full mt-4' src={`https://bfirst.sgp1.cdn.digitaloceanspaces.com/${!featuredImgURL ?(story as {story:any}).story.meta.featured_image:featuredImgURL}`} alt="" />
               </div>
             </div>
           </div>
