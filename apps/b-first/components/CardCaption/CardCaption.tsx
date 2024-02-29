@@ -8,7 +8,7 @@ const CardCaption = (props: { item: any }) => {
         <a href="">
           <img
             className="max-w-full w-full mx-auto"
-            src={getImageUrl(item.featured_image, 1600, 900)}
+            src={getImageUrl(item.meta.featured_image, 1600, 900)}
             alt={item.featured_image_caption}
           />
         </a>

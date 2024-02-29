@@ -76,15 +76,15 @@ export function Index({ news, categoryNews, latestNews, featured }: any) {
   return (
     <>
       <Head>
-        <meta property="og:image" content={getImageUrl(news.featured_image, 1600, 900)} />
+        <meta property="og:image" content={getImageUrl(news.meta.featured_image, 1600, 900)} />
         <meta property="og:title" content={news?.title} />
-        <meta property="og:description" content={news.brief} />
+        <meta property="og:description" content={news.meta.headline} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:url" content={`https://bangladeshfirst.com${router.asPath}`} />
         <meta property="og:type" content="article" />
       </Head>
-      <Header category={news?.category.name} />
+      <Header category={news?.categories[0].name} />
       <MobileMenu />
       <main id="content">
         <div className="bg-white mt-10">
@@ -93,7 +93,7 @@ export function Index({ news, categoryNews, latestNews, featured }: any) {
               <div className=" mx-auto flex flex-row flex-wrap">
                 {/*left*/}
                 <div className="flex-shrink max-w-full w-full lg:w-2/3 overflow-hidden pr-6">
-                  <BreadCrumb category={news?.category.name} />
+                  <BreadCrumb category={news?.categories[0].name} />
 
                   <h2 className="text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl mb-6">
                     {news?.title}
@@ -134,12 +134,12 @@ export function Index({ news, categoryNews, latestNews, featured }: any) {
                     <img src="/img/ads/banner_ibbl.gif" alt="Ad" />
                   </div>
                   <div className="w-full block flex flex-col border-b my-6">
-                    <BlockNews items={featured.slice(5)} title={"Featured"} showAd={false} />
+                    <BlockNews items={latestNews.data.slice(0, 6)} title={"Featured"} showAd={false} />
                   </div>
                 </div>
                 {/*right*/}
                 <div className="flex-shrink max-w-full w-full lg:w-1/3 pl-3 lg:pl-8 lg:pb-8 order-last bg-gray-50">
-                  <h2 className="text-xl font-normal pb-6 pt-6">More From {news.category.name}</h2>
+                  <h2 className="text-xl font-normal pb-6 pt-6">More From {news.categories[0].name}</h2>
                   <div className="flex flex-col gap-4 pr-6">
                     {categoryNews?.data
                       ?.filter((m: any) => m.id != news.id)
@@ -148,7 +148,7 @@ export function Index({ news, categoryNews, latestNews, featured }: any) {
                         <div key={idx} className="flex flex-col border-b pb-2 hover:bg-gray-50">
                           <a href={newsUrl(n)} className="hover:bg-gray-100">
                             <h4 className="font-extrabold text-xl">{n.title}</h4>
-                            <p className="font-light ">{n.brief}</p>
+                            <p className="font-light ">{n.meta.headline}</p>
                           </a>
                         </div>
                       ))}
@@ -157,22 +157,20 @@ export function Index({ news, categoryNews, latestNews, featured }: any) {
                   <div className="mt-5"></div>
                   <h2 className="text-xl font-normal pb-6 pt-6">Latest</h2>
                   <div className="flex flex-col gap-4 pr-6">
-                    {latestNews
+                    {latestNews.data
                       ?.filter((m: any) => m.id != news.id)
                       .splice(0, 10)
                       .map((n: any, idx: any) => (
                         <div key={idx} className="flex flex-col border-b pb-2 hover:bg-gray-50">
                           <a href={newsUrl(n)} className="hover:bg-gray-100">
                             <h4 className="font-extrabold text-xl">{n.title}</h4>
-                            <p className="font-light ">{n.brief}</p>
+                            <p className="font-light ">{n.meta.headline}</p>
                           </a>
                         </div>
                       ))}
                   </div>
                 </div>
               </div>
-
-              
             </div>
           </div>
           <Footer />
@@ -183,16 +181,16 @@ export function Index({ news, categoryNews, latestNews, featured }: any) {
   );
 }
 
+const baseUrl = "https://backend.bangladeshfirst.com/api/v1/public";
+
 export const getServerSideProps = async (context: any) => {
   const { id } = context.params;
-  const news = await fetch(`https://panel.bangladeshfirst.com/api/v2/detail/${id}`).then((res) => res.json());
+  const news = (await fetch(`${baseUrl}/story/details/${id}`).then((res) => res.json())).story;
 
-  const [categoryNews, latestNews, featured] = await Promise.all([
-    fetch(`https://panel.bangladeshfirst.com/api/v2/category/${news.category.name}?page=1&size=20`).then((res) =>
-      res.json()
-    ),
-    fetch("https://panel.bangladeshfirst.com/api/v2/latest").then((res) => res.json()),
-    fetch("https://panel.bangladeshfirst.com/api/v2/featured").then((res) => res.json()),
+  const [categoryNews, latestNews] = await Promise.all([
+    fetch(`${baseUrl}/categories/${news.categories[0].name}/stories?size=50`).then((res) => res.json()),
+    fetch(`${baseUrl}/latest/stories?size=50`).then((res) => res.json()),
+    // fetch("https://panel.bangladeshfirst.com/api/v2/featured").then((res) => res.json()),
   ]);
 
   return {
@@ -200,7 +198,6 @@ export const getServerSideProps = async (context: any) => {
       news,
       categoryNews,
       latestNews,
-      featured,
     },
   };
 };
