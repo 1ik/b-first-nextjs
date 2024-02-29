@@ -49,7 +49,7 @@ const FeaturedItems = ({ items }: { items: any[] }) => {
                     return (
                       <article key={index} className="flex-shrink max-w-full w-full sm:w-[calc(50%-2px)]">
                         <div className="relative h-full hover-img">
-                          <a /* href={newsUrl(news)} */ href="#">
+                          <a href={newsUrl(news)}>
                             <div className="filter h-full bg-gradient-to-b from-black/5 to-black brightness-75 hover:grayscale contrast-100">
                               <img
                                 className="max-w-full min-h-[200px] object-cover h-full w-full mx-auto"

@@ -933,11 +933,11 @@ export const getServerSideProps = async () => {
 
   const latestNews: any[] = (await latestNewsRes.json()).data;
 
-  // const filterFn = (item: any) => !latestNews.find((f) => f.id === item.id);
+  const filterFn = (item: any) => !latestNews.find((f) => f.id === item.id);
 
-  let bangladesh = (await bangladeshNews.json()).data;
-  let politics = (await politicsNews.json()).data;
-  let world = (await worldNews.json()).data;
+  let bangladesh = (await bangladeshNews.json()).data.filter(filterFn);
+  let politics = (await politicsNews.json()).data.filter(filterFn);
+  let world = (await worldNews.json()).data.filter(filterFn);
 
   return { props: { latestNews, bangladesh, politics, world } };
 };

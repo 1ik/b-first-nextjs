@@ -4,6 +4,7 @@ import CardCaption from "apps/b-first/components/CardCaption/CardCaption";
 import Footer from "apps/b-first/components/Footer/Footer";
 import Header from "apps/b-first/components/Header/Header";
 import MobileMenu from "apps/b-first/components/MobileMenu/MobileMenu";
+import { dateFormat } from "apps/b-first/dateFormat_utils";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -64,6 +65,7 @@ export function BreadCrumb({ category }: any) {
 }
 
 export function Index({ news, categoryNews, latestNews, featured }: any) {
+  console.log(news)
   const router = useRouter();
   const [copied, setCopied] = useState(false);
   function copyToClipboard() {
@@ -102,8 +104,8 @@ export function Index({ news, categoryNews, latestNews, featured }: any) {
                   <div className="news-meta border-1 border-b mb-4 pb-3">
                     <div className="flex justify-between">
                       <div>
-                        <p className="font-semibold">{news.author}</p>
-                        <p className="font-light text-sm">{news.created_at}</p>
+                        <p className="font-semibold">{news.authors[0].name}</p>
+                        <p className="font-light text-sm">{dateFormat(news.created_at)}</p>
                       </div>
                       <div className="text-xl flex items-center gap-6">
                         <FacebookShareButton url={`https://bangladeshfirst.com${router.asPath}`}>
@@ -121,7 +123,7 @@ export function Index({ news, categoryNews, latestNews, featured }: any) {
                         )}
                       </div>
                     </div>
-                    <p className="text-sm italic pt-7">{news.brief}</p>
+                    <p className="text-sm italic pt-7">{news.meta.headline}</p>
                   </div>
 
                   <div className="max-w-4xl pb-6">
