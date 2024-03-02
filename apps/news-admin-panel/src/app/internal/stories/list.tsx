@@ -100,10 +100,10 @@ export default function List() {
           ))}
         </tbody>
       </table>
-      <div className="flex justify-between w-1/3 m-auto  mb-10 mt-5 p-2 font-semibold">
-          <button className="hover:text-white bg-gray-300 px-2 py-1 rounded w-32" onClick={handlePrevPage} disabled={currentPage === 1}>Previous Page</button>
-          <button className="hover:text-white bg-gray-300 px-2 py-1 rounded w-32" onClick={handleNextPage} disabled={currentPage === totalPage}>Next Page</button>
-          <button className="hover:text-white bg-gray-300 px-2 py-1 rounded w-32" onClick={handleLastPage} disabled={currentPage === totalPage}>Last Page</button>
+      <div className="join grid grid-cols-3 w-[400px] mx-auto mb-10">
+          <button className="join-item btn btn-outline" onClick={handlePrevPage} disabled={currentPage === 1}>Previous Page</button>
+          <button className="join-item btn btn-outline" onClick={handleNextPage} disabled={currentPage === totalPage}>Next Page</button>
+          <button className="join-item btn btn-outline" onClick={handleLastPage} disabled={currentPage === totalPage}>Last Page</button>
         </div>
     </div>
   );
