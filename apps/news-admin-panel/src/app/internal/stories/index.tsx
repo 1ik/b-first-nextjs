@@ -14,7 +14,17 @@ const LoadAddEdit = lazy(
   () =>
     // eslint-disable-next-line
     new Promise<any>((resolve) => {
-      import("./addEdit").then((component) => {
+      import("./storyCreate").then((component) => {
+        resolve(component);
+      });
+    })
+);
+
+const LoadStoryPreview = lazy(
+  () =>
+    // eslint-disable-next-line
+    new Promise<any>((resolve) => {
+      import("./storyPreview").then((component) => {
         resolve(component);
       });
     })
@@ -32,6 +42,14 @@ export function AddEditStoriesLazy() {
   return (
     <Suspense>
       <LoadAddEdit />
+    </Suspense>
+  );
+}
+
+export function StoryPreviewLazy() {
+  return (
+    <Suspense>
+      <LoadStoryPreview />
     </Suspense>
   );
 }

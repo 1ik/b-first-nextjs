@@ -2,42 +2,63 @@ import { Editor } from "@tinymce/tinymce-react";
 import Multiselect from "multiselect-react-dropdown";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Breadcrumb } from "../../components";
 
 const baseUrl = "https://backend.bangladeshfirst.com";
+const token = "Bearer 3|KgHSFiBKye5bfM73JPi5VJDo6wNrHAKsUtys5Dme11e09b6a"
 
-const fetchData = async function () {
+const fetchData = async function (storyId: any) {
   try {
-    const [authorsRes, categoriesRes, tagsRes, imagesRes] = await Promise.all([
+    const [storyRes, authorsRes, categoriesRes, tagsRes, imagesRes] = await Promise.all([
+      fetch(`${baseUrl}/api/v1/stories/${storyId}`, {
+        headers: { Authorization: token },
+      }),
       fetch(`${baseUrl}/api/v1/authors`, {
-        headers: { Authorization: "Bearer 80|Ow72oPI9zesAOuEvWoGFAGUzYnJ3BIueZdSf5YVhbb69ed1b" },
+        headers: { Authorization: token },
       }),
       fetch(`${baseUrl}/api/v1/categories`, {
-        headers: { Authorization: "Bearer 80|Ow72oPI9zesAOuEvWoGFAGUzYnJ3BIueZdSf5YVhbb69ed1b" },
+        headers: { Authorization: token },
       }),
       fetch(`${baseUrl}/api/v1/tags`, {
-        headers: { Authorization: "Bearer 80|Ow72oPI9zesAOuEvWoGFAGUzYnJ3BIueZdSf5YVhbb69ed1b" },
+        headers: { Authorization: token },
       }),
       fetch(`${baseUrl}/api/v1/media-image-list`, {
-        headers: { Authorization: "Bearer 80|Ow72oPI9zesAOuEvWoGFAGUzYnJ3BIueZdSf5YVhbb69ed1b" },
+        headers: { Authorization: token },
       }),
     ]);
 
+    const storyData: any = await storyRes.json();
     const authorsData: any[] = await authorsRes.json();
     const categoriesData: any[] = await categoriesRes.json();
     const tagsData: any[] = await tagsRes.json();
     const imagesList: any[] = await imagesRes.json();
 
-    return { authorsData, categoriesData, tagsData, imagesList };
+    return { storyData, authorsData, categoriesData, tagsData, imagesList };
   } catch (error) {
     console.log(error);
   }
 };
 
-export default function AddEdit() {
+export default function StoryPreview() {
+  const handleStoryDelete = async function (id: any) {
+    if (!window.confirm("Do you want to delete the story ?")) return;
+    try {
+      const response = await fetch(`https://backend.bangladeshfirst.com/api/v1/stories/${id}`, {
+        method: "DELETE",
+        headers: { Authorization: "Bearer 3|KgHSFiBKye5bfM73JPi5VJDo6wNrHAKsUtys5Dme11e09b6a" },
+      });
+      if (!response.ok) throw new Error("Could not delete the story");
+      navigate("/stories");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const { storyId } = useParams();
   const [mediaModalToShow, setMediaModalToShow] = useState("upload");
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
 
   const {
     register,
@@ -45,7 +66,7 @@ export default function AddEdit() {
     formState: { errors },
   } = useForm();
 
-  // const [text, setText] = useState("");
+  const [story, setStory] = useState({});
   const [body, setBody] = useState("");
 
   const [featuredImg, setFeaturedImg] = useState<File | undefined>();
@@ -62,6 +83,7 @@ export default function AddEdit() {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [authors, setAuthors] = useState([]);
   const [selectedAuthors, setSelectedAuthors] = useState([]);
+
 
   const [showAddTagBtn, setShowAddTagBtn] = useState(false);
   const [shwoModal, setShowModal] = useState(false);
@@ -86,7 +108,7 @@ export default function AddEdit() {
       const response = await fetch(`${baseUrl}/api/v1/tags`, {
         method: "POST",
         headers: {
-          Authorization: "Bearer 80|Ow72oPI9zesAOuEvWoGFAGUzYnJ3BIueZdSf5YVhbb69ed1b",
+          Authorization: token,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ name: searchTagInput }),
@@ -100,36 +122,36 @@ export default function AddEdit() {
     }
   };
 
-  const handleAddStory = async function (data: any) {
+  const handleUpdateStory = async function (data: any) {
     /* ==== errors handling ==== */
-    if (!body) {
-      return setErr((cur) => ({ ...cur, body: "Body is required" }));
-    } else {
-      setErr((cur) => ({ ...cur, body: "" }));
-    }
-    if (!selectedTags.length) {
-      return setErr((cur) => ({ ...cur, tags: "Tag is required" }));
-    } else {
-      setErr((cur) => ({ ...cur, tags: "" }));
-    }
-    if (!selectedAuthors.length) {
-      return setErr((cur) => ({ ...cur, authors: "Author is required" }));
-    } else {
-      setErr((cur) => ({ ...cur, authors: "" }));
-    }
-    if (!selectedCategories.length) {
-      return setErr((cur) => ({ ...cur, categories: "Category is required" }));
-    } else {
-      setErr((cur) => ({ ...cur, categories: "" }));
-    }
-    if (!featuredImg) {
-      return setErr((cur) => ({ ...cur, featuredImg: "Featured Image is required" }));
-    } else {
-      setErr((cur) => ({ ...cur, featuredImg: "" }));
-    }
+    // if (!body) {
+    //   return setErr((cur) => ({ ...cur, body: "Body is required" }));
+    // } else {
+    //   setErr((cur) => ({ ...cur, body: "" }));
+    // }
+    // if (!selectedTags.length) {
+    //   return setErr((cur) => ({ ...cur, tags: "Tag is required" }));
+    // } else {
+    //   setErr((cur) => ({ ...cur, tags: "" }));
+    // }
+    // if (!selectedAuthors.length) {
+    //   return setErr((cur) => ({ ...cur, authors: "Author is required" }));
+    // } else {
+    //   setErr((cur) => ({ ...cur, authors: "" }));
+    // }
+    // if (!selectedCategories.length) {
+    //   return setErr((cur) => ({ ...cur, categories: "Category is required" }));
+    // } else {
+    //   setErr((cur) => ({ ...cur, categories: "" }));
+    // }
+    // if (!featuredImg) {
+      //   return setErr((cur) => ({ ...cur, featuredImg: "Featured Image is required" }));
+      // } else {
+        //   setErr((cur) => ({ ...cur, featuredImg: "" }));
+        // }
 
-    /* ======= creating story ======== */
-    const newStory = {
+    /* ======= updating story ======== */
+    const updateStory = {
       title: data.headline,
       meta: {
         featured_image: featuredImgURL,
@@ -146,16 +168,16 @@ export default function AddEdit() {
     };
 
     try {
-      const response = await fetch(`${baseUrl}/api/v1/stories`, {
-        method: "POST",
+      const response = await fetch(`${baseUrl}/api/v1/stories/${storyId}`, {
+        method: "PUT",
         headers: {
-          Authorization: "Bearer 80|Ow72oPI9zesAOuEvWoGFAGUzYnJ3BIueZdSf5YVhbb69ed1b",
+          Authorization: token,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(newStory),
+        body: JSON.stringify(updateStory),
       });
 
-      if (!response.ok) throw new Error("Could not create story");
+      if (!response.ok) throw new Error("Could not update story");
 
       navigate("/stories");
     } catch (error) {
@@ -175,7 +197,7 @@ export default function AddEdit() {
       const response = await fetch(`${baseUrl}/api/v1/media-upload-image`, {
         method: "POST",
         headers: {
-          Authorization: "Bearer 80|Ow72oPI9zesAOuEvWoGFAGUzYnJ3BIueZdSf5YVhbb69ed1b",
+          Authorization: token,
         },
         body: formData,
       });
@@ -193,18 +215,27 @@ export default function AddEdit() {
 
   useEffect(() => {
     (async function () {
-      const data = await fetchData();
+      const data = await fetchData(storyId);
+      setStory((data as any).storyData);
       setAuthors((data as any).authorsData.data);
       setCategories((data as any).categoriesData.data);
       setTags((data as any).tagsData.data);
+      setSelectedTags((data as any).storyData?.story.tags);
+      setSelectedAuthors((data as any).storyData?.story.authors);
+      setSelectedCategories((data as any).storyData?.story.categories);
       setImagesList((data as any).imagesList.media_images.data);
+      setBody((data as any).storyData.story.content)
+      setFeaturedImgURL((data as any).storyData.story.meta.featured_image)
+      setLoading(false);
     })();
   }, []);
+
+  if (loading) return <div>loading.........</div>;
 
   return (
     <div onClick={handleOutsideClick} className="overflow-x-auto flex flex-col h-full">
       <div className="inline-flex h-10 justify-between items-center px-4 py-2 w-full border-b">
-        <Breadcrumb items={[{ name: "Stories", link: "/stories" }, { name: "Create Story" }]} />
+        <Breadcrumb items={[{ name: "Stories", link: "/stories" }, { name: "Story preview" }]} />
       </div>
       <div className="overflow-x-auto p-5 h-full w-full flex flex-col">
         {/* ====================== pop-up modal start ====================*/}
@@ -269,7 +300,7 @@ export default function AddEdit() {
         {/* ======================= pop-up modal end ===================== */}
 
         {/*content*/}
-        <form onSubmit={handleSubmit(handleAddStory)}>
+        <form onSubmit={handleSubmit(handleUpdateStory)}>
           <div className="flex-1 w-full pb-6">
             <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
               {/* ==== news type ==== */}
@@ -277,7 +308,9 @@ export default function AddEdit() {
                 <label htmlFor="news-type" className="block text-sm font-medium leading-6 text-gray-900">
                   News Type*
                 </label>
-                <select {...register("newsType")} className="block rounded-md border border-gray-300">
+                <select
+                defaultValue= {(story as {story:any}).story.meta.newsType}
+                 {...register("newsType")} className="block rounded-md border border-gray-300">
                   <option value="print">Print</option>
                   <option value="online">Online</option>
                 </select>
@@ -292,6 +325,7 @@ export default function AddEdit() {
                 <div className="mt-2">
                   <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus:ring-gray-300 w-full pl-2">
                     <input
+                    defaultValue={(story as {story:any}).story.meta.shoulder}
                       {...register("shoulder")}
                       type="text"
                       name="shoulder"
@@ -311,7 +345,8 @@ export default function AddEdit() {
                 <div className="mt-2">
                   <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus:ring-gray-300 w-full pl-2">
                     <input
-                      {...register("headline", { required: "Headline is required" })}
+                    defaultValue={(story as {story:any}).story.title}
+                      {...register("headline")}
                       type="text"
                       name="headline"
                       id="headline"
@@ -331,6 +366,7 @@ export default function AddEdit() {
                 <div className="mt-2">
                   <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus:ring-gray-300 w-full pl-2">
                     <input
+                     defaultValue={(story as {story:any}).story.meta.subhead}
                       {...register("subhead")}
                       type="text"
                       name="subhead"
@@ -350,6 +386,7 @@ export default function AddEdit() {
                 <div className="mt-2">
                   <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus:ring-gray-300 w-full pl-2">
                     <input
+                    defaultValue={(story as {story:any}).story.meta.altheadline}
                       {...register("altheadline")}
                       type="text"
                       name="altheadline"
@@ -373,6 +410,7 @@ export default function AddEdit() {
                   onSelect={(list) => setSelectedAuthors(list)}
                   onRemove={(list) => setSelectedAuthors(list)}
                   placeholder="Select Authors"
+                  selectedValues={selectedAuthors}
                 />
                 <p className="text-sm text-red-700">{err.authors}</p>
               </div>
@@ -384,7 +422,8 @@ export default function AddEdit() {
                 </label>
                 <div className="mt-2">
                   <textarea
-                    {...register("intro", { required: "Intro is required" })}
+                  defaultValue={(story as {story:any}).story.meta.intro}
+                    {...register("intro")}
                     id="intro"
                     name="intro"
                     rows={3}
@@ -402,6 +441,7 @@ export default function AddEdit() {
                 <div className="mt-2">
                   <div>
                     <Editor
+                    initialValue={(story as {story:any}).story.content}
                       apiKey="pi5pfn04bb6lqbsylq9ia36vjdpv9ffaedner0xk14tr0zl0"
                       onEditorChange={(newValue, editor) => {
                         setBody(newValue);
@@ -424,30 +464,8 @@ export default function AddEdit() {
                             const reader = new FileReader();
 
                             reader.addEventListener("load", async function () {
-                              const formData = new FormData();
-                              formData.append("image", file);
-
-                              try {
-                                const response = await fetch(`${baseUrl}/api/v1/media-upload-image`, {
-                                  method: "POST",
-                                  headers: {
-                                    Authorization: "Bearer 80|Ow72oPI9zesAOuEvWoGFAGUzYnJ3BIueZdSf5YVhbb69ed1b",
-                                  },
-                                  body: formData,
-                                });
-
-                                if (!response.ok) throw new Error("Could not upload image");
-
-                                const data = await response.json();
-                                console.log(data);
-                                callback(`${baseUrl}/storage/${data.url}`, {
-                                  // title: "test",
-                                  // width: "1280",
-                                  // height: "720",
-                                });
-                              } catch (error) {
-                                console.log(error);
-                              }
+                              const base64image = reader.result as string;
+                              callback(base64image, {title: file.name})
                             });
                             reader.readAsDataURL(file);
                           });
@@ -511,6 +529,7 @@ export default function AddEdit() {
                   onSelect={(list) => setSelectedCategories(list)}
                   onRemove={(list) => setSelectedCategories(list)}
                   placeholder="Select Categories"
+                  selectedValues={selectedCategories}
                 />
                 <p className="text-sm text-red-700">{err.categories}</p>
               </div>
@@ -539,16 +558,20 @@ export default function AddEdit() {
                   Browse
                 </button>
                 <p className="text-sm text-red-700">{err.featuredImg}</p>
+                <img className='md:w-1/2 w-full mt-4' src={`https://bfirst.sgp1.cdn.digitaloceanspaces.com/${featuredImgURL}`} alt="" />
               </div>
             </div>
           </div>
           <div className="h-10 pt-5 flex items-center justify-end gap-x-6 w-full border-t border-gray-200">
-            <button type="button" className="text-sm font-semibold leading-6 text-gray-900">
+            <button onClick={()=> navigate("/stories")} type="button" className="text-sm font-semibold leading-6 text-gray-900">
               Cancel
             </button>
             <button type="submit" className="btn btn-sm btn-accent">
-              Save
+              Update
             </button>
+            <button type="button" onClick={()=>handleStoryDelete(storyId)} className='btn btn-sm text-white bg-red-600'>
+                Delete
+              </button>
           </div>
         </form>
       </div>
