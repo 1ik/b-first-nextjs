@@ -1,4 +1,3 @@
-import React from 'react';
 import SquareGrid from '../SquareGrid/SquareGrid';
 
 const BlockNews = ({ items, title, showAd = true }: { items: any[]; title: string; showAd?: boolean }) => {
@@ -18,6 +17,7 @@ const BlockNews = ({ items, title, showAd = true }: { items: any[]; title: strin
                                     </h2>
                                 </div>
                             )}
+                            <img className="mx-auto mb-8" src="/img/ads/FSB-banner-ad.jpeg" alt="advertisement area" />
                             <SquareGrid items={items} gridClass={className} />
                         </div>
                         {/* right */}
