@@ -58,6 +58,36 @@ const MobileMenu = () => {
                                         Sports
                                     </a>
                                 </li>
+                                <li className="relative">
+                                    <a href="/Corporates" className="block py-2 px-5 border-b border-gray-100 hover:bg-gray-50">
+                                        Corporates
+                                    </a>
+                                </li>
+                                <li className="relative">
+                                    <a href="/Tech" className="block py-2 px-5 border-b border-gray-100 hover:bg-gray-50">
+                                        Tech
+                                    </a>
+                                </li>
+                                <li className="relative">
+                                    <a href="/Opinion" className="block py-2 px-5 border-b border-gray-100 hover:bg-gray-50">
+                                        Opinion
+                                    </a>
+                                </li>
+                                <li className="relative">
+                                    <a href="/Features" className="block py-2 px-5 border-b border-gray-100 hover:bg-gray-50">
+                                        Features
+                                    </a>
+                                </li>
+                                <li className="relative">
+                                    <a href="/Lifestyle" className="block py-2 px-5 border-b border-gray-100 hover:bg-gray-50">
+                                        Lifestyle
+                                    </a>
+                                </li>
+                                <li className="relative">
+                                    <a href="/Education" className="block py-2 px-5 border-b border-gray-100 hover:bg-gray-50">
+                                        Education
+                                    </a>
+                                </li>
                             </ul>
                         </nav>
                     </div>

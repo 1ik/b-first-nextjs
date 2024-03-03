@@ -12,7 +12,7 @@ const Card = (props: { item: any }) => {
             <img
               style={{ height: "200px" }}
               className="max-w-full h-full object-cover w-full mx-auto"
-              src={getImageUrl(item.featured_image)}
+              src={getImageUrl(item.meta.featured_image)}
               alt="alt title"
             />
           </a>
@@ -21,9 +21,9 @@ const Card = (props: { item: any }) => {
               {/* <a href={newsUrl(item)}>{MaxText(item.title, 60)}</a> */}
               <a href={newsUrl(item)}>{item.title}</a>
             </h3>
-            <a className="text-gray-500" href={`/${item.category.name}`}>
+            <a className="text-gray-500" href={`/${item?.categories[0].name}`}>
               <span className="inline-block h-3 border-l-2 border-red-600 mr-2" />
-              {item.category.name}
+              {item.categories[0].name}
             </a>
           </div>
         </div>
