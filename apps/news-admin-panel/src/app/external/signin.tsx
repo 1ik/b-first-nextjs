@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { AppContext } from "../app.context";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
+import { Button } from "@bfirst/components-button";
 
 type Inputs = {
   email: string;
@@ -14,16 +15,18 @@ const submitLogin = async (baseUrl: string, input: any) => {
 };
 
 export function Signin() {
-  const { baseUrl } = useContext(AppContext);
-  const { mutate, isError, isSuccess, isPending } = useMutation({
+  const { baseUrl, setUser, setToken } = useContext(AppContext);
+  const { mutate, isError, isSuccess, isPending, data, error } = useMutation({
     mutationFn: (input) => {
       return axios.post(`${baseUrl}/api/v1/login`, input);
     },
   });
 
-  console.log("isLoading", isPending);
-  console.log("isError", isError);
-  console.log("success", isSuccess);
+  if (isSuccess) {
+    const { name, email, token } = data.data;
+    setUser && setUser({ name, email });
+    setToken && setToken(token);
+  }
 
   const {
     register,
@@ -87,10 +90,7 @@ export function Signin() {
             </div>
 
             <div>
-              <button type="submit" className="flex w-full btn btn-primary justify-center rounded-md px-3 py-1.5">
-                {isPending && <span className="loading loading-spinner"></span>}
-                Sign in
-              </button>
+              <Button loading={isPending} classes={"flex w-full justify-center rounded-md px-3 py-1.5"} />
             </div>
           </form>
         </div>

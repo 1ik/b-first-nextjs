@@ -1,10 +1,11 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IoMenuSharp } from "react-icons/io5";
 import { MdChevronRight } from "react-icons/md";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Link, Route, Routes, useLocation } from "react-router-dom";
 import { AddEditLazy, ListLazy } from "./internal/categories";
+import { AddEditAuthorLazy, AuthorsListLazy } from "./internal/authors";
 
 export const NavBar = () => {
   return (
@@ -39,7 +40,6 @@ export const NavBar = () => {
 const _links = [
   { name: "Categories", href: "/categories", isActive: true },
   { name: "Authors", href: "/authors" },
-  { name: "Tags", href: "/tags" },
   { name: "Stories", href: "/stories" },
 ];
 
@@ -50,6 +50,14 @@ export function AppInternal() {
       return { ...l, isActive: location.pathname.startsWith(l.href) };
     });
   });
+
+  useEffect(() => {
+    setLinks((curr) => {
+      return curr.map((l) => {
+        return { ...l, isActive: location.pathname.startsWith(l.href) };
+      });
+    });
+  }, [location.pathname]);
 
   return (
     <div className="drawer h-full lg:drawer-open">
@@ -96,6 +104,8 @@ export function AppInternal() {
             <Routes>
               <Route path="/categories" element={<ListLazy />} />
               <Route path="/categories/add" element={<AddEditLazy />} />
+              <Route path="/authors" element={<AuthorsListLazy />} />
+              <Route path="/authors/add" element={<AddEditAuthorLazy />} />
             </Routes>
           </div>
         </div>
@@ -105,9 +115,9 @@ export function AppInternal() {
         <ul className="menu p-4 w-50 min-h-full bg-base-200 text-base-content">
           {links.map((l) => (
             <li key={l.name}>
-              <a href={l.href} className={"flex justify-between" + (l.isActive ? " active" : "")}>
+              <Link key={l.name} to={l.href} className={"flex justify-between" + (l.isActive ? " active" : "")}>
                 {l.name} <MdChevronRight />
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
