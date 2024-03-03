@@ -5,6 +5,7 @@ export interface IAppContext {
   setUser?: Dispatch<React.SetStateAction<undefined>>;
   token?: string;
   setToken?: Dispatch<SetStateAction<undefined>>;
+  baseUrl?: string;
 }
 
 export const AppContext = React.createContext<IAppContext>({});

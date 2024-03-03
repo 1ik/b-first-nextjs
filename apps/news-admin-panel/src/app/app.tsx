@@ -3,14 +3,18 @@
 import { useState } from "react";
 import { AppContext } from "./app.context";
 import { Scaffold } from "./scaffold";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 export function App() {
   const [user, setUser] = useState();
   const [token, setToken] = useState();
+  const queryClient = new QueryClient({});
 
   return (
-    <AppContext.Provider value={{ user, setUser, token, setToken }}>
-      <Scaffold />
-    </AppContext.Provider>
+    <QueryClientProvider client={queryClient}>
+      <AppContext.Provider value={{ user, setUser, token, setToken, baseUrl: "https://backend.bangladeshfirst.com" }}>
+        <Scaffold />
+      </AppContext.Provider>
+    </QueryClientProvider>
   );
 }
