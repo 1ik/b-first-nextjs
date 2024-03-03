@@ -4,8 +4,10 @@ import { useEffect, useState } from "react";
 import { IoMenuSharp } from "react-icons/io5";
 import { MdChevronRight } from "react-icons/md";
 import { Link, Route, Routes, useLocation } from "react-router-dom";
-import { AddEditLazy, ListLazy } from "./internal/categories";
 import { AddEditAuthorLazy, AuthorsListLazy } from "./internal/authors";
+import { AddEditLazy, ListLazy } from "./internal/categories";
+import { AddEditStoriesLazy, StoriesListLazy, StoryPreviewLazy } from "./internal/stories";
+import { AddEditTagsLazy, TagsListLazy } from "./internal/tags";
 
 export const NavBar = () => {
   return (
@@ -106,10 +108,16 @@ export function AppInternal() {
               <Route path="/categories/add" element={<AddEditLazy />} />
               <Route path="/authors" element={<AuthorsListLazy />} />
               <Route path="/authors/add" element={<AddEditAuthorLazy />} />
+              <Route path="/stories" element={<StoriesListLazy />} />
+              <Route path="/stories/create-story" element={<AddEditStoriesLazy />} />
+              <Route path="/tags" element={<TagsListLazy />} />
+              <Route path="/tags/add" element={<AddEditTagsLazy />} />
+              <Route path="/stories/:storyId" element={<StoryPreviewLazy />} />
             </Routes>
           </div>
         </div>
       </div>
+
       <div className="drawer-side">
         <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
         <ul className="menu p-4 w-50 min-h-full bg-base-200 text-base-content">

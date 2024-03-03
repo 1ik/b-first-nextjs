@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import { Breadcrumb, DeleteAction, EditAction } from "../../components";
+import { token } from "../../token_utils";
 
 export default function List() {
   const [authors, setAuthors] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(1);
 
   const dateFormatter = (dateString: string) => {
     const date = new Date(dateString);
@@ -23,7 +26,7 @@ export default function List() {
     try {
       const response = await fetch(`https://backend.bangladeshfirst.com/api/v1/authors/${id}`, {
         method: "DELETE",
-        headers: { Authorization: "Bearer 80|Ow72oPI9zesAOuEvWoGFAGUzYnJ3BIueZdSf5YVhbb69ed1b" },
+        headers: { Authorization: token },
       });
       if (!response.ok) throw new Error("Could not delete the author");
       setAuthors((curr) => curr.filter((author) => (author as { id: number }).id !== id));
@@ -32,25 +35,34 @@ export default function List() {
     }
   };
 
+  const handleNextPage = () => {
+    setCurrentPage((curr)=> curr + 1);
+  };
+
+  const handlePrevPage = () => {
+    setCurrentPage((curr)=> curr - 1);
+  };
+
   useEffect(() => {
     const fetchData = async function () {
       try {
-        const response = await fetch("https://backend.bangladeshfirst.com/api/v1/authors", {
+        const response = await fetch(`https://backend.bangladeshfirst.com/api/v1/authors?page=${currentPage}&size=20`, {
           method: "GET",
-          headers: { Authorization: "Bearer 80|Ow72oPI9zesAOuEvWoGFAGUzYnJ3BIueZdSf5YVhbb69ed1b" },
+          headers: { Authorization: token },
         });
 
         if (!response.ok) throw new Error("Could not get authors list");
 
         const data = await response.json();
         setAuthors(data.data);
+        setTotalPage(data.meta.last_page);
       } catch (error) {
         console.log(error);
       }
     };
 
     fetchData();
-  }, []);
+  }, [currentPage]);
 
   return (
     <div className="overflow-x-auto flex flex-col">
@@ -92,6 +104,10 @@ export default function List() {
           ))}
         </tbody>
       </table>
+      <div className="join grid grid-cols-2 w-[250px] mx-auto">
+          <button className="join-item btn btn-outline" onClick={handlePrevPage} disabled={currentPage === 1}>Previous Page</button>
+          <button className="join-item btn btn-outline" onClick={handleNextPage} disabled={currentPage === totalPage}>Next Page</button>
+        </div>
     </div>
   );
 }

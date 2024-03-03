@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Breadcrumb, DeleteAction, EditAction } from "../../components";
+import { token } from "../../token_utils";
 
 export default function List() {
   const [tags, setTags] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(1);
 
   const handleDeleteTag = async function (id: number) {
     if (!window.confirm("Do you want to delete the tag ?")) return;
     try {
       const response = await fetch(`https://backend.bangladeshfirst.com/api/v1/tags/${id}`, {
         method: "DELETE",
-        headers: { Authorization: "Bearer 80|Ow72oPI9zesAOuEvWoGFAGUzYnJ3BIueZdSf5YVhbb69ed1b" },
+        headers: { Authorization: token },
       });
       if (!response.ok) throw new Error("Could not delete the tag");
       setTags(tags.filter(tag => ((tag as { id: number }).id) !== id));
@@ -21,15 +24,16 @@ export default function List() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("https://backend.bangladeshfirst.com/api/v1/tags", {
+        const response = await fetch(`https://backend.bangladeshfirst.com/api/v1/tags?page=${currentPage}&size=20`, {
           method: "GET",
-          headers: { Authorization: "Bearer 80|Ow72oPI9zesAOuEvWoGFAGUzYnJ3BIueZdSf5YVhbb69ed1b" },
+          headers: { Authorization: token },
         });
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
         const data = await response.json();
         setTags(data.data);
+        setTotalPage(data.meta.last_page);
       } catch (error) {
         console.log(error);
       }
@@ -50,6 +54,14 @@ export default function List() {
       hour12: true,
     }).format(date);
     return formattedDate.replace(/,/g, "");
+  };
+
+  const handleNextPage = () => {
+    setCurrentPage((curr)=> curr + 1);
+  };
+
+  const handlePrevPage = () => {
+    setCurrentPage((curr)=> curr - 1);
   };
 
   return (
@@ -92,6 +104,10 @@ export default function List() {
           ))}
         </tbody>
       </table>
+      <div className="join grid grid-cols-2 w-[250px] mx-auto">
+          <button className="join-item btn btn-outline" onClick={handlePrevPage} disabled={currentPage === 1}>Previous Page</button>
+          <button className="join-item btn btn-outline" onClick={handleNextPage} disabled={currentPage === totalPage}>Next Page</button>
+        </div>
     </div>
   );
 }

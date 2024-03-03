@@ -1,9 +1,9 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState } from "react";
 import { AppContext } from "./app.context";
 import { Scaffold } from "./scaffold";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 export function App() {
   const [user, setUser] = useState();

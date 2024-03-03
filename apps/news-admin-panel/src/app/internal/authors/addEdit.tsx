@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Breadcrumb } from "../../components";
+import { token } from "../../token_utils";
 
 export default function AddEdit() {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ export default function AddEdit() {
       const response = await fetch("https://backend.bangladeshfirst.com/api/v1/authors", {
         method: "POST",
         headers: {
-          Authorization: "Bearer 80|Ow72oPI9zesAOuEvWoGFAGUzYnJ3BIueZdSf5YVhbb69ed1b",
+          Authorization: token,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ name: authorName, meta: { about: authorAbout } }),
