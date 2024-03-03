@@ -17,8 +17,9 @@ const BlockNews = ({ items, title, showAd = true }: { items: any[]; title: strin
                                     </h2>
                                 </div>
                             )}
-                            <img className="mx-auto mb-8" src="/img/ads/FSB-banner-ad.jpeg" alt="advertisement area" />
+                            <img className="hidden lg:block mx-auto mb-8" src="/img/ads/FSB-banner-ad.jpeg" alt="advertisement area" />
                             <SquareGrid items={items} gridClass={className} />
+                            <img className="mx-auto mb-8 lg:hidden" src="/img/ads/FSB-banner-ad.jpeg" alt="advertisement area" />
                         </div>
                         {/* right */}
                         {showAd && (
