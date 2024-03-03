@@ -6,6 +6,7 @@ import { MdChevronRight } from "react-icons/md";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { AddEditAuthorLazy, AuthorsListLazy } from "./internal/authors";
 import { AddEditLazy, ListLazy } from "./internal/categories";
+import ManageStories from "./internal/manageStories/manageStories";
 import { AddEditStoriesLazy, StoriesListLazy, StoryPreviewLazy } from "./internal/stories";
 import { AddEditTagsLazy, TagsListLazy } from "./internal/tags";
 
@@ -44,6 +45,7 @@ const _links = [
   { name: "Authors", href: "/authors" },
   { name: "Tags", href: "/tags" },
   { name: "Stories", href: "/stories" },
+  { name: "Manage Stories", href: "/manage-stories" },
 ];
 
 export function App() {
@@ -103,10 +105,10 @@ export function App() {
               <Route path="/authors/add" element={<AddEditAuthorLazy />} />
               <Route path="/stories" element={<StoriesListLazy />} />
               <Route path="/stories/create-story" element={<AddEditStoriesLazy />} />
-              <Route path="/tags" element={<TagsListLazy/>} />
+              <Route path="/tags" element={<TagsListLazy />} />
               <Route path="/tags/add" element={<AddEditTagsLazy />} />
               <Route path="/stories/:storyId" element={<StoryPreviewLazy />} />
-              
+              <Route path="/manage-stories" element={<ManageStories />} />
             </Routes>
           </div>
         </div>
