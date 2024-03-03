@@ -3,44 +3,38 @@ import { Breadcrumb } from "../../components";
 import { useNavigate } from "react-router-dom";
 
 export default function AddEdit() {
-  const [categoryName, setCategoryName] = useState("");
-  const [about, setAboutText] = useState("");
+  const [tagName, setTagName] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if(!categoryName) return;
+    if (!tagName) return;
 
     try {
-      const response = await fetch("https://backend.bangladeshfirst.com/api/v1/categories", {
+      const response = await fetch("https://backend.bangladeshfirst.com/api/v1/tags", {
         method: "POST",
         headers: {
           Authorization: "Bearer 80|Ow72oPI9zesAOuEvWoGFAGUzYnJ3BIueZdSf5YVhbb69ed1b",
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          name: categoryName,
-          metadata: {
-            about: about,
-          },
+          name: tagName,
         }),
       });
 
       if (!response.ok) {
-        throw new Error("Failed to create category");
+        throw new Error("Failed to create tag");
       }
-      setCategoryName(''),
-      setAboutText('');
-      alert("Category created successfully!");
+      setTagName(""), alert("Tag created successfully!");
     } catch (error) {
-      console.error("Error creating category:", error);
-      alert("Failed to create category. Please try again.");
+      console.error("Error creating tag:", error);
+      alert("Failed to create tag. Please try again.");
     }
   };
   return (
     <div className="overflow-x-auto flex flex-col h-full">
       <div className="inline-flex h-10 justify-between items-center px-4 py-2 w-full border-b">
-        <Breadcrumb items={[{ name: "Categories", link: "/categories" }, { name: "Add" }]} />
+        <Breadcrumb items={[{ name: "Tags", link: "/tags" }, { name: "Add" }]} />
       </div>
 
       <form onSubmit={handleSubmit}>
@@ -59,9 +53,9 @@ export default function AddEdit() {
                       name="name"
                       id="name"
                       className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                      placeholder="Category Name"
-                      value={categoryName}
-                      onChange={(event)=>setCategoryName(event.target.value)}
+                      placeholder="Tag Name"
+                      value={tagName}
+                      onChange={(event) => setTagName(event.target.value)}
                     />
                   </div>
                   <p className="mt-2 text-xs leading-6 text-gray-600">
@@ -69,28 +63,15 @@ export default function AddEdit() {
                   </p>
                 </div>
               </div>
-
-              <div className="col-span-full">
-                <label htmlFor="about" className="block text-sm font-medium leading-6 text-gray-900">
-                  About
-                </label>
-                <div className="mt-2">
-                  <textarea
-                    id="about"
-                    name="about"
-                    rows={3}
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-300 sm:text-sm sm:leading-6"
-                    value={about}
-                    onChange={(event)=>setAboutText(event.target.value)}
-                  />
-                </div>
-                <p className="mt-3 text-sm leading-6 text-gray-600">Write a few sentences about this category.</p>
-              </div>
             </div>
           </div>
 
           <div className="h-10 pt-5 flex items-center justify-end gap-x-6 w-full border-t border-gray-200">
-            <button type="button" onClick={()=> navigate("/categories")} className="text-sm font-semibold leading-6 text-gray-900">
+            <button
+              type="button"
+              onClick={() => navigate("/tags")}
+              className="text-sm font-semibold leading-6 text-gray-900"
+            >
               Cancel
             </button>
             <button type="submit" className="btn btn-sm btn-accent">

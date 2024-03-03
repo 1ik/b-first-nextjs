@@ -1,27 +1,13 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Breadcrumb, DeleteAction, EditAction } from "../../components";
 
 export default function List() {
-  const [categories, setCategories] = useState([]);
-
-  const handleDeleteCategory = async function (id: number) {
-    if (!window.confirm("Do you want to delete the category ?")) return;
-    try {
-      const response = await fetch(`https://backend.bangladeshfirst.com/api/v1/categories/${id}`, {
-        method: "DELETE",
-        headers: { Authorization: "Bearer 80|Ow72oPI9zesAOuEvWoGFAGUzYnJ3BIueZdSf5YVhbb69ed1b" },
-      });
-      if (!response.ok) throw new Error("Could not delete the author");
-      setCategories(categories.filter(category => ((category as { id: number }).id) !== id));
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const [stories, setStories] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("https://backend.bangladeshfirst.com/api/v1/categories", {
+        const response = await fetch("https://backend.bangladeshfirst.com/api/v1/stories", {
           method: "GET",
           headers: { Authorization: "Bearer 80|Ow72oPI9zesAOuEvWoGFAGUzYnJ3BIueZdSf5YVhbb69ed1b" },
         });
@@ -29,7 +15,7 @@ export default function List() {
           throw new Error("Failed to fetch data");
         }
         const data = await response.json();
-        setCategories(data.data);
+        setStories(data.data);
       } catch (error) {
         console.log(error);
       }
@@ -55,11 +41,11 @@ export default function List() {
   return (
     <div className="overflow-x-auto flex flex-col">
       <div className="inline-flex h-10 justify-between items-center px-4 py-2 w-full border-b">
-        <Breadcrumb items={[{ name: "Categories" }]} />
+        <Breadcrumb items={[{ name: "Stories" }]} />
         <span className="inline-flex gap-2">
           <input type="text" className="input-sm h-6" placeholder="Search" />
-          <a href="categories/add" className="btn btn-outline btn-xs">
-            Add
+          <a href="stories/create-story" className="btn btn-outline btn-xs">
+            Create Story
           </a>
         </span>
       </div>
@@ -74,17 +60,17 @@ export default function List() {
           </tr>
         </thead>
         <tbody>
-          {categories.map((category) => (
-            <tr key={(category as { id: number }).id}>
-              <td>{(category as { id: number }).id}</td>
-              <td>{(category as { name: string }).name}</td>
-              <td>{dateFormatter((category as { created_at: string }).created_at)}</td>
-              <td>{dateFormatter((category as { updated_at: string }).updated_at)}</td>
+          {stories.map((story) => (
+            <tr key={(story as { id: number }).id}>
+              <td>{(story as { id: number }).id}</td>
+              <td>{(story as { title: string }).title}</td>
+              <td>{dateFormatter((story as { created_at: string }).created_at)}</td>
+              <td>{dateFormatter((story as { updated_at: string }).updated_at)}</td>
               <td className="flex flex-row justify-end gap-2">
                 <button>
                   <EditAction />
                 </button>
-                <button onClick={() => handleDeleteCategory((category as { id: number }).id)}>
+                <button>
                   <DeleteAction />
                 </button>
               </td>

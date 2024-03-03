@@ -2,17 +2,17 @@ import React, { useEffect, useState } from "react";
 import { Breadcrumb, DeleteAction, EditAction } from "../../components";
 
 export default function List() {
-  const [categories, setCategories] = useState([]);
+  const [tags, setTags] = useState([]);
 
-  const handleDeleteCategory = async function (id: number) {
-    if (!window.confirm("Do you want to delete the category ?")) return;
+  const handleDeleteTag = async function (id: number) {
+    if (!window.confirm("Do you want to delete the tag ?")) return;
     try {
-      const response = await fetch(`https://backend.bangladeshfirst.com/api/v1/categories/${id}`, {
+      const response = await fetch(`https://backend.bangladeshfirst.com/api/v1/tags/${id}`, {
         method: "DELETE",
         headers: { Authorization: "Bearer 80|Ow72oPI9zesAOuEvWoGFAGUzYnJ3BIueZdSf5YVhbb69ed1b" },
       });
-      if (!response.ok) throw new Error("Could not delete the author");
-      setCategories(categories.filter(category => ((category as { id: number }).id) !== id));
+      if (!response.ok) throw new Error("Could not delete the tag");
+      setTags(tags.filter(tag => ((tag as { id: number }).id) !== id));
     } catch (error) {
       console.log(error);
     }
@@ -21,7 +21,7 @@ export default function List() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("https://backend.bangladeshfirst.com/api/v1/categories", {
+        const response = await fetch("https://backend.bangladeshfirst.com/api/v1/tags", {
           method: "GET",
           headers: { Authorization: "Bearer 80|Ow72oPI9zesAOuEvWoGFAGUzYnJ3BIueZdSf5YVhbb69ed1b" },
         });
@@ -29,7 +29,7 @@ export default function List() {
           throw new Error("Failed to fetch data");
         }
         const data = await response.json();
-        setCategories(data.data);
+        setTags(data.data);
       } catch (error) {
         console.log(error);
       }
@@ -55,10 +55,10 @@ export default function List() {
   return (
     <div className="overflow-x-auto flex flex-col">
       <div className="inline-flex h-10 justify-between items-center px-4 py-2 w-full border-b">
-        <Breadcrumb items={[{ name: "Categories" }]} />
+        <Breadcrumb items={[{ name: "Tags" }]} />
         <span className="inline-flex gap-2">
           <input type="text" className="input-sm h-6" placeholder="Search" />
-          <a href="categories/add" className="btn btn-outline btn-xs">
+          <a href="tags/add" className="btn btn-outline btn-xs">
             Add
           </a>
         </span>
@@ -74,17 +74,17 @@ export default function List() {
           </tr>
         </thead>
         <tbody>
-          {categories.map((category) => (
-            <tr key={(category as { id: number }).id}>
-              <td>{(category as { id: number }).id}</td>
-              <td>{(category as { name: string }).name}</td>
-              <td>{dateFormatter((category as { created_at: string }).created_at)}</td>
-              <td>{dateFormatter((category as { updated_at: string }).updated_at)}</td>
+          {tags.map((tag) => (
+            <tr key={(tag as { id: number }).id}>
+              <td>{(tag as { id: number }).id}</td>
+              <td>{(tag as { name: string }).name}</td>
+              <td>{dateFormatter((tag as { created_at: string }).created_at)}</td>
+              <td>{dateFormatter((tag as { updated_at: string }).updated_at)}</td>
               <td className="flex flex-row justify-end gap-2">
                 <button>
                   <EditAction />
                 </button>
-                <button onClick={() => handleDeleteCategory((category as { id: number }).id)}>
+                <button onClick={() => handleDeleteTag((tag as { id: number }).id)}>
                   <DeleteAction />
                 </button>
               </td>

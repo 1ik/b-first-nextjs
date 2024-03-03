@@ -1,5 +1,7 @@
-import { AppContext } from "./app.context";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+
 import { useState } from "react";
+import { AppContext } from "./app.context";
 import { Scaffold } from "./scaffold";
 
 export function App() {
