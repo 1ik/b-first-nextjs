@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Breadcrumb, DeleteAction, EditAction } from "../../components";
 import { token } from "../../token_utils";
+import { Link } from "react-router-dom";
 
 export default function List() {
   const [categories, setCategories] = useState([]);
@@ -15,7 +16,7 @@ export default function List() {
         headers: { Authorization: token },
       });
       if (!response.ok) throw new Error("Could not delete the author");
-      setCategories(categories.filter(category => ((category as { id: number }).id) !== id));
+      setCategories(categories.filter((category) => (category as { id: number }).id !== id));
     } catch (error) {
       console.log(error);
     }
@@ -24,10 +25,13 @@ export default function List() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`https://backend.bangladeshfirst.com/api/v1/categories?page=${currentPage}&size=20`, {
-          method: "GET",
-          headers: { Authorization: token },
-        });
+        const response = await fetch(
+          `https://backend.bangladeshfirst.com/api/v1/categories?page=${currentPage}&size=20`,
+          {
+            method: "GET",
+            headers: { Authorization: token },
+          }
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
@@ -45,8 +49,6 @@ export default function List() {
   const dateFormatter = (dateString: string) => {
     const date = new Date(dateString);
 
-    
-
     const formattedDate = new Intl.DateTimeFormat("en-US", {
       month: "short",
       day: "numeric",
@@ -59,11 +61,11 @@ export default function List() {
   };
 
   const handleNextPage = () => {
-    setCurrentPage((curr)=> curr + 1);
+    setCurrentPage((curr) => curr + 1);
   };
 
   const handlePrevPage = () => {
-    setCurrentPage((curr)=> curr - 1);
+    setCurrentPage((curr) => curr - 1);
   };
 
   return (
@@ -72,9 +74,9 @@ export default function List() {
         <Breadcrumb items={[{ name: "Categories" }]} />
         <span className="inline-flex gap-2">
           <input type="text" className="input-sm h-6" placeholder="Search" />
-          <a href="categories/add" className="btn btn-outline btn-xs">
+          <Link to="add" className="btn btn-outline btn-xs">
             Add
-          </a>
+          </Link>
         </span>
       </div>
       <table className="table">
@@ -107,9 +109,13 @@ export default function List() {
         </tbody>
       </table>
       <div className="join grid grid-cols-2 w-[250px] mx-auto">
-          <button className="join-item btn btn-outline" onClick={handlePrevPage} disabled={currentPage === 1}>Previous Page</button>
-          <button className="join-item btn btn-outline" onClick={handleNextPage} disabled={currentPage === totalPage}>Next Page</button>
-        </div>
+        <button className="join-item btn btn-outline" onClick={handlePrevPage} disabled={currentPage === 1}>
+          Previous Page
+        </button>
+        <button className="join-item btn btn-outline" onClick={handleNextPage} disabled={currentPage === totalPage}>
+          Next Page
+        </button>
+      </div>
     </div>
   );
 }

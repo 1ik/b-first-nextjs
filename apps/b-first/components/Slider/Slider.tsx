@@ -27,7 +27,7 @@ const Slider = (props: { items: any[]; title: string }) => {
                                     <div className="splide__track">
                                         <ul className="splide__list">
                                             {props.items.map((item) => (
-                                                <li className="splide__slide flex">
+                                                <li key={item.id} className="splide__slide flex">
                                                     <Card item={item} />
                                                 </li>
                                             ))}
