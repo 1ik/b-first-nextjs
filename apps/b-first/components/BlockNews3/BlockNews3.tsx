@@ -1,7 +1,6 @@
 import { getImageUrl } from "../../image_utils";
-import React from "react";
-import SquareGrid from "../SquareGrid/SquareGrid";
 import { newsUrl } from "../../util";
+import SquareGrid from "../SquareGrid/SquareGrid";
 
 const BlockNews3 = ({ items, latest, title }: { items: any[]; title: string; latest: any[] }) => {
   if (!items?.length) {
@@ -104,7 +103,7 @@ const BlockNews3 = ({ items, latest, title }: { items: any[]; title: string; lat
               <div className="text-sm py-6 sticky">
                 <div className="w-full text-center">
                   <a href="#">
-                    <img className="mx-auto" src="/img/ads/walton-ads.jpeg" alt="advertisement area" />
+                    <img className="mx-auto" src="/img/ads/FSIBL-November-2023-20.gif" alt="advertisement area" />
                   </a>
                 </div>
               </div>
