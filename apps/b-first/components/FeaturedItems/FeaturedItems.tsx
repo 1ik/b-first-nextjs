@@ -21,7 +21,7 @@ const FeaturedItems = ({ items }: { items: any[] }) => {
                 >
                   <img
                     className="max-w-full w-full mx-auto h-full object-cover"
-                    src={getImageUrl(items[0].meta.featured_image)}
+                    src={getImageUrl(items[0].featured_image)}
                     alt="Image description"
                   />
                 </a>
@@ -31,11 +31,11 @@ const FeaturedItems = ({ items }: { items: any[] }) => {
                       {items[0].title}
                     </h2>
                   </a>
-                  <p className="text-gray-100 hidden sm:inline-block">{items[0].meta.headline}</p>
+                  <p className="text-gray-100 hidden sm:inline-block">{items[0].brief}</p>
                   <div className="pt-2">
                     <div className="text-gray-100">
                       <div className="inline-block h-3 border-l-2 border-red-600 mr-2" />
-                      {items[0].categories[0]?.name}
+                      {items[0].category?.name}
                     </div>
                   </div>
                 </div>
@@ -52,8 +52,8 @@ const FeaturedItems = ({ items }: { items: any[] }) => {
                           <a href={newsUrl(news)}>
                             <div className="filter h-full bg-gradient-to-b from-black/5 to-black brightness-75 hover:grayscale contrast-100">
                               <img
-                                className="max-w-full min-h-[200px] object-cover h-full w-full mx-auto"
-                                src={getImageUrl(news.meta.featured_image)}
+                                className="max-w-full object-cover h-full w-full mx-auto"
+                                src={getImageUrl(news.featured_image)}
                                 alt="Image description"
                               />
                             </div>
@@ -65,7 +65,7 @@ const FeaturedItems = ({ items }: { items: any[] }) => {
                             <div className="pt-1">
                               <div className="text-gray-100">
                                 <div className="inline-block h-3 border-l-2 border-red-600 mr-2" />
-                                {news.categories[0]?.name}
+                                {news.category?.name}
                               </div>
                             </div>
                           </div>
