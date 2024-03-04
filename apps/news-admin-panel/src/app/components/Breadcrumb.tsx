@@ -1,4 +1,5 @@
 import { Icon } from "./icons";
+import { Link } from "react-router-dom";
 
 interface BreadcrumbProps {
   items: { name: string; icon?: any; link?: string }[];
@@ -30,7 +31,7 @@ export function Breadcrumb(props: BreadcrumbProps) {
           return (
             <span key={index + item.name}>
               <li>
-                <a href={item.link} className="inline-flex gap-2 items-center">
+                <Link to={item.link} className="inline-flex gap-2 items-center">
                   {item.icon}
                   <span className={item.classNames}>{item.name}</span>
                   {index < menuItems.length - 1 && (
@@ -38,7 +39,7 @@ export function Breadcrumb(props: BreadcrumbProps) {
                       <Icon name="right" />
                     </span>
                   )}
-                </a>
+                </Link>
               </li>
             </span>
           );
