@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-
+import { useContext } from "react";
 import { useEffect, useState } from "react";
 import { IoMenuSharp } from "react-icons/io5";
 import { MdChevronRight } from "react-icons/md";
@@ -8,6 +8,8 @@ import { AddEditAuthorLazy, AuthorsListLazy } from "./internal/authors";
 import { AddEditLazy, ListLazy } from "./internal/categories";
 import { AddEditStoriesLazy, StoriesListLazy, StoryPreviewLazy } from "./internal/stories";
 import { AddEditTagsLazy, TagsListLazy } from "./internal/tags";
+import { ManageStories } from "./internal/manageStories/manageStories";
+import { AppContext } from "./app.context";
 
 export const NavBar = () => {
   return (
@@ -42,7 +44,9 @@ export const NavBar = () => {
 const _links = [
   { name: "Categories", href: "/categories", isActive: true },
   { name: "Authors", href: "/authors" },
+  { name: "Tags", href: "/tags" },
   { name: "Stories", href: "/stories" },
+  { name: "Manage Story", href: "/manage-story" }
 ];
 
 export function AppInternal() {
@@ -60,6 +64,14 @@ export function AppInternal() {
       });
     });
   }, [location.pathname]);
+  const { setUser, setToken } = useContext(AppContext);
+  const handleSignOut = function() {
+    localStorage.removeItem('userInfo');
+    localStorage.removeItem('token');
+    setUser && setUser(undefined)
+    setToken && setToken(undefined)
+
+  }
 
   return (
     <div className="drawer h-full lg:drawer-open">
@@ -113,6 +125,7 @@ export function AppInternal() {
               <Route path="/tags" element={<TagsListLazy />} />
               <Route path="/tags/add" element={<AddEditTagsLazy />} />
               <Route path="/stories/:storyId" element={<StoryPreviewLazy />} />
+              <Route path="/manage-story" element={<ManageStories/>} />
             </Routes>
           </div>
         </div>
@@ -128,6 +141,7 @@ export function AppInternal() {
               </Link>
             </li>
           ))}
+          <li className="btn btn-primary-outline " onClick={handleSignOut}>Sign out</li>
         </ul>
       </div>
     </div>

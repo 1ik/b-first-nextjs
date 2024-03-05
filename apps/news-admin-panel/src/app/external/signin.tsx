@@ -38,8 +38,8 @@ export function Signin() {
   } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = (data, event) => {
-    event.stopPropagation();
-    mutate(data);
+    event?.stopPropagation();
+    mutate(data as any);
   };
 
   return (

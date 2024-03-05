@@ -128,32 +128,6 @@ export default function StoryPreview() {
   };
 
   const handleUpdateStory = async function (data: any) {
-    /* ==== errors handling ==== */
-    // if (!body) {
-    //   return setErr((cur) => ({ ...cur, body: "Body is required" }));
-    // } else {
-    //   setErr((cur) => ({ ...cur, body: "" }));
-    // }
-    // if (!selectedTags.length) {
-    //   return setErr((cur) => ({ ...cur, tags: "Tag is required" }));
-    // } else {
-    //   setErr((cur) => ({ ...cur, tags: "" }));
-    // }
-    // if (!selectedAuthors.length) {
-    //   return setErr((cur) => ({ ...cur, authors: "Author is required" }));
-    // } else {
-    //   setErr((cur) => ({ ...cur, authors: "" }));
-    // }
-    // if (!selectedCategories.length) {
-    //   return setErr((cur) => ({ ...cur, categories: "Category is required" }));
-    // } else {
-    //   setErr((cur) => ({ ...cur, categories: "" }));
-    // }
-    // if (!featuredImg) {
-      //   return setErr((cur) => ({ ...cur, featuredImg: "Featured Image is required" }));
-      // } else {
-        //   setErr((cur) => ({ ...cur, featuredImg: "" }));
-        // }
 
     /* ======= updating story ======== */
     const updateStory = {

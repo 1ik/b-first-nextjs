@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import tinymce from "tinymce";
+import { token } from "../token_utils";
 
 export default function TinyMceEditor({
   initialValue = "",
@@ -31,8 +32,27 @@ export default function TinyMceEditor({
           const reader = new FileReader();
 
           reader.addEventListener("load", async function () {
-            const base64image = reader.result as string;
-            callback(base64image, { title: file.name });
+            const formData = new FormData();
+            formData.append("image", file);
+
+            try {
+              const response = await fetch(`https://backend.bangladeshfirst.com/api/v1/media-upload-image`, {
+                method: "POST",
+                headers: {
+                  Authorization: token,
+                },
+                body: formData,
+              });
+
+              if (!response.ok) throw new Error("Could not upload image");
+
+              const data = await response.json();
+
+              callback(`https://bfirst.sgp1.cdn.digitaloceanspaces.com/${data.url}`, { title: file.name });
+            } catch (error) {
+              console.log(error);
+            }
+            
           });
           reader.readAsDataURL(file);
         });
