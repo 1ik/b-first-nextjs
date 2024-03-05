@@ -1,9 +1,9 @@
 import Multiselect from "multiselect-react-dropdown";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import tinymce from "tinymce";
 import { Breadcrumb } from "../../components";
+import TinyMceEditor from "../../components/TinyMceEditor";
 import { token } from "../../token_utils";
 
 const baseUrl = "https://backend.bangladeshfirst.com";
@@ -39,7 +39,6 @@ const fetchData = async function () {
 export default function StoryCreate() {
   const [mediaModalToShow, setMediaModalToShow] = useState("upload");
   const navigate = useNavigate();
-  const editorRef = useRef<HTMLTextAreaElement>(null);
 
   const {
     register,
@@ -165,6 +164,10 @@ export default function StoryCreate() {
     }
   };
 
+  const handleEditorChange = function (newContent: string) {
+    setBody(newContent);
+  };
+
   const handleFeaturedImgUpload = async function (e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
@@ -194,49 +197,6 @@ export default function StoryCreate() {
   };
 
   useEffect(() => {
-    if (!editorRef.current) return;
-
-    tinymce.init({
-      target: editorRef.current,
-      plugins:
-        "anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss",
-      toolbar:
-        "undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat",
-      file_picker_callback: (callback, value, meta) => {
-        const input = document.createElement("input");
-        input.setAttribute("type", "file");
-        input.setAttribute("accept", "image/*");
-
-        input.addEventListener("change", (e: any) => {
-          if (!e.target) return;
-          const file = e.target.files[0];
-
-          const reader = new FileReader();
-
-          reader.addEventListener("load", async function () {
-            const base64image = reader.result as string;
-            callback(base64image, { title: file.name });
-          });
-          reader.readAsDataURL(file);
-        });
-
-        input.click();
-      },
-      setup: (editor) => {
-        editor.on("change", () => {
-          setBody(editor.getContent());
-        });
-      },
-      tinycomments_mode: "embedded",
-      tinycomments_author: "Author name",
-      mergetags_list: [
-        { value: "First.Name", title: "First Name" },
-        { value: "Email", title: "Email" },
-      ],
-    });
-  });
-
-  useEffect(() => {
     (async function () {
       const data = await fetchData();
       setAuthors((data as any).authorsData.data);
@@ -245,6 +205,8 @@ export default function StoryCreate() {
       setImagesList((data as any).imagesList.media_images.data);
     })();
   }, []);
+
+  console.log(body);
 
   return (
     <div onClick={handleOutsideClick} className="overflow-x-auto flex flex-col h-full">
@@ -490,7 +452,7 @@ export default function StoryCreate() {
                         ],
                       }}
                     /> */}
-                    <textarea ref={editorRef}></textarea>
+                    <TinyMceEditor initialValue="" onChange={handleEditorChange} />
                   </div>
                 </div>
                 <p className="text-sm text-red-700">{err.body}</p>
