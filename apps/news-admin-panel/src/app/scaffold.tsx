@@ -8,8 +8,11 @@ import { AppContext } from "./app.context";
  */
 export function Scaffold() {
   const { user } = useContext(AppContext);
-  if (user) {
+const userData = JSON.parse(localStorage.getItem("userLogin"))
+
+  if (user || userData !== null) {
     return <AppInternal />;
   }
   return <Signin />;
+
 }

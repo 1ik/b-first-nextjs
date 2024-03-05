@@ -4,7 +4,9 @@ import { AppContext } from "../app.context";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { Button } from "@bfirst/components-button";
-import "react-toastify/dist/ReactToastify.css";
+
+
+
 
 type Inputs = {
   email: string;
@@ -18,6 +20,12 @@ const submitLogin = async (baseUrl: string, input: any) => {
 export function Signin() {
   const [loginError, setLoginError] = useState<boolean>(false);
   const { baseUrl, setUser, setToken } = useContext(AppContext);
+
+  
+
+
+
+  
 
   const { mutate, isError, isSuccess, isPending, data, error } = useMutation({
     mutationFn: (input) => {
@@ -44,9 +52,13 @@ export function Signin() {
 
     if (data.email === "admin@gmail.com" && data.password === "123456") {
       setLoginError(false);
+    
+      localStorage.setItem("userLogin",JSON.stringify(data))
     } else {
       setLoginError(true);
     }
+
+
   };
 
   const handleChange = (event) => {
