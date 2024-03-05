@@ -1,12 +1,10 @@
-import arrayMove from "array-move";
 import { useEffect, useState } from "react";
 import SortableList, { SortableItem } from "react-easy-sort";
 import { Breadcrumb } from "../../components";
 import { token } from "../../token_utils";
-
-
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router";
 
 const dropTarget = (
   <div className="py-3 text-center text-blue-600/50 font-bold border-2 border-dashed border-blue-600/50 rounded-md">
@@ -20,7 +18,8 @@ export function ManageStories() {
   const [search, setSearch] = useState("");
   const [searchedNews, setSearchedNews] = useState([]);
 
-  // const arrayMove = require('array-move');
+  const navigate = useNavigate();
+
 
 
   useEffect(() => {
@@ -117,10 +116,6 @@ export function ManageStories() {
     setSearch(e.target.value);
   };
 
-  // const handleRemoveFeaturedStories = function (id: number) {
-  //   if (window.confirm("Do you want to remove story?"))
-  //     setFeaturedStories((curr) => curr.filter((item) => (item as { id: number }).id !== id));
-  // };
 
   const handleRemoveFeaturedStories = function (id: number) {
     toast.info(
@@ -146,20 +141,27 @@ export function ManageStories() {
     toast.success("Story removed successfully", { position: "top-center" });
   };
 
+  const move = <T,>(array: T[], from: number, to: number): T[] => {
+    const newArray: T[] = [...array];
+    const item: T = newArray.splice(from, 1)[0];
+    newArray.splice(to, 0, item);
+    return newArray;
+  };
+
   const onSortEnd = (oldIndex: number, newIndex: number) => {
-    setFeaturedStories((array: any[]) => arrayMove(array, oldIndex, newIndex) as never);
+    setFeaturedStories((array: any[]) => move(array, oldIndex, newIndex) as never);
   };
 
   return (
     <div className="overflow-x-auto flex flex-col h-full">
       <ToastContainer />
-      <div className="inline-flex h-10 justify-between items-center px-4 py-2 w-full border-b">
+      <div className="inline-flex h-10 justify-between items-center px-4 py-2 w-full border-b fixed bg-white z-10">
         <Breadcrumb items={[{ name: "Manage Stories" }]} />
       </div>
       <form onSubmit={handleSubmit}>
         <div className="overflow-x-auto mb-5 p-5 h-full w-full flex flex-col">
           {/*=============content=================*/}
-          <div className="flex-1 w-full">
+          <div className="flex-1 w-full mb-10">
             <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
               <div className="col-span-full">
                 <label className="block text-sm font-medium leading-6 text-gray-900">Feature Category</label>
@@ -220,7 +222,7 @@ export function ManageStories() {
                         </h3>
                         <button
                           onClick={(e) => {
-                            e.preventDefault(); // Prevent the default behavior of the button click
+                            e.preventDefault(); 
                             handleRemoveFeaturedStories((item as { id: number }).id);
                           }}
                           className="btn"
@@ -236,8 +238,8 @@ export function ManageStories() {
           </div>
 
           {/* ================== buttons ================ */}
-          <div className="h-10 pt-5 flex items-center justify-end gap-x-6 w-full border-t border-gray-100">
-            <button type="button" className="text-sm font-semibold leading-6 text-gray-900">
+          <div className="h-10 pt-5 flex items-center justify-end gap-x-6 w-full border-t border-gray-100 fixed bottom-5 right-10">
+            <button type="button" onClick={()=> window.location.reload()} className="text-sm font-semibold leading-6 text-gray-900">
               Cancel
             </button>
             <button type="submit" className="btn btn-sm btn-accent">
