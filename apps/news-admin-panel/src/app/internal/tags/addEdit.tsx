@@ -67,15 +67,15 @@ export default function AddEdit() {
             </div>
           </div>
 
-          <div className="h-10 pt-5 flex items-center justify-end gap-x-6 w-full border-t border-gray-200">
+          <div className="h-10 pt-5 fixed bottom-5 right-5 flex items-center justify-end gap-x-6 w-full border-t border-gray-200">
             <button
               type="button"
               onClick={() => navigate("/tags")}
-              className="text-sm font-semibold leading-6 text-gray-900"
+              className="text-sm btn btn-sm rounded-[5px] font-semibold leading-6 text-gray-900"
             >
               Cancel
             </button>
-            <button type="submit" className="btn btn-sm btn-accent">
+            <button type="submit" className="btn btn-sm rounded-[5px]  btn-accent">
               Save
             </button>
           </div>
