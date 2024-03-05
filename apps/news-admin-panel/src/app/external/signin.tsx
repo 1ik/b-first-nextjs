@@ -1,9 +1,10 @@
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AppContext } from "../app.context";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { Button } from "@bfirst/components-button";
+import "react-toastify/dist/ReactToastify.css";
 
 type Inputs = {
   email: string;
@@ -15,7 +16,9 @@ const submitLogin = async (baseUrl: string, input: any) => {
 };
 
 export function Signin() {
+  const [loginError, setLoginError] = useState<boolean>(false);
   const { baseUrl, setUser, setToken } = useContext(AppContext);
+
   const { mutate, isError, isSuccess, isPending, data, error } = useMutation({
     mutationFn: (input) => {
       return axios.post(`${baseUrl}/api/v1/login`, input);
@@ -38,6 +41,18 @@ export function Signin() {
   const onSubmit: SubmitHandler<Inputs> = (data, event) => {
     event.stopPropagation();
     mutate(data);
+
+    if (data.email === "admin@gmail.com" && data.password === "123456") {
+      setLoginError(false);
+    } else {
+      setLoginError(true);
+    }
+  };
+
+  const handleChange = (event) => {
+    if ((event.target as any).value.length > 0) {
+      setLoginError(false);
+    }
   };
 
   return (
@@ -63,6 +78,7 @@ export function Signin() {
                   autoComplete="email"
                   required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-400 sm:text-sm sm:leading-6"
+                  onChange={handleChange}
                 />
               </div>
             </div>
@@ -78,7 +94,7 @@ export function Signin() {
                   </a>
                 </div>
               </div>
-              <div className="mt-2">
+              <div className="mt-2 ">
                 <input
                   id="password"
                   {...register("password")}
@@ -86,9 +102,26 @@ export function Signin() {
                   required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-400 sm:text-sm sm:leading-6"
                 />
+                {loginError && (
+                  <div role="alert" className="alert alert-warning mt-2">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="stroke-current shrink-0 h-6 w-6"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                      />
+                    </svg>
+                    <span>Warning: Invalid email or password!</span>
+                  </div>
+                )}
               </div>
             </div>
-
             <div>
               <Button loading={isPending} classes={"flex w-full justify-center rounded-md px-3 py-1.5"} />
             </div>
