@@ -8,6 +8,7 @@ import { AddEditAuthorLazy, AuthorsListLazy } from "./internal/authors";
 import { AddEditLazy, ListLazy } from "./internal/categories";
 import { AddEditStoriesLazy, StoriesListLazy, StoryPreviewLazy } from "./internal/stories";
 import { AddEditTagsLazy, TagsListLazy } from "./internal/tags";
+import { ManageStories } from "./internal/manageStories/manageStories";
 
 export const NavBar = () => {
   return (
@@ -43,6 +44,8 @@ const _links = [
   { name: "Categories", href: "/categories", isActive: true },
   { name: "Authors", href: "/authors" },
   { name: "Stories", href: "/stories" },
+  { name: "Tags", href: "/tags" },
+  { name: "Manage Story", href: "/manage-story" }
 ];
 
 export function AppInternal() {
@@ -113,6 +116,7 @@ export function AppInternal() {
               <Route path="/tags" element={<TagsListLazy />} />
               <Route path="/tags/add" element={<AddEditTagsLazy />} />
               <Route path="/stories/:storyId" element={<StoryPreviewLazy />} />
+              <Route path="/manage-story" element={<ManageStories/>} />
             </Routes>
           </div>
         </div>
