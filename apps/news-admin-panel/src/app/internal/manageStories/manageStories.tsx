@@ -18,9 +18,6 @@ export function ManageStories() {
   const [search, setSearch] = useState("");
   const [searchedNews, setSearchedNews] = useState([]);
 
-
-
-
   useEffect(() => {
     const fetchData = async function () {
       try {
@@ -114,7 +111,6 @@ export function ManageStories() {
     if (!e.target.value) setSearchedNews([]);
     setSearch(e.target.value);
   };
-
 
   const handleRemoveFeaturedStories = function (id: number) {
     toast.info(
@@ -221,7 +217,7 @@ export function ManageStories() {
                         </h3>
                         <button
                           onClick={(e) => {
-                            e.preventDefault(); 
+                            e.preventDefault();
                             handleRemoveFeaturedStories((item as { id: number }).id);
                           }}
                           className="btn"
@@ -235,16 +231,19 @@ export function ManageStories() {
               </div>
             </div>
           </div>
-
-          {/* ================== buttons ================ */}
-          <div className="h-10 pt-5 flex items-center justify-end gap-x-6 w-full border-t border-gray-100 fixed bottom-5 right-10">
-            <button type="button" onClick={()=> window.location.reload()} className="text-sm font-semibold leading-6 text-gray-900">
-              Cancel
-            </button>
-            <button type="submit" className="btn btn-sm btn-accent">
-              Save
-            </button>
-          </div>
+        </div>
+        {/* ================== buttons ================ */}
+        <div className="h-10 pt-5 flex items-center justify-end gap-x-6 w-full border-t bg-white border-gray-100 fixed bottom-0 pb-5 right-10">
+          <button
+            type="button"
+            onClick={() => window.location.reload()}
+            className="text-sm font-semibold leading-6 text-gray-900"
+          >
+            Cancel
+          </button>
+          <button type="submit" className="btn btn-sm btn-accent">
+            Save
+          </button>
         </div>
       </form>
     </div>
