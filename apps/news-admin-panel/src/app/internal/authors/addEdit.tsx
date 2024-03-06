@@ -35,10 +35,10 @@ export default function AddEdit() {
   };
   return (
     <div className="overflow-x-auto flex flex-col h-full">
-      <div className="inline-flex h-10 justify-between items-center px-4 py-2 w-full border-b">
+      <div className="inline-flex h-10 justify-between items-center px-4 py-2 fixed bg-white z-10 w-[90.5%] border-b">
         <Breadcrumb items={[{ name: "Authors", link: "/authors" }, { name: "Add" }]} />
       </div>
-      <div className="overflow-x-auto p-5 h-full w-full flex flex-col">
+      <div className="overflow-x-auto p-5 h-full w-full mt-10 flex flex-col">
         {/*content*/}
         <form onSubmit={handleAddAuthor}>
           <div className="flex-1 w-full">
@@ -82,15 +82,15 @@ export default function AddEdit() {
               </div>
             </div>
           </div>
-          <div className="h-10 pt-5 flex items-center justify-end gap-x-6 w-full border-t border-gray-200">
+          <div className="h-10 pt-5 fixed bottom-5  -left-12 z-40 flex items-center justify-end gap-x-6 w-full border-t border-gray-200">
             <button
               onClick={() => navigate("/authors")}
               type="button"
-              className="text-sm font-semibold leading-6 text-gray-900"
+              className="text-sm btn btn-sm rounded-[5px] font-semibold  leading-6 text-gray-900"
             >
               Cancel
             </button>
-            <button type="submit" className="btn btn-sm btn-accent">
+            <button type="submit" className=" btn btn-sm rounded-[5px] btn-accent">
               Save
             </button>
           </div>

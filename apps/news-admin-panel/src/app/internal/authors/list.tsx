@@ -66,7 +66,7 @@ export default function List() {
 
   return (
     <div className="overflow-x-auto flex flex-col">
-      <div className="inline-flex h-10 justify-between items-center px-4 py-2 w-full border-b">
+      <div className="inline-flex h-10 justify-between items-center px-4 py-2 fixed bg-white z-10 w-[90.5%] border-b">
         <Breadcrumb items={[{ name: "Authors" }]} />
         <span className="inline-flex gap-2">
           <input type="text" className="input-sm h-6" placeholder="Search" />
@@ -75,7 +75,8 @@ export default function List() {
           </a>
         </span>
       </div>
-      <table className="table">
+
+      <table className="table mt-10">
         <thead className="sticky">
           <tr>
             <th>Id</th>
@@ -104,9 +105,9 @@ export default function List() {
           ))}
         </tbody>
       </table>
-      <div className="join grid grid-cols-2 w-[250px] mx-auto">
-          <button className="join-item btn btn-outline" onClick={handlePrevPage} disabled={currentPage === 1}>Previous Page</button>
-          <button className="join-item btn btn-outline" onClick={handleNextPage} disabled={currentPage === totalPage}>Next Page</button>
+      <div className="join grid grid-cols-2 w-[250px] mx-auto fixed bottom-5 right-5">
+          <button className="join-item btn btn-sm rounded-[5px] bg-white btn-outline" onClick={handlePrevPage} disabled={currentPage === 1}>Previous Page</button>
+          <button className="join-item btn btn-sm rounded-[5px] bg-white btn-outline" onClick={handleNextPage} disabled={currentPage === totalPage}>Next Page</button>
         </div>
     </div>
   );

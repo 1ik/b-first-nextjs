@@ -1,12 +1,13 @@
-import { Editor } from "@tinymce/tinymce-react";
 import Multiselect from "multiselect-react-dropdown";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { Breadcrumb } from "../../components";
+import TinyMceEditor from "../../components/TinyMceEditor";
+import { token } from "../../token_utils";
 
 const baseUrl = "https://backend.bangladeshfirst.com";
-const token = "Bearer 3|KgHSFiBKye5bfM73JPi5VJDo6wNrHAKsUtys5Dme11e09b6a"
+
 
 const fetchData = async function (storyId: any) {
   try {
@@ -46,7 +47,7 @@ export default function StoryPreview() {
     try {
       const response = await fetch(`https://backend.bangladeshfirst.com/api/v1/stories/${id}`, {
         method: "DELETE",
-        headers: { Authorization: "Bearer 3|KgHSFiBKye5bfM73JPi5VJDo6wNrHAKsUtys5Dme11e09b6a" },
+        headers: { Authorization: token },
       });
       if (!response.ok) throw new Error("Could not delete the story");
       navigate("/stories");
@@ -98,6 +99,10 @@ export default function StoryPreview() {
     }
   };
 
+  const handleEditorChange = function (newContent: string) {
+    setBody(newContent);
+  };
+
   const handleOutsideClick = function (e: React.MouseEvent<HTMLElement>) {
     const clickedElement = e.target as HTMLElement;
     if (clickedElement.id !== "selectTags_input") setShowAddTagBtn(false);
@@ -123,32 +128,6 @@ export default function StoryPreview() {
   };
 
   const handleUpdateStory = async function (data: any) {
-    /* ==== errors handling ==== */
-    // if (!body) {
-    //   return setErr((cur) => ({ ...cur, body: "Body is required" }));
-    // } else {
-    //   setErr((cur) => ({ ...cur, body: "" }));
-    // }
-    // if (!selectedTags.length) {
-    //   return setErr((cur) => ({ ...cur, tags: "Tag is required" }));
-    // } else {
-    //   setErr((cur) => ({ ...cur, tags: "" }));
-    // }
-    // if (!selectedAuthors.length) {
-    //   return setErr((cur) => ({ ...cur, authors: "Author is required" }));
-    // } else {
-    //   setErr((cur) => ({ ...cur, authors: "" }));
-    // }
-    // if (!selectedCategories.length) {
-    //   return setErr((cur) => ({ ...cur, categories: "Category is required" }));
-    // } else {
-    //   setErr((cur) => ({ ...cur, categories: "" }));
-    // }
-    // if (!featuredImg) {
-      //   return setErr((cur) => ({ ...cur, featuredImg: "Featured Image is required" }));
-      // } else {
-        //   setErr((cur) => ({ ...cur, featuredImg: "" }));
-        // }
 
     /* ======= updating story ======== */
     const updateStory = {
@@ -440,12 +419,12 @@ export default function StoryPreview() {
                 </label>
                 <div className="mt-2">
                   <div>
-                    <Editor
+                    {/* <Editor
                     initialValue={(story as {story:any}).story.content}
                       apiKey="pi5pfn04bb6lqbsylq9ia36vjdpv9ffaedner0xk14tr0zl0"
                       onEditorChange={(newValue, editor) => {
                         setBody(newValue);
-                        /*  setText(editor.getContent({ format: "text" })); */
+                        setText(editor.getContent({ format: "text" }));
                       }}
                       init={{
                         plugins:
@@ -479,7 +458,8 @@ export default function StoryPreview() {
                           { value: "Email", title: "Email" },
                         ],
                       }}
-                    />
+                    /> */}
+                    <TinyMceEditor onChange={handleEditorChange} initialValue={body}/>
                   </div>
                 </div>
                 <p className="text-sm text-red-700">{err.body}</p>
@@ -499,8 +479,8 @@ export default function StoryPreview() {
                       onSearch={handleSearch}
                       avoidHighlightFirstOption={true}
                       selectedValues={selectedTags}
-                      onSelect={(list) => setSelectedTags(list)}
-                      onRemove={(list) => setSelectedTags(list)}
+                      onSelect={(list:any) => setSelectedTags(list)}
+                      onRemove={(list:any) => setSelectedTags(list)}
                       placeholder="Select Tags"
                     />
                   </div>
