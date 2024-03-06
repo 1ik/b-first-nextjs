@@ -18,7 +18,6 @@ export function ManageStories() {
   const [search, setSearch] = useState("");
   const [searchedNews, setSearchedNews] = useState([]);
 
-  const navigate = useNavigate();
 
 
 
@@ -26,7 +25,7 @@ export function ManageStories() {
     const fetchData = async function () {
       try {
         const response = await fetch(
-          `https://backend.bangladeshfirst.com/api/v1/categories/${categoryOption}/featured-stories`,
+          `https://backend.bangladeshfirst.com/api/v1/public/categories/${categoryOption}/featured-stories`,
           {
             headers: { Authorization: token },
           }
@@ -154,17 +153,17 @@ export function ManageStories() {
 
   return (
     <div className="overflow-x-auto flex flex-col h-full">
-      <ToastContainer />
       <div className="inline-flex h-10 justify-between items-center px-4 py-2 w-full border-b fixed bg-white z-10">
         <Breadcrumb items={[{ name: "Manage Stories" }]} />
       </div>
+      <ToastContainer />
       <form onSubmit={handleSubmit}>
         <div className="overflow-x-auto mb-5 p-5 h-full w-full flex flex-col">
           {/*=============content=================*/}
           <div className="flex-1 w-full mb-10">
             <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
               <div className="col-span-full">
-                <label className="block text-sm font-medium leading-6 text-gray-900">Feature Category</label>
+                <label className="block text-sm font-medium leading-6 text-gray-900 mt-10">Feature Category</label>
                 <select
                   className="border-gray-300 rounded-md"
                   value={categoryOption}

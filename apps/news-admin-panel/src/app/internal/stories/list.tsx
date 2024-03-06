@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Breadcrumb } from "../../components";
 import { useNavigate } from "react-router";
 import { token } from "../../token_utils";
+import { Link } from "react-router-dom";
 
 export default function List() {
   const [stories, setStories] = useState([]);
@@ -66,9 +67,9 @@ export default function List() {
         <Breadcrumb items={[{ name: "Stories" }]} />
         <span className="inline-flex gap-2">
           <input type="text" className="input-sm h-6" placeholder="Search" />
-          <a href="stories/create-story" className="btn btn-outline btn-xs">
+          <Link to="/stories/create-story" className="btn btn-outline btn-xs">
             Create Story
-          </a>
+          </Link>
         </span>
       </div>
       <table className="table mt-10">

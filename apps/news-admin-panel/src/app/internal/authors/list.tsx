@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Breadcrumb, DeleteAction, EditAction } from "../../components";
 import { token } from "../../token_utils";
+import { Link } from "react-router-dom";
 
 export default function List() {
   const [authors, setAuthors] = useState([]);
@@ -70,9 +71,9 @@ export default function List() {
         <Breadcrumb items={[{ name: "Authors" }]} />
         <span className="inline-flex gap-2">
           <input type="text" className="input-sm h-6" placeholder="Search" />
-          <a href="authors/add" className="btn btn-outline btn-xs">
+          <Link to="/authors/add" className="btn btn-outline btn-xs">
             Add
-          </a>
+          </Link>
         </span>
       </div>
 

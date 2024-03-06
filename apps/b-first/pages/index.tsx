@@ -880,14 +880,15 @@ import Slider from "../components/Slider/Slider";
 //   );
 // }
 
-export default function Index({ latestNews, bangladesh, politics, world }: any) {
+export default function Index({featuredNews, latestNews, bangladesh, politics, world }: any) {
+  console.log(featuredNews);
   return (
     <>
       <Header />
       <MobileMenu />
       <main id="content">
-        <FeaturedItems items={latestNews} />
-        <BlockNews items={latestNews.slice(5, 11)} title={""} />
+        <FeaturedItems items={featuredNews} />
+        <BlockNews items={featuredNews.slice(5, 11)} title={""} />
         <Slider items={world.slice(0, 6)} title={"World"} />
         <BlockNews2 items={bangladesh.slice(0, 6)} latest={latestNews.slice(0, 5)} title={"Bangladesh"} />
         <BlockNews3 items={politics} latest={latestNews.slice(5, 11)} title={"Politics"} />
@@ -924,13 +925,15 @@ export default function Index({ latestNews, bangladesh, politics, world }: any) 
 const baseUrl = "https://backend.bangladeshfirst.com/api/v1/public";
 
 export const getServerSideProps = async () => {
-  const [latestNewsRes, politicsNews, bangladeshNews, worldNews] = await Promise.all([
+  const [featuredNewsRes, latestNewsRes, politicsNews, bangladeshNews, worldNews] = await Promise.all([
+    fetch(`${baseUrl}/categories/0/featured-stories`),
     fetch(`${baseUrl}/latest/stories`),
     fetch(`${baseUrl}/categories/politics/stories`),
     fetch(`${baseUrl}/categories/bangladesh/stories`),
     fetch(`${baseUrl}/categories/world/stories`),
   ]);
 
+  const featuredNews: any[] = (await featuredNewsRes.json()).data;
   const latestNews: any[] = (await latestNewsRes.json()).data;
 
   const filterFn = (item: any) => !latestNews.find((f) => f.id === item.id);
@@ -939,5 +942,5 @@ export const getServerSideProps = async () => {
   let politics = (await politicsNews.json()).data.filter(filterFn);
   let world = (await worldNews.json()).data.filter(filterFn);
 
-  return { props: { latestNews, bangladesh, politics, world } };
+  return { props: {featuredNews, latestNews, bangladesh, politics, world } };
 };
