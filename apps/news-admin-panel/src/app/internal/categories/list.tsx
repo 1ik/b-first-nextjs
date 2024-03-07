@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Breadcrumb, DeleteAction, EditAction } from "../../components";
 import { token } from "../../token_utils";
+import { Link } from "react-router-dom";
 
 export default function List() {
   const [categories, setCategories] = useState([]);
@@ -71,11 +72,11 @@ export default function List() {
     <div className="overflow-x-auto flex flex-col">
       <div className="inline-flex h-10 justify-between items-center px-4 py-2 fixed bg-white z-10 w-[90.5%] border-b">
         <Breadcrumb items={[{ name: "Categories" }]} />
-        <span className="inline-flex gap-2">
+        <span className="inline-flex gap-2 pr-4">
           <input type="text" className="input-sm h-6" placeholder="Search" />
-          <a href="categories/add" className="btn btn-outline btn-xs">
+          <Link to="/categories/add" className="btn btn-outline btn-xs">
             Add
-          </a>
+          </Link>
         </span>
       </div>
 

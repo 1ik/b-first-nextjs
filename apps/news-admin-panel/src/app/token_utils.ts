@@ -1,1 +1,1 @@
-export const token = "Bearer 1|Q6ShFu255w4N8XgjWCfLITzz4LAH33Vd8QLbma5If31d02d7";
+export const token = "Bearer 8|3uecuo1QS7wKQTWrGKvIyc87wYmp7I4e3zKZGpFNdfbc4aba";

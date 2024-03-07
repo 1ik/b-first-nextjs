@@ -4,6 +4,7 @@ import { AppContext } from "../app.context";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { Button } from "@bfirst/components-button";
+import { Link } from "react-router-dom";
 
 type Inputs = {
   email: string;
@@ -94,9 +95,9 @@ export function Signin() {
                   Password
                 </label>
                 <div className="text-sm">
-                  <a href="#" className="font-semibold text-gray-400 hover:text-gray-600">
+                  <Link to="#" className="font-semibold text-gray-400 hover:text-gray-600">
                     Forgot password?
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div className="mt-2">
