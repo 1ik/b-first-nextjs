@@ -139,6 +139,15 @@ export function Index({ news, categoryNews, latestNews, featured }: any) {
                 </div>
                 {/*right*/}
                 <div className="flex-shrink max-w-full w-full lg:w-1/3 pl-3 lg:pl-8 lg:pb-8 order-last bg-gray-50">
+                  {/* ============= ads =============== */}
+                  <div className="flex md:flex-row flex-col lg:flex-col gap-4 justify-center items-center">
+                    <a href="#">
+                      <img src="/img/ads/sibl-ad.gif" alt="Advertisement" />
+                    </a>
+                    <a href="$">
+                      <img src="/img/ads/global-islami-bank-ad.gif" alt="Advertisement" />
+                    </a>
+                  </div>
                   <h2 className="text-xl font-normal pb-6 pt-6">More From {news.category.name}</h2>
                   <div className="flex flex-col gap-4 pr-6">
                     {categoryNews?.data
@@ -152,6 +161,16 @@ export function Index({ news, categoryNews, latestNews, featured }: any) {
                           </a>
                         </div>
                       ))}
+                  </div>
+
+                  {/* ============= ads =============== */}
+                  <div className="flex md:flex-row flex-col lg:flex-col gap-4 justify-center items-center mt-8">
+                    <a href="#">
+                      <img src="/img/ads/union-bank-ad.gif" alt="Advertisement" />
+                    </a>
+                    <a href="$">
+                      <img src="/img/ads/ibbl.gif" alt="Advertisement" />
+                    </a>
                   </div>
 
                   <div className="mt-5"></div>
@@ -171,8 +190,6 @@ export function Index({ news, categoryNews, latestNews, featured }: any) {
                   </div>
                 </div>
               </div>
-
-              
             </div>
           </div>
           <Footer />
