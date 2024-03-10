@@ -24,5 +24,5 @@ export default function CurrentDate() {
 
   const formattedDate = `${dayOfWeek}, ${month} ${date}, ${year}`;
 
-  return <div className="text-xs text-red-700 font-semibold ml-1.5 translate-y-[-4px] self-start">{formattedDate}</div>;
+  return <div className="text-xs text-black font-normal ml-1.5 translate-y-[-4px] self-start">{formattedDate}</div>;
 }
