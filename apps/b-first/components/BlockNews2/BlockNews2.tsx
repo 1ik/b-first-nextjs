@@ -45,7 +45,7 @@ const BlockNews2 = ({ items, latest, title }: { items: any[]; title: string; lat
               <div className="text-sm py-6 sticky">
                 <div className="w-full text-center">
                   <a href="#">
-                    <img className="mx-auto" src="/img/ads/ad_islami_bank.jpg" alt="advertisement area" />
+                    <img className="mx-auto" src="/img/ads/union-bank-ad.gif" alt="advertisement area" />
                   </a>
                 </div>
               </div>

@@ -29,7 +29,7 @@ const BlockNews3 = ({ items, latest, title }: { items: any[]; title: string; lat
                     <a href={newsUrl(items[0])}>
                       <img
                         className="max-w-full w-full mx-auto h-auto"
-                        src={getImageUrl(items[0].meta.featured_image)}
+                        src={getImageUrl(items[0].featured_image)}
                         alt={items[0].title}
                       />
                     </a>
@@ -43,7 +43,7 @@ const BlockNews3 = ({ items, latest, title }: { items: any[]; title: string; lat
                       <div className="pt-2">
                         <div className="text-gray-100">
                           <div className="inline-block h-3 border-l-2 border-red-600 mr-2" />
-                          {items[0].categories[0]?.name}
+                          {items[0].category?.name}
                         </div>
                       </div>
                     </div>
