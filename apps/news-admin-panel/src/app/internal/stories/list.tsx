@@ -65,7 +65,7 @@ export default function List() {
     <div className="overflow-x-auto flex flex-col">
       <div className="inline-flex h-10 justify-between items-center px-4 py-2 fixed bg-white z-10 w-[90.5%] border-b">
         <Breadcrumb items={[{ name: "Stories" }]} />
-        <span className="inline-flex gap-2 pr-4">
+        <span className="inline-flex gap-2 pr-16 xl:pr-12">
           <input type="text" className="input-sm h-6" placeholder="Search" />
           <Link to="/stories/create-story" className="btn btn-outline btn-xs">
             Create Story
