@@ -1,4 +1,5 @@
 import React from "react";
+import CurrentDate from "../CurrentDate/CurrentDate";
 
 const Header = ({ category }: { category?: string }) => {
   return (
@@ -7,10 +8,11 @@ const Header = ({ category }: { category?: string }) => {
         <nav className="bg-white">
           <div className="md-container xl:container mx-auto px-3 sm:px-4 xl:px-2">
             <div className="flex justify-between">
-              <div className="mx-w-10 text-2xl font-bold capitalize text-white flex items-center">
+              <div className="mx-w-10 text-2xl font-bold capitalize text-white flex flex-col items-center">
                 <a href="/">
                   <img src="/img/logo.svg" alt="" />
                 </a>
+                <CurrentDate/>
               </div>
 
               <div className="flex flex-row">
