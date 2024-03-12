@@ -501,11 +501,11 @@ export default function StoryCreate() {
               </div>
             </div>
           </div>
-          <div className="h-10 pt-5 flex items-center justify-end gap-x-6 w-full border-t border-gray-200">
+          <div className="  flex items-center justify-end gap-x-6 w-full border-t  fixed bottom-2 bg-white z-40 right-10">
             <button
               onClick={() => navigate("/stories")}
               type="button"
-              className="text-sm font-semibold leading-6 text-gray-900"
+              className="text-sm font-semibold bg-white leading-6 text-gray-900"
             >
               Cancel
             </button>

@@ -131,7 +131,7 @@ export function AppInternal() {
         </div>
       </div>
 
-      <div className="drawer-side">
+      <div className="drawer-side z-[40]">
         <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
         <ul className="menu p-4 w-50 min-h-full bg-base-200 text-base-content">
           {links.map((l) => (
