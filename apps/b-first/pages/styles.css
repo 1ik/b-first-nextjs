@@ -24,3 +24,11 @@
   height: 90px;
   width: 160px;
 }
+
+.splide__pagination {
+  margin-top: -50px !important;
+}
+
+.splide__track {
+  padding-bottom: 30px !important
+}

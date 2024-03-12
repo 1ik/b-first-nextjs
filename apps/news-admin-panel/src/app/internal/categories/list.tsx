@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Breadcrumb, DeleteAction, EditAction } from "../../components";
 import { token } from "../../token_utils";
 import { Link } from "react-router-dom";
+import { IoSearchOutline } from "react-icons/io5";
 
 export default function List() {
   const [categories, setCategories] = useState([]);
@@ -70,11 +71,18 @@ export default function List() {
 
   return (
     <div className="overflow-x-auto flex flex-col">
-      <div className="inline-flex h-10 justify-between items-center px-4 py-2 fixed bg-white z-10 w-[90.5%] border-b">
+      <div className="inline-flex h-10 justify-between items-center px-4 py-2 fixed bg-white z-10  border-b w-full lg:w-[83%] xl:w-[88%]">
         <Breadcrumb items={[{ name: "Categories" }]} />
-        <span className="inline-flex gap-2 pr-16 xl:pr-12">
-          <input type="text" className="input-sm h-6" placeholder="Search" />
-          <Link to="/categories/add" className="btn btn-outline btn-xs">
+
+        <span className="inline-flex gap-2 ">
+          <details className="dropdown dropdown-left block md:hidden">
+            <summary className="btn btn-xs hover:bg-white h-8"><IoSearchOutline size={15} /></summary>
+            <ul className="p-0 m-0 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
+            <input type="text" className="input-sm" placeholder="Search" />
+            </ul>
+          </details>
+          <input type="text" className="input-sm h-6 hidden md:block" placeholder="Search" />
+          <Link to="/categories/add" className="btn btn-outline btn-xs h-8 md:h-6">
             Add
           </Link>
         </span>
@@ -110,10 +118,18 @@ export default function List() {
         </tbody>
       </table>
       <div className="join grid grid-cols-2 w-[250px] mx-auto fixed bottom-5 right-5">
-        <button className="join-item  btn btn-sm rounded-[5px] bg-white btn-outline" onClick={handlePrevPage} disabled={currentPage === 1}>
+        <button
+          className="join-item  btn btn-sm rounded-[5px] bg-white btn-outline"
+          onClick={handlePrevPage}
+          disabled={currentPage === 1}
+        >
           Previous Page
         </button>
-        <button className="join-item  btn btn-sm rounded-[5px] bg-white btn-outline" onClick={handleNextPage} disabled={currentPage === totalPage}>
+        <button
+          className="join-item  btn btn-sm rounded-[5px] bg-white btn-outline"
+          onClick={handleNextPage}
+          disabled={currentPage === totalPage}
+        >
           Next Page
         </button>
       </div>
