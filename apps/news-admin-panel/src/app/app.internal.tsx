@@ -1,15 +1,14 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { useContext } from "react";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { IoMenuSharp } from "react-icons/io5";
 import { MdChevronRight } from "react-icons/md";
 import { Link, Route, Routes, useLocation } from "react-router-dom";
+import { AppContext } from "./app.context";
 import { AddEditAuthorLazy, AuthorsListLazy } from "./internal/authors";
 import { AddEditLazy, ListLazy } from "./internal/categories";
+import { ManageStories } from "./internal/manageStories/manageStories";
 import { AddEditStoriesLazy, StoriesListLazy, StoryPreviewLazy } from "./internal/stories";
 import { AddEditTagsLazy, TagsListLazy } from "./internal/tags";
-import { ManageStories } from "./internal/manageStories/manageStories";
-import { AppContext } from "./app.context";
 
 export const NavBar = () => {
   return (
@@ -42,11 +41,11 @@ export const NavBar = () => {
 };
 
 const _links = [
+  { name: "Stories", href: "/stories" },
+  { name: "Manage Story", href: "/manage-story" },
   { name: "Categories", href: "/categories", isActive: true },
   { name: "Authors", href: "/authors" },
   { name: "Tags", href: "/tags" },
-  { name: "Stories", href: "/stories" },
-  { name: "Manage Story", href: "/manage-story" }
 ];
 
 export function AppInternal() {
@@ -125,7 +124,7 @@ export function AppInternal() {
               <Route path="/tags" element={<TagsListLazy />} />
               <Route path="/tags/add" element={<AddEditTagsLazy />} />
               <Route path="/stories/:storyId" element={<StoryPreviewLazy />} />
-              <Route path="/manage-story" element={<ManageStories/>} />
+              <Route path="/manage-story" element={<ManageStories />} />
             </Routes>
           </div>
         </div>
@@ -133,16 +132,20 @@ export function AppInternal() {
 
       <div className="drawer-side">
         <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
-        <ul className="menu p-4 w-50 min-h-full bg-base-200 text-base-content">
-          {links.map((l) => (
-            <li key={l.name}>
-              <Link key={l.name} to={l.href} className={"flex justify-between" + (l.isActive ? " active" : "")}>
-                {l.name} <MdChevronRight />
-              </Link>
-            </li>
-          ))}
-          <li className="btn btn-primary-outline " onClick={handleSignOut}>Sign out</li>
-        </ul>
+        <div className="menu p-4 w-50 min-h-full bg-base-200 text-base-content flex flex-col justify-between">
+          <ul className="">
+            {links.map((l) => (
+              <li key={l.name}>
+                <Link key={l.name} to={l.href} className={"flex justify-between" + (l.isActive ? " active" : "")}>
+                  {l.name} <MdChevronRight />
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <button className="btn btn-primary btn-outline" onClick={handleSignOut}>
+            Sign out
+          </button>
+        </div>
       </div>
     </div>
   );
