@@ -206,7 +206,20 @@ export default function StoryCreate() {
     })();
   }, []);
 
-  console.log(body);
+  /* ============ tag creation with enter keypress =========== */
+  useEffect(() => {
+    const handleKeypress = function (e: React.KeyboardEvent) {
+      if (e.key === "Enter" && searchTagInput) {
+        e.preventDefault();
+        handleAddTag();
+      }
+    };
+
+    window.addEventListener("keypress", handleKeypress as any);
+    return function () {
+      window.removeEventListener("keypress", handleKeypress as any);
+    };
+  }, [searchTagInput]);
 
   return (
     <div onClick={handleOutsideClick} className="overflow-x-auto flex flex-col h-full">
@@ -382,8 +395,14 @@ export default function StoryCreate() {
                   options={authors}
                   displayValue="name"
                   avoidHighlightFirstOption={true}
-                  onSelect={(list) => setSelectedAuthors(list)}
-                  onRemove={(list) => setSelectedAuthors(list)}
+                  onSelect={(list) => {
+                    setSelectedAuthors(list);
+                    setErr((cur) => ({ ...cur, authors: "" }));
+                  }}
+                  onRemove={(list) => {
+                    setSelectedAuthors(list);
+                    setErr((cur) => ({ ...cur, authors: "" }));
+                  }}
                   placeholder="Select Authors"
                 />
                 <p className="text-sm text-red-700">{err.authors}</p>
@@ -433,8 +452,14 @@ export default function StoryCreate() {
                       onSearch={handleSearch}
                       avoidHighlightFirstOption={true}
                       selectedValues={selectedTags}
-                      onSelect={(list) => setSelectedTags(list)}
-                      onRemove={(list) => setSelectedTags(list)}
+                      onSelect={(list) => {
+                        setSelectedTags(list);
+                        setErr((cur) => ({ ...cur, tags: "" }));
+                      }}
+                      onRemove={(list) => {
+                        setSelectedTags(list);
+                        setErr((cur) => ({ ...cur, tags: "" }));
+                      }}
                       placeholder="Select Tags"
                       closeOnSelect={true}
                     />
@@ -461,8 +486,14 @@ export default function StoryCreate() {
                   options={categories}
                   displayValue="name"
                   avoidHighlightFirstOption={true}
-                  onSelect={(list) => setSelectedCategories(list)}
-                  onRemove={(list) => setSelectedCategories(list)}
+                  onSelect={(list) => {
+                    setSelectedCategories(list);
+                    setErr((cur) => ({ ...cur, categories: "" }));
+                  }}
+                  onRemove={(list) => {
+                    setSelectedCategories(list);
+                    setErr((cur) => ({ ...cur, categories: "" }));
+                  }}
                   placeholder="Select Categories"
                   closeOnSelect={true}
                 />
