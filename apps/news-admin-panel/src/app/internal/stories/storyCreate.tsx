@@ -532,7 +532,7 @@ export default function StoryCreate() {
               </div>
             </div>
           </div>
-          <div className="  flex items-center justify-end gap-x-6 w-full border-t  fixed bottom-2 bg-white z-40 right-10">
+          <div className="h-10 pt-5 flex items-center justify-end gap-x-6 w-full border-t  fixed bottom-0 pb-5 bg-white z-40 right-10">
             <button
               onClick={() => navigate("/stories")}
               type="button"
