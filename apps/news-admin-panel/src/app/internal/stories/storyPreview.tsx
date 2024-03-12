@@ -134,7 +134,7 @@ export default function StoryPreview() {
       title: data.headline,
       meta: {
         featured_image: featuredImgURL,
-        newsType: data.newsType,
+        /* newsType: data.newsType, */
         shoulder: data.shoulder,
         subhead: data.subhead,
         altheadline: data.altheadline,
@@ -283,7 +283,7 @@ export default function StoryPreview() {
           <div className="flex-1 w-full pb-6">
             <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
               {/* ==== news type ==== */}
-              <div className="col-span-full">
+              {/* <div className="col-span-full">
                 <label htmlFor="news-type" className="block text-sm font-medium leading-6 text-gray-900">
                   News Type*
                 </label>
@@ -294,7 +294,7 @@ export default function StoryPreview() {
                   <option value="online">Online</option>
                 </select>
                 <p className="text-sm text-red-700">{errors.newsType && (errors.newsType.message as string)}</p>
-              </div>
+              </div> */}
 
               {/* ==== shoulder ==== */}
               <div className="col-span-4">
