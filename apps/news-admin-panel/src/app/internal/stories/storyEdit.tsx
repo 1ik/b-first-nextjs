@@ -213,6 +213,7 @@ export default function StoryPreview() {
         e.preventDefault();
         handleAddTag();
         (document.querySelector("#selectTags_input") as HTMLInputElement)?.blur();
+        setShowAddTagBtn(false);
       }
     };
 

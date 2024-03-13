@@ -142,7 +142,7 @@ export function AppInternal() {
               </li>
             ))}
           </ul>
-          <button className="btn btn-primary btn-outline" onClick={handleSignOut}>
+          <button className="btn btn-primary btn-outline btn-sm" onClick={handleSignOut}>
             Sign out
           </button>
         </div>

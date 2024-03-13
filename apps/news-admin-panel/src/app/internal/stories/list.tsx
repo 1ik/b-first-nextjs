@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import { token } from "../../token_utils";
 import { Link } from "react-router-dom";
 import { IoSearchOutline } from "react-icons/io5";
+import { dateFormatter } from "../../dateFormat_utils";
 
 export default function List() {
   const [stories, setStories] = useState([]);
@@ -35,6 +36,9 @@ export default function List() {
 
   const navigate = useNavigate();
 
+  const handleFirstPage = () => {
+    setCurrentPage(1);
+  }
   const handleNextPage = () => {
     setCurrentPage((curr) => curr + 1);
   };
@@ -47,32 +51,33 @@ export default function List() {
     setCurrentPage(totalPage);
   };
 
-  const dateFormatter = (dateString: string) => {
-    const date = new Date(dateString);
+  // const dateFormatter = (dateString: string) => {
+  //   const date = new Date(dateString);
 
-    const formattedDate = new Intl.DateTimeFormat("en-US", {
-      month: "short",
-      day: "numeric",
-      year: "numeric",
-      hour: "numeric",
-      minute: "numeric",
-      hour12: true,
-    }).format(date);
-    return formattedDate.replace(/,/g, "");
-  };
+  //   const formattedDate = new Intl.DateTimeFormat("en-US", {
+  //     month: "short",
+  //     day: "numeric",
+  //     year: "numeric",
+  //     hour: "numeric",
+  //     minute: "numeric",
+  //     hour12: true,
+  //   }).format(date);
+  //   return formattedDate.replace(/,/g, "");
+  // };
 
   return (
     <div className="overflow-x-auto flex flex-col">
       <div className="inline-flex h-10 justify-between items-center px-4 py-2 fixed bg-white z-10 border-b w-full lg:w-[83%] xl:w-[88%]">
         <Breadcrumb items={[{ name: "Stories" }]} />
         <span className="inline-flex gap-2">
-       
-        <details className="dropdown dropdown-left block md:hidden">
-            <summary className="btn btn-xs hover:bg-white h-8"><IoSearchOutline size={15} /></summary>
+          <details className="dropdown dropdown-left block md:hidden">
+            <summary className="btn btn-xs hover:bg-white h-8">
+              <IoSearchOutline size={15} />
+            </summary>
             <ul className="p-0 m-0 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
-            <input type="text" className="input-sm" placeholder="Search" />
+              <input type="text" className="input-sm" placeholder="Search" />
             </ul>
-        </details>
+          </details>
 
           <input type="text" className="input-sm h-6 hidden md:block" placeholder="Search" />
           <Link to="/stories/create-story" className="btn btn-outline btn-xs h-8 md:h-6">
@@ -111,7 +116,14 @@ export default function List() {
           ))}
         </tbody>
       </table>
-      <div className="join flex w-[400px] fixed bottom-5 -right-20">
+      <div className="bg-white join flex w-[400px] fixed bottom-5 left-[100%] -translate-x-full">
+        <button
+          className="join-item btn btn-sm rounded-[5px] bg-white btn-outline"
+          onClick={handleFirstPage}
+          disabled={currentPage === 1}
+        >
+          First Page
+        </button>
         <button
           className="join-item btn btn-sm rounded-[5px] bg-white btn-outline"
           onClick={handlePrevPage}
