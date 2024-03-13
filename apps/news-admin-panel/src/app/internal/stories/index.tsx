@@ -24,7 +24,7 @@ const LoadStoryPreview = lazy(
   () =>
     // eslint-disable-next-line
     new Promise<any>((resolve) => {
-      import("./storyPreview").then((component) => {
+      import("./storyEdit").then((component) => {
         resolve(component);
       });
     })

@@ -8,7 +8,6 @@ import { token } from "../../token_utils";
 
 const baseUrl = "https://backend.bangladeshfirst.com";
 
-
 const fetchData = async function (storyId: any) {
   try {
     const [storyRes, authorsRes, categoriesRes, tagsRes, imagesRes] = await Promise.all([
@@ -85,7 +84,6 @@ export default function StoryPreview() {
   const [authors, setAuthors] = useState([]);
   const [selectedAuthors, setSelectedAuthors] = useState([]);
 
-
   const [showAddTagBtn, setShowAddTagBtn] = useState(false);
   const [shwoModal, setShowModal] = useState(false);
 
@@ -128,13 +126,12 @@ export default function StoryPreview() {
   };
 
   const handleUpdateStory = async function (data: any) {
-
     /* ======= updating story ======== */
     const updateStory = {
       title: data.headline,
       meta: {
         featured_image: featuredImgURL,
-        newsType: data.newsType,
+        /* newsType: data.newsType, */
         shoulder: data.shoulder,
         subhead: data.subhead,
         altheadline: data.altheadline,
@@ -203,18 +200,35 @@ export default function StoryPreview() {
       setSelectedAuthors((data as any).storyData?.story.authors);
       setSelectedCategories((data as any).storyData?.story.categories);
       setImagesList((data as any).imagesList.media_images.data);
-      setBody((data as any).storyData.story.content)
-      setFeaturedImgURL((data as any).storyData.story.meta.featured_image)
+      setBody((data as any).storyData.story.content);
+      setFeaturedImgURL((data as any).storyData.story.meta.featured_image);
       setLoading(false);
     })();
   }, []);
+
+  /* ============ tag creation with enter keypress =========== */
+  useEffect(() => {
+    const handleKeypress = function (e: React.KeyboardEvent) {
+      if (e.key === "Enter" && searchTagInput) {
+        e.preventDefault();
+        handleAddTag();
+        (document.querySelector("#selectTags_input") as HTMLInputElement)?.blur();
+        setShowAddTagBtn(false);
+      }
+    };
+
+    window.addEventListener("keypress", handleKeypress as any);
+    return function () {
+      window.removeEventListener("keypress", handleKeypress as any);
+    };
+  }, [searchTagInput]);
 
   if (loading) return <div>loading.........</div>;
 
   return (
     <div onClick={handleOutsideClick} className="overflow-x-auto flex flex-col h-full">
       <div className="inline-flex h-10 justify-between items-center px-4 py-2 w-full border-b">
-        <Breadcrumb items={[{ name: "Stories", link: "/stories" }, { name: "Story preview" }]} />
+        <Breadcrumb items={[{ name: "Stories", link: "/stories" }, { name: "Edit Story" }]} />
       </div>
       <div className="overflow-x-auto p-5 h-full w-full flex flex-col">
         {/* ====================== pop-up modal start ====================*/}
@@ -283,7 +297,7 @@ export default function StoryPreview() {
           <div className="flex-1 w-full pb-6">
             <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
               {/* ==== news type ==== */}
-              <div className="col-span-full">
+              {/* <div className="col-span-full">
                 <label htmlFor="news-type" className="block text-sm font-medium leading-6 text-gray-900">
                   News Type*
                 </label>
@@ -294,7 +308,7 @@ export default function StoryPreview() {
                   <option value="online">Online</option>
                 </select>
                 <p className="text-sm text-red-700">{errors.newsType && (errors.newsType.message as string)}</p>
-              </div>
+              </div> */}
 
               {/* ==== shoulder ==== */}
               <div className="col-span-4">
@@ -304,7 +318,7 @@ export default function StoryPreview() {
                 <div className="mt-2">
                   <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus:ring-gray-300 w-full pl-2">
                     <input
-                    defaultValue={(story as {story:any}).story.meta.shoulder}
+                      defaultValue={(story as { story: any }).story.meta.shoulder}
                       {...register("shoulder")}
                       type="text"
                       name="shoulder"
@@ -324,7 +338,7 @@ export default function StoryPreview() {
                 <div className="mt-2">
                   <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus:ring-gray-300 w-full pl-2">
                     <input
-                    defaultValue={(story as {story:any}).story.title}
+                      defaultValue={(story as { story: any }).story.title}
                       {...register("headline")}
                       type="text"
                       name="headline"
@@ -345,7 +359,7 @@ export default function StoryPreview() {
                 <div className="mt-2">
                   <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus:ring-gray-300 w-full pl-2">
                     <input
-                     defaultValue={(story as {story:any}).story.meta.subhead}
+                      defaultValue={(story as { story: any }).story.meta.subhead}
                       {...register("subhead")}
                       type="text"
                       name="subhead"
@@ -365,7 +379,7 @@ export default function StoryPreview() {
                 <div className="mt-2">
                   <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus:ring-gray-300 w-full pl-2">
                     <input
-                    defaultValue={(story as {story:any}).story.meta.altheadline}
+                      defaultValue={(story as { story: any }).story.meta.altheadline}
                       {...register("altheadline")}
                       type="text"
                       name="altheadline"
@@ -386,8 +400,14 @@ export default function StoryPreview() {
                   options={authors}
                   displayValue="name"
                   avoidHighlightFirstOption={true}
-                  onSelect={(list) => setSelectedAuthors(list)}
-                  onRemove={(list) => setSelectedAuthors(list)}
+                  onSelect={(list) => {
+                    setSelectedAuthors(list);
+                    setErr((cur) => ({ ...cur, authors: "" }));
+                  }}
+                  onRemove={(list) => {
+                    setSelectedAuthors(list);
+                    setErr((cur) => ({ ...cur, authors: "" }));
+                  }}
                   placeholder="Select Authors"
                   selectedValues={selectedAuthors}
                 />
@@ -401,7 +421,7 @@ export default function StoryPreview() {
                 </label>
                 <div className="mt-2">
                   <textarea
-                  defaultValue={(story as {story:any}).story.meta.intro}
+                    defaultValue={(story as { story: any }).story.meta.intro}
                     {...register("intro")}
                     id="intro"
                     name="intro"
@@ -459,7 +479,7 @@ export default function StoryPreview() {
                         ],
                       }}
                     /> */}
-                    <TinyMceEditor onChange={handleEditorChange} initialValue={body}/>
+                    <TinyMceEditor onChange={handleEditorChange} initialValue={body} />
                   </div>
                 </div>
                 <p className="text-sm text-red-700">{err.body}</p>
@@ -479,8 +499,14 @@ export default function StoryPreview() {
                       onSearch={handleSearch}
                       avoidHighlightFirstOption={true}
                       selectedValues={selectedTags}
-                      onSelect={(list:any) => setSelectedTags(list)}
-                      onRemove={(list:any) => setSelectedTags(list)}
+                      onSelect={(list) => {
+                        setSelectedTags(list);
+                        setErr((cur) => ({ ...cur, tags: "" }));
+                      }}
+                      onRemove={(list) => {
+                        setSelectedTags(list);
+                        setErr((cur) => ({ ...cur, tags: "" }));
+                      }}
                       placeholder="Select Tags"
                     />
                   </div>
@@ -506,8 +532,14 @@ export default function StoryPreview() {
                   options={categories}
                   displayValue="name"
                   avoidHighlightFirstOption={true}
-                  onSelect={(list) => setSelectedCategories(list)}
-                  onRemove={(list) => setSelectedCategories(list)}
+                  onSelect={(list) => {
+                    setSelectedCategories(list);
+                    setErr((cur) => ({ ...cur, categories: "" }));
+                  }}
+                  onRemove={(list) => {
+                    setSelectedCategories(list);
+                    setErr((cur) => ({ ...cur, categories: "" }));
+                  }}
                   placeholder="Select Categories"
                   selectedValues={selectedCategories}
                 />
@@ -538,20 +570,32 @@ export default function StoryPreview() {
                   Browse
                 </button>
                 <p className="text-sm text-red-700">{err.featuredImg}</p>
-                <img className='md:w-1/2 w-full mt-4' src={`https://bfirst.sgp1.cdn.digitaloceanspaces.com/${featuredImgURL}`} alt="" />
+                <img
+                  className="md:w-1/2 w-full mt-4"
+                  src={`https://bfirst.sgp1.cdn.digitaloceanspaces.com/${featuredImgURL}`}
+                  alt=""
+                />
               </div>
             </div>
           </div>
-          <div className="h-10 pt-5 flex items-center justify-end gap-x-6 w-full border-t border-gray-200">
-            <button onClick={()=> navigate("/stories")} type="button" className="text-sm font-semibold leading-6 text-gray-900">
+          <div className="h-10 pt-5 flex items-center justify-end gap-x-6 w-full border-t fixed bottom-0 pb-5 right-5 bg-white z-40">
+            <button
+              onClick={() => navigate("/stories")}
+              type="button"
+              className="text-sm font-semibold leading-6 text-gray-900"
+            >
               Cancel
             </button>
             <button type="submit" className="btn btn-sm btn-accent">
               Update
             </button>
-            <button type="button" onClick={()=>handleStoryDelete(storyId)} className='btn btn-sm text-white bg-red-600'>
-                Delete
-              </button>
+            <button
+              type="button"
+              onClick={() => handleStoryDelete(storyId)}
+              className="btn btn-sm text-white bg-red-600"
+            >
+              Delete
+            </button>
           </div>
         </form>
       </div>

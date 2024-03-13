@@ -134,7 +134,7 @@ export default function StoryCreate() {
       title: data.headline,
       meta: {
         featured_image: featuredImgURL,
-        newsType: data.newsType,
+        /* newsType: data.newsType, */
         shoulder: data.shoulder,
         subhead: data.subhead,
         altheadline: data.altheadline,
@@ -206,7 +206,22 @@ export default function StoryCreate() {
     })();
   }, []);
 
-  console.log(body);
+  /* ============ tag creation with enter keypress =========== */
+  useEffect(() => {
+    const handleKeypress = function (e: React.KeyboardEvent) {
+      if (e.key === "Enter" && searchTagInput) {
+        e.preventDefault();
+        handleAddTag();
+        (document.querySelector("#selectTags_input") as HTMLInputElement)?.blur();
+        setShowAddTagBtn(false);
+      }
+    };
+
+    window.addEventListener("keypress", handleKeypress as any);
+    return function () {
+      window.removeEventListener("keypress", handleKeypress as any);
+    };
+  }, [searchTagInput]);
 
   return (
     <div onClick={handleOutsideClick} className="overflow-x-auto flex flex-col h-full">
@@ -282,7 +297,7 @@ export default function StoryCreate() {
           <div className="flex-1 w-full pb-6">
             <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
               {/* ==== news type ==== */}
-              <div className="col-span-full">
+              {/* <div className="col-span-full">
                 <label htmlFor="news-type" className="block text-sm font-medium leading-6 text-gray-900">
                   News Type*
                 </label>
@@ -294,7 +309,7 @@ export default function StoryCreate() {
                   <option value="online">Online</option>
                 </select>
                 <p className="text-sm text-red-700">{errors.newsType && (errors.newsType.message as string)}</p>
-              </div>
+              </div> */}
 
               {/* ==== shoulder ==== */}
               <div className="col-span-4">
@@ -382,8 +397,14 @@ export default function StoryCreate() {
                   options={authors}
                   displayValue="name"
                   avoidHighlightFirstOption={true}
-                  onSelect={(list) => setSelectedAuthors(list)}
-                  onRemove={(list) => setSelectedAuthors(list)}
+                  onSelect={(list) => {
+                    setSelectedAuthors(list);
+                    setErr((cur) => ({ ...cur, authors: "" }));
+                  }}
+                  onRemove={(list) => {
+                    setSelectedAuthors(list);
+                    setErr((cur) => ({ ...cur, authors: "" }));
+                  }}
                   placeholder="Select Authors"
                 />
                 <p className="text-sm text-red-700">{err.authors}</p>
@@ -433,8 +454,14 @@ export default function StoryCreate() {
                       onSearch={handleSearch}
                       avoidHighlightFirstOption={true}
                       selectedValues={selectedTags}
-                      onSelect={(list) => setSelectedTags(list)}
-                      onRemove={(list) => setSelectedTags(list)}
+                      onSelect={(list) => {
+                        setSelectedTags(list);
+                        setErr((cur) => ({ ...cur, tags: "" }));
+                      }}
+                      onRemove={(list) => {
+                        setSelectedTags(list);
+                        setErr((cur) => ({ ...cur, tags: "" }));
+                      }}
                       placeholder="Select Tags"
                       closeOnSelect={true}
                     />
@@ -461,8 +488,14 @@ export default function StoryCreate() {
                   options={categories}
                   displayValue="name"
                   avoidHighlightFirstOption={true}
-                  onSelect={(list) => setSelectedCategories(list)}
-                  onRemove={(list) => setSelectedCategories(list)}
+                  onSelect={(list) => {
+                    setSelectedCategories(list);
+                    setErr((cur) => ({ ...cur, categories: "" }));
+                  }}
+                  onRemove={(list) => {
+                    setSelectedCategories(list);
+                    setErr((cur) => ({ ...cur, categories: "" }));
+                  }}
                   placeholder="Select Categories"
                   closeOnSelect={true}
                 />
@@ -501,11 +534,11 @@ export default function StoryCreate() {
               </div>
             </div>
           </div>
-          <div className="h-10 pt-5 flex items-center justify-end gap-x-6 w-full border-t border-gray-200">
+          <div className="h-10 pt-5 flex items-center justify-end gap-x-6 w-full border-t  fixed bottom-0 pb-5 bg-white z-40 right-10">
             <button
               onClick={() => navigate("/stories")}
               type="button"
-              className="text-sm font-semibold leading-6 text-gray-900"
+              className="text-sm font-semibold bg-white leading-6 text-gray-900"
             >
               Cancel
             </button>
