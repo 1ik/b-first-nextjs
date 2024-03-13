@@ -206,6 +206,22 @@ export default function StoryPreview() {
     })();
   }, []);
 
+  /* ============ tag creation with enter keypress =========== */
+  useEffect(() => {
+    const handleKeypress = function (e: React.KeyboardEvent) {
+      if (e.key === "Enter" && searchTagInput) {
+        e.preventDefault();
+        handleAddTag();
+        (document.querySelector("#selectTags_input") as HTMLInputElement)?.blur();
+      }
+    };
+
+    window.addEventListener("keypress", handleKeypress as any);
+    return function () {
+      window.removeEventListener("keypress", handleKeypress as any);
+    };
+  }, [searchTagInput]);
+
   if (loading) return <div>loading.........</div>;
 
   return (
@@ -562,7 +578,11 @@ export default function StoryPreview() {
             </div>
           </div>
           <div className="h-10 pt-5 flex items-center justify-end gap-x-6 w-full border-t fixed bottom-0 pb-5 right-5 bg-white z-40">
-            <button onClick={()=> navigate("/stories")} type="button" className="text-sm font-semibold leading-6 text-gray-900">
+            <button
+              onClick={() => navigate("/stories")}
+              type="button"
+              className="text-sm font-semibold leading-6 text-gray-900"
+            >
               Cancel
             </button>
             <button type="submit" className="btn btn-sm btn-accent">

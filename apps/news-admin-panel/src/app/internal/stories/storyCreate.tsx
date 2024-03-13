@@ -212,6 +212,7 @@ export default function StoryCreate() {
       if (e.key === "Enter" && searchTagInput) {
         e.preventDefault();
         handleAddTag();
+        (document.querySelector("#selectTags_input") as HTMLInputElement)?.blur();
       }
     };
 
