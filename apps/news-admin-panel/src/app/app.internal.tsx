@@ -72,6 +72,10 @@ export function AppInternal() {
 
   }
 
+  const handleClick = function(){
+    (document.querySelector("#my-drawer") as HTMLInputElement).checked = false;
+  }
+
   return (
     <div className="drawer h-full lg:drawer-open">
       <input id="my-drawer" type="checkbox" className="drawer-toggle" />
@@ -136,7 +140,7 @@ export function AppInternal() {
           <ul className="">
             {links.map((l) => (
               <li key={l.name}>
-                <Link key={l.name} to={l.href} className={"flex justify-between" + (l.isActive ? " active" : "")}>
+                <Link onClick={handleClick} key={l.name} to={l.href} className={"flex justify-between" + (l.isActive ? " active" : "")}>
                   {l.name} <MdChevronRight />
                 </Link>
               </li>
