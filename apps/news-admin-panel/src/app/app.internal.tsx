@@ -42,7 +42,7 @@ export const NavBar = () => {
 
 const _links = [
   { name: "Stories", href: "/stories" },
-  { name: "Manage Story", href: "/manage-story" },
+  { name: "Top News List", href: "/top-news-list" },
   { name: "Categories", href: "/categories", isActive: true },
   { name: "Authors", href: "/authors" },
   { name: "Tags", href: "/tags" },
@@ -124,7 +124,7 @@ export function AppInternal() {
               <Route path="/tags" element={<TagsListLazy />} />
               <Route path="/tags/add" element={<AddEditTagsLazy />} />
               <Route path="/stories/:storyId" element={<StoryPreviewLazy />} />
-              <Route path="/manage-story" element={<ManageStories />} />
+              <Route path="/top-news-list" element={<ManageStories />} />
             </Routes>
           </div>
         </div>

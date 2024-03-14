@@ -176,7 +176,7 @@ export function ManageStories() {
   return (
     <div className="overflow-x-auto flex flex-col h-full" onClick={handleOutsideClick}>
       <div className="inline-flex h-10 justify-between items-center px-4 py-2 w-full border-b fixed bg-white z-10">
-        <Breadcrumb items={[{ name: "Manage Stories" }]} />
+        <Breadcrumb items={[{ name: "Top News List" }]} />
       </div>
       <ToastContainer />
       <form onSubmit={handleSubmit}>
@@ -252,10 +252,10 @@ export function ManageStories() {
                       </div>
                       <div className="flex-grow">
                         <SortableItem key={(item as { id: number }).id}>
-                          <div className="flex justify-between items-center py-3 rounded-md cursor-grab px-2 bg-gray-200 relative">
-                            <div className="pl-4">
+                          <div className="flex  justify-between items-center py-3 rounded-md cursor-grab px-2 bg-gray-200  relative   max-[340px]:w-[260px] max-[360px]:w-[290px] max-[430px]:w-[330px] max-[530px]:w-[350px]   sm:w-full">
+                            <div className="px-5">
                               <h3 className="">{(item as { title: string }).title}</h3>
-                              <p className="md:hidden mt-4">{dateFormatter((item as { created_at: string }).created_at)}</p>
+                              <p className="md:hidden  mt-4">{dateFormatter((item as { created_at: string }).created_at)}</p>
                             </div>
                             <div className="flex gap-x-4 items-center">
                               <p className="hidden md:block">
@@ -276,7 +276,7 @@ export function ManageStories() {
                                 id="delete-confirmation-modal"
                                 className="absolute bg-white shadow-lg right-0 bottom-[100%] p-3 rounded-md cursor-default border border-black/30"
                               >
-                                Do you want to delete the story ?
+                                Do you want to remove it from list ?
                                 <div className="flex w-full [&>*]:flex-grow">
                                   <button
                                     onClick={() => handleConfirm((item as { id: number }).id)}
