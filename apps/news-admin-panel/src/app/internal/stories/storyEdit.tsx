@@ -133,7 +133,7 @@ export default function StoryPreview() {
         featured_image: featuredImgURL,
         /* newsType: data.newsType, */
         shoulder: data.shoulder,
-        subhead: data.subhead,
+        /* subhead: data.subhead, */
         altheadline: data.altheadline,
         intro: data.intro,
       },
@@ -352,7 +352,7 @@ export default function StoryPreview() {
               </div>
 
               {/* ==== sub-head ==== */}
-              <div className="col-span-4">
+              {/* <div className="col-span-4">
                 <label htmlFor="subhead" className="block text-sm font-medium leading-6 text-gray-900">
                   Sub head
                 </label>
@@ -369,7 +369,7 @@ export default function StoryPreview() {
                     />
                   </div>
                 </div>
-              </div>
+              </div> */}
 
               {/* ==== alternative headline ==== */}
               <div className="col-span-4">
