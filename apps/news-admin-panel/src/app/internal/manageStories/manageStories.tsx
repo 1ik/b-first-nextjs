@@ -27,7 +27,7 @@ export function ManageStories() {
     const currentTime = Date.now();
     if (currentTime - lastSearchTime >= debounceDelay) {
       setLastSearchTime(currentTime);
-      fetchData();
+      // fetchData();
     }
   };
 
