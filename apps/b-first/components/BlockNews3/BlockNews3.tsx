@@ -37,7 +37,7 @@ const BlockNews3 = ({ items, latest, title }: { items: any[]; title: string; lat
                     <div className="absolute px-5 pt-8 pb-5 bottom-0 w-full bg-gradient-cover">
                       {/*title*/}
                       <a href={newsUrl(items[0])}>
-                        <h2 className="text-3xl font-bold capitalize text-white mb-3">{items[0].title}</h2>
+                        <h2 className="text-3xl font-bold capitalize text-white mb-3">{items[0].meta.altheadline || items[0].title}</h2>
                       </a>
                       <p className="text-gray-100 hidden sm:inline-block">{items[0].brief}</p>
                       {/* author and date */}
@@ -68,7 +68,7 @@ const BlockNews3 = ({ items, latest, title }: { items: any[]; title: string; lat
                       return (
                         <li key={item.id} className="border-b border-gray-100 hover:bg-gray-50">
                           <a className="text-lg font-bold px-6 py-3 flex flex-row items-center" href={newsUrl(item)}>
-                            {item.title}
+                            {item.meta.altheadline || item.title}
                           </a>
                         </li>
                       );
