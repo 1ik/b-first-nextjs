@@ -280,7 +280,7 @@ export default function StoryCreate() {
                       Allowed file type: <strong>png, jpg, jpeg, gif</strong>
                     </p>
                     <button type="submit" className="px-3 py-1 bg-gray-300 mt-4 rounded-lg">
-                      Next
+                    Add To Story
                     </button>
                   </form>
                 </div>
@@ -543,7 +543,7 @@ export default function StoryCreate() {
               Cancel
             </button>
             <button type="submit" className="btn btn-sm btn-accent">
-              Save
+              Publish
             </button>
           </div>
         </form>
