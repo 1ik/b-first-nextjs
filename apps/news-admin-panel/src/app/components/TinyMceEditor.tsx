@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import tinymce from "tinymce";
+import { getImageUrl } from "../image_utils";
 import { token } from "../token_utils";
 
 export default function TinyMceEditor({
@@ -47,8 +48,8 @@ export default function TinyMceEditor({
               if (!response.ok) throw new Error("Could not upload image");
 
               const data = await response.json();
-
-              callback(`https://bfirst.sgp1.cdn.digitaloceanspaces.com/${data.url}`, { title: file.name });
+              const url = getImageUrl(data.url);
+              callback(url, { title: file.name });
             } catch (error) {
               console.log(error);
             }

@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { Breadcrumb } from "../../components";
 import TinyMceEditor from "../../components/TinyMceEditor";
+import { getImageUrl } from "../../image_utils";
 import { token } from "../../token_utils";
 
 const baseUrl = "https://backend.bangladeshfirst.com";
@@ -280,7 +281,7 @@ export default function StoryCreate() {
                       Allowed file type: <strong>png, jpg, jpeg, gif</strong>
                     </p>
                     <button type="submit" className="px-3 py-1 bg-gray-300 mt-4 rounded-lg">
-                    Add To Story
+                      Add To Story
                     </button>
                   </form>
                 </div>
@@ -526,11 +527,7 @@ export default function StoryCreate() {
                   Browse
                 </button>
                 <p className="text-sm text-red-700">{err.featuredImg}</p>
-                <img
-                  className="md:w-1/2 w-full mt-4"
-                  src={`https://bfirst.sgp1.cdn.digitaloceanspaces.com/${featuredImgURL}`}
-                  alt=""
-                />
+                <img className="md:w-1/2 w-full mt-4" src={getImageUrl(featuredImgURL)} alt="" />
               </div>
             </div>
           </div>
