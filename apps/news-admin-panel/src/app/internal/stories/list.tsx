@@ -85,7 +85,7 @@ export default function List() {
           </Link>
         </span>
       </div>
-      <table className="table mt-10">
+      <table className="table mt-10 mb-28">
         <thead className="sticky">
           <tr>
             <th>Id</th>
@@ -116,30 +116,30 @@ export default function List() {
           ))}
         </tbody>
       </table>
-      <div className="bg-white join flex w-[400px] fixed bottom-5 left-[100%] -translate-x-full">
+      <div className="bg-white join flex  fixed bottom-5 right-5 ">
         <button
-          className="join-item btn btn-sm rounded-[5px] bg-white btn-outline"
+          className="join-item btn btn-xs sm:btn-sm rounded-[5px] bg-white btn-outline"
           onClick={handleFirstPage}
           disabled={currentPage === 1}
         >
           First Page
         </button>
         <button
-          className="join-item btn btn-sm rounded-[5px] bg-white btn-outline"
+          className="join-item btn btn-xs sm:btn-sm rounded-[5px] bg-white btn-outline"
           onClick={handlePrevPage}
           disabled={currentPage === 1}
         >
           Previous Page
         </button>
         <button
-          className="join-item btn btn-sm rounded-[5px] bg-white btn-outline"
+          className="join-item btn btn-xs sm:btn-sm rounded-[5px] bg-white btn-outline"
           onClick={handleNextPage}
           disabled={currentPage === totalPage}
         >
           Next Page
         </button>
         <button
-          className="join-item btn btn-sm rounded-[5px] bg-white btn-outline"
+          className="join-item btn btn-xs sm:btn-sm rounded-[5px] bg-white btn-outline"
           onClick={handleLastPage}
           disabled={currentPage === totalPage}
         >

@@ -881,7 +881,6 @@ import Slider from "../components/Slider/Slider";
 // }
 
 export default function Index({featuredNews, latestNews, bangladesh, politics, world }: any) {
-  console.log(featuredNews);
   return (
     <>
       <Header />

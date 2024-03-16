@@ -113,7 +113,7 @@ export default function List() {
           ))}
         </tbody>
       </table>
-      <div className="join grid grid-cols-2 w-[250px] mx-auto fixed bottom-5 right-5">
+      <div className="join bg-white grid grid-cols-2 w-[250px] mx-auto bottom-5 fixed  right-1/2 max-[640px]:translate-x-1/2 sm:right-5">
           <button className="join-item btn btn-sm rounded-[5px] bg-white btn-outline" onClick={handlePrevPage} disabled={currentPage === 1}>Previous Page</button>
           <button className="join-item btn btn-sm rounded-[5px] bg-white btn-outline" onClick={handleNextPage} disabled={currentPage === totalPage}>Next Page</button>
         </div>

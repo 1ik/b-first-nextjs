@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { IoMenuSharp } from "react-icons/io5";
 import { MdChevronRight } from "react-icons/md";
 import { Link, Route, Routes, useLocation } from "react-router-dom";
@@ -9,6 +9,8 @@ import { AddEditLazy, ListLazy } from "./internal/categories";
 import { ManageStories } from "./internal/manageStories/manageStories";
 import { AddEditStoriesLazy, StoriesListLazy, StoryPreviewLazy } from "./internal/stories";
 import { AddEditTagsLazy, TagsListLazy } from "./internal/tags";
+import { FaRegCircleUser } from "react-icons/fa6";
+
 
 export const NavBar = () => {
   return (
@@ -42,13 +44,14 @@ export const NavBar = () => {
 
 const _links = [
   { name: "Stories", href: "/stories" },
-  { name: "Manage Story", href: "/manage-story" },
+  { name: "Top News List", href: "/top-news-list" },
   { name: "Categories", href: "/categories", isActive: true },
   { name: "Authors", href: "/authors" },
   { name: "Tags", href: "/tags" },
 ];
 
 export function AppInternal() {
+  const [showProfileModal, setShowProfileModal] = useState(false);
   let location = useLocation();
   const [links, setLinks] = useState(() => {
     return _links.map((l) => {
@@ -63,13 +66,32 @@ export function AppInternal() {
       });
     });
   }, [location.pathname]);
-  const { setUser, setToken } = useContext(AppContext);
-  const handleSignOut = function() {
-    localStorage.removeItem('userInfo');
-    localStorage.removeItem('token');
-    setUser && setUser(undefined)
-    setToken && setToken(undefined)
+  const { user, setUser, setToken } = useContext(AppContext);
+  const handleSignOut = function () {
+    localStorage.removeItem("userInfo");
+    localStorage.removeItem("token");
+    setUser && setUser(undefined);
+    setToken && setToken(undefined);
+  };
 
+  const modalRef = useRef(null);
+  const btnRef = useRef(null);
+  useEffect(() => {
+    const handleClickOutside = function (e:any) {
+      if ((btnRef.current as any)?.contains(e.target)) {
+        return;
+      } else if (e.target !== modalRef.current) {
+        setShowProfileModal(false);
+      }
+    };
+    window.addEventListener("click", handleClickOutside);
+    return function () {
+      window.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
+  const handleClick = function(){
+    (document.querySelector("#my-drawer") as HTMLInputElement).checked = false;
   }
 
   return (
@@ -88,17 +110,17 @@ export function AppInternal() {
                 <a>Link</a>
               </li>
               <li>
-                <details>
-                  <summary>Parent</summary>
-                  <ul className="p-2 bg-base-100 rounded-t-none">
-                    <li>
-                      <a>Link 1</a>
-                    </li>
-                    <li>
-                      <a>Link 2</a>
-                    </li>
+                <button className="flex" ref={btnRef} onClick={() => setShowProfileModal((cur) => !cur)}>
+                  <FaRegCircleUser  className="text-xl" />
+                  <p>{user.name}</p>
+                </button>
+                {showProfileModal && (
+                  <ul ref={modalRef} className="absolute top-[100%] bg-white right-0 z-[999] flex flex-col hover:bg-white shadow-xl min-w-full m-0 p-0 text-center">
+                    <li className="hover:bg-gray-200 cursor-pointer p-2">Settings</li>
+                    <li className="hover:bg-gray-200 cursor-pointer p-2">Theme</li>
+                    <li className="hover:bg-gray-200 cursor-pointer p-2" onClick={handleSignOut}>Sign out</li>
                   </ul>
-                </details>
+                )}
               </li>
               <li className="pl-2">
                 <label
@@ -124,7 +146,7 @@ export function AppInternal() {
               <Route path="/tags" element={<TagsListLazy />} />
               <Route path="/tags/add" element={<AddEditTagsLazy />} />
               <Route path="/stories/:storyId" element={<StoryPreviewLazy />} />
-              <Route path="/manage-story" element={<ManageStories />} />
+              <Route path="/top-news-list" element={<ManageStories />} />
             </Routes>
           </div>
         </div>
@@ -136,15 +158,15 @@ export function AppInternal() {
           <ul className="">
             {links.map((l) => (
               <li key={l.name}>
-                <Link key={l.name} to={l.href} className={"flex justify-between" + (l.isActive ? " active" : "")}>
+                <Link onClick={handleClick} key={l.name} to={l.href} className={"flex justify-between" + (l.isActive ? " active" : "")}>
                   {l.name} <MdChevronRight />
                 </Link>
               </li>
             ))}
           </ul>
-          <button className="btn btn-primary btn-outline btn-sm" onClick={handleSignOut}>
+          {/* <button className="btn btn-primary btn-outline" onClick={handleSignOut}>
             Sign out
-          </button>
+          </button> */}
         </div>
       </div>
     </div>

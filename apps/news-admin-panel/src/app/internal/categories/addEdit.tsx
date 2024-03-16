@@ -89,7 +89,7 @@ export default function AddEdit() {
               </div>
             </div>
           </div>
-          <div className="h-10 pt-5 fixed bottom-5  -left-12 z-40   flex items-center justify-end gap-x-6 w-full border-t border-gray-200 ">
+          <div className="h-10 pt-5   flex items-center gap-x-6 w-full">
             <button
               type="button"
               onClick={() => navigate("/categories")}
@@ -97,7 +97,7 @@ export default function AddEdit() {
             >
               Cancel
             </button>
-            <button type="submit" className="btn text-black hover:text-white btn-sm rounded-[5px] bg-white btn-accent">
+            <button type="submit" className="btn text-black text-white btn-sm rounded-[5px] bg-black btn-accent">
               Save
             </button>
           

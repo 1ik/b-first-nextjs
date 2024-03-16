@@ -82,7 +82,7 @@ export default function AddEdit() {
               </div>
             </div>
           </div>
-          <div className="h-10 pt-5 fixed bottom-5  -left-12 z-40 flex items-center justify-end gap-x-6 w-full border-t border-gray-200">
+          <div className="h-10 pt-6  flex items-center gap-x-6 w-full">
             <button
               onClick={() => navigate("/authors")}
               type="button"

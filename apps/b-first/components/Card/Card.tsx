@@ -19,7 +19,7 @@ const Card = (props: { item: any }) => {
           <div className="py-3 flex-grow flex flex-col justify-between px-6">
             <h3 className="text-lg font-bold leading-tight mb-2">
               {/* <a href={newsUrl(item)}>{MaxText(item.title, 60)}</a> */}
-              <a href={newsUrl(item)}>{item.title}</a>
+              <a href={newsUrl(item)}>{item.meta.altheadline || item.title}</a>
             </h3>
             <a className="text-gray-500" href={`/${item?.categories[0].name}`}>
               <span className="inline-block h-3 border-l-2 border-red-600 mr-2" />

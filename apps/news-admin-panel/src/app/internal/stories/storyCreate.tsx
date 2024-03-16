@@ -136,7 +136,7 @@ export default function StoryCreate() {
         featured_image: featuredImgURL,
         /* newsType: data.newsType, */
         shoulder: data.shoulder,
-        subhead: data.subhead,
+        /* subhead: data.subhead, */
         altheadline: data.altheadline,
         intro: data.intro,
       },
@@ -280,7 +280,7 @@ export default function StoryCreate() {
                       Allowed file type: <strong>png, jpg, jpeg, gif</strong>
                     </p>
                     <button type="submit" className="px-3 py-1 bg-gray-300 mt-4 rounded-lg">
-                      Next
+                    Add To Story
                     </button>
                   </form>
                 </div>
@@ -351,7 +351,7 @@ export default function StoryCreate() {
               </div>
 
               {/* ==== sub-head ==== */}
-              <div className="col-span-4">
+              {/* <div className="col-span-4">
                 <label htmlFor="subhead" className="block text-sm font-medium leading-6 text-gray-900">
                   Sub head
                 </label>
@@ -367,7 +367,7 @@ export default function StoryCreate() {
                     />
                   </div>
                 </div>
-              </div>
+              </div> */}
 
               {/* ==== alternative headline ==== */}
               <div className="col-span-4">
@@ -543,7 +543,7 @@ export default function StoryCreate() {
               Cancel
             </button>
             <button type="submit" className="btn btn-sm btn-accent">
-              Save
+              Publish
             </button>
           </div>
         </form>
