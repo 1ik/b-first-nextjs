@@ -1,3 +1,10 @@
+import BackToTop from "apps/b-first/components/BackToTop/BackToTop";
+import BlockNews from "apps/b-first/components/BlockNews/BlockNews";
+import CardCaption from "apps/b-first/components/CardCaption/CardCaption";
+import Footer from "apps/b-first/components/Footer/Footer";
+import Header from "apps/b-first/components/Header/Header";
+import MobileMenu from "apps/b-first/components/MobileMenu/MobileMenu";
+import { dateFormat } from "apps/b-first/date_format";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -98,7 +105,9 @@ export function Index({ news, categoryNews, latestNews, featured }: any) {
                     <div className="flex justify-between">
                       <div>
                         <p className="font-semibold">{news.authors[0].name}</p>
-                        <p className="font-light text-sm">{dateFormat(news.created_at)}</p>
+                        <p suppressHydrationWarning={true} className="font-light text-sm">
+                          {dateFormat(news.created_at)}
+                        </p>
                       </div>
                       <div className="text-xl flex items-center gap-6">
                         <FacebookShareButton url={`https://bangladeshfirst.com${router.asPath}`}>
