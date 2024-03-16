@@ -13,12 +13,12 @@ export default function Component({ categoryData }: any) {
     setVisible(visible + 15);
   };
 
-  if (!Object.keys(categoryData).length) {
+  /*   if (!Object.keys(categoryData).length) {
     return <CustomError />;
-  }
+  } */
 
   if (!categoryData) {
-    return <div>Loading...</div>;
+    return <CustomError />;
   }
 
   const className = "sm:w-1/5";
@@ -26,7 +26,7 @@ export default function Component({ categoryData }: any) {
 
   return (
     <div className="text-gray-700 pt-9 sm:pt-10">
-      <Header category={data[0].category?.name} />
+      <Header category={data[0].categories[0]?.name} />
       <MobileMenu />
       <div className="md-container mx-auto">
         <SquareGrid items={data.slice(0, visible)} gridClass={className} />
@@ -47,12 +47,13 @@ export default function Component({ categoryData }: any) {
   );
 }
 
+const baseUrl = "https://backend.bangladeshfirst.com/api/v1/public";
+
 export const getServerSideProps = async ({ params }: any) => {
   try {
     const { category } = params;
-    const categoryResponse = await fetch(
-      `https://backend.bangladeshfirst.com/api/v2/category/${category}?page=1&size=100`
-    );
+    /* const categoryResponse = await fetch(`https://panel.bangladeshfirst.com/api/v2/category/${category}?page=1&size=100`); */
+    const categoryResponse = await fetch(`${baseUrl}/categories/${category}/stories?size=100`);
 
     if (!categoryResponse.ok) {
       throw new Error("Failed to fetch data");
