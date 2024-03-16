@@ -1,5 +1,5 @@
 import { getImageUrl } from "../../image_utils";
-import { newsUrl } from "../../util";
+import { getCategoryNames, newsUrl } from "../../util";
 
 const SquareGrid = ({ items, gridClass }: { items: any[]; gridClass: string }) => {
   return (
@@ -16,7 +16,7 @@ const SquareGrid = ({ items, gridClass }: { items: any[]; gridClass: string }) =
                   <a href={newsUrl(item)}>
                     <img
                       className="object-cover h-36 w-full"
-                      src={getImageUrl(item.meta.featured_image)}
+                      src={getImageUrl(item.meta?.featured_image)}
                       alt={item.title}
                     />
                   </a>
@@ -26,7 +26,7 @@ const SquareGrid = ({ items, gridClass }: { items: any[]; gridClass: string }) =
                   <a href={newsUrl(item)}>
                     <img
                       className="object-cover w-full h-full"
-                      src={getImageUrl(item.meta.featured_image)}
+                      src={getImageUrl(item.meta?.featured_image)}
                       alt={item.title}
                     />
                   </a>
@@ -42,7 +42,7 @@ const SquareGrid = ({ items, gridClass }: { items: any[]; gridClass: string }) =
                   </a> */}
                   <a className="text-gray-500" href={newsUrl(item)}>
                     <span className="inline-block h-3 border-l-2 border-red-600 mr-2" />
-                    {item.categories[0]?.name}
+                    {getCategoryNames(item)}
                   </a>
                 </div>
               </div>
