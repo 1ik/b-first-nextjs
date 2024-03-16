@@ -1,6 +1,5 @@
 import { getImageUrl } from "../../image_utils";
 import { newsUrl } from "../../util";
-import React from "react";
 
 const SquareGrid = ({ items, gridClass }: { items: any[]; gridClass: string }) => {
   return (
@@ -9,12 +8,17 @@ const SquareGrid = ({ items, gridClass }: { items: any[]; gridClass: string }) =
         {items.map((item, idx) => {
           return (
             <div
-              key={idx} className={`flex-shrink max-w-full w-full ${gridClass} px-3 pb-3 pt-3 sm:pt-0 border-b-2 sm:border-b-0 border-dotted border-gray-100`}
+              key={idx}
+              className={`flex-shrink max-w-full w-full ${gridClass} px-3 pb-3 pt-3 sm:pt-0 border-b-2 sm:border-b-0 border-dotted border-gray-100`}
             >
               <div className="flex h-full flex-row sm:flex-col hover-img">
                 <div className="w-[100%] hidden md:block">
                   <a href={newsUrl(item)}>
-                    <img className="object-cover h-36 w-full" src={getImageUrl(item.featured_image)} alt={item.title} />
+                    <img
+                      className="object-cover h-36 w-full"
+                      src={getImageUrl(item.meta.featured_image)}
+                      alt={item.title}
+                    />
                   </a>
                 </div>
 
@@ -22,7 +26,7 @@ const SquareGrid = ({ items, gridClass }: { items: any[]; gridClass: string }) =
                   <a href={newsUrl(item)}>
                     <img
                       className="object-cover w-full h-full"
-                      src={getImageUrl(item.featured_image)}
+                      src={getImageUrl(item.meta.featured_image)}
                       alt={item.title}
                     />
                   </a>
@@ -31,14 +35,14 @@ const SquareGrid = ({ items, gridClass }: { items: any[]; gridClass: string }) =
                 <div className="py-0 flex flex-col justify-between sm:py-3 pl-3 sm:pl-0 flex-1">
                   <h3 className="text-lg font-bold leading-tight mb-2">
                     {/* <a href={newsUrl(item)}>{MaxText(item.title, 50)}</a> */}
-                    <a href={newsUrl(item)}>{item.meta.altheadline || item.title}</a>
+                    <a href={newsUrl(item)}>{item.title}</a>
                   </h3>
                   {/* <a href={newsUrl(item)} className="hidden md:block text-gray-600 leading-tight mb-1">
                     {MaxText(item.brief, 90)}
                   </a> */}
                   <a className="text-gray-500" href={newsUrl(item)}>
                     <span className="inline-block h-3 border-l-2 border-red-600 mr-2" />
-                    {item.category?.name}
+                    {item.categories[0]?.name}
                   </a>
                 </div>
               </div>
