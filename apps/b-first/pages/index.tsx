@@ -40,7 +40,7 @@ export const getServerSideProps = async () => {
   const featuredNews: unknown[] = (await featuredNewsRes.json()).data;
   const latestNews: unknown[] = (await latestNewsRes.json()).data;
 
-  const filterFn = (item: unknown) => !latestNews.find((f) => f.id === item.id);
+  const filterFn = (item: unknown) => !latestNews.find((f) => (f as {id:number}).id === (item as {id:number}).id);
 
   const bangladesh = (await bangladeshNews.json()).data.filter(filterFn);
   const politics = (await politicsNews.json()).data.filter(filterFn);
