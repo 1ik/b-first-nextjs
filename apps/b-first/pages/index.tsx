@@ -18,7 +18,7 @@ export default function Index({ featuredNews, latestNews, bangladesh, politics, 
         <BlockNews items={featuredNews.slice(5, 11)} title={""} />
         <Slider items={world.slice(0, 6)} title={"World"} />
         <BlockNews2 items={bangladesh.slice(0, 6)} latest={latestNews.slice(0, 5)} title={"Bangladesh"} />
-        <BlockNews3 items={politics} latest={latestNews.slice(5, 11)} title={"Politics"} />
+        <BlockNews3 items={politics} latest={latestNews.slice(6, 11)} title={"Politics"} />
       </main>
       <BackToTop />
       <Footer />
