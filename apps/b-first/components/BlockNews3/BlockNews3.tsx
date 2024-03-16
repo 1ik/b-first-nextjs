@@ -29,14 +29,16 @@ const BlockNews3 = ({ items, latest, title }: { items: any[]; title: string; lat
                     <a href={newsUrl(items[0])}>
                       <img
                         className="max-w-full w-full mx-auto h-auto"
-                        src={getImageUrl(items[0].featured_image)}
+                        src={getImageUrl(items[0].meta.featured_image)}
                         alt={items[0].title}
                       />
                     </a>
                     <div className="absolute px-5 pt-8 pb-5 bottom-0 w-full bg-gradient-cover">
                       {/*title*/}
                       <a href={newsUrl(items[0])}>
-                        <h2 className="text-3xl font-bold capitalize text-white mb-3">{items[0].meta.altheadline || items[0].title}</h2>
+                        <h2 className="text-3xl font-bold capitalize text-white mb-3">
+                          {items[0].meta.altheadline || items[0].title}
+                        </h2>
                       </a>
                       <p className="text-gray-100 hidden sm:inline-block">{items[0].brief}</p>
                       {/* author and date */}
