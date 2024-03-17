@@ -6,7 +6,7 @@ import { useContext } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { AppContext } from "../app.context";
 
-type Inputs = {
+export type Inputs = {
   email: string;
   password: string;
 };
