@@ -1,4 +1,3 @@
-import React from "react";
 import CurrentDate from "../CurrentDate/CurrentDate";
 
 const Header = ({ category }: { category?: string }) => {
@@ -10,9 +9,9 @@ const Header = ({ category }: { category?: string }) => {
             <div className="flex justify-between">
               <div className="mx-w-10 text-2xl font-bold capitalize text-white flex flex-col items-center">
                 <a href="/">
-                  <img src="/img/logo.svg" alt="" />
+                  <img src="/img/logo.svg" alt="" className="w-[220px]" />
                 </a>
-                <CurrentDate/>
+                <CurrentDate />
               </div>
 
               <div className="flex flex-row">
