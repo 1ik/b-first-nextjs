@@ -1,5 +1,5 @@
-import React from "react";
 import PropTypes from "prop-types";
+import React from "react";
 
 // utils
 import classnames from "classnames";
@@ -10,33 +10,33 @@ import objectsToString from "../../utils/objectsToString";
 import { useTheme } from "../../context/theme";
 
 // types
+import { twMerge } from "tailwind-merge";
 import type {
-  variant,
-  color,
-  size,
-  label,
-  error,
-  success,
-  icon,
-  labelProps,
-  containerProps,
-  shrink,
   className,
+  color,
+  containerProps,
+  error,
+  icon,
+  label,
+  labelProps,
+  shrink,
+  size,
+  success,
+  variant,
 } from "../../types/components/input";
 import {
-  propTypesVariant,
-  propTypesColor,
-  propTypesSize,
-  propTypesLabel,
-  propTypesError,
-  propTypesSuccess,
-  propTypesIcon,
-  propTypesLabelProps,
-  propTypesContainerProps,
-  propTypesShrink,
   propTypesClassName,
+  propTypesColor,
+  propTypesContainerProps,
+  propTypesError,
+  propTypesIcon,
+  propTypesLabel,
+  propTypesLabelProps,
+  propTypesShrink,
+  propTypesSize,
+  propTypesSuccess,
+  propTypesVariant,
 } from "../../types/components/input";
-import { twMerge } from "tailwind-merge";
 
 export interface InputProps extends Omit<React.ComponentProps<"input">, "size"> {
   variant?: variant;
@@ -70,7 +70,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
       inputRef,
       ...rest
     },
-    ref,
+    ref
   ) => {
     // 1. init
     const { input } = useTheme();
@@ -94,21 +94,17 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const inputError = objectsToString(inputVariant.error.input);
     const inputSuccess = objectsToString(inputVariant.success.input);
     const inputShrink = objectsToString(inputVariant.shrink.input);
-    const inputColor = objectsToString(
-      inputVariant.colors.input[findMatch(valid.colors, color, "gray")],
-    );
+    const inputColor = objectsToString(inputVariant.colors.input[findMatch(valid.colors, color, "gray")]);
     const labelError = objectsToString(inputVariant.error.label);
     const labelSuccess = objectsToString(inputVariant.success.label);
     const labelShrink = objectsToString(inputVariant.shrink.label);
-    const labelColor = objectsToString(
-      inputVariant.colors.label[findMatch(valid.colors, color, "gray")],
-    );
+    const labelColor = objectsToString(inputVariant.colors.label[findMatch(valid.colors, color, "gray")]);
     const containerClasses = classnames(
       objectsToString(base.container),
       objectsToString(inputSize.container),
-      containerProps?.className,
+      containerProps?.className
     );
-    const inputClasses = classnames(
+    let inputClasses = classnames(
       objectsToString(base.input),
       objectsToString(inputVariant.base.input),
       objectsToString(inputSize.input),
@@ -117,7 +113,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
       { [inputError]: error },
       { [inputSuccess]: success },
       { [inputShrink]: shrink },
-      className,
+      className
     );
     const labelClasses = classnames(
       objectsToString(base.label),
@@ -127,31 +123,27 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
       { [labelError]: error },
       { [labelSuccess]: success },
       { [labelShrink]: shrink },
-      labelProps?.className,
+      labelProps?.className
     );
     const iconClasses = classnames(
       objectsToString(base.icon),
       objectsToString(inputVariant.base.icon),
-      objectsToString(inputSize.icon),
+      objectsToString(inputSize.icon)
     );
     const asteriskClasses = classnames(objectsToString(base.asterisk));
+    inputClasses += " focus:ring-0 focus:ring-offset-0";
 
     // 4. return
     return (
       <div {...containerProps} ref={ref} className={containerClasses}>
         {icon && <div className={iconClasses}>{icon}</div>}
-        <input
-          {...rest}
-          ref={inputRef}
-          className={inputClasses}
-          placeholder={rest?.placeholder || " "}
-        />
+        <input {...rest} ref={inputRef} className={inputClasses} placeholder={rest?.placeholder || " "} />
         <label {...labelProps} className={labelClasses}>
           {label} {rest.required ? <span className={asteriskClasses}>*</span> : ""}
         </label>
       </div>
     );
-  },
+  }
 );
 
 Input.propTypes = {
