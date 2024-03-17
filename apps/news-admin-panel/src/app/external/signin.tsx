@@ -1,4 +1,5 @@
-import { Button, Input } from "@bfirst/material-tailwind";
+import { Button, Card, CardBody, CardFooter, CardHeader, Checkbox, Input, Typography } from "@bfirst/material-tailwind";
+import { ExclamationCircleIcon, LockClosedIcon, UserIcon } from "@heroicons/react/24/solid";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { useContext } from "react";
@@ -39,6 +40,36 @@ export function Signin() {
     mutate(data as any);
   };
 
+  function LoginCard() {
+    return (
+      <div className="flex w-full h-full flex-col items-center justify-center">
+        <Card className="w-96">
+          <CardHeader variant="gradient" className="mb-4 grid h-28 place-items-center">
+            <img className="mx-auto h-10 w-auto" src="/img/logo.svg" alt="Bangladesh First Logo" />
+            <Typography variant="h6">Sign in to your account</Typography>
+          </CardHeader>
+          <CardBody className="flex flex-col gap-4">
+            <Input label="Email" size="lg" />
+            <Input label="Password" size="lg" />
+            <div className="-ml-2.5">
+              <Checkbox label="Remember Me" />
+            </div>
+          </CardBody>
+          <CardFooter className="pt-0">
+            <Button variant="gradient" fullWidth>
+              Sign In
+            </Button>
+            <Typography variant="small" className="mt-6 flex justify-center">
+              Forgot your password?
+            </Typography>
+          </CardFooter>
+        </Card>
+      </div>
+    );
+  }
+
+  return LoginCard();
+
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -49,33 +80,15 @@ export function Signin() {
         {/* ==== error msg ==== */}
         {isError && (
           <div role="alert" className="alert alert-error mt-4">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="stroke-current shrink-0 h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
+            <ExclamationCircleIcon className="w-6 h-6" />
             <span>Invalid email or password</span>
           </div>
         )}
       </div>
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
-          <Input
-            {...register("email")}
-            type="email"
-            autoComplete="email"
-            label="Email Address"
-            icon={<i className="fas fa-heart" />}
-          />
-          <Input {...register("password")} type="password" label="Password" icon={<i className="fas fa-lock" />} />
+          <Input {...register("email")} type="email" autoComplete="email" label="Email Address" icon={<UserIcon />} />
+          <Input {...register("password")} type="password" label="Password" icon={<LockClosedIcon />} />
 
           <Button type="submit" loading={isPending} className={"w-full flex justify-center text-center"}>
             Sign in

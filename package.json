@@ -7,6 +7,7 @@
   },
   "private": true,
   "dependencies": {
+    "@heroicons/react": "^2.1.1",
     "@material-tailwind/react": "^2.1.9",
     "@next/font": "^14.0.4",
     "@nx/next": "17.2.7",
