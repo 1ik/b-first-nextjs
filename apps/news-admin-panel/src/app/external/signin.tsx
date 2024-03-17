@@ -1,9 +1,8 @@
-import { Button } from "@bfirst/material-tailwind";
+import { Button, Input } from "@bfirst/material-tailwind";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { useContext } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
 import { AppContext } from "../app.context";
 
 type Inputs = {
@@ -69,43 +68,15 @@ export function Signin() {
       </div>
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
-              Email address
-            </label>
-            <div className="mt-2">
-              <input
-                id="  email"
-                {...register("email")}
-                type="email"
-                autoComplete="email"
-                required
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-400 sm:text-sm sm:leading-6"
-              />
-            </div>
-          </div>
+          <Input
+            {...register("email")}
+            type="email"
+            autoComplete="email"
+            label="Email Address"
+            icon={<i className="fas fa-heart" />}
+          />
+          <Input {...register("password")} type="password" label="Password" icon={<i className="fas fa-lock" />} />
 
-          <div>
-            <div className="flex items-center justify-between">
-              <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
-                Password
-              </label>
-              <div className="text-sm">
-                <Link to="#" className="font-semibold text-gray-400 hover:text-gray-600">
-                  Forgot password?
-                </Link>
-              </div>
-            </div>
-            <div className="mt-2">
-              <input
-                id="password"
-                {...register("password")}
-                type="password"
-                required
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-400 sm:text-sm sm:leading-6"
-              />
-            </div>
-          </div>
           <Button type="submit" loading={isPending} className={"w-full flex justify-center text-center"}>
             Sign in
           </Button>
