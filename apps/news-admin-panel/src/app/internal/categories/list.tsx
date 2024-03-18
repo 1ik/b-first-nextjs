@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { Breadcrumb, DeleteAction, EditAction } from "../../components";
-import { token } from "../../token_utils";
-import { Link } from "react-router-dom";
-import { IoSearchOutline } from "react-icons/io5";
+import { FeatureCategoryList } from "@bfirst/components-categories";
 
+export default function List() {
+  return <FeatureCategoryList />;
+}
+
+/*
 export default function List() {
   const [categories, setCategories] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -137,3 +138,4 @@ export default function List() {
     </div>
   );
 }
+*/
