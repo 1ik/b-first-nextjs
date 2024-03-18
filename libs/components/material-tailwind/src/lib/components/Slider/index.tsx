@@ -1,9 +1,12 @@
-import React from "react";
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
+
 import PropTypes from "prop-types";
+import React from "react";
 
 // utils
-import merge from "deepmerge";
 import classnames from "classnames";
+import merge from "deepmerge";
 import { twMerge } from "tailwind-merge";
 import findMatch from "../../utils/findMatch";
 import objectsToString from "../../utils/objectsToString";
@@ -13,36 +16,36 @@ import { useTheme } from "../../context/theme";
 
 // types
 import type {
-  color,
-  size,
-  className,
-  trackClassName,
-  thumbClassName,
   barClassName,
-  value,
+  className,
+  color,
   defaultValue,
-  onChange,
-  min,
-  max,
-  step,
-  inputRef,
   inputProps,
+  inputRef,
+  max,
+  min,
+  onChange,
+  size,
+  step,
+  thumbClassName,
+  trackClassName,
+  value,
 } from "../../types/components/slider";
 import {
-  propTypesColor,
-  propTypesSize,
-  propTypesClassName,
-  propTypesTrackClassName,
-  propTypesThumbClassName,
   propTypesBarClassName,
-  propTypesValue,
+  propTypesClassName,
+  propTypesColor,
   propTypesDefaultValue,
-  propTypesOnChange,
-  propTypesMin,
-  propTypesMax,
-  propTypesStep,
-  propTypesInputRef,
   propTypesInputProps,
+  propTypesInputRef,
+  propTypesMax,
+  propTypesMin,
+  propTypesOnChange,
+  propTypesSize,
+  propTypesStep,
+  propTypesThumbClassName,
+  propTypesTrackClassName,
+  propTypesValue,
 } from "../../types/components/slider";
 
 export interface SliderProps extends React.ComponentProps<"div"> {
@@ -82,7 +85,7 @@ export const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
       inputProps,
       ...rest
     },
-    ref,
+    ref
   ) => {
     // 1. init
     const { slider } = useTheme();
@@ -101,10 +104,8 @@ export const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
     max = max ?? defaultProps.max;
     step = step ?? defaultProps.step;
     className = twMerge(defaultProps.className || "", className);
-    thumbClassName =
-      classnames(defaultProps.thumbClassName, thumbClassName) ?? defaultProps.thumbClassName;
-    trackClassName =
-      classnames(defaultProps.trackClassName, trackClassName) ?? defaultProps.trackClassName;
+    thumbClassName = classnames(defaultProps.thumbClassName, thumbClassName) ?? defaultProps.thumbClassName;
+    trackClassName = classnames(defaultProps.trackClassName, trackClassName) ?? defaultProps.trackClassName;
     barClassName = classnames(defaultProps.barClassName, barClassName) ?? defaultProps.barClassName;
     inputProps = merge(inputProps, defaultProps?.inputProps || {}) ?? defaultProps.inputProps;
 
@@ -114,22 +115,22 @@ export const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
         objectsToString(base.container),
         objectsToString(colors[findMatch(valid.colors, color, "gray")]),
         objectsToString(sizes[findMatch(valid.sizes, size, "md")]["container"]),
-        className,
-      ),
+        className
+      )
     );
     const sliderBarClasses = twMerge(classnames(objectsToString(base.bar), barClassName));
     const sliderTrackClasses = classnames(
       objectsToString(base.track),
-      objectsToString(sizes[findMatch(valid.sizes, size, "md")]["track"]),
+      objectsToString(sizes[findMatch(valid.sizes, size, "md")]["track"])
     );
     const sliderThumbClasses = classnames(
       objectsToString(base.thumb),
-      objectsToString(sizes[findMatch(valid.sizes, size, "md")]["thumb"]),
+      objectsToString(sizes[findMatch(valid.sizes, size, "md")]["thumb"])
     );
     const sliderClasses = classnames(
       objectsToString(base.slider),
       twMerge(sliderTrackClasses, trackClassName),
-      twMerge(sliderThumbClasses, thumbClassName),
+      twMerge(sliderThumbClasses, thumbClassName)
     );
 
     // 4. return
@@ -149,7 +150,7 @@ export const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
         />
       </div>
     );
-  },
+  }
 );
 
 Slider.propTypes = {

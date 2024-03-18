@@ -1,9 +1,12 @@
-import React from "react";
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
+
 import PropTypes from "prop-types";
+import React from "react";
 
 // utils
-import Ripple from "material-ripple-effects";
 import classnames from "classnames";
+import Ripple from "material-ripple-effects";
 import { twMerge } from "tailwind-merge";
 import findMatch from "../../utils/findMatch";
 import objectsToString from "../../utils/objectsToString";
@@ -15,24 +18,16 @@ import { useTheme } from "../../context/theme";
 import Spinner from "../Spinner";
 
 // types
-import type {
-  variant,
-  size,
-  color,
-  fullWidth,
-  ripple,
-  className,
-  children,
-} from "../../types/components/button";
+import type { children, className, color, fullWidth, ripple, size, variant } from "../../types/components/button";
 import {
-  propTypesVariant,
-  propTypesSize,
+  propTypesChildren,
+  propTypesClassName,
   propTypesColor,
   propTypesFullWidth,
-  propTypesRipple,
-  propTypesClassName,
-  propTypesChildren,
   propTypesLoading,
+  propTypesRipple,
+  propTypesSize,
+  propTypesVariant,
 } from "../../types/components/button";
 
 export interface ButtonProps extends React.ComponentProps<"button"> {
@@ -67,9 +62,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     // 4. set styles
     const buttonBase = objectsToString(base.initial);
     const buttonVariant = objectsToString(
-      variants[findMatch(valid.variants, variant, "filled")][
-        findMatch(valid.colors, color, "gray")
-      ],
+      variants[findMatch(valid.variants, variant, "filled")][findMatch(valid.colors, color, "gray")]
     );
     const buttonSize = objectsToString(sizes[findMatch(valid.sizes, size, "md")]);
     const classes = twMerge(
@@ -83,16 +76,16 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {
           "flex items-center gap-2": loading,
           "gap-3": size === "lg",
-        },
+        }
       ),
-      className,
+      className
     );
 
     const spinnerClass = twMerge(
       classnames({
         "w-4 h-4": true,
         "w-5 h-5": size === "lg",
-      }),
+      })
     );
 
     // 5. return
@@ -109,9 +102,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           if (ripple) {
             rippleEffect.create(
               e,
-              (variant === "filled" || variant === "gradient") && color !== "white"
-                ? "light"
-                : "dark",
+              (variant === "filled" || variant === "gradient") && color !== "white" ? "light" : "dark"
             );
           }
           return typeof onMouseDown === "function" && onMouseDown(e);
@@ -121,7 +112,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {children}
       </button>
     );
-  },
+  }
 );
 
 Button.propTypes = {

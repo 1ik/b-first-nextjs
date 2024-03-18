@@ -1,9 +1,12 @@
-import React from "react";
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
+
 import PropTypes from "prop-types";
+import React from "react";
 
 // utils
-import Ripple from "material-ripple-effects";
 import classnames from "classnames";
+import Ripple from "material-ripple-effects";
 import { twMerge } from "tailwind-merge";
 import findMatch from "../../utils/findMatch";
 import objectsToString from "../../utils/objectsToString";
@@ -12,23 +15,15 @@ import objectsToString from "../../utils/objectsToString";
 import { useTheme } from "../../context/theme";
 
 // types
-import type {
-  color,
-  label,
-  icon,
-  ripple,
-  className,
-  disabled,
-  objectType,
-} from "../../types/components/checkbox";
+import type { className, color, disabled, icon, label, objectType, ripple } from "../../types/components/checkbox";
 import {
-  propTypesColor,
-  propTypesLabel,
-  propTypesIcon,
-  propTypesRipple,
   propTypesClassName,
+  propTypesColor,
   propTypesDisabled,
+  propTypesIcon,
+  propTypesLabel,
   propTypesObject,
+  propTypesRipple,
 } from "../../types/components/checkbox";
 
 export interface CheckboxProps extends React.ComponentProps<"input"> {
@@ -46,20 +41,8 @@ export interface CheckboxProps extends React.ComponentProps<"input"> {
 
 export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
   (
-    {
-      color,
-      label,
-      icon,
-      ripple,
-      className,
-      disabled,
-      containerProps,
-      labelProps,
-      iconProps,
-      inputRef,
-      ...rest
-    },
-    ref,
+    { color, label, icon, ripple, className, disabled, containerProps, labelProps, iconProps, inputRef, ...rest },
+    ref
   ) => {
     // 1. init
     const { checkbox } = useTheme();
@@ -85,22 +68,13 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
     const rootClasses = classnames(objectsToString(base.root), {
       [objectsToString(base.disabled)]: disabled,
     });
-    const containerClasses = twMerge(
-      classnames(objectsToString(base.container)),
-      containerProps?.className,
-    );
+    const containerClasses = twMerge(classnames(objectsToString(base.container)), containerProps?.className);
     const inputClasses = twMerge(
-      classnames(
-        objectsToString(base.input),
-        objectsToString(colors[findMatch(valid.colors, color, "gray")]),
-      ),
-      className,
+      classnames(objectsToString(base.input), objectsToString(colors[findMatch(valid.colors, color, "gray")])),
+      className
     );
     const labelClasses = twMerge(classnames(objectsToString(base.label)), labelProps?.className);
-    const iconContainerClasses = twMerge(
-      classnames(objectsToString(base.icon)),
-      iconProps?.className,
-    );
+    const iconContainerClasses = twMerge(classnames(objectsToString(base.icon)), iconProps?.className);
 
     return (
       <div ref={ref} className={rootClasses}>
@@ -152,7 +126,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
         )}
       </div>
     );
-  },
+  }
 );
 
 Checkbox.propTypes = {

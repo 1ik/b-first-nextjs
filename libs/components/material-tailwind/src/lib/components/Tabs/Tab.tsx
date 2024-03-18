@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
+
 import React from "react";
 
 // framer-motion
@@ -10,16 +13,11 @@ import objectsToString from "../../utils/objectsToString";
 
 // context
 import { useTheme } from "../../context/theme";
-import { useTabs, setActive, setIsInitial } from "./TabsContext";
+import { setActive, setIsInitial, useTabs } from "./TabsContext";
 
 // types
-import type { value, className, disabled, children } from "../../types/components/tabs";
-import {
-  propTypesValue,
-  propTypesClassName,
-  propTypesDisabled,
-  propTypesChildren,
-} from "../../types/components/tabs";
+import type { children, className, disabled, value } from "../../types/components/tabs";
+import { propTypesChildren, propTypesClassName, propTypesDisabled, propTypesValue } from "../../types/components/tabs";
 
 export interface TabProps extends React.ComponentProps<"li"> {
   value: value;
@@ -51,12 +49,9 @@ export const Tab = React.forwardRef<HTMLLIElement, TabProps>(
         [objectsToString(base.tab.disabled)]: disabled,
         [activeClassName]: active === value,
       }),
-      className,
+      className
     );
-    const indicatorClasses = twMerge(
-      classnames(objectsToString(base.indicator)),
-      indicatorProps?.className ?? "",
-    );
+    const indicatorClasses = twMerge(classnames(objectsToString(base.indicator)), indicatorProps?.className ?? "");
 
     // 4. return
     return (
@@ -81,16 +76,11 @@ export const Tab = React.forwardRef<HTMLLIElement, TabProps>(
       >
         <div className="z-20 text-inherit">{children}</div>
         {active === value && (
-          <motion.div
-            {...indicatorProps}
-            transition={{ duration: 0.5 }}
-            className={indicatorClasses}
-            layoutId={id}
-          />
+          <motion.div {...indicatorProps} transition={{ duration: 0.5 }} className={indicatorClasses} layoutId={id} />
         )}
       </li>
     );
-  },
+  }
 );
 
 Tab.propTypes = {

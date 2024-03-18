@@ -1,7 +1,10 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
+
 import React from "react";
 
 // framer-motion
-import { animate, m, useMotionValue, LazyMotion, domAnimation } from "framer-motion";
+import { LazyMotion, animate, domAnimation, m, useMotionValue } from "framer-motion";
 
 // @floating-ui
 import { useMergeRefs } from "@floating-ui/react";
@@ -16,26 +19,26 @@ import { useTheme } from "../../context/theme";
 
 // types
 import {
-  children,
-  prevArrow,
-  nextArrow,
-  navigation,
   autoplay,
   autoplayDelay,
-  transition,
-  loop,
+  children,
   className,
-  slideRef,
-  propTypesChildren,
-  propTypesClassName,
-  propTypesNextArrow,
-  propTypesPrevArrow,
-  propTypesNavigation,
+  loop,
+  navigation,
+  nextArrow,
+  prevArrow,
   propTypesAutoplay,
   propTypesAutoplayDelay,
-  propTypesTransition,
+  propTypesChildren,
+  propTypesClassName,
   propTypesLoop,
+  propTypesNavigation,
+  propTypesNextArrow,
+  propTypesPrevArrow,
   propTypesSlideRef,
+  propTypesTransition,
+  slideRef,
+  transition,
 } from "../../types/components/carousel";
 
 export interface CarouselProps extends React.ComponentProps<"div"> {
@@ -66,7 +69,7 @@ export const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
       slideRef,
       ...rest
     },
-    ref,
+    ref
   ) => {
     // 1. init
     const { carousel } = useTheme();
@@ -94,10 +97,7 @@ export const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
     const slideClasses = twMerge(classnames(objectsToString(base.slide)));
 
     // 4. set carousel functions
-    const calculateNewX = React.useCallback(
-      () => -index * (containerRef.current?.clientWidth || 0),
-      [index],
-    );
+    const calculateNewX = React.useCallback(() => -index * (containerRef.current?.clientWidth || 0), [index]);
 
     const handleNext = React.useCallback(() => {
       const idx = loop ? 0 : index;
@@ -163,11 +163,10 @@ export const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
           })}
 
         {/* navigation */}
-        {navigation &&
-          navigation({ setActiveIndex: setIndex, activeIndex: index, length: childrens.length })}
+        {navigation && navigation({ setActiveIndex: setIndex, activeIndex: index, length: childrens.length })}
       </div>
     );
-  },
+  }
 );
 
 Carousel.propTypes = {

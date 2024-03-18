@@ -1,36 +1,33 @@
-import React from "react";
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
+
 import PropTypes from "prop-types";
+import React from "react";
 
 // @floating-ui
 import {
-  useFloating,
-  offset as fuiOffset,
+  FloatingFocusManager,
+  FloatingOverlay,
+  autoUpdate,
   flip,
-  useListNavigation,
-  useTypeahead,
-  useInteractions,
-  useRole,
+  offset as fuiOffset,
+  size as fuiSize,
   useClick,
   useDismiss,
-  FloatingFocusManager,
-  autoUpdate,
-  size as fuiSize,
-  FloatingOverlay,
+  useFloating,
+  useInteractions,
+  useListNavigation,
+  useRole,
+  useTypeahead,
 } from "@floating-ui/react";
 
 // framer-motion
-import {
-  AnimatePresence,
-  m,
-  useIsomorphicLayoutEffect,
-  LazyMotion,
-  domAnimation,
-} from "framer-motion";
+import { AnimatePresence, LazyMotion, domAnimation, m, useIsomorphicLayoutEffect } from "framer-motion";
 
 // utils
 import classnames from "classnames";
-import { twMerge } from "tailwind-merge";
 import merge from "deepmerge";
+import { twMerge } from "tailwind-merge";
 import findMatch from "../../utils/findMatch";
 import objectsToString from "../../utils/objectsToString";
 
@@ -39,53 +36,53 @@ import { useTheme } from "../../context/theme";
 import { SelectContextProvider, usePrevious, useSelect } from "./SelectContext";
 
 // types
-import type { NewAnimatePresenceProps } from "../../types/generic";
 import type {
-  variant,
-  color,
-  size,
-  label,
-  error,
-  success,
+  animate,
   arrow,
-  value,
+  children,
+  className,
+  color,
+  containerProps,
+  disabled,
+  dismiss,
+  error,
+  label,
+  labelProps,
+  lockScroll,
+  menuProps,
+  name,
+  offset,
   onChange,
   selected,
-  offset,
-  dismiss,
-  animate,
-  lockScroll,
-  labelProps,
-  menuProps,
-  className,
-  disabled,
-  name,
-  children,
-  containerProps,
+  size,
+  success,
+  value,
+  variant,
 } from "../../types/components/select";
 import {
-  propTypesVariant,
-  propTypesColor,
-  propTypesSize,
-  propTypesLabel,
-  propTypesError,
-  propTypesSuccess,
+  propTypesAnimate,
   propTypesArrow,
-  propTypesValue,
+  propTypesChildren,
+  propTypesClassName,
+  propTypesColor,
+  propTypesContainerProps,
+  propTypesDisabled,
+  propTypesDismiss,
+  propTypesError,
+  propTypesLabel,
+  propTypesLabelProps,
+  propTypesLockScroll,
+  propTypesMenuProps,
+  propTypesName,
+  propTypesOffset,
   propTypesOnChange,
   propTypesSelected,
-  propTypesOffset,
-  propTypesDismiss,
-  propTypesAnimate,
-  propTypesLockScroll,
-  propTypesLabelProps,
-  propTypesMenuProps,
-  propTypesClassName,
-  propTypesDisabled,
-  propTypesName,
-  propTypesChildren,
-  propTypesContainerProps,
+  propTypesSize,
+  propTypesSuccess,
+  propTypesValue,
+  propTypesVariant,
 } from "../../types/components/select";
+import type { NewAnimatePresenceProps } from "../../types/generic";
 
 // select components
 import { SelectOption, SelectOptionProps } from "./SelectOption";
@@ -140,7 +137,7 @@ const Select = React.forwardRef<HTMLDivElement, SelectProps>(
       containerProps,
       ...rest
     },
-    ref,
+    ref
   ) => {
     // 1. init
     const { select } = useTheme();
@@ -164,8 +161,7 @@ const Select = React.forwardRef<HTMLDivElement, SelectProps>(
     animate = animate ?? defaultProps.animate;
     labelProps = labelProps ?? defaultProps.labelProps;
     menuProps = menuProps ?? defaultProps.menuProps;
-    containerProps =
-      merge(containerProps, defaultProps?.containerProps || {}) ?? defaultProps.containerProps;
+    containerProps = merge(containerProps, defaultProps?.containerProps || {}) ?? defaultProps.containerProps;
     className = twMerge(defaultProps.className || "", className);
 
     children = Array.isArray(children) ? children : [children];
@@ -267,7 +263,7 @@ const Select = React.forwardRef<HTMLDivElement, SelectProps>(
         getItemProps,
         dataRef: context.dataRef,
       }),
-      [selectedIndex, onChange, activeIndex, getItemProps, context.dataRef],
+      [selectedIndex, onChange, activeIndex, getItemProps, context.dataRef]
     );
 
     React.useEffect(() => {
@@ -293,7 +289,7 @@ const Select = React.forwardRef<HTMLDivElement, SelectProps>(
     const containerClasses = classnames(
       objectsToString(base.container),
       objectsToString(selectSize.container),
-      containerProps?.className,
+      containerProps?.className
     );
     const selectClasses = twMerge(
       classnames(
@@ -305,9 +301,9 @@ const Select = React.forwardRef<HTMLDivElement, SelectProps>(
         { [objectsToString(selectError.initial)]: error },
         { [objectsToString(selectError.states[state])]: error },
         { [objectsToString(selectSuccess.initial)]: success },
-        { [objectsToString(selectSuccess.states[state])]: success },
+        { [objectsToString(selectSuccess.states[state])]: success }
       ),
-      className,
+      className
     );
     const labelClasses = twMerge(
       classnames(
@@ -320,9 +316,9 @@ const Select = React.forwardRef<HTMLDivElement, SelectProps>(
         { [objectsToString(labelError.initial)]: error },
         { [objectsToString(labelError.states[state])]: error },
         { [objectsToString(labelSuccess.initial)]: success },
-        { [objectsToString(labelSuccess.states[state])]: success },
+        { [objectsToString(labelSuccess.states[state])]: success }
       ),
-      labelProps.className ?? "",
+      labelProps.className ?? ""
     );
     const arrowClasses = classnames(objectsToString(base.arrow.initial), {
       [objectsToString(base.arrow.active)]: open,
@@ -330,7 +326,7 @@ const Select = React.forwardRef<HTMLDivElement, SelectProps>(
     const menuClasses = twMerge(classnames(objectsToString(base.menu)), menuProps.className ?? "");
     const buttonContentClasses = classnames(
       "absolute top-2/4 -translate-y-2/4",
-      variant === "outlined" ? "left-3 pt-0.5" : "left-0 pt-3",
+      variant === "outlined" ? "left-3 pt-0.5" : "left-0 pt-3"
     );
 
     // 5. set animation
@@ -357,7 +353,7 @@ const Select = React.forwardRef<HTMLDivElement, SelectProps>(
     React.useEffect(() => {
       if (value && !onChange) {
         console.error(
-          "Warning: You provided a `value` prop to a select component without an `onChange` handler. This will render a read-only select. If the field should be mutable use `onChange` handler with `value` together.",
+          "Warning: You provided a `value` prop to a select component without an `onChange` handler. This will render a read-only select. If the field should be mutable use `onChange` handler with `value` together."
         );
       }
     }, [value, onChange]);
@@ -415,7 +411,7 @@ const Select = React.forwardRef<HTMLDivElement, SelectProps>(
                 ...child.props,
                 index: child.props?.index || index + 1,
                 id: `material-tailwind-select-${index}`,
-              }),
+              })
           )}
         </m.ul>
       </FloatingFocusManager>
@@ -436,9 +432,7 @@ const Select = React.forwardRef<HTMLDivElement, SelectProps>(
             })}
           >
             {typeof selected === "function" ? (
-              <span className={buttonContentClasses}>
-                {selected(children[selectedIndex - 1], selectedIndex - 1)}
-              </span>
+              <span className={buttonContentClasses}>{selected(children[selectedIndex - 1], selectedIndex - 1)}</span>
             ) : value && !onChange ? (
               <span className={buttonContentClasses}>{value}</span>
             ) : (
@@ -461,21 +455,13 @@ const Select = React.forwardRef<HTMLDivElement, SelectProps>(
           </label>
           <LazyMotion features={domAnimation}>
             <NewAnimatePresence>
-              {open && (
-                <>
-                  {lockScroll ? (
-                    <FloatingOverlay lockScroll>{selectMenu}</FloatingOverlay>
-                  ) : (
-                    selectMenu
-                  )}
-                </>
-              )}
+              {open && <>{lockScroll ? <FloatingOverlay lockScroll>{selectMenu}</FloatingOverlay> : selectMenu}</>}
             </NewAnimatePresence>
           </LazyMotion>
         </div>
       </SelectContextProvider>
     );
-  },
+  }
 );
 
 Select.propTypes = {
@@ -504,6 +490,6 @@ Select.propTypes = {
 
 Select.displayName = "MaterialTailwind.Select";
 
+export { SelectOption as Option, Select, usePrevious, useSelect };
 export type { SelectOptionProps };
-export { Select, SelectOption as Option, useSelect, usePrevious };
 export default Object.assign(Select, { Option: SelectOption });

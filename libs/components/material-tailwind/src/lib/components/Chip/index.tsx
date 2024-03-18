@@ -1,8 +1,11 @@
-import React from "react";
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
+
 import PropTypes from "prop-types";
+import React from "react";
 
 // framer-motion
-import { AnimatePresence, m, MotionProps, LazyMotion, domAnimation } from "framer-motion";
+import { AnimatePresence, LazyMotion, MotionProps, domAnimation, m } from "framer-motion";
 
 // utils
 import classnames from "classnames";
@@ -15,31 +18,31 @@ import objectsToString from "../../utils/objectsToString";
 import { useTheme } from "../../context/theme";
 
 // types
-import type { NewAnimatePresenceProps } from "../../types/generic";
 import type {
-  variant,
-  color,
-  icon,
-  open,
-  onClose,
   action,
   animate,
   className,
-  value,
+  color,
+  icon,
+  onClose,
+  open,
   size,
+  value,
+  variant,
 } from "../../types/components/chip";
 import {
-  propTypesVariant,
-  propTypesColor,
-  propTypesIcon,
-  propTypesOpen,
-  propTypesOnClose,
   propTypesAction,
   propTypesAnimate,
   propTypesClassName,
-  propTypesValue,
+  propTypesColor,
+  propTypesIcon,
+  propTypesOnClose,
+  propTypesOpen,
   propTypesSize,
+  propTypesValue,
+  propTypesVariant,
 } from "../../types/components/chip";
+import type { NewAnimatePresenceProps } from "../../types/generic";
 import IconButton from "../IconButton";
 
 export interface ChipProps extends Omit<MotionProps, "animate"> {
@@ -56,10 +59,7 @@ export interface ChipProps extends Omit<MotionProps, "animate"> {
 }
 
 export const Chip = React.forwardRef<HTMLDivElement, ChipProps>(
-  (
-    { variant, size, color, icon, open, onClose, action, animate, className, value, ...rest },
-    ref,
-  ) => {
+  ({ variant, size, color, icon, open, onClose, action, animate, className, value, ...rest }, ref) => {
     // 1. init
     const { chip } = useTheme();
     const { defaultProps, valid, styles } = chip;
@@ -80,9 +80,7 @@ export const Chip = React.forwardRef<HTMLDivElement, ChipProps>(
     const chipAction = objectsToString(base.action);
     const chipIcon = objectsToString(base.icon);
     const chipVariant = objectsToString(
-      variants[findMatch(valid.variants, variant, "filled")][
-        findMatch(valid.colors, color, "gray")
-      ],
+      variants[findMatch(valid.variants, variant, "filled")][findMatch(valid.colors, color, "gray")]
     );
     const chipSize = objectsToString(sizes[findMatch(valid.sizes, size, "md")]["chip"]);
     const actionSize = objectsToString(sizes[findMatch(valid.sizes, size, "md")]["action"]);
@@ -161,7 +159,7 @@ export const Chip = React.forwardRef<HTMLDivElement, ChipProps>(
         </NewAnimatePresence>
       </LazyMotion>
     );
-  },
+  }
 );
 
 Chip.propTypes = {

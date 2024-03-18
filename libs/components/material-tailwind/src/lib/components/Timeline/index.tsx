@@ -8,43 +8,36 @@ import objectsToString from "../../utils/objectsToString";
 import { useTheme } from "../../context/theme";
 
 // types
-import {
-  className,
-  children,
-  propTypeClassName,
-  propTypeChildren,
-} from "../../types/components/timeline";
+import { children, className, propTypeChildren, propTypeClassName } from "../../types/components/timeline";
 
 // components
-import TimelineItem from "./TimelineItem";
-import TimelineIcon from "./TimelineIcon";
 import TimelineBody from "./TimelineBody";
-import TimelineHeader from "./TimelineHeader";
 import TimelineConnector from "./TimelineConnector";
+import TimelineHeader from "./TimelineHeader";
+import TimelineIcon from "./TimelineIcon";
+import TimelineItem from "./TimelineItem";
 
 export interface TimelineProps extends React.HTMLAttributes<HTMLUListElement> {
   className?: className;
   children?: children;
 }
 
-export const Timeline = React.forwardRef<HTMLUListElement, TimelineProps>(
-  ({ className, children, ...rest }, ref) => {
-    // 1. init
-    const { timeline } = useTheme();
-    const { styles } = timeline;
-    const { base } = styles;
+export const Timeline = React.forwardRef<HTMLUListElement, TimelineProps>(({ className, children, ...rest }, ref) => {
+  // 1. init
+  const { timeline } = useTheme();
+  const { styles } = timeline;
+  const { base } = styles;
 
-    // 3. set styles
-    const classes = twMerge(objectsToString(base), className);
+  // 3. set styles
+  const classes = twMerge(objectsToString(base), className);
 
-    // 4. return
-    return (
-      <ul ref={ref} {...rest} className={classes}>
-        {children}
-      </ul>
-    );
-  },
-);
+  // 4. return
+  return (
+    <ul ref={ref} {...rest} className={classes}>
+      {children}
+    </ul>
+  );
+});
 
 Timeline.propTypes = {
   className: propTypeClassName,
@@ -53,7 +46,7 @@ Timeline.propTypes = {
 
 Timeline.displayName = "MaterialTailwind.Timeline";
 
-export { TimelineItem, TimelineIcon, TimelineBody, TimelineHeader, TimelineConnector };
+export { TimelineBody, TimelineConnector, TimelineHeader, TimelineIcon, TimelineItem };
 export default Object.assign(Timeline, {
   Item: TimelineItem,
   Icon: TimelineIcon,

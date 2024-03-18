@@ -1,19 +1,22 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
+
 import React from "react";
 
 // types
 import {
-  id,
-  value as valueType,
   animate,
   children,
-  propTypesValue,
+  id,
   indicatorProps,
   isInitial,
   orientation,
+  propTypesChildren,
   propTypesId,
   propTypesOrientation,
+  propTypesValue,
+  value as valueType,
 } from "../../types/components/tabs";
-import { propTypesChildren } from "../../types/components/tabs";
 
 export interface TabsContextType {
   state: {
@@ -75,19 +78,14 @@ export function useTabs() {
 
   if (!context) {
     throw new Error(
-      "useTabs() must be used within a Tabs. It happens when you use TabsHeader, TabsBody, Tab or TabPanel outside the Tabs component.",
+      "useTabs() must be used within a Tabs. It happens when you use TabsHeader, TabsBody, Tab or TabPanel outside the Tabs component."
     );
   }
 
   return context;
 }
 
-export const TabsContextProvider = ({
-  id,
-  value,
-  orientation,
-  children,
-}: TabsContextProviderProps) => {
+export const TabsContextProvider = ({ id, value, orientation, children }: TabsContextProviderProps) => {
   const initialState = React.useMemo(
     () => ({
       id: id ?? "indicator",
@@ -101,7 +99,7 @@ export const TabsContextProvider = ({
       },
       indicatorProps: undefined,
     }),
-    [id, value, orientation],
+    [id, value, orientation]
   );
 
   const [state, dispatch] = React.useReducer(reducer, initialState);
@@ -110,10 +108,8 @@ export const TabsContextProvider = ({
   return <TabsContext.Provider value={contextValue}>{children}</TabsContext.Provider>;
 };
 
-export const setId = (dispatch: (arg: object) => void, value: id) =>
-  dispatch({ type: "SET_ID", value });
-export const setActive = (dispatch: (arg: object) => void, value: valueType) =>
-  dispatch({ type: "SET_ACTIVE", value });
+export const setId = (dispatch: (arg: object) => void, value: id) => dispatch({ type: "SET_ID", value });
+export const setActive = (dispatch: (arg: object) => void, value: valueType) => dispatch({ type: "SET_ACTIVE", value });
 export const setAnimation = (dispatch: (arg: object) => void, value: animate) =>
   dispatch({ type: "SET_ANIMATION", value });
 export const setIndicator = (dispatch: (arg: object) => void, value: indicatorProps) =>

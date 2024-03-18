@@ -1,5 +1,8 @@
-import React from "react";
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
+
 import PropTypes from "prop-types";
+import React from "react";
 
 // utils
 import classnames from "classnames";
@@ -12,24 +15,24 @@ import { useTheme } from "../../context/theme";
 
 // types
 import type {
-  count,
-  value,
-  ratedIcon,
-  unratedIcon,
-  color,
   className,
+  color,
+  count,
   onChange,
+  ratedIcon,
   readonly as readonlyType,
+  unratedIcon,
+  value,
 } from "../../types/components/rating";
 import {
-  propTypesCount,
-  propTypesValue,
-  propTypesRatedIcon,
-  propTypesUnratedIcon,
-  propTypesColor,
   propTypesClassName,
+  propTypesColor,
+  propTypesCount,
   propTypesOnChange,
+  propTypesRatedIcon,
   propTypesReadonly,
+  propTypesUnratedIcon,
+  propTypesValue,
 } from "../../types/components/rating";
 
 export interface RatingProps extends Omit<React.ComponentProps<"div">, "onChange"> {
@@ -45,21 +48,7 @@ export interface RatingProps extends Omit<React.ComponentProps<"div">, "onChange
 }
 
 export const Rating = React.forwardRef<HTMLDivElement, RatingProps>(
-  (
-    {
-      count,
-      value,
-      ratedIcon,
-      unratedIcon,
-      ratedColor,
-      unratedColor,
-      className,
-      onChange,
-      readonly,
-      ...rest
-    },
-    ref,
-  ) => {
+  ({ count, value, ratedIcon, unratedIcon, ratedColor, unratedColor, className, onChange, readonly, ...rest }, ref) => {
     // 1. init
     const { rating } = useTheme();
     const { valid, defaultProps, styles } = rating;
@@ -81,18 +70,12 @@ export const Rating = React.forwardRef<HTMLDivElement, RatingProps>(
       ...Array(value).fill("rated"),
       ...Array(count - value).fill("un_rated"),
     ]);
-    const [ratingOnHover, setRatingOnHover] = React.useState(() => [
-      ...Array(count).fill("un_rated"),
-    ]);
+    const [ratingOnHover, setRatingOnHover] = React.useState(() => [...Array(count).fill("un_rated")]);
     const [isHover, setIsHover] = React.useState(false);
 
     // 3. set styles
-    const ratedColorClasses = objectsToString(
-      colors[findMatch(valid.colors, ratedColor, "yellow")],
-    );
-    const unratedColorClasses = objectsToString(
-      colors[findMatch(valid.colors, unratedColor, "blue-gray")],
-    );
+    const ratedColorClasses = objectsToString(colors[findMatch(valid.colors, ratedColor, "yellow")]);
+    const unratedColorClasses = objectsToString(colors[findMatch(valid.colors, unratedColor, "blue-gray")]);
     const ratingClasses = twMerge(classnames(objectsToString(base.rating), className));
     const ratingIconClasses = objectsToString(base.icon);
 
@@ -103,17 +86,13 @@ export const Rating = React.forwardRef<HTMLDivElement, RatingProps>(
     const customRatedIcon =
       React.isValidElement(ratedIcon) &&
       React.cloneElement(ratedIconInstance, {
-        className: twMerge(
-          classnames(ratingIconClasses, ratedColorClasses, ratedIconInstance?.props?.className),
-        ),
+        className: twMerge(classnames(ratingIconClasses, ratedColorClasses, ratedIconInstance?.props?.className)),
       });
 
     const customUnratedIcon =
       React.isValidElement(ratedIcon) &&
       React.cloneElement(unratedIconInstance, {
-        className: twMerge(
-          classnames(ratingIconClasses, unratedColorClasses, unratedIconInstance?.props?.className),
-        ),
+        className: twMerge(classnames(ratingIconClasses, unratedColorClasses, unratedIconInstance?.props?.className)),
       });
 
     const ratedIconEl =
@@ -140,9 +119,7 @@ export const Rating = React.forwardRef<HTMLDivElement, RatingProps>(
               const nextRating = ratingValue.map((el, i) => (i <= index ? "rated" : "un_rated"));
 
               setRatingValue(nextRating);
-              onChange &&
-                typeof onChange === "function" &&
-                onChange(nextRating.filter((el) => el === "rated").length);
+              onChange && typeof onChange === "function" && onChange(nextRating.filter((el) => el === "rated").length);
             },
             onMouseEnter: () => {
               if (readonly) return;
@@ -160,7 +137,7 @@ export const Rating = React.forwardRef<HTMLDivElement, RatingProps>(
               : customUnratedIcon
             : el === "rated"
             ? ratedIconEl
-            : unratedIconEl,
+            : unratedIconEl
         );
       });
 
@@ -170,7 +147,7 @@ export const Rating = React.forwardRef<HTMLDivElement, RatingProps>(
         {isHover ? renderRating(ratingOnHover) : renderRating(ratingValue)}
       </div>
     );
-  },
+  }
 );
 
 Rating.propTypes = {

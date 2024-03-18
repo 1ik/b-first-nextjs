@@ -1,22 +1,25 @@
-import React from "react";
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
+
 import PropTypes from "prop-types";
+import React from "react";
 
 // @floating-ui
 import {
-  useFloating,
-  useInteractions,
-  useClick,
-  useRole,
-  useDismiss,
-  useId,
-  FloatingPortal,
-  FloatingOverlay,
   FloatingFocusManager,
+  FloatingOverlay,
+  FloatingPortal,
+  useClick,
+  useDismiss,
+  useFloating,
+  useId,
+  useInteractions,
   useMergeRefs,
+  useRole,
 } from "@floating-ui/react";
 
 // framer-motion
-import { AnimatePresence, m, domAnimation, LazyMotion } from "framer-motion";
+import { AnimatePresence, LazyMotion, domAnimation, m } from "framer-motion";
 
 // utils
 import classnames from "classnames";
@@ -29,30 +32,22 @@ import objectsToString from "../../utils/objectsToString";
 import { useTheme } from "../../context/theme";
 
 // types
-import type { NewAnimatePresenceProps } from "../../types/generic";
-import type {
-  open,
-  handler,
-  size,
-  dismiss,
-  animate,
-  className,
-  children,
-} from "../../types/components/dialog";
+import type { animate, children, className, dismiss, handler, open, size } from "../../types/components/dialog";
 import {
-  propTypesOpen,
-  propTypesHandler,
-  propTypesSize,
-  propTypesDismiss,
   propTypesAnimate,
-  propTypesClassName,
   propTypesChildren,
+  propTypesClassName,
+  propTypesDismiss,
+  propTypesHandler,
+  propTypesOpen,
+  propTypesSize,
 } from "../../types/components/dialog";
+import type { NewAnimatePresenceProps } from "../../types/generic";
 
 // dialog components
-import { DialogHeader, DialogHeaderProps } from "./DialogHeader";
 import { DialogBody, DialogBodyProps } from "./DialogBody";
 import { DialogFooter, DialogFooterProps } from "./DialogFooter";
+import { DialogHeader, DialogHeaderProps } from "./DialogHeader";
 
 export interface DialogProps extends React.ComponentProps<"div"> {
   open: open;
@@ -84,11 +79,8 @@ const Dialog = React.forwardRef<HTMLDivElement, DialogProps>(
     // 3. set styles
     const backdropClasses = classnames(objectsToString(base.backdrop));
     const dialogClasses = twMerge(
-      classnames(
-        objectsToString(base.container),
-        objectsToString(sizes[findMatch(valid.sizes, size, "md")]),
-      ),
-      className,
+      classnames(objectsToString(base.container), objectsToString(sizes[findMatch(valid.sizes, size, "md")])),
+      className
     );
 
     // 4. set animation
@@ -131,11 +123,7 @@ const Dialog = React.forwardRef<HTMLDivElement, DialogProps>(
     const labelId = `${id}-label`;
     const descriptionId = `${id}-description`;
 
-    const { getFloatingProps } = useInteractions([
-      useClick(context),
-      useRole(context),
-      useDismiss(context, dismiss),
-    ]);
+    const { getFloatingProps } = useInteractions([useClick(context), useRole(context), useDismiss(context, dismiss)]);
 
     const mergedRef = useMergeRefs([ref, floating]);
 
@@ -186,7 +174,7 @@ const Dialog = React.forwardRef<HTMLDivElement, DialogProps>(
         </FloatingPortal>
       </LazyMotion>
     );
-  },
+  }
 );
 
 Dialog.propTypes = {
@@ -201,8 +189,8 @@ Dialog.propTypes = {
 
 Dialog.displayName = "MaterialTailwind.Dialog";
 
-export type { DialogHeaderProps, DialogBodyProps, DialogFooterProps };
-export { Dialog, DialogHeader, DialogBody, DialogFooter };
+export { Dialog, DialogBody, DialogFooter, DialogHeader };
+export type { DialogBodyProps, DialogFooterProps, DialogHeaderProps };
 export default Object.assign(Dialog, {
   Header: DialogHeader,
   Body: DialogBody,

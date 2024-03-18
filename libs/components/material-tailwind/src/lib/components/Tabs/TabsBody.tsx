@@ -1,25 +1,24 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
+
 import React from "react";
 
 // framer-motion
 import { useIsomorphicLayoutEffect } from "framer-motion";
 
 // utils
-import merge from "deepmerge";
 import classnames from "classnames";
+import merge from "deepmerge";
 import { twMerge } from "tailwind-merge";
 import objectsToString from "../../utils/objectsToString";
 
 // context
 import { useTheme } from "../../context/theme";
-import { useTabs, setAnimation } from "./TabsContext";
+import { setAnimation, useTabs } from "./TabsContext";
 
 // types
-import type { animate, className, children } from "../../types/components/tabs";
-import {
-  propTypesAnimate,
-  propTypesClassName,
-  propTypesChildren,
-} from "../../types/components/tabs";
+import type { animate, children, className } from "../../types/components/tabs";
+import { propTypesAnimate, propTypesChildren, propTypesClassName } from "../../types/components/tabs";
 
 export interface TabsBodyProps extends React.ComponentProps<"div"> {
   animate?: animate;
@@ -69,13 +68,10 @@ export const TabsBody = React.forwardRef<HTMLDivElement, TabsBodyProps>(
           transition: { duration: 0.5, times: [0.4, 0, 0.2, 1] },
         },
       }),
-      [],
+      []
     );
 
-    const appliedAnimation = React.useMemo(
-      () => merge(mainAnimation, animate),
-      [animate, mainAnimation],
-    );
+    const appliedAnimation = React.useMemo(() => merge(mainAnimation, animate), [animate, mainAnimation]);
 
     useIsomorphicLayoutEffect(() => {
       setAnimation(dispatch, appliedAnimation);
@@ -87,7 +83,7 @@ export const TabsBody = React.forwardRef<HTMLDivElement, TabsBodyProps>(
         {children}
       </div>
     );
-  },
+  }
 );
 
 TabsBody.propTypes = {

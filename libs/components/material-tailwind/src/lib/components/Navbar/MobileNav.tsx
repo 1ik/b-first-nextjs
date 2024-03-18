@@ -1,21 +1,17 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
+
 import React from "react";
 
 // framer-motion components
-import {
-  AnimatePresence,
-  AnimatePresenceProps,
-  m,
-  MotionProps,
-  LazyMotion,
-  domAnimation,
-} from "framer-motion";
+import { AnimatePresence, AnimatePresenceProps, LazyMotion, MotionProps, domAnimation, m } from "framer-motion";
 
 // @floating-ui
 import { useMergeRefs } from "@floating-ui/react";
 
 // utils
-import merge from "deepmerge";
 import classnames from "classnames";
+import merge from "deepmerge";
 import { twMerge } from "tailwind-merge";
 import objectsToString from "../../utils/objectsToString";
 
@@ -24,16 +20,14 @@ import { useTheme } from "../../context/theme";
 
 // types
 import {
-  open,
   animate,
-  className,
   children,
+  className,
+  open,
   propTypesAnimate,
-} from "../../types/components/navbar";
-import {
-  propTypesOpen,
-  propTypesClassName,
   propTypesChildren,
+  propTypesClassName,
+  propTypesOpen,
 } from "../../types/components/navbar";
 
 export interface MobileNavProps extends Omit<MotionProps, "animate"> {
@@ -53,7 +47,7 @@ export const MobileNav = React.forwardRef<HTMLDivElement, MobileNavProps>(
       `<MobileNav /> will be deprecated in the future versions of @material-tailwind/react use <Collapse /> instead.
       
 More details: https://www.material-tailwind.com/docs/react/collapse
-      `,
+      `
     );
 
     // 1. init
@@ -109,7 +103,7 @@ More details: https://www.material-tailwind.com/docs/react/collapse
         </NewAnimatePresence>
       </LazyMotion>
     );
-  },
+  }
 );
 
 MobileNav.displayName = "MaterialTailwind.MobileNav";

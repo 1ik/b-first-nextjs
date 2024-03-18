@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
+
 import React from "react";
 
 // utils
@@ -7,15 +10,11 @@ import objectsToString from "../../utils/objectsToString";
 
 // context
 import { useTheme } from "../../context/theme";
-import { useTabs, setIndicator } from "./TabsContext";
+import { setIndicator, useTabs } from "./TabsContext";
 
 // types
-import type { indicatorProps, className, children } from "../../types/components/tabs";
-import {
-  propTypesIndicator,
-  propTypesClassName,
-  propTypesChildren,
-} from "../../types/components/tabs";
+import type { children, className, indicatorProps } from "../../types/components/tabs";
+import { propTypesChildren, propTypesClassName, propTypesIndicator } from "../../types/components/tabs";
 
 export interface TabsHeaderProps extends React.ComponentProps<"ul"> {
   indicatorProps?: indicatorProps;
@@ -43,7 +42,7 @@ export const TabsHeader = React.forwardRef<HTMLUListElement, TabsHeaderProps>(
       classnames(objectsToString(styles.base), {
         [styles[orientation] && objectsToString(styles[orientation])]: orientation,
       }),
-      className,
+      className
     );
 
     // 4. return
@@ -54,7 +53,7 @@ export const TabsHeader = React.forwardRef<HTMLUListElement, TabsHeaderProps>(
         </ul>
       </nav>
     );
-  },
+  }
 );
 
 TabsHeader.propTypes = {

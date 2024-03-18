@@ -1,9 +1,12 @@
-import React from "react";
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
+
 import PropTypes from "prop-types";
+import React from "react";
 
 // utils
-import merge from "deepmerge";
 import classnames from "classnames";
+import merge from "deepmerge";
 import { twMerge } from "tailwind-merge";
 import findMatch from "../../utils/findMatch";
 import objectsToString from "../../utils/objectsToString";
@@ -13,26 +16,26 @@ import { useTheme } from "../../context/theme";
 
 // types
 import {
-  color,
-  invisible,
-  withBorder,
-  overlap,
-  className,
-  content,
   children,
-  placement,
+  className,
+  color,
   containerProps,
   containerRef,
-  propTypesColor,
-  propTypesInvisible,
-  propTypesWithBorder,
-  propTypesOverlap,
-  propTypesClassName,
-  propTypesContent,
+  content,
+  invisible,
+  overlap,
+  placement,
   propTypesChildren,
-  propTypesPlacement,
+  propTypesClassName,
+  propTypesColor,
   propTypesContainerProps,
   propTypesContainerRef,
+  propTypesContent,
+  propTypesInvisible,
+  propTypesOverlap,
+  propTypesPlacement,
+  propTypesWithBorder,
+  withBorder,
 } from "../../types/components/badge";
 
 export interface BadgeProps {
@@ -63,7 +66,7 @@ export const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
       containerRef,
       ...rest
     },
-    ref,
+    ref
   ) => {
     // 1. init
     const { badge } = useTheme();
@@ -77,8 +80,7 @@ export const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
     overlap = overlap ?? defaultProps.overlap;
     placement = placement ?? defaultProps.placement;
     className = twMerge(defaultProps.className || "", className);
-    containerProps =
-      merge(containerProps, defaultProps.containerProps || {}) ?? defaultProps.containerProps;
+    containerProps = merge(containerProps, defaultProps.containerProps || {}) ?? defaultProps.containerProps;
 
     // 3. set styles
     const badgeInitialClasses = objectsToString(base.badge.initial);
@@ -86,20 +88,16 @@ export const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
     const badgeWithContentClasses = objectsToString(base.badge.withContent);
     const badgeColorClasses = objectsToString(colors[findMatch(valid.colors, color, "red")]);
     const badgePlacementClasses = objectsToString(
-      placements[findMatch(valid.placements, placement, "top-end")][
-        findMatch(valid.overlaps, overlap, "square")
-      ],
+      placements[findMatch(valid.placements, placement, "top-end")][findMatch(valid.overlaps, overlap, "square")]
     );
     const badgeClasses = twMerge(
       classnames(badgeInitialClasses, badgePlacementClasses, badgeColorClasses, {
         [badgeWithBorderClasses]: withBorder,
         [badgeWithContentClasses]: content,
       }),
-      className,
+      className
     );
-    const badgeContainerClasses = twMerge(
-      classnames(objectsToString(base.container), containerProps?.className),
-    );
+    const badgeContainerClasses = twMerge(classnames(objectsToString(base.container), containerProps?.className));
 
     // 4. return
     return (
@@ -112,7 +110,7 @@ export const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
         )}
       </div>
     );
-  },
+  }
 );
 
 Badge.propTypes = {

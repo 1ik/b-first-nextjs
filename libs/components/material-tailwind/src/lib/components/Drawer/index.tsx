@@ -1,15 +1,18 @@
-import React from "react";
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
+
 import PropTypes from "prop-types";
+import React from "react";
 
 // framer-motion
-import { AnimatePresence, m, useAnimation, domAnimation, LazyMotion } from "framer-motion";
+import { AnimatePresence, LazyMotion, domAnimation, m, useAnimation } from "framer-motion";
 
 // @floating-ui
-import { useFloating, useInteractions, useDismiss } from "@floating-ui/react";
+import { useDismiss, useFloating, useInteractions } from "@floating-ui/react";
 
 // utils
-import merge from "deepmerge";
 import classnames from "classnames";
+import merge from "deepmerge";
 import { twMerge } from "tailwind-merge";
 import objectsToString from "../../utils/objectsToString";
 
@@ -18,28 +21,28 @@ import { useTheme } from "../../context/theme";
 
 // types
 import {
-  open,
-  size,
-  overlay,
   children,
-  placement,
-  overlayProps,
   className,
-  onClose,
   dismiss,
-  transition,
+  onClose,
+  open,
+  overlay,
+  overlayProps,
   overlayRef,
-  propTypesOpen,
-  propTypesSize,
-  propTypesOverlay,
+  placement,
   propTypesChildren,
-  propTypesPlacement,
-  propTypesOverlayProps,
   propTypesClassName,
-  propTypesOnClose,
   propTypesDismiss,
-  propTypesTransition,
+  propTypesOnClose,
+  propTypesOpen,
+  propTypesOverlay,
+  propTypesOverlayProps,
   propTypesOverlayRef,
+  propTypesPlacement,
+  propTypesSize,
+  propTypesTransition,
+  size,
+  transition,
 } from "../../types/components/drawer";
 
 export interface DrawerProps extends React.ComponentProps<"div"> {
@@ -72,7 +75,7 @@ export const Drawer = React.forwardRef<HTMLDivElement, DrawerProps>(
       overlayRef,
       ...rest
     },
-    ref,
+    ref
   ) => {
     // 1. init
     const { drawer } = useTheme();
@@ -99,12 +102,9 @@ export const Drawer = React.forwardRef<HTMLDivElement, DrawerProps>(
         "bottom-0 left-0": placement === "bottom",
         "top-0 left-0": placement === "top" || placement === "left",
       }),
-      className,
+      className
     );
-    const overlayClasses = twMerge(
-      classnames(objectsToString(base.overlay)),
-      overlayProps?.className,
-    );
+    const overlayClasses = twMerge(classnames(objectsToString(base.overlay)), overlayProps?.className);
 
     // 4. set the drawer
     const { context } = useFloating({
@@ -179,7 +179,7 @@ export const Drawer = React.forwardRef<HTMLDivElement, DrawerProps>(
         </LazyMotion>
       </React.Fragment>
     );
-  },
+  }
 );
 
 Drawer.propTypes = {
