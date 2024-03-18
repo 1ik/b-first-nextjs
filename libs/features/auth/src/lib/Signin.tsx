@@ -1,7 +1,7 @@
-import { Inputs, SigninForm } from "./components/SigninForm";
+// import { Inputs, SigninForm } from "./components/SigninForm";
 
-export function Signin() {
-  const signInSubmit = (inputs: Inputs) => {};
-
-  return <SigninForm onSubmit={signInSubmit} />;
-}
+// export function Signin() {
+//   const signInSubmit = (inputs: Inputs) => {};
+//   const { post, isError, isSuccess, isPending, data, error } = useApi();
+//   return <SigninForm onSubmit={signInSubmit} />;
+// }

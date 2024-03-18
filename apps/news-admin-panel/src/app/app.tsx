@@ -1,6 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ApiClient } from "@bfirst/api-client";
 import { useState } from "react";
 import { AppContext } from "./app.context";
 import { Scaffold } from "./scaffold";
@@ -13,17 +13,15 @@ if (localStorage.getItem("userInfo")) {
   bearerToken = JSON.parse(localStorage.getItem("token") as any);
 }
 
-
 export function App() {
   const [user, setUser] = useState(userInfo);
   const [token, setToken] = useState(bearerToken);
-  const queryClient = new QueryClient({});
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <AppContext.Provider value={{ user, setUser, token, setToken, baseUrl: "https://backend.bangladeshfirst.com" }}>
+    <AppContext.Provider value={{ user, setUser, token, setToken }}>
+      <ApiClient baseUrl="https://backend.bangladeshfirst.com" token={token}>
         <Scaffold />
-      </AppContext.Provider>
-    </QueryClientProvider>
+      </ApiClient>
+    </AppContext.Provider>
   );
 }

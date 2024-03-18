@@ -1,7 +1,6 @@
+import { usePost } from "@bfirst/api-client";
 import { Button, Card, CardBody, CardFooter, CardHeader, Checkbox, Input, Typography } from "@bfirst/material-tailwind";
 import { ExclamationCircleIcon, LockClosedIcon, UserIcon } from "@heroicons/react/24/solid";
-import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
 import { useContext } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { AppContext } from "../app.context";
@@ -12,12 +11,13 @@ export type Inputs = {
 };
 
 export function Signin() {
-  const { baseUrl, setUser, setToken } = useContext(AppContext);
-  const { mutate, isError, isSuccess, isPending, data, error } = useMutation({
-    mutationFn: (input) => {
-      return axios.post(`${baseUrl}/api/v1/login`, input);
-    },
-  });
+  const { setUser, setToken } = useContext(AppContext);
+  // const { mutate, isError, isSuccess, isPending, data, error } = useMutation({
+  //   mutationFn: (input) => {
+  //     return axios.post(`${baseUrl}/api/v1/login`, input);
+  //   },
+  // });
+  const { request, isError, isSuccess, isPending, data } = usePost("api/v1/login");
 
   if (isSuccess) {
     const { name, email, token } = data.data;
@@ -27,17 +27,11 @@ export function Signin() {
     localStorage.setItem("token", JSON.stringify({ token }));
   }
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm<Inputs>();
+  const { register, handleSubmit } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = (data, event) => {
-    console.log("onSub", data);
     event?.stopPropagation();
-    mutate(data as any);
+    request(data as any);
   };
 
   function LoginCard() {
@@ -68,7 +62,7 @@ export function Signin() {
     );
   }
 
-  return LoginCard();
+  // return LoginCard();
 
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
