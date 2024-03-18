@@ -8,7 +8,7 @@ const FeaturedItems = ({ items }: { items: any[] }) => {
   return (
     <>
       {/* hero big grid */}
-      <div className="bg-white py-6">
+      <div className="bg-white py-10">
         <div className="md-container xl:container mx-auto px-3 sm:px-4 xl:px-2">
           {/* big grid 1 */}
           <div className="flex flex-row flex-wrap">
