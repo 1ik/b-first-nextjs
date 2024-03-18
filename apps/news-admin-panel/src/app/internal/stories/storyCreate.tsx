@@ -68,13 +68,34 @@ export default function StoryCreate() {
   const [showAddTagBtn, setShowAddTagBtn] = useState(false);
   const [shwoModal, setShowModal] = useState(false);
 
-  const handleSearch = function (searchValue: string) {
-    setSearchTagInput(searchValue);
-    const existingTag = tags.find((tag) => (tag as { name: string }).name === searchValue);
-    if (!existingTag && searchValue.trim() !== "") {
-      setShowAddTagBtn(true);
-    } else {
-      setShowAddTagBtn(false);
+  const [lastSearchTime, setLastSearchTime] = useState(0);
+  const debounceDelay = 300;
+
+  const handleSearch = async function (searchValue: string, searchFor: string) {
+    if (searchFor === "tags") setSearchTagInput(searchValue);
+
+    const currentTime = Date.now();
+
+    if (currentTime - lastSearchTime >= debounceDelay) {
+      setLastSearchTime(currentTime);
+      try {
+        const res = await fetch(`${baseUrl}/api/v1/${searchFor}?name=${searchValue}`, {
+          headers: { Authorization: token },
+        });
+        const data = await res.json();
+        if (searchFor === "tags") {
+          if (!data.data.length) {
+            setShowAddTagBtn(true);
+          } else {
+            setTags(data.data);
+            setShowAddTagBtn(false);
+          }
+        }
+        if (searchFor === "authors") setAuthors(data.data);
+        if (searchFor === "categories") setCategories(data.data);
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
@@ -398,6 +419,7 @@ export default function StoryCreate() {
                   options={authors}
                   displayValue="name"
                   avoidHighlightFirstOption={true}
+                  onSearch={(searchValue) => handleSearch(searchValue, "authors")}
                   onSelect={(list) => {
                     setSelectedAuthors(list);
                     setErr((cur) => ({ ...cur, authors: "" }));
@@ -452,7 +474,7 @@ export default function StoryCreate() {
                       id="selectTags"
                       options={tags}
                       displayValue="name"
-                      onSearch={handleSearch}
+                      onSearch={(searchValue) => handleSearch(searchValue, "tags")}
                       avoidHighlightFirstOption={true}
                       selectedValues={selectedTags}
                       onSelect={(list) => {
@@ -489,6 +511,7 @@ export default function StoryCreate() {
                   options={categories}
                   displayValue="name"
                   avoidHighlightFirstOption={true}
+                  onSearch={(searchValue) => handleSearch(searchValue, "categories")}
                   onSelect={(list) => {
                     setSelectedCategories(list);
                     setErr((cur) => ({ ...cur, categories: "" }));
