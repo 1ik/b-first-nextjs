@@ -1,7 +1,28 @@
 import { FeatureCategoryList } from "@bfirst/components-categories";
+import { HCF } from "@bfirst/components-layout";
+import { Breadcrumbs, Button } from "@bfirst/material-tailwind";
+import { HomeIcon } from "@heroicons/react/16/solid";
+import { Link } from "react-router-dom";
 
 export default function List() {
-  return <FeatureCategoryList />;
+  return (
+    <HCF>
+      <HCF.Header className="border-4 border-solid border-indigo-50">
+        <div className="flex flex-row w-full justify-between pr-3">
+          <Breadcrumbs>
+            <Link to="/">
+              <HomeIcon className="w-5 h-5" />
+            </Link>
+            <Link to="/categories">Categories</Link>
+          </Breadcrumbs>
+          <Button size="sm">Add</Button>
+        </div>
+      </HCF.Header>
+      <HCF.Content overflow={"hidden"}>
+        <FeatureCategoryList />
+      </HCF.Content>
+    </HCF>
+  );
 }
 
 /*
