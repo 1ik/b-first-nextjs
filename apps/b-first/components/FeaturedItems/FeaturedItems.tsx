@@ -28,7 +28,7 @@ const FeaturedItems = ({ items }: { items: any[] }) => {
                 <div className="absolute px-5 pt-8 pb-5 bottom-0 w-full bg-gradient-cover">
                   <a href={newsUrl(items[0])}>
                     <h2 className="xl:text-3xl leading-tight sm:leading-normal lg:text-2xl sm:text-2xl text-lg md:text-3xl font-bold text-white">
-                      {items[0].title}
+                      {items[0].meta.altheadline || items[0].title}
                     </h2>
                   </a>
                   <p className="text-gray-100 hidden sm:inline-block">{items[0].meta.headline}</p>
@@ -60,7 +60,9 @@ const FeaturedItems = ({ items }: { items: any[] }) => {
                           </a>
                           <div className="absolute px-4 pt-7 pb-4 bottom-0 w-full bg-gradient-cover">
                             <a href={newsUrl(news)}>
-                              <h2 className="text-lg font-bold leading-tight text-white mb-1">{news.title}</h2>
+                              <h2 className="text-lg font-bold leading-tight text-white mb-1">
+                                {news.meta.altheadline || news.title}
+                              </h2>
                             </a>
                             <div className="pt-1">
                               <div className="text-gray-100">
