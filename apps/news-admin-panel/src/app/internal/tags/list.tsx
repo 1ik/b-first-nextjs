@@ -42,7 +42,7 @@ export default function List() {
     };
 
     fetchData();
-  }, []);
+  }, [currentPage]);
 
   const dateFormatter = (dateString: string) => {
     const date = new Date(dateString);

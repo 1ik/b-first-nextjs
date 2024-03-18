@@ -67,14 +67,40 @@ export default function StoryCreate() {
 
   const [showAddTagBtn, setShowAddTagBtn] = useState(false);
   const [shwoModal, setShowModal] = useState(false);
+  const [imgCaption, setImgCation] = useState('');
 
-  const handleSearch = function (searchValue: string) {
-    setSearchTagInput(searchValue);
-    const existingTag = tags.find((tag) => (tag as { name: string }).name === searchValue);
-    if (!existingTag && searchValue.trim() !== "") {
-      setShowAddTagBtn(true);
-    } else {
-      setShowAddTagBtn(false);
+  const [lastSearchTime, setLastSearchTime] = useState(0);
+  const debounceDelay = 300;
+
+  const handleSearch = async function (searchValue: string, searchFor: string) {
+    if (searchFor === "tags") setSearchTagInput(searchValue);
+
+    const currentTime = Date.now();
+
+    if (currentTime - lastSearchTime >= debounceDelay) {
+      setLastSearchTime(currentTime);
+      try {
+        const res = await fetch(`${baseUrl}/api/v1/${searchFor}?name=${searchValue}`, {
+          headers: { Authorization: token },
+        });
+        const data = await res.json();
+        if (searchFor === "tags") {
+          const filteredTags = data.data.filter(
+            (item: never) => (item as { name: string }).name.toLowerCase() == searchValue.toLowerCase()
+          );
+          setTags(data.data);
+
+          if (!filteredTags.length) {
+            setShowAddTagBtn(true);
+          } else {
+            setShowAddTagBtn(false);
+          }
+        }
+        if (searchFor === "authors") setAuthors(data.data);
+        if (searchFor === "categories") setCategories(data.data);
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
@@ -84,6 +110,7 @@ export default function StoryCreate() {
   };
 
   const handleAddTag = async function () {
+    if(!searchTagInput) return;
     try {
       const response = await fetch(`${baseUrl}/api/v1/tags`, {
         method: "POST",
@@ -138,6 +165,7 @@ export default function StoryCreate() {
         /* newsType: data.newsType, */
         shoulder: data.shoulder,
         /* subhead: data.subhead, */
+        imageCaption: imgCaption,
         altheadline: data.altheadline,
         intro: data.intro,
       },
@@ -280,6 +308,23 @@ export default function StoryCreate() {
                     <p>
                       Allowed file type: <strong>png, jpg, jpeg, gif</strong>
                     </p>
+                    <div className="md:w-1/2">
+                      <label htmlFor="imageCaption" className="block text-sm font-medium leading-6 text-gray-900">
+                        Image caption
+                      </label>
+                      <div className="mt-2">
+                        <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus:ring-gray-300 w-full pl-2">
+                          <input
+                            type="text"
+                            name="imageCaption"
+                            id="imageCaption"
+                            className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                            placeholder="Image caption"
+                            onChange={(e)=>setImgCation(e.target.value)}
+                          />
+                        </div>
+                      </div>
+                    </div>
                     <button type="submit" className="px-3 py-1 bg-gray-300 mt-4 rounded-lg">
                       Add To Story
                     </button>
@@ -297,21 +342,6 @@ export default function StoryCreate() {
         <form onSubmit={handleSubmit(handleAddStory)}>
           <div className="flex-1 w-full pb-6">
             <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-              {/* ==== news type ==== */}
-              {/* <div className="col-span-full">
-                <label htmlFor="news-type" className="block text-sm font-medium leading-6 text-gray-900">
-                  News Type*
-                </label>
-                <select
-                  {...register("newsType", { required: "News type is required" })}
-                  className="block rounded-md border border-gray-300"
-                >
-                  <option value="print">Print</option>
-                  <option value="online">Online</option>
-                </select>
-                <p className="text-sm text-red-700">{errors.newsType && (errors.newsType.message as string)}</p>
-              </div> */}
-
               {/* ==== shoulder ==== */}
               <div className="col-span-4">
                 <label htmlFor="shoulder" className="block text-sm font-medium leading-6 text-gray-900">
@@ -351,25 +381,6 @@ export default function StoryCreate() {
                 <p className="text-sm text-red-700">{errors.headline && (errors.headline.message as string)}</p>
               </div>
 
-              {/* ==== sub-head ==== */}
-              {/* <div className="col-span-4">
-                <label htmlFor="subhead" className="block text-sm font-medium leading-6 text-gray-900">
-                  Sub head
-                </label>
-                <div className="mt-2">
-                  <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus:ring-gray-300 w-full pl-2">
-                    <input
-                      {...register("subhead")}
-                      type="text"
-                      name="subhead"
-                      id="subhead"
-                      className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                      placeholder="Sub Head"
-                    />
-                  </div>
-                </div>
-              </div> */}
-
               {/* ==== alternative headline ==== */}
               <div className="col-span-4">
                 <label htmlFor="altheadline" className="block text-sm font-medium leading-6 text-gray-900">
@@ -398,6 +409,7 @@ export default function StoryCreate() {
                   options={authors}
                   displayValue="name"
                   avoidHighlightFirstOption={true}
+                  onSearch={(searchValue) => handleSearch(searchValue, "authors")}
                   onSelect={(list) => {
                     setSelectedAuthors(list);
                     setErr((cur) => ({ ...cur, authors: "" }));
@@ -414,7 +426,7 @@ export default function StoryCreate() {
               {/* ==== intro ===== */}
               <div className="col-span-4 sm:col-span-full">
                 <label htmlFor="intro" className="block text-sm font-medium leading-6 text-gray-900">
-                  Intro*
+                  Stand first*
                 </label>
                 <div className="mt-2">
                   <textarea
@@ -422,6 +434,7 @@ export default function StoryCreate() {
                     id="intro"
                     name="intro"
                     rows={3}
+                    placeholder="Stand first"
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-300 sm:text-sm sm:leading-6"
                   />
                 </div>
@@ -452,7 +465,7 @@ export default function StoryCreate() {
                       id="selectTags"
                       options={tags}
                       displayValue="name"
-                      onSearch={handleSearch}
+                      onSearch={(searchValue) => handleSearch(searchValue, "tags")}
                       avoidHighlightFirstOption={true}
                       selectedValues={selectedTags}
                       onSelect={(list) => {
@@ -489,6 +502,7 @@ export default function StoryCreate() {
                   options={categories}
                   displayValue="name"
                   avoidHighlightFirstOption={true}
+                  onSearch={(searchValue) => handleSearch(searchValue, "categories")}
                   onSelect={(list) => {
                     setSelectedCategories(list);
                     setErr((cur) => ({ ...cur, categories: "" }));

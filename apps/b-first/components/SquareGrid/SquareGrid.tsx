@@ -35,7 +35,7 @@ const SquareGrid = ({ items, gridClass }: { items: any[]; gridClass: string }) =
                 <div className="py-0 flex flex-col justify-between sm:py-3 pl-3 sm:pl-0 flex-1">
                   <h3 className="text-lg font-bold leading-tight mb-2">
                     {/* <a href={newsUrl(item)}>{MaxText(item.title, 50)}</a> */}
-                    <a href={newsUrl(item)}>{item.title}</a>
+                    <a href={newsUrl(item)}>{item.meta.altheadline || item.title}</a>
                   </h3>
                   {/* <a href={newsUrl(item)} className="hidden md:block text-gray-600 leading-tight mb-1">
                     {MaxText(item.brief, 90)}
