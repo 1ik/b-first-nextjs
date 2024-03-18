@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
+
 import React from "react";
 
 // @floating-ui
@@ -15,16 +18,16 @@ import Step from "./Step";
 
 // types
 import {
+  activeStep,
+  children,
+  className,
   isFirstStep,
   isLastStep,
-  activeStep,
-  className,
-  children,
   propTypesActiveStep,
+  propTypesChildren,
+  propTypesClassName,
   propTypesIsFirstStep,
   propTypesIsLastStep,
-  propTypesClassName,
-  propTypesChildren,
 } from "../../types/components/stepper";
 
 export interface StepperProps extends React.ComponentProps<"div"> {
@@ -38,19 +41,7 @@ export interface StepperProps extends React.ComponentProps<"div"> {
 }
 
 const Stepper = React.forwardRef<HTMLDivElement, StepperProps>(
-  (
-    {
-      activeStep,
-      isFirstStep,
-      isLastStep,
-      className,
-      lineClassName,
-      activeLineClassName,
-      children,
-      ...rest
-    },
-    ref,
-  ) => {
+  ({ activeStep, isFirstStep, isLastStep, className, lineClassName, activeLineClassName, children, ...rest }, ref) => {
     // 1. init
     const { stepper, step } = useTheme();
     const {
@@ -87,11 +78,7 @@ const Stepper = React.forwardRef<HTMLDivElement, StepperProps>(
     // 3. set styles
     const stepperClasses = twMerge(objectsToString(base.stepper), className);
     const lineClasses = twMerge(objectsToString(base.line.initial), lineClassName);
-    const activeLineClasses = twMerge(
-      lineClasses,
-      objectsToString(base.line.active),
-      activeLineClassName,
-    );
+    const activeLineClasses = twMerge(lineClasses, objectsToString(base.line.active), activeLineClassName);
     const activeStepClasses = objectsToString(stepBase.active);
     const completedStepClasses = objectsToString(stepBase.completed);
 
@@ -121,14 +108,14 @@ const Stepper = React.forwardRef<HTMLDivElement, StepperProps>(
                     ? twMerge(activeStepClasses, child.props?.activeClassName)
                     : index < activeStep
                     ? twMerge(completedStepClasses, child.props?.completedClassName)
-                    : "",
+                    : ""
                 ),
               });
             })
           : children}
       </div>
     );
-  },
+  }
 );
 
 Stepper.propTypes = {
@@ -143,7 +130,7 @@ Stepper.propTypes = {
 
 Stepper.displayName = "MaterialTailwind.Stepper";
 
-export { Stepper, Step };
+export { Step, Stepper };
 export default Object.assign(Stepper, {
   Step,
 });

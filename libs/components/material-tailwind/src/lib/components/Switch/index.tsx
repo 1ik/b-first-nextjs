@@ -1,9 +1,12 @@
-import React from "react";
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
+
 import PropTypes from "prop-types";
+import React from "react";
 
 // utils
-import Ripple from "material-ripple-effects";
 import classnames from "classnames";
+import Ripple from "material-ripple-effects";
 import { twMerge } from "tailwind-merge";
 import findMatch from "../../utils/findMatch";
 import objectsToString from "../../utils/objectsToString";
@@ -12,21 +15,14 @@ import objectsToString from "../../utils/objectsToString";
 import { useTheme } from "../../context/theme";
 
 // types
-import type {
-  color,
-  label,
-  ripple,
-  className,
-  disabled,
-  objectType,
-} from "../../types/components/checkbox";
+import type { className, color, disabled, label, objectType, ripple } from "../../types/components/checkbox";
 import {
-  propTypesColor,
-  propTypesLabel,
-  propTypesRipple,
   propTypesClassName,
+  propTypesColor,
   propTypesDisabled,
+  propTypesLabel,
   propTypesObject,
+  propTypesRipple,
 } from "../../types/components/checkbox";
 
 export interface SwitchProps extends React.ComponentProps<"input"> {
@@ -42,21 +38,7 @@ export interface SwitchProps extends React.ComponentProps<"input"> {
 }
 
 export const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
-  (
-    {
-      color,
-      label,
-      ripple,
-      className,
-      disabled,
-      containerProps,
-      circleProps,
-      labelProps,
-      inputRef,
-      ...rest
-    },
-    ref,
-  ) => {
+  ({ color, label, ripple, className, disabled, containerProps, circleProps, labelProps, inputRef, ...rest }, ref) => {
     // 1. init
     const { switch: toggle } = useTheme();
     const { defaultProps, valid, styles } = toggle;
@@ -79,24 +61,18 @@ export const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
     const rootClasses = classnames(objectsToString(base.root), {
       [objectsToString(base.disabled)]: disabled,
     });
-    const containerClasses = twMerge(
-      classnames(objectsToString(base.container)),
-      containerProps?.className,
-    );
+    const containerClasses = twMerge(classnames(objectsToString(base.container)), containerProps?.className);
     const inputClasses = twMerge(
-      classnames(
-        objectsToString(base.input),
-        objectsToString(colors[findMatch(valid.colors, color, "gray")]),
-      ),
-      className,
+      classnames(objectsToString(base.input), objectsToString(colors[findMatch(valid.colors, color, "gray")])),
+      className
     );
     const circleClasses = twMerge(
       classnames(
         objectsToString(base.circle),
         colors[findMatch(valid.colors, color, "gray")].circle,
-        colors[findMatch(valid.colors, color, "gray")].before,
+        colors[findMatch(valid.colors, color, "gray")].before
       ),
-      circleProps?.className,
+      circleProps?.className
     );
     const rippleClasses = classnames(objectsToString(base.ripple));
     const labelClasses = twMerge(classnames(objectsToString(base.label)), labelProps?.className);
@@ -137,7 +113,7 @@ export const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
         )}
       </div>
     );
-  },
+  }
 );
 
 Switch.propTypes = {

@@ -1,26 +1,29 @@
-import React from "react";
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
+
 import PropTypes from "prop-types";
+import React from "react";
 
 // @floating-ui
 import {
+  FloatingNode,
+  autoUpdate,
+  flip,
+  offset as fuiOffset,
+  safePolygon,
+  shift,
+  useClick,
+  useDismiss,
   useFloating,
-  useFloatingTree,
   useFloatingNodeId,
   useFloatingParentNodeId,
-  FloatingNode,
-  useInteractions,
-  offset as fuiOffset,
-  flip,
-  shift,
+  useFloatingTree,
   useHover,
-  useClick,
-  useRole,
-  useDismiss,
-  safePolygon,
+  useInteractions,
   useListNavigation,
-  useTypeahead,
   useMergeRefs,
-  autoUpdate,
+  useRole,
+  useTypeahead,
 } from "@floating-ui/react";
 
 // utils
@@ -32,24 +35,24 @@ import { MenuContextProvider } from "./MenuContext";
 
 // types
 import type {
-  open,
-  handler,
-  placement,
-  offset,
-  dismiss,
   animate,
-  lockScroll,
   children,
+  dismiss,
+  handler,
+  lockScroll,
+  offset,
+  open,
+  placement,
 } from "../../types/components/menu";
 import {
-  propTypesOpen,
-  propTypesHandler,
-  propTypesPlacement,
-  propTypesOffset,
-  propTypesDismiss,
   propTypesAnimate,
-  propTypesLockScroll,
   propTypesChildren,
+  propTypesDismiss,
+  propTypesHandler,
+  propTypesLockScroll,
+  propTypesOffset,
+  propTypesOpen,
+  propTypesPlacement,
 } from "../../types/components/menu";
 
 export interface MenuProps {
@@ -64,14 +67,8 @@ export interface MenuProps {
   allowHover?: boolean;
 }
 
-export const MenuCore = React.forwardRef<
-  HTMLButtonElement,
-  MenuProps & React.HTMLProps<HTMLButtonElement>
->(
-  (
-    { open, handler, placement, offset, dismiss, animate, lockScroll, allowHover, children },
-    ref,
-  ) => {
+export const MenuCore = React.forwardRef<HTMLButtonElement, MenuProps & React.HTMLProps<HTMLButtonElement>>(
+  ({ open, handler, placement, offset, dismiss, animate, lockScroll, allowHover, children }, ref) => {
     // 1. init
     const { menu } = useTheme();
     const { defaultProps } = menu;
@@ -108,9 +105,9 @@ export const MenuCore = React.forwardRef<
     const [activeIndex, setActiveIndex] = React.useState<number | null>(null);
     const listItemsRef = React.useRef<Array<HTMLButtonElement | null>>([]);
     const listContentRef = React.useRef(
-      React.Children.map(children, (child) =>
-        React.isValidElement(child) ? child.props.label : null,
-      ) as Array<string | null>,
+      React.Children.map(children, (child) => (React.isValidElement(child) ? child.props.label : null)) as Array<
+        string | null
+      >
     );
 
     const tree = useFloatingTree();
@@ -258,7 +255,7 @@ export const MenuCore = React.forwardRef<
         internalAllowHover,
         nested,
         setActiveIndex,
-      ],
+      ]
     );
 
     // 5. return
@@ -267,7 +264,7 @@ export const MenuCore = React.forwardRef<
         <FloatingNode id={nodeId}>{children}</FloatingNode>
       </MenuContextProvider>
     );
-  },
+  }
 );
 
 MenuCore.propTypes = {

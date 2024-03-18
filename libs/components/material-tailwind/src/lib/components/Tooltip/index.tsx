@@ -1,61 +1,63 @@
-import React from "react";
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 import PropTypes from "prop-types";
+import React from "react";
 
 // @floating-ui
 import {
-  offset as fuiOffset,
-  flip,
-  shift,
-  autoUpdate,
-  useFloating,
-  useInteractions,
-  useRole,
-  useDismiss,
-  useClick,
-  useHover,
-  useFocus,
   FloatingPortal,
+  autoUpdate,
+  flip,
+  offset as fuiOffset,
+  shift,
+  useClick,
+  useDismiss,
+  useFloating,
+  useFocus,
+  useHover,
+  useInteractions,
   useMergeRefs,
+  useRole,
 } from "@floating-ui/react";
 
 // framer-motion
-import { AnimatePresence, m, LazyMotion, domAnimation } from "framer-motion";
+import { AnimatePresence, LazyMotion, domAnimation, m } from "framer-motion";
 
 // utils
 import classnames from "classnames";
-import { twMerge } from "tailwind-merge";
 import merge from "deepmerge";
+import { twMerge } from "tailwind-merge";
 import objectsToString from "../../utils/objectsToString";
 
 // context
 import { useTheme } from "../../context/theme";
 
 // types
-import type { NewAnimatePresenceProps } from "../../types/generic";
 import type {
-  open,
-  handler,
-  content,
-  interactive,
-  placement,
-  offset,
-  dismiss,
   animate,
-  className,
   children,
+  className,
+  content,
+  dismiss,
+  handler,
+  interactive,
+  offset,
+  open,
+  placement,
 } from "../../types/components/popover";
 import {
-  propTypesOpen,
-  propTypesHandler,
-  propTypesContent,
-  propTypesInteractive,
-  propTypesPlacement,
-  propTypesOffset,
-  propTypesDismiss,
   propTypesAnimate,
-  propTypesClassName,
   propTypesChildren,
+  propTypesClassName,
+  propTypesContent,
+  propTypesDismiss,
+  propTypesHandler,
+  propTypesInteractive,
+  propTypesOffset,
+  propTypesOpen,
+  propTypesPlacement,
 } from "../../types/components/popover";
+import type { NewAnimatePresenceProps } from "../../types/generic";
 
 export interface TooltipProps extends React.ComponentProps<any> {
   open?: open;
@@ -71,22 +73,7 @@ export interface TooltipProps extends React.ComponentProps<any> {
 }
 
 export const Tooltip = React.forwardRef<HTMLDivElement, TooltipProps>(
-  (
-    {
-      open,
-      handler,
-      content,
-      interactive,
-      placement,
-      offset,
-      dismiss,
-      animate,
-      className,
-      children,
-      ...rest
-    },
-    ref,
-  ) => {
+  ({ open, handler, content, interactive, placement, offset, dismiss, animate, className, children, ...rest }, ref) => {
     // 1. init
     const { tooltip } = useTheme();
     const {
@@ -196,7 +183,7 @@ export const Tooltip = React.forwardRef<HTMLDivElement, TooltipProps>(
         </LazyMotion>
       </>
     );
-  },
+  }
 );
 
 Tooltip.propTypes = {

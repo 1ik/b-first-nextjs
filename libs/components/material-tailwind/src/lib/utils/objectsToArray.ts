@@ -1,5 +1,5 @@
-export default function objectsToArray(object) {
-  let result = [];
+export default function objectsToArray(object: any) {
+  let result: any[] = [];
 
   Object.values(object).forEach((value) => {
     if (typeof value === "string") {

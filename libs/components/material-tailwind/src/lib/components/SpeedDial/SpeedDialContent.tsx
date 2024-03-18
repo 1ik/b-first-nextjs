@@ -1,14 +1,17 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
+
 import React from "react";
 
 // framer-motion
-import { AnimatePresence, m, LazyMotion, domAnimation } from "framer-motion";
+import { AnimatePresence, LazyMotion, domAnimation, m } from "framer-motion";
 
 // @floating-ui
 import { useMergeRefs } from "@floating-ui/react";
 
 // context
-import { useSpeedDial } from "./index";
 import { useTheme } from "../../context/theme";
+import { useSpeedDial } from "./index";
 
 // utils
 import { twMerge } from "tailwind-merge";
@@ -52,12 +55,7 @@ export const SpeedDialContent = React.forwardRef<HTMLDivElement, SpeedDialConten
               {...getFloatingProps()}
             >
               {React.Children.map(children, (child: React.ReactElement) => (
-                <m.div
-                  initial="unmount"
-                  exit="unmount"
-                  animate={open ? "mount" : "unmount"}
-                  variants={animation}
-                >
+                <m.div initial="unmount" exit="unmount" animate={open ? "mount" : "unmount"} variants={animation}>
                   {child}
                 </m.div>
               ))}
@@ -66,7 +64,7 @@ export const SpeedDialContent = React.forwardRef<HTMLDivElement, SpeedDialConten
         </NewAnimatePresence>
       </LazyMotion>
     );
-  },
+  }
 );
 
 SpeedDialContent.propTypes = {

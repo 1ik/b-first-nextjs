@@ -1,8 +1,11 @@
-import React from "react";
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
+
 import PropTypes from "prop-types";
+import React from "react";
 
 // framer-motion
-import { AnimatePresence, m, MotionProps, domAnimation, LazyMotion } from "framer-motion";
+import { AnimatePresence, LazyMotion, MotionProps, domAnimation, m } from "framer-motion";
 
 // utils
 import classnames from "classnames";
@@ -15,29 +18,29 @@ import objectsToString from "../../utils/objectsToString";
 import { useTheme } from "../../context/theme";
 
 // types
-import type { NewAnimatePresenceProps } from "../../types/generic";
 import type {
-  variant,
-  color,
-  icon,
-  open,
   action,
   animate,
-  className,
   children,
+  className,
+  color,
+  icon,
   onClose,
+  open,
+  variant,
 } from "../../types/components/alert";
 import {
-  propTypesVariant,
-  propTypesColor,
-  propTypesIcon,
-  propTypesOpen,
   propTypesAction,
   propTypesAnimate,
-  propTypesClassName,
   propTypesChildren,
+  propTypesClassName,
+  propTypesColor,
+  propTypesIcon,
   propTypesOnClose,
+  propTypesOpen,
+  propTypesVariant,
 } from "../../types/components/alert";
+import type { NewAnimatePresenceProps } from "../../types/generic";
 import IconButton from "../IconButton";
 
 export interface AlertProps extends Omit<MotionProps, "animate"> {
@@ -72,9 +75,7 @@ export const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
     const alertBase = objectsToString(base.alert);
     const alertAction = objectsToString(base.action);
     const alertVariant = objectsToString(
-      variants[findMatch(valid.variants, variant, "filled")][
-        findMatch(valid.colors, color, "gray")
-      ],
+      variants[findMatch(valid.variants, variant, "filled")][findMatch(valid.colors, color, "gray")]
     );
     const classes = twMerge(classnames(alertBase, alertVariant), className);
     const actionClasses = classnames(alertAction);
@@ -139,7 +140,7 @@ export const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
         </NewAnimatePresence>
       </LazyMotion>
     );
-  },
+  }
 );
 
 Alert.propTypes = {

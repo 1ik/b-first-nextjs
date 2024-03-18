@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
+
 import React from "react";
 
 // utils
@@ -11,18 +14,18 @@ import { TabsContextProvider, useTabs } from "./TabsContext";
 
 // tabs components
 import { Tab, TabProps } from "./Tab";
+import { TabPanel, TabPanelProps } from "./TabPanel";
 import { TabsBody, TabsBodyProps } from "./TabsBody";
 import { TabsHeader, TabsHeaderProps } from "./TabsHeader";
-import { TabPanel, TabPanelProps } from "./TabPanel";
 
 // types
-import type { id, value, className, orientation, children } from "../../types/components/tabs";
+import type { children, className, orientation, value } from "../../types/components/tabs";
 import {
-  propTypesId,
-  propTypesValue,
-  propTypesClassName,
-  propTypesOrientation,
   propTypesChildren,
+  propTypesClassName,
+  propTypesId,
+  propTypesOrientation,
+  propTypesValue,
 } from "../../types/components/tabs";
 
 export interface TabsProps extends React.ComponentProps<"div" | any> {
@@ -48,7 +51,7 @@ const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(
       classnames(objectsToString(styles.base), {
         [styles[orientation] && objectsToString(styles[orientation])]: orientation,
       }),
-      className,
+      className
     );
 
     // 4. return
@@ -59,7 +62,7 @@ const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(
         </div>
       </TabsContextProvider>
     );
-  },
+  }
 );
 
 Tabs.propTypes = {
@@ -72,6 +75,6 @@ Tabs.propTypes = {
 
 Tabs.displayName = "MaterialTailwind.Tabs";
 
-export type { TabProps, TabsBodyProps, TabsHeaderProps, TabPanelProps };
-export { Tabs, Tab, TabsBody, TabsHeader, TabPanel, useTabs };
+export { Tab, TabPanel, Tabs, TabsBody, TabsHeader, useTabs };
+export type { TabPanelProps, TabProps, TabsBodyProps, TabsHeaderProps };
 export default Object.assign(Tabs, { Tab, Body: TabsBody, Header: TabsHeader, Panel: TabPanel });

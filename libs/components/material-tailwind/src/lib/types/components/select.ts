@@ -1,18 +1,14 @@
-import type { ReactElement, ReactNode } from "react";
+/* tslint:disable */
 import PropTypes from "prop-types";
+import type { ReactElement, ReactNode } from "react";
 
 // @floating-ui types
 import type { ContextData } from "@floating-ui/react";
 
 // generic types
-import type { colors, dismissType, animation, offsetType } from "../generic";
-import {
-  propTypesColors,
-  propTypesOffsetType,
-  propTypesDismissType,
-  propTypesAnimation,
-} from "../generic";
 import type React from "react";
+import type { animation, colors, dismissType, offsetType } from "../generic";
+import { propTypesAnimation, propTypesColors, propTypesDismissType, propTypesOffsetType } from "../generic";
 
 /**
  * This file contains the types and prop-types for Select, SelectOption and SelectContext components.

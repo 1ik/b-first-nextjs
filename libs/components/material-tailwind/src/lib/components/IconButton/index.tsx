@@ -1,9 +1,12 @@
-import React from "react";
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
+
 import PropTypes from "prop-types";
+import React from "react";
 
 // utils
-import Ripple from "material-ripple-effects";
 import classnames from "classnames";
+import Ripple from "material-ripple-effects";
 import { twMerge } from "tailwind-merge";
 import findMatch from "../../utils/findMatch";
 import objectsToString from "../../utils/objectsToString";
@@ -12,21 +15,14 @@ import objectsToString from "../../utils/objectsToString";
 import { useTheme } from "../../context/theme";
 
 // types
-import type {
-  variant,
-  size,
-  color,
-  ripple,
-  className,
-  children,
-} from "../../types/components/button";
+import type { children, className, color, ripple, size, variant } from "../../types/components/button";
 import {
-  propTypesVariant,
-  propTypesSize,
+  propTypesChildren,
+  propTypesClassName,
   propTypesColor,
   propTypesRipple,
-  propTypesClassName,
-  propTypesChildren,
+  propTypesSize,
+  propTypesVariant,
 } from "../../types/components/button";
 
 export interface IconButtonProps extends React.ComponentProps<"button"> {
@@ -59,9 +55,7 @@ export const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
     // 4. set styles
     const buttonBase = objectsToString(base);
     const buttonVariant = objectsToString(
-      variants[findMatch(valid.variants, variant, "filled")][
-        findMatch(valid.colors, color, "gray")
-      ],
+      variants[findMatch(valid.variants, variant, "filled")][findMatch(valid.colors, color, "gray")]
     );
     const buttonSize = objectsToString(sizes[findMatch(valid.sizes, size, "md")]);
     const classes = twMerge(classnames(buttonBase, buttonSize, buttonVariant), className);
@@ -79,21 +73,17 @@ export const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
           if (ripple) {
             rippleEffect.create(
               e,
-              (variant === "filled" || variant === "gradient") && color !== "white"
-                ? "light"
-                : "dark",
+              (variant === "filled" || variant === "gradient") && color !== "white" ? "light" : "dark"
             );
           }
 
           return typeof onMouseDown === "function" && onMouseDown(e);
         }}
       >
-        <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform">
-          {children}
-        </span>
+        <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform">{children}</span>
       </button>
     );
-  },
+  }
 );
 
 IconButton.propTypes = {

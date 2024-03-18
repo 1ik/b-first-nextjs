@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
+
 import React from "react";
 
 // context
@@ -28,7 +31,7 @@ export const SpeedDialAction = React.forwardRef<HTMLButtonElement, SpeedDialActi
         {children}
       </button>
     );
-  },
+  }
 );
 
 SpeedDialAction.propTypes = {

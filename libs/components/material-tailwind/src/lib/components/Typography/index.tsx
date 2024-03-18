@@ -1,5 +1,5 @@
-import React from "react";
 import PropTypes from "prop-types";
+import React from "react";
 
 // utils
 import classnames from "classnames";
@@ -11,21 +11,14 @@ import objectsToString from "../../utils/objectsToString";
 import { useTheme } from "../../context/theme";
 
 // types
-import type {
-  variant,
-  color,
-  textGradient,
-  asType,
-  className,
-  children,
-} from "../../types/components/typography";
+import type { asType, children, className, color, textGradient, variant } from "../../types/components/typography";
 import {
-  propTypesVariant,
+  propTypesAs,
+  propTypesChildren,
+  propTypesClassName,
   propTypesColor,
   propTypesTextGradient,
-  propTypesAs,
-  propTypesClassName,
-  propTypesChildren,
+  propTypesVariant,
 } from "../../types/components/typography";
 
 type Props<T extends keyof JSX.IntrinsicElements> = React.ComponentProps<T>;
@@ -62,9 +55,7 @@ export const Typography = React.forwardRef<HTMLElement, TypographyProps>(
     className = twMerge(defaultProps.className || "", className);
 
     // 3. set styles
-    const typographyVariant = objectsToString(
-      variants[findMatch(valid.variants, variant, "paragraph")],
-    );
+    const typographyVariant = objectsToString(variants[findMatch(valid.variants, variant, "paragraph")]);
     const typographyColor = colors[findMatch(valid.colors, color, "inherit")];
     const gradientTextClasses = objectsToString(gradient);
     const classes = twMerge(
@@ -72,9 +63,9 @@ export const Typography = React.forwardRef<HTMLElement, TypographyProps>(
         typographyVariant,
         { [typographyColor.color]: !textGradient },
         { [gradientTextClasses]: textGradient },
-        { [typographyColor.gradient]: textGradient },
+        { [typographyColor.gradient]: textGradient }
       ),
-      className,
+      className
     );
 
     // 4. set template
@@ -89,7 +80,7 @@ export const Typography = React.forwardRef<HTMLElement, TypographyProps>(
             ref,
             className: classes,
           },
-          children,
+          children
         );
         break;
       case "h2":
@@ -100,7 +91,7 @@ export const Typography = React.forwardRef<HTMLElement, TypographyProps>(
             ref,
             className: classes,
           },
-          children,
+          children
         );
         break;
       case "h3":
@@ -111,7 +102,7 @@ export const Typography = React.forwardRef<HTMLElement, TypographyProps>(
             ref,
             className: classes,
           },
-          children,
+          children
         );
         break;
       case "h4":
@@ -122,7 +113,7 @@ export const Typography = React.forwardRef<HTMLElement, TypographyProps>(
             ref,
             className: classes,
           },
-          children,
+          children
         );
         break;
       case "h5":
@@ -133,7 +124,7 @@ export const Typography = React.forwardRef<HTMLElement, TypographyProps>(
             ref,
             className: classes,
           },
-          children,
+          children
         );
         break;
       case "h6":
@@ -144,7 +135,7 @@ export const Typography = React.forwardRef<HTMLElement, TypographyProps>(
             ref,
             className: classes,
           },
-          children,
+          children
         );
         break;
       case "lead":
@@ -155,7 +146,7 @@ export const Typography = React.forwardRef<HTMLElement, TypographyProps>(
             ref,
             className: classes,
           },
-          children,
+          children
         );
         break;
       case "paragraph":
@@ -166,7 +157,7 @@ export const Typography = React.forwardRef<HTMLElement, TypographyProps>(
             ref,
             className: classes,
           },
-          children,
+          children
         );
         break;
       case "small":
@@ -177,7 +168,7 @@ export const Typography = React.forwardRef<HTMLElement, TypographyProps>(
             ref,
             className: classes,
           },
-          children,
+          children
         );
         break;
       default:
@@ -188,14 +179,14 @@ export const Typography = React.forwardRef<HTMLElement, TypographyProps>(
             ref,
             className: classes,
           },
-          children,
+          children
         );
         break;
     }
 
     // 5. return
     return template;
-  },
+  }
 );
 
 Typography.propTypes = {

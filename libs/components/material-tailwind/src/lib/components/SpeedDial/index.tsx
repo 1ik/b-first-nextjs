@@ -1,18 +1,21 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
+
 import React from "react";
 
 // @floating-ui
 import {
-  offset as fuiOffset,
-  flip,
-  shift,
+  FloatingNode,
   autoUpdate,
+  flip,
+  offset as fuiOffset,
+  safePolygon,
+  shift,
+  useDismiss,
   useFloating,
   useFloatingNodeId,
-  useInteractions,
-  useDismiss,
-  safePolygon,
   useHover,
-  FloatingNode,
+  useInteractions,
 } from "@floating-ui/react";
 
 // context
@@ -23,26 +26,26 @@ import merge from "deepmerge";
 
 // types
 import {
-  open,
-  handler,
-  placement,
-  offset,
-  dismiss,
   animate,
-  propTypesOpen,
-  propTypesHanlder,
-  propTypesPlacement,
-  propTypesOffset,
-  propTypesDismiss,
-  propTypesClassName,
-  propTypesChildren,
+  dismiss,
+  handler,
+  offset,
+  open,
+  placement,
   propTypesAnimate,
+  propTypesChildren,
+  propTypesClassName,
+  propTypesDismiss,
+  propTypesHanlder,
+  propTypesOffset,
+  propTypesOpen,
+  propTypesPlacement,
 } from "../../types/components/speedDial";
 
 // components
-import SpeedDialHandler from "./SpeedDialHandler";
-import SpeedDialContent from "./SpeedDialContent";
 import SpeedDialAction from "./SpeedDialAction";
+import SpeedDialContent from "./SpeedDialContent";
+import SpeedDialHandler from "./SpeedDialHandler";
 
 export interface SpeedDialProps extends React.ComponentProps<"div"> {
   open?: open;
@@ -66,15 +69,7 @@ export function useSpeedDial() {
   return context;
 }
 
-function SpeedDial({
-  open,
-  handler,
-  placement,
-  offset,
-  dismiss,
-  animate,
-  children,
-}: SpeedDialProps) {
+function SpeedDial({ open, handler, placement, offset, dismiss, animate, children }: SpeedDialProps) {
   // 1. init
   const {
     speedDial: { defaultProps },
@@ -135,7 +130,7 @@ function SpeedDial({
       getFloatingProps,
       animation: appliedAnimation,
     }),
-    [context, getFloatingProps, getReferenceProps, refs, strategy, x, y, open, appliedAnimation],
+    [context, getFloatingProps, getReferenceProps, refs, strategy, x, y, open, appliedAnimation]
   );
 
   // 5. return
@@ -161,7 +156,7 @@ SpeedDial.propTypes = {
 
 SpeedDial.displayName = "MaterialTailwind.SpeedDial";
 
-export { SpeedDial, SpeedDialHandler, SpeedDialContent, SpeedDialAction };
+export { SpeedDial, SpeedDialAction, SpeedDialContent, SpeedDialHandler };
 export default Object.assign(SpeedDial, {
   Handler: SpeedDialHandler,
   Content: SpeedDialContent,

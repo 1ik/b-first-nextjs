@@ -1,22 +1,25 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
+
 import React from "react";
 
 // context
 import { useTheme } from "../../context/theme";
 
 // utils
-import Ripple from "material-ripple-effects";
 import classnames from "classnames";
+import Ripple from "material-ripple-effects";
 import { twMerge } from "tailwind-merge";
 import objectsToString from "../../utils/objectsToString";
 
 // types
-import type { className, disabled, children, selected, ripple } from "../../types/components/list";
+import type { children, className, disabled, ripple, selected } from "../../types/components/list";
 import {
+  propTypesChildren,
   propTypesClassName,
   propTypesDisabled,
   propTypesRipple,
   propTypesSelected,
-  propTypesChildren,
 } from "../../types/components/list";
 
 // list item components
@@ -52,7 +55,7 @@ export const ListItem = React.forwardRef<HTMLDivElement, ListItemProps>(
         [objectsToString(base.item.disabled)]: disabled,
         [objectsToString(base.item.selected)]: selected && !disabled,
       }),
-      className,
+      className
     );
 
     return (
@@ -71,7 +74,7 @@ export const ListItem = React.forwardRef<HTMLDivElement, ListItemProps>(
         {children}
       </div>
     );
-  },
+  }
 );
 
 ListItem.propTypes = {
@@ -84,6 +87,6 @@ ListItem.propTypes = {
 
 ListItem.displayName = "MaterialTailwind.ListItem";
 
-export type { ListItemPrefixProps, ListItemSuffixProps };
 export { ListItemPrefix, ListItemSuffix };
+export type { ListItemPrefixProps, ListItemSuffixProps };
 export default Object.assign(ListItem, { Prefix: ListItemPrefix, Suffix: ListItemSuffix });

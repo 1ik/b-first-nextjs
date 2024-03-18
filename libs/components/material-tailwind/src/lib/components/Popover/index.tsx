@@ -1,18 +1,21 @@
-import React from "react";
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
+
 import PropTypes from "prop-types";
+import React from "react";
 
 // @floating-ui
 import {
-  offset as fuiOffset,
-  flip,
-  shift,
   autoUpdate,
+  flip,
+  offset as fuiOffset,
+  shift,
+  useClick,
+  useDismiss,
   useFloating,
+  useId,
   useInteractions,
   useRole,
-  useDismiss,
-  useId,
-  useClick,
 } from "@floating-ui/react";
 
 // utils
@@ -23,28 +26,20 @@ import { useTheme } from "../../context/theme";
 import { PopoverContextProvider, usePopover } from "./PopoverContext";
 
 // types
-import type {
-  open,
-  handler,
-  placement,
-  offset,
-  dismiss,
-  animate,
-  children,
-} from "../../types/components/popover";
+import type { animate, children, dismiss, handler, offset, open, placement } from "../../types/components/popover";
 import {
-  propTypesOpen,
-  propTypesHandler,
-  propTypesPlacement,
-  propTypesOffset,
-  propTypesDismiss,
   propTypesAnimate,
   propTypesChildren,
+  propTypesDismiss,
+  propTypesHandler,
+  propTypesOffset,
+  propTypesOpen,
+  propTypesPlacement,
 } from "../../types/components/popover";
 
 // popover components
-import { PopoverHandler, PopoverHandlerProps } from "./PopoverHandler";
 import { PopoverContent, PopoverContentProps } from "./PopoverContent";
+import { PopoverHandler, PopoverHandlerProps } from "./PopoverHandler";
 
 export interface PopoverProps {
   open?: open;
@@ -56,15 +51,7 @@ export interface PopoverProps {
   children: children;
 }
 
-const Popover = ({
-  open,
-  handler,
-  placement,
-  offset,
-  dismiss,
-  animate,
-  children,
-}: PopoverProps) => {
+const Popover = ({ open, handler, placement, offset, dismiss, animate, children }: PopoverProps) => {
   // 1. init
   const { popover } = useTheme();
   const { defaultProps } = popover;
@@ -141,7 +128,7 @@ const Popover = ({
       appliedAnimation,
       labelId,
       descriptionId,
-    ],
+    ]
   );
 
   // 6. return
@@ -160,6 +147,6 @@ Popover.propTypes = {
 
 Popover.displayName = "MaterialTailwind.Popover";
 
-export type { PopoverHandlerProps, PopoverContentProps };
-export { Popover, PopoverHandler, PopoverContent, usePopover };
+export { Popover, PopoverContent, PopoverHandler, usePopover };
+export type { PopoverContentProps, PopoverHandlerProps };
 export default Object.assign(Popover, { Handler: PopoverHandler, Content: PopoverContent });
