@@ -100,8 +100,9 @@ export function Index({ news, categoryNews, latestNews, featured }: any) {
                   <h2 className="text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl mb-6">
                     {news?.title}
                   </h2>
+                  <p>{news.meta.intro}</p>
 
-                  <div className="news-meta border-1 border-b mb-4 pb-3">
+                  <div className="news-meta border-1 border-b my-4 pb-3">
                     <div className="flex justify-between">
                       <div>
                         <p className="font-semibold">{news.authors[0].name}</p>

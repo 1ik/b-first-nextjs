@@ -87,6 +87,7 @@ export default function StoryPreview() {
 
   const [showAddTagBtn, setShowAddTagBtn] = useState(false);
   const [shwoModal, setShowModal] = useState(false);
+  const [imgCaption, setImgCation] = useState('');
 
   const handleSearch = function (searchValue: string) {
     setSearchTagInput(searchValue);
@@ -135,6 +136,7 @@ export default function StoryPreview() {
         /* newsType: data.newsType, */
         shoulder: data.shoulder,
         /* subhead: data.subhead, */
+        imageCaption: imgCaption,
         altheadline: data.altheadline,
         intro: data.intro,
       },
@@ -164,7 +166,10 @@ export default function StoryPreview() {
 
   const handleFeaturedImgUpload = async function (e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-
+    if (featuredImgURL) {
+      setShowModal(false);
+      return;
+    }
     if (!featuredImg) return setErr((cur) => ({ ...cur, featuredImg: "Featured Image is required" }));
 
     const formData = new FormData();
@@ -203,6 +208,7 @@ export default function StoryPreview() {
       setImagesList((data as any).imagesList.media_images.data);
       setBody((data as any).storyData.story.content);
       setFeaturedImgURL((data as any).storyData.story.meta.featured_image);
+      setImgCation((data as any).storyData.story.meta.imageCaption)
       setLoading(false);
     })();
   }, []);
@@ -282,6 +288,24 @@ export default function StoryPreview() {
                     <p>
                       Allowed file type: <strong>png, jpg, jpeg, gif</strong>
                     </p>
+                    <div className="md:w-1/2">
+                      <label htmlFor="imageCaption" className="block text-sm font-medium leading-6 text-gray-900">
+                        Image caption
+                      </label>
+                      <div className="mt-2">
+                        <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus:ring-gray-300 w-full pl-2">
+                          <input
+                            value = {imgCaption}
+                            type="text"
+                            name="imageCaption"
+                            id="imageCaption"
+                            className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                            placeholder="Image caption"
+                            onChange={(e) => setImgCation(e.target.value)}
+                          />
+                        </div>
+                      </div>
+                    </div>
                     <button className="px-3 py-1 bg-gray-300 mt-4 rounded-lg">Next</button>
                   </form>
                 </div>

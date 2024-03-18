@@ -13,7 +13,7 @@ const CardCaption = (props: { item: any }) => {
           />
         </a>
         <div className="py-3 px-6">
-          <span className="font-black font-semibold">{item.featured_image_caption}</span>
+          <span className="font-black font-semibold">{item.meta.imageCaption}</span>
         </div>
       </div>
     </>
