@@ -85,10 +85,14 @@ export default function StoryCreate() {
         });
         const data = await res.json();
         if (searchFor === "tags") {
-          if (!data.data.length) {
+          const filteredTags = data.data.filter(
+            (item: never) => (item as { name: string }).name.toLowerCase() == searchValue.toLowerCase()
+          );
+          setTags(data.data);
+
+          if (!filteredTags.length) {
             setShowAddTagBtn(true);
           } else {
-            setTags(data.data);
             setShowAddTagBtn(false);
           }
         }
@@ -106,6 +110,7 @@ export default function StoryCreate() {
   };
 
   const handleAddTag = async function () {
+    if(!searchTagInput) return;
     try {
       const response = await fetch(`${baseUrl}/api/v1/tags`, {
         method: "POST",
