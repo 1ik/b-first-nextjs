@@ -18,7 +18,7 @@ export const HCF = ({ children }) => {
 
   return (
     <div className="hcf w-full h-full flex flex-col">
-      {header && <div className="h-12 w-full flex items-center">{header}</div>}
+      {header && <>{header}</>}
       <>{content}</>
       {footer && <div className="h-12 w-full">{footer}</div>}
     </div>
@@ -32,7 +32,15 @@ interface HCFHeaderProps {
 
 // Header component
 const Header: React.FC<HCFHeaderProps> = ({ children, className }) => {
-  return <div className={`header shadow-lg w-full ${className}`}>{children}</div>;
+  return (
+    <div
+      className={`py-2 border-b border-blue-gray-100 bg-blue-gray-50 bg-slate-800 px-2 w-full ${
+        className ? className : ""
+      }`}
+    >
+      {children}
+    </div>
+  );
 };
 
 interface HCFOverflowProps {
