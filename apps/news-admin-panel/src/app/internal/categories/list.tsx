@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 export default function List() {
   return (
     <HCF>
-      <HCF.Header className="border-4 border-solid border-indigo-50">
+      <HCF.Header>
         <div className="flex flex-row w-full justify-between pr-3">
           <Breadcrumbs>
             <Link to="/">
