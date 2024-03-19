@@ -15,10 +15,12 @@ export default function List() {
             </Link>
             <Link to="/categories">Categories</Link>
           </Breadcrumbs>
-          <Button size="sm">Add</Button>
+          <Link to="add">
+            <Button size="sm">Add</Button>
+          </Link>
         </div>
       </HCF.Header>
-      <HCF.Content overflow={"hidden"}>
+      <HCF.Content>
         <FeatureCategoryList />
       </HCF.Content>
     </HCF>

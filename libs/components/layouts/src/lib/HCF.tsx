@@ -57,9 +57,14 @@ const Content: React.FC<HCFOverflowProps> = ({ children, overflow }) => {
   return <div className={"flex-1 w-full overflow-" + overflow}>{children}</div>;
 };
 
+interface HCFFooterProps {
+  children: React.ReactNode;
+  className?: string;
+}
+
 // Footer component
-const Footer = ({ children }) => {
-  return <div className="footer w-full">{children}</div>;
+const Footer: React.FC<HCFFooterProps> = ({ children, className }) => {
+  return <div className={"footer w-full " + (className || "")}>{children}</div>;
 };
 
 // Exporting the components
