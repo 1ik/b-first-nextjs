@@ -10,7 +10,7 @@ let bearerToken: any;
 
 if (localStorage.getItem("userInfo")) {
   userInfo = JSON.parse(localStorage.getItem("userInfo") as string);
-  bearerToken = JSON.parse(localStorage.getItem("token") as any);
+  bearerToken = localStorage.getItem("token") as string;
 }
 
 export function App() {

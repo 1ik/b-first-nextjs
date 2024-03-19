@@ -30,17 +30,19 @@ export function useGet(uri: string, options?: any) {
   const { baseUrl, token } = useContext(ApiClientContext);
 
   const { isError, isSuccess, isPending, data, error } = useQuery({
-    queryKey: [],
+    queryKey: [uri],
     queryFn: () =>
-      axios.get(`${baseUrl}/${uri}`, {
-        ...options,
-        headers: {
-          Authorization: token ? `Bearer ${token}` : null,
-        },
-      }),
+      axios
+        .get(`${baseUrl}/${uri}`, {
+          ...options,
+          headers: {
+            Authorization: token ? `Bearer ${token}` : null,
+          },
+        })
+        .then(data),
   });
 
-  return { isError, isSuccess, isPending, data, error };
+  return { isError, isSuccess, isPending, data: data?.data, error };
 }
 
 /**
@@ -57,6 +59,7 @@ export function usePost(uri: string) {
     data,
     error,
   } = useMutation({
+    mutationKey: [uri],
     mutationFn: (body: any) => {
       return axios.post(`${baseUrl}/${uri}`, body, {
         headers: {

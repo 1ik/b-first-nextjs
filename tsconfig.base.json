@@ -25,7 +25,9 @@
       "@bfirst/components-auth": ["libs/features/auth/src/index.ts"],
       "@bfirst/components-button": ["libs/components/button/src/index.ts"],
       "@bfirst/components-categories": ["libs/features/categories/src/index.ts"],
+      "@bfirst/components-icon": ["libs/components/icon/src/index.ts"],
       "@bfirst/components-layout": ["libs/components/layouts/src/index.ts"],
+      "@bfirst/components-table": ["libs/components/table/src/index.ts"],
       "@bfirst/material-tailwind": ["libs/components/material-tailwind/src/index.ts"]
     }
   },

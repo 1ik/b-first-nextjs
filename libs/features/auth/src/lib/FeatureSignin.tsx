@@ -16,7 +16,7 @@ export function FeatureSignIn({ setToken, setUser, logoUrl }: SigninProps) {
     setUser && setUser({ name, email });
     setToken && setToken(token);
     localStorage.setItem("userInfo", JSON.stringify({ name, email }));
-    localStorage.setItem("token", JSON.stringify({ token }));
+    localStorage.setItem("token", token);
   }
 
   return (
