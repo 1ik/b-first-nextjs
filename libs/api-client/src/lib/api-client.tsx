@@ -32,14 +32,12 @@ export function useGet(uri: string, options?: any) {
   const { isError, isSuccess, isPending, data, error } = useQuery({
     queryKey: [uri],
     queryFn: () =>
-      axios
-        .get(`${baseUrl}/${uri}`, {
-          ...options,
-          headers: {
-            Authorization: token ? `Bearer ${token}` : null,
-          },
-        })
-        .then(data),
+      axios.get(`${baseUrl}/${uri}`, {
+        ...options,
+        headers: {
+          Authorization: token ? `Bearer ${token}` : null,
+        },
+      }),
   });
 
   return { isError, isSuccess, isPending, data: data?.data, error };

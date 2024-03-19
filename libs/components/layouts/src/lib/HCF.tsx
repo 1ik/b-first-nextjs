@@ -12,8 +12,14 @@ import React from "react";
  */
 export const HCF = ({ children }) => {
   // Extracting children components
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   const header = React.Children.toArray(children).find((child) => child.type === Header);
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   const content = React.Children.toArray(children).find((child) => child.type === Content);
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   const footer = React.Children.toArray(children).find((child) => child.type === Footer);
 
   return (
