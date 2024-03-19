@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { QueryClient, QueryClientProvider, useMutation } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider, useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { createContext, useContext } from "react";
 
@@ -26,28 +26,21 @@ export const ApiClient: React.FC<Props> = ({ children, ...props }) => {
 /**
  * Api Hook To Execute a Get Request
  */
-export function useGet(uri: string, options: any) {
+export function useGet(uri: string, options?: any) {
   const { baseUrl, token } = useContext(ApiClientContext);
 
-  const {
-    mutate: request,
-    isError,
-    isSuccess,
-    isPending,
-    data,
-    error,
-  } = useMutation({
-    mutationFn: () => {
-      return axios.get(`${baseUrl}/${uri}`, {
+  const { isError, isSuccess, isPending, data, error } = useQuery({
+    queryKey: [],
+    queryFn: () =>
+      axios.get(`${baseUrl}/${uri}`, {
         ...options,
         headers: {
           Authorization: token ? `Bearer ${token}` : null,
         },
-      });
-    },
+      }),
   });
 
-  return { request, isError, isSuccess, isPending, data, error };
+  return { isError, isSuccess, isPending, data, error };
 }
 
 /**
