@@ -73,7 +73,7 @@ export function usePost(uri: string) {
 /**
  * Api Hook To Execute a Put Request
  */
-export function usePut(uri: string) {
+export function usePut(uri: string, handleSuccess?: any) {
   const { baseUrl, token } = useContext(ApiClientContext);
 
   const {
@@ -91,6 +91,7 @@ export function usePut(uri: string) {
         },
       });
     },
+    onSuccess: handleSuccess
   });
 
   return { request, isError, isSuccess, isPending, data, error };
@@ -99,7 +100,7 @@ export function usePut(uri: string) {
 /**
  * Api Hook To Execute a Delete Request
  */
-export function useDelete(uri: string) {
+export function useDelete(uri: string, handleSuccess?: any) {
   const { baseUrl, token } = useContext(ApiClientContext);
 
   const {
@@ -116,7 +117,7 @@ export function useDelete(uri: string) {
           Authorization: token ? `Bearer ${token}` : null,
         },
       });
-    },
+    }, onSuccess: handleSuccess
   });
 
   return { request, isError, isSuccess, isPending, data, error };

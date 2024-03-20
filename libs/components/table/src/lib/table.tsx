@@ -17,13 +17,14 @@ export interface TableProps {
   data: any[];
   pagination?: {
     currentPage: number;
+    lastPage: number;
     pageChanged(page: number): void;
   };
 }
 
 export const Table: React.FC<TableProps> = ({ columns, data, pagination }) => {
   return (
-    <table className="w-full h-full flex flex-col w-full table-auto text-left">
+    <table className="h-full flex flex-col w-full table-auto text-left">
       <thead className="h-12 w-full position-sticky">
         <tr className="w-full flex flex-row">
           {columns.map((col) => (
@@ -67,7 +68,7 @@ export const Table: React.FC<TableProps> = ({ columns, data, pagination }) => {
       <tfoot className="border-b border-blue-gray-100">
         <div className="p-3 flex items-center justify-between border-t border-blue-gray-50">
           <Typography variant="small" color="blue-gray" className="font-normal">
-            Page {pagination?.currentPage} of 10
+            Page {pagination?.currentPage} of {pagination?.lastPage}
           </Typography>
           <div className="flex gap-2">
             <Button
@@ -83,6 +84,7 @@ export const Table: React.FC<TableProps> = ({ columns, data, pagination }) => {
             <Button
               variant="outlined"
               size="sm"
+              disabled={pagination && pagination?.lastPage - pagination?.currentPage === 0}
               onClick={() => {
                 pagination && pagination.pageChanged(pagination.currentPage + 1);
               }}

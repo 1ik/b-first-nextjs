@@ -7,9 +7,10 @@ import { HiOutlinePencilSquare } from "react-icons/hi2";
 /* eslint-disable-next-line */
 export interface IconProps {
   name: "trash" | "pencil";
+  onClick?: ()=> void;
 }
 
-export const Icon = React.forwardRef<HTMLButtonElement, IconProps>(({ name }, ref) => {
+export const Icon = React.forwardRef<HTMLButtonElement, IconProps>(({ name, onClick }, ref) => {
   let Icon: IconType;
   switch (name) {
     case "trash":
@@ -21,7 +22,7 @@ export const Icon = React.forwardRef<HTMLButtonElement, IconProps>(({ name }, re
   }
 
   return (
-    <Button variant="outlined" className="p-2">
+    <Button variant="outlined" className="p-2" onClick={onClick}>
       <Icon style={{ fontSize: "15px", borderRadius: undefined }} />
     </Button>
   );
