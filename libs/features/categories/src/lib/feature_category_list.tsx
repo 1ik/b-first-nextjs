@@ -59,8 +59,8 @@ export function FeatureCategoryList() {
       render: (row) => {
         return (
           <div className="flex items-end gap-4 justify-end w-full">
-            <DeleteModal itemName="category" onClick={()=>handleDelete(row.id)}/>
             <UpdateModal itemName="category" onSubmit={(data: any)=>handleEdit(row.id, data)}/>
+            <DeleteModal itemName="category" onClick={()=>handleDelete(row.id)}/>
           </div>
         );
       },
