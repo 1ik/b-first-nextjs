@@ -192,7 +192,7 @@ export default function StoryPreview() {
 
   const handleFeaturedImgUpload = async function (e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (featuredImgURL) {
+    if (featuredImgURL && !featuredImg) {
       setShowModal(false);
       return;
     }
@@ -332,7 +332,7 @@ export default function StoryPreview() {
                         </div>
                       </div>
                     </div>
-                    <button className="px-3 py-1 bg-gray-300 mt-4 rounded-lg">Next</button>
+                    <button className="px-3 py-1 bg-gray-300 mt-4 rounded-lg">Add to story</button>
                   </form>
                 </div>
               )}
@@ -469,7 +469,7 @@ export default function StoryPreview() {
               {/* ==== intro ===== */}
               <div className="col-span-4 sm:col-span-full">
                 <label htmlFor="intro" className="block text-sm font-medium leading-6 text-gray-900">
-                  Intro*
+                  Stand first*
                 </label>
                 <div className="mt-2">
                   <textarea
