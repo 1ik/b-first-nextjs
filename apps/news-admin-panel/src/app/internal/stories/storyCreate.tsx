@@ -1,3 +1,4 @@
+import { AutocompleteTag } from "@bfirst/components-autocomplete-tag";
 import Multiselect from "multiselect-react-dropdown";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -67,7 +68,7 @@ export default function StoryCreate() {
 
   const [showAddTagBtn, setShowAddTagBtn] = useState(false);
   const [shwoModal, setShowModal] = useState(false);
-  const [imgCaption, setImgCation] = useState('');
+  const [imgCaption, setImgCation] = useState("");
 
   const [lastSearchTime, setLastSearchTime] = useState(0);
   const debounceDelay = 300;
@@ -110,7 +111,7 @@ export default function StoryCreate() {
   };
 
   const handleAddTag = async function () {
-    if(!searchTagInput) return;
+    if (!searchTagInput) return;
     try {
       const response = await fetch(`${baseUrl}/api/v1/tags`, {
         method: "POST",
@@ -236,21 +237,21 @@ export default function StoryCreate() {
   }, []);
 
   /* ============ tag creation with enter keypress =========== */
-  useEffect(() => {
-    const handleKeypress = function (e: React.KeyboardEvent) {
-      if (e.key === "Enter" && searchTagInput) {
-        e.preventDefault();
-        handleAddTag();
-        (document.querySelector("#selectTags_input") as HTMLInputElement)?.blur();
-        setShowAddTagBtn(false);
-      }
-    };
+  // useEffect(() => {
+  //   const handleKeypress = function (e: React.KeyboardEvent) {
+  //     if (e.key === "Enter" && searchTagInput) {
+  //       e.preventDefault();
+  //       handleAddTag();
+  //       (document.querySelector("#selectTags_input") as HTMLInputElement)?.blur();
+  //       setShowAddTagBtn(false);
+  //     }
+  //   };
 
-    window.addEventListener("keypress", handleKeypress as any);
-    return function () {
-      window.removeEventListener("keypress", handleKeypress as any);
-    };
-  }, [searchTagInput]);
+  //   window.addEventListener("keypress", handleKeypress as any);
+  //   return function () {
+  //     window.removeEventListener("keypress", handleKeypress as any);
+  //   };
+  // }, [searchTagInput]);
 
   return (
     <div onClick={handleOutsideClick} className="overflow-x-auto flex flex-col h-full">
@@ -320,7 +321,7 @@ export default function StoryCreate() {
                             id="imageCaption"
                             className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                             placeholder="Image caption"
-                            onChange={(e)=>setImgCation(e.target.value)}
+                            onChange={(e) => setImgCation(e.target.value)}
                           />
                         </div>
                       </div>
@@ -456,12 +457,9 @@ export default function StoryCreate() {
 
               {/* ==== tags ==== */}
               <div className="col-span-4 sm:col-span-full">
-                <label htmlFor="tags" className="block text-sm font-medium leading-6 text-gray-900">
-                  Tags*
-                </label>
                 <div className="grid grid-cols-6 gap-x-2 sm:gap-x-8">
                   <div className="col-span-5 sm:col-span-4">
-                    <Multiselect
+                    {/* <Multiselect
                       id="selectTags"
                       options={tags}
                       displayValue="name"
@@ -478,17 +476,19 @@ export default function StoryCreate() {
                       }}
                       placeholder="Select Tags"
                       closeOnSelect={true}
+                    /> */}
+
+                    <AutocompleteTag
+                      label="Choose Tag"
+                      items={tags}
+                      onSearch={(search) => {
+                        handleSearch(search, "tags");
+                      }}
+                      itemsSelected={(items) => {
+                        console.log(items);
+                      }}
                     />
                   </div>
-                  {showAddTagBtn && (
-                    <button
-                      onClick={handleAddTag}
-                      className="font-medium rounded-md col-span-1 p-1 border-2 bg-black/10"
-                      type="button"
-                    >
-                      + <span className="hidden md:inline-block">Add Tag</span>
-                    </button>
-                  )}
                 </div>
                 <p className="text-sm text-red-700">{err.tags}</p>
               </div>
