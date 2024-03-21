@@ -1,5 +1,5 @@
-import { useGet } from "@bfirst/api-client";
-import { Icon } from "@bfirst/components-icon";
+import { useDelete, useGet, usePut } from "@bfirst/api-client";
+import { ConfirmModal } from "@bfirst/components-confirm-modal";
 import { Table, TableColumnDef } from "@bfirst/components-table";
 import { Typography } from "@bfirst/material-tailwind";
 import moment from "moment";
@@ -57,21 +57,46 @@ export function FeatureCategoryList() {
       render: (row) => {
         return (
           <div className="flex items-end gap-4 justify-end w-full">
-            <Icon name="trash" />
-            <Icon name="pencil" />
+            <ConfirmModal
+              handleAction={() => handleDelete(row.id)}
+              message="Do you want to remove the category ?"
+              type="delete"
+            />
+            <ConfirmModal
+              handleAction={(input) => handleUpdate(input, row.id)}
+              message="Update the category"
+              type="update"
+              initialValue={row.name}
+            />
           </div>
         );
       },
     },
   ];
 
+  
+  
+  const [deleteId, setDeleteId] = useState<number | null>(null);
+  const [updateId, setUpdateId] = useState<number | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const { data } = useGet(`api/v1/categories?page=${currentPage}&size=20`);
+  
+  const handleDelete = function (id: number) {
+    setDeleteId(id);
+    deleteReq();
+  };
+  
+  const handleUpdate = function (input: string, id: number) {
+    setUpdateId(id);
+    updateReq({ name: input });
+  };
+  const { request: deleteReq } = useDelete(`api/v1/categories/${deleteId}`);
+  const { request: updateReq } = usePut(`api/v1/categories/${updateId}`);
 
   if (!data) {
     return <></>;
   }
-
+  
   return (
     <Table
       columns={TABLE_COLUMNS}

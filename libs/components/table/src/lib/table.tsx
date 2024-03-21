@@ -23,7 +23,7 @@ export interface TableProps {
 
 export const Table: React.FC<TableProps> = ({ columns, data, pagination }) => {
   return (
-    <table className="w-full h-full flex flex-col w-full table-auto text-left">
+    <table className="w-full h-full flex flex-col table-auto text-left">
       <thead className="h-12 w-full position-sticky">
         <tr className="w-full flex flex-row">
           {columns.map((col) => (
