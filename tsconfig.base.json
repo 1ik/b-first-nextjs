@@ -30,6 +30,7 @@
       "@bfirst/components-icon": ["libs/components/icon/src/index.ts"],
       "@bfirst/components-layout": ["libs/components/layouts/src/index.ts"],
       "@bfirst/components-table": ["libs/components/table/src/index.ts"],
+      "@bfirst/components-tags": ["libs/features/tags/src/index.ts"],
       "@bfirst/material-tailwind": ["libs/components/material-tailwind/src/index.ts"]
     }
   },
