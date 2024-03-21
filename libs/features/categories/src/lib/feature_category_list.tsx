@@ -103,6 +103,7 @@ export function FeatureCategoryList() {
       data={data.data}
       pagination={{
         currentPage,
+        lastPage:data.meta.last_page,
         pageChanged: (page: number) => {
           setCurrentPage(page);
         },

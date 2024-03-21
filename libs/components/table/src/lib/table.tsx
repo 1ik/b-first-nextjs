@@ -17,6 +17,7 @@ export interface TableProps {
   data: any[];
   pagination?: {
     currentPage: number;
+    lastPage: number;
     pageChanged(page: number): void;
   };
 }
@@ -67,7 +68,7 @@ export const Table: React.FC<TableProps> = ({ columns, data, pagination }) => {
       <tfoot className="border-b border-blue-gray-100">
         <div className="p-3 flex items-center justify-between border-t border-blue-gray-50">
           <Typography variant="small" color="blue-gray" className="font-normal">
-            Page {pagination?.currentPage} of 10
+            Page {pagination?.currentPage} of {pagination?.lastPage}
           </Typography>
           <div className="flex gap-2">
             <Button
@@ -83,6 +84,7 @@ export const Table: React.FC<TableProps> = ({ columns, data, pagination }) => {
             <Button
               variant="outlined"
               size="sm"
+              disabled={pagination?.currentPage === pagination?.lastPage}
               onClick={() => {
                 pagination && pagination.pageChanged(pagination.currentPage + 1);
               }}
