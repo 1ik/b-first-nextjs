@@ -19,7 +19,7 @@ export function FeatureAuthorList() {
     {
       key: "name",
       colKey: "name",
-      title: "Category",
+      title: "Author",
       width: "20%",
     },
     {
