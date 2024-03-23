@@ -6,7 +6,7 @@ import moment from "moment";
 import { useState } from "react";
 
 /**
- * Feature component that displays list of categories.
+ * Feature component that displays list of tags.
  */
 export function FeatureTagList() {
   const TABLE_COLUMNS: TableColumnDef[] = [
