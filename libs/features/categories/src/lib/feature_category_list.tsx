@@ -1,9 +1,11 @@
 import { useDelete, useGet, usePut } from "@bfirst/api-client";
-import { ConfirmModal } from "@bfirst/components-confirm-modal";
+import { ConfirmButton } from "@bfirst/components-confirm-button";
+import { Icon } from "@bfirst/components-icon";
 import { Table, TableColumnDef } from "@bfirst/components-table";
 import { Typography } from "@bfirst/material-tailwind";
 import moment from "moment";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 /**
  * Feature component that displays list of categories.
@@ -57,53 +59,48 @@ export function FeatureCategoryList() {
       render: (row) => {
         return (
           <div className="flex items-end gap-4 justify-end w-full">
-            <ConfirmModal
-              handleAction={() => handleDelete(row.id)}
+            <ConfirmButton
+              onConfirm={() => handleDelete(row.id)}
               message="Do you want to remove the category ?"
-              type="delete"
-            />
-            <ConfirmModal
-              handleAction={(input) => handleUpdate(input, row.id)}
-              message="Update the category"
-              type="update"
-              initialValue={row.name}
-            />
+              confirmHandler={<Icon name="trash" />}
+            >
+              Delete
+            </ConfirmButton>
+            <Link to={`${row.id}`}>
+              <Icon name="pencil"></Icon>
+            </Link>
           </div>
         );
       },
     },
   ];
 
-  
-  
   const [deleteId, setDeleteId] = useState<number | null>(null);
   const [updateId, setUpdateId] = useState<number | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const { data } = useGet(`api/v1/categories?page=${currentPage}&size=20`);
-  
+
   const handleDelete = function (id: number) {
     setDeleteId(id);
-    deleteReq();
+    request();
   };
-  
+
   const handleUpdate = function (input: string, id: number) {
-    setUpdateId(id);
-    updateReq({ name: input });
+    console.log("hi");
   };
-  const { request: deleteReq } = useDelete(`api/v1/categories/${deleteId}`);
-  const { request: updateReq } = usePut(`api/v1/categories/${updateId}`);
+  const { request } = useDelete(`api/v1/categories/${deleteId}`);
 
   if (!data) {
     return <></>;
   }
-  
+
   return (
     <Table
       columns={TABLE_COLUMNS}
       data={data.data}
       pagination={{
         currentPage,
-        lastPage:data.meta.last_page,
+        lastPage: data.meta.last_page,
         pageChanged: (page: number) => {
           setCurrentPage(page);
         },

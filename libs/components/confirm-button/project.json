@@ -1,7 +1,7 @@
 {
-  "name": "confirm-modal",
+  "name": "confirm-button",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/components/confirm-modal/src",
+  "sourceRoot": "libs/components/confirm-button/src",
   "projectType": "library",
   "tags": [],
   "targets": {
@@ -14,7 +14,7 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/libs/components/confirm-modal"
+        "outputPath": "dist/libs/components/confirm-button"
       },
       "configurations": {
         "development": {
