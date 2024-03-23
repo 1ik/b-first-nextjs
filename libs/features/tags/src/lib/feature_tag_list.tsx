@@ -19,7 +19,7 @@ export function FeatureTagList() {
     {
       key: "name",
       colKey: "name",
-      title: "Category",
+      title: "Tag",
       width: "20%",
     },
     {
