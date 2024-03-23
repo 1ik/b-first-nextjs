@@ -14,7 +14,7 @@ const LoadAddEdit = lazy(
   () =>
     // eslint-disable-next-line
     new Promise<any>((resolve) => {
-      import("./addEdit").then((component) => {
+      import("./add").then((component) => {
         resolve(component);
       });
     })
