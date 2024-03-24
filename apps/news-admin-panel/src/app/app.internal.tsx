@@ -5,7 +5,7 @@ import { MdChevronRight } from "react-icons/md";
 import { Link, Route, Routes, useLocation } from "react-router-dom";
 import { AppContext } from "./app.context";
 import { AddEditAuthorLazy, AuthorsListLazy } from "./internal/authors";
-import { AddEditLazy, ListLazy } from "./internal/categories";
+import { AddEditLazy, AddLazy, EditLazy, ListLazy } from "./internal/categories";
 import { ManageStories } from "./internal/manageStories/manageStories";
 import { AddEditStoriesLazy, StoriesListLazy, StoryPreviewLazy } from "./internal/stories";
 import { AddEditTagsLazy, TagsListLazy } from "./internal/tags";
@@ -138,7 +138,8 @@ export function AppInternal() {
           <div className="w-full h-full overflow-y-scroll">
             <Routes>
               <Route path="/categories" element={<ListLazy />} />
-              <Route path="/categories/add" element={<AddEditLazy />} />
+              <Route path="/categories/add" element={<AddLazy />} />
+              <Route path="/categories/:id" element={<EditLazy />} />
               <Route path="/authors" element={<AuthorsListLazy />} />
               <Route path="/authors/add" element={<AddEditAuthorLazy />} />
               <Route path="/stories" element={<StoriesListLazy />} />

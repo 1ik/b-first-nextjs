@@ -10,9 +10,10 @@ export interface SigninFormProps {
   onSubmit: (inputs: Inputs) => void;
   isError: boolean;
   loading: boolean;
+  defaultData?: any;
 }
 
-export function CategoryForm({ onSubmit, loading, isError }: SigninFormProps) {
+export function CategoryForm({ onSubmit, loading, isError, defaultData }: SigninFormProps) {
   const { register, handleSubmit } = useForm<Inputs>();
 
   return (
@@ -20,7 +21,7 @@ export function CategoryForm({ onSubmit, loading, isError }: SigninFormProps) {
       <HCF>
         <HCF.Content>
           <CardBody className="flex flex-col gap-4">
-            <Input {...register("name")} type="name" label="Category Name" />
+            <Input defaultValue={defaultData && defaultData.name} {...register("name")} type="name" label="Category Name" />
           </CardBody>
         </HCF.Content>
         <HCF.Footer className="flex w-full px-3 flex-row justify-end">
