@@ -28,6 +28,7 @@
       "@bfirst/components-autocomplete-tag": ["libs/components/autocomplete-tag/src/index.ts"],
       "@bfirst/components-button": ["libs/components/button/src/index.ts"],
       "@bfirst/components-categories": ["libs/features/categories/src/index.ts"],
+      "@bfirst/components-confirm-button": ["libs/components/confirm-button/src/index.ts"],
       "@bfirst/components-icon": ["libs/components/icon/src/index.ts"],
       "@bfirst/components-layout": ["libs/components/layouts/src/index.ts"],
       "@bfirst/components-table": ["libs/components/table/src/index.ts"],
