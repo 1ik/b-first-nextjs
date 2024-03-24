@@ -60,7 +60,7 @@ const Content: React.FC<HCFOverflowProps> = ({ children, overflow }) => {
     overflow = "scroll";
   }
 
-  return <div className={"flex-1 w-full overflow-" + overflow}>{children}</div>;
+  return <div className={"flex-1 w-full overflow-y-" + overflow}>{children}</div>;
 };
 
 interface HCFFooterProps {
