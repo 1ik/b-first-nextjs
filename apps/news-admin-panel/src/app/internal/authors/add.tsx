@@ -1,7 +1,7 @@
 import { FeatureAuthorAdd } from "@bfirst/components-authors";
+import { Icon } from "@bfirst/components-icon";
 import { HCF } from "@bfirst/components-layout";
-import { HomeIcon } from "@heroicons/react/24/solid";
-import { Breadcrumbs } from "@material-tailwind/react";
+import { Breadcrumbs } from "@bfirst/material-tailwind";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function AuthorAdd() {
@@ -21,7 +21,7 @@ export default function AuthorAdd() {
         <div className="flex flex-row w-full justify-between">
           <Breadcrumbs>
             <Link to="/">
-              <HomeIcon className="w-5 h-5" />
+              <Icon name="home" variant="text" />
             </Link>
             <Link to="/authors">Authors</Link>
             <Link to="">Add New Author</Link>
