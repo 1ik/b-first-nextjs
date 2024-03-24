@@ -29,6 +29,7 @@
       "@bfirst/components-categories": ["libs/features/categories/src/index.ts"],
       "@bfirst/components-icon": ["libs/components/icon/src/index.ts"],
       "@bfirst/components-layout": ["libs/components/layouts/src/index.ts"],
+      "@bfirst/components-stories": ["libs/features/stories/src/index.ts"],
       "@bfirst/components-table": ["libs/components/table/src/index.ts"],
       "@bfirst/material-tailwind": ["libs/components/material-tailwind/src/index.ts"]
     }
