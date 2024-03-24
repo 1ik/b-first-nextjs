@@ -8,7 +8,7 @@ export default function List() {
   return (
     <HCF>
       <HCF.Header>
-        <div className="flex flex-row w-full justify-between">
+        <div className="flex flex-row w-full justify-between items-center">
           <Breadcrumbs>
             <Link to="/">
             <Icon name="home" variant="text"/>
