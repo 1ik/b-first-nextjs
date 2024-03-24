@@ -10,11 +10,21 @@ const LoadList = lazy(
     })
 );
 
-const LoadAddEdit = lazy(
+const LoadAdd = lazy(
   () =>
     // eslint-disable-next-line
     new Promise<any>((resolve) => {
       import("./add").then((component) => {
+        resolve(component);
+      });
+    })
+);
+
+const LoadEdit = lazy(
+  () =>
+    // eslint-disable-next-line
+    new Promise<any>((resolve) => {
+      import("./edit").then((component) => {
         resolve(component);
       });
     })
@@ -28,10 +38,18 @@ export function TagsListLazy() {
   );
 }
 
-export function AddEditTagsLazy() {
+export function TagAddLazy() {
   return (
     <Suspense>
-      <LoadAddEdit />
+      <LoadAdd />
+    </Suspense>
+  );
+}
+
+export function TagEditLazy() {
+  return (
+    <Suspense>
+      <LoadEdit />
     </Suspense>
   );
 }

@@ -10,9 +10,10 @@ export interface TagFormProps {
   onSubmit: (inputs: Inputs) => void;
   isError: boolean;
   loading: boolean;
+  defaultData?: any;
 }
 
-export function TagForm({ onSubmit, loading, isError }: TagFormProps) {
+export function TagForm({ onSubmit, loading, isError, defaultData }: TagFormProps) {
   const { register, handleSubmit } = useForm<Inputs>();
 
   return (
@@ -20,7 +21,7 @@ export function TagForm({ onSubmit, loading, isError }: TagFormProps) {
       <HCF>
         <HCF.Content>
           <CardBody className="flex flex-col gap-4">
-            <Input {...register("name")} type="name" label="Tag Name" />
+            <Input defaultValue={defaultData && defaultData.name} {...register("name")} type="name" label="Tag Name" />
           </CardBody>
         </HCF.Content>
         <HCF.Footer className="flex w-full px-3 flex-row justify-end">

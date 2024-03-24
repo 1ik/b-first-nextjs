@@ -1,9 +1,11 @@
-import { useGet } from "@bfirst/api-client";
+import { useDelete, useGet } from "@bfirst/api-client";
+import { ConfirmButton } from "@bfirst/components-confirm-button";
 import { Icon } from "@bfirst/components-icon";
 import { Table, TableColumnDef } from "@bfirst/components-table";
 import { Typography } from "@bfirst/material-tailwind";
 import moment from "moment";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 /**
  * Feature component that displays list of tags.
@@ -57,16 +59,31 @@ export function FeatureTagList() {
       render: (row) => {
         return (
           <div className="flex items-end gap-4 justify-end w-full">
-            <Icon name="trash" />
-            <Icon name="pencil" />
+            <ConfirmButton
+              onConfirm={() => handleDelete(row.id)}
+              message="Do you want to remove the tag ?"
+              confirmHandler={<Icon name="trash" />}
+            >
+              Delete
+            </ConfirmButton>
+            <Link to={`${row.id}`}>
+              <Icon name="pencil"/>
+            </Link>
           </div>
         );
       },
     },
   ];
 
+  const [deleteId, setDeleteId] = useState<null | number>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const { data } = useGet(`api/v1/tags?page=${currentPage}&size=20`);
+  const { request } = useDelete(`api/v1/tags/${deleteId}`);
+
+  const handleDelete = function (id: number) {
+    setDeleteId(id);
+    request();
+  };
 
   if (!data) {
     return <></>;
@@ -78,6 +95,7 @@ export function FeatureTagList() {
       data={data.data}
       pagination={{
         currentPage,
+        lastPage: data?.meta.last_page,
         pageChanged: (page: number) => {
           setCurrentPage(page);
         },
