@@ -1,16 +1,15 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { useContext, useEffect, useRef, useState } from "react";
+import { FaRegCircleUser } from "react-icons/fa6";
 import { IoMenuSharp } from "react-icons/io5";
 import { MdChevronRight } from "react-icons/md";
 import { Link, Route, Routes, useLocation } from "react-router-dom";
 import { AppContext } from "./app.context";
-import { AddEditAuthorLazy, AuthorsListLazy } from "./internal/authors";
-import { AddEditLazy, AddLazy, EditLazy, ListLazy } from "./internal/categories";
+import { AuthorAddLazy, AuthorEditLazy, AuthorsListLazy } from "./internal/authors";
+import { AddLazy, EditLazy, ListLazy } from "./internal/categories";
 import { ManageStories } from "./internal/manageStories/manageStories";
 import { AddEditStoriesLazy, StoriesListLazy, StoryPreviewLazy } from "./internal/stories";
 import { AddEditTagsLazy, TagsListLazy } from "./internal/tags";
-import { FaRegCircleUser } from "react-icons/fa6";
-
 
 export const NavBar = () => {
   return (
@@ -141,7 +140,8 @@ export function AppInternal() {
               <Route path="/categories/add" element={<AddLazy />} />
               <Route path="/categories/:id" element={<EditLazy />} />
               <Route path="/authors" element={<AuthorsListLazy />} />
-              <Route path="/authors/add" element={<AddEditAuthorLazy />} />
+              <Route path="/authors/add" element={<AuthorAddLazy />} />
+              <Route path="/authors/:id" element={<AuthorEditLazy/>}/>
               <Route path="/stories" element={<StoriesListLazy />} />
               <Route path="/stories/create-story" element={<AddEditStoriesLazy />} />
               <Route path="/tags" element={<TagsListLazy />} />

@@ -10,9 +10,10 @@ export interface AuthorFormProps {
   onSubmit: (inputs: Inputs) => void;
   isError: boolean;
   loading: boolean;
+  defaultData?: any;
 }
 
-export function AuthorForm({ onSubmit, loading, isError }: AuthorFormProps) {
+export function AuthorForm({ onSubmit, loading, isError, defaultData }: AuthorFormProps) {
   const { register, handleSubmit } = useForm<Inputs>();
 
   return (
@@ -20,7 +21,12 @@ export function AuthorForm({ onSubmit, loading, isError }: AuthorFormProps) {
       <HCF>
         <HCF.Content>
           <CardBody className="flex flex-col gap-4">
-            <Input {...register("name")} type="name" label="Author Name" />
+            <Input
+              defaultValue={defaultData && defaultData.name}
+              {...register("name")}
+              type="name"
+              label="Author Name"
+            />
           </CardBody>
         </HCF.Content>
         <HCF.Footer className="flex w-full px-3 flex-row justify-end">
