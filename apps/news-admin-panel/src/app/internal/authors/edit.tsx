@@ -1,7 +1,7 @@
 import { FeatureAuthorEdit } from "@bfirst/components-authors";
 import { Icon } from "@bfirst/components-icon";
 import { HCF } from "@bfirst/components-layout";
-import { Breadcrumbs } from "@material-tailwind/react";
+import { Breadcrumbs } from "@bfirst/material-tailwind";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function AuthorEdit() {
