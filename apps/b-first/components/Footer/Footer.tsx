@@ -9,6 +9,7 @@ const Footer = () => {
                 <div id="footer-content" className="relative pt-8 xl:pt-16 pb-6 xl:pb-12">
                     <div className="md-container xl:container mx-auto px-3 sm:px-4 xl:px-2 overflow-hidden">
                         <div className="flex flex-wrap flex-row lg:justify-between -mx-3">
+                            
                             <div className="flex-shrink max-w-full w-full lg:w-2/5 px-3 lg:pr-16">
                                 <div className="flex items-center mb-2">
                                     <span className="text-3xl bg-white leading-normal mb-2 font-bold text-gray-100 mt-2">
@@ -17,6 +18,7 @@ const Footer = () => {
                                     {/* <img src="src/img-min/logo.png" alt="LOGO"> */}
                                 </div>
                                 <p>A newspaper that publishes news with authenticity and without fear.</p>
+                                
                                 <ul className="space-x-3 mt-6 mb-6 Lg:mb-0">
                                     {/*facebook*/}
                                     <li className="inline-block">
@@ -101,9 +103,10 @@ const Footer = () => {
                                     {/*end instagram*/}
                                 </ul>
                             </div>
-                            <div className="flex-shrink max-w-full w-full lg:w-3/5 px-3">
-                                <div className="flex flex-wrap flex-row">
-                                    <div className="flex-shrink max-w-full w-1/2 md:w-1/4 mb-6 lg:mb-0">
+                            
+                            <div className="flex-shrink justify-end max-w-full w-full lg:w-3/5 px-4 xl:px-0">
+                                <div className="flex flex-wrap justify-end flex-row">
+                                   <div className="flex-shrink max-w-full w-1/2 md:w-1/6 mb-6 lg:mb-0">
                                         <h4 className="text-base leading-normal mb-3 uppercase text-gray-100">Categories</h4>
                                         <ul>
                                             <li className="py-1 hover:text-white">
@@ -118,46 +121,28 @@ const Footer = () => {
                                             <li className="py-1 hover:text-white">
                                                 <a href="/Sports">Sports</a>
                                             </li>
-                                            <li className="py-1 hover:text-white">
-                                                <a href="">Login</a>
-                                            </li>
+                
                                         </ul>
                                     </div>
-                                    <div className="flex-shrink max-w-full w-1/2 md:w-1/4 mb-6 lg:mb-0">
+                                    <div className="flex-shrink max-w-full w-1/2 md:w-1/6 mb-6 lg:mb-0">
                                         <h4 className="text-base leading-normal mb-3 uppercase text-gray-100">Support</h4>
                                         <ul>
                                             <li className="py-1 hover:text-white">
-                                                <a href="#">NewsRoom</a>
+                                                <a href="/newsroom">NewsRoom</a>
                                             </li>
                                             <li className="py-1 hover:text-white">
-                                                <a href="#">Media</a>
+                                                <a href="/media">Media</a>
                                             </li>
                                             <li className="py-1 hover:text-white">
-                                                <a href="#">Sales</a>
+                                                <a href="/salse">Sales</a>
                                             </li>
                                             <li className="py-1 hover:text-white">
-                                                <a href="#">Editor</a>
+                                                <a href="/editor">Editor</a>
                                             </li>
                                         </ul>
                                     </div>
-                                    <div className="flex-shrink max-w-full w-1/2 md:w-1/4 mb-6 lg:mb-0">
-                                        <h4 className="text-base leading-normal mb-3 uppercase text-gray-100">Includes</h4>
-                                        <ul>
-                                            <li className="py-1 hover:text-white">
-                                                <a href="#">Utilities</a>
-                                            </li>
-                                            <li className="py-1 hover:text-white">
-                                                <a href="#">Components</a>
-                                            </li>
-                                            <li className="py-1 hover:text-white">
-                                                <a href="#">Example code</a>
-                                            </li>
-                                            <li className="py-1 hover:text-white">
-                                                <a href="#">Updates</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div className="flex-shrink max-w-full w-1/2 md:w-1/4 mb-6 lg:mb-0">
+                              
+                                    <div className="flex-shrink max-w-full w-1/2 md:w-1/6 mb-6 lg:mb-0">
                                         <h4 className="text-base leading-normal mb-3 uppercase text-gray-100">Legal</h4>
                                         <ul>
                                             <li className="py-1 hover:text-white hover:text-white">
