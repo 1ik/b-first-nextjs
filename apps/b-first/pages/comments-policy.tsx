@@ -3,18 +3,18 @@ import Header from '../components/Header/Header'
 import MobileMenu from '../components/MobileMenu/MobileMenu'
 import BackToTop from '../components/BackToTop/BackToTop'
 import Footer from '../components/Footer/Footer'
-import PrivacyPolicy from '../components/PrivacyPolicy/PrivacyPolicy'
+import CommetsPolicy from '../components/CommetsPolicy/CommetsPolicy'
 
-function privacy() {
+function comments() {
   return (
     <>
-     <Header />
-      <MobileMenu />
-        <PrivacyPolicy/>
+      <Header/>
+      <MobileMenu/>
+       <CommetsPolicy/>
       <BackToTop/>
-      <Footer/>
+      <Footer />
     </>
   )
 }
 
-export default privacy
+export default comments
