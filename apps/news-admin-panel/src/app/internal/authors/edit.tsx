@@ -1,16 +1,16 @@
-import { FeatureCategoryEdit } from "@bfirst/components-categories";
+import { FeatureAuthorEdit } from "@bfirst/components-authors";
 import { Icon } from "@bfirst/components-icon";
 import { HCF } from "@bfirst/components-layout";
 import { Breadcrumbs } from "@bfirst/material-tailwind";
 import { Link, useNavigate } from "react-router-dom";
 
-export default function CategoryEdit() {
+export default function AuthorEdit() {
   const navigate = useNavigate();
   const updated = () => {
-    navigate("/categories");
+    navigate("/authors");
   };
 
-  const onError = (error: any) => {
+  const onError = (error: unknown) => {
     console.log("error", error);
   };
 
@@ -20,15 +20,15 @@ export default function CategoryEdit() {
         <div className="flex flex-row w-full justify-between">
           <Breadcrumbs>
             <Link to="/">
-              <Icon name="home" variant="text"/>
+              <Icon name="home" variant="text" />
             </Link>
-            <Link to="/categories">Categories</Link>
-            <Link to="">Edit Category</Link>
+            <Link to="/authors">Authors</Link>
+            <Link to="">Edit Author</Link>
           </Breadcrumbs>
         </div>
       </HCF.Header>
       <HCF.Content>
-        <FeatureCategoryEdit onSuccess={updated} onError={onError} />
+        <FeatureAuthorEdit onSuccess={updated} onError={onError} />
       </HCF.Content>
     </HCF>
   );
