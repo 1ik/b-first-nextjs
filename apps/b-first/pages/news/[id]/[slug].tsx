@@ -144,6 +144,10 @@ export function Index({ news, categoryNews, latestNews, featured }: any) {
                 </div>
                 {/*right*/}
                 <div className="flex-shrink max-w-full w-full lg:w-1/3 pl-3 lg:pl-8 lg:pb-8 order-last bg-gray-50">
+                  <div className="flex justify-center md:justify-start mt-3">
+                    <img src="/img/ads/SIBL_Profit_300x250.gif" alt="asdf" />
+                  </div>
+
                   <h2 className="text-xl font-normal pb-6 pt-6">More From {news.categories[0].name}</h2>
                   <div className="flex flex-col gap-4 pr-6">
                     {categoryNews?.data
@@ -158,8 +162,10 @@ export function Index({ news, categoryNews, latestNews, featured }: any) {
                         </div>
                       ))}
                   </div>
-
                   <div className="mt-5"></div>
+                  <div className="flex justify-center md:justify-start">
+                    <img src="/img/ads/ibbl.gif" alt="asdf" />
+                  </div>
                   <h2 className="text-xl font-normal pb-6 pt-6">Latest</h2>
                   <div className="flex flex-col gap-4 pr-6">
                     {latestNews.data
@@ -167,12 +173,20 @@ export function Index({ news, categoryNews, latestNews, featured }: any) {
                       .splice(0, 10)
                       .map((n: any, idx: any) => (
                         <div key={idx} className="flex flex-col border-b pb-2 hover:bg-gray-50">
+                          {idx == 5 && (
+                            <div className="flex justify-center md:justify-start mb-6 mt-4">
+                              <img src="/img/ads/Global.gif" alt="asdf" />
+                            </div>
+                          )}
                           <a href={newsUrl(n)} className="hover:bg-gray-100">
                             <h4 className="font-extrabold text-xl">{n.title}</h4>
                             <p className="font-light ">{n.meta.headline}</p>
                           </a>
                         </div>
                       ))}
+                  </div>
+                  <div className="flex justify-center md:justify-start my-6">
+                    <img src="/img/ads/Union Bank.gif" alt="asdf" />
                   </div>
                 </div>
               </div>
