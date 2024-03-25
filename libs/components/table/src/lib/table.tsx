@@ -40,7 +40,7 @@ export const Table: React.FC<TableProps> = ({ columns, data, pagination }) => {
           ))}
         </tr>
       </thead>
-      <tbody className="flex-1 overflow-scroll w-full">
+      <tbody className="flex-1 overflow-y-scroll w-full">
         {data.map((row, index) => {
           const isLast = index === data.length - 1;
           const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50 flex items-center";
