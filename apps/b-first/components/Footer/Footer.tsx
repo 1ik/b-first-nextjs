@@ -132,7 +132,7 @@ const Footer = () => {
                         <a href="/media">Media</a>
                       </li>
                       <li className="py-1 hover:text-white">
-                        <a href="/salse">Sales</a>
+                        <a href="/sales">Sales</a>
                       </li>
                       <li className="py-1 hover:text-white">
                         <a href="/editor">Editor</a>
