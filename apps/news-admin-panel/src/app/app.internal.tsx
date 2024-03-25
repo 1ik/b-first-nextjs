@@ -9,7 +9,7 @@ import { AuthorAddLazy, AuthorEditLazy, AuthorsListLazy } from "./internal/autho
 import { AddLazy, EditLazy, ListLazy } from "./internal/categories";
 import { ManageStories } from "./internal/manageStories/manageStories";
 import { AddEditStoriesLazy, StoriesListLazy, StoryPreviewLazy } from "./internal/stories";
-import { AddEditTagsLazy, TagsListLazy } from "./internal/tags";
+import { TagAddLazy, TagEditLazy, TagsListLazy } from "./internal/tags";
 
 export const NavBar = () => {
   return (
@@ -76,7 +76,7 @@ export function AppInternal() {
   const modalRef = useRef(null);
   const btnRef = useRef(null);
   useEffect(() => {
-    const handleClickOutside = function (e:any) {
+    const handleClickOutside = function (e: any) {
       if ((btnRef.current as any)?.contains(e.target)) {
         return;
       } else if (e.target !== modalRef.current) {
@@ -89,9 +89,9 @@ export function AppInternal() {
     };
   }, []);
 
-  const handleClick = function(){
+  const handleClick = function () {
     (document.querySelector("#my-drawer") as HTMLInputElement).checked = false;
-  }
+  };
 
   return (
     <div className="drawer h-full lg:drawer-open">
@@ -110,14 +110,19 @@ export function AppInternal() {
               </li>
               <li>
                 <button className="flex" ref={btnRef} onClick={() => setShowProfileModal((cur) => !cur)}>
-                  <FaRegCircleUser  className="text-xl" />
+                  <FaRegCircleUser className="text-xl" />
                   <p>{user.name}</p>
                 </button>
                 {showProfileModal && (
-                  <ul ref={modalRef} className="absolute top-[100%] bg-white right-0 z-[999] flex flex-col hover:bg-white shadow-xl min-w-full m-0 p-0 text-center">
+                  <ul
+                    ref={modalRef}
+                    className="absolute top-[100%] bg-white right-0 z-[999] flex flex-col hover:bg-white shadow-xl min-w-full m-0 p-0 text-center"
+                  >
                     <li className="hover:bg-gray-200 cursor-pointer p-2">Settings</li>
                     <li className="hover:bg-gray-200 cursor-pointer p-2">Theme</li>
-                    <li className="hover:bg-gray-200 cursor-pointer p-2" onClick={handleSignOut}>Sign out</li>
+                    <li className="hover:bg-gray-200 cursor-pointer p-2" onClick={handleSignOut}>
+                      Sign out
+                    </li>
                   </ul>
                 )}
               </li>
@@ -141,11 +146,12 @@ export function AppInternal() {
               <Route path="/categories/:id" element={<EditLazy />} />
               <Route path="/authors" element={<AuthorsListLazy />} />
               <Route path="/authors/add" element={<AuthorAddLazy />} />
-              <Route path="/authors/:id" element={<AuthorEditLazy/>}/>
+              <Route path="/authors/:id" element={<AuthorEditLazy />} />
               <Route path="/stories" element={<StoriesListLazy />} />
               <Route path="/stories/create-story" element={<AddEditStoriesLazy />} />
               <Route path="/tags" element={<TagsListLazy />} />
-              <Route path="/tags/add" element={<AddEditTagsLazy />} />
+              <Route path="/tags/add" element={<TagAddLazy />} />
+              <Route path="/tags/:id" element={<TagEditLazy />} />
               <Route path="/stories/:storyId" element={<StoryPreviewLazy />} />
               <Route path="/top-news-list" element={<ManageStories />} />
             </Routes>
@@ -159,7 +165,12 @@ export function AppInternal() {
           <ul className="">
             {links.map((l) => (
               <li key={l.name}>
-                <Link onClick={handleClick} key={l.name} to={l.href} className={"flex justify-between" + (l.isActive ? " active" : "")}>
+                <Link
+                  onClick={handleClick}
+                  key={l.name}
+                  to={l.href}
+                  className={"flex justify-between" + (l.isActive ? " active" : "")}
+                >
                   {l.name} <MdChevronRight />
                 </Link>
               </li>
