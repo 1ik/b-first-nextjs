@@ -65,7 +65,6 @@ export function BreadCrumb({ category }: any) {
 }
 
 export function Index({ news, categoryNews, latestNews, featured }: any) {
-  console.log(news);
   const router = useRouter();
   const [copied, setCopied] = useState(false);
   function copyToClipboard() {
@@ -80,11 +79,12 @@ export function Index({ news, categoryNews, latestNews, featured }: any) {
       <Head>
         <meta property="og:image" content={getImageUrl(news.meta.featured_image, 1600, 900)} />
         <meta property="og:title" content={news?.title} />
-        <meta property="og:description" content={news.meta.headline} />
+        <meta property="og:description" content={news.meta.intro} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:url" content={`https://bangladeshfirst.com${router.asPath}`} />
         <meta property="og:type" content="article" />
+        <link rel="canonical" href={`https://bangladeshfirst.com${newsUrl(news)}`} />
       </Head>
       <Header category={news?.categories[0].name} />
       <MobileMenu />
@@ -97,9 +97,9 @@ export function Index({ news, categoryNews, latestNews, featured }: any) {
                 <div className="flex-shrink max-w-full w-full lg:w-2/3 overflow-hidden pr-6">
                   <BreadCrumb category={news?.categories[0].name} />
 
-                  <h2 className="text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl mb-6">
+                  <h1 className="text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl mb-6">
                     {news?.title}
-                  </h2>
+                  </h1>
                   <p>{news.meta.intro}</p>
 
                   <div className="news-meta border-1 border-b my-4 pb-3">

@@ -1,3 +1,4 @@
+import Head from "next/head";
 import BackToTop from "../components/BackToTop/BackToTop";
 import BlockNews from "../components/BlockNews/BlockNews";
 import BlockNews2 from "../components/BlockNews2/BlockNews2";
@@ -11,6 +12,9 @@ import Slider from "../components/Slider/Slider";
 export default function Index({ featuredNews, latestNews, bangladesh, politics, world }: any) {
   return (
     <>
+      <Head>
+        <link rel="canonical" href="https://bangladeshfirst.com" />
+      </Head>
       <Header />
       <MobileMenu />
       <main id="content">
