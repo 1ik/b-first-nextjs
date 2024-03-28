@@ -23,8 +23,20 @@ export type Inputs = {
   imageCaption?: string;
 };
 
+export type StoryInputs = {
+  title: string;
+  meta: {
+    featured_image: string;
+    shoulder: string;
+    imageCaption: string;
+    altheadline: string;
+    intro: string;
+  };
+  content: string;
+};
+
 export interface StoryFormProps {
-  onSubmit: (inputs: Inputs) => void;
+  onSubmit: (inputs: StoryInputs) => void;
   isError: boolean;
   loading: boolean;
   defaultData?: any;
@@ -57,7 +69,20 @@ export function StoryForm({ onSubmit, loading, isError, defaultData }: StoryForm
   const onValidate = function (data) {
     if (!body) setError((cur) => ({ ...cur, body: "Body is required" }));
     if (!featuredImgUrl) return setError((cur) => ({ ...cur, featuredImg: "Featured Image is required" }));
-    onSubmit({ ...data, body, featuredImg });
+
+    const story = {
+      title: data.headline,
+      meta: {
+        featured_image: featuredImgUrl,
+        shoulder: data.shoulder,
+        imageCaption: data.imageCaption,
+        altheadline: data.altheadline,
+        intro: data.standfirst,
+      },
+      content: body,
+    };
+
+    onSubmit(story);
   };
 
   useEffect(() => {
@@ -92,7 +117,7 @@ export function StoryForm({ onSubmit, loading, isError, defaultData }: StoryForm
               label="Alternative Headline"
             />
 
-            {/* ========== stand first ========= */}
+            {/* ========== stand first (intro) ========= */}
             <div>
               <Textarea
                 defaultValue={defaultData && defaultData.name}
@@ -121,6 +146,7 @@ export function StoryForm({ onSubmit, loading, isError, defaultData }: StoryForm
               <Button onClick={handleDialogOpen} variant="gradient">
                 Browse
               </Button>
+              <p className="text-xs p-1 font-light">{error.featuredImg}</p>
             </div>
             <div>
               {featuredImgUrl && (

@@ -1,3 +1,4 @@
+import { usePost } from "@bfirst/api-client";
 import { useEffect, useRef } from "react";
 import tinymce from "tinymce";
 
@@ -8,6 +9,8 @@ interface TinymceEditorProps {
 }
 
 export const TinymceEditor = function ({ label, defaultValue, onChange }: TinymceEditorProps) {
+  const { requestAsync } = usePost(`api/v1/media-upload-image`);
+
   const editorRef = useRef(null);
 
   useEffect(() => {
@@ -33,6 +36,17 @@ export const TinymceEditor = function ({ label, defaultValue, onChange }: Tinymc
           reader.addEventListener("load", async function () {
             const formData = new FormData();
             formData.append("image", file);
+
+            try {
+              const response = await requestAsync(formData);
+
+              callback(
+                `https://images.bangladeshfirst.com/resize?width=1600&height=900&format=webp&quality=85&path=${response.data.url}`,
+                { title: file.name }
+              );
+            } catch (error) {
+              console.log(error);
+            }
           });
           reader.readAsDataURL(file);
         });
