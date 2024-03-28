@@ -51,6 +51,7 @@ export function usePost(uri: string) {
 
   const {
     mutate: request,
+    mutateAsync: requestAsync,
     isError,
     isSuccess,
     isPending,
@@ -67,7 +68,7 @@ export function usePost(uri: string) {
     },
   });
 
-  return { request, isError, isSuccess, isPending, data, error };
+  return { request, requestAsync, isError, isSuccess, isPending, data, error };
 }
 
 /**
