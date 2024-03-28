@@ -1,5 +1,6 @@
 import { usePost } from "@bfirst/api-client";
 import { HCF } from "@bfirst/components-layout";
+import { TinymceEditor } from "@bfirst/components-tinymce-editor";
 import {
   Button,
   CardBody,
@@ -9,10 +10,10 @@ import {
   DialogHeader,
   Input,
   Textarea,
+  Typography,
 } from "@bfirst/material-tailwind";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { TinymceEditor } from "./TinymceEditor";
 
 export type Inputs = {
   shoulder?: string;
@@ -132,18 +133,23 @@ export function StoryForm({ onSubmit, loading, isError, defaultData }: StoryForm
 
             {/* ========== media browser ======= */}
             <Dialog open={dialogOpen} handler={handleDialogOpen} size="xl">
-              <DialogHeader>Media Browser</DialogHeader>
+              <DialogHeader className="flex justify-between">
+                <Typography>Media Browser</Typography>
+              </DialogHeader>
               <DialogBody>
                 <div className="flex flex-col gap-y-4">
-                  <div>
+                  <div className="lg:w-2/3">
                     <Input
                       onChange={(e) => setFeaturedImg(e.target.files?.[0])}
                       variant="standard"
                       label="Featured Image*"
                       type="file"
                     />
+                    <Typography className="my-2">
+                      Allowed file type: <span className="font-bold">png, jpg, jpeg, gif</span>
+                    </Typography>
                   </div>
-                  <div>
+                  <div className="lg:w-2/3">
                     <Input {...register("imageCaption")} label="Image Caption" />
                   </div>
                 </div>
