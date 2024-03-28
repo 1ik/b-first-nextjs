@@ -27,9 +27,9 @@ export type StoryInputs = {
   title: string;
   meta: {
     featured_image: string;
-    shoulder: string;
-    imageCaption: string;
-    altheadline: string;
+    shoulder?: string;
+    imageCaption?: string;
+    altheadline?: string;
     intro: string;
   };
   content: string;
@@ -66,7 +66,7 @@ export function StoryForm({ onSubmit, loading, isError, defaultData }: StoryForm
     request(formData);
   };
 
-  const onValidate = function (data) {
+  const onValidate = function (data: Inputs) {
     if (!body) setError((cur) => ({ ...cur, body: "Body is required" }));
     if (!featuredImgUrl) return setError((cur) => ({ ...cur, featuredImg: "Featured Image is required" }));
 
