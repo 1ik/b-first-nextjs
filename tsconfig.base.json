@@ -31,6 +31,7 @@
       "@bfirst/components-confirm-button": ["libs/components/confirm-button/src/index.ts"],
       "@bfirst/components-icon": ["libs/components/icon/src/index.ts"],
       "@bfirst/components-layout": ["libs/components/layouts/src/index.ts"],
+      "@bfirst/components-multiselect-search": ["libs/components/multiselect-search/src/index.ts"],
       "@bfirst/components-stories": ["libs/features/stories/src/index.ts"],
       "@bfirst/components-table": ["libs/components/table/src/index.ts"],
       "@bfirst/components-tags": ["libs/features/tags/src/index.ts"],
