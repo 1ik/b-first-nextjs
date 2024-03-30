@@ -34,6 +34,7 @@ export function MultiselectSearch(props: MultiselectSearchProps) {
   return (
     <div className="relative flex flex-col gap-3">
       <Input
+        onBlur={() => setSearchValue("")}
         label={props.label}
         placeholder="Type for suggestions"
         className="pl-20 p-4"
@@ -62,6 +63,9 @@ export function MultiselectSearch(props: MultiselectSearchProps) {
       />
       {searchValue && (
         <List className="absolute z-[99] bg-white top-full shadow-lg">
+          {props.onAddItem && !props.items?.find((i) => i.name.toLowerCase() === searchValue.toLowerCase()) && (
+            <ListItem className="bg-gray-200">Create "{searchValue}"</ListItem>
+          )}
           {props.items
             ?.filter((i) => !selectedItems.find((sI) => sI.id === i.id))
             .map((item) => {

@@ -7,7 +7,7 @@ import moment from "moment";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-export function StoriesList() {
+export function FeatureStoryList() {
   const TABLE_COLUMNS: TableColumnDef[] = [
     {
       key: "id",

@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom";
-import { HCF } from "@bfirst/components-layout";
-import { Breadcrumbs, Button } from "@bfirst/material-tailwind";
-import { StoriesList } from "@bfirst/components-stories";
 import { Icon } from "@bfirst/components-icon";
+import { HCF } from "@bfirst/components-layout";
+import { FeatureStoryList } from "@bfirst/components-stories";
+import { Breadcrumbs, Button } from "@bfirst/material-tailwind";
+import { Link } from "react-router-dom";
 
 export default function List() {
   return (
@@ -11,7 +11,7 @@ export default function List() {
         <div className="flex flex-row w-full justify-between items-center">
           <Breadcrumbs>
             <Link to="/">
-            <Icon name="home" variant="text"/>
+              <Icon name="home" variant="text" />
             </Link>
             <Link to="/stories">Stories</Link>
           </Breadcrumbs>
@@ -21,7 +21,7 @@ export default function List() {
         </div>
       </HCF.Header>
       <HCF.Content>
-        <StoriesList />
+        <FeatureStoryList />
       </HCF.Content>
     </HCF>
   );
