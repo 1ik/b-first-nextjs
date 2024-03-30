@@ -1,10 +1,10 @@
 import { useDelete, useGet } from "@bfirst/api-client";
-import { Table, TableColumnDef } from "@bfirst/components-table";
+import { ConfirmButton } from "@bfirst/components-confirm-button";
 import { Icon } from "@bfirst/components-icon";
+import { Table, TableColumnDef } from "@bfirst/components-table";
 import { Typography } from "@bfirst/material-tailwind";
 import moment from "moment";
-import { useState } from "react";
-import { ConfirmButton } from "@bfirst/components-confirm-button";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 export function StoriesList() {
@@ -35,14 +35,14 @@ export function StoriesList() {
       },
     },
     {
-      key: "updatedAt",
-      colKey: "updated_at",
-      title: "Updated At",
-      width: "20%",
+      key: "authors",
+      colKey: "authors",
+      title: "Authors",
+      width: "30%",
       render: (row) => {
         return (
           <Typography variant="small" className="font-normal leading-none opacity-70">
-            {moment(row["updated_at"]).format("YYYY-MM-DD hh:mm a")}
+            {row.authors.map(author => author.name).join(", ")}
           </Typography>
         );
       },
@@ -73,15 +73,18 @@ export function StoriesList() {
   ];
 
   const [currentPage, setCurrentPage] = useState(1);
-  const { data } = useGet(`api/v1/stories?page=${currentPage}&size=20`);
   const [deleteId, setDeleteId] = useState<number | null>(null);
+  const { data, refetch } = useGet(`api/v1/stories?page=${currentPage}&size=20`);
+  const { request, isSuccess } = useDelete(`api/v1/stories/${deleteId}`);
 
   const handleDelete = (id: number) => {
     setDeleteId(id);
     request();
   };
 
-  const { request } = useDelete(`api/v1/stories/${deleteId}`);
+  useEffect(() => {
+    if (isSuccess) refetch();
+  }, [isSuccess, refetch]);
 
   if (!data) {
     return <></>;

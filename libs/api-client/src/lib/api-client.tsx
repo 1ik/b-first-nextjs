@@ -29,7 +29,7 @@ export const ApiClient: React.FC<Props> = ({ children, ...props }) => {
 export function useGet(uri: string, options?: any) {
   const { baseUrl, token } = useContext(ApiClientContext);
 
-  const { isError, isSuccess, isPending, data, error } = useQuery({
+  const { isError, isSuccess, isPending, data, error, refetch } = useQuery({
     queryKey: [uri],
     queryFn: () =>
       axios.get(`${baseUrl}/${uri}`, {
@@ -40,7 +40,7 @@ export function useGet(uri: string, options?: any) {
       }),
   });
 
-  return { isError, isSuccess, isPending, data: data?.data, error };
+  return { isError, isSuccess, isPending, data: data?.data, error, refetch };
 }
 
 /**
