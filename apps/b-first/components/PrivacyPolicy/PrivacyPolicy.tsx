@@ -22,31 +22,31 @@ function PrivacyPolicy() {
         helps us understand how our readers engage with our content and improve our website's performance and user
         experience.
       </p>
-      <p className="font-medium text-base text-black/80 mb-4">
+      <p className="font-medium text-base text-black/80 mb-8">
         <span className="font-semibold md:font-bold text-lg md:text-xl">Cookies and Similar Technologies :</span> We use cookies, web beacons, and
         other tracking technologies to collect information about your browsing behavior and preferences. This
         information may include your IP address, browser type, device identifiers, and referral URLs.
       </p>
-      <h3 className="font-bold text-lg md:text-2xl text-black/80 mb-6">How We Use Your Information:</h3>
-      <p className="font-medium text-base text-black/80 mb-4">
+      <h3 className="font-bold text-lg md:text-2xl text-black/80 mb-4">How We Use Your Information:</h3>
+      <p className="font-medium text-base text-black/80 mb-3">
         <span className="font-semibold md:font-bold text-lg md:text-xl">To Provide Services :</span> We use your personal information to fulfill
         your subscriptions, deliver newsletters, process payments, and provide access to our content.
       </p>
-      <p className="font-medium text-base text-black/80 mb-4">
+      <p className="font-medium text-base text-black/80 mb-3">
         <span className="font-semibold md:font-bold text-lg md:text-xl">To Improve User Experience :</span> We analyze usage data and website
         analytics to optimize our website's performance, identify trends, and enhance the user experience.
       </p>
-      <p className="font-medium text-base text-black/80 mb-4">
+      <p className="font-medium text-base text-black/80 mb-3">
         <span className="font-semibold md:font-bold text-lg md:text-xl">To Communicate with You :</span> We may use your contact information to send
         important updates, announcements, marketing communications, and promotional offers related to our products and
         services.
       </p>
-      <p className="font-medium text-base text-black/80 mb-2">
+      <p className="font-medium text-base text-black/80 mb-8">
         <span className="font-semibold md:font-bold text-lg md:text-xl"> For Legal and Security Purposes :</span> We may use your information to
         comply with legal obligations, resolve disputes, investigate fraud, and protect the security of our website and
         users.
       </p>
-      <h3 className="font-bold text-lg md:text-2xl text-black/80 my-5">Information Sharing and Disclosure :</h3>
+      <h3 className="font-bold text-lg md:text-2xl text-black/80 mb-4">Information Sharing and Disclosure :</h3>
       <p className="font-medium text-base text-black/80 mb-2">
         <span className="font-semibold md:font-bold text-lg md:text-xl"> Service Providers :</span> We may share your information with trusted
         third-party service providers who assist us in delivering our services, processing payments, and managing our
