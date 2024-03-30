@@ -1,10 +1,10 @@
-import { useDelete, useGet, usePut } from "@bfirst/api-client";
+import { useDelete, useGet } from "@bfirst/api-client";
 import { ConfirmButton } from "@bfirst/components-confirm-button";
 import { Icon } from "@bfirst/components-icon";
 import { Table, TableColumnDef } from "@bfirst/components-table";
 import { Typography } from "@bfirst/material-tailwind";
 import moment from "moment";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 /**
@@ -76,19 +76,18 @@ export function FeatureCategoryList() {
   ];
 
   const [deleteId, setDeleteId] = useState<number | null>(null);
-  const [updateId, setUpdateId] = useState<number | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const { data } = useGet(`api/v1/categories?page=${currentPage}&size=20`);
+  const { data, refetch } = useGet(`api/v1/categories?page=${currentPage}&size=20`);
+  const { request, isSuccess } = useDelete(`api/v1/categories/${deleteId}`);
 
   const handleDelete = function (id: number) {
     setDeleteId(id);
     request();
   };
 
-  const handleUpdate = function (input: string, id: number) {
-    console.log("hi");
-  };
-  const { request } = useDelete(`api/v1/categories/${deleteId}`);
+  useEffect(() => {
+    if (isSuccess) refetch();
+  }, [isSuccess, refetch]);
 
   if (!data) {
     return <></>;
