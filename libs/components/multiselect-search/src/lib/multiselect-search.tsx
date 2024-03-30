@@ -12,7 +12,7 @@ export interface MultiselectSearchProps {
   items: Entry[];
   onSearch: (search: string) => void;
   itemsSelected: (items: Entry[]) => void;
-  onAddItem?: (itemName: string) => void;
+  onAddItem?: (itemName: string) => Promise<Entry>;
 }
 
 export function MultiselectSearch(props: MultiselectSearchProps) {
@@ -21,7 +21,6 @@ export function MultiselectSearch(props: MultiselectSearchProps) {
   const deleteChip = (entry: Entry) => {
     setSelectedItems(selectedItems.filter((sI) => sI.id !== entry.id));
   };
-
 
   useEffect(() => {
     props.itemsSelected(selectedItems);
@@ -40,7 +39,9 @@ export function MultiselectSearch(props: MultiselectSearchProps) {
           if(e.key === "Enter"){
             e.preventDefault();
             if(!props.items.find(i => i.name.toLowerCase() === searchValue.toLowerCase())){
-              props.onAddItem && props.onAddItem(searchValue)
+              if (props.onAddItem) {
+                props.onAddItem(searchValue).then((newItem) => setSelectedItems([newItem, ...selectedItems]));
+              }
             }
             else if(props.items.find(i => i.name.toLowerCase() === searchValue.toLowerCase())){
               const item = props.items.find(i => i.name.toLowerCase() === searchValue.toLowerCase());

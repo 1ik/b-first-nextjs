@@ -1,5 +1,6 @@
-import { usePost } from "@bfirst/api-client";
+import { useGet, usePost } from "@bfirst/api-client";
 import { HCF } from "@bfirst/components-layout";
+import { MultiselectSearch } from "@bfirst/components-multiselect-search";
 import { TinymceEditor } from "@bfirst/components-tinymce-editor";
 import {
   Button,
@@ -14,6 +15,7 @@ import {
 } from "@bfirst/material-tailwind";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 export type Inputs = {
   shoulder?: string;
@@ -44,13 +46,22 @@ export interface StoryFormProps {
 
 export function StoryForm({ onSubmit, loading, isError, defaultData }: StoryFormProps) {
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [error, setError] = useState({ body: "", featuredImg: "" });
+  const [error, setError] = useState({ authors: "", tags: "", categories: "", body: "", featuredImg: "" });
   const [body, setBody] = useState("");
   const [featuredImg, setFeaturedImg] = useState<undefined | File>();
   const [featuredImgUrl, setFeaturedImgUrl] = useState("");
+  const [search, setSearch] = useState({ authors: "", tags: "", categories: "" });
+  const [selectedAuthors, setSelectedAuthors] = useState([]);
+  const [selectedTags, setSelectedTags] = useState([]);
+  const [selectedCategories, setSelectedCategories] = useState([]);
 
-  const { request, isSuccess, data } = usePost(`api/v1/media-upload-image`);
+  const { request, isSuccess, data: uploadImageData } = usePost(`api/v1/media-upload-image`);
+  const { requestAsync: tagRequestAsync } = usePost(`api/v1/tags`);
+  const { data: authorsData } = useGet(`api/v1/authors?name=${search.authors}`);
+  const { data: tagsData } = useGet(`api/v1/tags?name=${search.tags}`);
+  const { data: categoriesData } = useGet(`api/v1/categories?name=${search.categories}`);
 
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -65,10 +76,17 @@ export function StoryForm({ onSubmit, loading, isError, defaultData }: StoryForm
     formData.append("image", featuredImg);
     request(formData);
   };
+  const handleAddTag = async (searchValue: string) => {
+    const { data } = await tagRequestAsync({ name: searchValue });
+    return data.data;
+  };
 
   const onValidate = function (data: Inputs) {
     if (!body) setError((cur) => ({ ...cur, body: "Body is required" }));
     if (!featuredImgUrl) return setError((cur) => ({ ...cur, featuredImg: "Featured Image is required" }));
+    if (!selectedAuthors.length) return setError((cur) => ({ ...cur, authors: "Author is required" }));
+    if (!selectedTags.length) return setError((cur) => ({ ...cur, tags: "Tag is required" }));
+    if (!selectedCategories.length) return setError((cur) => ({ ...cur, categories: "Category is required" }));
 
     const story = {
       title: data.headline,
@@ -79,6 +97,9 @@ export function StoryForm({ onSubmit, loading, isError, defaultData }: StoryForm
         altheadline: data.altheadline,
         intro: data.standfirst,
       },
+      authors: selectedAuthors.map((author) => (author as { id: number }).id),
+      tags: selectedTags.map((tag) => (tag as { id: number }).id),
+      categories: selectedCategories.map((category) => (category as { id: number }).id),
       content: body,
     };
 
@@ -87,10 +108,10 @@ export function StoryForm({ onSubmit, loading, isError, defaultData }: StoryForm
 
   useEffect(() => {
     if (isSuccess) {
-      setFeaturedImgUrl(data?.data.url);
+      setFeaturedImgUrl(uploadImageData?.data.url);
       setDialogOpen(false);
     }
-  }, [isSuccess, data]);
+  }, [isSuccess, uploadImageData]);
 
   return (
     <form onSubmit={handleSubmit(onValidate)} className="h-full">
@@ -117,6 +138,20 @@ export function StoryForm({ onSubmit, loading, isError, defaultData }: StoryForm
               label="Alternative Headline"
             />
 
+            {/* ========== authors ========== */}
+            <div>
+              <MultiselectSearch
+                label="Authors*"
+                items={authorsData?.data}
+                onSearch={(s) => setSearch((cur) => ({ ...cur, authors: s }))}
+                itemsSelected={(i) => {
+                  setSelectedAuthors(i as never);
+                  setError((cur) => ({ ...cur, authors: "" }));
+                }}
+              />
+              <p className="text-xs p-1 font-light">{error.authors}</p>
+            </div>
+
             {/* ========== stand first (intro) ========= */}
             <div>
               <Textarea
@@ -138,6 +173,35 @@ export function StoryForm({ onSubmit, loading, isError, defaultData }: StoryForm
                 }}
               />
               <p className="text-xs p-1 font-light">{error.body}</p>
+            </div>
+
+            {/* ========== tags ========== */}
+            <div>
+              <MultiselectSearch
+                label="Tags*"
+                items={tagsData?.data}
+                onSearch={(s) => setSearch((cur) => ({ ...cur, tags: s }))}
+                itemsSelected={(i) => {
+                  setSelectedTags(i as never);
+                  setError((cur) => ({ ...cur, tags: "" }));
+                }}
+                onAddItem={handleAddTag}
+              />
+              <p className="text-xs p-1 font-light">{error.tags}</p>
+            </div>
+
+            {/* ========== categories ========== */}
+            <div>
+              <MultiselectSearch
+                label="Categories*"
+                items={categoriesData?.data}
+                onSearch={(s) => setSearch((cur) => ({ ...cur, categories: s }))}
+                itemsSelected={(i) => {
+                  setSelectedCategories(i as never);
+                  setError((cur) => ({ ...cur, categories: "" }));
+                }}
+              />
+              <p className="text-xs p-1 font-light">{error.categories}</p>
             </div>
 
             {/* ========== featured image ========= */}
@@ -191,7 +255,10 @@ export function StoryForm({ onSubmit, loading, isError, defaultData }: StoryForm
         </HCF.Content>
         <HCF.Footer className="flex w-full px-3 flex-row justify-end">
           <Button loading={loading} type="submit">
-            Submit
+            Publish
+          </Button>
+          <Button type="button" variant="outlined" onClick={() => navigate("/stories")}>
+            Cancel
           </Button>
         </HCF.Footer>
       </HCF>

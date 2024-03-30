@@ -7,7 +7,6 @@ import { Link, useNavigate } from "react-router-dom";
 export default function StoryAdd() {
   const navigate = useNavigate();
   const added = () => {
-    console.log("categories created successfully");
     navigate("/stories");
   };
 
@@ -24,7 +23,7 @@ export default function StoryAdd() {
               <Icon name="home" variant="text" />
             </Link>
             <Link to="/stories">Stories</Link>
-            <Link to="">Add New Story</Link>
+            <Link to="">Create Story</Link>
           </Breadcrumbs>
         </div>
       </HCF.Header>
