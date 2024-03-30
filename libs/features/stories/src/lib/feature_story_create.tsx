@@ -19,6 +19,7 @@ export const FeatureStoryCreate: React.FC<FeatureStoryCreateProps> = (props: Fea
 
   return (
     <StoryForm
+      btnLabel="Publish"
       isError={false}
       loading={isPending}
       onSubmit={(data) => {

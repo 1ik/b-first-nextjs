@@ -13,6 +13,7 @@ export interface MultiselectSearchProps {
   onSearch: (search: string) => void;
   itemsSelected: (items: Entry[]) => void;
   onAddItem?: (itemName: string) => Promise<Entry>;
+  defaultValue?: Entry[];
 }
 
 export function MultiselectSearch(props: MultiselectSearchProps) {
@@ -21,6 +22,10 @@ export function MultiselectSearch(props: MultiselectSearchProps) {
   const deleteChip = (entry: Entry) => {
     setSelectedItems(selectedItems.filter((sI) => sI.id !== entry.id));
   };
+
+  useEffect(() => {
+    props.defaultValue && setSelectedItems(props.defaultValue);
+  }, [props.defaultValue]);
 
   useEffect(() => {
     props.itemsSelected(selectedItems);
@@ -35,18 +40,19 @@ export function MultiselectSearch(props: MultiselectSearchProps) {
         containerProps={{
           className: "min-w-0",
         }}
-        onKeyDown={(e)=> {
-          if(e.key === "Enter"){
+        value={searchValue}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
             e.preventDefault();
-            if(!props.items.find(i => i.name.toLowerCase() === searchValue.toLowerCase())){
+            if (!props.items.find((i) => i.name.toLowerCase() === searchValue.toLowerCase())) {
               if (props.onAddItem) {
                 props.onAddItem(searchValue).then((newItem) => setSelectedItems([newItem, ...selectedItems]));
               }
+            } else if (props.items.find((i) => i.name.toLowerCase() === searchValue.toLowerCase())) {
+              const item = props.items.find((i) => i.name.toLowerCase() === searchValue.toLowerCase());
+              setSelectedItems([item as Entry, ...selectedItems]);
             }
-            else if(props.items.find(i => i.name.toLowerCase() === searchValue.toLowerCase())){
-              const item = props.items.find(i => i.name.toLowerCase() === searchValue.toLowerCase());
-              setSelectedItems([item as Entry, ...selectedItems])
-            }
+            setSearchValue("");
           }
         }}
         onChange={(event) => {

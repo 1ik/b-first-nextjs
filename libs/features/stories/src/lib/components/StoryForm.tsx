@@ -42,14 +42,15 @@ export interface StoryFormProps {
   isError: boolean;
   loading: boolean;
   defaultData?: any;
+  btnLabel: string;
 }
 
-export function StoryForm({ onSubmit, loading, isError, defaultData }: StoryFormProps) {
+export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }: StoryFormProps) {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [error, setError] = useState({ authors: "", tags: "", categories: "", body: "", featuredImg: "" });
-  const [body, setBody] = useState("");
+  const [body, setBody] = useState(defaultData?.story.content || "");
   const [featuredImg, setFeaturedImg] = useState<undefined | File>();
-  const [featuredImgUrl, setFeaturedImgUrl] = useState("");
+  const [featuredImgUrl, setFeaturedImgUrl] = useState(defaultData?.story.meta.featured_image || "");
   const [search, setSearch] = useState({ authors: "", tags: "", categories: "" });
   const [selectedAuthors, setSelectedAuthors] = useState([]);
   const [selectedTags, setSelectedTags] = useState([]);
@@ -70,11 +71,14 @@ export function StoryForm({ onSubmit, loading, isError, defaultData }: StoryForm
 
   const handleDialogOpen = () => setDialogOpen((cur) => !cur);
   const handleUploadFeaturedImg = () => {
-    if (!featuredImg) return;
-
-    const formData = new FormData();
-    formData.append("image", featuredImg);
-    request(formData);
+    if (!featuredImgUrl && !featuredImg) {
+      return;
+    } else if (featuredImg) {
+      const formData = new FormData();
+      formData.append("image", featuredImg);
+      request(formData);
+    }
+    setDialogOpen(false);
   };
   const handleAddTag = async (searchValue: string) => {
     const { data } = await tagRequestAsync({ name: searchValue });
@@ -93,7 +97,7 @@ export function StoryForm({ onSubmit, loading, isError, defaultData }: StoryForm
       meta: {
         featured_image: featuredImgUrl,
         shoulder: data.shoulder,
-        imageCaption: data.imageCaption,
+        imageCaption: data.imageCaption || defaultData?.story.meta.imageCaption,
         altheadline: data.altheadline,
         intro: data.standfirst,
       },
@@ -119,12 +123,12 @@ export function StoryForm({ onSubmit, loading, isError, defaultData }: StoryForm
         <HCF.Content>
           <CardBody className="flex flex-col gap-4">
             {/* ========== shoulder ========= */}
-            <Input defaultValue={defaultData && defaultData.name} {...register("shoulder")} label="Shoulder" />
+            <Input defaultValue={defaultData?.story.meta.shoulder} {...register("shoulder")} label="Shoulder" />
 
             {/* ========== headline ========== */}
             <div>
               <Input
-                defaultValue={defaultData && defaultData.name}
+                defaultValue={defaultData?.story.title}
                 {...register("headline", { required: "A headline is required" })}
                 label="Headline*"
               />
@@ -133,7 +137,7 @@ export function StoryForm({ onSubmit, loading, isError, defaultData }: StoryForm
 
             {/* ======== alt headline ======== */}
             <Input
-              defaultValue={defaultData && defaultData.name}
+              defaultValue={defaultData?.story.meta.altheadline}
               {...register("altheadline")}
               label="Alternative Headline"
             />
@@ -148,6 +152,7 @@ export function StoryForm({ onSubmit, loading, isError, defaultData }: StoryForm
                   setSelectedAuthors(i as never);
                   setError((cur) => ({ ...cur, authors: "" }));
                 }}
+                defaultValue={defaultData?.story.authors}
               />
               <p className="text-xs p-1 font-light">{error.authors}</p>
             </div>
@@ -155,10 +160,10 @@ export function StoryForm({ onSubmit, loading, isError, defaultData }: StoryForm
             {/* ========== stand first (intro) ========= */}
             <div>
               <Textarea
-                defaultValue={defaultData && defaultData.name}
+                defaultValue={defaultData && defaultData?.story.meta.intro}
                 {...register("standfirst", { required: "A stand first is required" })}
                 label="Stand First*"
-                variant="outlined"
+                className="focus:ring-0"
               />
               <p className="text-xs p-1 font-light">{errors.standfirst && errors.standfirst.message}</p>
             </div>
@@ -171,6 +176,7 @@ export function StoryForm({ onSubmit, loading, isError, defaultData }: StoryForm
                   setBody(content);
                   setError((cur) => ({ ...cur, body: "" }));
                 }}
+                defaultValue={defaultData && defaultData.story.content}
               />
               <p className="text-xs p-1 font-light">{error.body}</p>
             </div>
@@ -186,6 +192,7 @@ export function StoryForm({ onSubmit, loading, isError, defaultData }: StoryForm
                   setError((cur) => ({ ...cur, tags: "" }));
                 }}
                 onAddItem={handleAddTag}
+                defaultValue={defaultData && defaultData.story.tags}
               />
               <p className="text-xs p-1 font-light">{error.tags}</p>
             </div>
@@ -200,6 +207,7 @@ export function StoryForm({ onSubmit, loading, isError, defaultData }: StoryForm
                   setSelectedCategories(i as never);
                   setError((cur) => ({ ...cur, categories: "" }));
                 }}
+                defaultValue={defaultData && defaultData.story.categories}
               />
               <p className="text-xs p-1 font-light">{error.categories}</p>
             </div>
@@ -240,7 +248,11 @@ export function StoryForm({ onSubmit, loading, isError, defaultData }: StoryForm
                     </Typography>
                   </div>
                   <div className="lg:w-2/3">
-                    <Input {...register("imageCaption")} label="Image Caption" />
+                    <Input
+                      {...register("imageCaption")}
+                      defaultValue={defaultData?.story.meta.imageCaption}
+                      label="Image Caption"
+                    />
                   </div>
                 </div>
               </DialogBody>
@@ -254,11 +266,11 @@ export function StoryForm({ onSubmit, loading, isError, defaultData }: StoryForm
           </CardBody>
         </HCF.Content>
         <HCF.Footer className="flex w-full px-3 flex-row justify-end">
-          <Button loading={loading} type="submit">
-            Publish
-          </Button>
           <Button type="button" variant="outlined" onClick={() => navigate("/stories")}>
             Cancel
+          </Button>
+          <Button loading={loading} type="submit">
+            {btnLabel}
           </Button>
         </HCF.Footer>
       </HCF>
