@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useState } from "react";
 import BackToTop from "../components/BackToTop/BackToTop";
 import CustomError from "../components/CustomError/CustomError";
@@ -6,7 +7,7 @@ import Header from "../components/Header/Header";
 import MobileMenu from "../components/MobileMenu/MobileMenu";
 import SquareGrid from "../components/SquareGrid/SquareGrid";
 
-export default function Component({ categoryData }: any) {
+export default function Component({ categoryData, category }: any) {
   const [visible, setVisible] = useState(15);
 
   const handleShowMore = () => {
@@ -25,25 +26,30 @@ export default function Component({ categoryData }: any) {
   const data = categoryData.data;
 
   return (
-    <div className="text-gray-700 pt-9 sm:pt-10">
-      <Header category={data[0].categories[0]?.name} />
-      <MobileMenu />
-      <div className="md-container mx-auto">
-        <SquareGrid items={data.slice(0, visible)} gridClass={className} />
-        {visible < data.length && (
-          <div className="flex justify-center items-center w-full">
-            <button
-              className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mb-5"
-              onClick={handleShowMore}
-            >
-              Show more
-            </button>
-          </div>
-        )}
+    <>
+      <Head>
+        <link rel="canonical" href={`https://bangladeshfirst.com/${category}`} />
+      </Head>
+      <div className="text-gray-700 pt-9 sm:pt-10">
+        <Header category={category} />
+        <MobileMenu />
+        <div className="md-container mx-auto">
+          <SquareGrid items={data.slice(0, visible)} gridClass={className} />
+          {visible < data.length && (
+            <div className="flex justify-center items-center w-full">
+              <button
+                className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mb-5"
+                onClick={handleShowMore}
+              >
+                Show more
+              </button>
+            </div>
+          )}
+        </div>
+        <Footer />
+        <BackToTop />
       </div>
-      <Footer />
-      <BackToTop />
-    </div>
+    </>
   );
 }
 
@@ -61,7 +67,7 @@ export const getServerSideProps = async ({ params }: any) => {
 
     const categoryData = await categoryResponse.json();
 
-    return { props: { categoryData } };
+    return { props: { categoryData, category } };
   } catch (error) {
     console.error("Error fetching data:", error);
     return { props: { categoryData: null } };
