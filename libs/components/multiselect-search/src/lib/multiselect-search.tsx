@@ -1,4 +1,5 @@
-import { Chip, Input, List, ListItem } from "@bfirst/material-tailwind";
+import { Chip, Input, Menu, MenuHandler, MenuItem, MenuList } from "@bfirst/material-tailwind";
+
 import React, { useEffect } from "react";
 
 type Entry = {
@@ -12,16 +13,21 @@ export interface MultiselectSearchProps {
   items: Entry[];
   onSearch: (search: string) => void;
   itemsSelected: (items: Entry[]) => void;
-  onAddItem?: (itemName: string) => void;
+  onAddItem?: (itemName: string) => Promise<Entry>;
+  defaultValue?: Entry[];
 }
 
 export function MultiselectSearch(props: MultiselectSearchProps) {
+  const [openMenu, setOpenMenu] = React.useState(false);
   const [selectedItems, setSelectedItems] = React.useState<Entry[]>([]);
   const [searchValue, setSearchValue] = React.useState("");
   const deleteChip = (entry: Entry) => {
     setSelectedItems(selectedItems.filter((sI) => sI.id !== entry.id));
   };
 
+  useEffect(() => {
+    props.defaultValue && setSelectedItems(props.defaultValue);
+  }, [props.defaultValue]);
 
   useEffect(() => {
     props.itemsSelected(selectedItems);
@@ -29,37 +35,41 @@ export function MultiselectSearch(props: MultiselectSearchProps) {
 
   return (
     <div className="relative flex flex-col gap-3">
-      <Input
-        label={props.label}
-        placeholder="Type for suggestions"
-        className="pl-20 p-4"
-        containerProps={{
-          className: "min-w-0",
-        }}
-        onKeyDown={(e)=> {
-          if(e.key === "Enter"){
-            e.preventDefault();
-            if(!props.items.find(i => i.name.toLowerCase() === searchValue.toLowerCase())){
-              props.onAddItem && props.onAddItem(searchValue)
-            }
-            else if(props.items.find(i => i.name.toLowerCase() === searchValue.toLowerCase())){
-              const item = props.items.find(i => i.name.toLowerCase() === searchValue.toLowerCase());
-              setSelectedItems([item as Entry, ...selectedItems])
-            }
-          }
-        }}
-        onChange={(event) => {
-          setSearchValue(event.target.value);
-          props.onSearch(event.target.value);
-        }}
-      />
-      {searchValue && (
-        <List className="absolute z-[99] bg-white top-full shadow-lg">
+      <Menu open={openMenu} handler={setOpenMenu} allowHover placement="bottom-start">
+        <MenuHandler>
+          <Input
+            value={searchValue}
+            label={props.label}
+            placeholder="Type for suggestions"
+            className="pl-20 p-4"
+            containerProps={{
+              className: "min-w-0",
+            }}
+            onChange={(event) => {
+              setSearchValue(event.target.value);
+              props.onSearch(event.target.value);
+            }}
+          />
+        </MenuHandler>
+
+        <MenuList>
+          {props.onAddItem &&
+            searchValue &&
+            !props.items?.find((i) => i.name.toLowerCase() === searchValue.toLowerCase()) && (
+              <MenuItem
+                onClick={() => {
+                  props.onAddItem && props.onAddItem(searchValue).then((newItem) => setSelectedItems([newItem, ...selectedItems]));
+                  setSearchValue("");
+                }}
+              >
+                Create "{searchValue}"
+              </MenuItem>
+            )}
           {props.items
             ?.filter((i) => !selectedItems.find((sI) => sI.id === i.id))
             .map((item) => {
               return (
-                <ListItem
+                <MenuItem
                   onClick={() => {
                     setSelectedItems([item, ...selectedItems]);
                     setSearchValue("");
@@ -67,11 +77,11 @@ export function MultiselectSearch(props: MultiselectSearchProps) {
                   key={item.id}
                 >
                   {item.name}
-                </ListItem>
+                </MenuItem>
               );
             })}
-        </List>
-      )}
+        </MenuList>
+      </Menu>
 
       <div className="flex flex-row gap-1">
         {selectedItems.map((item, index) => (
