@@ -8,7 +8,7 @@ import { AppContext } from "./app.context";
 import { AuthorAddLazy, AuthorEditLazy, AuthorsListLazy } from "./internal/authors";
 import { AddLazy, EditLazy, ListLazy } from "./internal/categories";
 import { ManageStories } from "./internal/manageStories/manageStories";
-import { AddEditStoriesLazy, StoriesListLazy, StoryPreviewLazy } from "./internal/stories";
+import { AddEditStoriesLazy, StoriesListLazy, StoryPreviewLazy, TrashStoriesListLazy } from "./internal/stories";
 import { TagAddLazy, TagEditLazy, TagsListLazy } from "./internal/tags";
 
 export const NavBar = () => {
@@ -44,6 +44,7 @@ export const NavBar = () => {
 const _links = [
   { name: "Stories", href: "/stories" },
   { name: "Top News List", href: "/top-news-list" },
+  { name: "Trash", href: "/trash" },
   { name: "Categories", href: "/categories", isActive: true },
   { name: "Authors", href: "/authors" },
   { name: "Tags", href: "/tags" },
@@ -148,6 +149,7 @@ export function AppInternal() {
               <Route path="/authors/add" element={<AuthorAddLazy />} />
               <Route path="/authors/:id" element={<AuthorEditLazy />} />
               <Route path="/stories" element={<StoriesListLazy />} />
+              <Route path="/trash" element={<TrashStoriesListLazy />} />
               <Route path="/stories/create-story" element={<AddEditStoriesLazy />} />
               <Route path="/tags" element={<TagsListLazy />} />
               <Route path="/tags/add" element={<TagAddLazy />} />
