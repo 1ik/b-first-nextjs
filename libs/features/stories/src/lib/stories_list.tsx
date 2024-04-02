@@ -8,6 +8,7 @@ import { ConfirmButton } from "@bfirst/components-confirm-button";
 import { Link } from "react-router-dom";
 
 export function StoriesList() {
+
   const TABLE_COLUMNS: TableColumnDef[] = [
     {
       key: "id",
@@ -20,6 +21,15 @@ export function StoriesList() {
       colKey: "title",
       title: "Title",
       width: "50%",
+      render: (row) => {
+        return (
+          <div>
+            <a href={`https://bangladeshfirst.com/news/${row.id}/${row.title}`} className="font-nomal text-sm text-black/80" target="_blank" rel="noopener noreferrer">
+           {row.title}
+            </a>
+          </div>
+        );
+      },
     },
     {
       key: "createdAt",
@@ -75,6 +85,8 @@ export function StoriesList() {
   const [currentPage, setCurrentPage] = useState(1);
   const { data } = useGet(`api/v1/stories?page=${currentPage}&size=20`);
   const [deleteId, setDeleteId] = useState<number | null>(null);
+
+  
 
   const handleDelete = (id: number) => {
     setDeleteId(id);
