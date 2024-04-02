@@ -7,7 +7,8 @@ import { useState } from "react";
 import { ConfirmButton } from "@bfirst/components-confirm-button";
 import { Link } from "react-router-dom";
 
-export function StoriesList() {
+export function StoriesList({ searchInput }: any) {
+ 
   const TABLE_COLUMNS: TableColumnDef[] = [
     {
       key: "id",
@@ -75,7 +76,11 @@ export function StoriesList() {
   const [currentPage, setCurrentPage] = useState(1);
   const { data } = useGet(`api/v1/stories?page=${currentPage}&size=20`);
   const [deleteId, setDeleteId] = useState<number | null>(null);
-
+  
+  // Story Search 
+  const {data: searchList , isPending} = useGet(`api/v1/stories?title=${searchInput}`);
+  
+  
   const handleDelete = (id: number) => {
     setDeleteId(id);
     request();
@@ -87,10 +92,17 @@ export function StoriesList() {
     return <></>;
   }
 
+  if(!searchList){
+    return<></>
+  }
+  
+  if (isPending) {
+    return <></>;
+  }
   return (
     <Table
       columns={TABLE_COLUMNS}
-      data={data.data}
+      data={searchInput ? searchList?.data : data?.data}
       pagination={{
         currentPage,
         lastPage: data?.meta.last_page,
