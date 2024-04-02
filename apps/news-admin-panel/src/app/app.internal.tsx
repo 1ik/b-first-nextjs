@@ -1,4 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { Accordion, AccordionBody, AccordionHeader } from "@bfirst/material-tailwind";
 import { useContext, useEffect, useRef, useState } from "react";
 import { FaRegCircleUser } from "react-icons/fa6";
 import { IoMenuSharp } from "react-icons/io5";
@@ -49,12 +50,27 @@ const _links = [
   { name: "Tags", href: "/tags" },
 ];
 
+const _subLinks = [
+  { name: "Stories", href: "/trash-stories" },
+  { name: "Categories", href: "/trash-categories" },
+  { name: "Authors", href: "/trash-authors" },
+  { name: "Tags", href: "/trash-tags" },
+];
+
 export function AppInternal() {
+  const [subMenuOpen, setSubMenuOpen] = useState(false);
   const [showProfileModal, setShowProfileModal] = useState(false);
+
   let location = useLocation();
+
   const [links, setLinks] = useState(() => {
     return _links.map((l) => {
       return { ...l, isActive: location.pathname.startsWith(l.href) };
+    });
+  });
+  const [subLinks, setSubLinks] = useState(() => {
+    return _subLinks.map((sL) => {
+      return { ...sL, isActive: location.pathname.startsWith(sL.href) };
     });
   });
 
@@ -65,6 +81,15 @@ export function AppInternal() {
       });
     });
   }, [location.pathname]);
+
+  useEffect(() => {
+    setSubLinks((curr) => {
+      return curr.map((sL) => {
+        return { ...sL, isActive: location.pathname.startsWith(sL.href) };
+      });
+    });
+  }, [location.pathname]);
+
   const { user, setUser, setToken } = useContext(AppContext);
   const handleSignOut = function () {
     localStorage.removeItem("userInfo");
@@ -175,6 +200,31 @@ export function AppInternal() {
                 </Link>
               </li>
             ))}
+            <Accordion
+              open={subMenuOpen}
+              icon={subMenuOpen ? <MdChevronRight className="rotate-90" /> : <MdChevronRight />}
+            >
+              <AccordionHeader
+                className="text-sm px-4 py-2 font-normal text-base-content border-0"
+                onClick={() => setSubMenuOpen((cur) => !cur)}
+              >
+                Trash
+              </AccordionHeader>
+              <AccordionBody className="p-0 pl-2">
+                {subLinks.map((sL) => (
+                  <li key={sL.name}>
+                    <Link
+                      onClick={handleClick}
+                      key={sL.name}
+                      to={sL.href}
+                      className={"flex justify-between" + (sL.isActive ? " active" : "")}
+                    >
+                      {sL.name} <MdChevronRight />
+                    </Link>
+                  </li>
+                ))}
+              </AccordionBody>
+            </Accordion>
           </ul>
           {/* <button className="btn btn-primary btn-outline" onClick={handleSignOut}>
             Sign out
