@@ -6,11 +6,11 @@ import { IoMenuSharp } from "react-icons/io5";
 import { MdChevronRight } from "react-icons/md";
 import { Link, Route, Routes, useLocation } from "react-router-dom";
 import { AppContext } from "./app.context";
-import { AuthorAddLazy, AuthorEditLazy, AuthorsListLazy } from "./internal/authors";
-import { AddLazy, EditLazy, ListLazy } from "./internal/categories";
+import { AuthorAddLazy, AuthorEditLazy, AuthorsListLazy, TrashAuthorsListLazy } from "./internal/authors";
+import { AddLazy, EditLazy, ListLazy, TrashCategoriesListLazy } from "./internal/categories";
 import { ManageStories } from "./internal/manageStories/manageStories";
 import { AddEditStoriesLazy, StoriesListLazy, StoryPreviewLazy, TrashStoriesListLazy } from "./internal/stories";
-import { TagAddLazy, TagEditLazy, TagsListLazy } from "./internal/tags";
+import { TagAddLazy, TagEditLazy, TagsListLazy, TrashTagsListLazy } from "./internal/tags";
 
 export const NavBar = () => {
   return (
@@ -45,7 +45,6 @@ export const NavBar = () => {
 const _links = [
   { name: "Stories", href: "/stories" },
   { name: "Top News List", href: "/top-news-list" },
-  { name: "Trash", href: "/trash" },
   { name: "Categories", href: "/categories", isActive: true },
   { name: "Authors", href: "/authors" },
   { name: "Tags", href: "/tags" },
@@ -174,13 +173,16 @@ export function AppInternal() {
               <Route path="/authors/add" element={<AuthorAddLazy />} />
               <Route path="/authors/:id" element={<AuthorEditLazy />} />
               <Route path="/stories" element={<StoriesListLazy />} />
-              <Route path="/trash" element={<TrashStoriesListLazy />} />
               <Route path="/stories/create-story" element={<AddEditStoriesLazy />} />
               <Route path="/tags" element={<TagsListLazy />} />
               <Route path="/tags/add" element={<TagAddLazy />} />
               <Route path="/tags/:id" element={<TagEditLazy />} />
               <Route path="/stories/:storyId" element={<StoryPreviewLazy />} />
               <Route path="/top-news-list" element={<ManageStories />} />
+              <Route path="/trash-stories" element={<TrashStoriesListLazy />} />
+              <Route path="/trash-authors" element={<TrashAuthorsListLazy />} />
+              <Route path="/trash-tags" element={<TrashTagsListLazy />} />
+              <Route path="/trash-categories" element={<TrashCategoriesListLazy />} />
             </Routes>
           </div>
         </div>

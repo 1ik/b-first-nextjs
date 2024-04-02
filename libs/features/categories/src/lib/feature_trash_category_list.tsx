@@ -6,7 +6,7 @@ import { Typography } from "@bfirst/material-tailwind";
 import moment from "moment";
 import { useState } from "react";
 
-export function FeatureTrashStories() {
+export function FeatureTrashCategoryList() {
   const TABLE_COLUMNS: TableColumnDef[] = [
     {
       key: "id",
@@ -15,9 +15,9 @@ export function FeatureTrashStories() {
       width: "10%",
     },
     {
-      key: "title",
-      colKey: "title",
-      title: "Title",
+      key: "name",
+      colKey: "name",
+      title: "Name",
       width: "50%",
     },
     {
@@ -34,15 +34,14 @@ export function FeatureTrashStories() {
       },
     },
     {
-      key: "authors",
-      colKey: "authors",
-      title: "Authors",
-      width: "30%",
+      key: "updatedAt",
+      colKey: "updated_at",
+      title: "Updated At",
+      width: "20%",
       render: (row) => {
         return (
           <Typography variant="small" className="font-normal leading-none opacity-70">
-            {console.log(row)}
-            {row.authors.map((author: { name: string }) => author.name).join(", ")}
+            {moment(row["updated_at"]).format("YYYY-MM-DD hh:mm a")}
           </Typography>
         );
       },
@@ -58,14 +57,14 @@ export function FeatureTrashStories() {
           <div className="flex items-end gap-4 justify-end w-full">
             <ConfirmButton
               onConfirm={() => handleDelete(row.id)}
-              message="Do you want to permanently remove the story ?"
+              message="Do you want to permanently remove the category ?"
               confirmHandler={<Icon name="trash" />}
             >
               Delete
             </ConfirmButton>
             <ConfirmButton
               onConfirm={() => handleRestore(row.id)}
-              message="Do you want to restore the story ?"
+              message="Do you want to restore the category ?"
               confirmHandler={<Icon name="restore" />}
             >
               Restore
@@ -80,9 +79,9 @@ export function FeatureTrashStories() {
   const [deleteId, setDeleteId] = useState<number | null>(null);
   const [restoreId, setRestoreId] = useState<number | null>(null);
 
-  const { data } = useGet(`api/v1/soft-deleted-stories`);
-  const { request: deleteRequest } = useDelete(`api/v1/delete-story/${deleteId}`);
-  const { request: restoreRequest } = usePut(`api/v1/restore-story/${restoreId}`);
+  const { data } = useGet(`api/v1/trash-items/category`);
+  const { request: deleteRequest } = useDelete(`api/v1/delete-trash-item/category/${deleteId}`);
+  const { request: restoreRequest } = usePut(`api/v1/restore-trash-item/category/${restoreId}`);
 
   const handleDelete = (id: number) => {
     setDeleteId(id);

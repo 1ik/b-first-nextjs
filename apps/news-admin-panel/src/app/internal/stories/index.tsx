@@ -14,7 +14,7 @@ const LoadTrashList = lazy(
   () =>
     // eslint-disable-next-line
     new Promise<any>((resolve) => {
-      import("./trash").then((component) => {
+      import("./trashStories").then((component) => {
         resolve(component);
       });
     })
