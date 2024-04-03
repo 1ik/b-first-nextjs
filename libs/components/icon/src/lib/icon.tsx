@@ -4,10 +4,11 @@ import { IconType } from "react-icons";
 import { BiSolidTrashAlt } from "react-icons/bi";
 import { HiHome } from "react-icons/hi";
 import { HiOutlinePencilSquare } from "react-icons/hi2";
+import { MdRestore } from "react-icons/md";
 
 /* eslint-disable-next-line */
 export interface IconProps {
-  name: "trash" | "pencil" | "home";
+  name: "trash" | "pencil" | "home" | "restore";
   variant?: "filled" | "gradient" | "outlined" | "text";
 }
 
@@ -22,6 +23,9 @@ export const Icon = React.forwardRef<HTMLButtonElement, IconProps>(({ name, vari
       break;
     case "home":
       Icon = HiHome;
+      break;
+    case "restore":
+      Icon = MdRestore;
       break;
   }
 
