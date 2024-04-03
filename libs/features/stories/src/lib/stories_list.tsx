@@ -8,7 +8,6 @@ import { ConfirmButton } from "@bfirst/components-confirm-button";
 import { Link } from "react-router-dom";
 
 export function StoriesList() {
-
   const TABLE_COLUMNS: TableColumnDef[] = [
     {
       key: "id",
@@ -24,8 +23,18 @@ export function StoriesList() {
       render: (row) => {
         return (
           <div>
-            <a href={`https://bangladeshfirst.com/news/${row.id}/${row.title}`} className="font-nomal text-sm text-black/80" target="_blank" rel="noopener noreferrer">
-           {row.title}
+            <a
+              href={`https://bangladeshfirst.com/news/${row.id}/${row.title
+                .replaceAll(" ", "-")
+                .replace(/[^\w\s-]/g, "")
+                .toLowerCase()}`}
+              className=""
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Typography variant="small" color="blue-gray" className="font-normal">
+                {row.title}
+              </Typography>
             </a>
           </div>
         );
@@ -85,8 +94,6 @@ export function StoriesList() {
   const [currentPage, setCurrentPage] = useState(1);
   const { data } = useGet(`api/v1/stories?page=${currentPage}&size=20`);
   const [deleteId, setDeleteId] = useState<number | null>(null);
-
-  
 
   const handleDelete = (id: number) => {
     setDeleteId(id);
