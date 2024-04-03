@@ -34,14 +34,14 @@ export function FeatureTrashTagList() {
       },
     },
     {
-      key: "updatedAt",
-      colKey: "updated_at",
-      title: "Updated At",
+      key: "deletedAt",
+      colKey: "deleted_at",
+      title: "Deleted At",
       width: "20%",
       render: (row) => {
         return (
           <Typography variant="small" className="font-normal leading-none opacity-70">
-            {moment(row["updated_at"]).format("YYYY-MM-DD hh:mm a")}
+            {moment(row["deleted_at"]).format("YYYY-MM-DD hh:mm a")}
           </Typography>
         );
       },

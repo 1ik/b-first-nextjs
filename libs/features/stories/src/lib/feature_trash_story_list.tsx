@@ -4,7 +4,7 @@ import { Icon } from "@bfirst/components-icon";
 import { Table, TableColumnDef } from "@bfirst/components-table";
 import { Typography } from "@bfirst/material-tailwind";
 import moment from "moment";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export function FeatureTrashStoryList() {
   const TABLE_COLUMNS: TableColumnDef[] = [
@@ -21,19 +21,6 @@ export function FeatureTrashStoryList() {
       width: "50%",
     },
     {
-      key: "createdAt",
-      colKey: "created_at",
-      title: "Created At",
-      width: "20%",
-      render: (row) => {
-        return (
-          <Typography variant="small" className="font-normal leading-none opacity-70">
-            {moment(row["created_at"]).format("YYYY-MM-DD hh:mm a")}
-          </Typography>
-        );
-      },
-    },
-    {
       key: "authors",
       colKey: "authors",
       title: "Authors",
@@ -42,6 +29,19 @@ export function FeatureTrashStoryList() {
         return (
           <Typography variant="small" className="font-normal leading-none opacity-70">
             {row.authors.map((author: { name: string }) => author.name).join(", ")}
+          </Typography>
+        );
+      },
+    },
+    {
+      key: "deletedAt",
+      colKey: "deleted_at",
+      title: "Deleted At",
+      width: "20%",
+      render: (row) => {
+        return (
+          <Typography variant="small" className="font-normal leading-none opacity-70">
+            {moment(row["deleted_at"]).format("YYYY-MM-DD hh:mm a")}
           </Typography>
         );
       },
@@ -93,7 +93,6 @@ export function FeatureTrashStoryList() {
     restoreRequest(null);
   };
 
-  
   useEffect(() => {
     if (deleteSuccess || restoreSuccess) {
       refetch();
