@@ -7,7 +7,11 @@ import moment from "moment";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-export function FeatureStoryList() {
+interface FeatureStoryListProps {
+  searchInput?: string;
+}
+
+export function FeatureStoryList({ searchInput }: FeatureStoryListProps) {
   const TABLE_COLUMNS: TableColumnDef[] = [
     {
       key: "id",
@@ -20,6 +24,25 @@ export function FeatureStoryList() {
       colKey: "title",
       title: "Title",
       width: "50%",
+      render: (row) => {
+        return (
+          <div>
+            <a
+              href={`https://bangladeshfirst.com/news/${row.id}/${row.title
+                .replaceAll(" ", "-")
+                .replace(/[^\w\s-]/g, "")
+                .toLowerCase()}`}
+              className=""
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Typography variant="small" color="blue-gray" className="font-normal">
+                {row.title}
+              </Typography>
+            </a>
+          </div>
+        );
+      },
     },
     {
       key: "createdAt",
@@ -42,7 +65,7 @@ export function FeatureStoryList() {
       render: (row) => {
         return (
           <Typography variant="small" className="font-normal leading-none opacity-70">
-            {row.authors.map(author => author.name).join(", ")}
+            {row.authors.map((author) => author.name).join(", ")}
           </Typography>
         );
       },
@@ -77,6 +100,9 @@ export function FeatureStoryList() {
   const { data, refetch } = useGet(`api/v1/stories?page=${currentPage}&size=20`);
   const { request, isSuccess } = useDelete(`api/v1/stories/${deleteId}`);
 
+  // Story Search
+  const { data: searchList, isPending } = useGet(`api/v1/stories?title=${searchInput}`);
+
   const handleDelete = (id: number) => {
     setDeleteId(id);
     request();
@@ -90,10 +116,17 @@ export function FeatureStoryList() {
     return <></>;
   }
 
+  if (!searchList) {
+    return <></>;
+  }
+
+  if (isPending) {
+    return <></>;
+  }
   return (
     <Table
       columns={TABLE_COLUMNS}
-      data={data.data}
+      data={searchInput ? searchList?.data : data?.data}
       pagination={{
         currentPage,
         lastPage: data?.meta.last_page,

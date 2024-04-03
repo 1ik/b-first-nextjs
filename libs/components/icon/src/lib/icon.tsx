@@ -4,15 +4,17 @@ import { IconType } from "react-icons";
 import { BiSolidTrashAlt } from "react-icons/bi";
 import { HiHome } from "react-icons/hi";
 import { HiOutlinePencilSquare } from "react-icons/hi2";
-import { MdRestore } from "react-icons/md";
+import { IoIosSearch } from "react-icons/io";
+import { MdAdd, MdRestore } from "react-icons/md";
 
 /* eslint-disable-next-line */
 export interface IconProps {
-  name: "trash" | "pencil" | "home" | "restore";
+  name: "trash" | "pencil" | "home" | "restore" | "search" | "create";
   variant?: "filled" | "gradient" | "outlined" | "text";
+  size?: number;
 }
 
-export const Icon = React.forwardRef<HTMLButtonElement, IconProps>(({ name, variant = "outlined" }, ref) => {
+export const Icon = React.forwardRef<HTMLButtonElement, IconProps>(({ name, variant = "outlined", size }, ref) => {
   let Icon: IconType;
   switch (name) {
     case "trash":
@@ -27,11 +29,17 @@ export const Icon = React.forwardRef<HTMLButtonElement, IconProps>(({ name, vari
     case "restore":
       Icon = MdRestore;
       break;
+    case "search":
+      Icon = IoIosSearch;
+      break;
+    case "create":
+      Icon = MdAdd;
+      break;
   }
 
   return (
     <Button variant={variant} className="p-2">
-      <Icon style={{ fontSize: "15px", borderRadius: undefined }} />
+      <Icon size={size} style={{ fontSize: "15px", borderRadius: undefined }} />
     </Button>
   );
 });
