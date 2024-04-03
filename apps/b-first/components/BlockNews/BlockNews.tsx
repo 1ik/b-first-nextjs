@@ -9,7 +9,7 @@ const BlockNews = ({
   items: any[];
   title: string;
   showAd?: boolean;
-  position: string;
+  position?: string;
 }) => {
   const className = "sm:w-1/3";
   return (
