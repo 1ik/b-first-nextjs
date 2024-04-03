@@ -21,6 +21,25 @@ export function StoriesList({ searchInput }: any) {
       colKey: "title",
       title: "Title",
       width: "50%",
+      render: (row) => {
+        return (
+          <div>
+            <a
+              href={`https://bangladeshfirst.com/news/${row.id}/${row.title
+                .replaceAll(" ", "-")
+                .replace(/[^\w\s-]/g, "")
+                .toLowerCase()}`}
+              className=""
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Typography variant="small" color="blue-gray" className="font-normal">
+                {row.title}
+              </Typography>
+            </a>
+          </div>
+        );
+      },
     },
     {
       key: "createdAt",
