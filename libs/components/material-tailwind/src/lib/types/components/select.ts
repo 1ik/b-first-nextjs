@@ -81,6 +81,7 @@ export const propTypesContainerProps: any = PropTypes.instanceOf(Object);
 export const propTypesContextValue: any = PropTypes.shape({
   selectedIndex: PropTypes.number.isRequired,
   setSelectedIndex: PropTypes.func.isRequired,
+  // @ts-ignore
   activeIndex: PropTypes.oneOfType([PropTypes.number, PropTypes.instanceOf(null)]),
   setActiveIndex: PropTypes.func.isRequired,
   listRef: PropTypes.instanceOf(Object).isRequired,
