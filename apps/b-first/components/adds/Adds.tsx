@@ -19,7 +19,7 @@ function Adds() {
           </div>
 
           <div>
-            <img src="/img/ads/SIBL_Profit_300x250.gif" alt="Adds" />
+            <img src="/img/ads/sibl-march-300x250.gif" alt="Adds" />
           </div>
         </div>
       </div>
