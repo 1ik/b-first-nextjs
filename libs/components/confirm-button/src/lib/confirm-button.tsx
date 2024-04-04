@@ -1,5 +1,4 @@
-import { Icon } from "@bfirst/components-icon";
-import { Button, Input, Popover, PopoverContent, PopoverHandler, Typography } from "@bfirst/material-tailwind";
+import { Button, Popover, PopoverContent, PopoverHandler, Typography } from "@material-tailwind/react";
 import { useState } from "react";
 
 /* eslint-disable-next-line */
@@ -14,7 +13,7 @@ export function ConfirmButton({ message, onConfirm, confirmHandler, children }: 
   const [isOpen, setIsOpen] = useState<undefined | boolean>();
 
   return (
-    <Popover placement="bottom" handler={setIsOpen} open={isOpen}>
+    <Popover placement="bottom-end" handler={setIsOpen} open={isOpen}>
       <PopoverHandler>
         <button>{confirmHandler}</button>
       </PopoverHandler>
