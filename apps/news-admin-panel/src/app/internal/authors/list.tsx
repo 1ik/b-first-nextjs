@@ -21,7 +21,7 @@ export default function List() {
             </div>
 
             <div className="hidden md:block">
-              <Button size="sm">Add</Button>
+              <Button size="sm">Create Author</Button>
             </div>
           </Link>
         </div>

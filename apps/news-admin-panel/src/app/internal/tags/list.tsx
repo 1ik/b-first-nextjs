@@ -20,7 +20,7 @@ export default function List() {
               <Icon size={20} name="create" variant="gradient" />
             </div>
             <div className="hidden md:block">
-              <Button size="sm">Add</Button>
+              <Button size="sm">Create Tag</Button>
             </div>
           </Link>
         </div>
