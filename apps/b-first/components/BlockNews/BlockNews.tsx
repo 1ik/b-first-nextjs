@@ -39,23 +39,7 @@ const BlockNews = ({
 
               <SquareGrid items={items} gridClass={className} />
             </div>
-            {/* right */}
-            {showAd && (
-              <div className="flex-shrink max-w-full w-full lg:w-1/3 lg:pl-8 lg:pb-8 order-first lg:order-last">
-                <div className="w-full bg-gray-50 h-full">
-                  <div className="text-sm py-6 sticky">
-                    <div className="w-full flex md:flex-row flex-col lg:flex-col gap-6 text-center justify-center">
-                      <a href="#">
-                        <img className="mx-auto" src="/img/ads/ibbl.gif" alt="advertisement area" />
-                      </a>
-                      <a href="#">
-                        <img className="mx-auto" src="/img/ads/global-islami-bank-ad.gif" alt="advertisement area" />
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
+      
           </div>
         </div>
       </div>
