@@ -11,8 +11,14 @@ export default function List() {
   const [lastSearchTime, setLastSearchTime] = useState(0);
   const [timer, setTimer] = useState<number | undefined>(undefined);
 
+  let debounceTimer: string | number | NodeJS.Timeout | undefined;
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchInput(e.target.value);
+    clearTimeout(debounceTimer);
+
+    debounceTimer = setTimeout(() => {
+      setSearchInput(e.target.value);
+    }, 500);
   };
 
   const debounceDelay = 300;

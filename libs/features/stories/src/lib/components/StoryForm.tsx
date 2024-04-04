@@ -85,6 +85,14 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
     return data.data;
   };
 
+  let debounce: string | number | NodeJS.Timeout | undefined;
+  const debounceSearch = function (callback: () => void) {
+    clearTimeout(debounce);
+    debounce = setTimeout(() => {
+      callback();
+    }, 500);
+  };
+
   const onValidate = function (data: Inputs) {
     if (!body) setError((cur) => ({ ...cur, body: "Body is required" }));
     if (!featuredImgUrl) return setError((cur) => ({ ...cur, featuredImg: "Featured Image is required" }));
@@ -147,7 +155,7 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
               <MultiselectSearch
                 label="Authors*"
                 items={authorsData?.data}
-                onSearch={(s) => setSearch((cur) => ({ ...cur, authors: s }))}
+                onSearch={(s) => debounceSearch(() => setSearch((cur) => ({ ...cur, authors: s })))}
                 itemsSelected={(i) => {
                   setSelectedAuthors(i as never);
                   setError((cur) => ({ ...cur, authors: "" }));
@@ -186,7 +194,7 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
               <MultiselectSearch
                 label="Tags*"
                 items={tagsData?.data}
-                onSearch={(s) => setSearch((cur) => ({ ...cur, tags: s }))}
+                onSearch={(s) => debounceSearch(() => setSearch((cur) => ({ ...cur, tags: s })))}
                 itemsSelected={(i) => {
                   setSelectedTags(i as never);
                   setError((cur) => ({ ...cur, tags: "" }));
@@ -202,7 +210,7 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
               <MultiselectSearch
                 label="Categories*"
                 items={categoriesData?.data}
-                onSearch={(s) => setSearch((cur) => ({ ...cur, categories: s }))}
+                onSearch={(s) => debounceSearch(() => setSearch((cur) => ({ ...cur, categories: s })))}
                 itemsSelected={(i) => {
                   setSelectedCategories(i as never);
                   setError((cur) => ({ ...cur, categories: "" }));
