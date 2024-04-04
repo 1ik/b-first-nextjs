@@ -16,7 +16,12 @@ export default function List() {
             <Link to="/categories">Categories</Link>
           </Breadcrumbs>
           <Link to="add">
-            <Button size="sm">Add</Button>
+            <div className="block md:hidden">
+              <Icon size={20} name="create" variant="gradient" />
+            </div>
+            <div className="md:block hidden">
+             <Button size="sm">Add</Button>
+            </div>
           </Link>
         </div>
       </HCF.Header>
