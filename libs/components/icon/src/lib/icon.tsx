@@ -6,10 +6,11 @@ import { HiHome } from "react-icons/hi";
 import { HiOutlinePencilSquare } from "react-icons/hi2";
 import { IoIosSearch } from "react-icons/io";
 import { MdAdd, MdRestore } from "react-icons/md";
+import { FaUserCircle } from "react-icons/fa";
 
 /* eslint-disable-next-line */
 export interface IconProps {
-  name: "trash" | "pencil" | "home" | "restore" | "search" | "create";
+  name: "trash" | "pencil" | "home" | "restore" | "search" | "create"|"user";
   variant?: "filled" | "gradient" | "outlined" | "text";
   size?: number;
 }
@@ -34,6 +35,9 @@ export const Icon = React.forwardRef<HTMLButtonElement, IconProps>(({ name, vari
       break;
     case "create":
       Icon = MdAdd;
+      break;
+    case "user":
+      Icon = FaUserCircle;
       break;
   }
 
