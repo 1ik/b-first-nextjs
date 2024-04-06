@@ -1,8 +1,8 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Accordion, AccordionBody, AccordionHeader } from "@bfirst/material-tailwind";
-import { useContext, useEffect, useRef, useState } from "react";
-import { FaRegCircleUser } from "react-icons/fa6";
+import { useContext, useEffect, useState } from "react";
 import { IoMenuSharp } from "react-icons/io5";
+// import { FaUserCircle } from "react-icons/fa";
 import { MdChevronRight } from "react-icons/md";
 import { Link, Route, Routes, useLocation } from "react-router-dom";
 import { AppContext } from "./app.context";
@@ -11,7 +11,8 @@ import { AddLazy, EditLazy, ListLazy, TrashCategoriesListLazy } from "./internal
 import { ManageStories } from "./internal/manageStories/manageStories";
 import { AddEditStoriesLazy, StoriesListLazy, StoryPreviewLazy, TrashStoriesListLazy } from "./internal/stories";
 import { TagAddLazy, TagEditLazy, TagsListLazy, TrashTagsListLazy } from "./internal/tags";
-
+import { Menu, MenuHandler, MenuList, MenuItem, Typography } from "@bfirst/material-tailwind";
+import { Icon } from "@bfirst/components-icon";
 export const NavBar = () => {
   return (
     <div className="navbar bg-base-300">
@@ -59,7 +60,6 @@ const _subLinks = [
 
 export function AppInternal() {
   const [subMenuOpen, setSubMenuOpen] = useState(false);
-  const [showProfileModal, setShowProfileModal] = useState(false);
 
   let location = useLocation();
 
@@ -98,22 +98,6 @@ export function AppInternal() {
     setToken && setToken(undefined);
   };
 
-  const modalRef = useRef(null);
-  const btnRef = useRef(null);
-  useEffect(() => {
-    const handleClickOutside = function (e: any) {
-      if ((btnRef.current as any)?.contains(e.target)) {
-        return;
-      } else if (e.target !== modalRef.current) {
-        setShowProfileModal(false);
-      }
-    };
-    window.addEventListener("click", handleClickOutside);
-    return function () {
-      window.removeEventListener("click", handleClickOutside);
-    };
-  }, []);
-
   const handleClick = function () {
     (document.querySelector("#my-drawer") as HTMLInputElement).checked = false;
   };
@@ -128,28 +112,50 @@ export function AppInternal() {
           <div className="flex-1">
             <a className="btn">Newsroom</a>
           </div>
-          <div className="flex-none">
-            <ul className="menu menu-horizontal px-1">
+          <div>
+            <ul className="flex items-center gap-6">
               <li>
                 <a>Link</a>
               </li>
               <li>
-                <button className="flex" ref={btnRef} onClick={() => setShowProfileModal((cur) => !cur)}>
-                  <FaRegCircleUser className="text-xl" />
-                  <p>{user.name}</p>
-                </button>
-                {showProfileModal && (
-                  <ul
-                    ref={modalRef}
-                    className="absolute top-[100%] bg-white right-0 z-[999] flex flex-col hover:bg-white shadow-xl min-w-full m-0 p-0 text-center"
-                  >
-                    <li className="hover:bg-gray-200 cursor-pointer p-2">Settings</li>
-                    <li className="hover:bg-gray-200 cursor-pointer p-2">Theme</li>
-                    <li className="hover:bg-gray-200 cursor-pointer p-2" onClick={handleSignOut}>
-                      Sign out
-                    </li>
-                  </ul>
-                )}
+                <Menu placement="top-start">
+                  <MenuHandler>
+                    <button>
+                      <Icon name="user" size={24} variant="text"/>
+                    </button>
+                  </MenuHandler>
+                  <MenuList>
+                    <MenuItem className="flex items-center gap-2">
+                    <Icon name="user" size={18} variant="text"/>
+                      <Typography variant="small" className="font-medium">
+                        My Profile
+                      </Typography>
+                    </MenuItem>
+                    <MenuItem className="flex items-center gap-2">
+                    <Icon name="settings" size={18} variant="text"/>
+                      <Typography variant="small" className="font-medium">
+                        Settings
+                      </Typography>
+                    </MenuItem>
+                    <MenuItem className="flex items-center gap-2">
+                    <Icon name="theam" size={18} variant="text"/>
+
+                      <Typography variant="small" className="font-medium">
+                         Theme
+                      </Typography>
+                    </MenuItem>
+           
+                    <hr className="my-2 border-blue-gray-50" />
+                    <MenuItem onClick={handleSignOut} className="flex items-center gap-2 ">
+                       <Icon name="logout" size={18} variant="text"/>
+                      <Typography  variant="small" className="font-medium">
+                        Sign Out
+                      </Typography>
+                    </MenuItem>
+                  </MenuList>
+                </Menu>
+
+                
               </li>
               <li className="pl-2">
                 <label
