@@ -19,10 +19,11 @@ export const TinymceEditor = function ({ label, defaultValue, onChange }: Tinymc
     tinymce.init({
       target: editorRef.current,
       plugins:
-        "anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount",
+        "paste anchor charmap codesample emoticons image  lists media searchreplace table visualblocks wordcount",
       toolbar:
-        "undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat",
-      file_picker_callback: (callback, value, meta) => {
+        "paste undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat",
+      
+        file_picker_callback: (callback, value, meta) => {
         const input = document.createElement("input");
         input.setAttribute("type", "file");
         input.setAttribute("accept", "image/*");
@@ -64,6 +65,7 @@ export const TinymceEditor = function ({ label, defaultValue, onChange }: Tinymc
         { value: "First.Name", title: "First Name" },
         { value: "Email", title: "Email" },
       ],
+      paste_as_text: true
     });
   });
 
