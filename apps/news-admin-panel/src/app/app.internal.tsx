@@ -146,9 +146,9 @@ export function AppInternal() {
                     </MenuItem>
            
                     <hr className="my-2 border-blue-gray-50" />
-                    <MenuItem className="flex items-center gap-2 ">
+                    <MenuItem onClick={handleSignOut} className="flex items-center gap-2 ">
                        <Icon name="logout" size={18} variant="text"/>
-                      <Typography onClick={handleSignOut} variant="small" className="font-medium">
+                      <Typography  variant="small" className="font-medium">
                         Sign Out
                       </Typography>
                     </MenuItem>
