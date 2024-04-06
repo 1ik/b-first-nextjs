@@ -50,7 +50,7 @@ export const Table: React.FC<TableProps> = ({ columns, data, pagination }) => {
               {columns.map((column, index) => {
                 const value = row[column.colKey];
                 return (
-                  <td className={classes} style={{ width: column.width }}>
+                  <td key={index} className={classes} style={{ width: column.width }}>
                     {column.render ? (
                       column.render(row)
                     ) : (
@@ -66,11 +66,13 @@ export const Table: React.FC<TableProps> = ({ columns, data, pagination }) => {
         })}
       </tbody>
       <tfoot className="border-b border-blue-gray-100">
-        <div className="p-3 flex items-center justify-between border-t border-blue-gray-50">
-          <Typography variant="small" color="blue-gray" className="font-normal">
-            Page {pagination?.currentPage} of {pagination?.lastPage}
-          </Typography>
-          <div className="flex gap-2">
+        <tr className="p-3 flex items-center justify-between border-t border-blue-gray-50">
+          <td>
+            <Typography variant="small" color="blue-gray" className="font-normal">
+              Page {pagination?.currentPage} of {pagination?.lastPage}
+            </Typography>
+          </td>
+          <td className="flex gap-2">
             <Button
               variant="outlined"
               size="sm"
@@ -91,8 +93,8 @@ export const Table: React.FC<TableProps> = ({ columns, data, pagination }) => {
             >
               Next
             </Button>
-          </div>
-        </div>
+          </td>
+        </tr>
       </tfoot>
     </table>
   );
