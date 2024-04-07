@@ -29,7 +29,7 @@ export const ApiClient: React.FC<Props> = ({ children, ...props }) => {
 export function useGet(uri: string, options?: any) {
   const { baseUrl, token } = useContext(ApiClientContext);
 
-  const { isError, isSuccess, isPending, data, error } = useQuery({
+  const { isError, isSuccess, isPending, data, error, refetch } = useQuery({
     queryKey: [uri],
     queryFn: () =>
       axios.get(`${baseUrl}/${uri}`, {
@@ -40,7 +40,7 @@ export function useGet(uri: string, options?: any) {
       }),
   });
 
-  return { isError, isSuccess, isPending, data: data?.data, error };
+  return { isError, isSuccess, isPending, data: data?.data, error, refetch };
 }
 
 /**
@@ -51,6 +51,7 @@ export function usePost(uri: string) {
 
   const {
     mutate: request,
+    mutateAsync: requestAsync,
     isError,
     isSuccess,
     isPending,
@@ -67,7 +68,7 @@ export function usePost(uri: string) {
     },
   });
 
-  return { request, isError, isSuccess, isPending, data, error };
+  return { request, requestAsync, isError, isSuccess, isPending, data, error };
 }
 
 /**

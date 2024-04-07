@@ -4,7 +4,7 @@ import { Icon } from "@bfirst/components-icon";
 import { Table, TableColumnDef } from "@bfirst/components-table";
 import { Typography } from "@bfirst/material-tailwind";
 import moment from "moment";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 /**
@@ -67,7 +67,7 @@ export function FeatureTagList() {
               Delete
             </ConfirmButton>
             <Link to={`${row.id}`}>
-              <Icon name="pencil"/>
+              <Icon name="pencil" />
             </Link>
           </div>
         );
@@ -77,13 +77,17 @@ export function FeatureTagList() {
 
   const [deleteId, setDeleteId] = useState<null | number>(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const { data } = useGet(`api/v1/tags?page=${currentPage}&size=20`);
-  const { request } = useDelete(`api/v1/tags/${deleteId}`);
+  const { data, refetch } = useGet(`api/v1/tags?page=${currentPage}&size=20`);
+  const { request, isSuccess } = useDelete(`api/v1/tags/${deleteId}`);
 
   const handleDelete = function (id: number) {
     setDeleteId(id);
     request();
   };
+
+  useEffect(() => {
+    if (isSuccess) refetch();
+  }, [isSuccess, refetch]);
 
   if (!data) {
     return <></>;
