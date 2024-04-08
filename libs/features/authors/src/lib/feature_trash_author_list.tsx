@@ -5,7 +5,7 @@ import { Table, TableColumnDef } from "@bfirst/components-table";
 import { Typography } from "@bfirst/material-tailwind";
 import moment from "moment";
 import { useEffect, useState } from "react";
-
+import { Spinner } from "@bfirst/material-tailwind";
 export function FeatureTrashAuthorList() {
   const TABLE_COLUMNS: TableColumnDef[] = [
     {
@@ -79,7 +79,7 @@ export function FeatureTrashAuthorList() {
   const [deleteId, setDeleteId] = useState<number | null>(null);
   const [restoreId, setRestoreId] = useState<number | null>(null);
 
-  const { data, refetch } = useGet(`api/v1/trash-items/author`);
+  const { data, refetch, isPending } = useGet(`api/v1/trash-items/author`);
   const { request: deleteRequest, isSuccess: deleteSuccess } = useDelete(`api/v1/delete-trash-item/author/${deleteId}`);
   const { request: restoreRequest, isSuccess: restoreSuccess } = usePut(
     `api/v1/restore-trash-item/author/${restoreId}`
@@ -101,8 +101,12 @@ export function FeatureTrashAuthorList() {
     }
   }, [deleteSuccess, restoreSuccess]);
 
-  if (!data) {
-    return <></>;
+  if (isPending) {
+    return (
+      <div className="flex h-screen justify-center items-center">
+        <Spinner className="h-10 w-10 text-gray-900/50" />
+      </div>
+    );
   }
 
   return (

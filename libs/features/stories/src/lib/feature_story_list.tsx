@@ -121,10 +121,11 @@ export function FeatureStoryList({ searchInput }: FeatureStoryListProps) {
   if (isPending) {
     return <></>;
   }
+  
   if (isLoading) {
     return (
       <div className="flex h-screen justify-center items-center">
-        <Spinner />
+        <Spinner className="h-10 w-10 text-gray-900/50"/>
       </div>
     );
   }
