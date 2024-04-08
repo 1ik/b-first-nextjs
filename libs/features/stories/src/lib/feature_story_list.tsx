@@ -113,7 +113,6 @@ export function FeatureStoryList({ searchInput }: FeatureStoryListProps) {
     if (isSuccess) refetch();
   }, [isSuccess, refetch]);
 
-
   if (!searchList) {
     return <></>;
   }
@@ -121,11 +120,11 @@ export function FeatureStoryList({ searchInput }: FeatureStoryListProps) {
   if (isPending) {
     return <></>;
   }
-  
+
   if (isLoading) {
     return (
-      <div className="flex h-screen justify-center items-center">
-        <Spinner className="h-10 w-10 text-gray-900/50"/>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+        <Spinner className="h-10 w-10 text-gray-900/50" />
       </div>
     );
   }
