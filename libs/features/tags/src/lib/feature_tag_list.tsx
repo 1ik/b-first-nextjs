@@ -6,7 +6,7 @@ import { Typography } from "@bfirst/material-tailwind";
 import moment from "moment";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
+import { Spinner } from "@bfirst/material-tailwind";
 /**
  * Feature component that displays list of tags.
  */
@@ -77,7 +77,7 @@ export function FeatureTagList() {
 
   const [deleteId, setDeleteId] = useState<null | number>(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const { data, refetch } = useGet(`api/v1/tags?page=${currentPage}&size=20`);
+  const { data, refetch, isPending } = useGet(`api/v1/tags?page=${currentPage}&size=20`);
   const { request, isSuccess } = useDelete(`api/v1/tags/${deleteId}`);
 
   const handleDelete = function (id: number) {
@@ -89,8 +89,12 @@ export function FeatureTagList() {
     if (isSuccess) refetch();
   }, [isSuccess, refetch]);
 
-  if (!data) {
-    return <></>;
+  if (isPending) {
+    return (
+      <div className="flex h-screen justify-center items-center">
+        <Spinner />
+      </div>
+    );
   }
 
   return (

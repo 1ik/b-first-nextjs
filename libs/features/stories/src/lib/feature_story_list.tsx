@@ -6,6 +6,7 @@ import { Typography } from "@bfirst/material-tailwind";
 import moment from "moment";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Spinner } from "@bfirst/material-tailwind";
 
 interface FeatureStoryListProps {
   searchInput?: string;
@@ -97,7 +98,7 @@ export function FeatureStoryList({ searchInput }: FeatureStoryListProps) {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [deleteId, setDeleteId] = useState<number | null>(null);
-  const { data, refetch } = useGet(`api/v1/stories?page=${currentPage}&size=20`);
+  const { data, refetch, isPending: isLoading } = useGet(`api/v1/stories?page=${currentPage}&size=20`);
   const { request, isSuccess } = useDelete(`api/v1/stories/${deleteId}`);
 
   // Story Search
@@ -112,9 +113,6 @@ export function FeatureStoryList({ searchInput }: FeatureStoryListProps) {
     if (isSuccess) refetch();
   }, [isSuccess, refetch]);
 
-  if (!data) {
-    return <></>;
-  }
 
   if (!searchList) {
     return <></>;
@@ -122,6 +120,13 @@ export function FeatureStoryList({ searchInput }: FeatureStoryListProps) {
 
   if (isPending) {
     return <></>;
+  }
+  if (isLoading) {
+    return (
+      <div className="flex h-screen justify-center items-center">
+        <Spinner />
+      </div>
+    );
   }
   return (
     <Table

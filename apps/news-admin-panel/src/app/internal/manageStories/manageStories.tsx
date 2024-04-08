@@ -5,6 +5,7 @@ import { token } from "../../token_utils";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { dateFormatter } from "../../dateFormat_utils";
+import { Spinner } from "@bfirst/material-tailwind";
 
 const dropTarget = (
   <div className="py-3 text-center text-blue-600/50 font-bold border-2 border-dashed border-blue-600/50 rounded-md">
@@ -20,6 +21,7 @@ export function ManageStories() {
   const [lastSearchTime, setLastSearchTime] = useState(0);
   const [timer, setTimer] = useState<number | undefined>(undefined);
   const [showConfirmModalFor, setShowConfirmModalFor] = useState<number>();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const debounceDelay = 300;
 
@@ -76,6 +78,7 @@ export function ManageStories() {
         if (!response.ok) throw new Error("Could not fetch data");
         const data = await response.json();
         setSearchedNews(data.data);
+        setIsLoading(false);
       } catch (error) {
         console.log(error);
       }
@@ -173,6 +176,13 @@ export function ManageStories() {
     if (showConfirmModalFor && clickedElement.id !== "selectTags_input") setShowConfirmModalFor(undefined);
   };
 
+  if (isLoading) {
+    return (
+      <div className="flex h-screen justify-center items-center">
+        <Spinner />
+      </div>
+    );
+  }
   return (
     <div className="overflow-x-auto flex flex-col h-full" onClick={handleOutsideClick}>
       <div className="inline-flex h-10 justify-between items-center px-4 py-2 w-full border-b fixed bg-white z-10">
@@ -255,7 +265,9 @@ export function ManageStories() {
                           <div className="flex  justify-between items-center py-3 rounded-md cursor-grab px-2 bg-gray-200  relative   max-[340px]:w-[260px] max-[360px]:w-[290px] max-[430px]:w-[330px] max-[530px]:w-[350px]   sm:w-full">
                             <div className="px-5">
                               <h3 className="">{(item as { title: string }).title}</h3>
-                              <p className="md:hidden  mt-4">{dateFormatter((item as { created_at: string }).created_at)}</p>
+                              <p className="md:hidden  mt-4">
+                                {dateFormatter((item as { created_at: string }).created_at)}
+                              </p>
                             </div>
                             <div className="flex gap-x-4 items-center">
                               <p className="hidden md:block">
