@@ -11,28 +11,51 @@ import { Link } from "react-router-dom";
  * Feature component that displays list of tags.
  */
 export function FeatureTagList() {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const isMobile = windowWidth < 765;
   const TABLE_COLUMNS: TableColumnDef[] = [
     {
       key: "id",
       colKey: "id",
       title: "ID",
-      width: "10%",
+      width: isMobile ? "0%" : "10%",
+      className: "hidden sm:block",
+      render: (row) => {
+        return (
+          <Typography variant="small" color="blue-gray" className="font-normal hidden sm:block">
+            {row.id}
+          </Typography>
+        );
+      },
     },
     {
       key: "name",
       colKey: "name",
       title: "Tag",
-      width: "20%",
+      width: "30%",
     },
     {
       key: "createdAt",
       colKey: "created_at",
       title: "Created At",
-      width: "20%",
+      width: "25%",
       render: (row) => {
         return (
           <Typography variant="small" className="font-normal leading-none opacity-70">
-            {moment(row["created_at"]).format("YYYY-MM-DD hh:mm a")}
+            {moment(row["created_at"]).format(`YYYY-MM-DD ${isMobile ? "" : "hh:mm a"}`)}
           </Typography>
         );
       },
@@ -41,7 +64,7 @@ export function FeatureTagList() {
       key: "updatedAt",
       colKey: "updated_at",
       title: "Updated At",
-      width: "20%",
+      width: "25%",
       render: (row) => {
         return (
           <Typography variant="small" className="font-normal leading-none opacity-70">

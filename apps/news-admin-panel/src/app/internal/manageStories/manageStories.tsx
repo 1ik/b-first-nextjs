@@ -246,7 +246,7 @@ export function ManageStories() {
                   draggedItemClassName="dragged"
                 >
                   {featuredStories.map((item, index) => (
-                    <div className="flex items-center">
+                    <div key={index} className="flex items-center">
                       <div className="px-2 w-[40px]">
                         <p>{index + 1}</p>
                       </div>

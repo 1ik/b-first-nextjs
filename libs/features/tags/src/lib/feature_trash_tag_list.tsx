@@ -24,10 +24,10 @@ export function FeatureTrashTagList() {
       key: "createdAt",
       colKey: "created_at",
       title: "Created At",
-      width: "20%",
+      width: "28%",
       render: (row) => {
         return (
-          <Typography variant="small" className="font-normal leading-none opacity-70">
+          <Typography variant="small" className="font-normal leading-none opacity-70md:pt-0 pt-4">
             {moment(row["created_at"]).format("YYYY-MM-DD hh:mm a")}
           </Typography>
         );
@@ -37,10 +37,10 @@ export function FeatureTrashTagList() {
       key: "deletedAt",
       colKey: "deleted_at",
       title: "Deleted At",
-      width: "20%",
+      width: "28%",
       render: (row) => {
         return (
-          <Typography variant="small" className="font-normal leading-none opacity-70">
+          <Typography variant="small" className="font-normal leading-none opacity-70 md:pt-0 pt-4">
             {moment(row["deleted_at"]).format("YYYY-MM-DD hh:mm a")}
           </Typography>
         );
@@ -50,11 +50,11 @@ export function FeatureTrashTagList() {
       key: "action",
       colKey: "id",
       title: "Action",
-      width: "20%",
+      width: "30%",
       className: "text-right",
       render: (row) => {
         return (
-          <div className="flex items-end gap-4 justify-end w-full">
+          <div className="flex items-end gap-2 md:gap-4 justify-end w-full">
             <ConfirmButton
               onConfirm={() => handleDelete(row.id)}
               message="Do you want to permanently remove the tag ?"

@@ -10,10 +10,12 @@ import { FaUserCircle } from "react-icons/fa";
 import { IoSettingsSharp } from "react-icons/io5";
 import { IoLogOutSharp } from "react-icons/io5";
 import { IoIosColorPalette } from "react-icons/io";
+import { RiArrowLeftSLine } from "react-icons/ri";
+import { RiArrowRightSLine  } from "react-icons/ri";
 
 /* eslint-disable-next-line */
 export interface IconProps {
-  name: "trash" | "pencil" | "home" | "restore" | "search" | "create"|"user"|"settings"| "logout"|"theam";
+  name: "trash" | "pencil" | "home" | "restore" | "search" | "create"|"user"|"settings"| "logout"|"theam"| "leftArrow" | "rightArrow"
   variant?: "filled" | "gradient" | "outlined" | "text";
   size?: number;
 }
@@ -50,6 +52,12 @@ export const Icon = React.forwardRef<HTMLButtonElement, IconProps>(({ name, vari
       break;
     case "theam":
       Icon = IoIosColorPalette;
+      break;
+    case "leftArrow":
+      Icon = RiArrowLeftSLine;
+      break;
+    case "rightArrow":
+      Icon = RiArrowRightSLine ;
       break;
   }
 

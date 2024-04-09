@@ -7,18 +7,54 @@ import moment from "moment";
 import { useEffect, useState } from "react";
 
 export function FeatureTrashStoryList() {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const isMobile = windowWidth < 765;
+
   const TABLE_COLUMNS: TableColumnDef[] = [
     {
       key: "id",
       colKey: "id",
       title: "ID",
-      width: "10%",
+      width: isMobile ? "0%" : "10%",
+      className: "hidden sm:block",
+      render: (row) => {
+        return (
+          <Typography variant="small" color="blue-gray" className="font-normal hidden sm:block">
+            {row.id}
+          </Typography>
+        );
+      },
     },
     {
       key: "title",
       colKey: "title",
       title: "Title",
       width: "50%",
+      render: (row) => {
+        return (
+          <div>
+            <Typography variant="small" color="blue-gray" className="font-normal hidden md:block text-sm">
+              {row.title}
+            </Typography>
+            <Typography variant="small" color="blue-gray" className="font-normal block md:hidden text-sm">
+              {`${row.title.slice(0, 20)}...`}
+            </Typography>
+          </div>
+        );
+      },
     },
     {
       key: "authors",
@@ -37,10 +73,10 @@ export function FeatureTrashStoryList() {
       key: "deletedAt",
       colKey: "deleted_at",
       title: "Deleted At",
-      width: "20%",
+      width: "35%",
       render: (row) => {
         return (
-          <Typography variant="small" className="font-normal leading-none opacity-70">
+          <Typography variant="small" className="font-normal leading-none opacity-70 md:pt-0 pt-4">
             {moment(row["deleted_at"]).format("YYYY-MM-DD hh:mm a")}
           </Typography>
         );
@@ -54,7 +90,7 @@ export function FeatureTrashStoryList() {
       className: "text-right",
       render: (row) => {
         return (
-          <div className="flex items-end gap-4 justify-end w-full">
+          <div className="flex items-end gap-2 md:gap-4 justify-end w-full">
             <ConfirmButton
               onConfirm={() => handleDelete(row.id)}
               message="Do you want to permanently remove the story ?"

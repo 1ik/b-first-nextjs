@@ -7,12 +7,36 @@ import moment from "moment";
 import { useEffect, useState } from "react";
 
 export function FeatureTrashAuthorList() {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const isMobile = windowWidth < 765;
+
   const TABLE_COLUMNS: TableColumnDef[] = [
     {
       key: "id",
       colKey: "id",
       title: "ID",
-      width: "10%",
+      width: isMobile ? "0%" : "10%",
+      className: "hidden sm:block",
+      render: (row) => {
+        return (
+          <Typography variant="small" color="blue-gray" className="font-normal hidden sm:block">
+            {row.id}
+          </Typography>
+        );
+      },
     },
     {
       key: "name",
@@ -27,7 +51,7 @@ export function FeatureTrashAuthorList() {
       width: "20%",
       render: (row) => {
         return (
-          <Typography variant="small" className="font-normal leading-none opacity-70">
+          <Typography variant="small" className="font-normal leading-none opacity-70 md:pt-0 pt-4">
             {moment(row["created_at"]).format("YYYY-MM-DD hh:mm a")}
           </Typography>
         );
@@ -40,7 +64,7 @@ export function FeatureTrashAuthorList() {
       width: "20%",
       render: (row) => {
         return (
-          <Typography variant="small" className="font-normal leading-none opacity-70">
+          <Typography variant="small" className="font-normal leading-none opacity-70 md:pt-0 pt-4">
             {moment(row["deleted_at"]).format("YYYY-MM-DD hh:mm a")}
           </Typography>
         );
@@ -50,11 +74,11 @@ export function FeatureTrashAuthorList() {
       key: "action",
       colKey: "id",
       title: "Action",
-      width: "20%",
+      width: "30%",
       className: "text-right",
       render: (row) => {
         return (
-          <div className="flex items-end gap-4 justify-end w-full">
+          <div className="flex items-end gap-2 md:gap-4 justify-end w-full">
             <ConfirmButton
               onConfirm={() => handleDelete(row.id)}
               message="Do you want to permanently remove the author ?"

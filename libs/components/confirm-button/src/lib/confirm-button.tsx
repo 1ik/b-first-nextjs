@@ -21,7 +21,7 @@ export function ConfirmButton({ message, onConfirm, confirmHandler, children }: 
         <Typography variant="h6" color="blue-gray" className="mb-6">
           {message}
         </Typography>
-        <div className="flex gap-x-8">
+        <div className="flex md:gap-x-8">
           <Button onClick={() => setIsOpen(false)} variant="outlined" className="flex-shrink-0">
             Cancel
           </Button>

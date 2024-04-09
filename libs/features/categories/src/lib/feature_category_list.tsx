@@ -11,28 +11,51 @@ import { Link } from "react-router-dom";
  * Feature component that displays list of categories.
  */
 export function FeatureCategoryList() {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const isMobile = windowWidth < 765;
   const TABLE_COLUMNS: TableColumnDef[] = [
     {
       key: "id",
       colKey: "id",
       title: "ID",
-      width: "10%",
+      width: isMobile ? "0%" : "10%",
+      className: "hidden sm:block",
+      render: (row) => {
+        return (
+          <Typography variant="small" color="blue-gray" className="font-normal hidden sm:block">
+            {row.id}
+          </Typography>
+        );
+      },
     },
     {
       key: "name",
       colKey: "name",
       title: "Category",
-      width: "20%",
+      width: "40%",
     },
     {
       key: "createdAt",
       colKey: "created_at",
       title: "Created At",
-      width: "20%",
+      width: "30%",
       render: (row) => {
         return (
           <Typography variant="small" className="font-normal leading-none opacity-70">
-            {moment(row["created_at"]).format("YYYY-MM-DD hh:mm a")}
+            {moment(row["created_at"]).format(`YYYY-MM-DD ${isMobile ? "" : "hh:mm a"}`)}
           </Typography>
         );
       },
@@ -41,7 +64,7 @@ export function FeatureCategoryList() {
       key: "updatedAt",
       colKey: "updated_at",
       title: "Updated At",
-      width: "20%",
+      width: "30%",
       render: (row) => {
         return (
           <Typography variant="small" className="font-normal leading-none opacity-70">
@@ -54,11 +77,11 @@ export function FeatureCategoryList() {
       key: "action",
       colKey: "id",
       title: "Action",
-      width: "30%",
+      width: "40%",
       className: "text-right",
       render: (row) => {
         return (
-          <div className="flex items-end gap-4 justify-end w-full">
+          <div className="flex items-end  md:gap-4 gap-2 justify-end w-full">
             <ConfirmButton
               onConfirm={() => handleDelete(row.id)}
               message="Do you want to remove the category ?"

@@ -12,18 +12,42 @@ interface FeatureStoryListProps {
 }
 
 export function FeatureStoryList({ searchInput }: FeatureStoryListProps) {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const isMobile = windowWidth < 765;
+
   const TABLE_COLUMNS: TableColumnDef[] = [
     {
       key: "id",
       colKey: "id",
       title: "ID",
-      width: "10%",
+      width: isMobile ? "0%" : "10%",
+      className: "hidden sm:block",
+      render: (row) => {
+        return (
+          <Typography variant="small" color="blue-gray" className="font-normal hidden sm:block">
+            {row.id}
+          </Typography>
+        );
+      },
     },
     {
       key: "title",
       colKey: "title",
       title: "Title",
-      width: "50%",
+      width: "30%",
       render: (row) => {
         return (
           <div>
@@ -36,8 +60,11 @@ export function FeatureStoryList({ searchInput }: FeatureStoryListProps) {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Typography variant="small" color="blue-gray" className="font-normal">
+              <Typography variant="small" color="blue-gray" className="font-normal hidden md:block text-sm">
                 {row.title}
+              </Typography>
+              <Typography variant="small" color="blue-gray" className="font-normal block md:hidden text-sm">
+                {`${row.title.slice(0,20)}...`}
               </Typography>
             </a>
           </div>
@@ -48,7 +75,7 @@ export function FeatureStoryList({ searchInput }: FeatureStoryListProps) {
       key: "createdAt",
       colKey: "created_at",
       title: "Created At",
-      width: "20%",
+      width: "25%",
       render: (row) => {
         return (
           <Typography variant="small" className="font-normal leading-none opacity-70">
@@ -64,7 +91,7 @@ export function FeatureStoryList({ searchInput }: FeatureStoryListProps) {
       width: "30%",
       render: (row) => {
         return (
-          <Typography variant="small" className="font-normal leading-none opacity-70">
+          <Typography variant="small" className="font-normal text-sm leading-none opacity-70">
             {row.authors.map((author) => author.name).join(", ")}
           </Typography>
         );
@@ -78,7 +105,7 @@ export function FeatureStoryList({ searchInput }: FeatureStoryListProps) {
       className: "text-right",
       render: (row) => {
         return (
-          <div className="flex items-end gap-4 justify-end w-full">
+          <div className="flex items-end  md:gap-4 gap-2 justify-end w-full">
             <ConfirmButton
               onConfirm={() => handleDelete(row.id)}
               message="Do you want to remove the stories ?"
