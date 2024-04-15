@@ -11,28 +11,13 @@ import { Link } from "react-router-dom";
  * Feature component that displays list of authors.
  */
 export function FeatureAuthorList() {
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
-  const isMobile = windowWidth < 765;
-
+ 
   const TABLE_COLUMNS: TableColumnDef[] = [
     {
       key: "id",
       colKey: "id",
       title: "ID",
-      width: isMobile ? "0%" : "10%",
+      width: "10%",
       className: "hidden sm:block",
       render: (row) => {
         return (
@@ -69,7 +54,7 @@ export function FeatureAuthorList() {
       render: (row) => {
         return (
           <Typography variant="small" className="font-normal leading-none opacity-70">
-            {moment(row["updated_at"]).format(`YYYY-MM-DD ${isMobile ? "" : "hh:mm a"}`)}
+            {moment(row["updated_at"]).format(`YYYY-MM-DD hh:mm a`)}
           </Typography>
         );
       },

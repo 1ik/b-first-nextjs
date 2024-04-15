@@ -6,48 +6,25 @@ import { Typography } from "@bfirst/material-tailwind";
 import moment from "moment";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Spinner } from "@bfirst/material-tailwind";
 
 interface FeatureStoryListProps {
   searchInput?: string;
 }
 
 export function FeatureStoryList({ searchInput }: FeatureStoryListProps) {
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
-  const isMobile = windowWidth < 765;
-
   const TABLE_COLUMNS: TableColumnDef[] = [
     {
       key: "id",
       colKey: "id",
       title: "ID",
-      width: isMobile ? "0%" : "10%",
-      className: "hidden sm:block",
-      render: (row) => {
-        return (
-          <Typography variant="small" color="blue-gray" className="font-normal hidden sm:block">
-            {row.id}
-          </Typography>
-        );
-      },
+      width: "10%",
     },
     {
       key: "title",
       colKey: "title",
       title: "Title",
-      width: "30%",
+      width: "50%",
       render: (row) => {
         return (
           <div>
@@ -60,11 +37,8 @@ export function FeatureStoryList({ searchInput }: FeatureStoryListProps) {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Typography variant="small" color="blue-gray" className="font-normal hidden md:block text-sm">
+              <Typography variant="small" color="blue-gray" className="font-normal">
                 {row.title}
-              </Typography>
-              <Typography variant="small" color="blue-gray" className="font-normal block md:hidden text-sm">
-                {`${row.title.slice(0,20)}...`}
               </Typography>
             </a>
           </div>
@@ -75,7 +49,7 @@ export function FeatureStoryList({ searchInput }: FeatureStoryListProps) {
       key: "createdAt",
       colKey: "created_at",
       title: "Created At",
-      width: "25%",
+      width: "20%",
       render: (row) => {
         return (
           <Typography variant="small" className="font-normal leading-none opacity-70">
@@ -91,7 +65,7 @@ export function FeatureStoryList({ searchInput }: FeatureStoryListProps) {
       width: "30%",
       render: (row) => {
         return (
-          <Typography variant="small" className="font-normal text-sm leading-none opacity-70">
+          <Typography variant="small" className="font-normal leading-none opacity-70">
             {row.authors.map((author) => author.name).join(", ")}
           </Typography>
         );
@@ -105,7 +79,7 @@ export function FeatureStoryList({ searchInput }: FeatureStoryListProps) {
       className: "text-right",
       render: (row) => {
         return (
-          <div className="flex items-end  md:gap-4 gap-2 justify-end w-full">
+          <div className="flex items-end gap-4 justify-end w-full">
             <ConfirmButton
               onConfirm={() => handleDelete(row.id)}
               message="Do you want to remove the stories ?"
@@ -124,7 +98,7 @@ export function FeatureStoryList({ searchInput }: FeatureStoryListProps) {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [deleteId, setDeleteId] = useState<number | null>(null);
-  const { data, refetch } = useGet(`api/v1/stories?page=${currentPage}&size=20`);
+  const { data, refetch, isPending: isLoading } = useGet(`api/v1/stories?page=${currentPage}&size=20`);
   const { request, isSuccess } = useDelete(`api/v1/stories/${deleteId}`);
 
   // Story Search
@@ -139,16 +113,20 @@ export function FeatureStoryList({ searchInput }: FeatureStoryListProps) {
     if (isSuccess) refetch();
   }, [isSuccess, refetch]);
 
-  if (!data) {
-    return <></>;
-  }
-
   if (!searchList) {
     return <></>;
   }
 
   if (isPending) {
     return <></>;
+  }
+
+  if (isLoading) {
+    return (
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+        <Spinner className="h-10 w-10 text-gray-900/50" />
+      </div>
+    );
   }
   return (
     <Table

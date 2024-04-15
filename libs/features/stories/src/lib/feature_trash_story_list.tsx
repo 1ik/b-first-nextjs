@@ -7,28 +7,14 @@ import moment from "moment";
 import { useEffect, useState } from "react";
 
 export function FeatureTrashStoryList() {
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
-  const isMobile = windowWidth < 765;
 
   const TABLE_COLUMNS: TableColumnDef[] = [
     {
       key: "id",
       colKey: "id",
       title: "ID",
-      width: isMobile ? "0%" : "10%",
+      width: "10%",
       className: "hidden sm:block",
       render: (row) => {
         return (
