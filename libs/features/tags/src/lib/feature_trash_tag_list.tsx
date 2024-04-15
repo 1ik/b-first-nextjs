@@ -27,7 +27,7 @@ export function FeatureTrashTagList() {
       width: "28%",
       render: (row) => {
         return (
-          <Typography variant="small" className="font-normal leading-none opacity-70md:pt-0 pt-4">
+          <Typography variant="small" className="font-normal leading-none opacity-70 md:pt-0 pt-4">
             {moment(row["created_at"]).format("YYYY-MM-DD hh:mm a")}
           </Typography>
         );

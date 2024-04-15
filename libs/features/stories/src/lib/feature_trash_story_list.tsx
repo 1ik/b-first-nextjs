@@ -23,6 +23,13 @@ export function FeatureTrashStoryList() {
           </Typography>
         );
       },
+      render: (row) => {
+        return (
+          <Typography variant="small" color="blue-gray" className="font-normal hidden sm:block">
+            {row.id}
+          </Typography>
+        );
+      },
     },
     {
       key: "title",
