@@ -11,7 +11,6 @@ import { Link } from "react-router-dom";
  * Feature component that displays list of tags.
  */
 export function FeatureTagList() {
-
   const TABLE_COLUMNS: TableColumnDef[] = [
     {
       key: "id",
