@@ -79,7 +79,7 @@ export function FeatureTrashCategoryList() {
   const [deleteId, setDeleteId] = useState<number | null>(null);
   const [restoreId, setRestoreId] = useState<number | null>(null);
 
-  const { data, refetch } = useGet(`api/v1/trash-items/category`);
+  const { data, refetch } = useGet(`api/v1/trash-items/category?page=${currentPage}&size=20`);
   const { request: deleteRequest, isSuccess: deleteSuccess } = useDelete(
     `api/v1/delete-trash-item/category/${deleteId}`
   );
