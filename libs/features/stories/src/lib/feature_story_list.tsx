@@ -6,7 +6,7 @@ import { Typography } from "@bfirst/material-tailwind";
 import moment from "moment";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Spinner } from "@bfirst/material-tailwind";
+import { Loader } from "@bfirst/components-loader";
 
 interface FeatureStoryListProps {
   searchInput?: string;
@@ -122,11 +122,7 @@ export function FeatureStoryList({ searchInput }: FeatureStoryListProps) {
   }
 
   if (isLoading) {
-    return (
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-        <Spinner className="h-10 w-10 text-gray-900/50" />
-      </div>
-    );
+    return <Loader />;
   }
   return (
     <Table

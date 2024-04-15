@@ -1,12 +1,12 @@
 import { useDelete, useGet } from "@bfirst/api-client";
 import { ConfirmButton } from "@bfirst/components-confirm-button";
 import { Icon } from "@bfirst/components-icon";
+import { Loader } from "@bfirst/components-loader";
 import { Table, TableColumnDef } from "@bfirst/components-table";
 import { Typography } from "@bfirst/material-tailwind";
 import moment from "moment";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Spinner } from "@bfirst/material-tailwind";
 
 /**
  * Feature component that displays list of categories.
@@ -91,11 +91,7 @@ export function FeatureCategoryList() {
   }, [isSuccess, refetch]);
 
   if (isPending) {
-    return (
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-        <Spinner className="h-10 w-10 text-gray-900/50"/>
-      </div>
-    );
+    return <Loader />;
   }
 
   return (

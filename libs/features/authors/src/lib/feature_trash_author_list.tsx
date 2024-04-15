@@ -5,7 +5,7 @@ import { Table, TableColumnDef } from "@bfirst/components-table";
 import { Typography } from "@bfirst/material-tailwind";
 import moment from "moment";
 import { useEffect, useState } from "react";
-import { Spinner } from "@bfirst/material-tailwind";
+import { Loader } from "@bfirst/components-loader";
 export function FeatureTrashAuthorList() {
   const TABLE_COLUMNS: TableColumnDef[] = [
     {
@@ -102,11 +102,7 @@ export function FeatureTrashAuthorList() {
   }, [deleteSuccess, restoreSuccess]);
 
   if (isPending) {
-    return (
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-        <Spinner className="h-10 w-10 text-gray-900/50" />
-      </div>
-    );
+    return <Loader />;
   }
 
   return (
