@@ -79,7 +79,7 @@ export function FeatureTrashStoryList() {
   const [deleteId, setDeleteId] = useState<number | null>(null);
   const [restoreId, setRestoreId] = useState<number | null>(null);
 
-  const { data, refetch } = useGet(`api/v1/trash-items/story`);
+  const { data, refetch } = useGet(`api/v1/trash-items/story?page=${currentPage}&size=20`);
   const { request: deleteRequest, isSuccess: deleteSuccess } = useDelete(`api/v1/delete-trash-item/story/${deleteId}`);
   const { request: restoreRequest, isSuccess: restoreSuccess } = usePut(`api/v1/restore-trash-item/story/${restoreId}`);
 
