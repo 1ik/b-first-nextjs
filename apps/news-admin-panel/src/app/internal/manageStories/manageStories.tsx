@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import SortableList, { SortableItem } from "react-easy-sort";
-import { Breadcrumb } from "../../components";
-import { token } from "../../token_utils";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { AppContext } from "../../app.context";
+import { Breadcrumb } from "../../components";
 import { dateFormatter } from "../../dateFormat_utils";
 
 const dropTarget = (
@@ -13,6 +13,7 @@ const dropTarget = (
 );
 
 export function ManageStories() {
+  const { token } = useContext(AppContext);
   const [categoryOption, setCategoryOption] = useState("0");
   const [featuredStories, setFeaturedStories] = useState([]);
   const [search, setSearch] = useState("");
@@ -47,7 +48,7 @@ export function ManageStories() {
       const response = await fetch(
         `https://backend.bangladeshfirst.com/api/v1/public/categories/${categoryOption}/featured-stories`,
         {
-          headers: { Authorization: token },
+          headers: { Authorization: `Bearer ${token}` },
         }
       );
 
@@ -69,7 +70,7 @@ export function ManageStories() {
     const fetchData = async function () {
       try {
         const response = await fetch(`https://backend.bangladeshfirst.com/api/v1/stories-search?title=${search}`, {
-          headers: { Authorization: token },
+          headers: { Authorization: `Bearer ${token}` },
           signal: controller.signal,
         });
 
@@ -120,7 +121,7 @@ export function ManageStories() {
       const response = await fetch(`https://backend.bangladeshfirst.com/api/v1/featured/stories/create`, {
         method: "POST",
         headers: {
-          Authorization: token,
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(newFeaturedIds),
