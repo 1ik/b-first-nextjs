@@ -5,7 +5,7 @@ export interface LoaderProps {}
 
 export function Loader(props: LoaderProps) {
   return (
-    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+    <div className="flex justify-center items-center h-full">
       <Spinner className="h-10 w-10 text-gray-900/50" />
     </div>
   );
