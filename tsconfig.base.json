@@ -36,6 +36,7 @@
       "@bfirst/components-table": ["libs/components/table/src/index.ts"],
       "@bfirst/components-tags": ["libs/features/tags/src/index.ts"],
       "@bfirst/components-tinymce-editor": ["libs/components/tinymce-editor/src/index.ts"],
+      "@bfirst/components-type-ahead-search": ["libs/components/type-ahead-search/src/index.ts"],
       "@bfirst/material-tailwind": ["libs/components/material-tailwind/src/index.ts"]
     }
   },
