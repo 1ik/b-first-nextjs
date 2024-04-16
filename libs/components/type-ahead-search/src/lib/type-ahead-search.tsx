@@ -44,7 +44,7 @@ const Item = forwardRef<HTMLDivElement, ItemProps & React.HTMLProps<HTMLDivEleme
         style={{
           background: active ? "#E5E7EB" : "none",
           padding: 4,
-          cursor: "default",
+          cursor: "pointer",
           ...rest.style,
         }}
       >
@@ -150,7 +150,6 @@ export function TypeAheadSearch({ label, items, onSearch, itemsSelected }: TypeA
             >
               {items?.map((item: Entry, index: number) => (
                 <Item
-                  className="cursor-pointer"
                   {...getItemProps({
                     key: item.id,
                     ref(node) {

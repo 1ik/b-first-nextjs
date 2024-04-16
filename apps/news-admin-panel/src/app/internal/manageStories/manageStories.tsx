@@ -144,68 +144,69 @@ export function ManageStories() {
                   <p className="grid-col-2 text-center">Title</p>
                   <p className="grid-col-3 text-center hidden md:block">Created at</p>
                 </div>
-                <SortableList
-                  dropTarget={dropTarget}
-                  onSortEnd={onSortEnd}
-                  className="flex flex-col gap-y-2"
-                  draggedItemClassName="dragged"
-                >
-                  {featuredStories.map((item, index) => (
-                    <div className="flex items-center">
-                      <div className="px-2 w-[40px]">
-                        <p>{index + 1}</p>
-                      </div>
-                      <div className="flex-grow">
-                        <SortableItem key={(item as { id: number }).id}>
-                          <div className="flex  justify-between items-center py-3 rounded-md cursor-grab px-2 bg-gray-200  relative   max-[340px]:w-[260px] max-[360px]:w-[290px] max-[430px]:w-[330px] max-[530px]:w-[350px]   sm:w-full">
-                            <div className="px-5">
-                              <h3 className="">{(item as { title: string }).title}</h3>
-                              <p className="md:hidden  mt-4">
-                                {dateFormatter((item as { created_at: string }).created_at)}
-                              </p>
-                            </div>
-                            <div className="flex gap-x-4 items-center">
-                              <p className="hidden md:block">
-                                {dateFormatter((item as { created_at: string }).created_at)}
-                              </p>
-                              <button
-                                onClick={(e) => {
-                                  e.preventDefault();
-                                  handleRemoveFeaturedStories((item as { id: number }).id);
-                                }}
-                                className="btn"
-                              >
-                                X
-                              </button>
-                            </div>
-                            {showConfirmModalFor === (item as { id: number }).id && (
-                              <div
-                                id="delete-confirmation-modal"
-                                className="absolute bg-white shadow-lg right-0 bottom-[100%] p-3 rounded-md cursor-default border border-black/30"
-                              >
-                                Do you want to remove it from list ?
-                                <div className="flex w-full [&>*]:flex-grow">
-                                  <button
-                                    onClick={() => handleConfirm((item as { id: number }).id)}
-                                    className="px-2 py-1 border hover:bg-black hover:text-white"
-                                  >
-                                    Yes
-                                  </button>
-                                  <button
-                                    onClick={() => setShowConfirmModalFor(undefined)}
-                                    className="px-2 py-1 border hover:bg-black hover:text-white"
-                                  >
-                                    No
-                                  </button>
-                                </div>
-                              </div>
-                            )}
+
+                <div className="flex gap-x-2">
+                  <div className="flex flex-col">
+                    {featuredStories.map((_, index) => (
+                      <p className="flex-grow mt-6">{index + 1}</p>
+                    ))}
+                  </div>
+                  <SortableList
+                    dropTarget={dropTarget}
+                    onSortEnd={onSortEnd}
+                    className="flex flex-grow flex-col gap-y-2"
+                    draggedItemClassName="dragged"
+                  >
+                    {featuredStories.map((item, index) => (
+                      <SortableItem key={(item as { id: number }).id}>
+                        <div className="flex  justify-between items-center py-3 rounded-md cursor-grab px-2 bg-gray-200  relative   max-[340px]:w-[260px] max-[360px]:w-[290px] max-[430px]:w-[330px] max-[530px]:w-[350px]   sm:w-full">
+                          <div className="px-5">
+                            <h3 className="">{(item as { title: string }).title}</h3>
+                            <p className="md:hidden  mt-4">
+                              {dateFormatter((item as { created_at: string }).created_at)}
+                            </p>
                           </div>
-                        </SortableItem>
-                      </div>
-                    </div>
-                  ))}
-                </SortableList>
+                          <div className="flex gap-x-4 items-center">
+                            <p className="hidden md:block">
+                              {dateFormatter((item as { created_at: string }).created_at)}
+                            </p>
+                            <button
+                              onClick={(e) => {
+                                e.preventDefault();
+                                handleRemoveFeaturedStories((item as { id: number }).id);
+                              }}
+                              className="btn"
+                            >
+                              X
+                            </button>
+                          </div>
+                          {showConfirmModalFor === (item as { id: number }).id && (
+                            <div
+                              id="delete-confirmation-modal"
+                              className="absolute bg-white shadow-lg right-0 bottom-[100%] p-3 rounded-md cursor-default border border-black/30"
+                            >
+                              Do you want to remove it from list ?
+                              <div className="flex w-full [&>*]:flex-grow">
+                                <button
+                                  onClick={() => handleConfirm((item as { id: number }).id)}
+                                  className="px-2 py-1 border hover:bg-black hover:text-white"
+                                >
+                                  Yes
+                                </button>
+                                <button
+                                  onClick={() => setShowConfirmModalFor(undefined)}
+                                  className="px-2 py-1 border hover:bg-black hover:text-white"
+                                >
+                                  No
+                                </button>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      </SortableItem>
+                    ))}
+                  </SortableList>
+                </div>
               </div>
             </div>
           </div>
