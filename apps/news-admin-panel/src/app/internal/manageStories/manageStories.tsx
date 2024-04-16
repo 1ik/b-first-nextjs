@@ -5,7 +5,7 @@ import { token } from "../../token_utils";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { dateFormatter } from "../../dateFormat_utils";
-import { Spinner } from "@bfirst/material-tailwind";
+import { Loader } from "@bfirst/components-loader";
 
 const dropTarget = (
   <div className="py-3 text-center text-blue-600/50 font-bold border-2 border-dashed border-blue-600/50 rounded-md">
@@ -21,7 +21,7 @@ export function ManageStories() {
   const [lastSearchTime, setLastSearchTime] = useState(0);
   const [timer, setTimer] = useState<number | undefined>(undefined);
   const [showConfirmModalFor, setShowConfirmModalFor] = useState<number>();
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const debounceDelay = 300;
 
@@ -45,6 +45,7 @@ export function ManageStories() {
   };
 
   const fetchData = async function () {
+    setIsLoading(true)
     try {
       const response = await fetch(
         `https://backend.bangladeshfirst.com/api/v1/public/categories/${categoryOption}/featured-stories`,
@@ -56,6 +57,7 @@ export function ManageStories() {
       if (!response.ok) throw new Error("Could not fetch data");
       const data = await response.json();
       setFeaturedStories(data.data);
+      setIsLoading(false)
     } catch (error) {
       console.log(error);
     }
@@ -177,11 +179,7 @@ export function ManageStories() {
   };
 
   if (isLoading) {
-    return (
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-        <Spinner className="h-10 w-10 text-gray-900/50"/>
-      </div>
-    );
+    return <Loader />;
   }
   return (
     <div className="overflow-x-auto flex flex-col h-full" onClick={handleOutsideClick}>
