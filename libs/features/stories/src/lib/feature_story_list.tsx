@@ -98,11 +98,11 @@ export function FeatureStoryList({ searchInput }: FeatureStoryListProps) {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [deleteId, setDeleteId] = useState<number | null>(null);
-  const { data, refetch, isPending: isLoading } = useGet(`api/v1/stories?page=${currentPage}&size=20`);
+  const { data, refetch, isPending } = useGet(`api/v1/stories?page=${currentPage}&size=20`);
   const { request, isSuccess } = useDelete(`api/v1/stories/${deleteId}`);
 
   // Story Search
-  const { data: searchList, isPending } = useGet(`api/v1/stories?title=${searchInput}`);
+  const { data: searchList } = useGet(`api/v1/stories?title=${searchInput}`);
 
   const handleDelete = (id: number) => {
     setDeleteId(id);
@@ -117,11 +117,8 @@ export function FeatureStoryList({ searchInput }: FeatureStoryListProps) {
     return <></>;
   }
 
-  if (isPending) {
-    return <></>;
-  }
 
-  if (isLoading) {
+  if (isPending) {
     return <Loader />;
   }
   return (
