@@ -5,7 +5,7 @@ import { Loader } from "@bfirst/components-loader";
 import { Table, TableColumnDef } from "@bfirst/components-table";
 import { Typography } from "@bfirst/material-tailwind";
 import moment from "moment";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export function FeatureTrashTagList() {
   const TABLE_COLUMNS: TableColumnDef[] = [
