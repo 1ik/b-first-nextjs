@@ -79,6 +79,7 @@ export function FeatureStoryList({ searchInput }: FeatureStoryListProps) {
       render: (row) => {
         return (
           <div className="flex items-end gap-4 justify-end w-full">
+            <Icon name="copy" onClick={() => handleCopyEmbed(row.id)} />
             <ConfirmButton
               onConfirm={() => handleDelete(row.id)}
               message="Do you want to remove the stories ?"
@@ -106,6 +107,12 @@ export function FeatureStoryList({ searchInput }: FeatureStoryListProps) {
   const handleDelete = (id: number) => {
     setDeleteId(id);
     request();
+  };
+
+  const handleCopyEmbed = (id: number) => {
+    navigator.clipboard.writeText(
+      `<iframe style="width: 800px; height: 160px;" src="https://backend.bangladeshfirst.com/api/v1/public/preview-story/${id}"></iframe>`
+    );
   };
 
   useEffect(() => {
