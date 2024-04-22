@@ -9,6 +9,7 @@ import Header from "../components/Header/Header";
 import MobileMenu from "../components/MobileMenu/MobileMenu";
 import Slider from "../components/Slider/Slider";
 import Adds from "../components/adds/Adds";
+import TopicList from "../components/TopicList/TopicList";
 
 export default function Index({ featuredNews, latestNews, bangladesh, politics, world }: any) {
   return (
@@ -19,11 +20,12 @@ export default function Index({ featuredNews, latestNews, bangladesh, politics, 
       <Header />
       <MobileMenu />
       <main id="content">
+        <TopicList />
         <FeaturedItems items={featuredNews} />
         <BlockNews position="mx-auto" items={featuredNews.slice(5, 11)} title={""} />
         <Slider items={world.slice(0, 6)} title={"World"} />
-        <Adds/>
-        <img src="/img/ads/banner_ibbl.gif" alt="Add"  className="fixed bottom-4 z-50 left-1/2 -translate-x-1/2"/>
+        <Adds />
+        <img src="/img/ads/banner_ibbl.gif" alt="Add" className="fixed bottom-4 z-50 left-1/2 -translate-x-1/2" />
         <BlockNews2 items={bangladesh.slice(0, 6)} latest={latestNews.slice(0, 5)} title={"Bangladesh"} />
         <BlockNews3 items={politics} latest={latestNews.slice(6, 11)} title={"Politics"} />
       </main>
@@ -47,11 +49,11 @@ export const getServerSideProps = async () => {
   const featuredNews: unknown[] = (await featuredNewsRes.json()).data;
   const latestNews: unknown[] = (await latestNewsRes.json()).data;
 
-  const filterFn = (item: unknown) => !latestNews.find((f) => (f as {id:number}).id === (item as {id:number}).id);
+  const filterFn = (item: unknown) => !latestNews.find((f) => (f as { id: number }).id === (item as { id: number }).id);
 
   const bangladesh = (await bangladeshNews.json()).data.filter(filterFn);
   const politics = (await politicsNews.json()).data.filter(filterFn);
   const world = (await worldNews.json()).data.filter(filterFn);
-  
+
   return { props: { featuredNews, latestNews, bangladesh, politics, world } };
 };
