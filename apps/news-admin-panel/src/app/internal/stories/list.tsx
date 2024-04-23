@@ -8,8 +8,6 @@ import { Link } from "react-router-dom";
 
 export default function List() {
   const [searchInput, setSearchInput] = useState("");
-  const [lastSearchTime, setLastSearchTime] = useState(0);
-  const [timer, setTimer] = useState<number | undefined>(undefined);
 
   let debounceTimer: string | number | NodeJS.Timeout | undefined;
 
@@ -19,27 +17,6 @@ export default function List() {
     debounceTimer = setTimeout(() => {
       setSearchInput(e.target.value);
     }, 500);
-  };
-
-  const debounceDelay = 300;
-
-  const throttledSearch = () => {
-    const currentTime = Date.now();
-    if (currentTime - lastSearchTime >= debounceDelay) {
-      setLastSearchTime(currentTime);
-    }
-  };
-
-  const handlePaste = (event: any) => {
-    event.preventDefault();
-    const pastedText = event.clipboardData.getData("text/plain");
-    setSearchInput(pastedText);
-    clearTimeout(timer);
-
-    const newTimer = setTimeout(() => {
-      throttledSearch();
-    }, 100) as unknown as number;
-    setTimer(newTimer);
   };
 
   return (
@@ -54,7 +31,7 @@ export default function List() {
           </Breadcrumbs>
           <div className="flex items-center gap-x-4">
             <div className="relative hidden md:block">
-              <Input onPaste={handlePaste} onChange={handleInputChange} label="Search" className="pr-8" />
+              <Input onChange={handleInputChange} label="Search" className="pr-8" />
               <div className="absolute top-1/2 -translate-y-1/2 right-1">
                 <Icon size={20} name="search" variant="text" />
               </div>
@@ -74,7 +51,7 @@ export default function List() {
                   </Button>
                 </MenuHandler>
                 <MenuList className="p-0.5 m-0">
-                  <input onPaste={handlePaste} onChange={handleInputChange} type="text" placeholder="Search" />
+                  <input onChange={handleInputChange} type="text" placeholder="Search" />
                 </MenuList>
               </Menu>
             </div>
