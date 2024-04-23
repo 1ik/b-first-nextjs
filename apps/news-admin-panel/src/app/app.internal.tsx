@@ -13,6 +13,8 @@ import { AddEditStoriesLazy, StoriesListLazy, StoryPreviewLazy, TrashStoriesList
 import { TagAddLazy, TagEditLazy, TagsListLazy, TrashTagsListLazy } from "./internal/tags";
 import { Menu, MenuHandler, MenuList, MenuItem, Typography } from "@bfirst/material-tailwind";
 import { Icon } from "@bfirst/components-icon";
+import { HomeLazy } from "./internal/home";
+import { TrendingTagsLazy } from "./internal/trendingTags";
 export const NavBar = () => {
   return (
     <div className="navbar bg-base-300">
@@ -121,41 +123,39 @@ export function AppInternal() {
                 <Menu placement="top-start">
                   <MenuHandler>
                     <button>
-                      <Icon name="user" size={24} variant="text"/>
+                      <Icon name="user" size={24} variant="text" />
                     </button>
                   </MenuHandler>
                   <MenuList>
                     <MenuItem className="flex items-center gap-2">
-                    <Icon name="user" size={18} variant="text"/>
+                      <Icon name="user" size={18} variant="text" />
                       <Typography variant="small" className="font-medium">
                         My Profile
                       </Typography>
                     </MenuItem>
                     <MenuItem className="flex items-center gap-2">
-                    <Icon name="settings" size={18} variant="text"/>
+                      <Icon name="settings" size={18} variant="text" />
                       <Typography variant="small" className="font-medium">
                         Settings
                       </Typography>
                     </MenuItem>
                     <MenuItem className="flex items-center gap-2">
-                    <Icon name="theam" size={18} variant="text"/>
+                      <Icon name="theam" size={18} variant="text" />
 
                       <Typography variant="small" className="font-medium">
-                         Theme
+                        Theme
                       </Typography>
                     </MenuItem>
-           
+
                     <hr className="my-2 border-blue-gray-50" />
                     <MenuItem onClick={handleSignOut} className="flex items-center gap-2 ">
-                       <Icon name="logout" size={18} variant="text"/>
-                      <Typography  variant="small" className="font-medium">
+                      <Icon name="logout" size={18} variant="text" />
+                      <Typography variant="small" className="font-medium">
                         Sign Out
                       </Typography>
                     </MenuItem>
                   </MenuList>
                 </Menu>
-
-                
               </li>
               <li className="pl-2">
                 <label
@@ -172,6 +172,8 @@ export function AppInternal() {
         <div className="content flex-1  overflow-hidden">
           <div className="w-full h-full overflow-y-scroll">
             <Routes>
+              <Route path="/" element={<HomeLazy />} />
+              <Route path="/trending-topic" element={<TrendingTagsLazy />} />
               <Route path="/categories" element={<ListLazy />} />
               <Route path="/categories/add" element={<AddLazy />} />
               <Route path="/categories/:id" element={<EditLazy />} />
@@ -189,6 +191,7 @@ export function AppInternal() {
               <Route path="/trash-authors" element={<TrashAuthorsListLazy />} />
               <Route path="/trash-tags" element={<TrashTagsListLazy />} />
               <Route path="/trash-categories" element={<TrashCategoriesListLazy />} />
+        
             </Routes>
           </div>
         </div>
