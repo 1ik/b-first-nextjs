@@ -64,18 +64,18 @@ export function TrendingTags() {
   };
 
   return (
-    <div className="my-4 px-4">
+    <div className="p-5">
       <Input label="Search Trending Topic" type="text" placeholder="Type Trending Tags" />
       <form>
-        <div className="col-span-full mt-5">
-          <label className="block text-lg font-medium leading-6 mb-4 text-gray-900">Trending Topic</label>
+        <div className="col-span-full">
+          <label className="block text-lg font-medium leading-6 mb-4 mt-6 text-gray-900">Trending Topic</label>
           <div className="grid grid-cols-3 py-4 mb-2 border-b">
             <p className="grid-col-1">Serial</p>
             <p className="grid-col-2 text-center">Title</p>
             <p className="grid-col-3 text-center hidden md:block">Created at</p>
           </div>
 
-          <div className="flex gap-x-2">
+          <div className="flex gap-x-2 mb-5">
             <div className="flex flex-col">
               {data.map((_, index) => (
                 <p className="flex-grow mt-6">{index + 1}</p>
