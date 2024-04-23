@@ -1,6 +1,7 @@
 import { useDelete, useGet } from "@bfirst/api-client";
 import { ConfirmButton } from "@bfirst/components-confirm-button";
 import { Icon } from "@bfirst/components-icon";
+import { PopoverNotify } from "@bfirst/components-popover-notify";
 import { Table, TableColumnDef } from "@bfirst/components-table";
 import { Typography } from "@bfirst/material-tailwind";
 import moment from "moment";
@@ -79,7 +80,7 @@ export function FeatureStoryList({ searchInput }: FeatureStoryListProps) {
       render: (row) => {
         return (
           <div className="flex items-end gap-4 justify-end w-full">
-            <Icon name="copy" onClick={() => handleCopyEmbed(row.id)} />
+            <PopoverNotify trigger={<Icon name="copy" onClick={() => handleCopyEmbed(row.id)} />} message="copied" />
             <ConfirmButton
               onConfirm={() => handleDelete(row.id)}
               message="Do you want to remove the stories ?"
