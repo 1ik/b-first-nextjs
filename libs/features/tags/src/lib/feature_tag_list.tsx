@@ -42,13 +42,20 @@ export function FeatureTagList() {
       colKey: "updated_at",
       title: "Updated At",
       width: "20%",
+      className: "hidden md:block",
       render: (row) => {
         return (
-          <Typography variant="small" className="font-normal leading-none opacity-70">
+          <Typography variant="small" className="font-normal leading-none opacity-70 hidden md:block">
             {moment(row["updated_at"]).format("YYYY-MM-DD hh:mm a")}
           </Typography>
         );
       },
+    },
+    {
+      key: "created_by",
+      colKey: "created_by",
+      title: "Created By",
+      width: "25%",
     },
     {
       key: "action",
