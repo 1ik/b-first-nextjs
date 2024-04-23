@@ -18,13 +18,13 @@ export function FeatureTrashStoryList() {
       key: "title",
       colKey: "title",
       title: "Title",
-      width: "50%",
+      width: "45%",
     },
     {
       key: "authors",
       colKey: "authors",
       title: "Authors",
-      width: "30%",
+      width: "38%",
       render: (row) => {
         return (
           <Typography variant="small" className="font-normal leading-none opacity-70">
@@ -38,13 +38,20 @@ export function FeatureTrashStoryList() {
       colKey: "deleted_at",
       title: "Deleted At",
       width: "20%",
+      className: "hidden md:block",
       render: (row) => {
         return (
-          <Typography variant="small" className="font-normal leading-none opacity-70">
+          <Typography variant="small" className="font-normal leading-none opacity-70 hidden md:block">
             {moment(row["deleted_at"]).format("YYYY-MM-DD hh:mm a")}
           </Typography>
         );
       },
+    },
+    {
+      key: "created_by",
+      colKey: "created_by",
+      title: "Created By",
+      width: "15%",
     },
     {
       key: "action",
@@ -54,7 +61,7 @@ export function FeatureTrashStoryList() {
       className: "text-right",
       render: (row) => {
         return (
-          <div className="flex items-end gap-4 justify-end w-full">
+          <div className="flex items-end md:gap-4 gap-2 justify-end w-full">
             <ConfirmButton
               onConfirm={() => handleDelete(row.id)}
               message="Do you want to permanently remove the story ?"

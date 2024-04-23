@@ -48,10 +48,11 @@ export function FeatureStoryList({ searchInput }: FeatureStoryListProps) {
       key: "createdAt",
       colKey: "created_at",
       title: "Created At",
-      width: "20%",
+      width: "25%",
+      className: "hidden md:block",
       render: (row) => {
         return (
-          <Typography variant="small" className="font-normal leading-none opacity-70">
+          <Typography variant="small" className="font-normal leading-none opacity-70 hidden md:block">
             {moment(row["created_at"]).format("YYYY-MM-DD hh:mm a")}
           </Typography>
         );
@@ -69,6 +70,12 @@ export function FeatureStoryList({ searchInput }: FeatureStoryListProps) {
           </Typography>
         );
       },
+    },
+    {
+      key: "created_by",
+      colKey: "created_by",
+      title: "Created By",
+      width: "30%",
     },
     {
       key: "action",

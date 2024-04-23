@@ -18,16 +18,17 @@ export function FeatureTrashTagList() {
       key: "name",
       colKey: "name",
       title: "Name",
-      width: "50%",
+      width: "30%",
     },
     {
       key: "createdAt",
       colKey: "created_at",
       title: "Created At",
       width: "20%",
+      className: "hidden md:block",
       render: (row) => {
         return (
-          <Typography variant="small" className="font-normal leading-none opacity-70">
+          <Typography variant="small" className="font-normal leading-none opacity-70 hidden md:block">
             {moment(row["created_at"]).format("YYYY-MM-DD hh:mm a")}
           </Typography>
         );
@@ -37,7 +38,7 @@ export function FeatureTrashTagList() {
       key: "deletedAt",
       colKey: "deleted_at",
       title: "Deleted At",
-      width: "20%",
+      width: "25%",
       render: (row) => {
         return (
           <Typography variant="small" className="font-normal leading-none opacity-70">
@@ -45,6 +46,12 @@ export function FeatureTrashTagList() {
           </Typography>
         );
       },
+    },
+    {
+      key: "created_by",
+      colKey: "created_by",
+      title: "Created By",
+      width: "20%",
     },
     {
       key: "action",
