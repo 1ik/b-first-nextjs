@@ -112,7 +112,7 @@ export function FeatureStoryList({ searchInput }: FeatureStoryListProps) {
 
   const handleCopyEmbed = (id: number) => {
     navigator.clipboard.writeText(
-      `<iframe style="width: 100%; background: #F2F4F7; border-radius: 8px; padding: 8px 8px 0px 8px; box-sizing: border-box;" src="https://backend.bangladeshfirst.com/api/v1/public/preview-story/${id}" ></iframe>`
+      `<iframe class="news-iframe" style="width: 100%; background: #F2F4F7; border-radius: 8px; padding: 8px 8px 0px 8px; box-sizing: border-box;" src="https://backend.bangladeshfirst.com/api/v1/public/preview-story/${id}" ></iframe>`
     );
   };
 
