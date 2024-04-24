@@ -50,14 +50,21 @@ export function FeatureCategoryList() {
       key: "updatedAt",
       colKey: "updated_at",
       title: "Updated At",
-      width: "30%",
+      width: "20%",
+      className: "md:block hidden",
       render: (row) => {
         return (
-          <Typography variant="small" className="font-normal leading-none opacity-70">
+          <Typography variant="small" className="font-normal leading-none opacity-70 hidden md:block">
             {moment(row["updated_at"]).format("YYYY-MM-DD hh:mm a")}
           </Typography>
         );
       },
+    },
+    {
+      key: "created_by",
+      colKey: "created_by",
+      title: "Created By",
+      width: "25%",
     },
     {
       key: "action",

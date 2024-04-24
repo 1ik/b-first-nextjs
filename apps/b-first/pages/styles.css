@@ -32,3 +32,14 @@
 .splide__track {
   padding-bottom: 30px !important
 }
+
+/* iframe styles */
+iframe {
+  width: 100%;
+}
+
+@media (max-width: 670px){
+  .news-iframe {
+    min-height: 275px;
+  }
+}

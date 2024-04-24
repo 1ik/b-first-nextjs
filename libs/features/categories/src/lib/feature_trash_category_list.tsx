@@ -27,16 +27,17 @@ export function FeatureTrashCategoryList() {
       key: "name",
       colKey: "name",
       title: "Name",
-      width: "50%",
+      width: "40%",
     },
     {
       key: "createdAt",
       colKey: "created_at",
       title: "Created At",
-      width: "30%",
+      width: "25%",
+      className: "hidden md:block",
       render: (row) => {
         return (
-          <Typography variant="small" className="font-normal leading-none opacity-70 md:pt-0 pt-4">
+          <Typography variant="small" className="font-normal leading-none opacity-70 hidden md:block">
             {moment(row["created_at"]).format("YYYY-MM-DD hh:mm a")}
           </Typography>
         );
@@ -54,6 +55,12 @@ export function FeatureTrashCategoryList() {
           </Typography>
         );
       },
+    },
+    {
+      key: "created_by",
+      colKey: "created_by",
+      title: "Created By",
+      width: "20%",
     },
     {
       key: "action",

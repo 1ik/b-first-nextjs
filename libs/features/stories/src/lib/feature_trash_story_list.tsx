@@ -35,25 +35,13 @@ export function FeatureTrashStoryList() {
       key: "title",
       colKey: "title",
       title: "Title",
-      width: "50%",
-      render: (row) => {
-        return (
-          <div>
-            <Typography variant="small" color="blue-gray" className="font-normal hidden md:block text-sm">
-              {row.title}
-            </Typography>
-            <Typography variant="small" color="blue-gray" className="font-normal block md:hidden text-sm">
-              {`${row.title.slice(0, 20)}...`}
-            </Typography>
-          </div>
-        );
-      },
+      width: "45%",
     },
     {
       key: "authors",
       colKey: "authors",
       title: "Authors",
-      width: "30%",
+      width: "38%",
       render: (row) => {
         return (
           <Typography variant="small" className="font-normal leading-none opacity-70">
@@ -66,14 +54,21 @@ export function FeatureTrashStoryList() {
       key: "deletedAt",
       colKey: "deleted_at",
       title: "Deleted At",
-      width: "35%",
+      width: "20%",
+      className: "hidden md:block",
       render: (row) => {
         return (
-          <Typography variant="small" className="font-normal leading-none opacity-70 md:pt-0 pt-4">
+          <Typography variant="small" className="font-normal leading-none opacity-70 hidden md:block">
             {moment(row["deleted_at"]).format("YYYY-MM-DD hh:mm a")}
           </Typography>
         );
       },
+    },
+    {
+      key: "created_by",
+      colKey: "created_by",
+      title: "Created By",
+      width: "15%",
     },
     {
       key: "action",
@@ -83,7 +78,7 @@ export function FeatureTrashStoryList() {
       className: "text-right",
       render: (row) => {
         return (
-          <div className="flex items-end gap-2 md:gap-4 justify-end w-full">
+          <div className="flex items-end md:gap-4 gap-2 justify-end w-full">
             <ConfirmButton
               onConfirm={() => handleDelete(row.id)}
               message="Do you want to permanently remove the story ?"
