@@ -55,7 +55,7 @@ const Header = ({ category }: { category?: string }) => {
                     className={`dropdown relative border-l border-r hover:bg-gray-900 ${
                       category === "Corporates" ||
                       category === "Tech" ||
-                      category === "Opinion" ||
+                      category === "Entertainment" ||
                       category === "Features" ||
                       category === "Lifestyle" ||
                       category === "Education"
@@ -78,8 +78,8 @@ const Header = ({ category }: { category?: string }) => {
                         </a>
                       </li>
                       <li className="relative hover:bg-gray-50">
-                        <a className="block py-2 px-6 border-b border-gray-100" href="/Opinion">
-                          Opinion
+                        <a className="block py-2 px-6 border-b border-gray-100" href="/Entertainment">
+                          Entertainment
                         </a>
                       </li>
                       <li className="relative hover:bg-gray-50">

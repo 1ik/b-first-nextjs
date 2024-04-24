@@ -1,17 +1,18 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { useContext, useEffect, useRef, useState } from "react";
+import { Accordion, AccordionBody, AccordionHeader } from "@bfirst/material-tailwind";
+import { useContext, useEffect, useState } from "react";
 import { IoMenuSharp } from "react-icons/io5";
+// import { FaUserCircle } from "react-icons/fa";
 import { MdChevronRight } from "react-icons/md";
 import { Link, Route, Routes, useLocation } from "react-router-dom";
 import { AppContext } from "./app.context";
-import { AddEditAuthorLazy, AuthorsListLazy } from "./internal/authors";
-import { AddEditLazy, ListLazy } from "./internal/categories";
+import { AuthorAddLazy, AuthorEditLazy, AuthorsListLazy, TrashAuthorsListLazy } from "./internal/authors";
+import { AddLazy, EditLazy, ListLazy, TrashCategoriesListLazy } from "./internal/categories";
 import { ManageStories } from "./internal/manageStories/manageStories";
-import { AddEditStoriesLazy, StoriesListLazy, StoryPreviewLazy } from "./internal/stories";
-import { AddEditTagsLazy, TagsListLazy } from "./internal/tags";
-import { FaRegCircleUser } from "react-icons/fa6";
-
-
+import { AddEditStoriesLazy, StoriesListLazy, StoryPreviewLazy, TrashStoriesListLazy } from "./internal/stories";
+import { TagAddLazy, TagEditLazy, TagsListLazy, TrashTagsListLazy } from "./internal/tags";
+import { Menu, MenuHandler, MenuList, MenuItem, Typography } from "@bfirst/material-tailwind";
+import { Icon } from "@bfirst/components-icon";
 export const NavBar = () => {
   return (
     <div className="navbar bg-base-300">
@@ -50,12 +51,26 @@ const _links = [
   { name: "Tags", href: "/tags" },
 ];
 
+const _subLinks = [
+  { name: "Stories", href: "/trash-stories" },
+  { name: "Categories", href: "/trash-categories" },
+  { name: "Authors", href: "/trash-authors" },
+  { name: "Tags", href: "/trash-tags" },
+];
+
 export function AppInternal() {
-  const [showProfileModal, setShowProfileModal] = useState(false);
+  const [subMenuOpen, setSubMenuOpen] = useState(false);
+
   let location = useLocation();
+
   const [links, setLinks] = useState(() => {
     return _links.map((l) => {
       return { ...l, isActive: location.pathname.startsWith(l.href) };
+    });
+  });
+  const [subLinks, setSubLinks] = useState(() => {
+    return _subLinks.map((sL) => {
+      return { ...sL, isActive: location.pathname.startsWith(sL.href) };
     });
   });
 
@@ -66,6 +81,15 @@ export function AppInternal() {
       });
     });
   }, [location.pathname]);
+
+  useEffect(() => {
+    setSubLinks((curr) => {
+      return curr.map((sL) => {
+        return { ...sL, isActive: location.pathname.startsWith(sL.href) };
+      });
+    });
+  }, [location.pathname]);
+
   const { user, setUser, setToken } = useContext(AppContext);
   const handleSignOut = function () {
     localStorage.removeItem("userInfo");
@@ -74,25 +98,9 @@ export function AppInternal() {
     setToken && setToken(undefined);
   };
 
-  const modalRef = useRef(null);
-  const btnRef = useRef(null);
-  useEffect(() => {
-    const handleClickOutside = function (e:any) {
-      if ((btnRef.current as any)?.contains(e.target)) {
-        return;
-      } else if (e.target !== modalRef.current) {
-        setShowProfileModal(false);
-      }
-    };
-    window.addEventListener("click", handleClickOutside);
-    return function () {
-      window.removeEventListener("click", handleClickOutside);
-    };
-  }, []);
-
-  const handleClick = function(){
+  const handleClick = function () {
     (document.querySelector("#my-drawer") as HTMLInputElement).checked = false;
-  }
+  };
 
   return (
     <div className="drawer h-full lg:drawer-open">
@@ -104,23 +112,50 @@ export function AppInternal() {
           <div className="flex-1">
             <a className="btn">Newsroom</a>
           </div>
-          <div className="flex-none">
-            <ul className="menu menu-horizontal px-1">
+          <div>
+            <ul className="flex items-center gap-6">
               <li>
                 <a>Link</a>
               </li>
               <li>
-                <button className="flex" ref={btnRef} onClick={() => setShowProfileModal((cur) => !cur)}>
-                  <FaRegCircleUser  className="text-xl" />
-                  <p>{user.name}</p>
-                </button>
-                {showProfileModal && (
-                  <ul ref={modalRef} className="absolute top-[100%] bg-white right-0 z-[999] flex flex-col hover:bg-white shadow-xl min-w-full m-0 p-0 text-center">
-                    <li className="hover:bg-gray-200 cursor-pointer p-2">Settings</li>
-                    <li className="hover:bg-gray-200 cursor-pointer p-2">Theme</li>
-                    <li className="hover:bg-gray-200 cursor-pointer p-2" onClick={handleSignOut}>Sign out</li>
-                  </ul>
-                )}
+                <Menu placement="top-start">
+                  <MenuHandler>
+                    <button>
+                      <Icon name="user" size={24} variant="text"/>
+                    </button>
+                  </MenuHandler>
+                  <MenuList>
+                    <MenuItem className="flex items-center gap-2">
+                    <Icon name="user" size={18} variant="text"/>
+                      <Typography variant="small" className="font-medium">
+                        My Profile
+                      </Typography>
+                    </MenuItem>
+                    <MenuItem className="flex items-center gap-2">
+                    <Icon name="settings" size={18} variant="text"/>
+                      <Typography variant="small" className="font-medium">
+                        Settings
+                      </Typography>
+                    </MenuItem>
+                    <MenuItem className="flex items-center gap-2">
+                    <Icon name="theme" size={18} variant="text"/>
+
+                      <Typography variant="small" className="font-medium">
+                         Theme
+                      </Typography>
+                    </MenuItem>
+           
+                    <hr className="my-2 border-blue-gray-50" />
+                    <MenuItem onClick={handleSignOut} className="flex items-center gap-2 ">
+                       <Icon name="logout" size={18} variant="text"/>
+                      <Typography  variant="small" className="font-medium">
+                        Sign Out
+                      </Typography>
+                    </MenuItem>
+                  </MenuList>
+                </Menu>
+
+                
               </li>
               <li className="pl-2">
                 <label
@@ -138,15 +173,22 @@ export function AppInternal() {
           <div className="w-full h-full overflow-y-scroll">
             <Routes>
               <Route path="/categories" element={<ListLazy />} />
-              <Route path="/categories/add" element={<AddEditLazy />} />
+              <Route path="/categories/add" element={<AddLazy />} />
+              <Route path="/categories/:id" element={<EditLazy />} />
               <Route path="/authors" element={<AuthorsListLazy />} />
-              <Route path="/authors/add" element={<AddEditAuthorLazy />} />
+              <Route path="/authors/add" element={<AuthorAddLazy />} />
+              <Route path="/authors/:id" element={<AuthorEditLazy />} />
               <Route path="/stories" element={<StoriesListLazy />} />
               <Route path="/stories/create-story" element={<AddEditStoriesLazy />} />
               <Route path="/tags" element={<TagsListLazy />} />
-              <Route path="/tags/add" element={<AddEditTagsLazy />} />
+              <Route path="/tags/add" element={<TagAddLazy />} />
+              <Route path="/tags/:id" element={<TagEditLazy />} />
               <Route path="/stories/:storyId" element={<StoryPreviewLazy />} />
               <Route path="/top-news-list" element={<ManageStories />} />
+              <Route path="/trash-stories" element={<TrashStoriesListLazy />} />
+              <Route path="/trash-authors" element={<TrashAuthorsListLazy />} />
+              <Route path="/trash-tags" element={<TrashTagsListLazy />} />
+              <Route path="/trash-categories" element={<TrashCategoriesListLazy />} />
             </Routes>
           </div>
         </div>
@@ -158,11 +200,44 @@ export function AppInternal() {
           <ul className="">
             {links.map((l) => (
               <li key={l.name}>
-                <Link onClick={handleClick} key={l.name} to={l.href} className={"flex justify-between" + (l.isActive ? " active" : "")}>
+                <Link
+                  onClick={() => {
+                    handleClick();
+                    setSubMenuOpen(false);
+                  }}
+                  key={l.name}
+                  to={l.href}
+                  className={"flex justify-between" + (l.isActive ? " active" : "")}
+                >
                   {l.name} <MdChevronRight />
                 </Link>
               </li>
             ))}
+            <Accordion
+              open={subMenuOpen}
+              icon={subMenuOpen ? <MdChevronRight className="rotate-90" /> : <MdChevronRight />}
+            >
+              <AccordionHeader
+                className="text-sm px-4 py-2 font-normal text-base-content border-0"
+                onClick={() => setSubMenuOpen((cur) => !cur)}
+              >
+                Trash
+              </AccordionHeader>
+              <AccordionBody className="p-0 pl-2">
+                {subLinks.map((sL) => (
+                  <li key={sL.name}>
+                    <Link
+                      onClick={handleClick}
+                      key={sL.name}
+                      to={sL.href}
+                      className={"flex justify-between" + (sL.isActive ? " active" : "")}
+                    >
+                      {sL.name} <MdChevronRight />
+                    </Link>
+                  </li>
+                ))}
+              </AccordionBody>
+            </Accordion>
           </ul>
           {/* <button className="btn btn-primary btn-outline" onClick={handleSignOut}>
             Sign out

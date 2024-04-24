@@ -12,11 +12,11 @@ export function FeatureSignIn({ setToken, setUser, logoUrl }: SigninProps) {
   const { request, isError, isSuccess, isPending, data } = usePost("api/v1/login");
 
   if (isSuccess) {
-    const { name, email, token } = data && data.data;
+    const { name, email, token, expire } = data && data.data;
     setUser && setUser({ name, email });
     setToken && setToken(token);
     localStorage.setItem("userInfo", JSON.stringify({ name, email }));
-    localStorage.setItem("token", JSON.stringify({ token }));
+    localStorage.setItem("token", JSON.stringify({ token, expire }));
   }
 
   return (
