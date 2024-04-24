@@ -10,11 +10,31 @@ const LoadList = lazy(
     })
 );
 
-const LoadAddEdit = lazy(
+const LoadTrashList = lazy(
   () =>
     // eslint-disable-next-line
     new Promise<any>((resolve) => {
-      import("./addEdit").then((component) => {
+      import("./trash").then((component) => {
+        resolve(component);
+      });
+    })
+);
+
+const LoadAdd = lazy(
+  () =>
+    // eslint-disable-next-line
+    new Promise<any>((resolve) => {
+      import("./add").then((component) => {
+        resolve(component);
+      });
+    })
+);
+
+const LoadEdit = lazy(
+  () =>
+    // eslint-disable-next-line
+    new Promise<any>((resolve) => {
+      import("./edit").then((component) => {
         resolve(component);
       });
     })
@@ -28,10 +48,26 @@ export function ListLazy() {
   );
 }
 
-export function AddEditLazy() {
+export function TrashCategoriesListLazy() {
   return (
     <Suspense>
-      <LoadAddEdit />
+      <LoadTrashList />
+    </Suspense>
+  );
+}
+
+export function AddLazy() {
+  return (
+    <Suspense>
+      <LoadAdd />
+    </Suspense>
+  );
+}
+
+export function EditLazy() {
+  return (
+    <Suspense>
+      <LoadEdit />
     </Suspense>
   );
 }

@@ -10,6 +10,16 @@ const LoadList = lazy(
     })
 );
 
+const LoadTrashList = lazy(
+  () =>
+    // eslint-disable-next-line
+    new Promise<any>((resolve) => {
+      import("./trashStories").then((component) => {
+        resolve(component);
+      });
+    })
+);
+
 const LoadAddEdit = lazy(
   () =>
     // eslint-disable-next-line
@@ -34,6 +44,14 @@ export function StoriesListLazy() {
   return (
     <Suspense>
       <LoadList />
+    </Suspense>
+  );
+}
+
+export function TrashStoriesListLazy() {
+  return (
+    <Suspense>
+      <LoadTrashList />
     </Suspense>
   );
 }
