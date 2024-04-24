@@ -1,6 +1,20 @@
+import { Avatar, Menu, MenuHandler, MenuItem, MenuList } from "@bfirst/material-tailwind";
+import Link from "next/link";
+import { useContext } from "react";
+import { AppContext } from "../../pages/_app";
 import CurrentDate from "../CurrentDate/CurrentDate";
 
 const Header = ({ category }: { category?: string }) => {
+  const { user, setUser, setToken } = useContext(AppContext);
+
+  const handleLogout = function () {
+    setUser && setUser({});
+    setToken && setToken("");
+    if (typeof window === "object") {
+      localStorage.removeItem("userInfo");
+      localStorage.removeItem("token");
+    }
+  };
   return (
     <>
       <header className="fixed top-0 left-0 right-0 z-50 border-b-2">
@@ -14,7 +28,7 @@ const Header = ({ category }: { category?: string }) => {
                 <CurrentDate />
               </div>
 
-              <div className="flex flex-row">
+              <div className="flex flex-row items-center">
                 <ul className="navbar hidden lg:flex lg:flex-row text-gray-400 text-sm items-center font-bold">
                   <li className={`relative border-l hover:bg-gray-900 ${category === "Bangladesh" ? "active" : null}`}>
                     <a className="block py-3 px-6 border-b-2 border-transparent" href="/Bangladesh">
@@ -90,7 +104,26 @@ const Header = ({ category }: { category?: string }) => {
                       </li>
                     </ul>
                   </li>
+                  <li className={`relative border-l hover:bg-gray-900 ${Object.keys(user)?.length ? "hidden" : null}`}>
+                    <Link className="block py-3 px-6 border-b-2 border-transparent" href="/signin">
+                      Sign in
+                    </Link>
+                  </li>
                 </ul>
+
+                {Object.keys(user)?.length ? (
+                  <div>
+                    <Menu>
+                      <MenuHandler>
+                        <Avatar className="cursor-pointer p-1 mx-2" src={user.avatar} alt="avatar" />
+                      </MenuHandler>
+                      <MenuList className="text-lg">
+                        <MenuItem>My account</MenuItem>
+                        <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                      </MenuList>
+                    </Menu>
+                  </div>
+                ) : null}
 
                 <div className="flex flex-row items-center text-gray-300">
                   <div className="relative hover:bg-gray-800 block lg:hidden">

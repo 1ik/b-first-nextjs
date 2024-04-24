@@ -47,10 +47,12 @@ export default function Signin() {
     if (socialLoginSuccess) {
       setUser && setUser(socialLoginData?.data.data);
       localStorage.setItem("userInfo", JSON.stringify(socialLoginData?.data.data));
+      localStorage.setItem("token", JSON.stringify(socialLoginData?.data.token));
       route.push("/");
     } else if (isSuccess) {
       setUser && setUser(data?.data.data);
       localStorage.setItem("userInfo", JSON.stringify(data?.data.data));
+      localStorage.setItem("token", JSON.stringify(data?.data.token));
       route.push("/");
     }
   }, [data?.data, isSuccess, route, setUser, socialLoginData, socialLoginSuccess]);
