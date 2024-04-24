@@ -10,7 +10,6 @@ interface FeatureStoryUpdateProps {
 
 export const FeatureStoryUpdate: React.FC<FeatureStoryUpdateProps> = (props: FeatureStoryUpdateProps) => {
   const { request, isError, isPending, isSuccess, error } = usePut(`api/v1/stories/${props.storyId}`);
-
   const { data: storyData, isPending: storyIsPending, refetch } = useGet(`api/v1/stories/${props.storyId}`);
 
   useEffect(() => {
