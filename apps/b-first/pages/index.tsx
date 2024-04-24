@@ -9,8 +9,12 @@ import Header from "../components/Header/Header";
 import MobileMenu from "../components/MobileMenu/MobileMenu";
 import Slider from "../components/Slider/Slider";
 import Adds from "../components/adds/Adds";
+import { useContext } from "react";
+import { AppContext } from "./_app";
 
 export default function Index({ featuredNews, latestNews, bangladesh, politics, world }: any) {
+  const {user} = useContext(AppContext)
+  console.log(user)
   return (
     <>
       <Head>

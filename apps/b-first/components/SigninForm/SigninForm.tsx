@@ -12,9 +12,10 @@ export interface SigninFormProps {
   logoUrl: string;
   isError: boolean;
   loading: boolean;
+  onGoogleLogin?: () => void;
 }
 
-export default function SigninForm({ onSubmit, logoUrl, isError, loading }) {
+export default function SigninForm({ onSubmit, logoUrl, isError, loading, onGoogleLogin }: SigninFormProps) {
   const { register, handleSubmit } = useForm<Inputs>();
 
   return (
@@ -32,7 +33,12 @@ export default function SigninForm({ onSubmit, logoUrl, isError, loading }) {
             </div>
           )}
           <div>
-            <Button variant="gradient" className="w-full flex items-center justify-center gap-x-4">
+            <Button
+              onClick={onGoogleLogin}
+              fullWidth
+              variant="outlined"
+              className="flex items-center gap-x-3 justify-center"
+            >
               <img className="w-5" src="/img/google-logo.png" />
               Google
             </Button>
