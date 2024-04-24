@@ -22,7 +22,7 @@ const FeaturedItems = ({ items }: { items: any[] }) => {
                   <img
                     className="max-w-full w-full mx-auto h-full object-cover"
                     src={getImageUrl(items[0].meta.featured_image)}
-                    alt="Image description"
+                    alt={items[0].title}
                   />
                 </a>
                 <div className="absolute px-5 pt-8 pb-5 bottom-0 w-full bg-gradient-cover">
@@ -54,7 +54,7 @@ const FeaturedItems = ({ items }: { items: any[] }) => {
                               <img
                                 className="max-w-full min-h-[200px] object-cover h-full w-full mx-auto"
                                 src={getImageUrl(news.meta.featured_image)}
-                                alt="Image description"
+                                alt={news.title}
                               />
                             </div>
                           </a>

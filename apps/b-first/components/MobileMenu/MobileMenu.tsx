@@ -69,8 +69,8 @@ const MobileMenu = () => {
                                     </a>
                                 </li>
                                 <li className="relative">
-                                    <a href="/Opinion" className="block py-2 px-5 border-b border-gray-100 hover:bg-gray-50">
-                                        Opinion
+                                    <a href="/Entertainment" className="block py-2 px-5 border-b border-gray-100 hover:bg-gray-50">
+                                        Entertainment
                                     </a>
                                 </li>
                                 <li className="relative">

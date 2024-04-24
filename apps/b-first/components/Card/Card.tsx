@@ -12,7 +12,7 @@ const Card = (props: { item: any }) => {
               style={{ height: "200px" }}
               className="max-w-full h-full object-cover w-full mx-auto"
               src={getImageUrl(item.meta.featured_image)}
-              alt="alt title"
+              alt={item.title}
             />
           </a>
           <div className="py-3 flex-grow flex flex-col justify-between px-6">
