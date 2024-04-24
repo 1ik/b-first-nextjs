@@ -1,4 +1,4 @@
-import { Button, Card, CardBody, CardFooter, CardHeader, Input, Typography } from "@bfirst/material-tailwind";
+import { Alert, Button, Card, CardBody, CardFooter, CardHeader, Input, Typography } from "@bfirst/material-tailwind";
 import { ExclamationCircleIcon, LockClosedIcon, UserIcon } from "@heroicons/react/24/solid";
 import { useForm } from "react-hook-form";
 
@@ -27,10 +27,9 @@ export default function SigninForm({ onSubmit, logoUrl, isError, loading, onGoog
         </CardHeader>
         <CardBody className="flex flex-col gap-4">
           {isError && (
-            <div role="alert" className="alert alert-error mt-4">
-              <ExclamationCircleIcon className="w-6 h-6" />
-              <span>Invalid email or password</span>
-            </div>
+            <Alert icon={<ExclamationCircleIcon className="w-6 h-6" />} color="red">
+              Invalid email or password
+            </Alert>
           )}
           <div>
             <Button
