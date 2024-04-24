@@ -1,6 +1,7 @@
 import { useDelete, useGet } from "@bfirst/api-client";
 import { ConfirmButton } from "@bfirst/components-confirm-button";
 import { Icon } from "@bfirst/components-icon";
+import { Loader } from "@bfirst/components-loader";
 import { Table, TableColumnDef } from "@bfirst/components-table";
 import { Typography } from "@bfirst/material-tailwind";
 import moment from "moment";
@@ -93,7 +94,7 @@ export function FeatureCategoryList() {
 
   const [deleteId, setDeleteId] = useState<number | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const { data, refetch } = useGet(`api/v1/categories?page=${currentPage}&size=20`);
+  const { data, refetch, isPending } = useGet(`api/v1/categories?page=${currentPage}&size=20`);
   const { request, isSuccess } = useDelete(`api/v1/categories/${deleteId}`);
 
   const handleDelete = function (id: number) {
@@ -105,8 +106,8 @@ export function FeatureCategoryList() {
     if (isSuccess) refetch();
   }, [isSuccess, refetch]);
 
-  if (!data) {
-    return <></>;
+  if (isPending) {
+    return <Loader />;
   }
 
   return (
