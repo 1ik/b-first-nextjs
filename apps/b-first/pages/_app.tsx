@@ -4,6 +4,7 @@ import Head from "next/head";
 import { Dispatch, createContext, useState } from "react";
 import "./styles.css";
 import { Analytics } from "@bd-first/analytics";
+import { apps } from "../firebaseConfig";
 
 export interface IAppContext {
   user?: any;
