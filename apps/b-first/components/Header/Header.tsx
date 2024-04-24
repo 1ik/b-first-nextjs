@@ -115,9 +115,13 @@ const Header = ({ category }: { category?: string }) => {
                   <div>
                     <Menu>
                       <MenuHandler>
-                        <Avatar className="cursor-pointer p-1 mx-2" src={user.avatar} alt="avatar" />
+                        <Avatar
+                          className="cursor-pointer p-1 mx-2"
+                          src={user.avatar || "/img/user-avatar.png"}
+                          alt="avatar"
+                        />
                       </MenuHandler>
-                      <MenuList className="text-lg">
+                      <MenuList>
                         <MenuItem>My account</MenuItem>
                         <MenuItem onClick={handleLogout}>Logout</MenuItem>
                       </MenuList>
