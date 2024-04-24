@@ -7,6 +7,7 @@ import { Typography } from "@bfirst/material-tailwind";
 import moment from "moment";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Loader } from "@bfirst/components-loader";
 
 interface FeatureStoryListProps {
   searchInput?: string;
@@ -19,6 +20,14 @@ export function FeatureStoryList({ searchInput }: FeatureStoryListProps) {
       colKey: "id",
       title: "ID",
       width: "10%",
+      className: "hidden sm:block",
+      render: (row) => {
+        return (
+          <Typography variant="small" color="blue-gray" className="font-normal hidden sm:block">
+            {row.id}
+          </Typography>
+        );
+      },
     },
     {
       key: "title",
@@ -106,11 +115,8 @@ export function FeatureStoryList({ searchInput }: FeatureStoryListProps) {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [deleteId, setDeleteId] = useState<number | null>(null);
-  const { data, refetch } = useGet(`api/v1/stories?page=${currentPage}&size=20`);
+  const { data, refetch, isPending } = useGet(`api/v1/stories?title=${searchInput}&page=${currentPage}&size=20`);
   const { request, isSuccess } = useDelete(`api/v1/stories/${deleteId}`);
-
-  // Story Search
-  const { data: searchList, isPending } = useGet(`api/v1/stories?title=${searchInput}`);
 
   const handleDelete = (id: number) => {
     setDeleteId(id);
@@ -127,21 +133,15 @@ export function FeatureStoryList({ searchInput }: FeatureStoryListProps) {
     if (isSuccess) refetch();
   }, [isSuccess, refetch]);
 
-  if (!data) {
-    return <></>;
-  }
-
-  if (!searchList) {
-    return <></>;
-  }
 
   if (isPending) {
-    return <></>;
+    return <Loader />;
   }
+
   return (
     <Table
       columns={TABLE_COLUMNS}
-      data={searchInput ? searchList?.data : data?.data}
+      data={ data?.data}
       pagination={{
         currentPage,
         lastPage: data?.meta.last_page,

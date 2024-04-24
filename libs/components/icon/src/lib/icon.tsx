@@ -5,9 +5,13 @@ import { BiSolidTrashAlt } from "react-icons/bi";
 import { FaUserCircle } from "react-icons/fa";
 import { HiHome } from "react-icons/hi";
 import { HiOutlinePencilSquare } from "react-icons/hi2";
-import { IoIosColorPalette, IoIosSearch } from "react-icons/io";
-import { IoLogOutSharp, IoSettingsSharp } from "react-icons/io5";
+import { IoIosSearch } from "react-icons/io";
 import { MdAdd, MdContentCopy, MdRestore } from "react-icons/md";
+import { IoSettingsSharp } from "react-icons/io5";
+import { IoLogOutSharp } from "react-icons/io5";
+import { IoIosColorPalette } from "react-icons/io";
+import { RiArrowLeftSLine } from "react-icons/ri";
+import { RiArrowRightSLine } from "react-icons/ri";
 
 /* eslint-disable-next-line */
 export interface IconProps {
@@ -22,6 +26,8 @@ export interface IconProps {
     | "settings"
     | "logout"
     | "theme"
+    | "leftArrow"
+    | "rightArrow"
     | "copy";
   variant?: "filled" | "gradient" | "outlined" | "text";
   size?: number;
@@ -61,6 +67,12 @@ export const Icon = React.forwardRef<HTMLButtonElement, IconProps>(
         break;
       case "theme":
         Icon = IoIosColorPalette;
+        break;
+      case "leftArrow":
+        Icon = RiArrowLeftSLine;
+        break;
+      case "rightArrow":
+        Icon = RiArrowRightSLine;
         break;
       case "copy":
         Icon = MdContentCopy;

@@ -6,6 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Breadcrumb } from "../../components";
 import { dateFormatter } from "../../dateFormat_utils";
+import { Loader } from "@bfirst/components-loader";
 
 const dropTarget = (
   <div className="py-3 text-center text-blue-600/50 font-bold border-2 border-dashed border-blue-600/50 rounded-md">
@@ -18,6 +19,7 @@ export function ManageStories() {
   const [featuredStories, setFeaturedStories] = useState([]);
   const [search, setSearch] = useState("");
   const [showConfirmModalFor, setShowConfirmModalFor] = useState<number>();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   let debounce: string | number | NodeJS.Timeout | undefined;
   const debounceSearch = function (callback: () => void) {
@@ -102,6 +104,9 @@ export function ManageStories() {
     }
   }, [featuredSaveSuccess]);
 
+  if (isLoading) {
+    return <Loader />;
+  }
   return (
     <div className="overflow-x-auto flex flex-col h-full">
       <div className="inline-flex h-10 justify-between items-center px-4 py-2 w-full border-b fixed bg-white z-10">

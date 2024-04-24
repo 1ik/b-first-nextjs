@@ -4,6 +4,7 @@ import { HCF } from "@bfirst/components-layout";
 import { Breadcrumbs } from "@bfirst/material-tailwind";
 import { Link } from "react-router-dom";
 
+
 export default function TrashList() {
   return (
     <HCF>
