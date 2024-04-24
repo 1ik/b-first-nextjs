@@ -1,5 +1,6 @@
 import { useGet, usePost } from "@bfirst/api-client";
 import { HCF } from "@bfirst/components-layout";
+import { Loader } from "@bfirst/components-loader";
 import { MultiselectSearch } from "@bfirst/components-multiselect-search";
 import { TinymceEditor } from "@bfirst/components-tinymce-editor";
 import {
@@ -12,6 +13,11 @@ import {
   Input,
   Textarea,
   Typography,
+  Tabs,
+  TabsHeader,
+  TabsBody,
+  Tab,
+  TabPanel,
 } from "@bfirst/material-tailwind";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -61,6 +67,9 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
   const { data: authorsData } = useGet(`api/v1/authors?name=${search.authors}`);
   const { data: tagsData } = useGet(`api/v1/tags?name=${search.tags}`);
   const { data: categoriesData } = useGet(`api/v1/categories?name=${search.categories}`);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [lastPage, setLastpage] = useState(0);
+  const { data: mediaData, isPending } = useGet(`api/v1/media-image-list?page=${currentPage}`);
 
   const navigate = useNavigate();
   const {
@@ -125,6 +134,24 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
     }
   }, [isSuccess, uploadImageData]);
 
+  const data = [
+    {
+      label: "Upload",
+      value: "upload",
+    },
+    {
+      label: "Library",
+      value: "library",
+    },
+  ];
+  const handleMediaUrlClick = (media_url: string) => {
+    setFeaturedImgUrl(media_url);
+    setDialogOpen(false);
+  };
+
+  useEffect(() => {
+    setLastpage(mediaData?.media_images.last_page);
+  }, []);
   return (
     <form onSubmit={handleSubmit(onValidate)} className="h-full">
       <HCF>
@@ -243,33 +270,117 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
                 <Typography>Media Browser</Typography>
               </DialogHeader>
               <DialogBody>
-                <div className="flex flex-col gap-y-4">
-                  <div className="lg:w-2/3">
-                    <Input
-                      onChange={(e) => setFeaturedImg(e.target.files?.[0])}
-                      variant="standard"
-                      label="Featured Image*"
-                      type="file"
-                    />
-                    <Typography className="my-2">
-                      Allowed file type: <span className="font-bold">png, jpg, jpeg, gif</span>
-                    </Typography>
-                  </div>
-                  <div className="lg:w-2/3">
-                    <Input
-                      {...register("imageCaption")}
-                      defaultValue={defaultData?.story.meta.imageCaption}
-                      label="Image Caption"
-                    />
-                  </div>
-                </div>
+                {/*======== Taps ======= */}
+                <Tabs id="custom-animation" value="upload">
+                  <TabsHeader>
+                    {data.map(({ label, value }) => (
+                      <Tab key={value} value={value}>
+                        {label}
+                      </Tab>
+                    ))}
+                  </TabsHeader>
+                  <TabsBody
+                    animate={{
+                      initial: { y: 250 },
+                      mount: { y: 0 },
+                      unmount: { y: 250 },
+                    }}
+                  >
+                    {data.map(({ value }) => (
+                      <TabPanel key={value} value={value}>
+                        {value === "upload" && (
+                          <div>
+                            <DialogBody>
+                              <div className="flex flex-col gap-y-4">
+                                <div className="lg:w-2/3 mt-5 mb-10">
+                                  <Input
+                                    onChange={(e) => setFeaturedImg(e.target.files?.[0])}
+                                    variant="standard"
+                                    label="Featured Image*"
+                                    type="file"
+                                  />
+                                  <Typography className="my-2">
+                                    Allowed file type: <span className="font-bold">png, jpg, jpeg, gif</span>
+                                  </Typography>
+                                </div>
+                                <div className="lg:w-2/3 mb-10 mt-6">
+                                  <Input
+                                    {...register("imageCaption")}
+                                    defaultValue={defaultData?.story.meta.imageCaption}
+                                    label="Image Caption"
+                                  />
+                                </div>
+                              </div>
+                            </DialogBody>
+                            <DialogFooter>
+                              <Button onClick={handleUploadFeaturedImg}>Add to News</Button>
+                              <Button className="ml-2" variant="outlined" onClick={() => setDialogOpen(false)}>
+                                Cancel
+                              </Button>
+                            </DialogFooter>
+                          </div>
+                        )}
+                        {value === "library" && (
+                          <>
+                            <DialogBody>
+                              {isPending ? (
+                                <div className="h-60 w-full">
+                                  <Loader />
+                                </div>
+                              ) : (
+                                <div className="flex gap-5 flex-wrap  overflow-y-scroll md:overflow-auto md:h-60 h-[500px] w-full">
+                                  {mediaData?.media_images.data.map((item: { url: string }) => {
+                                    return (
+                                      <div>
+                                        <img
+                                          onClick={() => handleMediaUrlClick(item.url)}
+                                          className="w-[190px] aspect-video object-cover cursor-pointer"
+                                          src={`https://images.bangladeshfirst.com/resize?width=1600&height=900&format=webp&quality=85&path=${item.url}`}
+                                          alt={item.url}
+                                        />
+                                      </div>
+                                    );
+                                  })}
+                                </div>
+                              )}
+                            </DialogBody>
+
+                            <DialogFooter>
+                              <tfoot className="border-b border-blue-gray-100 w-full">
+                                <tr className="p-3 w-full flex justify-between items-center">
+                                  <td>
+                                    <Typography variant="small" color="blue-gray" className="font-normal">
+                                      Page {currentPage} of {lastPage}
+                                    </Typography>
+                                  </td>
+                                  <td className="flex gap-2">
+                                    <Button
+                                      variant="outlined"
+                                      size="sm"
+                                      disabled={currentPage === 1}
+                                      onClick={() => setCurrentPage((cur) => cur - 1)}
+                                    >
+                                      Previous
+                                    </Button>
+                                    <Button
+                                      variant="outlined"
+                                      size="sm"
+                                      disabled={currentPage === lastPage}
+                                      onClick={() => setCurrentPage((cur) => cur + 1)}
+                                    >
+                                      Next
+                                    </Button>
+                                  </td>
+                                </tr>
+                              </tfoot>
+                            </DialogFooter>
+                          </>
+                        )}
+                      </TabPanel>
+                    ))}
+                  </TabsBody>
+                </Tabs>
               </DialogBody>
-              <DialogFooter>
-                <Button onClick={handleUploadFeaturedImg}>Add to News</Button>
-                <Button className="ml-2" variant="outlined" onClick={() => setDialogOpen(false)}>
-                  Cancel
-                </Button>
-              </DialogFooter>
             </Dialog>
           </CardBody>
         </HCF.Content>
