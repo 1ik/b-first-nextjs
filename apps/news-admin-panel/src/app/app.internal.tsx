@@ -138,7 +138,7 @@ export function AppInternal() {
                       </Typography>
                     </MenuItem>
                     <MenuItem className="flex items-center gap-2">
-                    <Icon name="theam" size={18} variant="text"/>
+                    <Icon name="theme" size={18} variant="text"/>
 
                       <Typography variant="small" className="font-medium">
                          Theme

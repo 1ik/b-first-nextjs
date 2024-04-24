@@ -1,6 +1,7 @@
 import { useDelete, useGet } from "@bfirst/api-client";
 import { ConfirmButton } from "@bfirst/components-confirm-button";
 import { Icon } from "@bfirst/components-icon";
+import { PopoverNotify } from "@bfirst/components-popover-notify";
 import { Table, TableColumnDef } from "@bfirst/components-table";
 import { Typography } from "@bfirst/material-tailwind";
 import moment from "moment";
@@ -48,10 +49,11 @@ export function FeatureStoryList({ searchInput }: FeatureStoryListProps) {
       key: "createdAt",
       colKey: "created_at",
       title: "Created At",
-      width: "20%",
+      width: "25%",
+      className: "hidden md:block",
       render: (row) => {
         return (
-          <Typography variant="small" className="font-normal leading-none opacity-70">
+          <Typography variant="small" className="font-normal leading-none opacity-70 hidden md:block">
             {moment(row["created_at"]).format("YYYY-MM-DD hh:mm a")}
           </Typography>
         );
@@ -71,6 +73,12 @@ export function FeatureStoryList({ searchInput }: FeatureStoryListProps) {
       },
     },
     {
+      key: "created_by",
+      colKey: "created_by",
+      title: "Created By",
+      width: "30%",
+    },
+    {
       key: "action",
       colKey: "id",
       title: "Action",
@@ -79,6 +87,7 @@ export function FeatureStoryList({ searchInput }: FeatureStoryListProps) {
       render: (row) => {
         return (
           <div className="flex items-end gap-4 justify-end w-full">
+            <PopoverNotify trigger={<Icon name="copy" onClick={() => handleCopyEmbed(row.id)} />} message="copied" />
             <ConfirmButton
               onConfirm={() => handleDelete(row.id)}
               message="Do you want to remove the stories ?"
@@ -106,6 +115,12 @@ export function FeatureStoryList({ searchInput }: FeatureStoryListProps) {
   const handleDelete = (id: number) => {
     setDeleteId(id);
     request();
+  };
+
+  const handleCopyEmbed = (id: number) => {
+    navigator.clipboard.writeText(
+      `<iframe class="news-iframe" style="width: 100%; background: #F2F4F7; border-radius: 8px; padding: 8px 8px 0px 8px; box-sizing: border-box;" src="https://backend.bangladeshfirst.com/api/v1/public/preview-story/${id}" ></iframe>`
+    );
   };
 
   useEffect(() => {
