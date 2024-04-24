@@ -70,6 +70,7 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
   const [currentPage, setCurrentPage] = useState(1);
   const [lastPage, setLastpage] = useState(0);
   const { data: mediaData, isPending } = useGet(`api/v1/media-image-list?page=${currentPage}`);
+  // console.log(mediaData.media_images);
 
   const navigate = useNavigate();
   const {
@@ -303,7 +304,7 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
                                     Allowed file type: <span className="font-bold">png, jpg, jpeg, gif</span>
                                   </Typography>
                                 </div>
-                                <div className="lg:w-2/3 mb-10 mt-6">
+                                <div className="lg:w-2/3 md:mb-16 mt-6">
                                   <Input
                                     {...register("imageCaption")}
                                     defaultValue={defaultData?.story.meta.imageCaption}
@@ -328,7 +329,7 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
                                   <Loader />
                                 </div>
                               ) : (
-                                <div className="flex gap-5 flex-wrap  overflow-y-scroll md:overflow-auto md:h-60 h-[500px] w-full">
+                                <div className="flex gap-5 flex-wrap justify-center md:justify-start  overflow-y-scroll md:overflow-auto md:h-60 h-48 w-full">
                                   {mediaData?.media_images.data.map((item: { url: string }) => {
                                     return (
                                       <div>
