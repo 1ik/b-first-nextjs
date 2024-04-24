@@ -68,9 +68,8 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
   const { data: tagsData } = useGet(`api/v1/tags?name=${search.tags}`);
   const { data: categoriesData } = useGet(`api/v1/categories?name=${search.categories}`);
   const [currentPage, setCurrentPage] = useState(1);
-  const [lastPage, setLastpage] = useState(0);
   const { data: mediaData, isPending } = useGet(`api/v1/media-image-list?page=${currentPage}`);
-  // console.log(mediaData.media_images);
+ 
 
   const navigate = useNavigate();
   const {
@@ -150,9 +149,7 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
     setDialogOpen(false);
   };
 
-  useEffect(() => {
-    setLastpage(mediaData?.media_images.last_page);
-  }, []);
+
   return (
     <form onSubmit={handleSubmit(onValidate)} className="h-full">
       <HCF>
@@ -347,14 +344,14 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
                             </DialogBody>
 
                             <DialogFooter>
-                              <tfoot className="border-b border-blue-gray-100 w-full">
-                                <tr className="p-3 w-full flex justify-between items-center">
-                                  <td>
+                              <div className="border-b border-blue-gray-100 w-full">
+                                <div className="p-3 w-full flex justify-between items-center">
+                                  <div>
                                     <Typography variant="small" color="blue-gray" className="font-normal">
-                                      Page {currentPage} of {lastPage}
+                                      Page {currentPage} of {mediaData?.media_images.last_page}
                                     </Typography>
-                                  </td>
-                                  <td className="flex gap-2">
+                                  </div>
+                                  <div className="flex gap-2">
                                     <Button
                                       variant="outlined"
                                       size="sm"
@@ -366,14 +363,14 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
                                     <Button
                                       variant="outlined"
                                       size="sm"
-                                      disabled={currentPage === lastPage}
+                                      disabled={currentPage === mediaData?.media_images.last_page}
                                       onClick={() => setCurrentPage((cur) => cur + 1)}
                                     >
                                       Next
                                     </Button>
-                                  </td>
-                                </tr>
-                              </tfoot>
+                                  </div>
+                                </div>
+                              </div>
                             </DialogFooter>
                           </>
                         )}
