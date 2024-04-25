@@ -1,6 +1,6 @@
 import { useGet, usePost } from "@bfirst/api-client";
 import { TypeAheadSearch } from "@bfirst/components-type-ahead-search";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import SortableList, { SortableItem } from "react-easy-sort";
 
@@ -57,8 +57,10 @@ export function TrendingTags() {
   const [search, setSearch] = useState("");
   const { data: searchedNews } = useGet(`api/v1/tags?name=${search}`);
   const [featuredStories, setFeaturedStories] = useState([]);
-  // const [categoryOption, setCategoryOption] = useState("0");
+  const [showConfirmModalFor, setShowConfirmModalFor] = useState<number>();
   const { request, isSuccess: featuredSaveSuccess } = usePost(`api/v1/trendy-topic/create`);
+
+
 
   const move = <T,>(array: T[], from: number, to: number): T[] => {
     const newArray: T[] = [...array];
@@ -68,7 +70,7 @@ export function TrendingTags() {
   };
 
   const onSortEnd = (oldIndex: number, newIndex: number) => {
-    setData((array: any[]) => move(array, oldIndex, newIndex) as never);
+    setFeaturedStories((array: any[]) => move(array, oldIndex, newIndex) as never);
   };
 
   let debounce: string | number | NodeJS.Timeout | undefined;
@@ -109,6 +111,24 @@ export function TrendingTags() {
     request(newTrendingTopicId);
   };
 
+  const handleConfirm = (id: number) => {
+    setFeaturedStories((curr) => curr.filter((item) => (item as { id: number }).id !== id));
+    setShowConfirmModalFor(undefined);
+    toast.dismiss();
+    toast.success("List removed successfully", { position: "top-center" });
+  };
+  const handleRemoveFeaturedStories = function (id: number) {
+    setShowConfirmModalFor(id);
+  };
+
+
+  useEffect(() => {
+    if (featuredSaveSuccess) {
+      toast.success("Featured saved succesfully", {
+        position: "top-center",
+      });
+    }
+  }, [featuredSaveSuccess]);
 
 
   return (
@@ -155,12 +175,34 @@ export function TrendingTags() {
                       <button
                         onClick={(e) => {
                           e.preventDefault();
-                          // handleRemoveFeaturedStories((item as { id: number }).id);
+                          handleRemoveFeaturedStories((item as { id: number }).id);
                         }}
                         className="btn"
                       >
                         X
                       </button>
+                      {showConfirmModalFor === (item as { id: number }).id && (
+                        <div
+                          id="delete-confirmation-modal"
+                          className="absolute bg-white shadow-lg right-0 bottom-[100%] p-3 rounded-md cursor-default border border-black/30"
+                        >
+                          Do you want to remove it from list ?
+                          <div className="flex w-full [&>*]:flex-grow">
+                            <button
+                              onClick={() => handleConfirm((item as { id: number }).id)}
+                              className="px-2 py-1 border hover:bg-black hover:text-white"
+                            >
+                              Yes
+                            </button>
+                            <button
+                              onClick={() => setShowConfirmModalFor(undefined)}
+                              className="px-2 py-1 border hover:bg-black hover:text-white"
+                            >
+                              No
+                            </button>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </SortableItem>
