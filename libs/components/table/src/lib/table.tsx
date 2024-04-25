@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "@bfirst/material-tailwind";
 import { Typography } from "@material-tailwind/react";
+import { Icon } from "@bfirst/components-icon";
 
 export interface TableColumnDef {
   key?: string;
@@ -25,7 +26,7 @@ export interface TableProps {
 export const Table: React.FC<TableProps> = ({ columns, data, pagination }) => {
   return (
     <table className="w-full h-full flex flex-col table-auto text-left">
-      <thead className="h-12 w-full position-sticky">
+      <thead className="md:h-12 w-full position-sticky">
         <tr className="w-full flex flex-row">
           {columns.map((col) => (
             <th
@@ -40,10 +41,10 @@ export const Table: React.FC<TableProps> = ({ columns, data, pagination }) => {
           ))}
         </tr>
       </thead>
-      <tbody className="flex-1 overflow-y-scroll w-full">
+      <tbody className="flex-1 overflow-y-scroll md:w-full">
         {data.map((row, index) => {
           const isLast = index === data.length - 1;
-          const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50 flex items-center";
+          const classes = isLast ? "sm:p-4" : "sm:p-4 border-b border-blue-gray-50 flex items-center";
 
           return (
             <tr key={index} className="w-full flex">
@@ -77,6 +78,7 @@ export const Table: React.FC<TableProps> = ({ columns, data, pagination }) => {
               variant="outlined"
               size="sm"
               disabled={pagination?.currentPage === 1}
+              className="md:block hidden"
               onClick={() => {
                 pagination && pagination.pageChanged(pagination.currentPage - 1);
               }}
@@ -86,7 +88,30 @@ export const Table: React.FC<TableProps> = ({ columns, data, pagination }) => {
             <Button
               variant="outlined"
               size="sm"
+              disabled={pagination?.currentPage === 1}
+              className="block md:hidden m-0 p-0 border-0"
+              onClick={() => {
+                pagination && pagination.pageChanged(pagination.currentPage - 1);
+              }}
+            >
+              <Icon size={22} name="leftArrow" variant="text" />
+            </Button>
+            <Button
+              variant="outlined"
+              size="sm"
               disabled={pagination?.currentPage === pagination?.lastPage}
+              className="md:hidden block m-0 p-0 border-0"
+              onClick={() => {
+                pagination && pagination.pageChanged(pagination.currentPage + 1);
+              }}
+            >
+              <Icon size={22} name="rightArrow" variant="text" />
+            </Button>
+            <Button
+              variant="outlined"
+              size="sm"
+              disabled={pagination?.currentPage === pagination?.lastPage}
+              className="hidden md:block"
               onClick={() => {
                 pagination && pagination.pageChanged(pagination.currentPage + 1);
               }}

@@ -8,5 +8,5 @@ export const newsUrl = (news: any) =>
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const getCategoryNames = (item: any) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return item?.categories?.map((m: any) => m?.name).join(",");
+  return item?.categories?.map((m: any) => m?.name).join(", ");
 };

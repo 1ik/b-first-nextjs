@@ -9,7 +9,7 @@ const CardCaption = (props: { item: any }) => {
           <img
             className="max-w-full w-full mx-auto"
             src={getImageUrl(item.meta.featured_image, 1600, 900)}
-            alt={item.featured_image_caption}
+            alt={item.title}
           />
         </a>
         <div className="py-3 px-6">

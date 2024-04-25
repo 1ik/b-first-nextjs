@@ -6,29 +6,39 @@ import { Typography } from "@bfirst/material-tailwind";
 import moment from "moment";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Loader } from "@bfirst/components-loader";
 
 /**
  * Feature component that displays list of authors.
  */
 export function FeatureAuthorList() {
+ 
   const TABLE_COLUMNS: TableColumnDef[] = [
     {
       key: "id",
       colKey: "id",
       title: "ID",
       width: "10%",
+      className: "hidden sm:block",
+      render: (row) => {
+        return (
+          <Typography variant="small" color="blue-gray" className="font-normal hidden sm:block">
+            {row.id}
+          </Typography>
+        );
+      },
     },
     {
       key: "name",
       colKey: "name",
       title: "Author",
-      width: "20%",
+      width: "40%",
     },
     {
       key: "createdAt",
       colKey: "created_at",
       title: "Created At",
-      width: "20%",
+      width: "25%",
       render: (row) => {
         return (
           <Typography variant="small" className="font-normal leading-none opacity-70">
@@ -42,13 +52,20 @@ export function FeatureAuthorList() {
       colKey: "updated_at",
       title: "Updated At",
       width: "20%",
+      className : "hidden md:block",
       render: (row) => {
         return (
-          <Typography variant="small" className="font-normal leading-none opacity-70">
+          <Typography variant="small" className="font-normal leading-none opacity-70 hidden md:block">
             {moment(row["updated_at"]).format("YYYY-MM-DD hh:mm a")}
           </Typography>
         );
       },
+    },
+    {
+      key: "created_by",
+      colKey: "created_by",
+      title: "Created By",
+      width: "25%",
     },
     {
       key: "action",
@@ -58,7 +75,7 @@ export function FeatureAuthorList() {
       className: "text-right",
       render: (row) => {
         return (
-          <div className="flex items-end gap-4 justify-end w-full">
+          <div className="flex items-end  md:gap-4 gap-2 justify-end w-full">
             <ConfirmButton
               onConfirm={() => handleDelete(row.id)}
               message="Do you want to remove the author ?"
@@ -77,7 +94,7 @@ export function FeatureAuthorList() {
 
   const [deleteId, setDeleteId] = useState<null | number>(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const { data, refetch } = useGet(`api/v1/authors?page=${currentPage}&size=20`);
+  const { data, refetch, isPending } = useGet(`api/v1/authors?page=${currentPage}&size=20`);
   const { request, isSuccess } = useDelete(`api/v1/authors/${deleteId}`);
 
   const handleDelete = function (id: number) {
@@ -89,8 +106,8 @@ export function FeatureAuthorList() {
     if (isSuccess) refetch();
   }, [isSuccess, refetch]);
 
-  if (!data) {
-    return <></>;
+  if (isPending) {
+    return <Loader />;
   }
 
   return (

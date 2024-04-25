@@ -1,30 +1,41 @@
 import { useDelete, useGet, usePut } from "@bfirst/api-client";
 import { ConfirmButton } from "@bfirst/components-confirm-button";
 import { Icon } from "@bfirst/components-icon";
+import { Loader } from "@bfirst/components-loader";
 import { Table, TableColumnDef } from "@bfirst/components-table";
 import { Typography } from "@bfirst/material-tailwind";
 import moment from "moment";
 import { useEffect, useState } from "react";
 
 export function FeatureTrashStoryList() {
+
+
   const TABLE_COLUMNS: TableColumnDef[] = [
     {
       key: "id",
       colKey: "id",
       title: "ID",
       width: "10%",
+      className: "hidden sm:block",
+      render: (row) => {
+        return (
+          <Typography variant="small" color="blue-gray" className="font-normal hidden sm:block">
+            {row.id}
+          </Typography>
+        );
+      },
     },
     {
       key: "title",
       colKey: "title",
       title: "Title",
-      width: "50%",
+      width: "45%",
     },
     {
       key: "authors",
       colKey: "authors",
       title: "Authors",
-      width: "30%",
+      width: "38%",
       render: (row) => {
         return (
           <Typography variant="small" className="font-normal leading-none opacity-70">
@@ -38,13 +49,20 @@ export function FeatureTrashStoryList() {
       colKey: "deleted_at",
       title: "Deleted At",
       width: "20%",
+      className: "hidden md:block",
       render: (row) => {
         return (
-          <Typography variant="small" className="font-normal leading-none opacity-70">
+          <Typography variant="small" className="font-normal leading-none opacity-70 hidden md:block">
             {moment(row["deleted_at"]).format("YYYY-MM-DD hh:mm a")}
           </Typography>
         );
       },
+    },
+    {
+      key: "created_by",
+      colKey: "created_by",
+      title: "Created By",
+      width: "15%",
     },
     {
       key: "action",
@@ -54,7 +72,7 @@ export function FeatureTrashStoryList() {
       className: "text-right",
       render: (row) => {
         return (
-          <div className="flex items-end gap-4 justify-end w-full">
+          <div className="flex items-end md:gap-4 gap-2 justify-end w-full">
             <ConfirmButton
               onConfirm={() => handleDelete(row.id)}
               message="Do you want to permanently remove the story ?"
@@ -79,7 +97,7 @@ export function FeatureTrashStoryList() {
   const [deleteId, setDeleteId] = useState<number | null>(null);
   const [restoreId, setRestoreId] = useState<number | null>(null);
 
-  const { data, refetch } = useGet(`api/v1/trash-items/story?page=${currentPage}&size=20`);
+  const { data, refetch, isPending } = useGet(`api/v1/trash-items/story`);
   const { request: deleteRequest, isSuccess: deleteSuccess } = useDelete(`api/v1/delete-trash-item/story/${deleteId}`);
   const { request: restoreRequest, isSuccess: restoreSuccess } = usePut(`api/v1/restore-trash-item/story/${restoreId}`);
 
@@ -99,8 +117,8 @@ export function FeatureTrashStoryList() {
     }
   }, [deleteSuccess, restoreSuccess]);
 
-  if (!data) {
-    return <></>;
+  if (isPending) {
+    return <Loader />;
   }
 
   return (
