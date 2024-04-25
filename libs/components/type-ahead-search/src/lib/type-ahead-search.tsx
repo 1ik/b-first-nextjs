@@ -22,6 +22,7 @@ interface ItemProps {
 type Entry = {
   id?: any;
   title: string;
+  name : string
 };
 
 export interface TypeAheadSearchProps {
@@ -165,7 +166,7 @@ export function TypeAheadSearch({ label, items, onSearch, itemsSelected }: TypeA
                   })}
                   active={activeIndex === index}
                 >
-                  {item.title}
+                  {item.title || item.name}
                 </Item>
               ))}
             </div>

@@ -1,5 +1,7 @@
-import { Input } from "@bfirst/material-tailwind";
+import { useGet, usePost } from "@bfirst/api-client";
+import { TypeAheadSearch } from "@bfirst/components-type-ahead-search";
 import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
 import SortableList, { SortableItem } from "react-easy-sort";
 
 const demoTagsList = [
@@ -52,6 +54,11 @@ const dropTarget = (
 );
 export function TrendingTags() {
   const [data, setData] = useState(demoTagsList);
+  const [search, setSearch] = useState("");
+  const { data: searchedNews } = useGet(`api/v1/tags?name=${search}`);
+  const [featuredStories, setFeaturedStories] = useState([]);
+  // const [categoryOption, setCategoryOption] = useState("0");
+  const { request, isSuccess: featuredSaveSuccess } = usePost(`api/v1/trendy-topic/create`);
 
   const move = <T,>(array: T[], from: number, to: number): T[] => {
     const newArray: T[] = [...array];
@@ -59,14 +66,65 @@ export function TrendingTags() {
     newArray.splice(to, 0, item);
     return newArray;
   };
+
   const onSortEnd = (oldIndex: number, newIndex: number) => {
     setData((array: any[]) => move(array, oldIndex, newIndex) as never);
   };
 
+  let debounce: string | number | NodeJS.Timeout | undefined;
+  const debounceSearch = function (callback: () => void) {
+    clearTimeout(debounce);
+    debounce = setTimeout(() => {
+      callback();
+    }, 500);
+  };
+
+  const handleAddFeaturedStories = function (news: any) {
+    if (!news) return;
+    if (featuredStories.length >= 10) {
+      toast.success("Last item removed and new one added", {
+        position: "top-center",
+      });
+      setFeaturedStories((cur) => {
+        const newList = cur.slice(0, -1);
+        return [{ id: news.id, name: news.name, created_at: news.created_at }, ...newList] as never;
+      });
+    } else
+      setFeaturedStories((cur) => [{ id: news.id, name: news.name, created_at: news.created_at }, ...cur] as never);
+    setSearch("");
+  };
+
+  const handleSubmit = async function (e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (featuredStories.length !== 10) {
+      toast.warning("Total Trending Topic must be 10", {
+        position: "top-center",
+      });
+      return;
+    }
+    const newTrendingTopicId = {
+      tag_ids: featuredStories.map((story) => (story as { id: number }).id),
+    };
+
+    request(newTrendingTopicId);
+  };
+
+
+
   return (
     <div className="p-5">
-      <Input label="Search Trending Topic" type="text" placeholder="Type Trending Tags" />
-      <form>
+      <ToastContainer />
+      <form onSubmit={handleSubmit}>
+        <div className="col-span-3">
+          <TypeAheadSearch
+            label="Type for Trending Topic"
+            items={searchedNews?.data.filter((sN: any) => !featuredStories.some((fN: any) => fN.id === sN.id))}
+            onSearch={(s) => debounceSearch(() => setSearch(s))}
+            itemsSelected={(i) => {
+              handleAddFeaturedStories(i);
+            }}
+          />
+        </div>
         <div className="col-span-full">
           <label className="block text-lg font-medium leading-6 mb-4 mt-6 text-gray-900">Trending Topic</label>
           <div className="grid grid-cols-3 py-4 mb-2 border-b">
@@ -87,7 +145,7 @@ export function TrendingTags() {
               className="flex flex-grow flex-col gap-y-2"
               draggedItemClassName="dragged"
             >
-              {data.map((item, index) => (
+              {featuredStories.map((item, index) => (
                 <SortableItem key={(item as { id: number }).id}>
                   <div className="flex  justify-between items-center py-3 rounded-md cursor-grab px-2 bg-gray-200  relative   max-[340px]:w-[260px] max-[360px]:w-[290px] max-[430px]:w-[330px] max-[530px]:w-[350px]   sm:w-full">
                     <div className="px-5">
