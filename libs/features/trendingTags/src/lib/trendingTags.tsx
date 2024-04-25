@@ -3,6 +3,9 @@ import { TypeAheadSearch } from "@bfirst/components-type-ahead-search";
 import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import SortableList, { SortableItem } from "react-easy-sort";
+import { Typography } from "@bfirst/material-tailwind";
+import moment from "moment";
+// import { dateFormatter } from "../../dateFormat_utils";
 
 const demoTagsList = [
   {
@@ -56,11 +59,10 @@ export function TrendingTags() {
   const [data, setData] = useState(demoTagsList);
   const [search, setSearch] = useState("");
   const { data: searchedNews } = useGet(`api/v1/tags?name=${search}`);
+  const { data: TendingList, isSuccess: trendingLoadSuccess } = useGet(`api/v1/public/trendy-topics`);
   const [featuredStories, setFeaturedStories] = useState([]);
   const [showConfirmModalFor, setShowConfirmModalFor] = useState<number>();
   const { request, isSuccess: featuredSaveSuccess } = usePost(`api/v1/trendy-topic/create`);
-
-
 
   const move = <T,>(array: T[], from: number, to: number): T[] => {
     const newArray: T[] = [...array];
@@ -121,7 +123,6 @@ export function TrendingTags() {
     setShowConfirmModalFor(id);
   };
 
-
   useEffect(() => {
     if (featuredSaveSuccess) {
       toast.success("Featured saved succesfully", {
@@ -130,6 +131,11 @@ export function TrendingTags() {
     }
   }, [featuredSaveSuccess]);
 
+  useEffect(() => {
+    if (trendingLoadSuccess) {
+      setFeaturedStories([...TendingList.data] as never);
+    }
+  }, [TendingList, trendingLoadSuccess]);
 
   return (
     <div className="p-5">
@@ -147,10 +153,15 @@ export function TrendingTags() {
         </div>
         <div className="col-span-full">
           <label className="block text-lg font-medium leading-6 mb-4 mt-6 text-gray-900">Trending Topic</label>
-          <div className="grid grid-cols-3 py-4 mb-2 border-b">
-            <p className="grid-col-1">Serial</p>
-            <p className="grid-col-2 text-center">Title</p>
-            <p className="grid-col-3 text-center hidden md:block">Created at</p>
+          <div className="flex border-b justify-between  pr-2 py-4">
+            <div className="flex gap-x-6">
+              <p>Serial</p>
+              <p>Name</p>
+            </div>
+            <div className="flex justify-between w-48">
+              <p>Created at</p>
+              <p>Action</p>
+            </div>
           </div>
 
           <div className="flex gap-x-2 mb-5">
@@ -167,9 +178,14 @@ export function TrendingTags() {
             >
               {featuredStories.map((item, index) => (
                 <SortableItem key={(item as { id: number }).id}>
-                  <div className="flex  justify-between items-center py-3 rounded-md cursor-grab px-2 bg-gray-200  relative   max-[340px]:w-[260px] max-[360px]:w-[290px] max-[430px]:w-[330px] max-[530px]:w-[350px]   sm:w-full">
-                    <div className="px-5">
+                  <div className="flex   justify-between items-center py-3 rounded-md ml-1 cursor-grab px-4 bg-gray-200  relative   max-[340px]:w-[260px] max-[360px]:w-[290px] max-[430px]:w-[330px] max-[530px]:w-[350px] sm:w-full ">
+                    <div className="px-5 flex items-center justify-between w-full">
                       <h3>{(item as { name: string }).name}</h3>
+                      
+
+                      <Typography variant="small" className="font-normal leading-none opacity-70">
+                        {moment((item as { created_at: string }).created_at).format("YYYY-MM-DD hh:mm a")}
+                      </Typography>
                     </div>
                     <div className="flex gap-x-4 items-center">
                       <button
