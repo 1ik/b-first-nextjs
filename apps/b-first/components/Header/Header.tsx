@@ -1,11 +1,12 @@
 import { Avatar, Menu, MenuHandler, MenuItem, MenuList } from "@bfirst/material-tailwind";
 import Link from "next/link";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../pages/_app";
 import CurrentDate from "../CurrentDate/CurrentDate";
 
 const Header = ({ category }: { category?: string }) => {
   const { user, setUser, setToken } = useContext(AppContext);
+  const [isClient, setIsClient] = useState(false)
 
   const handleLogout = function () {
     setUser && setUser({});
@@ -15,6 +16,11 @@ const Header = ({ category }: { category?: string }) => {
       localStorage.removeItem("token");
     }
   };
+
+  useEffect(()=>{
+    setIsClient(true)
+  }, [])
+
   return (
     <>
       <header className="fixed top-0 left-0 right-0 z-50 border-b-2">
@@ -111,12 +117,12 @@ const Header = ({ category }: { category?: string }) => {
                   </li>
                 </ul>
 
-                {Object.keys(user)?.length ? (
-                  <div>
+                {isClient && Object.keys(user)?.length ? (
+                  <div className="border-l">
                     <Menu>
                       <MenuHandler>
                         <Avatar
-                          className="cursor-pointer p-1 mx-2"
+                          className="cursor-pointer p-1 mx-2 opacity-80 hover:opacity-100"
                           src={user.avatar || "/img/user-avatar.png"}
                           alt="avatar"
                         />
