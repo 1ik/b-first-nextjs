@@ -142,12 +142,17 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
 
   const handleMediaUrlClick = (media_url: string) => {
     setFeaturedImgUrl(media_url);
-    setDialogOpen(false);
+    // setDialogOpen(false);
   };
 
   const handlePopup = () => {
     setDialogOpen(false);
   };
+
+  const handleAddnews =(image_caption: string)=>{
+    console.log(image_caption);
+    
+  }
 
   return (
     <form onSubmit={handleSubmit(onValidate)} className="h-full">
@@ -297,11 +302,11 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
                                     label="Featured Image*"
                                     type="file"
                                   />
-                                  <Typography className="my-2">
+                                  <Typography className="my-4">
                                     Allowed file type: <span className="font-bold">png, jpg, jpeg, gif</span>
                                   </Typography>
                                 </div>
-                                <div className="lg:w-2/3 md:mb-16 mt-6">
+                                <div className="lg:w-2/3 md:my-16">
                                   <Input
                                     {...register("imageCaption")}
                                     defaultValue={defaultData?.story.meta.imageCaption}
@@ -320,7 +325,7 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
                         )}
                         {value === "library" && (
                           <div>
-                            <MideaLibrary mediaUrlClick={handleMediaUrlClick} dialogPopup={handlePopup} />
+                            <MideaLibrary mediaUrlClick={handleMediaUrlClick} dialogPopup={handlePopup} addNews={handleAddnews}/>
                           </div>
                         )}
                       </TabPanel>

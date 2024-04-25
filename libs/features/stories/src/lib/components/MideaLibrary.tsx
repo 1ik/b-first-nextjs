@@ -4,13 +4,21 @@ import { Loader } from "@bfirst/components-loader";
 import { Button, Input, Typography } from "@bfirst/material-tailwind";
 import { useState } from "react";
 
-export default function MideaLibrary({ mediaUrlClick, dialogPopup }) {
+export default function MideaLibrary({ mediaUrlClick, dialogPopup, addNews }: any) {
   const [currentPage, setCurrentPage] = useState(1);
+  const [imageCaption, setImageCaption] = useState("");
+  
   const { data, isPending } = useGet(`api/v1/media-image-list?page=${currentPage}`);
+
   return (
     <div>
       <div className="w-full mb-4">
-        <Input type="text" label="Image Caption" />
+        <Input
+          onChange={(e) => setImageCaption(e.target.value)}
+          type="text"
+          label="Image Caption"
+          value={imageCaption}
+        />
       </div>
       {isPending ? (
         <div className="h-60 w-full">
@@ -41,10 +49,19 @@ export default function MideaLibrary({ mediaUrlClick, dialogPopup }) {
             </Typography>
           </div>
           <div className="flex">
-            <Button variant="" disabled={currentPage === 1} onClick={() => setCurrentPage((cur) => cur - 1)}>
+            <Button
+              variant="outlined"
+              className="border-0"
+              size="sm"
+              disabled={currentPage === 1}
+              onClick={() => setCurrentPage((cur) => cur - 1)}
+            >
               <Icon variant="text" name="leftArrow" />
             </Button>
             <Button
+              variant="outlined"
+              className="border-0"
+              size="sm"
               disabled={currentPage === data?.media_images.last_page}
               onClick={() => setCurrentPage((cur) => cur + 1)}
             >
@@ -54,7 +71,9 @@ export default function MideaLibrary({ mediaUrlClick, dialogPopup }) {
         </div>
       </div>
       <div className="flex w-full gap-2 justify-end mt-4">
-        <Button type="button">Add News</Button>
+        <Button onClick={() => addNews(imageCaption)} type="button">
+          Add News
+        </Button>
         <Button variant="outlined" onClick={dialogPopup}>
           Cancel
         </Button>
