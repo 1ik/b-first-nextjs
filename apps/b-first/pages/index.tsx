@@ -11,7 +11,7 @@ import Slider from "../components/Slider/Slider";
 import Adds from "../components/adds/Adds";
 import TopicList from "../components/TopicList/TopicList";
 
-export default function Index({ featuredNews, latestNews, bangladesh, politics, world }: any) {
+export default function Index({ featuredNews, latestNews, bangladesh, politics, world, trendyTopicList }: any) {
   return (
     <>
       <Head>
@@ -20,7 +20,7 @@ export default function Index({ featuredNews, latestNews, bangladesh, politics, 
       <Header />
       <MobileMenu />
       <main id="content">
-        <TopicList />
+        <TopicList items={trendyTopicList}/>
         <FeaturedItems items={featuredNews} />
         <BlockNews position="mx-auto" items={featuredNews.slice(5, 11)} title={""} />
         <Slider items={world.slice(0, 6)} title={"World"} />
@@ -38,22 +38,24 @@ export default function Index({ featuredNews, latestNews, bangladesh, politics, 
 const baseUrl = "https://backend.bangladeshfirst.com/api/v1/public";
 
 export const getServerSideProps = async () => {
-  const [featuredNewsRes, latestNewsRes, politicsNews, bangladeshNews, worldNews] = await Promise.all([
+  const [featuredNewsRes, latestNewsRes, politicsNews, bangladeshNews, worldNews,trendyTopic] = await Promise.all([
     fetch(`${baseUrl}/categories/0/featured-stories`),
     fetch(`${baseUrl}/latest/stories`),
     fetch(`${baseUrl}/categories/politics/stories`),
     fetch(`${baseUrl}/categories/bangladesh/stories`),
     fetch(`${baseUrl}/categories/world/stories`),
+    fetch(`${baseUrl}/trendy-topics`),
   ]);
 
   const featuredNews: unknown[] = (await featuredNewsRes.json()).data;
   const latestNews: unknown[] = (await latestNewsRes.json()).data;
-
+  
   const filterFn = (item: unknown) => !latestNews.find((f) => (f as { id: number }).id === (item as { id: number }).id);
-
+  
   const bangladesh = (await bangladeshNews.json()).data.filter(filterFn);
   const politics = (await politicsNews.json()).data.filter(filterFn);
   const world = (await worldNews.json()).data.filter(filterFn);
+  const trendyTopicList: unknown[] = (await trendyTopic.json()).data;
 
-  return { props: { featuredNews, latestNews, bangladesh, politics, world } };
+  return { props: { featuredNews, latestNews, bangladesh, politics, world,trendyTopicList } };
 };
