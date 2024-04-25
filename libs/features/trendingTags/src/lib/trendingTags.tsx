@@ -5,50 +5,6 @@ import { ToastContainer, toast } from "react-toastify";
 import SortableList, { SortableItem } from "react-easy-sort";
 import { Typography } from "@bfirst/material-tailwind";
 import moment from "moment";
-// import { dateFormatter } from "../../dateFormat_utils";
-
-const demoTagsList = [
-  {
-    id: 1,
-    name: "cricket",
-  },
-  {
-    id: 2,
-    name: "fashion",
-  },
-  {
-    id: 3,
-    name: "instagood",
-  },
-  {
-    id: 4,
-    name: "news",
-  },
-  {
-    id: 5,
-    name: "reels",
-  },
-  {
-    id: 6,
-    name: "arival",
-  },
-  {
-    id: 7,
-    name: "holyday",
-  },
-  {
-    id: 8,
-    name: "summer",
-  },
-  {
-    id: 9,
-    name: "nature",
-  },
-  {
-    id: 10,
-    name: "artist",
-  },
-];
 
 const dropTarget = (
   <div className="py-3 text-center text-blue-600/50 font-bold border-2 border-dashed border-blue-600/50 rounded-md">
@@ -56,7 +12,6 @@ const dropTarget = (
   </div>
 );
 export function TrendingTags() {
-  const [data, setData] = useState(demoTagsList);
   const [search, setSearch] = useState("");
   const { data: searchedNews } = useGet(`api/v1/tags?name=${search}`);
   const { data: TendingList, isSuccess: trendingLoadSuccess } = useGet(`api/v1/public/trendy-topics`);
@@ -166,7 +121,7 @@ export function TrendingTags() {
 
           <div className="flex gap-x-2 mb-5">
             <div className="flex flex-col">
-              {data.map((_, index) => (
+              {TendingList?.data.map((_, index) => (
                 <p className="flex-grow mt-6">{index + 1}</p>
               ))}
             </div>
@@ -181,7 +136,6 @@ export function TrendingTags() {
                   <div className="flex   justify-between items-center py-3 rounded-md ml-1 cursor-grab px-4 bg-gray-200  relative   max-[340px]:w-[260px] max-[360px]:w-[290px] max-[430px]:w-[330px] max-[530px]:w-[350px] sm:w-full ">
                     <div className="px-5 flex items-center justify-between w-full">
                       <h3>{(item as { name: string }).name}</h3>
-                      
 
                       <Typography variant="small" className="font-normal leading-none opacity-70">
                         {moment((item as { created_at: string }).created_at).format("YYYY-MM-DD hh:mm a")}
