@@ -1,6 +1,5 @@
 import { useGet, usePost } from "@bfirst/api-client";
 import { HCF } from "@bfirst/components-layout";
-// import { Loader } from "@bfirst/components-loader";
 import { MultiselectSearch } from "@bfirst/components-multiselect-search";
 import { TinymceEditor } from "@bfirst/components-tinymce-editor";
 import {
@@ -22,7 +21,7 @@ import {
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import MediaLibrary from "./mediaLibrary";
+import MideaLibrary from "./mediaLibrary";
 
 export type Inputs = {
   shoulder?: string;
@@ -62,15 +61,11 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
   const [selectedAuthors, setSelectedAuthors] = useState([]);
   const [selectedTags, setSelectedTags] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
-
   const { request, isSuccess, data: uploadImageData } = usePost(`api/v1/media-upload-image`);
   const { requestAsync: tagRequestAsync } = usePost(`api/v1/tags`);
   const { data: authorsData } = useGet(`api/v1/authors?name=${search.authors}`);
   const { data: tagsData } = useGet(`api/v1/tags?name=${search.tags}`);
   const { data: categoriesData } = useGet(`api/v1/categories?name=${search.categories}`);
-  // const [currentPage, setCurrentPage] = useState(1);
-  // const { data: mediaData, isPending } = useGet(`api/v1/media-image-list?page=${currentPage}`);
-
   const navigate = useNavigate();
   const {
     register,
@@ -144,10 +139,15 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
       value: "library",
     },
   ];
-  // const handleMediaUrlClick = (media_url: string) => {
-  //   setFeaturedImgUrl(media_url);
-  //   setDialogOpen(false);
-  // };
+
+  const handleMediaUrlClick = (media_url: string) => {
+    setFeaturedImgUrl(media_url);
+    setDialogOpen(false);
+  };
+
+  const handlePopup = () => {
+    setDialogOpen(false);
+  };
 
   return (
     <form onSubmit={handleSubmit(onValidate)} className="h-full">
@@ -290,7 +290,7 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
                           <div>
                             <DialogBody>
                               <div className="flex flex-col gap-y-4">
-                                <div className="lg:w-2/3 mt-5 mb-10">
+                                <div className="lg:w-2/3 mt-5 mb-4">
                                   <Input
                                     onChange={(e) => setFeaturedImg(e.target.files?.[0])}
                                     variant="standard"
@@ -320,7 +320,7 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
                         )}
                         {value === "library" && (
                           <div>
-                            <MediaLibrary/>
+                            <MideaLibrary mediaUrlClick={handleMediaUrlClick} dialogPopup={handlePopup} />
                           </div>
                         )}
                       </TabPanel>
