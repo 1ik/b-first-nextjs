@@ -4,12 +4,12 @@ import { Loader } from "@bfirst/components-loader";
 import { Button, Input, Typography } from "@bfirst/material-tailwind";
 import { useState } from "react";
 
-export default function MideaLibrary({ mediaUrlClick , dialogPopup}) {
+export default function MideaLibrary({ mediaUrlClick, dialogPopup }) {
   const [currentPage, setCurrentPage] = useState(1);
   const { data, isPending } = useGet(`api/v1/media-image-list?page=${currentPage}`);
   return (
     <div>
-      <div className="w-96 mb-4">
+      <div className="w-full mb-4">
         <Input type="text" label="Image Caption" />
       </div>
       {isPending ? (
@@ -41,19 +41,10 @@ export default function MideaLibrary({ mediaUrlClick , dialogPopup}) {
             </Typography>
           </div>
           <div className="flex">
-            <Button
-              variant="outlined"
-              size="sm"
-              className="border-0"
-              disabled={currentPage === 1}
-              onClick={() => setCurrentPage((cur) => cur - 1)}
-            >
+            <Button variant="" disabled={currentPage === 1} onClick={() => setCurrentPage((cur) => cur - 1)}>
               <Icon variant="text" name="leftArrow" />
             </Button>
             <Button
-              className="border-0"
-              variant="outlined"
-              size="sm"
               disabled={currentPage === data?.media_images.last_page}
               onClick={() => setCurrentPage((cur) => cur + 1)}
             >
@@ -63,10 +54,10 @@ export default function MideaLibrary({ mediaUrlClick , dialogPopup}) {
         </div>
       </div>
       <div className="flex w-full gap-2 justify-end mt-4">
-        <Button type="button" variant="outlined">
-          Add News
+        <Button type="button">Add News</Button>
+        <Button variant="outlined" onClick={dialogPopup}>
+          Cancel
         </Button>
-        <Button onClick={dialogPopup}>Cancel</Button>
       </div>
     </div>
   );

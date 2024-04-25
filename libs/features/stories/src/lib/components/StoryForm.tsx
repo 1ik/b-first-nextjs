@@ -21,7 +21,7 @@ import {
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import MideaLibrary from "./mediaLibrary";
+import MideaLibrary from "./MideaLibrary";
 
 export type Inputs = {
   shoulder?: string;
