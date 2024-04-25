@@ -13,9 +13,10 @@ export interface SigninFormProps {
   isError: boolean;
   loading: boolean;
   onGoogleLogin?: () => void;
+  onFacebookLogin?: () => void;
 }
 
-export default function SigninForm({ onSubmit, logoUrl, isError, loading, onGoogleLogin }: SigninFormProps) {
+export default function SigninForm({ onSubmit, logoUrl, isError, loading, onGoogleLogin, onFacebookLogin }: SigninFormProps) {
   const { register, handleSubmit } = useForm<Inputs>();
 
   return (
@@ -31,7 +32,7 @@ export default function SigninForm({ onSubmit, logoUrl, isError, loading, onGoog
               Invalid email or password
             </Alert>
           )}
-          <div>
+          <div className="flex flex-col gap-y-4">
             <Button
               onClick={onGoogleLogin}
               fullWidth
@@ -40,6 +41,15 @@ export default function SigninForm({ onSubmit, logoUrl, isError, loading, onGoog
             >
               <img className="w-5" src="/img/google-logo.png" />
               Google
+            </Button>
+            <Button
+              onClick={onFacebookLogin}
+              fullWidth
+              variant="outlined"
+              className="flex items-center gap-x-3 justify-center"
+            >
+              <img className="w-5" src="/img/facebook-logo.png" />
+              Facebook
             </Button>
           </div>
           <Typography variant="small" className="text-center">

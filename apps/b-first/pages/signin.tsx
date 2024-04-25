@@ -1,5 +1,5 @@
 import { usePost } from "@bfirst/api-client";
-import { GoogleAuthProvider, getRedirectResult, signInWithRedirect } from "firebase/auth";
+import { FacebookAuthProvider, GoogleAuthProvider, UserCredential, signInWithPopup } from "firebase/auth";
 import { useRouter } from "next/router";
 import { useContext, useEffect } from "react";
 import SigninForm, { Inputs } from "../components/SigninForm/SigninForm";
@@ -23,25 +23,28 @@ export default function Signin() {
     request(inputs);
   };
 
-  const handleGoogleLogin = function () {
-    const provider = new GoogleAuthProvider();
-    signInWithRedirect(auth, provider);
+  const getDataAndNavigate = function (result: UserCredential) {
+    if (!result) return;
+    const data = {
+      name: result.user.displayName,
+      email: result.user.email,
+      photo_url: result.user.photoURL,
+      provider: result.providerId?.split(".")[0],
+      provider_id: result.user.uid,
+      access_token: (result.user as unknown as { accessToken: any }).accessToken,
+    };
+    socialLoginReq(data);
   };
 
-  useEffect(() => {
-    getRedirectResult(auth).then((result) => {
-      if (!result) return;
-      const data = {
-        name: result.user.displayName,
-        email: result.user.email,
-        photo_url: result.user.photoURL,
-        provider: result.providerId?.split(".")[0],
-        provider_id: result.user.uid,
-        access_token: (result.user as unknown as { accessToken: any }).accessToken,
-      };
-      socialLoginReq(data);
-    });
-  }, []);
+  const handleGoogleLogin = function () {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider).then(getDataAndNavigate);
+  };
+
+  const handleFacebookLogin = function () {
+    const provider = new FacebookAuthProvider();
+    signInWithPopup(auth, provider).then(getDataAndNavigate);
+  };
 
   useEffect(() => {
     if (socialLoginSuccess) {
@@ -65,6 +68,7 @@ export default function Signin() {
         loading={socialLoginPending || isPending}
         isError={socialLoginError || isError}
         onGoogleLogin={handleGoogleLogin}
+        onFacebookLogin={handleFacebookLogin}
       />
     </div>
   );
