@@ -90,7 +90,6 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
       categories: selectedCategories.map((category) => (category as { id: number }).id),
       content: body,
     };
-    return console.log(story);
     onSubmit(story);
   };
 
