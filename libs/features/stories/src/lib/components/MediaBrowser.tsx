@@ -14,7 +14,9 @@ import {
   TabsHeader,
   Typography,
 } from "@bfirst/material-tailwind";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface MediaBrowserProps {
   defaultData?: any;
@@ -36,7 +38,7 @@ export default function MediaBrowser({
   const [currentPage, setCurrentPage] = useState(1);
 
   const { data: mediaImageData, isPending } = useGet(`api/v1/media-image-list?sort=desc&page=${currentPage}`);
-  const { requestAsync } = usePost(`api/v1/media-upload-image`);
+  const { requestAsync, isSuccess } = usePost(`api/v1/media-upload-image`);
 
   const handleDialogOpen = () => onDialogOpen((cur) => !cur);
   const handleFeaturedImgUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -64,8 +66,15 @@ export default function MediaBrowser({
     },
   ];
 
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("Image uploaded");
+    }
+  }, [isSuccess]);
+
   return (
     <Dialog open={dialogOpen} handler={handleDialogOpen} size="xl">
+      <ToastContainer position="top-center" />
       <DialogHeader className="flex justify-between">
         <Typography>Media Browser</Typography>
       </DialogHeader>
@@ -88,7 +97,7 @@ export default function MediaBrowser({
           </div>
           <TabsBody>
             {data.map(({ value }) => (
-              <TabPanel className="h-[40vh]" key={value} value={value}>
+              <TabPanel className="h-[350px]" key={value} value={value}>
                 {value === "upload" && (
                   <div className="flex gap-x-4">
                     <div className="flex flex-1 items-center justify-center flex-col gap-y-4">
