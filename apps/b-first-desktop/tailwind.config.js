@@ -7,7 +7,14 @@ module.exports = {
     ...createGlobPatternsForDependencies(__dirname),
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        montserrat: ["var(--font-montserrat)", "sans-serif"],
+      },
+      colors: {
+        accent: "#EB1923",
+      },
+    },
   },
   plugins: [],
 };
