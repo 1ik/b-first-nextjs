@@ -1,0 +1,26 @@
+{
+  "name": "b-first-desktop-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/b-first-desktop-e2e/src",
+  "targets": {
+    "e2e": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/b-first-desktop-e2e/cypress.config.ts",
+        "testingType": "e2e",
+        "devServerTarget": "b-first-desktop:serve"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "b-first-desktop:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["b-first-desktop"]
+}
