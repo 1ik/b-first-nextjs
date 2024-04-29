@@ -1,4 +1,9 @@
+import { Montserrat } from "@next/font/google";
+import localFont from "@next/font/local";
 import "./global.css";
+
+const washingtonFont = localFont({ src: "../public/fonts/washington.otf" });
+const montserratFont = Montserrat({ subsets: ["latin"], variable: "--font-montserrat" });
 
 export const metadata = {
   title: "Bangladesh First",
@@ -8,7 +13,9 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <main className={`${washingtonFont.className} ${montserratFont.variable}`}>{children}</main>
+      </body>
     </html>
   );
 }
