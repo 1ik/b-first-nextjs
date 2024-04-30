@@ -7,9 +7,13 @@ export interface ItemCardHorizontalProps {
   itemLeftWidth: string;
   itemRightWidth: string;
   itemsWidth: string;
+  src:string,
+  alt: string
 }
 
 export function ItemCardHorizontal({
+  src,
+  alt,
   title,
   flexDirection,
   description,
@@ -35,8 +39,8 @@ export function ItemCardHorizontal({
         <div className={itemRightWidth}>
           <img
             className="w-full h-full"
-            src="https://images.bangladeshfirst.com/resize?width=1600&height=900&format=webp&quality=85&path=mediaImages/2024-Apr-30_66308f2115ef0_1714458401.jpg"
-            alt="test alt"
+            src={src}
+            alt={alt}
           />
         </div>
       </div>
