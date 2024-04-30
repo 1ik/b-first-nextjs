@@ -1,3 +1,10 @@
+import Navbar from "./components/Navbar/Navbar";
+
 export default function Index() {
-  return <div className="desktop-container bg-red-500">Index page</div>;
+  return (
+    <>
+      <Navbar />
+      <div style={{ height: "400vh" }}></div>
+    </>
+  );
 }
