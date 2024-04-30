@@ -71,13 +71,13 @@ export function FeatureTrashTagList() {
       render: (row) => {
         return (
           <div className="flex items-end gap-2 md:gap-4 justify-end w-full">
-            <ConfirmButton
+            {/* <ConfirmButton
               onConfirm={() => handleDelete(row.id)}
               message="Do you want to permanently remove the tag ?"
               confirmHandler={<Icon name="trash" />}
             >
               Delete
-            </ConfirmButton>
+            </ConfirmButton> */}
             <ConfirmButton
               onConfirm={() => handleRestore(row.id)}
               message="Do you want to restore the tag ?"
