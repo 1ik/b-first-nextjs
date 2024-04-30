@@ -12,14 +12,6 @@ export default function Index() {
             organised labour in the US."
       />
 
-      <ItemCardHorizontal
-        itemsWidth="w-[392px]"
-        itemLeftWidth="w-[230px]"
-        itemRightWidth="w-[150px]"
-        flexDirection="flex-row-reverse"
-        title="US rate setter tells BBC 'no hurry' to cut interest rates"
-        titleBorder={true}
-      />
     </div>
   );
   return <div className="desktop-container bg-red-500">Index page</div>;
