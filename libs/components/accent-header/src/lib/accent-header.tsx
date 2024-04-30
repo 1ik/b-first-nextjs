@@ -1,11 +1,12 @@
 export interface AccentHeaderProps {
-  header : string
+  header : string;
+  color : string
 }
 
-export function AccentHeader({header}:AccentHeaderProps) {
+export function AccentHeader({header,color}:AccentHeaderProps) {
   return (
-    <div className="border-b border-[#00479B]">
-      <h3 className="bg-[#00479B] inline px-4 py-1 font-montserrat font-bold text-white text-[22px] border-b border-[#00479B]">
+    <div className={`border-b border-${color}`}>
+      <h3 className={`bg-${color} inline px-4 py-1 font-montserrat font-bold text-white text-[22px] border-b border-${color}`}>
         {header}
       </h3>
     </div>
