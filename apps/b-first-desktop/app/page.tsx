@@ -6,7 +6,6 @@ export default function Index() {
         itemsWidth="w-[1340px]"
         itemLeftWidth="w-[420px]"
         itemRightWidth="w-[880px]"
-        header="Business"
         title="Volkswagen workers vote to unionize in major win for organised labour"
         titleBorder={false}
         description="Volkswagen workers in the US have voted to join the United Autoworkers Union (UAW) in a massive victory for

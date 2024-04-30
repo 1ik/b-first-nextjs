@@ -23,6 +23,7 @@
       "@bd-first/home01/server": ["libs/pages/desktop/home01/src/server.ts"],
       "@bd-first/news-site-ui/server": ["news-site-ui/src/server.ts"],
       "@bfirst/api-client": ["libs/api-client/src/index.ts"],
+      "@bfirst/components-accent-header": ["libs/components/accent-header/src/index.ts"],
       "@bfirst/components-auth": ["libs/features/auth/src/index.ts"],
       "@bfirst/components-authors": ["libs/features/authors/src/index.ts"],
       "@bfirst/components-autocomplete-tag": ["libs/components/autocomplete-tag/src/index.ts"],
