@@ -1,46 +1,46 @@
 import { AccentHeader } from "@bfirst/components-accent-header";
 export interface ItemCardHorizontalProps {
-  title: string;
-  description?: string;
+  data: any;
   flexDirection?: string;
-  titleBorder: boolean;
+  itemsWidth: string;
   itemLeftWidth: string;
   itemRightWidth: string;
-  itemsWidth: string;
-  src:string,
-  alt: string
+  isTitleBorder: boolean;
+  isIntro: boolean;
+  isAccentHeader: boolean;
 }
 
 export function ItemCardHorizontal({
-  src,
-  alt,
-  title,
+  data,
   flexDirection,
-  description,
-  titleBorder,
+  isTitleBorder,
   itemsWidth,
   itemLeftWidth,
   itemRightWidth,
+  isIntro,
+  isAccentHeader,
 }: ItemCardHorizontalProps) {
   return (
     <div className={`${itemsWidth}`}>
-      <AccentHeader  header="Bangladesh" color={"red"}/>
+      {isAccentHeader && <AccentHeader header="Bangladesh" color="red" />}
       <div className={`flex justify-between mt-5 ${flexDirection}`}>
         <div className={itemLeftWidth}>
           <h2
             className={`font-normal  text-black  ${
-              titleBorder ? "font-normal  text-black border-t text-2xl border-red-500 pt-2" : "text-6xl"
+              isTitleBorder ? "font-normal  text-black border-t text-2xl border-red-500 pt-2" : "text-6xl"
             }`}
           >
-            {title}
+            {data.title}
           </h2>
-          <p className="font-normal mt-4 text-[28px] text-[#727272]">{description}</p>
+
+          {isIntro && <p className="font-normal mt-4 text-[28px] text-[#727272]">{data.meta.intro}</p>}
         </div>
+
         <div className={itemRightWidth}>
           <img
-            className="w-full h-full"
-            src={src}
-            alt={alt}
+            className="w-full"
+            src={`https://images.bangladeshfirst.com/resize?width=1600&height=900&format=webp&quality=85&path=${data.meta.featured_image}`}
+            alt={data.meta.featured_image.imageCaption}
           />
         </div>
       </div>
