@@ -1,9 +1,10 @@
-import Container from "./components/Container/Container";
-
+import { ItemCardHorizontal } from "@bfirst/components-itemCardHorizontal";
 export default function Index() {
   return (
-    <Container className="">
-      <div className="text-2xl">Index Page</div>
-    </Container>
+    <div className="desktop-container">
+      <div className="w-96">
+        <ItemCardHorizontal />
+      </div>
+    </div>
   );
 }
