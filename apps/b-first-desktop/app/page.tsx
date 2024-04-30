@@ -7,4 +7,5 @@ export default function Index() {
       </div>
     </div>
   );
+  return <div className="desktop-container bg-red-500">Index page</div>;
 }
