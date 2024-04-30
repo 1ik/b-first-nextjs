@@ -20,7 +20,7 @@ export function ItemCardHorizontal({
 }: ItemCardHorizontalProps) {
   return (
     <div className={`${itemsWidth}`}>
-      <AccentHeader  header="Bangladesh" color="red-500"/>
+      <AccentHeader  header="Bangladesh" color={"red"}/>
       <div className={`flex justify-between mt-5 ${flexDirection}`}>
         <div className={itemLeftWidth}>
           <h2
