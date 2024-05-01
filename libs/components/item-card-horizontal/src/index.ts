@@ -1,1 +1,1 @@
-export * from "./lib/itemCardHorizontal";
+export * from "./lib/item-card-horizontal";
