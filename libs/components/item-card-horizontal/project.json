@@ -1,7 +1,7 @@
 {
   "name": "itemCardHorizontal",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/components/itemCardHorizontal/src",
+  "sourceRoot": "libs/components/item-card-horizontal/src",
   "projectType": "library",
   "tags": [],
   "targets": {
@@ -14,7 +14,7 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/libs/components/itemCardHorizontal"
+        "outputPath": "dist/libs/components/item-card-horizontal"
       },
       "configurations": {
         "development": {
