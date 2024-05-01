@@ -1,7 +1,7 @@
 import { AccentHeader } from "@bfirst/components-accent-header";
 export interface ItemCardHorizontalProps {
   data: any;
-  flexDirection?: string;
+  flexDirection?: any;
   itemsWidth: string;
   itemLeftWidth: string;
   itemRightWidth: string;
@@ -21,10 +21,10 @@ export function ItemCardHorizontal({
   isAccentHeader,
 }: ItemCardHorizontalProps) {
   return (
-    <div className={`${itemsWidth}`}>
-      {isAccentHeader && <AccentHeader header="Bangladesh" color="red" />}
-      <div className={`flex justify-between mt-5 ${flexDirection}`}>
-        <div className={itemLeftWidth}>
+    <div style={{width:itemsWidth}}>
+      {isAccentHeader && <AccentHeader header="Bangladesh" color="#ff0000" />}
+      <div style={{flexDirection : flexDirection}} className={`flex justify-between mt-5`}>
+        <div style={{width:itemLeftWidth}}>
           <h2
             className={`font-normal  text-black  ${
               isTitleBorder ? "font-normal  text-black border-t text-2xl border-red-500 pt-2" : "text-6xl"
@@ -36,7 +36,7 @@ export function ItemCardHorizontal({
           {isIntro && <p className="font-normal mt-4 text-[28px] text-[#727272]">{data.meta.intro}</p>}
         </div>
 
-        <div className={itemRightWidth}>
+        <div style={{width:itemRightWidth}}>
           <img
             className="w-full"
             src={`https://images.bangladeshfirst.com/resize?width=1600&height=900&format=webp&quality=85&path=${data.meta.featured_image}`}
