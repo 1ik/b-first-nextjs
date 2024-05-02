@@ -1,5 +1,5 @@
 {
-  "name": "@bfirst/components-itemCardHorizontal",
+  "name": "@bfirst/components-item-card-horizontal",
   "version": "0.0.1",
   "main": "./index.js",
   "types": "./index.d.ts",
