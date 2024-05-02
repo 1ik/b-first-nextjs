@@ -1,48 +1,42 @@
-import { AccentHeader } from "@bfirst/components-accent-header";
 export interface ItemCardHorizontalProps {
   data: any;
-  flexDirection?: any;
-  itemsWidth: string;
-  itemLeftWidth: string;
-  itemRightWidth: string;
-  isTitleBorder: boolean;
-  isIntro: boolean;
-  isAccentHeader: boolean;
+  size?: "lg" | "sm";
+  imageSide?: "left" | "right";
+  showTitleBorder?: boolean;
+  showIntro?: boolean;
 }
 
 export function ItemCardHorizontal({
   data,
-  flexDirection,
-  isTitleBorder,
-  itemsWidth,
-  itemLeftWidth,
-  itemRightWidth,
-  isIntro,
-  isAccentHeader,
+  size = "lg",
+  imageSide = "left",
+  showTitleBorder,
+  showIntro,
 }: ItemCardHorizontalProps) {
   return (
-    <div style={{width:itemsWidth}}>
-      {isAccentHeader && <AccentHeader header="Bangladesh" color="#ff0000" />}
-      <div style={{flexDirection : flexDirection}} className={`flex justify-between mt-5`}>
-        <div style={{width:itemLeftWidth}}>
-          <h2
-            className={`font-normal  text-black  ${
-              isTitleBorder ? "font-normal  text-black border-t text-2xl border-red-500 pt-2" : "text-6xl"
-            }`}
-          >
-            {data.title}
-          </h2>
+    <div className={`flex gap-x-4 mt-5`}>
+      <div
+        className={`${size === "lg" && "w-1/3"}  ${size === "sm" && "w-2/3"}  ${imageSide === "left" && "order-last"} ${
+          imageSide === "right" && "order-first"
+        }`}
+      >
+        <h2
+          className={`text-black pt-2 ${size === "lg" && "text-6xl"} ${size === "sm" && "text-[24px]"} ${
+            showTitleBorder && "border-t-[2px]  border-accent"
+          }`}
+        >
+          {data.title}
+        </h2>
 
-          {isIntro && <p className="font-normal mt-4 text-[28px] text-[#727272]">{data.meta.intro}</p>}
-        </div>
+        {showIntro && <p className="mt-4 text-[28px] text-[#727272]">{data.meta.intro}</p>}
+      </div>
 
-        <div style={{width:itemRightWidth}}>
-          <img
-            className="w-full"
-            src={`https://images.bangladeshfirst.com/resize?width=1600&height=900&format=webp&quality=85&path=${data.meta.featured_image}`}
-            alt={data.meta.featured_image.imageCaption}
-          />
-        </div>
+      <div className={`${size === "lg" && "w-2/3"}  ${size === "sm" && "w-1/3"}`}>
+        <img
+          className="w-full"
+          src={`https://images.bangladeshfirst.com/resize?width=1600&height=900&format=webp&quality=85&path=${data.meta.featured_image}`}
+          alt={data.meta.featured_image.imageCaption}
+        />
       </div>
     </div>
   );
