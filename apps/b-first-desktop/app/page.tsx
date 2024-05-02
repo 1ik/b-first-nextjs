@@ -1,27 +1,23 @@
-import { ItemCardHorizontal } from "@bfirst/components-itemCardHorizontal";
-export default function Index() {
+import { ItemList } from "@bfirst/components-item-list";
+export default async function Index() {
+  const data = await getData()
   return (
     <div className="desktop-container">
-      <ItemCardHorizontal
-        itemsWidth="w-[1340px]"
-        itemLeftWidth="w-[420px]"
-        itemRightWidth="w-[880px]"
-        header="Business"
-        title="Volkswagen workers vote to unionize in major win for organised labour"
-        titleBorder={false}
-        description="Volkswagen workers in the US have voted to join the United Autoworkers Union (UAW) in a massive victory for
-            organised labour in the US."
-      />
-
-      <ItemCardHorizontal
-        itemsWidth="w-[392px]"
-        itemLeftWidth="w-[230px]"
-        itemRightWidth="w-[150px]"
-        flexDirection="flex-row-reverse"
-        title="US rate setter tells BBC 'no hurry' to cut interest rates"
-        titleBorder={true}
-      />
+      <div className="w-[400px]">
+        <ItemList data={data.data.slice(0,7)} listType="circle" />
+      </div>
     </div>
   );
-  return <div className="desktop-container bg-red-500">Index page</div>;
+}
+
+
+const baseUrl = "https://backend.bangladeshfirst.com/api/v1/public";
+async function getData() {
+  const res = await fetch(`${baseUrl}/latest/stories`);
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
+
+  return res.json();
 }
