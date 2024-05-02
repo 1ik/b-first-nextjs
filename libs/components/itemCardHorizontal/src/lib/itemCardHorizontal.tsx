@@ -1,34 +1,26 @@
+import { AccentHeader } from "@bfirst/components-accent-header";
 export interface ItemCardHorizontalProps {
-  header?: string;
   title: string;
   description?: string;
   flexDirection?: string;
   titleBorder: boolean;
-  itemLeftWidth:string;
+  itemLeftWidth: string;
   itemRightWidth: string;
-  itemsWidth : string
+  itemsWidth: string;
 }
 
 export function ItemCardHorizontal({
-  header,
   title,
   flexDirection,
   description,
   titleBorder,
   itemsWidth,
   itemLeftWidth,
-  itemRightWidth
+  itemRightWidth,
 }: ItemCardHorizontalProps) {
   return (
     <div className={`${itemsWidth}`}>
-      {header && (
-        <div className="border-b border-[#00479B]">
-          <h3 className="bg-[#00479B] inline px-4 py-1 font-montserrat font-bold text-white text-[22px] border-b border-[#00479B]">
-            {header}
-          </h3>
-        </div>
-      )}
-
+      <AccentHeader  header="Bangladesh" color={"red"}/>
       <div className={`flex justify-between mt-5 ${flexDirection}`}>
         <div className={itemLeftWidth}>
           <h2

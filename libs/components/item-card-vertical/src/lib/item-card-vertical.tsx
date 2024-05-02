@@ -1,3 +1,4 @@
+import { getImageUrl } from "@bfirst/utilities";
 /* eslint-disable-next-line */
 export interface ItemCardVerticalProps {
   data: any;
@@ -19,7 +20,7 @@ export function ItemCardVertical({
       <div>
         <img
           className={`w-full ${showImageBorder ? "border-b-[5px] border-accent" : ""}`}
-          src={`https://images.bangladeshfirst.com/resize?width=1600&height=900&format=webp&quality=85&path=${data.meta.featured_image}`}
+          src={getImageUrl(data.meta.featured_image)}
           alt=""
         />
       </div>
