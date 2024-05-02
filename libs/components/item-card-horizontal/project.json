@@ -1,5 +1,5 @@
 {
-  "name": "itemCardHorizontal",
+  "name": "item-card-horizontal",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/components/item-card-horizontal/src",
   "projectType": "library",

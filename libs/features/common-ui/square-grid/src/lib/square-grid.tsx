@@ -8,10 +8,10 @@ export interface SquareGridProps {
 
 export function SquareGrid({ data }: SquareGridProps) {
   return (
-    <div>
-      {data.map((item, index) => (
+    <div className="grid grid-cols-4 gap-8">
+      {data.map((item:any, index:any) => (
         <div key={index}>
-          <AccentHeader header={item.story.categories.name} color={item.story.categories.color_code} />
+          <AccentHeader header={item.categories[0].name} color={item.categories[0].color_code} />
           <ItemCardVertical data={item} size={"md"} />
         </div>
       ))}
