@@ -4,7 +4,7 @@ export default async function Index() {
   return (
     <div className="desktop-container">
       <div className="w-[400px]">
-        <ItemList data={data.data.slice(0,7)} listType="circle" />
+        <ItemList data={data.data.slice(0,7)} listType="number" />
       </div>
     </div>
   );
