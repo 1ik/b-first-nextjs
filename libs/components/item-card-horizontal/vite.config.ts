@@ -1,13 +1,13 @@
 /// <reference types='vitest' />
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import dts from "vite-plugin-dts";
-import * as path from "path";
 import { nxViteTsPaths } from "@nx/vite/plugins/nx-tsconfig-paths.plugin";
+import react from "@vitejs/plugin-react";
+import * as path from "path";
+import { defineConfig } from "vite";
+import dts from "vite-plugin-dts";
 
 export default defineConfig({
   root: __dirname,
-  cacheDir: "../../../node_modules/.vite/libs/components/itemCardHorizontal",
+  cacheDir: "../../../node_modules/.vite/libs/components/item-card-horizontal",
 
   plugins: [
     react(),
@@ -23,7 +23,7 @@ export default defineConfig({
   // Configuration for building your library.
   // See: https://vitejs.dev/guide/build.html#library-mode
   build: {
-    outDir: "../../../dist/libs/components/itemCardHorizontal",
+    outDir: "../../../dist/libs/components/item-card-horizontal",
     reportCompressedSize: true,
     commonjsOptions: {
       transformMixedEsModules: true,
@@ -31,7 +31,7 @@ export default defineConfig({
     lib: {
       // Could also be a dictionary or array of multiple entry points.
       entry: "src/index.ts",
-      name: "itemCardHorizontal",
+      name: "item-card-horizontal",
       fileName: "index",
       // Change this to the formats you want to support.
       // Don't forget to update your package.json as well.
