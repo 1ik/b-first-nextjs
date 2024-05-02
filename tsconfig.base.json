@@ -33,6 +33,7 @@
       "@bfirst/components-desktop-nav": ["libs/features/desktop/desktop-nav/src/index.ts"],
       "@bfirst/components-highlight-chip": ["libs/components/highlight-chip/src/index.ts"],
       "@bfirst/components-icon": ["libs/components/icon/src/index.ts"],
+      "@bfirst/components-item-list": ["libs/components/item-list/src/index.ts"],
       "@bfirst/components-item-card-horizontal": ["libs/components/item-card-horizontal/src/index.ts"],
       "@bfirst/components-item-card-vertical": ["libs/components/item-card-vertical/src/index.ts"],
       "@bfirst/components-layout": ["libs/components/layouts/src/index.ts"],
