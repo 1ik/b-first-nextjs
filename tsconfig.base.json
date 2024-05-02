@@ -30,6 +30,7 @@
       "@bfirst/components-button": ["libs/components/button/src/index.ts"],
       "@bfirst/components-categories": ["libs/features/categories/src/index.ts"],
       "@bfirst/components-confirm-button": ["libs/components/confirm-button/src/index.ts"],
+      "@bfirst/components-desktop-nav": ["libs/features/desktop/desktop-nav/src/index.ts"],
       "@bfirst/components-icon": ["libs/components/icon/src/index.ts"],
       "@bfirst/components-itemCardHorizontal": ["libs/components/item-card-horizontal/src/index.ts"],
       "@bfirst/components-item-card-vertical": ["libs/components/item-card-vertical/src/index.ts"],
