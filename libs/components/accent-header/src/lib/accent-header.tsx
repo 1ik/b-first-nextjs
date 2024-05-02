@@ -1,6 +1,6 @@
 export interface AccentHeaderProps {
   header: string;
-  color: string;
+  color?: string;
 }
 
 export function AccentHeader({ header, color }: AccentHeaderProps) {
