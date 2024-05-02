@@ -1,3 +1,15 @@
+import { TopNewsSection } from "@bfirst/components-top-news-section";
+import { getData } from "./utils/dataFetch";
+
 export default async function Index() {
-  return <div className="desktop-container">Index</div>;
+  const data = await getData("categories/0/featured-stories");
+  return (
+    <div className="desktop-container">
+      <TopNewsSection
+        data={data.data}
+        ads1="https://placehold.co/320x250?text=Ads"
+        ads2="https://placehold.co/320x250?text=Ads"
+      />
+    </div>
+  );
 }

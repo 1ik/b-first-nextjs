@@ -13,11 +13,11 @@ export function ItemCardVertical({
   showRelatedStory = false,
   showImageBorder = false,
 }: ItemCardVerticalProps) {
-  const fontSize = size === "lg" ? "text-6xl" : size === "md" ? "text-[23px]" : "";
+  const fontSize = size === "lg" ? "text-4xl" : size === "md" ? "text-[23px]" : "";
 
   return (
     <div>
-      <div>
+      <div className="mb-5">
         <img
           className={`w-full ${showImageBorder ? "border-b-[5px] border-accent" : ""}`}
           src={getImageUrl(data.meta.featured_image)}
