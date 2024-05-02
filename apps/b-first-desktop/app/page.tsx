@@ -5,11 +5,7 @@ export default async function Index() {
   const data = await getData("categories/0/featured-stories");
   return (
     <div className="desktop-container">
-      <TopNewsSection
-        data={data.data}
-        ads1="https://placehold.co/320x250?text=Ads"
-        ads2="https://placehold.co/320x250?text=Ads"
-      />
+      
     </div>
   );
 }
