@@ -15,14 +15,14 @@ export function ItemCardHorizontal({
   showIntro,
 }: ItemCardHorizontalProps) {
   return (
-    <div className={`flex gap-x-4 mt-5`}>
+    <div className={`flex gap-x-4`}>
       <div
         className={`${size === "lg" && "w-1/3"}  ${size === "sm" && "w-2/3"}  ${imageSide === "left" && "order-last"} ${
           imageSide === "right" && "order-first"
         }`}
       >
         <h2
-          className={`text-black pt-2 ${size === "lg" && "text-6xl"} ${size === "sm" && "text-[24px]"} ${
+          className={`text-black pt-2 ${size === "lg" && "text-4xl"} ${size === "sm" && "text-lg"} ${
             showTitleBorder && "border-t-[2px]  border-accent"
           }`}
         >
@@ -36,7 +36,7 @@ export function ItemCardHorizontal({
         <img
           className="w-full"
           src={getImageUrl(data.meta.featured_image)}
-          // alt={data.meta.featured_image.imageCaption}
+          alt={data.meta.featured_image.imageCaption}
         />
       </div>
     </div>
