@@ -1,4 +1,4 @@
-import {getImageUrl} from "@bfirst/utilities"
+import { getImageUrl } from "@bfirst/utilities";
 export interface ItemCardHorizontalProps {
   data: any;
   size?: "lg" | "sm";
@@ -36,11 +36,9 @@ export function ItemCardHorizontal({
         <img
           className="w-full"
           src={getImageUrl(data.meta.featured_image)}
-          alt={data.meta.featured_image.imageCaption}
+          // alt={data.meta.featured_image.imageCaption}
         />
       </div>
     </div>
   );
 }
-
-
