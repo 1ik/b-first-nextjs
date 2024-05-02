@@ -1,3 +1,4 @@
+import {getImageUrl} from "@bfirst/utilities"
 export interface ItemCardHorizontalProps {
   data: any;
   size?: "lg" | "sm";
@@ -34,10 +35,12 @@ export function ItemCardHorizontal({
       <div className={`${size === "lg" && "w-2/3"}  ${size === "sm" && "w-1/3"}`}>
         <img
           className="w-full"
-          src={`https://images.bangladeshfirst.com/resize?width=1600&height=900&format=webp&quality=85&path=${data.meta.featured_image}`}
+          src={getImageUrl(data.meta.featured_image)}
           alt={data.meta.featured_image.imageCaption}
         />
       </div>
     </div>
   );
 }
+
+
