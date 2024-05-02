@@ -23,6 +23,7 @@
       "@bd-first/home01/server": ["libs/pages/desktop/home01/src/server.ts"],
       "@bd-first/news-site-ui/server": ["news-site-ui/src/server.ts"],
       "@bfirst/api-client": ["libs/api-client/src/index.ts"],
+      "@bfirst/components-accent-header": ["libs/components/accent-header/src/index.ts"],
       "@bfirst/components-auth": ["libs/features/auth/src/index.ts"],
       "@bfirst/components-authors": ["libs/features/authors/src/index.ts"],
       "@bfirst/components-autocomplete-tag": ["libs/components/autocomplete-tag/src/index.ts"],
@@ -31,6 +32,8 @@
       "@bfirst/components-confirm-button": ["libs/components/confirm-button/src/index.ts"],
       "@bfirst/components-desktop-nav": ["libs/features/desktop/desktop-nav/src/index.ts"],
       "@bfirst/components-icon": ["libs/components/icon/src/index.ts"],
+      "@bfirst/components-itemCardHorizontal": ["libs/components/item-card-horizontal/src/index.ts"],
+      "@bfirst/components-item-card-vertical": ["libs/components/item-card-vertical/src/index.ts"],
       "@bfirst/components-layout": ["libs/components/layouts/src/index.ts"],
       "@bfirst/components-loader": ["libs/components/loader/src/index.ts"],
       "@bfirst/components-multiselect-search": ["libs/components/multiselect-search/src/index.ts"],
@@ -40,7 +43,8 @@
       "@bfirst/components-tags": ["libs/features/tags/src/index.ts"],
       "@bfirst/components-tinymce-editor": ["libs/components/tinymce-editor/src/index.ts"],
       "@bfirst/components-type-ahead-search": ["libs/components/type-ahead-search/src/index.ts"],
-      "@bfirst/material-tailwind": ["libs/components/material-tailwind/src/index.ts"]
+      "@bfirst/material-tailwind": ["libs/components/material-tailwind/src/index.ts"],
+      "@bfirst/utilities": ["libs/utilities/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
