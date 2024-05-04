@@ -1,15 +1,24 @@
+import { getImageUrl } from "@bfirst/utilities";
+import moment from "moment";
+
 export interface ItemListProps {
-  listType?: "number" | "circle" | "none";
-  imageUrl?: string;
-  alt?: string;
   data: any;
+  listType?: "number" | "circle" | "none";
+  showImage?: boolean;
+  showDate?: boolean;
 }
 
-export function ItemList({ data, listType = "none", imageUrl, alt }: ItemListProps) {
+export function ItemList({ data, listType = "none", showImage = false, showDate = false }: ItemListProps) {
   return (
     <ul>
-      {imageUrl && <img className="w-full" src={imageUrl} alt={alt} />}
-
+      {showImage && (
+        <img className="w-full" src={getImageUrl(data[0].meta.featured_image)} alt={data[0].meta.image_caption} />
+      )}
+      {showDate && (
+        <h3 className="bg-[#FDC269] text-black font-montserrat font-semibold text-2xl px-8 py-1.5 w-fit my-3">
+          {moment().format("D MMMM")}
+        </h3>
+      )}
       {data.map((item: any, index: number) => (
         <li
           key={item.id}
