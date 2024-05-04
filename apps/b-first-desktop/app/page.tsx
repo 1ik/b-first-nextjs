@@ -32,8 +32,10 @@ export default async function Index() {
         <SquareGrid data={latestNews.data.slice(0, 8)} />
       </div>
       <img className="mx-auto my-12" src="https://placehold.co/720x100?text=Ads" alt="Ads" />
-      <div className="desktop-container bg-[#F6EFEF]">
-        <GridItems data={recommended.data.slice(14, 18)} />
+      <div className="bg-[#F6EFEF]">
+        <div className="desktop-container">
+          <GridItems data={recommended.data.slice(14, 18)} />
+        </div>
       </div>
       <img className="mx-auto my-12" src="https://placehold.co/720x100?text=Ads" alt="Ads" />
       <div className="desktop-container">
