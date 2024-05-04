@@ -15,6 +15,7 @@ export default async function Index() {
   const latestNews = await getData("latest/stories");
   const economyNews = await getData("categories/economy/stories");
   const featureNews = await getData("categories/feature/stories");
+  const entertainmentNews = await getData("categories/entertainment/stories");
   const trendingTopics = await getData("trendy-topics");
   return (
     <>
@@ -79,8 +80,9 @@ export default async function Index() {
       </div>
 
       <div className="desktop-container my-10">
-        <BlockNews4 data={economyNews.data} />
+        <BlockNews4 data={entertainmentNews.data} />
       </div>
+      <img className="mx-auto my-12" src="https://placehold.co/720x100?text=Ads" alt="Ads" />
     </>
   );
 }
