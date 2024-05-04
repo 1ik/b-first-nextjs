@@ -1,40 +1,21 @@
 import { AccentHeader } from "@bfirst/components-accent-header";
 import { ItemCardHorizontal } from "@bfirst/components-item-card-horizontal";
-export interface BlockNewsProps {}
+export interface BlockNewsProps {
+  data: any;
+}
 
-export async function BlockNews(props: BlockNewsProps) {
-  const data = await getData();
+export async function BlockNews({ data }: BlockNewsProps) {
   return (
     <div>
       <div className="grid grid-cols-3 gap-5">
-        {data.data.map((item: any, index: number) => {
-          if (index < 1) {
-            return (
-              <div className="col-span-3" key={index}>
-                <AccentHeader header={item.categories[1].name} color="blue" />
-                <ItemCardHorizontal data={item} size="lg" showIntro imageSide="right" />
-              </div>
-            );
-          }
-          if (index > 1 && index < 8) {
-            return (
-              <div className="col-span-1" key={index}>
-                <ItemCardHorizontal data={item} showTitleBorder size="sm" />;
-              </div>
-            );
-          }
-        })}
+        <div className="col-span-3 flex flex-col gap-y-4">
+          <AccentHeader header={data[0].categories[1].name} color="blue" />
+          <ItemCardHorizontal data={data[0]} size="lg" showIntro imageSide="right" />
+        </div>
+        {data.slice(1, 7).map((item: any) => (
+          <ItemCardHorizontal key={item.id} data={item} showTitleBorder size="sm" />
+        ))}
       </div>
     </div>
   );
 }
-
-async function getData() {
-  const res = await fetch(`${baseUrl}/categories/economy/stories`);
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
-  return res.json();
-}
-
-const baseUrl = "https://backend.bangladeshfirst.com/api/v1/public";

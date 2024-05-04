@@ -13,7 +13,7 @@ export function ItemList({ data, listType = "none", imageUrl, alt }: ItemListPro
       {data.map((item: any, index: number) => (
         <li
           key={item.id}
-          className={`text-[26px] text-black border-b border-[#D8D8D8] pb-6 mb-6 ${
+          className={`text-2xl text-black border-b border-[#D8D8D8] pb-4 mb-4 ${
             listType === "number" && "flex gap-x-7 items-center"
           }`}
         >
