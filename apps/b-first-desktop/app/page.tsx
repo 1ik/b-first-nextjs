@@ -3,6 +3,7 @@ import { BlockNews } from "@bfirst/components-block-news";
 import { BlockNews2 } from "@bfirst/components-block-news-2";
 import { BlockNews3 } from "@bfirst/components-block-news-3";
 import { ItemList } from "@bfirst/components-item-list";
+import { ListGrid } from "@bfirst/components-list-grid";
 import { SquareGrid } from "@bfirst/components-square-grid";
 import { TopNewsSection } from "@bfirst/components-top-news-section";
 import Navbar from "./components/Navbar/Navbar";
@@ -15,6 +16,13 @@ export default async function Index() {
   const economyNews = await getData("categories/economy/stories");
   const featureNews = await getData("categories/feature/stories");
   const trendingTopics = await getData("trendy-topics");
+  const listData = await Promise.all([
+    getData("categories/bangladesh/stories"),
+    getData("categories/world/stories"),
+    getData("categories/sports/stories"),
+    getData("categories/tech/stories"),
+  ]);
+
   return (
     <>
       <Navbar />
@@ -51,7 +59,7 @@ export default async function Index() {
         </div>
       </div>
       <img className="mx-auto my-12" src="https://placehold.co/720x100?text=Ads" alt="Ads" />
-      
+
       <div className="desktop-container my-10">
         <div className="grid grid-cols-4 gap-x-4">
           <div className="col-span-3">
@@ -75,6 +83,10 @@ export default async function Index() {
           ads1="https://placehold.co/320x250?text=Ads"
           ads2="https://placehold.co/320x250?text=Ads"
         />
+      </div>
+
+      <div className="desktop-container">
+        <ListGrid data={listData} />
       </div>
     </>
   );

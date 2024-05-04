@@ -11,8 +11,8 @@ export function HighlightChip({ items, title }: HighlightChipProps) {
         <h3 className="font-montserrat px-6 py-2 bg-[#643FA1] text-white font-bold w-fit whitespace-nowrap">{title}</h3>
       )}
       <ul className="flex gap-2 flex-wrap">
-        {items.map((item) => (
-          <li className="bg-[#FAF6FF] text-black  rounded-md">
+        {items.map((item, index) => (
+          <li key={index} className="bg-[#FAF6FF] text-black  rounded-md">
             <a className="px-3 py-1 inline-block" href="">
               {item.name}
             </a>
