@@ -2,6 +2,7 @@ import { AccentHeader } from "@bfirst/components-accent-header";
 import { BlockNews } from "@bfirst/components-block-news";
 import { BlockNews2 } from "@bfirst/components-block-news-2";
 import { BlockNews3 } from "@bfirst/components-block-news-3";
+import { BlockNews4 } from "@bfirst/components-block-news-4";
 import { ItemList } from "@bfirst/components-item-list";
 import { ListGrid } from "@bfirst/components-list-grid";
 import { SquareGrid } from "@bfirst/components-square-grid";
@@ -15,6 +16,7 @@ export default async function Index() {
   const latestNews = await getData("latest/stories");
   const economyNews = await getData("categories/economy/stories");
   const featureNews = await getData("categories/feature/stories");
+  const entertainmentNews = await getData("categories/entertainment/stories");
   const trendingTopics = await getData("trendy-topics");
   const listData = await Promise.all([
     getData("categories/bangladesh/stories"),
@@ -97,6 +99,11 @@ export default async function Index() {
       <div className="desktop-container">
         <ListGrid data={listData} />
       </div>
+
+      <div className="desktop-container my-10">
+        <BlockNews4 data={entertainmentNews.data} />
+      </div>
+      <img className="mx-auto my-12" src="https://placehold.co/720x100?text=Ads" alt="Ads" />
     </>
   );
 }
