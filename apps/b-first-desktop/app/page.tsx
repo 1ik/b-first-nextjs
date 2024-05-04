@@ -1,5 +1,6 @@
 import { AccentHeader } from "@bfirst/components-accent-header";
 import { BlockNews } from "@bfirst/components-block-news";
+import { GridItems } from "@bfirst/components-grid-items";
 import { ItemList } from "@bfirst/components-item-list";
 import { SquareGrid } from "@bfirst/components-square-grid";
 import { TopNewsSection } from "@bfirst/components-top-news-section";
@@ -12,6 +13,7 @@ export default async function Index() {
   const latestNews = await getData("latest/stories");
   const economyNews = await getData("categories/economy/stories");
   const trendingTopics = await getData("trendy-topics");
+  const recommended = await getData("latest/stories");
   return (
     <>
       <Navbar />
@@ -29,6 +31,11 @@ export default async function Index() {
       <div className="desktop-container">
         <SquareGrid data={latestNews.data.slice(0, 8)} />
       </div>
+      <img className="mx-auto my-12" src="https://placehold.co/720x100?text=Ads" alt="Ads" />
+      <div className="desktop-container bg-[#F6EFEF]">
+        <GridItems data={recommended.data.slice(14, 18)} />
+      </div>
+      <img className="mx-auto my-12" src="https://placehold.co/720x100?text=Ads" alt="Ads" />
       <div className="desktop-container">
         <div className="grid grid-cols-4 gap-x-4">
           <div className="col-span-3">
