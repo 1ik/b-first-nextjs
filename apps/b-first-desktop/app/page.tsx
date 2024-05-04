@@ -12,7 +12,6 @@ export default async function Index() {
   const topNews = await getData("categories/0/featured-stories");
   const latestNews = await getData("latest/stories");
   const economyNews = await getData("categories/economy/stories");
-  const lifestyleNews = await getData("categories/lifestyle/stories");
   const trendingTopics = await getData("trendy-topics");
   return (
     <>
@@ -31,6 +30,13 @@ export default async function Index() {
       <div className="desktop-container">
         <SquareGrid data={latestNews.data.slice(0, 8)} />
       </div>
+      <img className="mx-auto my-12" src="https://placehold.co/720x100?text=Ads" alt="Ads" />
+      <div className="bg-[#F6EFEF] py-8">
+        <div className="desktop-container">
+          <SquareGrid data={latestNews.data.slice(8, 12)} />
+        </div>
+      </div>
+      <img className="mx-auto my-12" src="https://placehold.co/720x100?text=Ads" alt="Ads" />
       <div className="desktop-container">
         <div className="grid grid-cols-4 gap-x-4">
           <div className="col-span-3">
@@ -38,10 +44,11 @@ export default async function Index() {
           </div>
           <div className="border-l pl-3">
             <AccentHeader header="Todays News" />
-            <ItemList data={latestNews.data.slice(8, 14)} listType="circle" />
+            <ItemList data={latestNews.data.slice(12, 14)} listType="circle" />
           </div>
         </div>
       </div>
+      <img className="mx-auto my-12" src="https://placehold.co/720x100?text=Ads" alt="Ads" />
       <div className="desktop-container">
         <BlockNews3
           data={latestNews.data}
