@@ -14,7 +14,7 @@ export function ItemList({ data, listType = "none", imageUrl, alt }: ItemListPro
         <li
           key={item.id}
           className={`text-2xl text-black border-b border-[#D8D8D8] pb-4 mb-4 ${
-            listType === "number" && "flex gap-x-7 items-center"
+            listType === "number" && "flex gap-x-7 items-center last:border-b-0 first:gap-x-12"
           }`}
         >
           {listType === "number" && (
