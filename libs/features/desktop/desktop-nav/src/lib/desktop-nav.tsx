@@ -139,7 +139,7 @@ export function DesktopNav({
 
       <div
         className={`bg-white w-full transition-[padding] duration-300 ${
-          isSticky ? "fixed top-0 left-0 shadow-md py-3" : "my-10"
+          isSticky ? "fixed top-0 left-0 shadow-md py-3 z-[9999]" : "my-10"
         }`}
       >
         <div className="desktop-container flex justify-between items-center">
