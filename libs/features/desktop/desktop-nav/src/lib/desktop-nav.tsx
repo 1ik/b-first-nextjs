@@ -82,7 +82,7 @@ export function DesktopNav({
           }
         });
       },
-      { rootMargin: "-50px" }
+      { rootMargin: "-80px" }
     );
 
     observer.observe(navbar);
@@ -137,43 +137,47 @@ export function DesktopNav({
         </div>
       </div>
 
-      <div
-        className={`bg-white w-full transition-[padding] duration-300 ${
-          isSticky ? "fixed top-0 left-0 shadow-md py-3 z-[9999]" : "my-10"
-        }`}
-      >
-        <div className="desktop-container flex justify-between items-center">
-          <div className="w-8">
-            {logoMini && (
-              <a href="/">
-                <img
-                  className={`w-full duration-300 ${isSticky ? "scale-100" : "scale-0"}`}
-                  src={logoMini}
-                  alt="Logo"
-                />
-              </a>
-            )}
-          </div>
-          <ul className="flex text-[22px]">
-            {_links.map((link, index) => (
-              <li
-                key={index}
-                className={`relative before:content-[''] before:absolute before:h-2/5 before:w-[2px] before:bg-[#cccccc] before:right-0 before:top-1/2 before:-translate-y-1/2 after:content-[''] after:absolute after:h-[3px] ${
-                  link.href === activeLink ? "after:w-1/3" : "after:w-0"
-                } after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:bg-accent hover:after:w-1/3 z after:duration-300`}
-              >
-                <a className="px-5 py-1 block" href={link.href}>
-                  {link.name}
+      <div className="h-24 relative">
+        <div
+          className={`w-full transition-[padding] duration-300 ${
+            isSticky
+              ? "fixed top-0 left-0 bg-white/90 backdrop-blur shadow-md py-3 z-[9999]"
+              : "bg-white absolute top-1/2 -translate-y-1/2"
+          }`}
+        >
+          <div className="desktop-container flex justify-between items-center">
+            <div className="w-8">
+              {logoMini && (
+                <a href="/">
+                  <img
+                    className={`w-full duration-300 ${isSticky ? "scale-100" : "scale-0"}`}
+                    src={logoMini}
+                    alt="Logo"
+                  />
                 </a>
+              )}
+            </div>
+            <ul className="flex text-[22px]">
+              {_links.map((link, index) => (
+                <li
+                  key={index}
+                  className={`relative before:content-[''] before:absolute before:h-2/5 before:w-[2px] before:bg-[#cccccc] before:right-0 before:top-1/2 before:-translate-y-1/2 after:content-[''] after:absolute after:h-[3px] ${
+                    link.href === activeLink ? "after:w-1/3" : "after:w-0"
+                  } after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:bg-accent hover:after:w-1/3 z after:duration-300`}
+                >
+                  <a className="px-5 py-1 block" href={link.href}>
+                    {link.name}
+                  </a>
+                </li>
+              ))}
+              <li className="px-5 py-1 flex items-center gap-x-1">
+                More <IoIosArrowDown />
               </li>
-            ))}
-            <li className="px-5 py-1 flex items-center gap-x-1">
-              More <IoIosArrowDown />
-            </li>
-          </ul>
-          <button className="w-8 block">
-            <FaSearch />
-          </button>
+            </ul>
+            <button className="w-8 block">
+              <FaSearch />
+            </button>
+          </div>
         </div>
       </div>
     </nav>
