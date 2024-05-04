@@ -40,6 +40,7 @@
       "@bfirst/components-item-card-vertical": ["libs/components/item-card-vertical/src/index.ts"],
       "@bfirst/components-item-list": ["libs/components/item-list/src/index.ts"],
       "@bfirst/components-layout": ["libs/components/layouts/src/index.ts"],
+      "@bfirst/components-list-grid": ["libs/features/desktop/list-grid/src/index.ts"],
       "@bfirst/components-loader": ["libs/components/loader/src/index.ts"],
       "@bfirst/components-multiselect-search": ["libs/components/multiselect-search/src/index.ts"],
       "@bfirst/components-popover-notify": ["libs/components/popover-notify/src/index.ts"],

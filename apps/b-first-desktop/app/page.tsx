@@ -3,6 +3,7 @@ import { BlockNews } from "@bfirst/components-block-news";
 import { BlockNews2 } from "@bfirst/components-block-news-2";
 import { BlockNews3 } from "@bfirst/components-block-news-3";
 import { ItemList } from "@bfirst/components-item-list";
+import { ListGrid } from "@bfirst/components-list-grid";
 import { SquareGrid } from "@bfirst/components-square-grid";
 import { TopNewsSection } from "@bfirst/components-top-news-section";
 import Navbar from "./components/Navbar/Navbar";
@@ -15,6 +16,13 @@ export default async function Index() {
   const economyNews = await getData("categories/economy/stories");
   const featureNews = await getData("categories/feature/stories");
   const trendingTopics = await getData("trendy-topics");
+  const listData = await Promise.all([
+    getData("categories/bangladesh/stories"),
+    getData("categories/world/stories"),
+    getData("categories/sports/stories"),
+    getData("categories/tech/stories"),
+  ]);
+
   return (
     <>
       <Navbar />
@@ -30,7 +38,7 @@ export default async function Index() {
       </div>
       <img className="mx-auto my-12" src="https://placehold.co/720x100?text=Ads" alt="Ads" />
       <div className="desktop-container">
-        <SquareGrid data={latestNews.data.slice(0, 8)} />
+        <SquareGrid data={latestNews.data.slice(7, 15)} />
       </div>
       <img className="mx-auto my-12" src="https://placehold.co/720x100?text=Ads" alt="Ads" />
       <div className="bg-[#F6EFEF] py-8">
@@ -40,41 +48,54 @@ export default async function Index() {
       </div>
       <img className="mx-auto my-12" src="https://placehold.co/720x100?text=Ads" alt="Ads" />
       <div className="desktop-container">
-        <div className="grid grid-cols-4 gap-x-4">
-          <div className="col-span-3">
+        <div className="grid grid-cols-4">
+          <div className="col-span-3 border-r pr-4 mr-4">
             <BlockNews data={economyNews.data} />
           </div>
-          <div className="border-l pl-3">
+          <div>
             <AccentHeader header="Todays News" />
-            <ItemList data={latestNews.data.slice(12, 14)} listType="circle" />
+            <ItemList data={latestNews.data.slice(0, 6)} listType="circle" />
           </div>
         </div>
       </div>
       <img className="mx-auto my-12" src="https://placehold.co/720x100?text=Ads" alt="Ads" />
-      
+
       <div className="desktop-container my-10">
-        <div className="grid grid-cols-4 gap-x-4">
-          <div className="col-span-3">
+        <div className="grid grid-cols-4">
+          <div className="col-span-3 border-r pr-4 mr-4">
             <BlockNews2 data={featureNews.data} />
             <div className="flex justify-end mt-8">
               <img src="https://placehold.co/740x90?text=Ads" alt="Ads" />
             </div>
           </div>
-          <div className="border-l pl-3">
+          <div>
             <AccentHeader header="Most Viewed" />
-            <div className="mt-8">
-              <ItemList data={latestNews.data.slice(14, 22)} listType="number" />
-            </div>
+            <ItemList data={latestNews.data.slice(14, 22)} listType="number" />
+            <img className="mt-4 mx-auto" src="https://placehold.co/320x250?text=Ads" alt="Ads" />
           </div>
         </div>
       </div>
 
       <div className="desktop-container">
-        <BlockNews3
-          data={latestNews.data}
-          ads1="https://placehold.co/320x250?text=Ads"
-          ads2="https://placehold.co/320x250?text=Ads"
-        />
+        <div className="grid grid-cols-4">
+          <div className="col-span-3 border-r pr-4 mr-4">
+            <BlockNews3 data={latestNews.data} />
+          </div>
+          <div>
+            <AccentHeader header="On this day" color="#A49A46" />
+            <ItemList data={latestNews.data.slice(14, 22)} listType="circle" />
+            <div className="flex flex-col gap-y-3 items-center">
+              <img src="https://placehold.co/320x250?text=Ads" alt="Ads" />
+              <img src="https://placehold.co/320x250?text=Ads" alt="Ads" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <img className="mx-auto my-16" src="https://placehold.co/720x100?text=Ads" alt="Ads" />
+
+      <div className="desktop-container">
+        <ListGrid data={listData} />
       </div>
     </>
   );

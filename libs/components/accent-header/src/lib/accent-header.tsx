@@ -5,7 +5,7 @@ export interface AccentHeaderProps {
 
 export function AccentHeader({ header, color }: AccentHeaderProps) {
   return (
-    <div style={{ borderColor: color || "#EB1923" }} className="border-b">
+    <div style={{ borderColor: color || "#EB1923" }} className="border-b mb-4">
       <h3
         style={{ backgroundColor: color || "#EB1923" }}
         className={`inline px-4 py-1 font-montserrat font-bold text-white text-xl uppercase`}
