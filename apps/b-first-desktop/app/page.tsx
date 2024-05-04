@@ -1,5 +1,6 @@
 import { AccentHeader } from "@bfirst/components-accent-header";
 import { BlockNews } from "@bfirst/components-block-news";
+import { BlockNews3 } from "@bfirst/components-block-news-3";
 import { ItemList } from "@bfirst/components-item-list";
 import { SquareGrid } from "@bfirst/components-square-grid";
 import { TopNewsSection } from "@bfirst/components-top-news-section";
@@ -29,6 +30,13 @@ export default async function Index() {
       <div className="desktop-container">
         <SquareGrid data={latestNews.data.slice(0, 8)} />
       </div>
+      <img className="mx-auto my-12" src="https://placehold.co/720x100?text=Ads" alt="Ads" />
+      <div className="bg-[#F6EFEF] py-8">
+        <div className="desktop-container">
+          <SquareGrid data={latestNews.data.slice(8, 12)} />
+        </div>
+      </div>
+      <img className="mx-auto my-12" src="https://placehold.co/720x100?text=Ads" alt="Ads" />
       <div className="desktop-container">
         <div className="grid grid-cols-4 gap-x-4">
           <div className="col-span-3">
@@ -36,9 +44,17 @@ export default async function Index() {
           </div>
           <div className="border-l pl-3">
             <AccentHeader header="Todays News" />
-            <ItemList data={latestNews.data.slice(8, 14)} listType="circle" />
+            <ItemList data={latestNews.data.slice(12, 14)} listType="circle" />
           </div>
         </div>
+      </div>
+      <img className="mx-auto my-12" src="https://placehold.co/720x100?text=Ads" alt="Ads" />
+      <div className="desktop-container">
+        <BlockNews3
+          data={latestNews.data}
+          ads1="https://placehold.co/320x250?text=Ads"
+          ads2="https://placehold.co/320x250?text=Ads"
+        />
       </div>
     </>
   );
