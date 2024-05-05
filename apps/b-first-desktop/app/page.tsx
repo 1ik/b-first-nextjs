@@ -4,6 +4,7 @@ import { BlockNews2 } from "@bfirst/components-block-news-2";
 import { BlockNews3 } from "@bfirst/components-block-news-3";
 import { BlockNews4 } from "@bfirst/components-block-news-4";
 import { BlockNews5 } from "@bfirst/components-block-news-5";
+import { Footer } from "@bfirst/components-footer";
 import { ItemList } from "@bfirst/components-item-list";
 import { ListGrid } from "@bfirst/components-list-grid";
 import { SquareGrid } from "@bfirst/components-square-grid";
@@ -103,7 +104,14 @@ export default async function Index() {
       <div className="desktop-container my-10">
         <BlockNews5 data={entertainmentNews.data} />
       </div>
+
       <img className="mx-auto my-12" src="https://placehold.co/720x100?text=Ads" alt="Ads" />
+
+      <div className="bg-black">
+        <div className="desktop-container">
+          <Footer logo="/img/logo-light.svg" />
+        </div>
+      </div>
     </>
   );
 }
