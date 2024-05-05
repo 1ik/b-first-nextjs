@@ -1,5 +1,6 @@
 import { Montserrat } from "@next/font/google";
 import localFont from "@next/font/local";
+import BackToTop from "./components/BackToTop/BackToTop";
 import "./global.css";
 
 const washingtonFont = localFont({ src: "../public/fonts/washington.otf" });
@@ -15,6 +16,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body>
         <main className={`${washingtonFont.className} ${montserratFont.variable}`}>{children}</main>
+        <BackToTop />
       </body>
     </html>
   );

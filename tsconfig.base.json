@@ -47,6 +47,7 @@
       "@bfirst/components-loader": ["libs/components/loader/src/index.ts"],
       "@bfirst/components-multiselect-search": ["libs/components/multiselect-search/src/index.ts"],
       "@bfirst/components-popover-notify": ["libs/components/popover-notify/src/index.ts"],
+      "@bfirst/components-scroll-to-top": ["libs/components/scroll-to-top/src/index.ts"],
       "@bfirst/components-square-grid": ["libs/features/common-ui/square-grid/src/index.ts"],
       "@bfirst/components-stories": ["libs/features/stories/src/index.ts"],
       "@bfirst/components-table": ["libs/components/table/src/index.ts"],
