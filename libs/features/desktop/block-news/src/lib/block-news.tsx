@@ -7,14 +7,14 @@ export interface BlockNewsProps {
   data: any;
   ads1?: string;
   ads2?: string;
+  className?: string;
 }
 
-export function BlockNews({ data, ads1, ads2 }: BlockNewsProps) {
+export function BlockNews({ data, ads1, ads2, className }: BlockNewsProps) {
   return (
-    <div className="grid grid-cols-5 gap-5">
-      <div className="col-span-2">
-        <ItemCardVertical showImageBorder data={data[0]} size="lg" />
-      </div>
+    <div className={`grid grid-cols-5 gap-5 ${className}`}>
+      <ItemCardVertical className="col-span-2" showImageBorder data={data[0]} size="lg" />
+
       <div className="flex flex-col justify-between">
         {data.slice(1, 5).map((item: any) => (
           <ItemCardHorizontal showTitleBorder data={item} size="sm" />

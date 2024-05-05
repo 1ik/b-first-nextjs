@@ -4,18 +4,16 @@ import { ItemCardVertical } from "@bfirst/components-item-card-vertical";
 
 export interface BlockNews3Props {
   data: any;
+  className?: string;
 }
 
-export async function BlockNews3({ data }: BlockNews3Props) {
+export async function BlockNews3({ data, className }: BlockNews3Props) {
   return (
-    <div>
-      <div className="mb-4">
-        <AccentHeader header={data[0].categories[1].name} color={data[0].categories[1].color_code} />
-      </div>
+    <div className={`${className}`}>
+      <AccentHeader className="mb-4" header={data[0].categories[1].name} color={data[0].categories[1].color_code} />
+
       <div className="grid grid-cols-3 gap-5">
-        <div className="col-span-3">
-          <ItemCardHorizontal data={data[0]} showIntro />
-        </div>
+        <ItemCardHorizontal className="col-span-3" data={data[0]} showIntro />
 
         {data.splice(1, 3).map((item: any) => {
           return <ItemCardVertical key={item.id} size="md" data={item} />;

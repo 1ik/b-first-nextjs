@@ -4,11 +4,12 @@ import { ItemList } from "@bfirst/components-item-list";
 /* eslint-disable-next-line */
 export interface ListGridProps {
   data: any;
+  className?: string;
 }
 
-export function ListGrid({ data }: ListGridProps) {
+export function ListGrid({ data, className }: ListGridProps) {
   return (
-    <div className="grid grid-cols-4 gap-x-8">
+    <div className={`grid grid-cols-4 gap-x-8 ${className}`}>
       {data.map((list: any, index: number) => (
         <div
           className={`${
@@ -18,9 +19,7 @@ export function ListGrid({ data }: ListGridProps) {
           }`}
         >
           <AccentHeader header={list.data[0].categories[0].name} color={list.data[0].categories[0].color_code} />
-          <div>
-            <ItemList key={index} data={list.data.slice(0, 5)} showImage />
-          </div>
+          <ItemList key={index} data={list.data.slice(0, 5)} showImage />
         </div>
       ))}
     </div>
