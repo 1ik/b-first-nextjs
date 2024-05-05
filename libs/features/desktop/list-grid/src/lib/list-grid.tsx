@@ -9,7 +9,7 @@ export interface ListGridProps {
 
 export function ListGrid({ data, className }: ListGridProps) {
   return (
-    <div className={`grid grid-cols-4 gap-x-8 ${className && className}`}>
+    <div className={`grid grid-cols-4 gap-x-8 ${className}`}>
       {data.map((list: any, index: number) => (
         <div
           className={`${

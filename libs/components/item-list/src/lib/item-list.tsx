@@ -11,7 +11,7 @@ export interface ItemListProps {
 
 export function ItemList({ data, listType = "none", showImage = false, showDate = false, className }: ItemListProps) {
   return (
-    <ul className={`${className && className}`}>
+    <ul className={`${className}`}>
       {showImage && (
         <img className="w-full mb-5" src={getImageUrl(data[0].meta.featured_image)} alt={data[0].meta.image_caption} />
       )}

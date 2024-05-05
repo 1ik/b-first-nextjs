@@ -9,7 +9,7 @@ export interface BlockNews3Props {
 
 export async function BlockNews3({ data, className }: BlockNews3Props) {
   return (
-    <div className={`${className && className}`}>
+    <div className={`${className}`}>
       <AccentHeader className="mb-4" header={data[0].categories[1].name} color={data[0].categories[1].color_code} />
 
       <div className="grid grid-cols-3 gap-5">

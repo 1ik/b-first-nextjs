@@ -9,14 +9,12 @@ export interface BlockNews5Props {
 
 export function BlockNews5({ data, className }: BlockNews5Props) {
   return (
-    <div className={className && className}>
+    <div className={className}>
       <AccentHeader header={data[0].categories[0].name} color={data[0].categories[0].color_code} />
       <div className="grid grid-cols-4 gap-x-5 mt-8">
         <div>
           {data.slice(0, 5).map((item: any) => (
-            <div className="mb-8 last:mb-0">
-              <ItemCardHorizontal size="md" data={item} />
-            </div>
+            <ItemCardHorizontal className="mb-8 last:mb-0" size="md" data={item} />
           ))}
         </div>
 

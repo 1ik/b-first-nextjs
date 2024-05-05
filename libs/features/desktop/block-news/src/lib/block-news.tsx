@@ -12,7 +12,7 @@ export interface BlockNewsProps {
 
 export function BlockNews({ data, ads1, ads2, className }: BlockNewsProps) {
   return (
-    <div className={`grid grid-cols-5 gap-5 ${className && className}`}>
+    <div className={`grid grid-cols-5 gap-5 ${className}`}>
       <ItemCardVertical className="col-span-2" showImageBorder data={data[0]} size="lg" />
 
       <div className="flex flex-col justify-between">

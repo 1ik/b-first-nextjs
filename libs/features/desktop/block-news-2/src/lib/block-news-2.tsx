@@ -7,7 +7,7 @@ export interface BlockNews2Props {
 
 export function BlockNews2({ data ,className }: BlockNews2Props) {
   return (
-    <div className={`${className && className}`}>
+    <div className={`${className}`}>
       <div className={`grid grid-cols-3 gap-5`}>
         <div className="col-span-3 flex flex-col gap-y-4">
           <AccentHeader header={data[0].categories[1].name} color={data[0].categories.color_code} />
