@@ -6,8 +6,8 @@ export interface ScrollToTopProps {}
 
 export function ScrollToTop(props: ScrollToTopProps) {
   return (
-    <ScrollUp showUnder={500} duration={1000}>
-      <button className="p-2 text-3xl bg-slate-800 text-white rounded">
+    <ScrollUp showUnder={500} duration={1000} easing="easeInQuint">
+      <button className="p-2 text-3xl bg-slate-800 text-white rounded duration-200 hover:-translate-y-1">
         <LuArrowBigUp />
       </button>
     </ScrollUp>
