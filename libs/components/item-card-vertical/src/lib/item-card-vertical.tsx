@@ -23,7 +23,7 @@ export function ItemCardVertical({
     <div className={`${className && className}`}>
       <div className="mb-5 relative">
         <img
-          className={`w-full ${showImageBorder ? "border-b-[5px] border-accent" : ""}`}
+          className={`${size === "md" ? 'h-[230px]' : ''} object-cover w-full ${showImageBorder ? "border-b-[5px] border-accent" : ""}`}
           src={getImageUrl(data?.meta.featured_image)}
           alt=""
         />

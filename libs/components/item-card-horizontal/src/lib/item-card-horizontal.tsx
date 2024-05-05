@@ -25,7 +25,7 @@ export function ItemCardHorizontal({
         <h2
           className={`text-black ${
             size === "lg" ? "text-4xl" : size === "sm" ? "text-lg" : size === "md" ? "text-[26px]" : ""
-          }   ${showTitleBorder ? "border-t-[2px]  border-accent pt-2" : ""}`}
+          }   ${showTitleBorder ? "border-t-[2px] leading-tight border-accent pt-2" : ""}`}
         >
           {data?.title}
         </h2>
