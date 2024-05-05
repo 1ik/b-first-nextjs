@@ -29,37 +29,36 @@ export default async function Index() {
   return (
     <>
       <Navbar />
-      <div className="desktop-container">
-        <TrendingTopics className="mb-8" items={trendingTopics.data} title="Trending Topics" />
-      </div>
-      <div className="desktop-container">
-        <BlockNews
-          data={topNews.data}
-          ads1="https://placehold.co/320x250?text=Ads"
-          ads2="https://placehold.co/320x250?text=Ads"
-        />
-      </div>
+      <TrendingTopics className="desktop-container mb-8" items={trendingTopics.data} title="Trending Topics" />
+      <BlockNews
+        className="desktop-container"
+        data={topNews.data}
+        ads1="https://placehold.co/320x250?text=Ads"
+        ads2="https://placehold.co/320x250?text=Ads"
+      />
       <img className="mx-auto my-12" src="https://placehold.co/720x100?text=Ads" alt="Ads" />
-      <div className="desktop-container">
-        <SquareGrid data={latestNews.data.slice(7, 15)} />
-      </div>
+      <SquareGrid showAccentHeader className="desktop-container" data={latestNews.data.slice(7, 15)} />
       <img className="mx-auto my-12" src="https://placehold.co/720x100?text=Ads" alt="Ads" />
+
       <div className="bg-[#F6EFEF] py-8">
         <div className="desktop-container">
+          <AccentHeader className=" mb-5 " header="RECOMMENDED FOR YOU" />
           <SquareGrid data={latestNews.data.slice(8, 12)} />
         </div>
       </div>
       <img className="mx-auto my-12" src="https://placehold.co/720x100?text=Ads" alt="Ads" />
+
       <div className="desktop-container">
         <div className="grid grid-cols-4">
-          <BlockNews2 className="col-span-3 border-r pr-4 mr-4" data={economyNews.data} />
+          <BlockNews2 className="col-span-3 border-r pr-4 mr-4 " data={economyNews.data} />
 
           <div>
-            <AccentHeader header="Todays News" />
+            <AccentHeader header="Latest News" />
             <ItemList data={latestNews.data.slice(0, 6)} listType="circle" />
           </div>
         </div>
       </div>
+
       <img className="mx-auto my-12" src="https://placehold.co/720x100?text=Ads" alt="Ads" />
 
       <div className="desktop-container my-10">
@@ -96,20 +95,13 @@ export default async function Index() {
 
       <img className="mx-auto my-16" src="https://placehold.co/720x100?text=Ads" alt="Ads" />
 
-      <div className="desktop-container">
-        <ListGrid data={listData} />
-      </div>
-
-      <div className="desktop-container my-10">
-        <BlockNews5 data={entertainmentNews.data} />
-      </div>
+      <ListGrid className="desktop-container" data={listData} />
+      <BlockNews5 className="desktop-container my-10" data={entertainmentNews.data} />
 
       <img className="mx-auto my-12" src="https://placehold.co/720x100?text=Ads" alt="Ads" />
 
       <div className="bg-black">
-        <div className="desktop-container">
-          <Footer logo="/img/logo-light.svg" />
-        </div>
+        <Footer className="desktop-container" logo="/img/logo-light.svg" />
       </div>
     </>
   );

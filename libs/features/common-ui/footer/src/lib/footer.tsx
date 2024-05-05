@@ -1,6 +1,7 @@
 /* eslint-disable-next-line */
 export interface FooterProps {
   logo: string;
+  className?: string
 }
 
 const links = [
@@ -34,9 +35,9 @@ const links = [
   },
 ];
 
-export function Footer({ logo }: FooterProps) {
+export function Footer({ logo , className}: FooterProps) {
   return (
-    <div className="font-montserrat py-20 text-white">
+    <div className={`font-montserrat py-20 text-white ${className}`}>
       <div className="flex items-center justify-center">
         <img src={logo} alt="Logo" className="mb-14 w-[400px]" />
       </div>
