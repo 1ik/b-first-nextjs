@@ -15,7 +15,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body>
-        <main className={`${washingtonFont.className} ${montserratFont.variable}`}>{children}</main>
+        <main className={`${washingtonFont.className} ${montserratFont.variable} dark:bg-dark-400 dark:text-white`}>{children}</main>
         <BackToTop />
       </body>
     </html>

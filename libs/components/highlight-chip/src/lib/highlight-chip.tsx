@@ -13,7 +13,7 @@ export function HighlightChip({ items, title, className }: HighlightChipProps) {
       )}
       <ul className="flex gap-2 flex-wrap">
         {items?.map((item, index) => (
-          <li key={index} className="bg-[#FAF6FF] text-black  rounded-md">
+          <li key={index} className="bg-[#FAF6FF] dark:bg-dark-300 dark:text-white text-black  rounded-md">
             <a className="px-3 py-1 inline-block" href="">
               {item.name}
             </a>

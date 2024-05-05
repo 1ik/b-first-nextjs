@@ -40,9 +40,9 @@ export default async function Index() {
       <SquareGrid showAccentHeader className="desktop-container" data={latestNews?.data.slice(7, 15)} />
       <img className="mx-auto my-12" src="https://placehold.co/720x100?text=Ads" alt="Ads" />
 
-      <div className="bg-[#F6EFEF] py-8">
+      <div className="bg-[#F6EFEF] dark:bg-dark-300 py-8">
         <div className="desktop-container">
-          <AccentHeader header="Recommended For You" color="#5D26D1"/>
+          <AccentHeader header="Recommended For You" color="#5D26D1" />
           <SquareGrid data={latestNews?.data.slice(8, 12)} />
         </div>
       </div>
@@ -53,7 +53,7 @@ export default async function Index() {
           <BlockNews2 className="col-span-3 border-r pr-4 mr-4" data={economyNews?.data} />
 
           <div>
-            <AccentHeader header="Latest News" color="#5D26D1"/>
+            <AccentHeader header="Latest News" color="#5D26D1" />
             <ItemList data={latestNews?.data.slice(0, 6)} listType="circle" />
             <img className="mt-4 mx-auto" src="https://placehold.co/320x250?text=Ads" alt="Ads" />
           </div>
@@ -71,7 +71,7 @@ export default async function Index() {
             </div>
           </div>
           <div>
-            <AccentHeader header="Most Viewed" color="#119F9F"/>
+            <AccentHeader header="Most Viewed" color="#119F9F" />
             <ItemList data={latestNews?.data.slice(14, 22)} listType="number" />
             <img className="mt-4 mx-auto" src="https://placehold.co/320x250?text=Ads" alt="Ads" />
           </div>
