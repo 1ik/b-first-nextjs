@@ -16,13 +16,16 @@ export function BlockNews({ data, ads1, ads2, className }: BlockNewsProps) {
       <ItemCardVertical className="col-span-2" showImageBorder data={data?.[0]} size="lg" />
 
       <div className="flex flex-col justify-between">
-        {data?.slice(1, 5).map((item: any) => (
-          <ItemCardHorizontal showTitleBorder data={item} size="sm" />
+        {data?.slice(1, 5).map((item: any, index:number) => (
+          <div key={index}>
+            <ItemCardHorizontal showTitleBorder data={item} size="sm" />
+            {index+1 < 4 && <hr className="mt-4" />}
+          </div>
         ))}
       </div>
       <div className="flex flex-col gap-y-3">
         <img className="flex-grow object-cover" src={getImageUrl(data?.[6].meta.featured_image)} alt="Story image" />
-        <h3 className="text-[28px]">{data?.[6].title}</h3>
+        <h3 className="text-[28px] leading-none">{data?.[6].title}</h3>
       </div>
       <div className="flex flex-col gap-y-2">
         <img src={ads1} alt="Ads" />
