@@ -24,18 +24,18 @@ export function ItemCardVertical({
       <div className="mb-5 relative">
         <img
           className={`w-full ${showImageBorder ? "border-b-[5px] border-accent" : ""}`}
-          src={getImageUrl(data.meta.featured_image)}
+          src={getImageUrl(data?.meta.featured_image)}
           alt=""
         />
         {titlePosition === "inset" && (
-          <h2 className="bg-white absolute right-0 bottom-0 text-5xl w-3/5 px-6 py-4">{data.title}</h2>
+          <h2 className="bg-white absolute right-0 bottom-0 text-5xl w-3/5 px-6 py-4">{data?.title}</h2>
         )}
       </div>
       <div>
-        <h2 className={`${fontSize} ${titlePosition === "inset" ? "hidden" : ""}`}>{data.title}</h2>
+        <h2 className={`${fontSize} ${titlePosition === "inset" ? "hidden" : ""}`}>{data?.title}</h2>
         {showRelatedStory && (
           <ul>
-            {data.meta.related_story.map((item, index) => (
+            {data?.meta.related_story.map((item, index) => (
               <li key={index} className="text-sm">
                 {item}
               </li>
