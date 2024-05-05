@@ -50,7 +50,7 @@ export default async function Index() {
 
       <div className="desktop-container">
         <div className="grid grid-cols-4">
-          <BlockNews2 className="col-span-3 border-r pr-4 mr-4" data={economyNews?.data} />
+          <BlockNews2 adsUrl="https://placehold.co/720x100?text=Ads" className="col-span-3 border-r pr-4 mr-4" data={economyNews?.data} />
 
           <div>
             <AccentHeader header="Latest News" color="#5D26D1" />
@@ -60,15 +60,13 @@ export default async function Index() {
         </div>
       </div>
 
-      <img className="mx-auto" src="https://placehold.co/720x100?text=Ads" alt="Ads" />
+     
 
       <div className="desktop-container my-10">
         <div className="grid grid-cols-4">
           <div className="col-span-3 border-r pr-4 mr-4">
-            <BlockNews3 data={featureNews?.data} />
-            <div className="flex justify-end mt-8">
-              <img src="https://placehold.co/740x90?text=Ads" alt="Ads" />
-            </div>
+            <BlockNews3 adsUrl="https://placehold.co/740x90?text=Ads" data={featureNews?.data} />
+       
           </div>
           <div>
             <AccentHeader header="Most Viewed" color="#119F9F" />
@@ -80,10 +78,10 @@ export default async function Index() {
 
       <div className="desktop-container">
         <div className="grid grid-cols-4">
-          <BlockNews4 className="col-span-3 border-r pr-4 mr-4" data={latestNews?.data} />
+          <BlockNews4 adsUrl="https://placehold.co/720x100?text=Ads" className="col-span-3 border-r pr-4 mr-4" data={latestNews?.data} />
           <div>
             <AccentHeader header="On this day" color="#A49A46" />
-            <ItemList showImage showDate data={latestNews?.data.slice(14, 17)} />
+            <ItemList showImage showDate data={latestNews?.data.slice(14, 19)} />
             <div className="flex flex-col gap-y-3 items-center">
               <img src="https://placehold.co/320x250?text=Ads" alt="Ads" />
               <img src="https://placehold.co/320x250?text=Ads" alt="Ads" />
@@ -91,7 +89,7 @@ export default async function Index() {
           </div>
         </div>
       </div>
-      <img className="mx-auto my-16" src="https://placehold.co/720x100?text=Ads" alt="Ads" />
+     
       <BlockNews5 className="desktop-container my-10" data={entertainmentNews?.data} />
       <img className="mx-auto my-16" src="https://placehold.co/720x100?text=Ads" alt="Ads" />
 
