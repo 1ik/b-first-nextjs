@@ -40,7 +40,7 @@ export default async function Index() {
       <SquareGrid showAccentHeader className="desktop-container" data={latestNews?.data.slice(7, 15)} />
       <img className="mx-auto my-12" src="https://placehold.co/720x100?text=Ads" alt="Ads" />
 
-      <div className="bg-[#F6EFEF] py-8">
+      <div className="bg-[#F6EFEF] dark:bg-dark-300 py-8">
         <div className="desktop-container">
           <AccentHeader header="Recommended For You" color="#5D26D1" />
           <SquareGrid data={latestNews?.data.slice(8, 12)} />
