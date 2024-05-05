@@ -90,12 +90,12 @@ export function DesktopNav({
 
   return (
     <nav ref={navRef} className="flex flex-col gap-y-5">
-      <div className="bg-[#f6efef]">
+      <div className="bg-[#f6efef] dark:bg-dark-500">
         <div className="desktop-container flex justify-between items-center">
           <p>{moment().format("dddd, MMMM Do, YYYY")}</p>
           <div className="flex gap-x-10">
             {/* ====== theme toggle button ====== */}
-            <div className="bg-black p-2 self-center rounded-md">
+            <div className="bg-black dark:bg-dark-300 p-2 self-center rounded-md">
               <button
                 onClick={handleToggleTheme}
                 className={`bg-black p-2 block cursor-pointer self-center w-5 aspect-square rounded-full duration-500 ${
@@ -104,16 +104,16 @@ export function DesktopNav({
               ></button>
             </div>
             <div className="flex gap-x-1 py-5">
-              <a href="#" className="bg-black p-2.5 rounded-md">
+              <a href="#" className="bg-black dark:bg-dark-300 p-2.5 rounded-md">
                 <FaFacebookF className="text-white" />
               </a>
-              <a href="#" className="bg-black p-2.5 rounded-md">
+              <a href="#" className="bg-black dark:bg-dark-300 p-2.5 rounded-md">
                 <FaInstagram className="text-white" />
               </a>
-              <a href="#" className="bg-black p-2.5 rounded-md">
+              <a href="#" className="bg-black dark:bg-dark-300 p-2.5 rounded-md">
                 <FaXTwitter className="text-white" />
               </a>
-              <a href="#" className="bg-black p-2.5 rounded-md">
+              <a href="#" className="bg-black dark:bg-dark-300 p-2.5 rounded-md">
                 <FaYoutube className="text-white" />
               </a>
             </div>
@@ -130,23 +130,23 @@ export function DesktopNav({
           <div className="w-80">{adsLeft && <img src={adsLeft} alt="Ads" />}</div>
           <div className="w-80">
             <a href="/">
-              <img className="w-full" src={logoDark} alt="Logo" />
+              <img className="w-full" src={isDark ? logoLight : logoDark} alt="Logo" />
             </a>
           </div>
           <div className="w-80">{adsRight && <img src={adsRight} alt="Ads" />}</div>
         </div>
       </div>
 
-      <div className="h-24 relative">
+      <div className="h-24 relative ">
         <div
           className={`w-full transition-[padding] duration-300 ${
             isSticky
-              ? "fixed top-0 left-0 bg-white/90 backdrop-blur shadow-md py-3 z-[9999]"
-              : "bg-white absolute top-1/2 -translate-y-1/2"
+              ? "fixed top-0 left-0 bg-white/90 dark:bg-dark-400/90 backdrop-blur shadow-md py-3 z-[9999]"
+              : "absolute top-1/2 -translate-y-1/2"
           }`}
         >
           <div className="desktop-container flex justify-between items-center">
-            <div className="w-8">
+            <div className="w-9">
               {logoMini && (
                 <a href="/">
                   <img
@@ -174,7 +174,7 @@ export function DesktopNav({
                 More <IoIosArrowDown />
               </li>
             </ul>
-            <button className="w-8 block">
+            <button className="w-9 block text-2xl">
               <FaSearch />
             </button>
           </div>
