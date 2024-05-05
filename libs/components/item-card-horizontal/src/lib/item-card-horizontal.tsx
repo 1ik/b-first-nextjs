@@ -23,14 +23,14 @@ export function ItemCardHorizontal({
           ${imageSide === "left" ? "order-last" : imageSide === "right" ? "order-first" : ""}`}
       >
         <h2
-          className={`text-black ${
+          className={`${
             size === "lg" ? "text-4xl" : size === "sm" ? "text-lg" : size === "md" ? "text-[26px]" : ""
           }   ${showTitleBorder ? "border-t-[2px] leading-tight border-accent pt-2" : ""}`}
         >
           {data?.title}
         </h2>
 
-        {showIntro && <p className="mt-4 text-[28px] text-[#727272]">{data?.meta.intro}</p>}
+        {showIntro && <p className="mt-4 text-[28px] dark:text-[#bebdbd] text-[#727272]">{data?.meta.intro}</p>}
       </div>
 
       <div className={`${size === "lg" ? "w-2/3" : size === "md" ? "w-5/12" : size === "sm" ? "w-1/3" : ""}`}>
