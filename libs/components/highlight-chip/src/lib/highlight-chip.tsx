@@ -2,11 +2,12 @@
 export interface HighlightChipProps {
   items: any[];
   title?: string;
+  className?: string;
 }
 
-export function HighlightChip({ items, title }: HighlightChipProps) {
+export function HighlightChip({ items, title, className }: HighlightChipProps) {
   return (
-    <div className="flex items-start gap-2">
+    <div className={`flex items-start gap-2 ${className}`}>
       {title && (
         <h3 className="font-montserrat px-6 py-2 bg-[#643FA1] text-white font-bold w-fit whitespace-nowrap">{title}</h3>
       )}
