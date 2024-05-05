@@ -13,11 +13,7 @@ export function ItemList({ data, listType = "none", showImage = false, showDate 
   return (
     <ul className={`${className}`}>
       {showImage && (
-        <img
-          className="w-full mb-5"
-          src={getImageUrl(data?.[0].meta.featured_image)}
-          alt={data?.[0].meta.image_caption}
-        />
+        <img className="h-[220px] object-cover w-full mb-5" src={getImageUrl(data?.[0].meta.featured_image)} alt={data?.[0].meta.image_caption} />
       )}
       {showDate && (
         <h3 className="bg-[#FDC269] text-black font-montserrat font-semibold text-2xl px-8 py-1.5 w-fit my-3">
