@@ -5,14 +5,16 @@ import { ItemList } from "@bfirst/components-item-list";
 /* eslint-disable-next-line */
 export interface BlockNews4Props {
   data: any;
+  sectionHeader?: string;
+  headerColor?: string;
   className?: string;
   adsUrl?: string;
 }
 
-export function BlockNews4({ data, className, adsUrl }: BlockNews4Props) {
+export function BlockNews4({ data, sectionHeader, headerColor, className, adsUrl }: BlockNews4Props) {
   return (
     <div className={className}>
-      <AccentHeader header={data?.[0].categories[0].name} color={data?.[0].categories[0].color_code} />
+      {sectionHeader && <AccentHeader header={sectionHeader} color={headerColor} />}
 
       <ItemCardVertical className="border-b mb-3 mt-3" data={data?.[0]} size="lg" titlePosition="inset" />
 
@@ -22,9 +24,7 @@ export function BlockNews4({ data, className, adsUrl }: BlockNews4Props) {
         </div>
         <ItemList data={data?.slice(2, 7)} listType="circle" />
       </div>
-     {
-      adsUrl &&  <img className="mx-auto mt-5" src={adsUrl} alt="Ads" />
-     }
+      {adsUrl && <img className="mx-auto mt-5" src={adsUrl} alt="Ads" />}
     </div>
   );
 }

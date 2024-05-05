@@ -18,6 +18,7 @@ export default async function Index() {
   const economyNews = await getData("categories/economy/stories");
   const featureNews = await getData("categories/feature/stories");
   const entertainmentNews = await getData("categories/entertainment/stories");
+  const lifestyleNews = await getData("categories/lifestyle/stories");
   const trendingTopics = await getData("trendy-topics");
   const listData = await Promise.all([
     getData("categories/bangladesh/stories"),
@@ -51,6 +52,8 @@ export default async function Index() {
       <div className="desktop-container">
         <div className="grid grid-cols-4">
           <BlockNews2
+            sectionHeader="Economy"
+            headerColor="#00479B"
             adsUrl="/ads/social_islami.png"
             className="col-span-3 border-r pr-4 mr-4"
             data={economyNews?.data}
@@ -67,7 +70,12 @@ export default async function Index() {
       <div className="desktop-container my-10">
         <div className="grid grid-cols-4">
           <div className="col-span-3 border-r pr-4 mr-4">
-            <BlockNews3 adsUrl="/ads/ads_three.png" data={featureNews?.data} />
+            <BlockNews3
+              sectionHeader="Feature"
+              headerColor="#8BD032"
+              adsUrl="/ads/ads_three.png"
+              data={featureNews?.data}
+            />
           </div>
           <div>
             <AccentHeader header="Most Viewed" color="#119F9F" />
@@ -77,12 +85,14 @@ export default async function Index() {
         </div>
       </div>
 
-      <div className="desktop-container">
+      <div className="desktop-container mt-20">
         <div className="grid grid-cols-4">
           <BlockNews4
+            sectionHeader="Lifestyle"
+            headerColor="#EF2D8A"
             adsUrl="/ads/social_islami.png"
             className="col-span-3 border-r pr-4 mr-4"
-            data={latestNews?.data}
+            data={lifestyleNews?.data}
           />
           <div>
             <AccentHeader header="On this day" color="#A49A46" />
@@ -95,7 +105,12 @@ export default async function Index() {
         </div>
       </div>
 
-      <BlockNews5 className="desktop-container my-10" data={entertainmentNews?.data} />
+      <BlockNews5
+        sectionHeader="entertainment"
+        headerColor="#5D26D1"
+        className="desktop-container my-10"
+        data={entertainmentNews?.data}
+      />
       <img className="mx-auto my-16" src="/ads/ads_six.png" alt="Ads" />
 
       <ListGrid className="desktop-container" data={listData} />

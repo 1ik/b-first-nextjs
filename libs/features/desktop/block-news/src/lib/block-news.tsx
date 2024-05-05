@@ -5,12 +5,13 @@ import { getImageUrl } from "@bfirst/utilities";
 /* eslint-disable-next-line */
 export interface BlockNewsProps {
   data: any;
+  sectionHeader?: string;
   ads1?: string;
   ads2?: string;
   className?: string;
 }
 
-export function BlockNews({ data, ads1, ads2, className }: BlockNewsProps) {
+export function BlockNews({ data, sectionHeader, ads1, ads2, className }: BlockNewsProps) {
   return (
     <div className={`grid grid-cols-5 gap-5 ${className}`}>
       <ItemCardVertical className="col-span-2" showImageBorder data={data?.[0]} size="lg" />

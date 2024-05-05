@@ -24,7 +24,7 @@ export function ItemCardHorizontal({
       >
         <h2
           className={`${
-            size === "lg" ? "text-4xl" : size === "sm" ? "text-xl" : size === "md" ? "text-[26px]" : ""
+            size === "lg" ? "text-4xl" : size === "sm" ? "text-xl" : size === "md" ? "text-[26px] leading-none" : ""
           }   ${showTitleBorder ? "border-t-[2px] leading-tight border-accent pt-2" : ""}`}
         >
           {data?.title}
@@ -35,7 +35,7 @@ export function ItemCardHorizontal({
 
       <div className={`${size === "lg" ? "w-2/3" : size === "md" ? "w-5/12" : size === "sm" ? "w-1/3" : ""}`}>
         <img
-          className="w-full"
+          className={`w-full object-cover ${size === "md" ? "h-[100px]" : size === "sm" ? "h-[70px]" : ""}`}
           src={getImageUrl(data?.meta.featured_image)}
           alt={data?.meta.featured_image.imageCaption}
         />
