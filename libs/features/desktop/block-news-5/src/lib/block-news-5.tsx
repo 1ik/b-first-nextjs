@@ -22,8 +22,8 @@ export function BlockNews5({ data, className }: BlockNews5Props) {
           <ItemCardVertical className="col-span-2" data={data?.[5]} size="lg" />
 
           <div className="flex flex-col gap-y-10">
-            <img src="https://placehold.co/420x250?text=Ads" alt="Ads" />
-            <img src="https://placehold.co/420x250?text=Ads" alt="Ads" />
+            <img src="/ads/Global.gif" alt="Ads" />
+            <img src="/ads/SIBL_Profit_300x250.gif" alt="Ads" />
           </div>
           {data?.slice(6, 9).map((item: any, index) => (
             <ItemCardVertical data={item} size="md" />

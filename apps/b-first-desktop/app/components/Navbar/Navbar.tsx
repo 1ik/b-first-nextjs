@@ -5,11 +5,11 @@ import { DesktopNav } from "@bfirst/components-desktop-nav";
 export default function Navbar() {
   return (
     <DesktopNav
-      adsRight="https://placehold.co/320x100?text=Ads"
+      adsRight="/ads/ads_hader_right.png"
       logoLight="/img/logo-light.svg"
       logoDark="/img/logo-dark.svg"
-      adsLeft="https://placehold.co/320x100?text=Ads"
-      adsBanner="https://placehold.co/740x90?text=Ads"
+      adsLeft="/ads/ads_hader_left.png"
+      adsBanner="/ads/banner_ibbl.gif"
       logoMini="/img/logo-mini.png"
     />
   );

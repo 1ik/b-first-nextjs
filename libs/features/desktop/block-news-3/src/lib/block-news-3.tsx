@@ -5,9 +5,10 @@ import { ItemCardVertical } from "@bfirst/components-item-card-vertical";
 export interface BlockNews3Props {
   data: any;
   className?: string;
+  adsUrl?: string;
 }
 
-export async function BlockNews3({ data, className }: BlockNews3Props) {
+export async function BlockNews3({ data, className, adsUrl }: BlockNews3Props) {
   return (
     <div className={`${className}`}>
       <AccentHeader className="mb-4" header={data?.[0].categories[1].name} color={data?.[0].categories[1].color_code} />
@@ -18,6 +19,9 @@ export async function BlockNews3({ data, className }: BlockNews3Props) {
         {data?.splice(1, 3).map((item: any) => {
           return <ItemCardVertical key={item.id} size="md" data={item} />;
         })}
+      </div>
+      <div className="flex justify-end mt-8">
+        <img src={adsUrl} alt="Ads" />
       </div>
     </div>
   );

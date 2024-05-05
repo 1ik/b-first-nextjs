@@ -27,7 +27,7 @@ export function BlockNews({ data, ads1, ads2, className }: BlockNewsProps) {
         <img className="flex-grow object-cover" src={getImageUrl(data?.[6].meta.featured_image)} alt="Story image" />
         <h3 className="text-[28px] leading-none">{data?.[6].title}</h3>
       </div>
-      <div className="flex flex-col gap-y-2">
+      <div className="flex flex-col gap-y-3">
         <img src={ads1} alt="Ads" />
         <img src={ads2} alt="Ads" />
       </div>

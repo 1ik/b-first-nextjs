@@ -2,10 +2,11 @@ import { AccentHeader } from "@bfirst/components-accent-header";
 import { ItemCardHorizontal } from "@bfirst/components-item-card-horizontal";
 export interface BlockNews2Props {
   data: any;
-  className?: string
+  className?: string;
+  adsUrl?: string;
 }
 
-export function BlockNews2({ data ,className }: BlockNews2Props) {
+export function BlockNews2({ data, className, adsUrl  }: BlockNews2Props) {
   return (
     <div className={`${className}`}>
       <div className={`grid grid-cols-3 gap-5`}>
@@ -17,6 +18,7 @@ export function BlockNews2({ data ,className }: BlockNews2Props) {
           <ItemCardHorizontal key={item.id} data={item} showTitleBorder size="sm" />
         ))}
       </div>
+      {adsUrl && <img className="mx-auto mt-10" src={adsUrl} alt="Ads" />}
     </div>
   );
 }
