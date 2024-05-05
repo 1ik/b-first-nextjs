@@ -1,27 +1,26 @@
 import { AccentHeader } from "@bfirst/components-accent-header";
+import { ItemCardHorizontal } from "@bfirst/components-item-card-horizontal";
 import { ItemCardVertical } from "@bfirst/components-item-card-vertical";
-import { ItemList } from "@bfirst/components-item-list";
 
-/* eslint-disable-next-line */
 export interface BlockNews3Props {
   data: any;
 }
 
-export function BlockNews3({ data }: BlockNews3Props) {
+export async function BlockNews3({ data }: BlockNews3Props) {
   return (
     <div>
-      <AccentHeader header={data[0].categories[0].name} color={data[0].categories[0].color_code} />
-      <div className="border-b mb-3 mt-3">
-        <ItemCardVertical data={data[0]} size="lg" titlePosition="inset" />
+      <div className="mb-4">
+        <AccentHeader header={data[0].categories[1].name} color={data[0].categories[1].color_code} />
       </div>
-      <div className="grid grid-cols-3">
-        <div className="col-span-2 border-r pr-3 mr-3">
-          <ItemCardVertical data={data[1]} size="lg" />
+      <div className="grid grid-cols-3 gap-5">
+        <div className="col-span-3">
+          <ItemCardHorizontal data={data[0]} showIntro />
         </div>
-        <ItemList data={data.slice(2, 7)} listType="circle" />
+
+        {data.splice(1, 3).map((item: any) => {
+          return <ItemCardVertical key={item.id} size="md" data={item} />;
+        })}
       </div>
     </div>
   );
 }
-
-export default BlockNews3;

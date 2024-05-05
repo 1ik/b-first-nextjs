@@ -3,10 +3,10 @@ import { BlockNews } from "@bfirst/components-block-news";
 import { BlockNews2 } from "@bfirst/components-block-news-2";
 import { BlockNews3 } from "@bfirst/components-block-news-3";
 import { BlockNews4 } from "@bfirst/components-block-news-4";
+import { BlockNews5 } from "@bfirst/components-block-news-5";
 import { ItemList } from "@bfirst/components-item-list";
 import { ListGrid } from "@bfirst/components-list-grid";
 import { SquareGrid } from "@bfirst/components-square-grid";
-import { TopNewsSection } from "@bfirst/components-top-news-section";
 import Navbar from "./components/Navbar/Navbar";
 import TrendingTopics from "./components/TrendingTopics/TrendingTopics";
 import { getData } from "./utils/dataFetch";
@@ -32,7 +32,7 @@ export default async function Index() {
         <TrendingTopics items={trendingTopics.data} title="Trending Topics" />
       </div>
       <div className="desktop-container">
-        <TopNewsSection
+        <BlockNews
           data={topNews.data}
           ads1="https://placehold.co/320x250?text=Ads"
           ads2="https://placehold.co/320x250?text=Ads"
@@ -52,7 +52,7 @@ export default async function Index() {
       <div className="desktop-container">
         <div className="grid grid-cols-4">
           <div className="col-span-3 border-r pr-4 mr-4">
-            <BlockNews data={economyNews.data} />
+            <BlockNews2 data={economyNews.data} />
           </div>
           <div>
             <AccentHeader header="Todays News" />
@@ -65,7 +65,7 @@ export default async function Index() {
       <div className="desktop-container my-10">
         <div className="grid grid-cols-4">
           <div className="col-span-3 border-r pr-4 mr-4">
-            <BlockNews2 data={featureNews.data} />
+            <BlockNews3 data={featureNews.data} />
             <div className="flex justify-end mt-8">
               <img src="https://placehold.co/740x90?text=Ads" alt="Ads" />
             </div>
@@ -81,7 +81,7 @@ export default async function Index() {
       <div className="desktop-container">
         <div className="grid grid-cols-4">
           <div className="col-span-3 border-r pr-4 mr-4">
-            <BlockNews3 data={latestNews.data} />
+            <BlockNews4 data={latestNews.data} />
           </div>
           <div>
             <AccentHeader header="On this day" color="#A49A46" />
@@ -101,7 +101,7 @@ export default async function Index() {
       </div>
 
       <div className="desktop-container my-10">
-        <BlockNews4 data={entertainmentNews.data} />
+        <BlockNews5 data={entertainmentNews.data} />
       </div>
       <img className="mx-auto my-12" src="https://placehold.co/720x100?text=Ads" alt="Ads" />
     </>
