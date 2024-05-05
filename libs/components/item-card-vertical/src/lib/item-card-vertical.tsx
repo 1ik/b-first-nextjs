@@ -6,6 +6,7 @@ export interface ItemCardVerticalProps {
   showRelatedStory?: boolean;
   showImageBorder?: boolean;
   titlePosition?: "normal" | "inset";
+  className?: string;
 }
 
 export function ItemCardVertical({
@@ -14,11 +15,12 @@ export function ItemCardVertical({
   showRelatedStory = false,
   showImageBorder = false,
   titlePosition = "normal",
+  className,
 }: ItemCardVerticalProps) {
   const fontSize = size === "lg" ? "text-4xl" : size === "md" ? "text-[23px]" : "";
 
   return (
-    <div>
+    <div className={`${className && className}`}>
       <div className="mb-5 relative">
         <img
           className={`w-full ${showImageBorder ? "border-b-[5px] border-accent" : ""}`}

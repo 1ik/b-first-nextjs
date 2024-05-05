@@ -51,9 +51,8 @@ export default async function Index() {
       <img className="mx-auto my-12" src="https://placehold.co/720x100?text=Ads" alt="Ads" />
       <div className="desktop-container">
         <div className="grid grid-cols-4">
-          <div className="col-span-3 border-r pr-4 mr-4">
-            <BlockNews2 data={economyNews.data} />
-          </div>
+          <BlockNews2 className="col-span-3 border-r pr-4 mr-4" data={economyNews.data} />
+
           <div>
             <AccentHeader header="Todays News" />
             <ItemList data={latestNews.data.slice(0, 6)} listType="circle" />
@@ -101,7 +100,7 @@ export default async function Index() {
       </div>
 
       <div className="desktop-container my-10">
-        <BlockNews5 data={entertainmentNews.data} />
+        <BlockNews5  data={entertainmentNews.data} />
       </div>
       <img className="mx-auto my-12" src="https://placehold.co/720x100?text=Ads" alt="Ads" />
     </>
