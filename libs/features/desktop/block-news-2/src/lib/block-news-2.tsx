@@ -18,7 +18,7 @@ export function BlockNews2({ data, className, adsUrl  }: BlockNews2Props) {
           <ItemCardHorizontal key={item.id} data={item} showTitleBorder size="sm" />
         ))}
       </div>
-      {adsUrl && <img className="mx-auto mt-10" src={adsUrl} alt="Ads" />}
+      {adsUrl && <img className="mx-auto mt-24" src={adsUrl} alt="Ads" />}
     </div>
   );
 }
