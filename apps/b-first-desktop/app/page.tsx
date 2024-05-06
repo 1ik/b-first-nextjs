@@ -11,7 +11,6 @@ import Navbar from "./components/Navbar/Navbar";
 import TrendingTopics from "./components/TrendingTopics/TrendingTopics";
 import { getData } from "./utils/dataFetch";
 
-
 export default async function Index() {
   const topNews = await getData("categories/0/featured-stories");
   const latestNews = await getData("latest/stories");
@@ -115,9 +114,7 @@ export default async function Index() {
 
       <ListGrid className="desktop-container" data={listData} />
 
-      <img className="mx-auto my-12" src="/ads/fresh.png" alt="Ads" />
-
- 
+      <img className="mx-auto my-12" src="/ads/fresh.gif" alt="Ads" />
     </>
   );
 }
