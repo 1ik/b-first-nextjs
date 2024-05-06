@@ -34,7 +34,7 @@ export default async function Index() {
         className="desktop-container"
         data={topNews?.data}
         ads1="/ads/Global.gif"
-        ads2="/ads/SIBL_Profit_300x250.gif"
+        ads2="/ads/union-bank-ad.gif"
       />
       <img className="mx-auto my-14" src="/ads/nagad.png" alt="Ads" />
       <SquareGrid showAccentHeader className="desktop-container" data={latestNews?.data.slice(7, 15)} />
