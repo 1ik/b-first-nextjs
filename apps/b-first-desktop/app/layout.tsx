@@ -18,10 +18,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <main className={`${washingtonFont.className} ${montserratFont.variable} dark:bg-dark-400 dark:text-white`}>
           {children}
-          <div className="bg-black">
-            <Footer className="desktop-container" logo="/img/logo-light.svg" />
-          </div>
         </main>
+        <footer className="bg-black">
+          <Footer className="desktop-container" logo="/img/logo-light.svg" />
+        </footer>
         <BackToTop />
       </body>
     </html>
