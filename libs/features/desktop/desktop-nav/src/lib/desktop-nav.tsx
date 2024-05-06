@@ -59,14 +59,32 @@ export function DesktopNav({
   logoMini,
   activeLink,
 }: DesktopNavProps) {
-  const [isDark, setIsDark] = useState(false);
+  const [theme, setTheme] = useState<null | string>(null);
   const [isSticky, setIsSticky] = useState(false);
   const navRef = useRef(null);
 
   const handleToggleTheme = function () {
-    document.documentElement.classList.toggle("dark");
-    setIsDark((cur) => !cur);
+    if (theme === "dark") {
+      document.documentElement.classList.remove("dark");
+      setTheme("light");
+      localStorage.setItem("b-first-theme", "light");
+    }
+    if (theme === "light") {
+      document.documentElement.classList.add("dark");
+      setTheme("dark");
+      localStorage.setItem("b-first-theme", "dark");
+    }
   };
+
+  useEffect(() => {
+    const siteTheme = localStorage.getItem("b-first-theme");
+    setTheme(siteTheme);
+  }, []);
+
+  useEffect(() => {
+    if (theme === "dark") document.documentElement.classList.add("dark");
+    if (theme === "light") document.documentElement.classList.remove("dark");
+  }, [theme]);
 
   useEffect(() => {
     const navbar = navRef.current;
@@ -99,7 +117,7 @@ export function DesktopNav({
               <button
                 onClick={handleToggleTheme}
                 className={`bg-black p-2 block cursor-pointer self-center w-5 aspect-square rounded-full duration-500 ${
-                  isDark ? "bg-yellow-400" : "bg-transparent shadow-[inset_-7px_-4px_1px_1px_white]"
+                  theme === "dark" ? "bg-yellow-400" : "bg-transparent shadow-[inset_-7px_-4px_1px_1px_white]"
                 } `}
               ></button>
             </div>
@@ -130,7 +148,7 @@ export function DesktopNav({
           <div className="w-80">{adsLeft && <img src={adsLeft} alt="Ads" />}</div>
           <div className="w-80">
             <a href="/">
-              <img className="w-full" src={isDark ? logoLight : logoDark} alt="Logo" />
+              <img className="w-full" src={theme === "dark" ? logoLight : logoDark} alt="Logo" />
             </a>
           </div>
           <div className="w-80">{adsRight && <img src={adsRight} alt="Ads" />}</div>
