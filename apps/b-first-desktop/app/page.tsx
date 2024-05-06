@@ -55,7 +55,7 @@ export default async function Index() {
             sectionHeader="Economy"
             headerColor="#00479B"
             adsUrl="/ads/social_islami.png"
-            className="col-span-3 border-r pr-4 mr-4"
+            className="col-span-3 border-r dark:border-dark-300 pr-4 mr-4"
             data={economyNews?.data}
           />
 
@@ -69,7 +69,7 @@ export default async function Index() {
 
       <div className="desktop-container my-10">
         <div className="grid grid-cols-4">
-          <div className="col-span-3 border-r pr-4 mr-4">
+          <div className="col-span-3 border-r dark:border-dark-300 pr-4 mr-4">
             <BlockNews3
               sectionHeader="Feature"
               headerColor="#8BD032"
@@ -91,7 +91,7 @@ export default async function Index() {
             sectionHeader="Lifestyle"
             headerColor="#EF2D8A"
             adsUrl="/ads/social_islami.png"
-            className="col-span-3 border-r pr-4 mr-4"
+            className="col-span-3 border-r dark:border-dark-300 pr-4 mr-4"
             data={lifestyleNews?.data}
           />
           <div>

@@ -14,7 +14,7 @@ export function ListGrid({ data, className }: ListGridProps) {
         <div
           className={`${
             data?.length !== index + 1
-              ? "relative after:content-[''] after:bg-[#E5E7EB] after:w-[1px] after:h-full after:absolute after:-right-4 after:top-0"
+              ? "relative after:content-[''] after:bg-[#E5E7EB] dark:after:bg-dark-300 after:w-[1px] after:h-full after:absolute after:-right-4 after:top-0"
               : ""
           }`}
         >

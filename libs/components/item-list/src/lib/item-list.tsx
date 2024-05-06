@@ -27,9 +27,9 @@ export function ItemList({ data, listType = "none", showImage = false, showDate 
       {data?.map((item: any, index: number) => (
         <li
           key={item.id}
-          className={`text-2xl ${data?.length !== index + 1 ? "border-b border-[#D8D8D8]" : ""} pb-4 mb-4 ${
-            listType === "number" && "flex gap-x-7 items-center last:border-b-0 first:gap-x-12"
-          }`}
+          className={`text-2xl ${
+            data?.length !== index + 1 ? "border-b border-[#D8D8D8] dark:border-dark-300" : ""
+          } pb-4 mb-4 ${listType === "number" && "flex gap-x-7 items-center last:border-b-0 first:gap-x-12"}`}
         >
           {listType === "number" && (
             <span className="text-[#D8D8D8] dark:text-[#313233] font-semibold font-montserrat text-[100px]">
