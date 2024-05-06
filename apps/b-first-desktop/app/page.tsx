@@ -4,7 +4,6 @@ import { BlockNews2 } from "@bfirst/components-block-news-2";
 import { BlockNews3 } from "@bfirst/components-block-news-3";
 import { BlockNews4 } from "@bfirst/components-block-news-4";
 import { BlockNews5 } from "@bfirst/components-block-news-5";
-import { Footer } from "@bfirst/components-footer";
 import { ItemList } from "@bfirst/components-item-list";
 import { ListGrid } from "@bfirst/components-list-grid";
 import { SquareGrid } from "@bfirst/components-square-grid";
@@ -115,11 +114,7 @@ export default async function Index() {
 
       <ListGrid className="desktop-container" data={listData} />
 
-      <img className="mx-auto my-12" src="/ads/fresh.png" alt="Ads" />
-
-      <div className="bg-black">
-        <Footer className="desktop-container" logo="/img/logo-light.svg" />
-      </div>
+      <img className="mx-auto my-12" src="/ads/fresh.gif" alt="Ads" />
     </>
   );
 }

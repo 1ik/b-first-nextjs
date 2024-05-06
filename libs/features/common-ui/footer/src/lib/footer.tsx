@@ -11,7 +11,11 @@ const links = [
   },
   {
     name: "Privacy Policy",
-    href: "/#",
+    href: "/privacy-policy",
+  },
+  {
+    name: "Comments Policy",
+    href: "/comments-policy",
   },
   {
     name: "Cookie Settings",

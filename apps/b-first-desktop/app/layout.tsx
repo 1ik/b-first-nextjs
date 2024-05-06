@@ -1,6 +1,7 @@
 import { Montserrat } from "@next/font/google";
 import localFont from "@next/font/local";
 import BackToTop from "./components/BackToTop/BackToTop";
+import { Footer } from "@bfirst/components-footer";
 import "./global.css";
 
 const washingtonFont = localFont({ src: "../public/fonts/washington.otf" });
@@ -15,7 +16,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body>
-        <main className={`${washingtonFont.className} ${montserratFont.variable} dark:bg-dark-400 dark:text-white`}>{children}</main>
+        <main className={`${washingtonFont.className} ${montserratFont.variable} dark:bg-dark-400 dark:text-white`}>
+          {children}
+        </main>
+        <footer className="bg-black">
+          <Footer className="desktop-container" logo="/img/logo-light.svg" />
+        </footer>
         <BackToTop />
       </body>
     </html>
