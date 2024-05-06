@@ -95,10 +95,12 @@ export function DesktopNav({
           <p>{moment().format("dddd, MMMM Do, YYYY")}</p>
           <div className="flex gap-x-10">
             {/* ====== theme toggle button ====== */}
-            <div className="bg-black dark:bg-dark-300 p-2 self-center rounded-md">
+            <div
+              onClick={handleToggleTheme}
+              className="bg-black dark:bg-dark-300 p-2 self-center rounded-md cursor-pointer"
+            >
               <button
-                onClick={handleToggleTheme}
-                className={`bg-black p-2 block cursor-pointer self-center w-5 aspect-square rounded-full duration-500 ${
+                className={`bg-black p-2 block  self-center w-5 aspect-square rounded-full duration-500 ${
                   isDark ? "bg-yellow-400" : "bg-transparent shadow-[inset_-7px_-4px_1px_1px_white]"
                 } `}
               ></button>

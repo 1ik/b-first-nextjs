@@ -1,7 +1,7 @@
 /* eslint-disable-next-line */
 export interface FooterProps {
   logo: string;
-  className?: string
+  className?: string;
 }
 
 const links = [
@@ -35,7 +35,7 @@ const links = [
   },
 ];
 
-export function Footer({ logo , className}: FooterProps) {
+export function Footer({ logo, className }: FooterProps) {
   return (
     <div className={`font-montserrat py-20 text-white ${className}`}>
       <div className="flex items-center justify-center">
@@ -47,7 +47,7 @@ export function Footer({ logo , className}: FooterProps) {
             key={index}
             className={`relative ${
               links.length !== index + 1
-                ? "before:content-[''] before:absolute before:h-2/5 before:w-[2px] before:bg-white before:right-0 before:top-1/2 before:-translate-y-1/2"
+                ? "before:content-[''] before:absolute before:h-2/5 before:w-[2px] before:bg-white dark:before:bg-dark-300  before:right-0 before:top-1/2 before:-translate-y-1/2"
                 : ""
             } after:content-[''] after:absolute after:h-[3px]
             after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:bg-white after:w-0 hover:after:w-1/3 after:duration-300`}
@@ -58,10 +58,9 @@ export function Footer({ logo , className}: FooterProps) {
           </li>
         ))}
       </ul>
-      <hr className="my-10" />
+      <hr className="my-10 dark:border-dark-300" />
       <div className="text-center">
-        <p>© 2024 Cable News Network. A Warner Bros. Discovery Company. All Rights Reserved.</p>
-        <p>CNN Sans ™ & © 2016 Cable News Network</p>
+        <p>© 2024 Bangladesh First. All Rights Reserved</p>
       </div>
     </div>
   );
