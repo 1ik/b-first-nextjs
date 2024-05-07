@@ -1,11 +1,10 @@
-import React from "react";
 import Navbar from "../../components/Navbar/Navbar";
 
 export default function PrivacyPolicy() {
   return (
     <div>
       <Navbar />
-      <div className="desktop-container my-16">
+      <div className="desktop-container pt-16 pb-24">
         <h2 className="font-montserrat font-semibold text-xl md:text-4xl  mb-6 text-center">Privacy Policy</h2>
         <p className="font-montserrat font-semibold text-base  mb-5">
           At Bangladesh First, we are committed to protecting the privacy and security of our readers and visitors to
@@ -62,7 +61,6 @@ export default function PrivacyPolicy() {
           your information when required by law or in response to valid legal requests, such as subpoenas, court orders,
           or government investigations.
         </p>
-
         <h3 className="font-montserrat font-bold text-lg md:text-2xl mt-6 mb-2 ">Data Security:</h3>
         We implement appropriate technical and organizational measures to protect your personal information from
         unauthorized access, disclosure, alteration, or destruction. However, no method of transmission over the
