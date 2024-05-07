@@ -114,7 +114,7 @@ export default async function Index() {
 
       <ListGrid className="desktop-container" data={listData} />
 
-      <img className="mx-auto my-12" src="/ads/fresh.gif" alt="Ads" />
+      <img className="mx-auto mt-12" src="/ads/fresh.gif" alt="Ads" />
     </>
   );
 }
