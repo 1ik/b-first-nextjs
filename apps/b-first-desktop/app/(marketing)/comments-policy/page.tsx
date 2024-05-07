@@ -1,11 +1,10 @@
-import React from "react";
 import Navbar from "../../components/Navbar/Navbar";
 
 export default function CommentsPolicy() {
   return (
     <div>
       <Navbar />
-      <div className="desktop-container my-16">
+      <div className="desktop-container pt-16 pb-24">
         <h2 className="font-semibold text-xl md:text-4xl text-center font-montserrat mb-8">Comment Policy</h2>
         <p className="font-semibold text-lg font-montserrat mb-8">
           At Bangladesh First, we value open dialogue and constructive discourse as integral components of our online
