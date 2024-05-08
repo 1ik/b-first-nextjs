@@ -3,6 +3,7 @@ import { ItemCardHorizontal } from "@bfirst/components-item-card-horizontal";
 import { ItemList } from "@bfirst/components-item-list";
 import { ProfileCard } from "@bfirst/components-profile-card";
 import { SocialShare } from "@bfirst/components-social-share";
+import { SquareGrid } from "@bfirst/components-square-grid";
 import { getImageUrl } from "@bfirst/utilities";
 import Link from "next/link";
 import BreadCrumb from "../../../../components/BreadCrumb/BreadCrumb";
@@ -80,6 +81,34 @@ export default async function NewsDetails({ params }) {
               className="text-2xl leading-[30px] [&>p]:mt-8"
               dangerouslySetInnerHTML={{ __html: detailsData?.story.content }}
             ></div>
+            <div className="my-10 border-t border-b dark:border-dark-300 py-4 flex gap-x-4 items-center">
+              <h4 className="text-3xl">Tags:</h4>
+              <ul className="flex gap-x-2 flex-wrap">
+                {detailsData?.story.tags.map((tag, index) => (
+                  <li
+                    key={index}
+                    className="text-lg font-montserrat font-semibold py-0.5 px-2 rounded-md bg-[#2B2B2B] text-white"
+                  >
+                    {tag.name}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <img className="my-10 mx-auto" src="/ads/banner_ibbl.gif" alt="Ads" />
+
+            <div className="flex gap-x-2 items-start py-8 my-16 border-t border-b dark:border-dark-300">
+              <img src="https://placehold.co/64x64" alt="user image" />
+              <textarea
+                rows={4}
+                className="w-full border dark:border-dark-300 outline-none p-2 placeholder:font-montserrat"
+                placeholder="Leave a comment"
+              ></textarea>
+            </div>
+
+            <div>
+              <AccentHeader header="related news" color="#8E7581" />
+              <SquareGrid data={latestNews?.data.slice(10, 16)} size="sm" gridCols={3} />
+            </div>
           </div>
           <div>
             <img className="my-10 mx-auto" src="/ads/Global.gif" alt="Ads" />
