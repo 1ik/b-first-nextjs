@@ -4,6 +4,7 @@ import localFont from "@next/font/local";
 import BackToTop from "./components/BackToTop/BackToTop";
 import "./global.css";
 import { Provider } from "./components/ThemeProvider/Provider";
+import Link from "next/link";
 
 const washingtonFont = localFont({ src: "../public/fonts/washington.otf" });
 const montserratFont = Montserrat({ subsets: ["latin"], variable: "--font-montserrat" });
@@ -24,7 +25,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {children}
           </main>
           <footer className="bg-black">
-            <Footer className="desktop-container" logo="/img/logo-light.svg" />
+            <Footer Link={Link} className="desktop-container" logo="/img/logo-light.svg" />
           </footer>
           <BackToTop />
         </Provider>

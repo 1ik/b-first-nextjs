@@ -1,6 +1,6 @@
 import { ItemCardHorizontal } from "@bfirst/components-item-card-horizontal";
 import { ItemCardVertical } from "@bfirst/components-item-card-vertical";
-import { getImageUrl } from "@bfirst/utilities";
+import { getImageUrl, getNewsUrl } from "@bfirst/utilities";
 
 /* eslint-disable-next-line */
 export interface BlockNewsProps {
@@ -9,24 +9,48 @@ export interface BlockNewsProps {
   ads1?: string;
   ads2?: string;
   className?: string;
+  Link?: any;
 }
 
-export function BlockNews({ data, sectionHeader, ads1, ads2, className }: BlockNewsProps) {
+export function BlockNews({ data, sectionHeader, ads1, ads2, className, Link }: BlockNewsProps) {
   return (
     <div className={`grid grid-cols-5 gap-5 ${className}`}>
-      <ItemCardVertical className="col-span-2" showImageBorder data={data?.[0]} size="lg" />
+      <ItemCardVertical Link={Link} className="col-span-2" showImageBorder data={data?.[0]} size="lg" />
 
       <div className="flex flex-col justify-between">
-        {data?.slice(1, 5).map((item: any, index:number) => (
+        {data?.slice(1, 5).map((item: any, index: number) => (
           <div key={index}>
-            <ItemCardHorizontal showTitleBorder data={item} size="sm" />
-            {index+1 < 4 && <hr className="mt-4 dark:border-dark-300" />}
+            <ItemCardHorizontal Link={Link} showTitleBorder data={item} size="sm" />
+            {index + 1 < 4 && <hr className="mt-4 dark:border-dark-300" />}
           </div>
         ))}
       </div>
       <div className="flex flex-col gap-y-3">
-        <img className="flex-grow object-cover" src={getImageUrl(data?.[6].meta.featured_image)} alt="Story image" />
-        <h3 className="text-[28px] leading-none">{data?.[6].title}</h3>
+        {Link ? (
+          <Link className="flex-grow overflow-hidden" href={getNewsUrl(data?.[6])}>
+            <img
+              className="h-full object-cover"
+              src={getImageUrl(data?.[6].meta.featured_image)}
+              alt={data?.[6].meta.imageCaption}
+            />
+          </Link>
+        ) : (
+          <a className="flex-grow overflow-hidden" href={getNewsUrl(data?.[6])}>
+            <img
+              className="h-full object-cover"
+              src={getImageUrl(data?.[6].meta.featured_image)}
+              alt={data?.[6].meta.imageCaption}
+            />
+          </a>
+        )}
+
+        <h3 className="text-[28px] leading-none hover:text-accent dark:hover:text-accent-light duration-150">
+          {Link ? (
+            <Link href={getNewsUrl(data?.[6])}>{data?.[6].title}</Link>
+          ) : (
+            <a href={getNewsUrl(data?.[6])}>{data?.[6].title}</a>
+          )}
+        </h3>
       </div>
       <div className="flex flex-col gap-y-3">
         <img src={ads1} alt="Ads" />

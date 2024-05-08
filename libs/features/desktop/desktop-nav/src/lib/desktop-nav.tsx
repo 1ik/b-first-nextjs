@@ -15,6 +15,7 @@ export interface DesktopNavProps {
   logoMini?: string;
   theme?: string;
   onThemeChange?: any;
+  Link?: any;
 }
 
 const _links = [
@@ -53,6 +54,7 @@ const _links = [
 ];
 
 export function DesktopNav({
+  Link,
   adsBanner,
   adsLeft,
   adsRight,
@@ -140,9 +142,15 @@ export function DesktopNav({
         <div className="flex justify-between items-center">
           <div className="w-80">{adsLeft && <img src={adsLeft} alt="Ads" />}</div>
           <div className="w-80">
-            <a href="/">
-              <img className="w-full" src={isMounted && theme === "dark" ? logoLight : logoDark} alt="Logo" />
-            </a>
+            {Link ? (
+              <Link href="/">
+                <img className="w-full" src={isMounted && theme === "dark" ? logoLight : logoDark} alt="Logo" />
+              </Link>
+            ) : (
+              <a href="/">
+                <img className="w-full" src={isMounted && theme === "dark" ? logoLight : logoDark} alt="Logo" />
+              </a>
+            )}
           </div>
           <div className="w-80">{adsRight && <img src={adsRight} alt="Ads" />}</div>
         </div>
@@ -158,15 +166,24 @@ export function DesktopNav({
         >
           <div className="desktop-container flex justify-between items-center">
             <div className="w-9">
-              {logoMini && (
-                <a href="/">
-                  <img
-                    className={`w-full duration-300 ${isSticky ? "scale-100" : "scale-0"}`}
-                    src={logoMini}
-                    alt="Logo"
-                  />
-                </a>
-              )}
+              {logoMini &&
+                (Link ? (
+                  <Link href="/">
+                    <img
+                      className={`w-full duration-300 ${isSticky ? "scale-100" : "scale-0"}`}
+                      src={logoMini}
+                      alt="Logo"
+                    />
+                  </Link>
+                ) : (
+                  <a href="/">
+                    <img
+                      className={`w-full duration-300 ${isSticky ? "scale-100" : "scale-0"}`}
+                      src={logoMini}
+                      alt="Logo"
+                    />
+                  </a>
+                ))}
             </div>
             <ul className="flex text-[22px]">
               {_links.map((link, index) => (
@@ -176,9 +193,15 @@ export function DesktopNav({
                     link.href === activeLink ? "after:w-1/3" : "after:w-0"
                   } after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:bg-accent hover:after:w-1/3 z after:duration-300`}
                 >
-                  <a className="px-5 py-1 block" href={link.href}>
-                    {link.name}
-                  </a>
+                  {Link ? (
+                    <Link className="px-5 py-1 block" href={link.href}>
+                      {link.name}
+                    </Link>
+                  ) : (
+                    <a className="px-5 py-1 block" href={link.href}>
+                      {link.name}
+                    </a>
+                  )}
                 </li>
               ))}
               <li className="px-5 py-1 flex items-center gap-x-1">

@@ -7,28 +7,29 @@ export interface BlockNews5Props {
   sectionHeader?: string;
   headerColor?: string;
   className?: string;
+  Link?: any;
 }
 
-export function BlockNews5({ data, sectionHeader, headerColor, className }: BlockNews5Props) {
+export function BlockNews5({ data, Link, sectionHeader, headerColor, className }: BlockNews5Props) {
   return (
     <div className={className}>
       {sectionHeader && <AccentHeader header={sectionHeader} color={headerColor} />}
       <div className="grid grid-cols-4 gap-x-5 mt-8">
         <div>
           {data?.slice(0, 6).map((item: any) => (
-            <ItemCardHorizontal className="mb-8 last:mb-0" size="md" data={item} />
+            <ItemCardHorizontal Link={Link} className="mb-8 last:mb-0" size="md" data={item} />
           ))}
         </div>
 
         <div className="col-span-3 grid grid-cols-3 gap-5">
-          <ItemCardVertical className="col-span-2" data={data?.[6]} size="lg" />
+          <ItemCardVertical Link={Link} className="col-span-2" data={data?.[6]} size="lg" />
 
           <div className="flex flex-col gap-y-10 items-center">
             <img src="/ads/Global.gif" alt="Ads" />
             <img src="/ads/SIBL_Profit_300x250.gif" alt="Ads" />
           </div>
           {data?.slice(7, 10).map((item: any, index: number) => (
-            <ItemCardVertical key={index} data={item} size="md" />
+            <ItemCardVertical Link={Link} key={index} data={item} size="md" />
           ))}
         </div>
       </div>

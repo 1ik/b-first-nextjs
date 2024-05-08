@@ -2,12 +2,14 @@
 
 import { DesktopNav } from "@bfirst/components-desktop-nav";
 import { useTheme } from "next-themes";
+import Link from "next/link";
 
 export default function Navbar() {
   const { theme, setTheme } = useTheme();
 
   return (
     <DesktopNav
+      Link={Link}
       theme={theme}
       onThemeChange={setTheme}
       adsRight="/ads/ads_hader_right.png"

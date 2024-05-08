@@ -9,14 +9,16 @@ export interface BlockNews4Props {
   headerColor?: string;
   className?: string;
   adsUrl?: string;
+  Link?: any;
 }
 
-export function BlockNews4({ data, sectionHeader, headerColor, className, adsUrl }: BlockNews4Props) {
+export function BlockNews4({ data, Link, sectionHeader, headerColor, className, adsUrl }: BlockNews4Props) {
   return (
     <div className={className}>
       {sectionHeader && <AccentHeader header={sectionHeader} color={headerColor} />}
 
       <ItemCardVertical
+        Link={Link}
         className="border-b dark:border-dark-300 mb-3 mt-3"
         data={data?.[0]}
         size="lg"
@@ -25,9 +27,9 @@ export function BlockNews4({ data, sectionHeader, headerColor, className, adsUrl
 
       <div className="grid grid-cols-3">
         <div className="col-span-2 border-r dark:border-dark-300 pr-3 mr-3">
-          <ItemCardVertical data={data?.[1]} size="lg" />
+          <ItemCardVertical Link={Link} data={data?.[1]} size="lg" />
         </div>
-        <ItemList data={data?.slice(2, 7)} listType="circle" />
+        <ItemList Link={Link} data={data?.slice(2, 7)} listType="circle" />
       </div>
       {adsUrl && <img className="mx-auto mt-5" src={adsUrl} alt="Ads" />}
     </div>
