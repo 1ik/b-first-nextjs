@@ -49,6 +49,7 @@
       "@bfirst/components-popover-notify": ["libs/components/popover-notify/src/index.ts"],
       "@bfirst/components-profile-card": ["libs/components/profile-card/src/index.ts"],
       "@bfirst/components-scroll-to-top": ["libs/components/scroll-to-top/src/index.ts"],
+      "@bfirst/components-social-share": ["libs/components/social-share/src/index.ts"],
       "@bfirst/components-square-grid": ["libs/features/common-ui/square-grid/src/index.ts"],
       "@bfirst/components-stories": ["libs/features/stories/src/index.ts"],
       "@bfirst/components-table": ["libs/components/table/src/index.ts"],
