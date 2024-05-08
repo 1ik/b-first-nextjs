@@ -23,25 +23,21 @@ export function ItemCardVertical({
 
   return (
     <div className={`${className && className}`}>
-      <div className="mb-5 relative">
+      <div className={`mb-5 relative overflow-hidden ${showImageBorder ? "border-b-[5px] border-accent" : ""}`}>
         {Link ? (
           <Link href={getNewsUrl(data)}>
             <img
-              className={`${size === "md" ? "h-[230px]" : ""} object-cover w-full ${
-                showImageBorder ? "border-b-[5px] border-accent" : ""
-              }`}
+              className={`hover:scale-110 duration-300 ${size === "md" ? "h-[230px]" : ""} object-cover w-full`}
               src={getImageUrl(data?.meta.featured_image)}
-              alt=""
+              alt={data?.meta.imageCaption}
             />
           </Link>
         ) : (
           <a href={getNewsUrl(data)}>
             <img
-              className={`${size === "md" ? "h-[230px]" : ""} object-cover w-full ${
-                showImageBorder ? "border-b-[5px] border-accent" : ""
-              }`}
+              className={`hover:scale-110 duration-300 ${size === "md" ? "h-[230px]" : ""} object-cover w-full`}
               src={getImageUrl(data?.meta.featured_image)}
-              alt=""
+              alt={data?.meta.imageCaption}
             />
           </a>
         )}

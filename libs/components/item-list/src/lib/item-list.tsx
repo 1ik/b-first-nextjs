@@ -20,24 +20,27 @@ export function ItemList({
 }: ItemListProps) {
   return (
     <ul className={`${className}`}>
-      {showImage &&
-        (Link ? (
-          <Link href={getNewsUrl(data?.[0])}>
-            <img
-              className="h-[220px] object-cover w-full mb-5"
-              src={getImageUrl(data?.[0].meta.featured_image)}
-              alt={data?.[0].meta.image_caption}
-            />
-          </Link>
-        ) : (
-          <a href={getNewsUrl(data?.[0])}>
-            <img
-              className="h-[220px] object-cover w-full mb-5"
-              src={getImageUrl(data?.[0].meta.featured_image)}
-              alt={data?.[0].meta.image_caption}
-            />
-          </a>
-        ))}
+      {showImage && (
+        <div className="overflow-hidden">
+          {Link ? (
+            <Link href={getNewsUrl(data?.[0])}>
+              <img
+                className="hover:scale-110 duration-300 h-[220px] object-cover w-full mb-5"
+                src={getImageUrl(data?.[0].meta.featured_image)}
+                alt={data?.[0].meta.image_caption}
+              />
+            </Link>
+          ) : (
+            <a href={getNewsUrl(data?.[0])}>
+              <img
+                className="hover:scale-110 duration-300 h-[220px] object-cover w-full mb-5"
+                src={getImageUrl(data?.[0].meta.featured_image)}
+                alt={data?.[0].meta.image_caption}
+              />
+            </a>
+          )}
+        </div>
+      )}
       {showDate && (
         <h3 className="bg-[#FDC269] text-black font-montserrat font-semibold text-2xl px-8 py-1.5 w-fit my-3">
           {moment().format("D MMMM")}
