@@ -7,7 +7,7 @@ export interface ProfileCardProps {
 
 export function ProfileCard({ data, updatedTime }: ProfileCardProps) {
   return (
-    <div className="bg-[#F2F2F2] p-8">
+    <div className="bg-[#F2F2F2] p-8 dark:bg-dark-300">
       <img
         className="h-[120px] w-[120px] rounded-full object-center"
         src="https://placehold.co/120x120"
