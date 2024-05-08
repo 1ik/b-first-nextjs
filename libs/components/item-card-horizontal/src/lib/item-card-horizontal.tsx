@@ -53,11 +53,17 @@ export function ItemCardHorizontal({
         {showIntro && <p className="mt-4 text-[28px] dark:text-[#bebdbd] text-[#727272]">{data?.meta.intro}</p>}
       </div>
 
-      <div className={`${size === "lg" ? "w-2/3" : size === "md" ? "w-5/12" : size === "sm" ? "w-1/3" : ""}`}>
+      <div
+        className={`overflow-hidden ${
+          size === "lg" ? "w-2/3" : size === "md" ? "w-5/12" : size === "sm" ? "w-1/3" : ""
+        }`}
+      >
         {Link ? (
           <Link href={getNewsUrl(data)}>
             <img
-              className={`w-full object-cover ${size === "md" ? "h-[100px]" : size === "sm" ? "h-[70px]" : ""}`}
+              className={`hover:scale-110 duration-300 w-full object-cover ${
+                size === "md" ? "h-[100px]" : size === "sm" ? "h-[70px]" : ""
+              }`}
               src={getImageUrl(data?.meta.featured_image)}
               alt={data?.meta.featured_image.imageCaption}
             />
@@ -65,7 +71,9 @@ export function ItemCardHorizontal({
         ) : (
           <a href={getNewsUrl(data)}>
             <img
-              className={`w-full object-cover ${size === "md" ? "h-[100px]" : size === "sm" ? "h-[70px]" : ""}`}
+              className={`hover:scale-110 duration-300 w-full object-cover ${
+                size === "md" ? "h-[100px]" : size === "sm" ? "h-[70px]" : ""
+              }`}
               src={getImageUrl(data?.meta.featured_image)}
               alt={data?.meta.featured_image.imageCaption}
             />

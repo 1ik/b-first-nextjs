@@ -29,7 +29,7 @@ export function BlockNews({ data, sectionHeader, ads1, ads2, className, Link }: 
         {Link ? (
           <Link className="flex-grow overflow-hidden" href={getNewsUrl(data?.[6])}>
             <img
-              className="h-full object-cover"
+              className="h-full object-cover hover:scale-110 duration-200"
               src={getImageUrl(data?.[6].meta.featured_image)}
               alt={data?.[6].meta.imageCaption}
             />
@@ -37,7 +37,7 @@ export function BlockNews({ data, sectionHeader, ads1, ads2, className, Link }: 
         ) : (
           <a className="flex-grow overflow-hidden" href={getNewsUrl(data?.[6])}>
             <img
-              className="h-full object-cover"
+              className="h-full object-cover hover:scale-110 duration-300"
               src={getImageUrl(data?.[6].meta.featured_image)}
               alt={data?.[6].meta.imageCaption}
             />
