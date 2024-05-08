@@ -1,0 +1,14 @@
+export interface ProfileCardProps {
+  data : any
+  updatedTime: string;
+}
+
+export function ProfileCard({ data, updatedTime, }: ProfileCardProps) {
+  return (
+    <div className="w-[420px] bg-[#F2F2F2] p-8 rounded-xl">
+      <img className="h-[120px] w-[120px] rounded-full object-center" src={"https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg"} alt="profile" />
+      <h3 className="text-2xl mt-4 mb-3">{`By ${data.name}`}</h3>
+      <p className="font-montserrat text-lg">{`Updated ${updatedTime}`}</p>
+    </div>
+  );
+}
