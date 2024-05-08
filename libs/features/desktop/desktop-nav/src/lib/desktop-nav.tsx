@@ -13,6 +13,8 @@ export interface DesktopNavProps {
   adsBanner?: string;
   activeLink?: string;
   logoMini?: string;
+  theme?: string;
+  onThemeChange?: any;
 }
 
 const _links = [
@@ -58,14 +60,15 @@ export function DesktopNav({
   logoDark,
   logoMini,
   activeLink,
+  theme,
+  onThemeChange,
 }: DesktopNavProps) {
-  const [isDark, setIsDark] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
   const navRef = useRef(null);
 
   const handleToggleTheme = function () {
-    document.documentElement.classList.toggle("dark");
-    setIsDark((cur) => !cur);
+    onThemeChange(theme === "light" ? "dark" : "light");
   };
 
   useEffect(() => {
@@ -88,6 +91,10 @@ export function DesktopNav({
     observer.observe(navbar);
   }, [setIsSticky]);
 
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   return (
     <nav ref={navRef} className="flex flex-col gap-y-5">
       <div className="bg-[#f6efef] dark:bg-dark-500">
@@ -101,7 +108,9 @@ export function DesktopNav({
             >
               <button
                 className={`bg-black p-2 block  self-center w-5 aspect-square rounded-full duration-500 ${
-                  isDark ? "bg-yellow-400" : "bg-transparent shadow-[inset_-7px_-4px_1px_1px_white]"
+                  isMounted && theme === "dark"
+                    ? "bg-yellow-400"
+                    : "bg-transparent shadow-[inset_-7px_-4px_1px_1px_white]"
                 } `}
               ></button>
             </div>
@@ -132,7 +141,7 @@ export function DesktopNav({
           <div className="w-80">{adsLeft && <img src={adsLeft} alt="Ads" />}</div>
           <div className="w-80">
             <a href="/">
-              <img className="w-full" src={isDark ? logoLight : logoDark} alt="Logo" />
+              <img className="w-full" src={isMounted && theme === "dark" ? logoLight : logoDark} alt="Logo" />
             </a>
           </div>
           <div className="w-80">{adsRight && <img src={adsRight} alt="Ads" />}</div>
