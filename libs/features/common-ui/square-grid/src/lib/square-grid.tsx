@@ -6,12 +6,13 @@ export interface SquareGridProps {
   data: any;
   className?: string;
   showAccentHeader?: boolean;
+  gridCols: number;
   Link?: any;
 }
 
-export function SquareGrid({ data, Link, className, showAccentHeader = false }: SquareGridProps) {
+export function SquareGrid({ data, className, Link, showAccentHeader = false, gridCols }: SquareGridProps) {
   return (
-    <div className={`grid grid-cols-4 gap-8 ${className}`}>
+    <div className={`grid grid-cols-${gridCols} gap-8 ${className}`}>
       {data?.map((item: any, index: any) => (
         <div key={index}>
           {showAccentHeader && (
