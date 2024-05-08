@@ -51,6 +51,22 @@ const _links = [
     name: "Lifestyle",
     href: "/lifestyle",
   },
+  {
+    name: "Education",
+    href: "/education",
+  },
+  {
+    name: "Interview",
+    href: "/interview",
+  },
+  {
+    name: "Corporates",
+    href: "/corporates",
+  },
+  {
+    name: "Offbeat",
+    href: "/offbeat",
+  },
 ];
 
 export function DesktopNav({
@@ -188,26 +204,47 @@ export function DesktopNav({
                 ))}
             </div>
             <ul className="flex text-[22px]">
-              {_links.map((link, index) => (
-                <li
-                  key={index}
-                  className={`relative before:content-[''] before:absolute before:h-2/5 before:w-[2px] before:bg-[#cccccc] before:right-0 before:top-1/2 before:-translate-y-1/2 after:content-[''] after:absolute after:h-[3px] ${
-                    link.href === activeLink ? "after:w-1/3" : "after:w-0"
-                  } after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:bg-accent hover:after:w-1/3 z after:duration-300`}
-                >
-                  {Link ? (
-                    <Link className="px-5 py-1 block" href={link.href}>
-                      {link.name}
-                    </Link>
-                  ) : (
-                    <a className="px-5 py-1 block" href={link.href}>
-                      {link.name}
-                    </a>
-                  )}
-                </li>
-              ))}
-              <li className="px-5 py-1 flex items-center gap-x-1">
+              {_links.map(
+                (link, index) =>
+                  index < 8 && (
+                    <li
+                      key={index}
+                      className={`relative before:content-[''] before:absolute before:h-2/5 before:w-[2px] before:bg-[#cccccc] before:right-0 before:top-1/2 before:-translate-y-1/2 after:content-[''] after:absolute after:h-[3px] ${
+                        link.href === activeLink ? "after:w-1/3" : "after:w-0"
+                      } after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:bg-accent hover:after:w-1/3 z after:duration-300`}
+                    >
+                      {Link ? (
+                        <Link className="px-5 py-1 block" href={link.href}>
+                          {link.name}
+                        </Link>
+                      ) : (
+                        <a className="px-5 py-1 block" href={link.href}>
+                          {link.name}
+                        </a>
+                      )}
+                    </li>
+                  )
+              )}
+              <li className="px-5 py-1 flex items-center gap-x-1 relative group">
                 More <IoIosArrowDown />
+                <ul className="absolute z-100 top-10 right-0 bg-[#F6EFEF] group:hover:scale-1 scale-0">
+                  {_links.map(
+                    (link, index) =>
+                      index >= 8 && (
+                        <li key={index} className="hover:bg-gray-200 mb-1">
+                          {Link ? (
+                            <Link className="px-5 py-1 block" href={link.href}>
+                              {link.name}
+                            </Link>
+                          ) : (
+                            <a className="px-5 py-1 block" href={link.href}>
+                              {link.name}
+                            </a>
+                          )}
+                        </li>
+                      )
+                  )}
+                </ul>
               </li>
             </ul>
             <button className="w-9 block text-2xl">
