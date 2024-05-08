@@ -20,7 +20,7 @@ export function BlockNews({ data, sectionHeader, ads1, ads2, className }: BlockN
         {data?.slice(1, 5).map((item: any, index:number) => (
           <div key={index}>
             <ItemCardHorizontal showTitleBorder data={item} size="sm" />
-            {index+1 < 4 && <hr className="mt-4" />}
+            {index+1 < 4 && <hr className="mt-4 dark:border-dark-300" />}
           </div>
         ))}
       </div>

@@ -13,6 +13,8 @@ export interface DesktopNavProps {
   adsBanner?: string;
   activeLink?: string;
   logoMini?: string;
+  theme?: string;
+  onThemeChange?: any;
 }
 
 const _links = [
@@ -58,33 +60,16 @@ export function DesktopNav({
   logoDark,
   logoMini,
   activeLink,
+  theme,
+  onThemeChange,
 }: DesktopNavProps) {
-  const [theme, setTheme] = useState<null | string>(null);
+  const [isMounted, setIsMounted] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
   const navRef = useRef(null);
 
   const handleToggleTheme = function () {
-    if (theme === "dark") {
-      document.documentElement.classList.remove("dark");
-      setTheme("light");
-      localStorage.setItem("b-first-theme", "light");
-    }
-    if (theme === "light") {
-      document.documentElement.classList.add("dark");
-      setTheme("dark");
-      localStorage.setItem("b-first-theme", "dark");
-    }
+    onThemeChange(theme === "light" ? "dark" : "light");
   };
-
-  useEffect(() => {
-    const siteTheme = localStorage.getItem("b-first-theme");
-    setTheme(siteTheme);
-  }, []);
-
-  useEffect(() => {
-    if (theme === "dark") document.documentElement.classList.add("dark");
-    if (theme === "light") document.documentElement.classList.remove("dark");
-  }, [theme]);
 
   useEffect(() => {
     const navbar = navRef.current;
@@ -106,6 +91,10 @@ export function DesktopNav({
     observer.observe(navbar);
   }, [setIsSticky]);
 
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   return (
     <nav ref={navRef} className="flex flex-col gap-y-5">
       <div className="bg-[#f6efef] dark:bg-dark-500">
@@ -113,11 +102,15 @@ export function DesktopNav({
           <p>{moment().format("dddd, MMMM Do, YYYY")}</p>
           <div className="flex gap-x-10">
             {/* ====== theme toggle button ====== */}
-            <div className="bg-black dark:bg-dark-300 p-2 self-center rounded-md">
+            <div
+              onClick={handleToggleTheme}
+              className="bg-black dark:bg-dark-300 p-2 self-center rounded-md cursor-pointer"
+            >
               <button
-                onClick={handleToggleTheme}
-                className={`bg-black p-2 block cursor-pointer self-center w-5 aspect-square rounded-full duration-500 ${
-                  theme === "dark" ? "bg-yellow-400" : "bg-transparent shadow-[inset_-7px_-4px_1px_1px_white]"
+                className={`bg-black p-2 block  self-center w-5 aspect-square rounded-full duration-500 ${
+                  isMounted && theme === "dark"
+                    ? "bg-yellow-400"
+                    : "bg-transparent shadow-[inset_-7px_-4px_1px_1px_white]"
                 } `}
               ></button>
             </div>
@@ -148,7 +141,7 @@ export function DesktopNav({
           <div className="w-80">{adsLeft && <img src={adsLeft} alt="Ads" />}</div>
           <div className="w-80">
             <a href="/">
-              <img className="w-full" src={theme === "dark" ? logoLight : logoDark} alt="Logo" />
+              <img className="w-full" src={isMounted && theme === "dark" ? logoLight : logoDark} alt="Logo" />
             </a>
           </div>
           <div className="w-80">{adsRight && <img src={adsRight} alt="Ads" />}</div>

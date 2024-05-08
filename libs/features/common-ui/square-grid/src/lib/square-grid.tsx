@@ -12,8 +12,8 @@ export function SquareGrid({ data, className, showAccentHeader = false }: Square
   return (
     <div className={`grid grid-cols-4 gap-8 ${className}`}>
       {data?.map((item: any, index: any) => (
-        <div className="flex flex-col gap-y-2" key={index}>
-          {showAccentHeader && <AccentHeader header={item.categories[0].name} color={item.categories[0].color_code} />}
+        <div key={index}>
+          {showAccentHeader && <AccentHeader header={item.categories[0].name} color={item.categories[0].color_code} className="mb-[7px]"/>}
           <ItemCardVertical data={item} size={"md"} />
         </div>
       ))}
