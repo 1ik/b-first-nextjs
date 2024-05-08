@@ -8,18 +8,19 @@ export interface BlockNews3Props {
   headerColor?: string;
   className?: string;
   adsUrl?: string;
+  Link?: any;
 }
 
-export async function BlockNews3({ data, sectionHeader, headerColor, className, adsUrl }: BlockNews3Props) {
+export async function BlockNews3({ data, Link, sectionHeader, headerColor, className, adsUrl }: BlockNews3Props) {
   return (
     <div className={`${className}`}>
       {sectionHeader && <AccentHeader className="mb-4" header={sectionHeader} color={headerColor} />}
 
       <div className="grid grid-cols-3 gap-5">
-        <ItemCardHorizontal className="col-span-3" data={data?.[0]} showIntro />
+        <ItemCardHorizontal Link={Link} className="col-span-3" data={data?.[0]} showIntro />
 
         {data?.splice(1, 3).map((item: any) => {
-          return <ItemCardVertical key={item.id} size="md" data={item} />;
+          return <ItemCardVertical Link={Link} key={item.id} size="md" data={item} />;
         })}
       </div>
       <div className="flex justify-end mt-16">

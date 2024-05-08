@@ -3,9 +3,10 @@ export interface HighlightChipProps {
   items: any[];
   title?: string;
   className?: string;
+  Link?: any;
 }
 
-export function HighlightChip({ items, title, className }: HighlightChipProps) {
+export function HighlightChip({ items, title, className, Link }: HighlightChipProps) {
   return (
     <div className={`flex items-start gap-2 ${className}`}>
       {title && (
@@ -14,9 +15,15 @@ export function HighlightChip({ items, title, className }: HighlightChipProps) {
       <ul className="flex gap-2 flex-wrap">
         {items?.map((item, index) => (
           <li key={index} className="bg-[#FAF6FF] dark:bg-dark-300 dark:text-white text-black  rounded-md">
-            <a className="px-3 py-1 inline-block" href="">
-              {item.name}
-            </a>
+            {Link ? (
+              <Link className="px-3 py-1 inline-block" href="">
+                {item.name}
+              </Link>
+            ) : (
+              <a className="px-3 py-1 inline-block" href="">
+                {item.name}
+              </a>
+            )}
           </li>
         ))}
       </ul>

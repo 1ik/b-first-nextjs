@@ -2,6 +2,7 @@
 export interface FooterProps {
   logo: string;
   className?: string;
+  Link?: any;
 }
 
 const links = [
@@ -39,11 +40,19 @@ const links = [
   },
 ];
 
-export function Footer({ logo, className }: FooterProps) {
+export function Footer({ logo, Link, className }: FooterProps) {
   return (
     <div className={`font-montserrat py-20 text-white ${className}`}>
       <div className="flex items-center justify-center">
-        <img src={logo} alt="Logo" className="mb-14 w-[400px]" />
+        {Link ? (
+          <Link href="/">
+            <img src={logo} alt="Logo" className="mb-14 w-[400px]" />
+          </Link>
+        ) : (
+          <a href="/">
+            <img src={logo} alt="Logo" className="mb-14 w-[400px]" />
+          </a>
+        )}
       </div>
       <ul className="flex font-semibold items-center justify-center">
         {links.map((link, index) => (
@@ -56,9 +65,15 @@ export function Footer({ logo, className }: FooterProps) {
             } after:content-[''] after:absolute after:h-[3px]
             after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:bg-white after:w-0 hover:after:w-1/3 after:duration-300`}
           >
-            <a className="px-5 py-2 block" href={link.href}>
-              {link.name}
-            </a>
+            {Link ? (
+              <Link className="px-5 py-2 block" href={link.href}>
+                {link.name}
+              </Link>
+            ) : (
+              <a className="px-5 py-2 block" href={link.href}>
+                {link.name}
+              </a>
+            )}
           </li>
         ))}
       </ul>
