@@ -37,13 +37,13 @@ export default async function Index() {
         ads2="/ads/union-bank-ad.gif"
       />
       <img className="mx-auto my-14" src="/ads/nagad.png" alt="Ads" />
-      <SquareGrid showAccentHeader className="desktop-container" data={latestNews?.data.slice(7, 15)} />
+      <SquareGrid showAccentHeader className="desktop-container" data={latestNews?.data.slice(7, 15)} gridCols= {4}/>
       <img className="mx-auto my-12" src="/ads/ads_top.png" alt="Ads" />
 
       <div className="bg-[#F6EFEF] dark:bg-dark-300 py-8">
         <div className="desktop-container">
           <AccentHeader header="Recommended For You" color="#5D26D1" />
-          <SquareGrid data={latestNews?.data.slice(8, 12)} />
+          <SquareGrid data={latestNews?.data.slice(8, 12)} gridCols= {4} />
         </div>
       </div>
       <img className="mx-auto my-12" src="/ads/bkash.png" alt="Ads" />
