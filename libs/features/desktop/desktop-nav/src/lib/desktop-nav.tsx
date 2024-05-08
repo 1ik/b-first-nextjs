@@ -144,11 +144,13 @@ export function DesktopNav({
           <div className="w-80">
             {Link ? (
               <Link href="/">
-                <img className="w-full" src={isMounted && theme === "dark" ? logoLight : logoDark} alt="Logo" />
+                <img className="w-full dark:hidden block" src={logoDark} alt="Logo" />
+                <img className="w-full hidden dark:block" src={logoLight} alt="Logo" />
               </Link>
             ) : (
               <a href="/">
-                <img className="w-full" src={isMounted && theme === "dark" ? logoLight : logoDark} alt="Logo" />
+                <img className="w-full dark:hidden block" src={logoDark} alt="Logo" />
+                <img className="w-full hidden dark:block" src={logoLight} alt="Logo" />
               </a>
             )}
           </div>
