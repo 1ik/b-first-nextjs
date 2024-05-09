@@ -7,6 +7,7 @@ import { SquareGrid } from "@bfirst/components-square-grid";
 import { getImageUrl } from "@bfirst/utilities";
 import Link from "next/link";
 import BreadCrumb from "../../../../components/BreadCrumb/BreadCrumb";
+import ImagePreview from "../../../../components/ImagePreview/ImagePreview";
 import Navbar from "../../../../components/Navbar/Navbar";
 import TrendingTopics from "../../../../components/TrendingTopics/TrendingTopics";
 import { getData } from "../../../../utils/dataFetch";
@@ -47,11 +48,12 @@ export default async function NewsDetails({ params }) {
           {/* ====== row 1 ===== */}
           <h3 className="text-2xl self-end font-montserrat">{detailsData?.story.meta.intro}</h3>
           <div className="col-span-3">
-            <img
+            <ImagePreview url={getImageUrl(detailsData?.story.meta.featured_image)} alt={detailsData?.story.title} />
+            {/* <img
               className="w-full"
               src={getImageUrl(detailsData?.story.meta.featured_image)}
               alt={detailsData?.story.title}
-            />
+            /> */}
             <p className="font-montserrat text-xl mt-4">{detailsData?.story.meta.imageCaption}</p>
           </div>
 
