@@ -10,8 +10,11 @@ import BreadCrumb from "../../../../components/BreadCrumb/BreadCrumb";
 import Navbar from "../../../../components/Navbar/Navbar";
 import TrendingTopics from "../../../../components/TrendingTopics/TrendingTopics";
 import { getData } from "../../../../utils/dataFetch";
+import Head from "next/head";
 
 export default async function NewsDetails({ params }) {
+  const link_url = `https://5a45-119-148-28-105.ngrok-free.app/news/${params.id}/${params.slug}`;
+
   const [detailsData, trendingTopics, latestNews] = await Promise.all([
     getData(`story/details/${params.id}`),
     getData("trendy-topics"),
@@ -57,7 +60,7 @@ export default async function NewsDetails({ params }) {
             <div className="pb-8 mb-8 border-b dark:border-dark-300">
               <ProfileCard data={detailsData?.story.authors[0]} updatedTime={detailsData?.story.updated_at} />
             </div>
-            <SocialShare facebookShareUrl="" whahtsappShareUrl="" twitterShareUrl="" instagramShareUrl="" />
+            <SocialShare shareLink={link_url} />
             <img className="my-10 mx-auto" src="/ads/SIBL_Profit_300x250.gif" alt="Ads" />
             <div>
               <AccentHeader
