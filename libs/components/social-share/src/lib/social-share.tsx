@@ -28,7 +28,7 @@ export function SocialShare({ shareLink }: SocialShareProps) {
           </div>
         </FacebookShareButton>
 
-        <WhatsappShareButton url={shareLink} className="">
+        <WhatsappShareButton url={shareLink}>
           <div className="bg-black/90 hover:bg-black p-1.5 text-white rounded-md">
             <FaWhatsapp size={20} />
           </div>

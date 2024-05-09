@@ -11,7 +11,22 @@ import ImagePreview from "../../../../components/ImagePreview/ImagePreview";
 import Navbar from "../../../../components/Navbar/Navbar";
 import TrendingTopics from "../../../../components/TrendingTopics/TrendingTopics";
 import { getData } from "../../../../utils/dataFetch";
-import Head from "next/head";
+
+export async function generateMetadata({ params }) {
+  const data = await getData(`story/details/${params.id}`);
+  const metadata = {
+    title: data?.story.title,
+    description: data?.story.meta.intro,
+    image: getImageUrl(data?.story.meta.featured_image),
+    openGraph: {
+      url: `https://5a45-119-148-28-105.ngrok-free.app/news/${params.id}/${params.slug}`,
+      title: data?.story.title,
+      images: getImageUrl(data?.story.meta.featured_image),
+      description: data.story.meta.intro,
+    },
+  };
+  return metadata;
+}
 
 export default async function NewsDetails({ params }) {
   const link_url = `https://5a45-119-148-28-105.ngrok-free.app/news/${params.id}/${params.slug}`;
