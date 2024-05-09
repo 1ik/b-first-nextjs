@@ -13,7 +13,7 @@ export function ProfileCard({ data, updatedTime }: ProfileCardProps) {
         src="https://placehold.co/120x120"
         alt="profile"
       />
-      <h3 className="text-2xl mt-4 mb-3">{`By ${data.name}`}</h3>
+      <h3 className="text-2xl mt-4 mb-3">{`By ${data?.name}`}</h3>
       <p className="font-montserrat text-lg">{`Updated ${moment(updatedTime)
         .tz("Asia/Dhaka")
         .format("h:mm A, ddd MMM Do, YYYY")}`}</p>

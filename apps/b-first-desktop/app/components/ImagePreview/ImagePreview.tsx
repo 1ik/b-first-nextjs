@@ -12,6 +12,7 @@ interface ImagepreviewProps {
 export default function ImagePreview({ url, url_md, url_lg, alt }: ImagepreviewProps) {
   return (
     <ModalImage
+      className="w-full"
       hideDownload
       style={{ zIndex: "9999" }}
       small={url}
