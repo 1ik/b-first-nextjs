@@ -182,7 +182,7 @@ export function DesktopNav({
         <div
           className={`w-full transition-[padding] duration-300 ${
             isSticky
-              ? "fixed top-0 left-0 bg-white/90 dark:bg-dark-400/90 backdrop-blur shadow-md py-3 z-[9999]"
+              ? "fixed top-0 left-0 bg-white/90 dark:bg-dark-400/90 backdrop-blur shadow-md py-3 z-[999]"
               : "absolute top-1/2 -translate-y-1/2"
           }`}
         >
