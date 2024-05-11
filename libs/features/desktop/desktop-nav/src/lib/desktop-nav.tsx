@@ -232,7 +232,7 @@ export function DesktopNav({
               >
                 More <IoIosArrowDown />
                 <ul
-                  className={`px-4 rounded-md py-6 absolute z-100 top-10 -right-6  bg-white dark:bg-dark-300 shadow-lg  shadow-black/20 dark:shadow-black/80  flex-col gap-y-4 items-center duration-500 origin-top scale-y-0 group-hover:scale-y-110`}
+                  className={`px-4 rounded-md py-6 absolute top-10 -right-6  bg-white dark:bg-dark-300 shadow-lg shadow-black/20 dark:shadow-black/80 duration-500 origin-top scale-y-0 group-hover:scale-y-110 flex flex-col gap-y-1`}
                 >
                   {_links.slice(8).map((link, index) => (
                     <li
