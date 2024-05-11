@@ -12,7 +12,25 @@ import Navbar from "../../../../components/Navbar/Navbar";
 import TrendingTopics from "../../../../components/TrendingTopics/TrendingTopics";
 import { getData } from "../../../../utils/dataFetch";
 
+export async function generateMetadata({ params }) {
+  const data = await getData(`story/details/${params.id}`);
+  const metadata = {
+    title: data?.story.title,
+    description: data?.story.meta.intro,
+    image: getImageUrl(data?.story.meta.featured_image),
+    openGraph: {
+      url: `https://9a96-119-148-28-105.ngrok-free.app/news/${params.id}/${params.slug}`,
+      title: data?.story.title,
+      images: getImageUrl(data?.story.meta.featured_image),
+      description: data.story.meta.intro,
+    },
+  };
+  return metadata;
+}
+
 export default async function NewsDetails({ params }) {
+  const link_url = `https://9a96-119-148-28-105.ngrok-free.app/news/${params.id}/${params.slug}`;
+
   const [detailsData, trendingTopics, latestNews] = await Promise.all([
     getData(`story/details/${params.id}`),
     getData("trendy-topics"),
@@ -59,7 +77,7 @@ export default async function NewsDetails({ params }) {
             <div className="pb-8 mb-8 border-b dark:border-dark-300">
               <ProfileCard data={detailsData?.story.authors[0]} updatedTime={detailsData?.story.updated_at} />
             </div>
-            <SocialShare facebookShareUrl="" whahtsappShareUrl="" twitterShareUrl="" instagramShareUrl="" />
+            <SocialShare shareLink={link_url} />
             <img className="my-10 mx-auto" src="/ads/SIBL_Profit_300x250.gif" alt="Ads" />
             <div>
               <AccentHeader
