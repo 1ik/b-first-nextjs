@@ -19,7 +19,7 @@ export async function generateMetadata({ params }) {
     description: data?.story.meta.intro,
     image: getImageUrl(data?.story.meta.featured_image),
     openGraph: {
-      url: `https://5a45-119-148-28-105.ngrok-free.app/news/${params.id}/${params.slug}`,
+      url: `https://9a96-119-148-28-105.ngrok-free.app/news/${params.id}/${params.slug}`,
       title: data?.story.title,
       images: getImageUrl(data?.story.meta.featured_image),
       description: data.story.meta.intro,
@@ -29,7 +29,7 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function NewsDetails({ params }) {
-  const link_url = `https://5a45-119-148-28-105.ngrok-free.app/news/${params.id}/${params.slug}`;
+  const link_url = `https://9a96-119-148-28-105.ngrok-free.app/news/${params.id}/${params.slug}`;
 
   const [detailsData, trendingTopics, latestNews] = await Promise.all([
     getData(`story/details/${params.id}`),
