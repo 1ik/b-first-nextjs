@@ -1,10 +1,10 @@
 "use client";
 
-import { WhatsappShareButton, FacebookShareButton, TwitterShareButton, InstapaperShareButton } from "react-share";
-import { FaFacebookF, FaInstagram, FaXTwitter } from "react-icons/fa6";
-import { FaWhatsapp } from "react-icons/fa";
-import { MdContentCopy } from "react-icons/md";
 import { useState } from "react";
+import { FaWhatsapp } from "react-icons/fa";
+import { FaFacebookF, FaXTwitter } from "react-icons/fa6";
+import { MdContentCopy } from "react-icons/md";
+import { FacebookShareButton, TwitterShareButton, WhatsappShareButton } from "react-share";
 
 export interface SocialShareProps {
   shareLink: string;
@@ -34,11 +34,11 @@ export function SocialShare({ shareLink }: SocialShareProps) {
           </div>
         </WhatsappShareButton>
 
-        <InstapaperShareButton url={shareLink}>
+        {/* <InstapaperShareButton url={shareLink}>
           <div className="bg-black/90 hover:bg-black p-1.5 text-white rounded-md">
             <FaInstagram size={20} />
           </div>
-        </InstapaperShareButton>
+        </InstapaperShareButton> */}
 
         <TwitterShareButton url={shareLink}>
           <div className="bg-black/90 hover:bg-black p-1.5 text-white rounded-md">

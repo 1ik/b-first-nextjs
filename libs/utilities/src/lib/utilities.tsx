@@ -1,13 +1,16 @@
-export const getImageUrl = (path: string, w?: number, h?: number) => {
+export const getImageUrl = (path: string, w?: number, h?: number, q?: number) => {
   if (!w) {
     w = 1600;
   }
   if (!h) {
     h = 900;
   }
+  if (!q) {
+    q = 85;
+  }
 
   const baseUrl = `https://images.bangladeshfirst.com`;
-  return baseUrl + `/resize?width=${w}&height=${h}&format=webp&quality=85&path=${path}`;
+  return baseUrl + `/resize?width=${w}&height=${h}&format=webp&quality=${q}&path=${path}`;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
