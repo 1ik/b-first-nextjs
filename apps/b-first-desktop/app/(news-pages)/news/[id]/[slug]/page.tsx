@@ -5,6 +5,7 @@ import { ProfileCard } from "@bfirst/components-profile-card";
 import { SocialShare } from "@bfirst/components-social-share";
 import { SquareGrid } from "@bfirst/components-square-grid";
 import { getImageUrl } from "@bfirst/utilities";
+import { Metadata } from "next";
 import Link from "next/link";
 import BreadCrumb from "../../../../components/BreadCrumb/BreadCrumb";
 import ImagePreview from "../../../../components/ImagePreview/ImagePreview";
@@ -12,24 +13,50 @@ import Navbar from "../../../../components/Navbar/Navbar";
 import TrendingTopics from "../../../../components/TrendingTopics/TrendingTopics";
 import { getData } from "../../../../utils/dataFetch";
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata({ params }): Promise<Metadata> {
   const data = await getData(`story/details/${params.id}`);
-  const metadata = {
+
+  return {
     title: data?.story.title,
     description: data?.story.meta.intro,
-    image: getImageUrl(data?.story.meta.featured_image),
     openGraph: {
-      url: `https://9a96-119-148-28-105.ngrok-free.app/news/${params.id}/${params.slug}`,
       title: data?.story.title,
-      images: getImageUrl(data?.story.meta.featured_image),
-      description: data.story.meta.intro,
+      description: data?.story.meta.intro,
+      images: [
+        {
+          url: getImageUrl(data?.story.meta.featured_image, 600, 315, 20),
+          secureUrl: getImageUrl(data?.story.meta.featured_image, 600, 315, 20),
+          width: 1200,
+          height: 630,
+          alt: data?.story.title,
+        },
+      ],
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: data?.story.title,
+      description: data?.story.meta.intro,
+      images: [
+        {
+          url: getImageUrl(data?.story.meta.featured_image),
+          secureUrl: getImageUrl(data?.story.meta.featured_image),
+          alt: data?.story.title,
+          width: 1600,
+          height: 900,
+        },
+      ],
+    },
+    alternates: {
+      canonical: `https://bangladeshfirst.com/news/${params.id}/${params.slug}`,
     },
   };
-  return metadata;
 }
 
 export default async function NewsDetails({ params }) {
-  const link_url = `https://9a96-119-148-28-105.ngrok-free.app/news/${params.id}/${params.slug}`;
+  //! NEED TO CHANGE BASE URL TO HTTPS://BANGLADESHFIRST.COM
+
+  const link_url = `https://997c-119-148-28-105.ngrok-free.app/news/${params.id}/${params.slug}`;
 
   const [detailsData, trendingTopics, latestNews] = await Promise.all([
     getData(`story/details/${params.id}`),
