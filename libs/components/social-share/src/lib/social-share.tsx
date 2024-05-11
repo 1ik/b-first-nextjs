@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { FaWhatsapp } from "react-icons/fa";
-import { FaFacebookF, FaXTwitter } from "react-icons/fa6";
+import { FaCheck, FaFacebookF, FaXTwitter } from "react-icons/fa6";
 import { MdContentCopy } from "react-icons/md";
 import { FacebookShareButton, TwitterShareButton, WhatsappShareButton } from "react-share";
 
@@ -12,9 +12,8 @@ export interface SocialShareProps {
 
 export function SocialShare({ shareLink }: SocialShareProps) {
   const [copied, setCopied] = useState(false);
-  function copyToClipboard() {
-    const currentUrl = window.location.href;
-    navigator.clipboard.writeText(currentUrl);
+  function copyToClipboard(url: string) {
+    navigator.clipboard.writeText(url);
     setCopied(true);
     setTimeout(() => setCopied(false), 1000);
   }
@@ -47,11 +46,13 @@ export function SocialShare({ shareLink }: SocialShareProps) {
         </TwitterShareButton>
 
         {copied ? (
-          <span className="text-sm">Copied!</span>
+          <div className={`bg-black/90 hover:bg-black p-1.5 flex items-center cursor-pointer rounded-md text-white `}>
+            <FaCheck />
+          </div>
         ) : (
           <div
-            onClick={copyToClipboard}
-            className="bg-black/90 hover:bg-black p-1.5 flex items-center cursor-pointer rounded-md text-white "
+            onClick={() => copyToClipboard(shareLink)}
+            className={`bg-black/90 hover:bg-black p-1.5 flex items-center cursor-pointer rounded-md text-white `}
           >
             <MdContentCopy />
           </div>

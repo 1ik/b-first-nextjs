@@ -56,7 +56,7 @@ export async function generateMetadata({ params }): Promise<Metadata> {
 export default async function NewsDetails({ params }) {
   //! NEED TO CHANGE BASE URL TO HTTPS://BANGLADESHFIRST.COM
 
-  const link_url = `https://997c-119-148-28-105.ngrok-free.app/news/${params.id}/${params.slug}`;
+  const link_url = `http://localhost:4200/news/${params.id}/${params.slug}`;
 
   const [detailsData, trendingTopics, latestNews] = await Promise.all([
     getData(`story/details/${params.id}`),
