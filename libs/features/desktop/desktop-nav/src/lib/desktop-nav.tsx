@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { FaFacebookF, FaInstagram, FaSearch, FaYoutube } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { IoIosArrowDown } from "react-icons/io";
+import { NavLink } from "react-router-dom";
 
 /* eslint-disable-next-line */
 export interface DesktopNavProps {
@@ -228,11 +229,19 @@ export function DesktopNav({
               ))}
               <li
                 suppressHydrationWarning
-                className="relative px-5 py-1 flex items-center gap-x-1 group cursor-pointer"
+                className={`relative px-5 py-1 flex items-center gap-x-1 group cursor-pointer after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:bg-accent after:duration-300 after:h-[3px] ${
+                  activeLink &&
+                  _links
+                    .slice(8)
+                    .map((item) => item.href)
+                    .includes(activeLink)
+                    ? "after:w-1/3"
+                    : ""
+                }`}
               >
                 More <IoIosArrowDown />
                 <ul
-                  className={`px-4 rounded-md py-6 absolute top-10 -right-6  bg-white dark:bg-dark-300 shadow-lg shadow-black/20 dark:shadow-black/80 duration-500 origin-top scale-y-0 group-hover:scale-y-110 flex flex-col gap-y-1`}
+                  className={`px-4 z-[100] -translate-y-2 rounded-md py-6 absolute top-10 -right-6  bg-white dark:bg-dark-300 shadow-lg shadow-black/20 dark:shadow-black/80 duration-500 origin-top scale-y-0 group-hover:scale-y-110 flex flex-col gap-y-1.5`}
                 >
                   {_links.slice(8).map((link, index) => (
                     <li
