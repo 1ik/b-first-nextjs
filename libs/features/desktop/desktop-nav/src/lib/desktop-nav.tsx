@@ -3,7 +3,6 @@ import { useEffect, useRef, useState } from "react";
 import { FaFacebookF, FaInstagram, FaSearch, FaYoutube } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { IoIosArrowDown } from "react-icons/io";
-import { NavLink } from "react-router-dom";
 
 /* eslint-disable-next-line */
 export interface DesktopNavProps {
