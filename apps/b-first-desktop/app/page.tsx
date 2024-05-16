@@ -25,9 +25,7 @@ export default async function Index() {
     getData("categories/world/stories"),
     getData("categories/sports/stories"),
     getData("categories/tech/stories"),
-  ])
-  
-
+  ]);
 
   return (
     <>
