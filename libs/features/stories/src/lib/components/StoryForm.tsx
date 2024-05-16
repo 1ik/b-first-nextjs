@@ -2,20 +2,11 @@ import { useGet, usePost } from "@bfirst/api-client";
 import { HCF } from "@bfirst/components-layout";
 import { MultiselectSearch } from "@bfirst/components-multiselect-search";
 import { TinymceEditor } from "@bfirst/components-tinymce-editor";
-import {
-  Button,
-  CardBody,
-  Dialog,
-  DialogBody,
-  DialogFooter,
-  DialogHeader,
-  Input,
-  Textarea,
-  Typography,
-} from "@bfirst/material-tailwind";
-import { useEffect, useState } from "react";
+import { Button, CardBody, Input, Textarea } from "@bfirst/material-tailwind";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import MediaBrowser from "./MediaBrowser";
 
 export type Inputs = {
   shoulder?: string;
@@ -49,19 +40,15 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
   const [dialogOpen, setDialogOpen] = useState(false);
   const [error, setError] = useState({ authors: "", tags: "", categories: "", body: "", featuredImg: "" });
   const [body, setBody] = useState(defaultData?.story.content || "");
-  const [featuredImg, setFeaturedImg] = useState<undefined | File>();
   const [featuredImgUrl, setFeaturedImgUrl] = useState(defaultData?.story.meta.featured_image || "");
   const [search, setSearch] = useState({ authors: "", tags: "", categories: "" });
   const [selectedAuthors, setSelectedAuthors] = useState([]);
   const [selectedTags, setSelectedTags] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
-
-  const { request, isSuccess, data: uploadImageData } = usePost(`api/v1/media-upload-image`);
   const { requestAsync: tagRequestAsync } = usePost(`api/v1/tags`);
   const { data: authorsData } = useGet(`api/v1/authors?name=${search.authors}`);
   const { data: tagsData } = useGet(`api/v1/tags?name=${search.tags}`);
   const { data: categoriesData } = useGet(`api/v1/categories?name=${search.categories}`);
-
   const navigate = useNavigate();
   const {
     register,
@@ -69,17 +56,6 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
     formState: { errors },
   } = useForm<Inputs>();
 
-  const handleDialogOpen = () => setDialogOpen((cur) => !cur);
-  const handleUploadFeaturedImg = () => {
-    if (!featuredImgUrl && !featuredImg) {
-      return;
-    } else if (featuredImg) {
-      const formData = new FormData();
-      formData.append("image", featuredImg);
-      request(formData);
-    }
-    setDialogOpen(false);
-  };
   const handleAddTag = async (searchValue: string) => {
     const { data } = await tagRequestAsync({ name: searchValue });
     return data.data;
@@ -114,16 +90,8 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
       categories: selectedCategories.map((category) => (category as { id: number }).id),
       content: body,
     };
-
     onSubmit(story);
   };
-
-  useEffect(() => {
-    if (isSuccess) {
-      setFeaturedImgUrl(uploadImageData?.data.url);
-      setDialogOpen(false);
-    }
-  }, [isSuccess, uploadImageData]);
 
   return (
     <form onSubmit={handleSubmit(onValidate)} className="h-full">
@@ -220,57 +188,30 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
               <p className="text-xs p-1 font-light">{error.categories}</p>
             </div>
 
-            {/* ========== featured image ========= */}
+            {/* ========== media browser ======= */}
             <div>
-              <p>Featured Image*</p>
-              <Button onClick={handleDialogOpen} variant="gradient">
+              <Button variant="gradient" onClick={() => setDialogOpen((cur) => !cur)}>
                 Browse
               </Button>
-              <p className="text-xs p-1 font-light">{error.featuredImg}</p>
             </div>
+            <MediaBrowser
+              defaultData={defaultData}
+              register={register}
+              dialogOpen={dialogOpen}
+              onDialogOpen={setDialogOpen}
+              featuredImgUrl={featuredImgUrl}
+              onFeaturedImgUrl={setFeaturedImgUrl}
+            />
+
             <div>
               {featuredImgUrl && (
                 <img
+                  className="md:w-[720px] w-full aspect-video object-cover"
                   src={`https://images.bangladeshfirst.com/resize?width=1600&height=900&format=webp&quality=85&path=${featuredImgUrl}`}
                   alt="Featured_Image"
                 />
               )}
             </div>
-
-            {/* ========== media browser ======= */}
-            <Dialog open={dialogOpen} handler={handleDialogOpen} size="xl">
-              <DialogHeader className="flex justify-between">
-                <Typography>Media Browser</Typography>
-              </DialogHeader>
-              <DialogBody>
-                <div className="flex flex-col gap-y-4">
-                  <div className="lg:w-2/3">
-                    <Input
-                      onChange={(e) => setFeaturedImg(e.target.files?.[0])}
-                      variant="standard"
-                      label="Featured Image*"
-                      type="file"
-                    />
-                    <Typography className="my-2">
-                      Allowed file type: <span className="font-bold">png, jpg, jpeg, gif</span>
-                    </Typography>
-                  </div>
-                  <div className="lg:w-2/3">
-                    <Input
-                      {...register("imageCaption")}
-                      defaultValue={defaultData?.story.meta.imageCaption}
-                      label="Image Caption"
-                    />
-                  </div>
-                </div>
-              </DialogBody>
-              <DialogFooter>
-                <Button onClick={handleUploadFeaturedImg}>Add to News</Button>
-                <Button className="ml-2" variant="outlined" onClick={() => setDialogOpen(false)}>
-                  Cancel
-                </Button>
-              </DialogFooter>
-            </Dialog>
           </CardBody>
         </HCF.Content>
         <HCF.Footer className="flex w-full px-3 flex-row justify-end">
