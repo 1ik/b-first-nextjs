@@ -3,7 +3,7 @@ import { HCF } from "@bfirst/components-layout";
 import { MultiselectSearch } from "@bfirst/components-multiselect-search";
 import { TinymceEditor } from "@bfirst/components-tinymce-editor";
 import { Button, CardBody, Input, Textarea } from "@bfirst/material-tailwind";
-import { useState } from "react";
+import { useReducer, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import MediaBrowser from "./MediaBrowser";
@@ -36,8 +36,30 @@ export interface StoryFormProps {
   btnLabel: string;
 }
 
+export interface StateInterface {
+  dialogOpen: boolean;
+  openFrom: string;
+}
+
+const initialState: StateInterface = {
+  dialogOpen: false,
+  openFrom: "",
+};
+
+const reducer = function (curState: StateInterface, action: { type: string; payload?: string | boolean }) {
+  switch (action.type) {
+    case "setDialogOpen":
+      return { ...curState, dialogOpen: (action.payload as boolean) || !curState.dialogOpen };
+    case "setOpenFrom":
+      return { ...curState, openFrom: action.payload as string };
+    default:
+      return { ...curState };
+  }
+};
+
 export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }: StoryFormProps) {
-  const [dialogOpen, setDialogOpen] = useState(false);
+  const [state, dispatch] = useReducer(reducer, initialState);
+
   const [error, setError] = useState({ authors: "", tags: "", categories: "", body: "", featuredImg: "" });
   const [body, setBody] = useState(defaultData?.story.content || "");
   const [featuredImgUrl, setFeaturedImgUrl] = useState(defaultData?.story.meta.featured_image || "");
@@ -45,6 +67,7 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
   const [selectedAuthors, setSelectedAuthors] = useState([]);
   const [selectedTags, setSelectedTags] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
+
   const { requestAsync: tagRequestAsync } = usePost(`api/v1/tags`);
   const { data: authorsData } = useGet(`api/v1/authors?name=${search.authors}`);
   const { data: tagsData } = useGet(`api/v1/tags?name=${search.tags}`);
@@ -148,6 +171,7 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
             <div>
               <TinymceEditor
                 label="Body*"
+                dispatch={dispatch}
                 onChange={(content) => {
                   setBody(content);
                   setError((cur) => ({ ...cur, body: "" }));
@@ -190,15 +214,21 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
 
             {/* ========== media browser ======= */}
             <div>
-              <Button variant="gradient" onClick={() => setDialogOpen((cur) => !cur)}>
+              <Button
+                variant="gradient"
+                onClick={() => {
+                  dispatch({ type: "setDialogOpen" });
+                  dispatch({ type: "setOpenFrom", payload: "storyForm" });
+                }}
+              >
                 Browse
               </Button>
             </div>
             <MediaBrowser
               defaultData={defaultData}
               register={register}
-              dialogOpen={dialogOpen}
-              onDialogOpen={setDialogOpen}
+              state={state}
+              dispatch={dispatch}
               featuredImgUrl={featuredImgUrl}
               onFeaturedImgUrl={setFeaturedImgUrl}
             />

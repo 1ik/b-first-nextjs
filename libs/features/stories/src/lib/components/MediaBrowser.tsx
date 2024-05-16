@@ -17,11 +17,13 @@ import {
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import tinymce from "tinymce";
+import { StateInterface } from "./StoryForm";
 
 interface MediaBrowserProps {
   defaultData?: any;
-  dialogOpen: boolean;
-  onDialogOpen: Dispatch<SetStateAction<boolean>>;
+  state: StateInterface;
+  dispatch: any;
   featuredImgUrl: string;
   onFeaturedImgUrl: Dispatch<SetStateAction<string>>;
   register?: any;
@@ -29,30 +31,47 @@ interface MediaBrowserProps {
 
 export default function MediaBrowser({
   defaultData,
-  dialogOpen,
-  onDialogOpen,
+  state,
+  dispatch,
   featuredImgUrl,
   onFeaturedImgUrl,
   register,
 }: MediaBrowserProps) {
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedImageFile, setSelectedImageFile] = useState<any>(null);
+  const [selectedImage, setSelectedImage] = useState("");
+  const [imageUploadTitle, setImageUploadTitle] = useState("");
 
   const { data: mediaImageData, isPending } = useGet(`api/v1/media-image-list?sort=desc&page=${currentPage}`);
   const { requestAsync, isSuccess } = usePost(`api/v1/media-upload-image`);
 
-  const handleDialogOpen = () => onDialogOpen((cur) => !cur);
-  const handleFeaturedImgUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target?.files?.[0];
-    if (!file) return;
+  const handleDialogOpen = () => {
+    dispatch({ type: "setDialogOpen" });
+  };
+
+  const handleAddToNews = async () => {
+    if (!selectedImageFile || !imageUploadTitle) return;
 
     const formData = new FormData();
-    formData.append("image", file);
+    formData.append("image", selectedImageFile);
+    formData.append("title", imageUploadTitle);
     const data = await requestAsync(formData);
-    onFeaturedImgUrl(data.data.url);
+
+    setImageUploadTitle("");
+    setSelectedImage("");
+    setSelectedImageFile(null);
+
+    handleImageSelect(data.data.url);
   };
-  const handleAddToNews = () => {
-    if (!featuredImgUrl) return;
-    onDialogOpen(false);
+
+  const handleImageSelect = function (path: string) {
+    if (state.openFrom === "storyForm") onFeaturedImgUrl(path);
+    if (state.openFrom === "textEditor") {
+      tinymce.activeEditor?.insertContent(
+        `<img src="https://images.bangladeshfirst.com/resize?width=1600&height=900&format=webp&quality=85&path=${path}" alt=""/>`
+      );
+    }
+    dispatch({ type: "setDialogOpen", payload: false });
   };
 
   const data = [
@@ -67,13 +86,22 @@ export default function MediaBrowser({
   ];
 
   useEffect(() => {
+    if (!selectedImageFile) return;
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      setSelectedImage(e.target?.result as string);
+    };
+    reader.readAsDataURL(selectedImageFile);
+  }, [selectedImageFile]);
+
+  useEffect(() => {
     if (isSuccess) {
       toast.success("Image uploaded");
     }
   }, [isSuccess]);
 
   return (
-    <Dialog open={dialogOpen} handler={handleDialogOpen} size="xl">
+    <Dialog open={state.dialogOpen} handler={handleDialogOpen} size="xl">
       <ToastContainer position="top-center" />
       <DialogHeader className="flex justify-between">
         <Typography>Media Browser</Typography>
@@ -102,42 +130,56 @@ export default function MediaBrowser({
                   <div className="flex gap-x-4">
                     <div className="flex flex-1 items-center justify-center flex-col gap-y-4">
                       <div className="md:mt-5 mb-4">
-                        <label className="md:w-72 flex flex-col items-center px-4 py-6 bg-[#e1e2e4] rounded-lg shadow-lg cursor-pointer hover:bg-blue hover:shadow-xl">
-                          <svg
-                            fill="#b3b6bc"
-                            height="100px"
-                            width="100px"
-                            version="1.1"
-                            id="Capa_1"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="-2.8 -2.8 33.56 33.56"
-                            stroke="#000000"
-                            transform="matrix(1, 0, 0, 1, 0, 0)rotate(0)"
-                            stroke-width="0.00027963"
-                          >
-                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                            <g
-                              id="SVGRepo_tracerCarrier"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke="#CCCCCC"
-                              stroke-width="0.223704"
-                            ></g>
-                            <g id="SVGRepo_iconCarrier">
-                              <g>
-                                <g id="c140__x2B_">
-                                  <path d="M13.98,0C6.259,0,0,6.26,0,13.982s6.259,13.981,13.98,13.981c7.725,0,13.983-6.26,13.983-13.981 C27.963,6.26,21.705,0,13.98,0z M21.102,16.059h-4.939v5.042h-4.299v-5.042H6.862V11.76h5.001v-4.9h4.299v4.9h4.939v4.299H21.102z "></path>
+                        <label className="md:w-80 flex flex-col items-center px-4 py-6 bg-[#e1e2e4] rounded-lg shadow-lg cursor-pointer hover:bg-blue hover:shadow-xl">
+                          {selectedImage ? (
+                            <img src={selectedImage} alt="selected file" />
+                          ) : (
+                            <>
+                              <svg
+                                fill="#b3b6bc"
+                                height="100px"
+                                width="100px"
+                                version="1.1"
+                                id="Capa_1"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="-2.8 -2.8 33.56 33.56"
+                                stroke="#000000"
+                                transform="matrix(1, 0, 0, 1, 0, 0)rotate(0)"
+                                stroke-width="0.00027963"
+                              >
+                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                <g
+                                  id="SVGRepo_tracerCarrier"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke="#CCCCCC"
+                                  stroke-width="0.223704"
+                                ></g>
+                                <g id="SVGRepo_iconCarrier">
+                                  <g>
+                                    <g id="c140__x2B_">
+                                      <path d="M13.98,0C6.259,0,0,6.26,0,13.982s6.259,13.981,13.98,13.981c7.725,0,13.983-6.26,13.983-13.981 C27.963,6.26,21.705,0,13.98,0z M21.102,16.059h-4.939v5.042h-4.299v-5.042H6.862V11.76h5.001v-4.9h4.299v4.9h4.939v4.299H21.102z "></path>
+                                    </g>
+                                    <g id="Capa_1_9_"> </g>
+                                  </g>
                                 </g>
-                                <g id="Capa_1_9_"> </g>
-                              </g>
-                            </g>
-                          </svg>
-                          <span>Upload Image</span>
-                          <input className="hidden" onChange={handleFeaturedImgUpload} type="file" />
+                              </svg>
+                              <span>Upload Image</span>
+                            </>
+                          )}
+
+                          <input
+                            className="hidden"
+                            onChange={(e) => setSelectedImageFile(e.target.files?.[0])}
+                            type="file"
+                          />
                         </label>
                         <Typography className="my-4">
                           Allowed file type: <span className="font-bold">png, jpg, jpeg, gif</span>
                         </Typography>
+                        {selectedImage && (
+                          <Input onChange={(e) => setImageUploadTitle(e.target.value)} label="Image title" />
+                        )}
                       </div>
                       <div className="lg:w-2/3 md:my-16"></div>
                     </div>
@@ -156,7 +198,7 @@ export default function MediaBrowser({
                             return (
                               <img
                                 key={index}
-                                onClick={() => onFeaturedImgUrl(item.url)}
+                                onClick={() => handleImageSelect(item.url)}
                                 className="w-[200px] aspect-video object-cover cursor-pointer"
                                 src={`https://images.bangladeshfirst.com/resize?width=1600&height=900&format=webp&quality=85&path=${item.url}`}
                                 alt={item.url}
@@ -203,7 +245,7 @@ export default function MediaBrowser({
       </DialogBody>
       <DialogFooter>
         <Button onClick={handleAddToNews}>Add to News</Button>
-        <Button className="ml-2" variant="outlined" onClick={() => onDialogOpen(false)}>
+        <Button className="ml-2" variant="outlined" onClick={() => dispatch({ type: "setDialogOpen", payload: false })}>
           Cancel
         </Button>
       </DialogFooter>

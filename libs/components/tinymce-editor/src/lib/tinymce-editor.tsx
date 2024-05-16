@@ -6,9 +6,10 @@ interface TinymceEditorProps {
   defaultValue?: string;
   label?: string;
   onChange: (content: string) => void;
+  dispatch: any;
 }
 
-export const TinymceEditor = function ({ label, defaultValue, onChange }: TinymceEditorProps) {
+export const TinymceEditor = function ({ label, defaultValue, onChange, dispatch }: TinymceEditorProps) {
   const { requestAsync } = usePost(`api/v1/media-upload-image`);
 
   const editorRef = useRef(null);
@@ -18,12 +19,11 @@ export const TinymceEditor = function ({ label, defaultValue, onChange }: Tinymc
 
     tinymce.init({
       target: editorRef.current,
-      plugins:
-        "anchor charmap codesample emoticons image  lists media searchreplace table visualblocks wordcount code",
+      plugins: "anchor charmap codesample emoticons image  lists media searchreplace table visualblocks wordcount code",
       toolbar:
-        "paste undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | code image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat",
-      
-        file_picker_callback: (callback, value, meta) => {
+        "paste media-library undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | code image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat",
+
+      file_picker_callback: (callback, value, meta) => {
         const input = document.createElement("input");
         input.setAttribute("type", "file");
         input.setAttribute("accept", "image/*");
@@ -58,6 +58,13 @@ export const TinymceEditor = function ({ label, defaultValue, onChange }: Tinymc
         editor.on("change", () => {
           onChange(editor.getContent());
         });
+        editor.ui.registry.addButton("media-library", {
+          text: "Library",
+          onAction: () => {
+            dispatch({ type: "setDialogOpen", paylaod: true });
+            dispatch({ type: "setOpenFrom", payload: "textEditor" });
+          },
+        });
       },
       tinycomments_mode: "embedded",
       tinycomments_author: "Author name",
@@ -65,7 +72,7 @@ export const TinymceEditor = function ({ label, defaultValue, onChange }: Tinymc
         { value: "First.Name", title: "First Name" },
         { value: "Email", title: "Email" },
       ],
-      paste_as_text: true
+      paste_as_text: true,
     });
   });
 
