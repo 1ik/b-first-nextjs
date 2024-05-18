@@ -14,7 +14,7 @@ import {
   TabsHeader,
   Typography,
 } from "@bfirst/material-tailwind";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import tinymce from "tinymce";
@@ -38,15 +38,23 @@ export default function MediaBrowser({
   register,
 }: MediaBrowserProps) {
   const [currentPage, setCurrentPage] = useState(1);
+  const [activeTab, setActiveTab] = useState("upload");
   const [selectedImageFile, setSelectedImageFile] = useState<any>(null);
   const [selectedImage, setSelectedImage] = useState("");
   const [imageUploadTitle, setImageUploadTitle] = useState("");
+  const [searchImageTitle, setSearchImageTitle] = useState("");
 
-  const { data: mediaImageData, isPending } = useGet(`api/v1/media-image-list?sort=desc&page=${currentPage}`);
+  const { data: mediaImageData, isPending } = useGet(
+    `api/v1/media-image-list?title=${searchImageTitle}&sort=desc&page=${currentPage}`
+  );
   const { requestAsync, isSuccess } = usePost(`api/v1/media-upload-image`);
 
   const handleDialogOpen = () => {
     dispatch({ type: "setDialogOpen" });
+  };
+
+  const handleImageSearch = (e: ChangeEvent<HTMLInputElement>) => {
+    setTimeout(() => setSearchImageTitle(e.target.value), 500);
   };
 
   const handleAddToNews = async () => {
@@ -68,7 +76,7 @@ export default function MediaBrowser({
     if (state.openFrom === "storyForm") onFeaturedImgUrl(path);
     if (state.openFrom === "textEditor") {
       tinymce.activeEditor?.insertContent(
-        `<img src="https://images.bangladeshfirst.com/resize?width=1600&height=900&format=webp&quality=85&path=${path}" alt=""/>`
+        `<img width="100%" src="https://images.bangladeshfirst.com/smartcrop?width=1600&height=900&format=webp&quality=85&path=${path}" alt=""/>`
       );
     }
     dispatch({ type: "setDialogOpen", payload: false });
@@ -84,6 +92,13 @@ export default function MediaBrowser({
       value: "library",
     },
   ];
+
+  useEffect(() => {
+    if (state.dialogOpen) {
+      setActiveTab("upload");
+      setSearchImageTitle("");
+    }
+  }, [state.dialogOpen]);
 
   useEffect(() => {
     if (!selectedImageFile) return;
@@ -111,17 +126,20 @@ export default function MediaBrowser({
         <Tabs id="custom-animation" value="upload">
           <TabsHeader>
             {data.map(({ label, value }) => (
-              <Tab key={value} value={value}>
+              <Tab onClick={() => setActiveTab(value)} key={value} value={value}>
                 {label}
               </Tab>
             ))}
           </TabsHeader>
-          <div className="mx-4 my-4 md:my-1">
-            <Input
-              {...register("imageCaption")}
-              defaultValue={defaultData?.story.meta.imageCaption}
-              label="Image Caption"
-            />
+          <div className="h-12 mx-4 my-4 md:my-1 flex gap-2 flex-col md:flex-row">
+            {state.openFrom === "storyForm" && (
+              <Input
+                {...register("imageCaption")}
+                defaultValue={defaultData?.story.meta.imageCaption}
+                label="Image Caption"
+              />
+            )}
+            {activeTab === "library" && <Input onChange={handleImageSearch} label="Search" />}
           </div>
           <TabsBody>
             {data.map(({ value }) => (
@@ -193,7 +211,7 @@ export default function MediaBrowser({
                           <Loader />
                         </div>
                       ) : (
-                        <div className="flex gap-5 flex-wrap justify-center md:justify-between overflow-y-scroll md:overflow-auto md:h-72 h-48 w-full">
+                        <div className="flex gap-5 flex-wrap items-start justify-center md:justify-between overflow-y-scroll md:overflow-auto md:h-72 h-48 w-full">
                           {mediaImageData?.media_images.data.map((item: { url: string }, index: number) => {
                             return (
                               <img

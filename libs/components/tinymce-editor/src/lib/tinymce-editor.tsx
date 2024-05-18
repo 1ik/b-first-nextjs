@@ -21,7 +21,7 @@ export const TinymceEditor = function ({ label, defaultValue, onChange, dispatch
       target: editorRef.current,
       plugins: "anchor charmap codesample emoticons image  lists media searchreplace table visualblocks wordcount code",
       toolbar:
-        "paste media-library undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | code image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat",
+        "paste undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | code media-library media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat",
 
       file_picker_callback: (callback, value, meta) => {
         const input = document.createElement("input");
@@ -59,7 +59,7 @@ export const TinymceEditor = function ({ label, defaultValue, onChange, dispatch
           onChange(editor.getContent());
         });
         editor.ui.registry.addButton("media-library", {
-          text: "Library",
+          icon: "gallery",
           onAction: () => {
             dispatch({ type: "setDialogOpen", paylaod: true });
             dispatch({ type: "setOpenFrom", payload: "textEditor" });
