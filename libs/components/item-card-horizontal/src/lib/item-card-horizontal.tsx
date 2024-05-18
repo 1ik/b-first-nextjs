@@ -3,7 +3,8 @@ export interface ItemCardHorizontalProps {
   data: any;
   size?: "lg" | "sm" | "md";
   imageSide?: "left" | "right";
-  showTitleBorder?: boolean;
+  showTitleBorderSmall?: boolean;
+  showTitleBorderBig?: boolean;
   showIntro?: boolean;
   className?: string;
   Link?: any;
@@ -13,24 +14,36 @@ export function ItemCardHorizontal({
   data,
   size = "lg",
   imageSide = "left",
-  showTitleBorder,
+  showTitleBorderSmall,
+  showTitleBorderBig,
   showIntro,
   className,
   Link,
 }: ItemCardHorizontalProps) {
+  const fontSize = `${
+    size === "lg"
+      ? "text-5xl leading-[46.5px]"
+      : size === "sm"
+      ? "text-2xl pl-2.5"
+      : size === "md"
+      ? "text-xl leading-none"
+      : ""
+  }`;
   return (
-    <div className={`flex gap-x-4 ${className}`}>
+    <div
+      className={`flex ${className} ${showTitleBorderBig ? "border-t-[1px] leading-tight border-accent" : ""} ${
+        size === "lg" ? "gap-x-8" : size === "md" ? "gap-x-2" : ""
+      }`}
+    >
       <div
-        className={`${size === "lg" ? "w-1/3" : size === "md" ? "w-7/12" : size === "sm" ? "w-2/3" : ""}   
+        className={`${size === "lg" ? "w-4/12" : size === "md" ? "w-7/12" : size === "sm" ? "w-7/12" : ""}   
           ${imageSide === "left" ? "order-last" : imageSide === "right" ? "order-first" : ""}`}
       >
         {Link ? (
           <Link className="" href={getNewsUrl(data)}>
             <h2
-              className={`${
-                size === "lg" ? "text-4xl" : size === "sm" ? "text-xl" : size === "md" ? "text-[26px] leading-none" : ""
-              } ${
-                showTitleBorder ? "border-t-[2px] leading-tight border-accent pt-2" : ""
+              className={`${fontSize} ${
+                showTitleBorderSmall ? "border-t-[3px] leading-tight border-accent pt-2" : ""
               } hover:text-accent dark:hover:text-accent-light duration-150`}
             >
               {data?.title}
@@ -39,10 +52,8 @@ export function ItemCardHorizontal({
         ) : (
           <a href={getNewsUrl(data)}>
             <h2
-              className={`${
-                size === "lg" ? "text-4xl" : size === "sm" ? "text-xl" : size === "md" ? "text-[26px] leading-none" : ""
-              } ${
-                showTitleBorder ? "border-t-[2px] leading-tight border-accent pt-2" : ""
+              className={`${fontSize} ${
+                showTitleBorderSmall ? "border-t-[3px] leading-tight border-accent pt-2" : ""
               } hover:text-accent dark:hover:text-accent-light duration-150`}
             >
               {data?.title}
@@ -50,20 +61,18 @@ export function ItemCardHorizontal({
           </a>
         )}
 
-        {showIntro && <p className="mt-4 text-[28px] dark:text-[#bebdbd] text-[#727272]">{data?.meta.intro}</p>}
+        {showIntro && <p className="mt-4 text-[22px] dark:text-[#bebdbd] text-[#727272]">{data?.meta.intro}</p>}
       </div>
 
       <div
         className={`overflow-hidden ${
-          size === "lg" ? "w-2/3" : size === "md" ? "w-5/12" : size === "sm" ? "w-1/3" : ""
+          size === "lg" ? "w-8/12" : size === "md" ? "w-5/12" : size === "sm" ? "w-5/12" : ""
         }`}
       >
         {Link ? (
           <Link href={getNewsUrl(data)}>
             <img
-              className={`hover:scale-110 duration-300 w-full object-cover ${
-                size === "md" ? "h-[100px]" : size === "sm" ? "h-[70px]" : ""
-              }`}
+              className={`hover:scale-110 duration-300 w-full object-cover aspect-video`}
               src={getImageUrl(data?.meta.featured_image)}
               alt={data?.meta.featured_image.imageCaption}
             />
@@ -71,9 +80,7 @@ export function ItemCardHorizontal({
         ) : (
           <a href={getNewsUrl(data)}>
             <img
-              className={`hover:scale-110 duration-300 w-full object-cover ${
-                size === "md" ? "h-[100px]" : size === "sm" ? "h-[70px]" : ""
-              }`}
+              className={`hover:scale-110 duration-300 w-full object-cover aspect-video`}
               src={getImageUrl(data?.meta.featured_image)}
               alt={data?.meta.featured_image.imageCaption}
             />
