@@ -20,20 +20,18 @@ export function ItemCardHorizontal({
   className,
   Link,
 }: ItemCardHorizontalProps) {
-  const fontSize = `${
-    size === "lg"
-      ? "text-4xl leading-[46.5px]"
-      : size === "sm"
+  const fontSize = `leading-[110%] ${size === "lg"
+    ? "text-4xl"
+    : size === "sm"
       ? "text-lg pl-2.5"
       : size === "md"
-      ? "text-xl leading-none"
-      : ""
-  }`;
+        ? "text-xl"
+        : ""
+    }`;
   return (
     <div
-      className={`flex ${className} ${showTitleBorderBig ? "border-t-[1px] leading-tight border-accent" : ""} ${
-        size === "lg" ? "gap-x-6" : size === "md" ? "gap-x-2" : ""
-      }`}
+      className={`flex ${className} ${showTitleBorderBig ? "border-t border-accent" : ""} ${size === "lg" ? "gap-x-6" : ""
+        }`}
     >
       <div
         className={`${size === "lg" ? "w-4/12" : size === "md" ? "w-7/12" : size === "sm" ? "w-7/12" : ""}   
@@ -42,9 +40,8 @@ export function ItemCardHorizontal({
         {Link ? (
           <Link className="" href={getNewsUrl(data)}>
             <h2
-              className={`${fontSize} ${
-                showTitleBorderSmall ? "border-t-[3px] leading-tight border-accent pt-2" : ""
-              } hover:text-accent dark:hover:text-accent-light duration-150`}
+              className={`pl-2 ${fontSize} ${showTitleBorderSmall ? "border-t-[3px] border-accent" : ""
+                } ${showTitleBorderBig || showTitleBorderSmall ? "pt-2" : ""} hover:text-accent dark:hover:text-accent-light duration-150`}
             >
               {data?.title}
             </h2>
@@ -52,22 +49,20 @@ export function ItemCardHorizontal({
         ) : (
           <a href={getNewsUrl(data)}>
             <h2
-              className={`${fontSize} ${
-                showTitleBorderSmall ? "border-t-[3px] leading-tight border-accent pt-2" : ""
-              } hover:text-accent dark:hover:text-accent-light duration-150`}
+              className={`pl-2 ${fontSize} ${showTitleBorderSmall ? "border-t-[3px] border-accent" : ""
+                } ${showTitleBorderBig || showTitleBorderSmall ? "pt-2" : ""} hover:text-accent dark:hover:text-accent-light duration-150`}
             >
               {data?.title}
             </h2>
           </a>
         )}
 
-        {showIntro && <p className="mt-4 text-xl dark:text-[#bebdbd] text-[#727272]">{data?.meta.intro}</p>}
+        {showIntro && <p className="mt-4 text-xl leading-[110%] dark:text-[#bebdbd] text-[#727272]">{data?.meta.intro}</p>}
       </div>
 
       <div
-        className={`overflow-hidden ${
-          size === "lg" ? "w-8/12" : size === "md" ? "w-5/12" : size === "sm" ? "w-5/12" : ""
-        }`}
+        className={`overflow-hidden ${size === "lg" ? "w-8/12" : size === "md" ? "w-5/12" : size === "sm" ? "w-5/12" : ""
+          }`}
       >
         {Link ? (
           <Link href={getNewsUrl(data)}>

@@ -85,9 +85,9 @@ export default async function NewsDetails({ params }) {
         />
         <h1 className="text-7xl my-10">{detailsData?.story.title}</h1>
 
-        <div className="grid grid-cols-7 gap-x-10 gap-y-11">
+        <div className="grid grid-cols-4 gap-x-10 gap-y-11">
           {/* ====== row 1 ===== */}
-          <div className="flex flex-col col-span-2">
+          <div className="flex flex-col">
             <h3 className="text-xl font-montserrat">{detailsData?.story.meta.intro}</h3>
             <div className="border-t mt-10 pt-2 dark:border-dark-300">
               <SocialShare shareLink={link_url} />
@@ -96,7 +96,7 @@ export default async function NewsDetails({ params }) {
               <ProfileCard data={detailsData?.story.authors[0]} updatedTime={detailsData?.story.updated_at} />
             </div>
           </div>
-          <div className="col-span-5">
+          <div className="col-span-3">
             <ImagePreview url={getImageUrl(detailsData?.story.meta.featured_image)} alt={detailsData?.story.title} />
             {/* <img
               className="w-full"
@@ -107,9 +107,9 @@ export default async function NewsDetails({ params }) {
           </div>
 
           {/* ======== row 2 ======= */}
-          <div className="col-span-2">
+          <div>
             <img className="my-10 mx-auto" src="/ads/SIBL_Profit_300x250.gif" alt="Ads" />
-            <div>
+            <div className="sticky top-[100px]">
               <AccentHeader
                 header={`more from ${detailsData?.story.categories[0].name}`}
                 color={detailsData?.story.categories[0].color_code}
@@ -123,12 +123,13 @@ export default async function NewsDetails({ params }) {
                   size="sm"
                 />
               ))}
+              <img className="my-10 mx-auto" src="/ads/SIBL_Profit_300x250.gif" alt="Ads" />
             </div>
-            <img className="my-10 mx-auto sticky top-[80px]" src="/ads/SIBL_Profit_300x250.gif" alt="Ads" />
+
           </div>
-          <div className="col-span-3">
+          <div className="col-span-2">
             <div
-              className="text-2xl leading-[30px] [&>p]:mt-8"
+              className="text-2xl leading-[110%] [&>p]:mt-8"
               dangerouslySetInnerHTML={{ __html: detailsData?.story.content }}
             ></div>
             <div className="my-10 border-t border-b dark:border-dark-300 py-4 flex gap-x-4 items-center">
@@ -159,17 +160,17 @@ export default async function NewsDetails({ params }) {
 
             <div>
               <AccentHeader header="related news" color="#8E7581" />
-              <SquareGrid data={latestNews?.data.slice(10, 16)} size="sm" gridCols={3} />
+              <SquareGrid data={latestNews?.data.slice(10, 16)} size="md" gridCols={3} />
             </div>
           </div>
-          <div className="col-span-2">
+          <div>
             <img className="my-10 mx-auto" src="/ads/Global.gif" alt="Ads" />
             <div>
               <AccentHeader header="Latest" />
               <ItemList Link={Link} listType="circle" data={latestNews?.data.slice(0, 5)} />
             </div>
-            <img className="my-10 mx-auto" src="/ads/union-bank-ad.gif" alt="Ads" />
-            <div>
+            <div className="sticky top-[100px]">
+              <img className="my-10 mx-auto" src="/ads/union-bank-ad.gif" alt="Ads" />
               <AccentHeader header="Most Viewed" color="#119F9F" />
               <ItemList Link={Link} data={latestNews?.data.slice(14, 22)} listType="number" />
             </div>

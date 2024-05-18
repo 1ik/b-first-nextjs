@@ -20,7 +20,7 @@ export function BlockNews({ data, sectionHeader, ads1, ads2, className, Link }: 
         <div className="w-[60%] flex flex-col justify-between">
           {data?.slice(1, 5).map((item: any, index: number) => (
             <div key={index}>
-              <ItemCardHorizontal Link={Link} showTitleBorderSmall data={item} size="sm" />
+              <ItemCardHorizontal Link={Link} showTitleBorderSmall data={item} size="md" />
               {index + 1 < 4 && <hr className="mt-4 dark:border-dark-300" />}
             </div>
           ))}

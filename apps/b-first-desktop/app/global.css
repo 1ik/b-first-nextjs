@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 .desktop-container {
-  @apply max-w-[1400px] px-[40px] mx-auto;
+  @apply max-w-[1400px] px-[30px] mx-auto;
 }

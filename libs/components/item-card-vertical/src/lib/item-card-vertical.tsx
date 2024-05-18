@@ -19,7 +19,7 @@ export function ItemCardVertical({
   className,
   Link,
 }: ItemCardVerticalProps) {
-  const fontSize = size === "lg" ? "text-4xl" : size === "md" ? "text-[23px]" : size === "sm" ? "text-[19px]" : "";
+  const fontSize = size === "lg" ? "text-4xl" : size === "md" ? "text-[20px] leading-5" : size === "sm" ? "text-[19px]" : "";
 
   return (
     <div className={`${className && className}`}>
