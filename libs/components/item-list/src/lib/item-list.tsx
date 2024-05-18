@@ -51,7 +51,7 @@ export function ItemList({
           <Link href={getNewsUrl(item)}>
             <li
               key={item.id}
-              className={`hover:text-accent dark:hover:text-accent-light duration-200 text-xl ${
+              className={`hover:text-accent dark:hover:text-accent-light duration-200 text-[22px] leading-[110%] ${
                 data?.length !== index + 1 ? "border-b border-[#D8D8D8] dark:border-dark-300" : ""
               } pb-4 mb-4 ${listType === "number" && "flex items-center"}`}
             >
@@ -73,7 +73,7 @@ export function ItemList({
           <a href={getNewsUrl(item)}>
             <li
               key={item.id}
-              className={`hover:text-accent dark:hover:text-accent-light duration-200 text-xl ${
+              className={`hover:text-accent dark:hover:text-accent-light duration-200 text-[22px] leading-[110%] ${
                 data?.length !== index + 1 ? "border-b border-[#D8D8D8] dark:border-dark-300" : ""
               } pb-4 mb-4 ${listType === "number" && "flex items-center"}`}
             >
