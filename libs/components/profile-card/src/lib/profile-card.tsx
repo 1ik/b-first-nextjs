@@ -7,14 +7,14 @@ export interface ProfileCardProps {
 
 export function ProfileCard({ data, updatedTime }: ProfileCardProps) {
   return (
-    <div className="bg-[#F2F2F2] p-8 dark:bg-dark-300">
+    <div className="bg-[#F2F2F2] pl-4 py-4 dark:bg-dark-300">
       <img
-        className="h-[120px] w-[120px] rounded-full object-center"
-        src="https://placehold.co/120x120"
+        className="h-[100px] w-[100px] rounded-full object-center"
+        src="https://thumbs.dreamstime.com/b/businessman-icon-vector-male-avatar-profile-image-profile-businessman-icon-vector-male-avatar-profile-image-182095609.jpg"
         alt="profile"
       />
-      <h3 className="text-2xl mt-4 mb-3">{`By ${data?.name}`}</h3>
-      <p className="font-montserrat text-lg">{`Updated ${moment(updatedTime)
+      <h3 className="text-[22px] mt-4 mb-3">{`By ${data?.name}`}</h3>
+      <p className="font-montserrat text-sm">{`Updated ${moment(updatedTime)
         .tz("Asia/Dhaka")
         .format("h:mm A, ddd MMM Do, YYYY")}`}</p>
     </div>

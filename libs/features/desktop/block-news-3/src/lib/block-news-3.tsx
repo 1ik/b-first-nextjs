@@ -11,7 +11,7 @@ export interface BlockNews3Props {
   Link?: any;
 }
 
-export async function BlockNews3({ data, Link, sectionHeader, headerColor, className, adsUrl }: BlockNews3Props) {
+export function BlockNews3({ data, Link, sectionHeader, headerColor, className, adsUrl }: BlockNews3Props) {
   return (
     <div className={`${className}`}>
       {sectionHeader && <AccentHeader className="mb-4" header={sectionHeader} color={headerColor} />}

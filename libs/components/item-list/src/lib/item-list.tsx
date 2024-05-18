@@ -25,7 +25,7 @@ export function ItemList({
           {Link ? (
             <Link href={getNewsUrl(data?.[0])}>
               <img
-                className="hover:scale-110 duration-300 h-[220px] object-cover w-full mb-5"
+                className="hover:scale-110 duration-300 aspect-video object-cover w-full mb-5"
                 src={getImageUrl(data?.[0].meta.featured_image)}
                 alt={data?.[0].meta.image_caption}
               />
@@ -33,7 +33,7 @@ export function ItemList({
           ) : (
             <a href={getNewsUrl(data?.[0])}>
               <img
-                className="hover:scale-110 duration-300 h-[220px] object-cover w-full mb-5"
+                className="hover:scale-110 duration-300 aspect-video object-cover w-full mb-5"
                 src={getImageUrl(data?.[0].meta.featured_image)}
                 alt={data?.[0].meta.image_caption}
               />
@@ -42,7 +42,7 @@ export function ItemList({
         </div>
       )}
       {showDate && (
-        <h3 className="bg-[#FDC269] text-black font-montserrat font-semibold text-2xl px-8 py-1.5 w-fit my-3">
+        <h3 className="bg-[#FDC269] text-black font-montserrat font-semibold text-[22px] px-8 py-1.5 w-fit my-3">
           {moment().format("D MMMM")}
         </h3>
       )}
@@ -51,17 +51,17 @@ export function ItemList({
           <Link href={getNewsUrl(item)}>
             <li
               key={item.id}
-              className={`hover:text-accent dark:hover:text-accent-light duration-200 text-2xl ${
+              className={`hover:text-accent dark:hover:text-accent-light duration-200 text-[22px] leading-[110%] ${
                 data?.length !== index + 1 ? "border-b border-[#D8D8D8] dark:border-dark-300" : ""
-              } pb-4 mb-4 ${listType === "number" && "flex items-center last:border-b-0"}`}
+              } pb-4 mb-4 ${listType === "number" && "flex items-center"}`}
             >
               {listType === "number" && (
-                <span className="text-[#D8D8D8] block w-24 flex-shrink-0 dark:text-[#313233] font-semibold font-montserrat text-[100px] py-8">
+                <span className="text-[#D8D8D8] block w-20 flex-shrink-0 dark:text-[#313233] font-semibold font-montserrat text-[90px] py-8">
                   {index + 1}
                 </span>
               )}
               {listType === "circle" && (
-                <span className="text-[#D8D8D8] dark:text-[#313233] leading-[0px] font-semibold font-montserrat text-[100px] pr-4">
+                <span className="text-[#D8D8D8] dark:text-[#313233] leading-[0px] font-semibold font-montserrat text-7xl pr-4">
                   .
                 </span>
               )}
@@ -73,17 +73,17 @@ export function ItemList({
           <a href={getNewsUrl(item)}>
             <li
               key={item.id}
-              className={`hover:text-accent dark:hover:text-accent-light duration-200 text-2xl ${
+              className={`hover:text-accent dark:hover:text-accent-light duration-200 text-[22px] leading-[110%] ${
                 data?.length !== index + 1 ? "border-b border-[#D8D8D8] dark:border-dark-300" : ""
-              } pb-4 mb-4 ${listType === "number" && "flex items-center last:border-b-0"}`}
+              } pb-4 mb-4 ${listType === "number" && "flex items-center"}`}
             >
               {listType === "number" && (
-                <span className="text-[#D8D8D8] block w-24 flex-shrink-0 dark:text-[#313233] font-semibold font-montserrat text-[100px] py-8">
+                <span className="text-[#D8D8D8] block w-20 flex-shrink-0 dark:text-[#313233] font-semibold font-montserrat text-[90px] py-8">
                   {index + 1}
                 </span>
               )}
               {listType === "circle" && (
-                <span className="text-[#D8D8D8] dark:text-[#313233] leading-[0px] font-semibold font-montserrat text-[100px] pr-4">
+                <span className="text-[#D8D8D8] dark:text-[#313233] leading-[0px] font-semibold font-montserrat text-7xl pr-4">
                   .
                 </span>
               )}

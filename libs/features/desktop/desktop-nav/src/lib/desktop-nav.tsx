@@ -121,7 +121,7 @@ export function DesktopNav({
     <nav ref={navRef} className="flex flex-col gap-y-5">
       <div className="bg-[#f6efef] dark:bg-dark-500">
         <div className="desktop-container flex justify-between items-center">
-          <p>{moment().format("dddd, MMMM Do, YYYY")}</p>
+          <p className="text-xl">{moment().format("dddd, MMMM Do, YYYY")}</p>
           <div className="flex gap-x-10">
             {/* ====== theme toggle button ====== */}
             <div
