@@ -14,18 +14,18 @@ export interface BlockNewsProps {
 
 export function BlockNews({ data, sectionHeader, ads1, ads2, className, Link }: BlockNewsProps) {
   return (
-    <div className={`grid grid-cols-5 gap-5 ${className}`}>
+    <div className={`grid grid-cols-4 gap-5 ${className}`}>
       <ItemCardVertical Link={Link} className="col-span-2" showImageBorder data={data?.[0]} size="lg" />
 
-      <div className="flex flex-col justify-between">
+      <div className="flex flex-col  justify-between">
         {data?.slice(1, 5).map((item: any, index: number) => (
           <div key={index}>
-            <ItemCardHorizontal Link={Link} showTitleBorder data={item} size="sm" />
+            <ItemCardHorizontal Link={Link} showTitleBorderSmall data={item} size="sm" />
             {index + 1 < 4 && <hr className="mt-4 dark:border-dark-300" />}
           </div>
         ))}
       </div>
-      <div className="flex flex-col gap-y-3">
+      {/* <div className="flex flex-col gap-y-3">
         {Link ? (
           <Link className="flex-grow overflow-hidden" href={getNewsUrl(data?.[6])}>
             <img
@@ -51,7 +51,7 @@ export function BlockNews({ data, sectionHeader, ads1, ads2, className, Link }: 
             <a href={getNewsUrl(data?.[6])}>{data?.[6].title}</a>
           )}
         </h3>
-      </div>
+      </div> */}
       <div className="flex flex-col gap-y-3">
         <img src={ads1} alt="Ads" />
         <img src={ads2} alt="Ads" />
