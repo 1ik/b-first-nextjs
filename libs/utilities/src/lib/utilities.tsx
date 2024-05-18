@@ -10,7 +10,7 @@ export const getImageUrl = (path: string, w?: number, h?: number, q?: number) =>
   }
 
   const baseUrl = `https://images.bangladeshfirst.com`;
-  return baseUrl + `/resize?width=${w}&height=${h}&format=webp&quality=${q}&path=${path}`;
+  return baseUrl + `/smartcrop?width=${w}&height=${h}&format=webp&quality=${q}&path=${path}`;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
