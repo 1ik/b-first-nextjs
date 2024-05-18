@@ -89,10 +89,10 @@ export default async function NewsDetails({ params }) {
           {/* ====== row 1 ===== */}
           <div className="flex flex-col col-span-2">
             <h3 className="text-xl font-montserrat">{detailsData?.story.meta.intro}</h3>
-            <div className="border-t mt-6 pt-2 dark:border-dark-300">
+            <div className="border-t mt-10 pt-2 dark:border-dark-300">
               <SocialShare shareLink={link_url} />
             </div>
-            <div className="border-t mt-10 dark:border-dark-300">
+            <div className="mt-10">
               <ProfileCard data={detailsData?.story.authors[0]} updatedTime={detailsData?.story.updated_at} />
             </div>
           </div>
