@@ -1,5 +1,7 @@
+"use client";
 import Link from "next/link";
 import Navbar from "./components/Navbar/Navbar";
+import { Button } from "@bfirst/material-tailwind";
 
 export default function NotFound() {
   return (
@@ -15,11 +17,13 @@ export default function NotFound() {
           Sorry! The page you are looking for could not be found.
         </p>
         <p className="text-xl mt-1 mb-4">You can return to our homepage. Thanks for your understanding.</p>
-        <Link
-          className="border border-accent text-accent px-6 py-2.5 text-xl font-medium rounded-md hover:text-white hover:bg-accent duration-200"
-          href="/"
-        >
-          Return Home
+        <Link href="/">
+          <Button
+            size="lg"
+            className="border border-accent text-accent px-6 py-2.5 text-xl font-medium rounded-md hover:text-white hover:bg-accent duration-200"
+          >
+            Return Home
+          </Button>
         </Link>
       </div>
     </>

@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import Navbar from "./components/Navbar/Navbar";
+import { Button } from "@bfirst/material-tailwind";
 
 export default function Error({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
   useEffect(() => {
@@ -16,12 +17,14 @@ export default function Error({ error, reset }: { error: Error & { digest?: stri
         <div>
           <p className="capitalize font-black text-[150px] text-accent tracking-[10px]">Oops!</p>
           <h3 className="font-montserrat text-2xl mb-4">Something went wrong!</h3>
-          <button
-            className="font-montserrat bg-accent px-4 py-2 text-base rounded-sm text-white"
+
+          <Button
             onClick={() => reset()}
+            size="lg"
+            className="font-montserrat border border-accent text-accent px-6 py-2.5 text-lg font-medium rounded-md hover:text-white hover:bg-accent duration-200"
           >
             Try again
-          </button>
+          </Button>
         </div>
       </div>
     </>
