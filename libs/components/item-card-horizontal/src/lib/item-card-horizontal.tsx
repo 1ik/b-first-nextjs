@@ -22,9 +22,9 @@ export function ItemCardHorizontal({
 }: ItemCardHorizontalProps) {
   const fontSize = `${
     size === "lg"
-      ? "text-5xl leading-[46.5px]"
+      ? "text-4xl leading-[46.5px]"
       : size === "sm"
-      ? "text-2xl pl-2.5"
+      ? "text-lg pl-2.5"
       : size === "md"
       ? "text-xl leading-none"
       : ""
@@ -32,7 +32,7 @@ export function ItemCardHorizontal({
   return (
     <div
       className={`flex ${className} ${showTitleBorderBig ? "border-t-[1px] leading-tight border-accent" : ""} ${
-        size === "lg" ? "gap-x-8" : size === "md" ? "gap-x-2" : ""
+        size === "lg" ? "gap-x-6" : size === "md" ? "gap-x-2" : ""
       }`}
     >
       <div
@@ -61,7 +61,7 @@ export function ItemCardHorizontal({
           </a>
         )}
 
-        {showIntro && <p className="mt-4 text-[22px] dark:text-[#bebdbd] text-[#727272]">{data?.meta.intro}</p>}
+        {showIntro && <p className="mt-4 text-xl dark:text-[#bebdbd] text-[#727272]">{data?.meta.intro}</p>}
       </div>
 
       <div

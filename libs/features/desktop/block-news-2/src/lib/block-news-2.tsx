@@ -12,13 +12,13 @@ export interface BlockNews2Props {
 export function BlockNews2({ data, Link, sectionHeader, headerColor, className, adsUrl }: BlockNews2Props) {
   return (
     <div className={`${className}`}>
-      <div className={`grid grid-cols-3 gap-5`}>
+      <div className={`grid grid-cols-3 gap-x-4 gap-y-6`}>
         <div className="col-span-3 flex flex-col gap-y-4">
           {sectionHeader && <AccentHeader header={sectionHeader} color={headerColor} />}
           <ItemCardHorizontal Link={Link} data={data?.[0]} size="lg" showIntro imageSide="right" />
         </div>
         {data?.slice(1, 7).map((item: any) => (
-          <ItemCardHorizontal Link={Link} key={item.id} data={item} showTitleBorder size="sm" />
+          <ItemCardHorizontal Link={Link} key={item.id} data={item} showTitleBorderBig size="sm" />
         ))}
       </div>
       {adsUrl && <img className="mx-auto mt-28" src={adsUrl} alt="Ads" />}
