@@ -54,9 +54,8 @@ export async function generateMetadata({ params }): Promise<Metadata> {
 }
 
 export default async function NewsDetails({ params }) {
-  //! NEED TO CHANGE BASE URL TO HTTPS://BANGLADESHFIRST.COM
 
-  const link_url = `http://localhost:4200/news/${params.id}/${params.slug}`;
+  const link_url = `http://bangladeshfirst.com/news/${params.id}/${params.slug}`;
 
   const [detailsData, trendingTopics, latestNews] = await Promise.all([
     getData(`story/details/${params.id}`),
@@ -86,10 +85,18 @@ export default async function NewsDetails({ params }) {
         />
         <h1 className="text-7xl my-10">{detailsData?.story.title}</h1>
 
-        <div className="grid grid-cols-4 gap-x-10 gap-y-11">
+        <div className="grid grid-cols-7 gap-x-10 gap-y-11">
           {/* ====== row 1 ===== */}
-          <h3 className="text-2xl self-end font-montserrat">{detailsData?.story.meta.intro}</h3>
-          <div className="col-span-3">
+          <div className="flex flex-col col-span-2">
+            <h3 className="text-xl font-montserrat">{detailsData?.story.meta.intro}</h3>
+            <div className="border-t mt-6 pt-2 dark:border-dark-300">
+              <SocialShare shareLink={link_url} />
+            </div>
+            <div className="border-t mt-10 dark:border-dark-300">
+              <ProfileCard data={detailsData?.story.authors[0]} updatedTime={detailsData?.story.updated_at} />
+            </div>
+          </div>
+          <div className="col-span-5">
             <ImagePreview url={getImageUrl(detailsData?.story.meta.featured_image)} alt={detailsData?.story.title} />
             {/* <img
               className="w-full"
@@ -100,11 +107,7 @@ export default async function NewsDetails({ params }) {
           </div>
 
           {/* ======== row 2 ======= */}
-          <div>
-            <div className="pb-8 mb-8 border-b dark:border-dark-300">
-              <ProfileCard data={detailsData?.story.authors[0]} updatedTime={detailsData?.story.updated_at} />
-            </div>
-            <SocialShare shareLink={link_url} />
+          <div className="col-span-2">
             <img className="my-10 mx-auto" src="/ads/SIBL_Profit_300x250.gif" alt="Ads" />
             <div>
               <AccentHeader
@@ -123,7 +126,7 @@ export default async function NewsDetails({ params }) {
             </div>
             <img className="my-10 mx-auto sticky top-[80px]" src="/ads/SIBL_Profit_300x250.gif" alt="Ads" />
           </div>
-          <div className="col-span-2">
+          <div className="col-span-3">
             <div
               className="text-2xl leading-[30px] [&>p]:mt-8"
               dangerouslySetInnerHTML={{ __html: detailsData?.story.content }}
@@ -143,21 +146,23 @@ export default async function NewsDetails({ params }) {
             </div>
             <img className="my-10 mx-auto" src="/ads/banner_ibbl.gif" alt="Ads" />
 
-            <div className="flex gap-x-2 items-start py-8 my-16 border-t border-b dark:border-dark-300">
+            {/* ======== Comment section ======== */}
+
+            {/* <div className="flex gap-x-2 items-start py-8 my-16 border-t border-b dark:border-dark-300">
               <img src="https://placehold.co/64x64" alt="user image" />
               <textarea
                 rows={4}
                 className="w-full border dark:border-dark-300 outline-none p-2 placeholder:font-montserrat"
                 placeholder="Leave a comment"
               ></textarea>
-            </div>
+            </div> */}
 
             <div>
               <AccentHeader header="related news" color="#8E7581" />
               <SquareGrid data={latestNews?.data.slice(10, 16)} size="sm" gridCols={3} />
             </div>
           </div>
-          <div>
+          <div className="col-span-2">
             <img className="my-10 mx-auto" src="/ads/Global.gif" alt="Ads" />
             <div>
               <AccentHeader header="Latest" />
