@@ -12,6 +12,7 @@ import ImagePreview from "../../../../components/ImagePreview/ImagePreview";
 import Navbar from "../../../../components/Navbar/Navbar";
 import TrendingTopics from "../../../../components/TrendingTopics/TrendingTopics";
 import { getData } from "../../../../utils/dataFetch";
+import { notFound } from "next/navigation";
 
 export async function generateMetadata({ params }): Promise<Metadata> {
   const data = await getData(`story/details/${params.id}`);
@@ -54,7 +55,6 @@ export async function generateMetadata({ params }): Promise<Metadata> {
 }
 
 export default async function NewsDetails({ params }) {
-
   const link_url = `http://bangladeshfirst.com/news/${params.id}/${params.slug}`;
 
   const [detailsData, trendingTopics, latestNews] = await Promise.all([
@@ -62,6 +62,8 @@ export default async function NewsDetails({ params }) {
     getData("trendy-topics"),
     getData("latest/stories"),
   ]);
+
+  if (!detailsData) return notFound();
 
   return (
     <>
@@ -125,7 +127,6 @@ export default async function NewsDetails({ params }) {
               ))}
               <img className="my-10 mx-auto" src="/ads/SIBL_Profit_300x250.gif" alt="Ads" />
             </div>
-
           </div>
           <div className="col-span-2">
             <div
