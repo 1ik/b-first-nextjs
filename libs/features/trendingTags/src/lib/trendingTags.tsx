@@ -55,12 +55,7 @@ export function TrendingTags() {
 
   const handleSubmit = async function (e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (featuredStories.length !== 10) {
-      toast.warning("Total Trending Topic must be 10", {
-        position: "top-center",
-      });
-      return;
-    }
+ 
     const newTrendingTopicId = {
       tag_ids: featuredStories.map((story) => (story as { id: number }).id),
     };
