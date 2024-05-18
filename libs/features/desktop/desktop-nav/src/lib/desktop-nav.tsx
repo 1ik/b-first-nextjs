@@ -240,7 +240,9 @@ export function DesktopNav({
               >
                 More <IoIosArrowDown />
                 <ul
-                  className={`px-4 z-[100] -translate-y-2 rounded-md py-6 absolute top-10 -right-6  bg-white dark:bg-dark-300 shadow-lg shadow-black/20 dark:shadow-black/80 duration-500 origin-top scale-y-0 group-hover:scale-y-110 flex flex-col gap-y-1.5`}
+                  className={`px-4 z-[100] -translate-y-2 rounded-md py-6 absolute top-10 -right-6 ${
+                    isSticky ? "bg-white/90" : "bg-white"
+                  } dark:bg-dark-400/90 shadow-lg shadow-black/20 dark:shadow-black/80 duration-500 origin-top scale-y-0 group-hover:scale-y-110 flex flex-col gap-y-1.5`}
                 >
                   {_links.slice(8).map((link, index) => (
                     <li
