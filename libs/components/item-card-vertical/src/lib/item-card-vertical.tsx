@@ -27,9 +27,7 @@ export function ItemCardVertical({
         {Link ? (
           <Link href={getNewsUrl(data)}>
             <img
-              className={`hover:scale-110 duration-300 ${
-                size === "md" ? "h-[230px]" : size === "sm" ? "h-[160px]" : ""
-              } object-cover w-full`}
+              className={`hover:scale-110 duration-300 aspect-video object-cover w-full`}
               src={getImageUrl(data?.meta.featured_image)}
               alt={data?.meta.imageCaption}
             />
@@ -37,9 +35,7 @@ export function ItemCardVertical({
         ) : (
           <a href={getNewsUrl(data)}>
             <img
-              className={`hover:scale-110 duration-300 ${
-                size === "md" ? "h-[230px]" : size === "sm" ? "h-[160px]" : ""
-              } object-cover w-full`}
+              className={`hover:scale-110 duration-300 aspect-video object-cover w-full`}
               src={getImageUrl(data?.meta.featured_image)}
               alt={data?.meta.imageCaption}
             />

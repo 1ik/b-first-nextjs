@@ -25,7 +25,7 @@ export function ItemList({
           {Link ? (
             <Link href={getNewsUrl(data?.[0])}>
               <img
-                className="hover:scale-110 duration-300 h-[220px] object-cover w-full mb-5"
+                className="hover:scale-110 duration-300 aspect-video object-cover w-full mb-5"
                 src={getImageUrl(data?.[0].meta.featured_image)}
                 alt={data?.[0].meta.image_caption}
               />
@@ -33,7 +33,7 @@ export function ItemList({
           ) : (
             <a href={getNewsUrl(data?.[0])}>
               <img
-                className="hover:scale-110 duration-300 h-[220px] object-cover w-full mb-5"
+                className="hover:scale-110 duration-300 aspect-video object-cover w-full mb-5"
                 src={getImageUrl(data?.[0].meta.featured_image)}
                 alt={data?.[0].meta.image_caption}
               />
