@@ -19,7 +19,6 @@ export default function trendingTags() {
       </HCF.Header>
       <HCF.Content>
         <TrendingTags />
-        
       </HCF.Content>
     </HCF>
   );

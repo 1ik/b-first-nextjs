@@ -14,8 +14,8 @@ const dropTarget = (
 export function TrendingTags() {
   const [search, setSearch] = useState("");
   const { data: searchedNews } = useGet(`api/v1/tags?name=${search}`);
-  const { data: TendingList, isSuccess: trendingLoadSuccess } = useGet(`api/v1/public/trendy-topics`);
-  const [featuredStories, setFeaturedStories] = useState([]);
+  const { data: TrendingTagsList, isSuccess: trendingLoadSuccess } = useGet(`api/v1/public/trendy-topics`);
+  const [trendingTopic, setTrendingTopic] = useState([]);
   const [showConfirmModalFor, setShowConfirmModalFor] = useState<number>();
   const { request, isSuccess: featuredSaveSuccess } = usePost(`api/v1/trendy-topic/create`);
 
@@ -27,7 +27,7 @@ export function TrendingTags() {
   };
 
   const onSortEnd = (oldIndex: number, newIndex: number) => {
-    setFeaturedStories((array: any[]) => move(array, oldIndex, newIndex) as never);
+    setTrendingTopic((array: any[]) => move(array, oldIndex, newIndex) as never);
   };
 
   let debounce: string | number | NodeJS.Timeout | undefined;
@@ -38,38 +38,37 @@ export function TrendingTags() {
     }, 500);
   };
 
-  const handleAddFeaturedStories = function (news: any) {
+  const handleAddTrendingTopic = function (news: any) {
     if (!news) return;
-    if (featuredStories.length >= 10) {
+    if (trendingTopic.length >= 10) {
       toast.success("Last item removed and new one added", {
         position: "top-center",
       });
-      setFeaturedStories((cur) => {
+      setTrendingTopic((cur) => {
         const newList = cur.slice(0, -1);
         return [{ id: news.id, name: news.name, created_at: news.created_at }, ...newList] as never;
       });
-    } else
-      setFeaturedStories((cur) => [{ id: news.id, name: news.name, created_at: news.created_at }, ...cur] as never);
+    } else setTrendingTopic((cur) => [{ id: news.id, name: news.name, created_at: news.created_at }, ...cur] as never);
     setSearch("");
   };
 
   const handleSubmit = async function (e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
- 
+
     const newTrendingTopicId = {
-      tag_ids: featuredStories.map((story) => (story as { id: number }).id),
+      tag_ids: trendingTopic.map((story) => (story as { id: number }).id),
     };
 
     request(newTrendingTopicId);
   };
 
   const handleConfirm = (id: number) => {
-    setFeaturedStories((curr) => curr.filter((item) => (item as { id: number }).id !== id));
+    setTrendingTopic((curr) => curr.filter((item) => (item as { id: number }).id !== id));
     setShowConfirmModalFor(undefined);
     toast.dismiss();
     toast.success("List removed successfully", { position: "top-center" });
   };
-  const handleRemoveFeaturedStories = function (id: number) {
+  const handleRemoveTrendingTopic = function (id: number) {
     setShowConfirmModalFor(id);
   };
 
@@ -83,9 +82,9 @@ export function TrendingTags() {
 
   useEffect(() => {
     if (trendingLoadSuccess) {
-      setFeaturedStories([...TendingList.data] as never);
+      setTrendingTopic([...TrendingTagsList.data] as never);
     }
-  }, [TendingList, trendingLoadSuccess]);
+  }, [TrendingTagsList, trendingLoadSuccess]);
 
   return (
     <div className="p-5">
@@ -94,10 +93,10 @@ export function TrendingTags() {
         <div className="col-span-3">
           <TypeAheadSearch
             label="Type for Trending Topic"
-            items={searchedNews?.data.filter((sN: any) => !featuredStories.some((fN: any) => fN.id === sN.id))}
+            items={searchedNews?.data.filter((sN: any) => !trendingTopic.some((fN: any) => fN.id === sN.id))}
             onSearch={(s) => debounceSearch(() => setSearch(s))}
             itemsSelected={(i) => {
-              handleAddFeaturedStories(i);
+              handleAddTrendingTopic(i);
             }}
           />
         </div>
@@ -116,7 +115,7 @@ export function TrendingTags() {
 
           <div className="flex gap-x-2 mb-5">
             <div className="flex flex-col">
-              {TendingList?.data.map((_, index) => (
+              {trendingTopic.map((_, index) => (
                 <p className="flex-grow mt-6">{index + 1}</p>
               ))}
             </div>
@@ -126,7 +125,7 @@ export function TrendingTags() {
               className="flex flex-grow flex-col gap-y-2"
               draggedItemClassName="dragged"
             >
-              {featuredStories.map((item, index) => (
+              {trendingTopic.map((item, index) => (
                 <SortableItem key={(item as { id: number }).id}>
                   <div className="flex   justify-between items-center py-3 rounded-md ml-1 cursor-grab px-4 bg-gray-200  relative   max-[340px]:w-[260px] max-[360px]:w-[290px] max-[430px]:w-[330px] max-[530px]:w-[350px] sm:w-full ">
                     <div className="px-5 flex items-center justify-between w-full">
@@ -140,7 +139,7 @@ export function TrendingTags() {
                       <button
                         onClick={(e) => {
                           e.preventDefault();
-                          handleRemoveFeaturedStories((item as { id: number }).id);
+                          handleRemoveTrendingTopic((item as { id: number }).id);
                         }}
                         className="btn"
                       >
