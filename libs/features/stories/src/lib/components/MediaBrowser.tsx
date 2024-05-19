@@ -43,6 +43,7 @@ export default function MediaBrowser({
   const [selectedImage, setSelectedImage] = useState("");
   const [imageUploadTitle, setImageUploadTitle] = useState("");
   const [searchImageTitle, setSearchImageTitle] = useState("");
+  const [imageCaption, setImageCaption] = useState("");
 
   const { data: mediaImageData, isPending } = useGet(
     `api/v1/media-image-list?title=${searchImageTitle}&sort=desc&page=${currentPage}`
@@ -68,7 +69,6 @@ export default function MediaBrowser({
     setImageUploadTitle("");
     setSelectedImage("");
     setSelectedImageFile(null);
-
     handleImageSelect(data.data.url);
   };
 
@@ -76,7 +76,10 @@ export default function MediaBrowser({
     if (state.openFrom === "storyForm") onFeaturedImgUrl(path);
     if (state.openFrom === "textEditor") {
       tinymce.activeEditor?.insertContent(
-        `<img width="100%" src="https://images.bangladeshfirst.com/smartcrop?width=1600&height=900&format=webp&quality=85&path=${path}" alt=""/>`
+        `<div>
+          <img width="100%" src="https://images.bangladeshfirst.com/smartcrop?width=1600&height=900&format=webp&quality=85&path=${path}" alt=""/>
+          <h4>${imageCaption && imageCaption}</h4>
+        </div>`
       );
     }
     dispatch({ type: "setDialogOpen", payload: false });
@@ -141,11 +144,7 @@ export default function MediaBrowser({
             )}
 
             {state.openFrom === "textEditor" && (
-              <Input
-                {...register("imageCaption")}
-                defaultValue={defaultData?.story.meta.imageCaption}
-                label="Image Caption"
-              />
+              <Input onChange={(e) => setImageCaption(e.target.value)} label="Image Caption" />
             )}
 
             {activeTab === "library" && <Input onChange={handleImageSearch} label="Search" />}
