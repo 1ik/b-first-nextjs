@@ -20,7 +20,7 @@ export default function NotFound() {
         <Link href="/">
           <Button
             size="lg"
-            className="border border-accent text-accent px-6 py-2.5 text-xl font-medium rounded-md hover:text-white hover:bg-accent duration-200"
+            className="border bg-transparent border-accent text-accent px-6 py-2.5 text-xl font-medium rounded-md hover:text-white hover:bg-accent duration-200"
           >
             Return Home
           </Button>

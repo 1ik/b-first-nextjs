@@ -21,7 +21,7 @@ export default function Error({ error, reset }: { error: Error & { digest?: stri
           <Button
             onClick={() => reset()}
             size="lg"
-            className="font-montserrat border border-accent text-accent px-6 py-2.5 text-lg font-medium rounded-md hover:text-white hover:bg-accent duration-200"
+            className="font-montserrat border bg-transparent border-accent text-accent px-6 py-2.5 text-lg font-medium rounded-md hover:text-white hover:bg-accent duration-200"
           >
             Try again
           </Button>
