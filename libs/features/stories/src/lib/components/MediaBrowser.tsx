@@ -139,6 +139,15 @@ export default function MediaBrowser({
                 label="Image Caption"
               />
             )}
+
+            {state.openFrom === "textEditor" && (
+              <Input
+                {...register("imageCaption")}
+                defaultValue={defaultData?.story.meta.imageCaption}
+                label="Image Caption"
+              />
+            )}
+
             {activeTab === "library" && <Input onChange={handleImageSearch} label="Search" />}
           </div>
           <TabsBody>
@@ -204,14 +213,14 @@ export default function MediaBrowser({
                   </div>
                 )}
                 {value === "library" && (
-                  <div>
+                  <div className="mt-4">
                     <div>
                       {isPending ? (
                         <div className="md:h-72 h-[250px] w-full">
                           <Loader />
                         </div>
                       ) : (
-                        <div className="grid grid-cols-2 md:grid-cols-5 gap-x-6 gap-y-5 md:gap-y-0 md:h-72 h-[250px] w-full  overflow-y-scroll md:overflow-auto">
+                        <div className="grid grid-cols-2 md:grid-cols-5 gap-x-6 gap-y-5   md:gap-y-0 md:h-72 h-[250px] w-full  overflow-y-scroll md:overflow-auto">
                           {mediaImageData?.media_images.data.map((item: { url: string }, index: number) => {
                             return (
                               <img
