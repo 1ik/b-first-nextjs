@@ -29,6 +29,7 @@ export interface TypeAheadSearchProps {
   items: Entry[];
   onSearch: (search: string) => void;
   itemsSelected: (items: Entry | undefined) => void;
+  listHeight?: "available" | "contain";
 }
 
 const Item = forwardRef<HTMLDivElement, ItemProps & React.HTMLProps<HTMLDivElement>>(
@@ -54,11 +55,18 @@ const Item = forwardRef<HTMLDivElement, ItemProps & React.HTMLProps<HTMLDivEleme
   }
 );
 
-export function TypeAheadSearch({ label, items, onSearch, itemsSelected }: TypeAheadSearchProps) {
+export function TypeAheadSearch({
+  label,
+  items,
+  onSearch,
+  itemsSelected,
+  listHeight = "available",
+}: TypeAheadSearchProps) {
   const [open, setOpen] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [selectedItem, setSelectedItem] = useState<Entry>();
+  const [height, setHeight] = useState<number | null>(null);
 
   const listRef = useRef<Array<HTMLElement | null>>([]);
 
@@ -72,7 +80,7 @@ export function TypeAheadSearch({ label, items, onSearch, itemsSelected }: TypeA
         apply({ rects, availableHeight, elements }) {
           Object.assign(elements.floating.style, {
             width: `${rects.reference.width}px`,
-            maxHeight: `${availableHeight}px`,
+            maxHeight: `${listHeight === "available" ? availableHeight : ""}px`,
           });
         },
         padding: 10,
@@ -106,11 +114,18 @@ export function TypeAheadSearch({ label, items, onSearch, itemsSelected }: TypeA
   const containerRef = useRef(null);
 
   useEffect(() => {
+    if (containerRef.current) {
+      const containerHeight = (containerRef.current as { offsetHeight: number }).offsetHeight;
+      setHeight(containerHeight);
+    }
+  }, []);
+
+  useEffect(() => {
     itemsSelected(selectedItem);
   }, [selectedItem]);
-
+  console.log(height);
   return (
-    <div ref={containerRef} className="relative">
+    <div ref={containerRef} className="relative h-full">
       <Input
         label={label}
         {...getReferenceProps({
@@ -137,7 +152,7 @@ export function TypeAheadSearch({ label, items, onSearch, itemsSelected }: TypeA
         {open && (
           <FloatingFocusManager context={context} initialFocus={-1} visuallyHiddenDismiss>
             <div
-              className="absolute left-0 top-full z-[9999]"
+              className="absolute left-0 top-full z-[9999] shadow-xl p-3 rounded-md"
               {...getFloatingProps({
                 ref: refs.setFloating,
                 style: {
@@ -145,6 +160,7 @@ export function TypeAheadSearch({ label, items, onSearch, itemsSelected }: TypeA
                   background: "white",
                   color: "black",
                   overflowY: "auto",
+                  maxHeight: height || 500,
                 },
               })}
             >

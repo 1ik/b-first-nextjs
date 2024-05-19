@@ -46,12 +46,13 @@ export default function EmbedRelatedNews({ open, onOpen }: EmbedRelatedNewsProps
           itemsSelected={(i) => {
             handleEmbedNews(i?.id);
           }}
+          listHeight="contain"
         />
-        <p className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-xl opacity-80">
+        <p className="absolute w-full text-center top-1/2 -translate-y-1/2 text-xl opacity-80">
           Please search the news you want to embed.
         </p>
       </DialogBody>
-      <DialogFooter>
+      <DialogFooter className="mt-4">
         <Button onClick={() => onOpen(false)} className="ml-2" variant="outlined">
           Cancel
         </Button>
