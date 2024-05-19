@@ -137,7 +137,7 @@ export function TypeAheadSearch({ label, items, onSearch, itemsSelected }: TypeA
         {open && (
           <FloatingFocusManager context={context} initialFocus={-1} visuallyHiddenDismiss>
             <div
-              className="absolute left-0 top-full z-[999]"
+              className="absolute left-0 top-full z-[9999]"
               {...getFloatingProps({
                 ref: refs.setFloating,
                 style: {

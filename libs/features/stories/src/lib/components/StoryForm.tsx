@@ -7,6 +7,7 @@ import { useReducer, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import MediaBrowser from "./MediaBrowser";
+import EmbedRelatedNews from "./EmbedRelatedNews";
 
 export type Inputs = {
   shoulder?: string;
@@ -60,6 +61,7 @@ const reducer = function (curState: StateInterface, action: { type: string; payl
 export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }: StoryFormProps) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  const [isOpenEmbed, setIsOpenEmbed] = useState(false);
   const [error, setError] = useState({ authors: "", tags: "", categories: "", body: "", featuredImg: "" });
   const [body, setBody] = useState(defaultData?.story.content || "");
   const [featuredImgUrl, setFeaturedImgUrl] = useState(defaultData?.story.meta.featured_image || "");
@@ -172,6 +174,7 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
               <TinymceEditor
                 label="Body*"
                 dispatch={dispatch}
+                onOpenEmbed={setIsOpenEmbed}
                 onChange={(content) => {
                   setBody(content);
                   setError((cur) => ({ ...cur, body: "" }));
@@ -242,6 +245,9 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
                 />
               )}
             </div>
+
+            {/* ============== modal for related news embed ============ */}
+            <EmbedRelatedNews open={isOpenEmbed} onOpen={setIsOpenEmbed}/>
           </CardBody>
         </HCF.Content>
         <HCF.Footer className="flex w-full px-3 flex-row justify-end">
