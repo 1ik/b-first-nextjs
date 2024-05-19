@@ -143,11 +143,11 @@ export default function MediaBrowser({
           </div>
           <TabsBody>
             {data.map(({ value }) => (
-              <TabPanel className="h-[350px]" key={value} value={value}>
+              <TabPanel className="h-[400px]" key={value} value={value}>
                 {value === "upload" && (
                   <div className="flex gap-x-4">
                     <div className="flex flex-1 items-center justify-center flex-col gap-y-4">
-                      <div className="md:mt-5 mb-4">
+                      <div className="md:mt-5 md:mb-4">
                         <label className="md:w-80 flex flex-col items-center px-4 py-6 bg-[#e1e2e4] rounded-lg shadow-lg cursor-pointer hover:bg-blue hover:shadow-xl">
                           {selectedImage ? (
                             <img src={selectedImage} alt="selected file" />
@@ -192,7 +192,7 @@ export default function MediaBrowser({
                             type="file"
                           />
                         </label>
-                        <Typography className="my-4">
+                        <Typography className="my-2 md:my-4">
                           Allowed file type: <span className="font-bold">png, jpg, jpeg, gif</span>
                         </Typography>
                         {selectedImage && (
@@ -207,17 +207,17 @@ export default function MediaBrowser({
                   <div>
                     <div>
                       {isPending ? (
-                        <div className="h-72 w-full">
+                        <div className="md:h-72 h-[250px] w-full">
                           <Loader />
                         </div>
                       ) : (
-                        <div className="flex gap-5 flex-wrap items-start justify-center md:justify-between overflow-y-scroll md:overflow-auto md:h-72 h-48 w-full">
+                        <div className="grid grid-cols-2 md:grid-cols-5 gap-x-6 gap-y-5 md:gap-y-0 md:h-72 h-[250px] w-full  overflow-y-scroll md:overflow-auto">
                           {mediaImageData?.media_images.data.map((item: { url: string }, index: number) => {
                             return (
                               <img
                                 key={index}
                                 onClick={() => handleImageSelect(item.url)}
-                                className="w-[200px] aspect-video object-cover cursor-pointer"
+                                className="w-full aspect-video object-cover cursor-pointer"
                                 src={`https://images.bangladeshfirst.com/resize?width=1600&height=900&format=webp&quality=85&path=${item.url}`}
                                 alt={item.url}
                               />
