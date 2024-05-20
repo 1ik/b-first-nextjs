@@ -4,6 +4,7 @@ import { ItemCardHorizontal } from "@bfirst/components-item-card-horizontal";
 import { ItemList } from "@bfirst/components-item-list";
 import Image from "next/image";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import BreadCrumb from "../../components/BreadCrumb/BreadCrumb";
 import Navbar from "../../components/Navbar/Navbar";
 import TrendingTopics from "../../components/TrendingTopics/TrendingTopics";
@@ -16,6 +17,9 @@ export default async function CategoryPage({ params }) {
     getData(`categories/${category}/stories`),
     getData("latest/stories"),
   ]);
+
+  if (!categroyNews?.data.length) return notFound();
+
   return (
     <>
       <Navbar activeLink={`/${category}`} />
