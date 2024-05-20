@@ -1,7 +1,7 @@
 import { getImageUrl, getNewsUrl } from "@bfirst/utilities";
 export interface ItemCardHorizontalProps {
   data: any;
-  size?: "lg" | "sm" | "md";
+  size?: "sm" | "md" | "lg" | "xl";
   imageSide?: "left" | "right";
   showTitleBorderSmall?: boolean;
   showTitleBorderBig?: boolean;
@@ -12,7 +12,7 @@ export interface ItemCardHorizontalProps {
 
 export function ItemCardHorizontal({
   data,
-  size = "lg",
+  size = "xl",
   imageSide = "left",
   showTitleBorderSmall,
   showTitleBorderBig,
@@ -20,28 +20,37 @@ export function ItemCardHorizontal({
   className,
   Link,
 }: ItemCardHorizontalProps) {
-  const fontSize = `leading-[110%] ${size === "lg"
-    ? "text-4xl"
-    : size === "sm"
+  const fontSize = `leading-[110%] ${
+    size === "xl"
+      ? "text-4xl"
+      : size === "sm"
       ? "text-lg pl-2.5"
       : size === "md"
-        ? "text-xl"
-        : ""
-    }`;
+      ? "text-xl"
+      : size === "lg"
+      ? "text-4xl"
+      : ""
+  }`;
   return (
     <div
-      className={`flex ${className} ${showTitleBorderBig ? "border-t border-accent" : ""} ${size === "lg" ? "gap-x-6" : ""
-        }`}
+      className={`flex ${className} ${showTitleBorderBig ? "border-t border-accent" : ""} ${
+        size === "xl" ? "gap-x-6" : size === "lg" ? "gap-x-5" : ""
+      }`}
     >
       <div
-        className={`${size === "lg" ? "w-4/12" : size === "md" ? "w-7/12" : size === "sm" ? "w-7/12" : ""}   
+        className={`${
+          size === "xl" ? "w-4/12" : size === "md" ? "w-7/12" : size === "sm" ? "w-7/12" : size === "lg" ? "w-6/12" : ""
+        }   
           ${imageSide === "left" ? "order-last" : imageSide === "right" ? "order-first" : ""}`}
       >
         {Link ? (
           <Link className="" href={getNewsUrl(data)}>
             <h2
-              className={`pl-2 ${fontSize} ${showTitleBorderSmall ? "border-t-[3px] border-accent" : ""
-                } ${showTitleBorderBig || showTitleBorderSmall ? "pt-2" : ""} hover:text-accent dark:hover:text-accent-light duration-150`}
+              className={`${size === "lg" ? "pl-0" : "pl-2"} ${fontSize} ${
+                showTitleBorderSmall ? "border-t-[3px] border-accent" : ""
+              } ${
+                showTitleBorderBig || showTitleBorderSmall ? "pt-2" : ""
+              } hover:text-accent dark:hover:text-accent-light duration-150`}
             >
               {data?.title}
             </h2>
@@ -49,20 +58,32 @@ export function ItemCardHorizontal({
         ) : (
           <a href={getNewsUrl(data)}>
             <h2
-              className={`pl-2 ${fontSize} ${showTitleBorderSmall ? "border-t-[3px] border-accent" : ""
-                } ${showTitleBorderBig || showTitleBorderSmall ? "pt-2" : ""} hover:text-accent dark:hover:text-accent-light duration-150`}
+              className={`${size === "lg" ? "pl-0" : "pl-2"} ${fontSize} ${
+                showTitleBorderSmall ? "border-t-[3px] border-accent" : ""
+              } ${
+                showTitleBorderBig || showTitleBorderSmall ? "pt-2" : ""
+              } hover:text-accent dark:hover:text-accent-light duration-150`}
             >
               {data?.title}
             </h2>
           </a>
         )}
 
-        {showIntro && <p className="mt-4 text-xl leading-[110%] dark:text-[#bebdbd] text-[#727272]">{data?.meta.intro}</p>}
+        {showIntro && (
+          <p
+            className={`mt-4 leading-[110%] dark:text-[#bebdbd] text-[#727272] ${
+              size === "lg" ? "text-2xl" : "text-xl"
+            }`}
+          >
+            {data?.meta.intro}
+          </p>
+        )}
       </div>
 
       <div
-        className={`overflow-hidden ${size === "lg" ? "w-8/12" : size === "md" ? "w-5/12" : size === "sm" ? "w-5/12" : ""
-          }`}
+        className={`overflow-hidden ${
+          size === "xl" ? "w-8/12" : size === "md" ? "w-5/12" : size === "sm" ? "w-5/12" : size === "lg" ? "w-5/12" : ""
+        }`}
       >
         {Link ? (
           <Link href={getNewsUrl(data)}>
