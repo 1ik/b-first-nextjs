@@ -28,7 +28,7 @@ export function ItemCardHorizontal({
       : size === "md"
       ? "text-xl"
       : size === "lg"
-      ? "text-4xl"
+      ? "text-[28px]"
       : ""
   }`;
   return (
@@ -72,7 +72,7 @@ export function ItemCardHorizontal({
         {showIntro && (
           <p
             className={`mt-4 leading-[110%] dark:text-[#bebdbd] text-[#727272] ${
-              size === "lg" ? "text-2xl" : "text-xl"
+              size === "md" ? "text-lg pl-2" : "text-xl"
             }`}
           >
             {data?.meta.intro}
