@@ -1,7 +1,7 @@
 import { getImageUrl, getNewsUrl } from "@bfirst/utilities";
 export interface ItemCardHorizontalProps {
   data: any;
-  size?: "lg" | "sm" | "md";
+  size?: "sm" | "md" | "lg" | "xl";
   imageSide?: "left" | "right";
   showTitleBorderSmall?: boolean;
   showTitleBorderBig?: boolean;
@@ -12,7 +12,7 @@ export interface ItemCardHorizontalProps {
 
 export function ItemCardHorizontal({
   data,
-  size = "lg",
+  size = "xl",
   imageSide = "left",
   showTitleBorderSmall,
   showTitleBorderBig,
@@ -20,49 +20,56 @@ export function ItemCardHorizontal({
   className,
   Link,
 }: ItemCardHorizontalProps) {
-  const fontSize = `leading-[110%] ${size === "lg"
-    ? "text-4xl"
-    : size === "sm"
-      ? "text-lg pl-2.5"
+  const fontSize = `leading-[110%] ${
+    size === "xl"
+      ? "text-4xl"
+      : size === "sm"
+      ? "text-lg"
       : size === "md"
-        ? "text-xl"
-        : ""
-    }`;
+      ? "text-xl"
+      : size === "lg"
+      ? "text-[28px]"
+      : ""
+  }`;
   return (
     <div
-      className={`flex ${className} ${showTitleBorderBig ? "border-t border-accent" : ""} ${size === "lg" ? "gap-x-6" : ""
-        }`}
+      className={`flex ${className} ${showTitleBorderBig ? "border-t border-accent" : ""} ${
+        size === "xl" ? "gap-x-6" : size === "lg" ? "gap-x-5" : ""
+      }`}
     >
       <div
-        className={`${size === "lg" ? "w-4/12" : size === "md" ? "w-7/12" : size === "sm" ? "w-7/12" : ""}   
-          ${imageSide === "left" ? "order-last" : imageSide === "right" ? "order-first" : ""}`}
+        className={`${showTitleBorderSmall ? "border-t-[3px] border-accent" : ""} ${
+          size === "xl" ? "w-4/12" : size === "md" ? "w-7/12" : size === "sm" ? "w-7/12" : size === "lg" ? "w-6/12" : ""
+        }   
+          ${imageSide === "left" ? "order-last" : imageSide === "right" ? "order-first" : ""} `}
       >
-        {Link ? (
-          <Link className="" href={getNewsUrl(data)}>
-            <h2
-              className={`pl-2 ${fontSize} ${showTitleBorderSmall ? "border-t-[3px] border-accent" : ""
-                } ${showTitleBorderBig || showTitleBorderSmall ? "pt-2" : ""} hover:text-accent dark:hover:text-accent-light duration-150`}
-            >
-              {data?.title}
-            </h2>
-          </Link>
-        ) : (
-          <a href={getNewsUrl(data)}>
-            <h2
-              className={`pl-2 ${fontSize} ${showTitleBorderSmall ? "border-t-[3px] border-accent" : ""
-                } ${showTitleBorderBig || showTitleBorderSmall ? "pt-2" : ""} hover:text-accent dark:hover:text-accent-light duration-150`}
-            >
-              {data?.title}
-            </h2>
-          </a>
-        )}
+        <div className={`pl-2 ${showTitleBorderSmall || showTitleBorderBig ? "pt-2" : "pt-0"}`}>
+          {Link ? (
+            <Link className="" href={getNewsUrl(data)}>
+              <h2 className={` ${fontSize}   hover:text-accent dark:hover:text-accent-light duration-150`}>
+                {data?.title}
+              </h2>
+            </Link>
+          ) : (
+            <a href={getNewsUrl(data)}>
+              <h2
+                className={` ${fontSize} ${
+                  showTitleBorderBig || showTitleBorderSmall ? "pt-2" : ""
+                } hover:text-accent dark:hover:text-accent-light duration-150`}
+              >
+                {data?.title}
+              </h2>
+            </a>
+          )}
 
-        {showIntro && <p className="mt-4 text-xl leading-[110%] dark:text-[#bebdbd] text-[#727272]">{data?.meta.intro}</p>}
+          {showIntro && <p className={`mt-4 leading-[110%] dark:text-[#bebdbd] text-[#727272] `}>{data?.meta.intro}</p>}
+        </div>
       </div>
 
       <div
-        className={`overflow-hidden ${size === "lg" ? "w-8/12" : size === "md" ? "w-5/12" : size === "sm" ? "w-5/12" : ""
-          }`}
+        className={`overflow-hidden ${
+          size === "xl" ? "w-8/12" : size === "md" ? "w-5/12" : size === "sm" ? "w-5/12" : size === "lg" ? "w-5/12" : ""
+        }`}
       >
         {Link ? (
           <Link href={getNewsUrl(data)}>
