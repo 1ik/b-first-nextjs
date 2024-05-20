@@ -40,6 +40,7 @@ export default function MediaBrowser({
   const [currentPage, setCurrentPage] = useState(1);
   const [activeTab, setActiveTab] = useState("upload");
   const [selectedImageFile, setSelectedImageFile] = useState<any>(null);
+  const [selectedUploadImage, setSelectedUploadImage] = useState("");
   const [selectedImage, setSelectedImage] = useState("");
   const [imageUploadTitle, setImageUploadTitle] = useState("");
   const [searchImageTitle, setSearchImageTitle] = useState("");
@@ -59,17 +60,17 @@ export default function MediaBrowser({
   };
 
   const handleAddToNews = async () => {
-    if (!selectedImageFile || !imageUploadTitle) return;
+    if (selectedImage) {
+      handleImageSelect(selectedImage);
+    } else {
+      if (!selectedImageFile || !imageUploadTitle) return;
 
-    const formData = new FormData();
-    formData.append("image", selectedImageFile);
-    formData.append("title", imageUploadTitle);
-    const data = await requestAsync(formData);
-
-    setImageUploadTitle("");
-    setSelectedImage("");
-    setSelectedImageFile(null);
-    handleImageSelect(data.data.url);
+      const formData = new FormData();
+      formData.append("image", selectedImageFile);
+      formData.append("title", imageUploadTitle);
+      const data = await requestAsync(formData);
+      handleImageSelect(data.data.url);
+    }
   };
 
   const handleImageSelect = function (path: string) {
@@ -83,6 +84,11 @@ export default function MediaBrowser({
       );
     }
     dispatch({ type: "setDialogOpen", payload: false });
+
+    setImageUploadTitle("");
+    setSelectedImage("");
+    setSelectedImageFile(null);
+    setSelectedUploadImage("");
   };
 
   const data = [
@@ -107,7 +113,7 @@ export default function MediaBrowser({
     if (!selectedImageFile) return;
     const reader = new FileReader();
     reader.onload = function (e) {
-      setSelectedImage(e.target?.result as string);
+      setSelectedUploadImage(e.target?.result as string);
     };
     reader.readAsDataURL(selectedImageFile);
   }, [selectedImageFile]);
@@ -157,8 +163,8 @@ export default function MediaBrowser({
                     <div className="flex flex-1 items-center justify-center flex-col gap-y-4">
                       <div className="md:mt-5 md:mb-4">
                         <label className="md:w-80 flex flex-col items-center px-4 py-6 bg-[#e1e2e4] rounded-lg shadow-lg cursor-pointer hover:bg-blue hover:shadow-xl">
-                          {selectedImage ? (
-                            <img src={selectedImage} alt="selected file" />
+                          {selectedUploadImage ? (
+                            <img src={selectedUploadImage} alt="selected file" />
                           ) : (
                             <>
                               <svg
@@ -224,8 +230,10 @@ export default function MediaBrowser({
                             return (
                               <img
                                 key={index}
-                                onClick={() => handleImageSelect(item.url)}
-                                className="w-full aspect-video object-cover cursor-pointer"
+                                onClick={() => setSelectedImage(item.url)}
+                                className={`w-full aspect-video object-cover cursor-pointer ${
+                                  selectedImage === item.url ? "border-[3px] border-red-500" : ""
+                                }`}
                                 src={`https://images.bangladeshfirst.com/resize?width=1600&height=900&format=webp&quality=85&path=${item.url}`}
                                 alt={item.url}
                               />
