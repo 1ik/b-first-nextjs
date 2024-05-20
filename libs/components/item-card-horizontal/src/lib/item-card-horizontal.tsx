@@ -24,7 +24,7 @@ export function ItemCardHorizontal({
     size === "xl"
       ? "text-4xl"
       : size === "sm"
-      ? "text-lg pl-2.5"
+      ? "text-lg"
       : size === "md"
       ? "text-xl"
       : size === "lg"
