@@ -3,6 +3,7 @@ import { getImageUrl, getNewsUrl } from "@bfirst/utilities";
 export interface ItemCardVerticalProps {
   data: any;
   size?: "sm" | "md" | "lg";
+  showIntro?: boolean;
   showRelatedStory?: boolean;
   showImageBorder?: boolean;
   titlePosition?: "normal" | "inset";
@@ -14,6 +15,7 @@ export function ItemCardVertical({
   data,
   size = "md",
   showRelatedStory = false,
+  showIntro = false,
   showImageBorder = false,
   titlePosition = "normal",
   className,
@@ -79,6 +81,8 @@ export function ItemCardVertical({
             </h2>
           </a>
         )}
+
+        {showIntro && <p className="text-xl mt-3 dark:text-[#bebdbd] text-[#6f6f6f]">{data?.meta.intro}</p>}
 
         {showRelatedStory && (
           <ul>

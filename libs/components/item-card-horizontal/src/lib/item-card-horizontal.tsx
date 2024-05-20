@@ -31,6 +31,11 @@ export function ItemCardHorizontal({
       ? "text-[28px]"
       : ""
   }`;
+
+  const introFontSize = `leading-[110%] ${
+    size === "xl" ? "text-[22px]" : size === "lg" ? "text-xl" : size === "md" ? "text-lg" : ""
+  } `;
+
   return (
     <div
       className={`flex ${className} ${showTitleBorderBig ? "border-t border-accent" : ""} ${
@@ -46,7 +51,7 @@ export function ItemCardHorizontal({
         <div className={`pl-2 ${showTitleBorderSmall || showTitleBorderBig ? "pt-2" : "pt-0"}`}>
           {Link ? (
             <Link className="" href={getNewsUrl(data)}>
-              <h2 className={` ${fontSize}   hover:text-accent dark:hover:text-accent-light duration-150`}>
+              <h2 className={` ${fontSize} hover:text-accent dark:hover:text-accent-light duration-150`}>
                 {data?.title}
               </h2>
             </Link>
@@ -62,7 +67,9 @@ export function ItemCardHorizontal({
             </a>
           )}
 
-          {showIntro && <p className={`mt-4 leading-[110%] dark:text-[#bebdbd] text-[#727272] `}>{data?.meta.intro}</p>}
+          {showIntro && (
+            <p className={`${introFontSize} mt-4 dark:text-[#bebdbd] text-[#727272] `}>{data?.meta.intro}</p>
+          )}
         </div>
       </div>
 
