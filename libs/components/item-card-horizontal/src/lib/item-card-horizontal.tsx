@@ -38,46 +38,32 @@ export function ItemCardHorizontal({
       }`}
     >
       <div
-        className={`${
+        className={`${showTitleBorderSmall ? "border-t-[3px] border-accent" : ""} ${
           size === "xl" ? "w-4/12" : size === "md" ? "w-7/12" : size === "sm" ? "w-7/12" : size === "lg" ? "w-6/12" : ""
         }   
-          ${imageSide === "left" ? "order-last" : imageSide === "right" ? "order-first" : ""}`}
+          ${imageSide === "left" ? "order-last" : imageSide === "right" ? "order-first" : ""} `}
       >
-        {Link ? (
-          <Link className="" href={getNewsUrl(data)}>
-            <h2
-              className={`${size === "lg" ? "pl-0" : "pl-2"} ${fontSize} ${
-                showTitleBorderSmall ? "border-t-[3px] border-accent" : ""
-              } ${
-                showTitleBorderBig || showTitleBorderSmall ? "pt-2" : ""
-              } hover:text-accent dark:hover:text-accent-light duration-150`}
-            >
-              {data?.title}
-            </h2>
-          </Link>
-        ) : (
-          <a href={getNewsUrl(data)}>
-            <h2
-              className={`${size === "lg" ? "pl-0" : "pl-2"} ${fontSize} ${
-                showTitleBorderSmall ? "border-t-[3px] border-accent" : ""
-              } ${
-                showTitleBorderBig || showTitleBorderSmall ? "pt-2" : ""
-              } hover:text-accent dark:hover:text-accent-light duration-150`}
-            >
-              {data?.title}
-            </h2>
-          </a>
-        )}
+        <div className={`pl-2 ${showTitleBorderSmall || showTitleBorderBig ? "pt-2" : "pt-0"}`}>
+          {Link ? (
+            <Link className="" href={getNewsUrl(data)}>
+              <h2 className={` ${fontSize}   hover:text-accent dark:hover:text-accent-light duration-150`}>
+                {data?.title}
+              </h2>
+            </Link>
+          ) : (
+            <a href={getNewsUrl(data)}>
+              <h2
+                className={` ${fontSize} ${
+                  showTitleBorderBig || showTitleBorderSmall ? "pt-2" : ""
+                } hover:text-accent dark:hover:text-accent-light duration-150`}
+              >
+                {data?.title}
+              </h2>
+            </a>
+          )}
 
-        {showIntro && (
-          <p
-            className={`mt-4 leading-[110%] dark:text-[#bebdbd] text-[#727272] ${
-              size === "md" ? "text-lg pl-2" : "text-xl"
-            }`}
-          >
-            {data?.meta.intro}
-          </p>
-        )}
+          {showIntro && <p className={`mt-4 leading-[110%] dark:text-[#bebdbd] text-[#727272] `}>{data?.meta.intro}</p>}
+        </div>
       </div>
 
       <div
