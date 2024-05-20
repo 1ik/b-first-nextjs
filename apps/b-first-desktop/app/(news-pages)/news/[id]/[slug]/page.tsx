@@ -54,7 +54,6 @@ export async function generateMetadata({ params }): Promise<Metadata> {
 }
 
 export default async function NewsDetails({ params }) {
-
   const link_url = `http://bangladeshfirst.com/news/${params.id}/${params.slug}`;
 
   const [detailsData, trendingTopics, latestNews] = await Promise.all([
@@ -62,6 +61,10 @@ export default async function NewsDetails({ params }) {
     getData("trendy-topics"),
     getData("latest/stories"),
   ]);
+
+  const relatedNews = (await getData(`related-stories/${detailsData?.story.tags[0].id}`)).data.filter(
+    (rN: { id: any }) => rN.id != params.id
+  );
 
   return (
     <>
@@ -125,7 +128,6 @@ export default async function NewsDetails({ params }) {
               ))}
               <img className="my-10 mx-auto" src="/ads/SIBL_Profit_300x250.gif" alt="Ads" />
             </div>
-
           </div>
           <div className="col-span-2">
             <div
@@ -158,10 +160,12 @@ export default async function NewsDetails({ params }) {
               ></textarea>
             </div> */}
 
-            <div>
-              <AccentHeader header="related news" color="#8E7581" />
-              <SquareGrid data={latestNews?.data.slice(10, 16)} size="md" gridCols={3} />
-            </div>
+            {relatedNews.length ? (
+              <div>
+                <AccentHeader header="related news" color="#8E7581" />
+                <SquareGrid data={relatedNews.slice(0, 6)} size="md" gridCols={3} />
+              </div>
+            ) : null}
           </div>
           <div>
             <img className="my-10 mx-auto" src="/ads/Global.gif" alt="Ads" />

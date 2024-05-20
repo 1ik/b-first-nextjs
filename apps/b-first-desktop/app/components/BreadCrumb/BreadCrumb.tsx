@@ -19,7 +19,7 @@ export default function BreadCrumb({ links, className }: BreadCrumbProps) {
         <Fragment key={index}>
           <span className="text-[20px] font-semibold">/</span>
           <li>
-            <Link className="p-1 hover:text-accent dark:hover:text-accent-light duration-200" href={item.href}>
+            <Link className="p-1 capitalize hover:text-accent dark:hover:text-accent-light duration-200" href={item.href}>
               {item.name}
             </Link>
           </li>
