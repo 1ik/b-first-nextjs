@@ -28,8 +28,8 @@ const _links = [
     href: "/world",
   },
   {
-    name: "Business",
-    href: "/business",
+    name: "Economy",
+    href: "/economy",
   },
   {
     name: "Feature",
@@ -62,10 +62,6 @@ const _links = [
   {
     name: "Corporates",
     href: "/corporates",
-  },
-  {
-    name: "Economy",
-    href: "/economy",
   },
   {
     name: "Politics",
