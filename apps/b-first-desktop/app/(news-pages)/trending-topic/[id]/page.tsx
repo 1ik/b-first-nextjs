@@ -30,7 +30,7 @@ export default async function TrendingTopic({ params }) {
           <div className="col-span-3">
             {trenndingNews.data?.map((item, index) => (
               <ItemCardHorizontal
-                className=" border-b pb-4 border-[#D9D9D9] dark:border-dark-300"
+                className=" border-b pb-4  dark:border-dark-300"
                 key={index}
                 data={item}
                 size="lg"
@@ -45,7 +45,7 @@ export default async function TrendingTopic({ params }) {
               <img className="mt-4 mx-auto" src="/ads/SIBL_Profit_300x250.gif" alt="Ads" />
             </div>
             <div className="my-10">
-              <AccentHeader header="TODAYS NEWS" color="#5D26D1" />
+              <AccentHeader header="LATEST NEWS" color="#5D26D1" />
               <ItemList Link={Link} data={latestNews?.data.slice(0, 6)} listType="circle" />
               <img className="mt-4 mx-auto" src="/ads/IBBL.gif" alt="Ads" />
             </div>

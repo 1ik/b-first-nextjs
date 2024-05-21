@@ -38,10 +38,6 @@ export function ItemCardHorizontal({
       : ""
   }`;
 
-  const introFontSize = `leading-[110%] ${
-    size === "xl" ? "text-[22px]" : size === "lg" ? "text-xl" : size === "md" ? "text-lg" : ""
-  } `;
-
   return (
     <div
       className={`flex ${className} ${showTitleBorderBig ? "border-t border-accent" : ""} ${
@@ -74,7 +70,7 @@ export function ItemCardHorizontal({
           )}
 
           {showCreatedAt && (
-            <p className="font-montserrat text-lg text-[#6F6F6F] mt-10 border-t pt-4 border-[#D9D9D9] dark:border-dark-300 dark:text-white">
+            <p className="font-montserrat text-lg text-[#6F6F6F] mt-10 border-t pt-4  dark:border-dark-300 dark:text-white">
               Created At : {`${moment(data?.created_at).format("MMM Do, YYYY")}`}
             </p>
           )}
