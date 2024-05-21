@@ -7,6 +7,7 @@ import { SquareGrid } from "@bfirst/components-square-grid";
 import { getImageUrl } from "@bfirst/utilities";
 import { Metadata } from "next";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import BreadCrumb from "../../../../components/BreadCrumb/BreadCrumb";
 import ImagePreview from "../../../../components/ImagePreview/ImagePreview";
 import Navbar from "../../../../components/Navbar/Navbar";
@@ -62,8 +63,10 @@ export default async function NewsDetails({ params }) {
     getData("latest/stories"),
   ]);
 
+  if (!detailsData) return notFound();
+
   const tagsArr = detailsData?.story.tags.map((tag: { id: any }) => tag.id);
-  const relatedNews = (await getData(`related-stories?tags=${tagsArr.join(",")}`)).data.filter(
+  const relatedNews = (await getData(`related-stories/${tagsArr.join(",")}`)).data.filter(
     (rN: { id: any }) => rN.id != params.id
   );
 
