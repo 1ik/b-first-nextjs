@@ -16,11 +16,11 @@ export function HighlightChip({ items, title, className, Link }: HighlightChipPr
         {items?.map((item, index) => (
           <li key={index} className="bg-[#FAF6FF] dark:bg-dark-300 dark:text-white text-black  rounded-md">
             {Link ? (
-              <Link className="px-3 py-1 inline-block" href="">
+              <Link className="px-3 py-1 inline-block" href={`/trending-topic/${item.id}`}>
                 {item.name}
               </Link>
             ) : (
-              <a className="px-3 py-1 inline-block" href="">
+              <a className="px-3 py-1 inline-block" href={`/trending-topic/${item.id}`}>
                 {item.name}
               </a>
             )}

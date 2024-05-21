@@ -97,7 +97,7 @@ export default async function NewsDetails({ params }) {
           <div className="flex flex-col">
             <h3 className="text-xl font-montserrat">{detailsData?.story.meta.intro}</h3>
             <div className="border-t mt-10 pt-2 dark:border-dark-300">
-              <SocialShare shareLink={link_url} />
+              <SocialShare title="Share News" shareLink={link_url} />
             </div>
             <div className="mt-10">
               <ProfileCard data={detailsData?.story.authors[0]} updatedTime={detailsData?.story.updated_at} />
