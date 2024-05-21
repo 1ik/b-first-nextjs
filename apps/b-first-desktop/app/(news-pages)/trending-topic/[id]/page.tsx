@@ -46,7 +46,7 @@ export default async function TrendingTopic({ params }) {
             </div>
             <div className="my-10">
               <AccentHeader header="LATEST NEWS" color="#5D26D1" />
-              <ItemList Link={Link} data={latestNews?.data.slice(0, 6)} listType="circle" />
+              <ItemList Link={Link} data={latestNews?.data.slice(0, 6)} listType="circle" showButton moreNewsLink="/latest"/>
               <img className="mt-4 mx-auto" src="/ads/IBBL.gif" alt="Ads" />
             </div>
             <div>

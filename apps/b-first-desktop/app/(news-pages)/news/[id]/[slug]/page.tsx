@@ -175,7 +175,7 @@ export default async function NewsDetails({ params }) {
             <img className="my-10 mx-auto" src="/ads/Global.gif" alt="Ads" />
             <div>
               <AccentHeader header="Latest" />
-              <ItemList Link={Link} listType="circle" data={latestNews?.data.slice(0, 5)} />
+              <ItemList Link={Link} listType="circle" data={latestNews?.data.slice(0, 5)} showButton moreNewsLink="/latest"/>
             </div>
             <div className="sticky top-[100px]">
               <img className="my-10 mx-auto" src="/ads/union-bank-ad.gif" alt="Ads" />

@@ -8,6 +8,8 @@ export interface ItemListProps {
   showDate?: boolean;
   className?: string;
   Link?: any;
+  moreNewsLink?: string;
+  showButton?: boolean;
 }
 
 export function ItemList({
@@ -17,6 +19,8 @@ export function ItemList({
   showImage = false,
   showDate = false,
   className,
+  showButton = false,
+  moreNewsLink,
 }: ItemListProps) {
   return (
     <ul className={`${className}`}>
@@ -92,6 +96,17 @@ export function ItemList({
             </li>
           </a>
         )
+      )}
+
+      {showButton && (
+        <div className="flex justify-center my-2 cursor-pointer">
+          <a
+            href={moreNewsLink}
+            className="text-xl border rounded-md px-6 py-2 hover:duration-500 hover:bg-accent hover:text-white dark:border-dark-300"
+          >
+            More News
+          </a>
+        </div>
       )}
     </ul>
   );
