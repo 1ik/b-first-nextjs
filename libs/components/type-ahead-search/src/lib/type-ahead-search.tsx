@@ -22,6 +22,7 @@ interface ItemProps {
 type Entry = {
   id?: any;
   title: string;
+  name: string;
 };
 
 export interface TypeAheadSearchProps {
@@ -29,6 +30,7 @@ export interface TypeAheadSearchProps {
   items: Entry[];
   onSearch: (search: string) => void;
   itemsSelected: (items: Entry | undefined) => void;
+  displayValue: string;
   listHeight?: "available" | "contain";
 }
 
@@ -60,6 +62,7 @@ export function TypeAheadSearch({
   items,
   onSearch,
   itemsSelected,
+  displayValue,
   listHeight = "available",
 }: TypeAheadSearchProps) {
   const [open, setOpen] = useState(false);
@@ -181,7 +184,7 @@ export function TypeAheadSearch({
                   })}
                   active={activeIndex === index}
                 >
-                  {item.title}
+                  {item[displayValue]}
                 </Item>
               ))}
             </div>

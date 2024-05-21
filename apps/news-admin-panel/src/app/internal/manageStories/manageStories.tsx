@@ -135,6 +135,7 @@ export function ManageStories() {
                   label="Type for News"
                   items={searchedNews?.data.filter((sN: any) => !featuredStories.some((fN: any) => fN.id === sN.id))}
                   onSearch={(s) => debounceSearch(() => setSearch(s))}
+                  displayValue="title"
                   itemsSelected={(i) => {
                     handleAddFeaturedStories(i);
                   }}
