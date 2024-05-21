@@ -22,7 +22,7 @@ interface ItemProps {
 type Entry = {
   id?: any;
   title: string;
-  name : string
+  name: string;
 };
 
 export interface TypeAheadSearchProps {
@@ -30,6 +30,7 @@ export interface TypeAheadSearchProps {
   items: Entry[];
   onSearch: (search: string) => void;
   itemsSelected: (items: Entry | undefined) => void;
+  displayValue: string;
 }
 
 const Item = forwardRef<HTMLDivElement, ItemProps & React.HTMLProps<HTMLDivElement>>(
@@ -55,7 +56,7 @@ const Item = forwardRef<HTMLDivElement, ItemProps & React.HTMLProps<HTMLDivEleme
   }
 );
 
-export function TypeAheadSearch({ label, items, onSearch, itemsSelected }: TypeAheadSearchProps) {
+export function TypeAheadSearch({ label, items, onSearch, itemsSelected, displayValue }: TypeAheadSearchProps) {
   const [open, setOpen] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -166,7 +167,7 @@ export function TypeAheadSearch({ label, items, onSearch, itemsSelected }: TypeA
                   })}
                   active={activeIndex === index}
                 >
-                  {item.title || item.name}
+                  {item[displayValue]}
                 </Item>
               ))}
             </div>

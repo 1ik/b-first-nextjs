@@ -17,7 +17,7 @@ export function TrendingTags() {
   const { data: TrendingTagsList, isSuccess: trendingLoadSuccess } = useGet(`api/v1/public/trendy-topics`);
   const [trendingTopic, setTrendingTopic] = useState([]);
   const [showConfirmModalFor, setShowConfirmModalFor] = useState<number>();
-  const { request, isSuccess: featuredSaveSuccess } = usePost(`api/v1/trendy-topic/create`);
+  const { request, isSuccess: trendingList } = usePost(`api/v1/trendy-topic/create`);
 
   const move = <T,>(array: T[], from: number, to: number): T[] => {
     const newArray: T[] = [...array];
@@ -73,12 +73,12 @@ export function TrendingTags() {
   };
 
   useEffect(() => {
-    if (featuredSaveSuccess) {
-      toast.success("Featured saved succesfully", {
+    if (trendingList) {
+      toast.success("Trending list saved succesfully", {
         position: "top-center",
       });
     }
-  }, [featuredSaveSuccess]);
+  }, [trendingList]);
 
   useEffect(() => {
     if (trendingLoadSuccess) {
@@ -92,6 +92,7 @@ export function TrendingTags() {
       <form onSubmit={handleSubmit}>
         <div className="col-span-3">
           <TypeAheadSearch
+            displayValue="name"
             label="Type for Trending Topic"
             items={searchedNews?.data.filter((sN: any) => !trendingTopic.some((fN: any) => fN.id === sN.id))}
             onSearch={(s) => debounceSearch(() => setSearch(s))}
