@@ -64,6 +64,9 @@ export default async function NewsDetails({ params }) {
   ]);
 
   if (!detailsData) return notFound();
+  const relatedNews = (await getData(`related-stories/${detailsData?.story.tags[0].id}`)).data.filter(
+    (rN: { id: any }) => rN.id != params.id
+  );
 
   return (
     <>
@@ -159,10 +162,12 @@ export default async function NewsDetails({ params }) {
               ></textarea>
             </div> */}
 
-            <div>
-              <AccentHeader header="related news" color="#8E7581" />
-              <SquareGrid data={latestNews?.data.slice(10, 16)} size="md" gridCols={3} />
-            </div>
+            {relatedNews.length ? (
+              <div>
+                <AccentHeader header="related news" color="#8E7581" />
+                <SquareGrid data={relatedNews.slice(0, 6)} size="md" gridCols={3} />
+              </div>
+            ) : null}
           </div>
           <div>
             <img className="my-10 mx-auto" src="/ads/Global.gif" alt="Ads" />

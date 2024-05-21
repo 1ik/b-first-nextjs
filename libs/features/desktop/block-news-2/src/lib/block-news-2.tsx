@@ -15,7 +15,7 @@ export function BlockNews2({ data, Link, sectionHeader, headerColor, className, 
       <div className={`grid grid-cols-3 gap-x-4 gap-y-6`}>
         <div className="col-span-3 flex flex-col gap-y-4">
           {sectionHeader && <AccentHeader header={sectionHeader} color={headerColor} />}
-          <ItemCardHorizontal Link={Link} data={data?.[0]} size="lg" showIntro imageSide="right" />
+          <ItemCardHorizontal Link={Link} data={data?.[0]} showIntro imageSide="right" />
         </div>
         {data?.slice(1, 7).map((item: any) => (
           <ItemCardHorizontal Link={Link} key={item.id} data={item} showTitleBorderBig size="sm" />
