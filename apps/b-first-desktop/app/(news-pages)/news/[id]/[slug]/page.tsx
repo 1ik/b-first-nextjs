@@ -12,6 +12,7 @@ import ImagePreview from "../../../../components/ImagePreview/ImagePreview";
 import Navbar from "../../../../components/Navbar/Navbar";
 import TrendingTopics from "../../../../components/TrendingTopics/TrendingTopics";
 import { getData } from "../../../../utils/dataFetch";
+import { notFound } from "next/navigation";
 
 export async function generateMetadata({ params }): Promise<Metadata> {
   const data = await getData(`story/details/${params.id}`);
@@ -62,6 +63,7 @@ export default async function NewsDetails({ params }) {
     getData("latest/stories"),
   ]);
 
+  if (!detailsData) return notFound();
   const relatedNews = (await getData(`related-stories/${detailsData?.story.tags[0].id}`)).data.filter(
     (rN: { id: any }) => rN.id != params.id
   );
