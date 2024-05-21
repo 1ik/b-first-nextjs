@@ -62,7 +62,7 @@ export default async function CategoryPage({ params }) {
             <Image className="mx-auto block my-10" width={320} height={250} src="/ads/Global.gif" alt="Ads" />
             <div>
               <AccentHeader header="Latest" />
-              <ItemList Link={Link} listType="circle" data={latestNews?.data.slice(0, 6)} />
+              <ItemList Link={Link} listType="circle" data={latestNews?.data.slice(0, 6)} moreNewsLink="/latest" showButton/>
             </div>
             <Image className="mx-auto block my-10" width={320} height={250} src="/ads/union-bank-ad.gif" alt="Ads" />
             <div>

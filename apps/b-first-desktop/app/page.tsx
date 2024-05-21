@@ -69,7 +69,7 @@ export default async function Index() {
 
           <div>
             <AccentHeader header="Latest News" color="#5D26D1" />
-            <ItemList Link={Link} data={latestNews?.data.slice(0, 6)} listType="circle" />
+            <ItemList Link={Link} data={latestNews?.data.slice(0, 6)} listType="circle" showButton moreNewsLink="/latest"/>
             <img className="mt-4 mx-auto" src="/ads/Global.gif" alt="Ads" />
           </div>
         </div>
