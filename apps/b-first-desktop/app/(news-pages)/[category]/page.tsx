@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import BreadCrumb from "../../components/BreadCrumb/BreadCrumb";
+import LoadMore from "../../components/LoadMore/LoadMore";
 import Navbar from "../../components/Navbar/Navbar";
 import TrendingTopics from "../../components/TrendingTopics/TrendingTopics";
 import { getData } from "../../utils/dataFetch";
@@ -14,7 +15,9 @@ export default async function CategoryPage({ params }) {
   const { category } = params;
   const [trendingTopics, categroyNews, latestNews] = await Promise.all([
     getData("trendy-topics"),
-    getData(`categories/${category}/stories`),
+    getData(
+      `${category === "latest" ? "latest/stories?size=20&page=1" : `categories/${category}/stories?size=20&page=1`}`
+    ),
     getData("latest/stories"),
   ]);
 
@@ -53,6 +56,7 @@ export default async function CategoryPage({ params }) {
                 data={news}
               />
             ))}
+            <LoadMore initialPage={2} category={category} />
           </div>
           <div>
             <Image className="mx-auto block my-10" width={320} height={250} src="/ads/Global.gif" alt="Ads" />

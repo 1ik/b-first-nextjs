@@ -62,7 +62,8 @@ export default async function NewsDetails({ params }) {
     getData("latest/stories"),
   ]);
 
-  const relatedNews = (await getData(`related-stories/${detailsData?.story.tags[0].id}`)).data.filter(
+  const tagsArr = detailsData?.story.tags.map((tag: { id: any }) => tag.id);
+  const relatedNews = (await getData(`related-stories?tags=${tagsArr.join(",")}`)).data.filter(
     (rN: { id: any }) => rN.id != params.id
   );
 

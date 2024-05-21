@@ -12,7 +12,7 @@ export function HighlightChip({ items, title, className, Link }: HighlightChipPr
       {title && (
         <h3 className="font-montserrat px-6 py-2 bg-[#643FA1] text-white font-bold w-fit whitespace-nowrap">{title}</h3>
       )}
-      <ul className="flex gap-2 flex-wrap">
+      <ul className="flex gap-2 flex-wrap self-center">
         {items?.map((item, index) => (
           <li key={index} className="bg-[#FAF6FF] dark:bg-dark-300 dark:text-white text-black  rounded-md">
             {Link ? (
