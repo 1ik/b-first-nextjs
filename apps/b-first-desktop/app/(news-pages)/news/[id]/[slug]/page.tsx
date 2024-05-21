@@ -7,6 +7,7 @@ import { SquareGrid } from "@bfirst/components-square-grid";
 import { getImageUrl } from "@bfirst/utilities";
 import { Metadata } from "next";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import BreadCrumb from "../../../../components/BreadCrumb/BreadCrumb";
 import ImagePreview from "../../../../components/ImagePreview/ImagePreview";
 import Navbar from "../../../../components/Navbar/Navbar";
@@ -62,7 +63,10 @@ export default async function NewsDetails({ params }) {
     getData("latest/stories"),
   ]);
 
-  const relatedNews = (await getData(`related-stories/${detailsData?.story.tags[0].id}`)).data.filter(
+  if (!detailsData) return notFound();
+
+  const tagsArr = detailsData?.story.tags.map((tag: { id: any }) => tag.id);
+  const relatedNews = (await getData(`related-stories?tags=${tagsArr.join(",")}`))?.data.filter(
     (rN: { id: any }) => rN.id != params.id
   );
 
@@ -160,7 +164,7 @@ export default async function NewsDetails({ params }) {
               ></textarea>
             </div> */}
 
-            {relatedNews.length ? (
+            {relatedNews?.length ? (
               <div>
                 <AccentHeader header="related news" color="#8E7581" />
                 <SquareGrid data={relatedNews.slice(0, 6)} size="md" gridCols={3} />
