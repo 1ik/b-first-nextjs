@@ -66,7 +66,7 @@ export default async function NewsDetails({ params }) {
   if (!detailsData) return notFound();
 
   const tagsArr = detailsData?.story.tags.map((tag: { id: any }) => tag.id);
-  const relatedNews = (await getData(`related-stories/${tagsArr.join(",")}`)).data.filter(
+  const relatedNews = (await getData(`related-stories?tags=${tagsArr.join(",")}`))?.data.filter(
     (rN: { id: any }) => rN.id != params.id
   );
 
@@ -164,7 +164,7 @@ export default async function NewsDetails({ params }) {
               ></textarea>
             </div> */}
 
-            {relatedNews.length ? (
+            {relatedNews?.length ? (
               <div>
                 <AccentHeader header="related news" color="#8E7581" />
                 <SquareGrid data={relatedNews.slice(0, 6)} size="md" gridCols={3} />
