@@ -1,17 +1,17 @@
 "use client";
 
 import { ItemCardHorizontal } from "@bfirst/components-item-card-horizontal";
-import { Spinner } from "@bfirst/material-tailwind";
 import { Key, useEffect, useRef, useState } from "react";
 import { getData } from "../../utils/dataFetch";
 
 interface LoadMoreProps {
   initialPage?: number;
+  lastPage?: number;
   size?: number;
   category: string;
 }
 
-export default function LoadMore({ initialPage = 1, category, size = 10 }: LoadMoreProps) {
+export default function LoadMore({ initialPage = 1, lastPage = 1, category, size = 10 }: LoadMoreProps) {
   const [page, setPage] = useState(initialPage);
   const [stories, setStories] = useState<any>([]);
   const loaderRef = useRef(null);
@@ -20,9 +20,10 @@ export default function LoadMore({ initialPage = 1, category, size = 10 }: LoadM
     const loadMoreStoris = async function () {
       const next = page + 1;
       const moreStories = await getData(
-        `${category === "latest"
-          ? `latest/stories?size=${size}&page=${next}`
-          : `categories/${category}/stories?size=${size}&page=${next}`
+        `${
+          category === "latest"
+            ? `latest/stories?size=${size}&page=${next}`
+            : `categories/${category}/stories?size=${size}&page=${next}`
         }`
       );
       if (moreStories?.data.length) {
@@ -56,9 +57,11 @@ export default function LoadMore({ initialPage = 1, category, size = 10 }: LoadM
           data={story}
         />
       ))}
-      <div className="flex items-center justify-center h-20">
-        <img ref={loaderRef} className="animate-ping w-12" src="/img/logo-mini.png" alt="logo" />
-      </div>
+      {page < lastPage && (
+        <div className="flex items-center justify-center h-20">
+          <img ref={loaderRef} className="animate-ping w-12" src="/img/logo-mini.png" alt="logo" />
+        </div>
+      )}
     </>
   );
 }

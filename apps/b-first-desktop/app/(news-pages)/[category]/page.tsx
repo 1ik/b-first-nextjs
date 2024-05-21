@@ -56,7 +56,7 @@ export default async function CategoryPage({ params }) {
                 data={news}
               />
             ))}
-            <LoadMore initialPage={2} category={category} />
+            <LoadMore initialPage={2} lastPage={categroyNews?.meta.last_page} category={category} />
           </div>
           <div>
             <Image className="mx-auto block my-10" width={320} height={250} src="/ads/Global.gif" alt="Ads" />
