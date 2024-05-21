@@ -16,8 +16,8 @@ export function BlockNews5({ data, Link, sectionHeader, headerColor, className }
       {sectionHeader && <AccentHeader header={sectionHeader} color={headerColor} />}
       <div className="grid grid-cols-4 gap-x-5 mt-8">
         <div>
-          {data?.slice(0, 6).map((item: any) => (
-            <ItemCardHorizontal Link={Link} className="mb-8 last:mb-0" size="md" data={item} />
+          {data?.slice(0, 6).map((item: any, index: number) => (
+            <ItemCardHorizontal Link={Link} key={index} className="mb-8 last:mb-0" size="md" data={item} />
           ))}
         </div>
 
