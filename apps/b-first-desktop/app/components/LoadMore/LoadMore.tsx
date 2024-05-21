@@ -20,10 +20,9 @@ export default function LoadMore({ initialPage = 1, category, size = 10 }: LoadM
     const loadMoreStoris = async function () {
       const next = page + 1;
       const moreStories = await getData(
-        `${
-          category === "latest"
-            ? `latest/stories?size=${size}&page=${next}`
-            : `categories/${category}/stories?size=${size}&page=${next}`
+        `${category === "latest"
+          ? `latest/stories?size=${size}&page=${next}`
+          : `categories/${category}/stories?size=${size}&page=${next}`
         }`
       );
       if (moreStories?.data.length) {
@@ -58,7 +57,7 @@ export default function LoadMore({ initialPage = 1, category, size = 10 }: LoadM
         />
       ))}
       <div className="flex items-center justify-center h-20">
-        <Spinner ref={loaderRef} color="red" className="w-10 h-10 text-transparent" />
+        <img ref={loaderRef} className="animate-ping w-12" src="/img/logo-mini.png" alt="logo" />
       </div>
     </>
   );
