@@ -10,7 +10,7 @@ export default async function TrendingTopic({ params }) {
   const latestNews = await getData("latest/stories");
 
   console.log(trenndingNews.meta.path);
-  
+
   return (
     <div>
       <Navbar />
@@ -28,7 +28,7 @@ export default async function TrendingTopic({ params }) {
         </div>
         <div className="grid grid-cols-4 gap-x-6">
           <div className="col-span-3">
-            {trenndingNews.data?.map((item, index) => (
+            {trenndingNews.data?.map((item: any, index: number) => (
               <ItemCardHorizontal
                 className=" border-b pb-4  dark:border-dark-300"
                 key={index}

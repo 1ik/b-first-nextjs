@@ -2,10 +2,10 @@ import moment from "moment-timezone";
 
 export interface ProfileCardProps {
   data: any;
-  updatedTime: string;
+  createdTime: string;
 }
 
-export function ProfileCard({ data, updatedTime }: ProfileCardProps) {
+export function ProfileCard({ data, createdTime }: ProfileCardProps) {
   return (
     <div className="bg-[#F2F2F2] pl-4 py-4 dark:bg-dark-300">
       <img
@@ -14,7 +14,7 @@ export function ProfileCard({ data, updatedTime }: ProfileCardProps) {
         alt="profile"
       />
       <h3 className="text-[22px] mt-4 mb-3">{`By ${data?.name}`}</h3>
-      <p className="font-montserrat text-sm">{`Updated ${moment(updatedTime)
+      <p className="font-montserrat text-sm">{`Created at ${moment(createdTime)
         .tz("Asia/Dhaka")
         .format("h:mm A, ddd MMM Do, YYYY")}`}</p>
     </div>

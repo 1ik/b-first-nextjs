@@ -56,7 +56,7 @@ export function ItemList({
             <li
               key={item.id}
               className={`hover:text-accent dark:hover:text-accent-light duration-200 text-[22px] leading-[110%] ${
-                data?.length !== index + 1 ? "border-b border-[#D8D8D8] dark:border-dark-300" : ""
+                data?.length !== index + 1 ? "border-b  dark:border-dark-300" : ""
               } pb-4 mb-4 ${listType === "number" && "flex items-center"}`}
             >
               {listType === "number" && (
@@ -78,7 +78,7 @@ export function ItemList({
             <li
               key={item.id}
               className={`hover:text-accent dark:hover:text-accent-light duration-200 text-[22px] leading-[110%] ${
-                data?.length !== index + 1 ? "border-b border-[#D8D8D8] dark:border-dark-300" : ""
+                data?.length !== index + 1 ? "border-b  dark:border-dark-300" : ""
               } pb-4 mb-4 ${listType === "number" && "flex items-center"}`}
             >
               {listType === "number" && (

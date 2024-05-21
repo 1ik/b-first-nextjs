@@ -100,7 +100,7 @@ export default async function NewsDetails({ params }) {
               <SocialShare title="Share News" shareLink={link_url} />
             </div>
             <div className="mt-10">
-              <ProfileCard data={detailsData?.story.authors[0]} updatedTime={detailsData?.story.updated_at} />
+              <ProfileCard data={detailsData?.story.authors[0]} createdTime={detailsData?.story.created_at} />
             </div>
           </div>
           <div className="col-span-3">
@@ -121,7 +121,7 @@ export default async function NewsDetails({ params }) {
                 header={`more from ${detailsData?.story.categories[0].name}`}
                 color={detailsData?.story.categories[0].color_code}
               />
-              {latestNews?.data.slice(5, 10).map((item, index) => (
+              {latestNews?.data.slice(5, 10).map((item: any, index: number) => (
                 <ItemCardHorizontal
                   Link={Link}
                   className="pb-6 mb-6 border-b dark:border-dark-300"
@@ -141,7 +141,7 @@ export default async function NewsDetails({ params }) {
             <div className="my-10 border-t border-b dark:border-dark-300 py-4 flex gap-x-4 items-center">
               <h4 className="text-3xl">Tags:</h4>
               <ul className="flex gap-x-2 flex-wrap">
-                {detailsData?.story.tags.map((tag, index) => (
+                {detailsData?.story.tags.map((tag:any, index:number) => (
                   <li
                     key={index}
                     className="text-lg font-montserrat font-semibold py-0.5 px-2 rounded-md bg-[#2B2B2B] text-white"
