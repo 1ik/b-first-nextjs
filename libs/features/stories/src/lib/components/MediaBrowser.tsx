@@ -134,6 +134,14 @@ export default function MediaBrowser({
     }
   }, [state.dialogOpen]);
 
+  useEffect(() => {
+    if (activeTab === "library") {
+      setSelectedImageFile(null);
+      setImageUploadTitle("");
+      setSelectedUploadImage("");
+    }
+  }, [activeTab]);
+
   return (
     <Dialog open={state.dialogOpen} handler={handleDialogOpen} size="xl">
       <ToastContainer position="top-center" />
@@ -176,7 +184,7 @@ export default function MediaBrowser({
                           {selectedUploadImage ? (
                             <img src={selectedUploadImage} alt="selected file" />
                           ) : (
-                            <>
+                            <div className="py-4">
                               <svg
                                 fill="#b3b6bc"
                                 height="100px"
@@ -207,7 +215,7 @@ export default function MediaBrowser({
                                 </g>
                               </svg>
                               <span>Upload Image</span>
-                            </>
+                            </div>
                           )}
 
                           <input
