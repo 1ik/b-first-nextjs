@@ -9,8 +9,6 @@ export default async function TrendingTopic({ params }) {
   const trenndingNews = await getData(`trending-topics/${params.id}`);
   const latestNews = await getData("latest/stories");
 
-  console.log(trenndingNews.meta.path);
-
   return (
     <div>
       <Navbar />
@@ -21,7 +19,7 @@ export default async function TrendingTopic({ params }) {
             links={[
               {
                 name: "Trending Now",
-                href: `/`,
+                href: `/trending-topic/${params.id}`,
               },
             ]}
           />
@@ -46,7 +44,13 @@ export default async function TrendingTopic({ params }) {
             </div>
             <div className="my-10">
               <AccentHeader header="LATEST NEWS" color="#5D26D1" />
-              <ItemList Link={Link} data={latestNews?.data.slice(0, 6)} listType="circle" showButton moreNewsLink="/latest"/>
+              <ItemList
+                Link={Link}
+                data={latestNews?.data.slice(0, 6)}
+                listType="circle"
+                showButton
+                moreNewsLink="/latest"
+              />
               <img className="mt-4 mx-auto" src="/ads/IBBL.gif" alt="Ads" />
             </div>
             <div>

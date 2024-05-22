@@ -98,16 +98,26 @@ export function ItemList({
         )
       )}
 
-      {showButton && (
-        <div className="flex justify-center my-2 cursor-pointer">
-          <a
-            href={moreNewsLink}
-            className="text-xl border rounded-md px-6 py-2 hover:duration-500 hover:bg-accent hover:text-white dark:border-dark-300"
-          >
-            More News
-          </a>
-        </div>
-      )}
+      {showButton &&
+        (Link ? (
+          <div className="flex justify-center cursor-pointer border-b dark:border-dark-300">
+            <Link
+              href={moreNewsLink}
+              className="text-[22px] border px-10 py-2 duration-300 hover:bg-[#fb8d8d] dark:hover:bg-dark-300 dark:border-dark-300"
+            >
+              More News
+            </Link>
+          </div>
+        ) : (
+          <div className="flex justify-center cursor-pointer border-b dark:border-dark-300">
+            <a
+              href={moreNewsLink}
+              className="text-[22px] border px-10 py-2 duration-300 hover:bg-[#fb8d8d] dark:hover:bg-dark-300 dark:border-dark-300"
+            >
+              More News
+            </a>
+          </div>
+        ))}
     </ul>
   );
 }
