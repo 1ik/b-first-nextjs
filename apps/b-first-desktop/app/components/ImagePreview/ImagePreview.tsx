@@ -14,11 +14,11 @@ export default function ImagePreview({ url, alt }: ImagepreviewProps) {
   return (
     <>
       <Card className="cursor-pointer" onClick={handleOpen}>
-        <img className="w-full" src={url} alt={alt}/>
+        <img className="w-full" src={url} alt={alt || "featured image"} />
       </Card>
       <Dialog size="lg" open={open} handler={handleOpen}>
         <DialogBody className="p-0 m-0">
-          <img alt={alt} className="w-full object-cover" src={url} />
+          <img alt={alt || "featured image"} className="w-full object-cover" src={url} />
         </DialogBody>
       </Dialog>
     </>
