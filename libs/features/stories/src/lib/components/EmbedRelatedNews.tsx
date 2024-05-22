@@ -40,6 +40,7 @@ export default function EmbedRelatedNews({ open, onOpen }: EmbedRelatedNewsProps
       <DialogHeader>Search and embed news</DialogHeader>
       <DialogBody className="h-[60vh] relative overflow-hidden">
         <TypeAheadSearch
+          displayValue="title"
           label="Type for News"
           items={searchedNews?.data}
           onSearch={(s) => debounceSearch(() => setSearch(s))}

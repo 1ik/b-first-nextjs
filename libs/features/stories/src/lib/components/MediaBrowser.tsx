@@ -60,6 +60,9 @@ export default function MediaBrowser({
   };
 
   const handleAddToNews = async () => {
+    if (!imageUploadTitle) {
+      toast.error("image title is required");
+    }
     if (selectedImage) {
       handleImageSelect(selectedImage);
     } else {
@@ -209,7 +212,7 @@ export default function MediaBrowser({
                         <Typography className="my-2 md:my-4">
                           Allowed file type: <span className="font-bold">png, jpg, jpeg, gif</span>
                         </Typography>
-                        {selectedImage && (
+                        {selectedImageFile && (
                           <Input onChange={(e) => setImageUploadTitle(e.target.value)} label="Image title" />
                         )}
                       </div>
@@ -225,7 +228,7 @@ export default function MediaBrowser({
                           <Loader />
                         </div>
                       ) : (
-                        <div className="grid grid-cols-2 md:grid-cols-5 gap-x-6 gap-y-5   md:gap-y-0 md:h-72 h-[250px] w-full  overflow-y-scroll md:overflow-auto">
+                        <div className="grid grid-cols-2 md:grid-cols-5 gap-x-6 gap-y-5 md:h-72 h-[250px] w-full overflow-y-scroll md:overflow-auto">
                           {mediaImageData?.media_images.data.map((item: { url: string }, index: number) => {
                             return (
                               <img
@@ -234,7 +237,7 @@ export default function MediaBrowser({
                                 className={`w-full aspect-video object-cover cursor-pointer ${
                                   selectedImage === item.url ? "border-[3px] border-red-500" : ""
                                 }`}
-                                src={`https://images.bangladeshfirst.com/resize?width=1600&height=900&format=webp&quality=85&path=${item.url}`}
+                                src={`https://images.bangladeshfirst.com/smartcrop?width=1600&height=900&format=webp&quality=85&path=${item.url}`}
                                 alt={item.url}
                               />
                             );
