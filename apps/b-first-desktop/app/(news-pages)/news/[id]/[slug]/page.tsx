@@ -57,11 +57,16 @@ export async function generateMetadata({ params }): Promise<Metadata> {
 export default async function NewsDetails({ params }) {
   const link_url = `http://bangladeshfirst.com/news/${params.id}/${params.slug}`;
 
-  const [detailsData, trendingTopics, latestNews] = await Promise.all([
-    getData(`story/details/${params.id}`),
-    getData("trendy-topics"),
-    getData("latest/stories"),
-  ]);
+  const detailsData = await getData(`story/details/${params.id}`);
+
+  const [trendingTopics, latestNews, topNews, categoryNews] = (
+    await Promise.all([
+      getData("trendy-topics"),
+      getData("latest/stories"),
+      getData("categories/0/featured-stories"),
+      getData(`categories/${detailsData?.story.categories[0].name}/stories`),
+    ])
+  ).map((item) => item?.data);
 
   if (!detailsData) return notFound();
 
@@ -73,12 +78,7 @@ export default async function NewsDetails({ params }) {
   return (
     <>
       <Navbar activeLink={`/${detailsData?.story.categories[0].name.toLowerCase()}`} />
-      <TrendingTopics
-        Link={Link}
-        className="desktop-container mb-8"
-        title="Trending Topics"
-        items={trendingTopics?.data}
-      />
+      <TrendingTopics Link={Link} className="desktop-container mb-8" title="Trending Topics" items={trendingTopics} />
 
       <div className="desktop-container">
         <img className="mx-auto my-12" src="/ads/chopstick-ads.gif" alt="Ads" />
@@ -121,7 +121,7 @@ export default async function NewsDetails({ params }) {
                 header={`more from ${detailsData?.story.categories[0].name}`}
                 color={detailsData?.story.categories[0].color_code}
               />
-              {latestNews?.data.slice(5, 10).map((item: any, index: number) => (
+              {categoryNews?.slice(0, 5).map((item: any, index: number) => (
                 <ItemCardHorizontal
                   Link={Link}
                   className="pb-6 mb-6 border-b dark:border-dark-300"
@@ -140,8 +140,8 @@ export default async function NewsDetails({ params }) {
             ></div>
             <div className="my-10 border-t border-b dark:border-dark-300 py-4 flex gap-x-4 items-center">
               <h4 className="text-3xl">Tags:</h4>
-              <ul className="flex gap-x-2 flex-wrap">
-                {detailsData?.story.tags.map((tag:any, index:number) => (
+              <ul className="flex gap-2 flex-wrap">
+                {detailsData?.story.tags.map((tag: any, index: number) => (
                   <li
                     key={index}
                     className="text-lg font-montserrat font-semibold py-0.5 px-2 rounded-md bg-[#2B2B2B] text-white"
@@ -174,13 +174,19 @@ export default async function NewsDetails({ params }) {
           <div>
             <img className="my-10 mx-auto" src="/ads/Global.gif" alt="Ads" />
             <div>
-              <AccentHeader header="Latest News" color="#5D26D1"/>
-              <ItemList Link={Link} listType="circle" data={latestNews?.data.slice(0, 5)} showButton moreNewsLink="/latest"/>
+              <AccentHeader header="Latest News" color="#5D26D1" />
+              <ItemList
+                Link={Link}
+                listType="circle"
+                data={latestNews?.slice(0, 5)}
+                showButton
+                moreNewsLink="/latest"
+              />
             </div>
             <div className="sticky top-[100px]">
               <img className="my-10 mx-auto" src="/ads/union-bank-ad.gif" alt="Ads" />
-              <AccentHeader header="Most Viewed" color="#119F9F" />
-              <ItemList Link={Link} data={latestNews?.data.slice(14, 22)} listType="number" />
+              <AccentHeader header="Top News" color="#119F9F" />
+              <ItemList Link={Link} data={topNews?.slice(0, 6)} listType="number" />
             </div>
           </div>
         </div>
