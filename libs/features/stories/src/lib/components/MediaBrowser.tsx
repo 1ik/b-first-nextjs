@@ -68,6 +68,9 @@ export default function MediaBrowser({
     } else {
       if (!selectedImageFile || !imageUploadTitle) return;
 
+      // image size should be less than or equal to 2 MB
+      if (selectedImageFile.size > 2 * 1024 * 1024) return toast.error("Image size exceeds the maximum limit of 2MB");
+
       const formData = new FormData();
       formData.append("image", selectedImageFile);
       formData.append("title", imageUploadTitle);
@@ -87,11 +90,6 @@ export default function MediaBrowser({
       );
     }
     dispatch({ type: "setDialogOpen", payload: false });
-
-    setImageUploadTitle("");
-    setSelectedImage("");
-    setSelectedImageFile(null);
-    setSelectedUploadImage("");
   };
 
   const data = [
@@ -126,6 +124,15 @@ export default function MediaBrowser({
       toast.success("Image uploaded");
     }
   }, [isSuccess]);
+
+  useEffect(() => {
+    if (!state.dialogOpen) {
+      setImageUploadTitle("");
+      setSelectedImage("");
+      setSelectedImageFile(null);
+      setSelectedUploadImage("");
+    }
+  }, [state.dialogOpen]);
 
   return (
     <Dialog open={state.dialogOpen} handler={handleDialogOpen} size="xl">
@@ -165,7 +172,7 @@ export default function MediaBrowser({
                   <div className="flex gap-x-4">
                     <div className="flex flex-1 items-center justify-center flex-col gap-y-4">
                       <div className="md:mt-5 md:mb-4">
-                        <label className="md:w-80 flex flex-col items-center px-4 py-6 bg-[#e1e2e4] rounded-lg shadow-lg cursor-pointer hover:bg-blue hover:shadow-xl">
+                        <label className="md:w-80 flex flex-col items-center p-4 bg-[#e1e2e4] rounded-lg shadow-lg cursor-pointer hover:bg-blue hover:shadow-xl">
                           {selectedUploadImage ? (
                             <img src={selectedUploadImage} alt="selected file" />
                           ) : (
@@ -212,6 +219,9 @@ export default function MediaBrowser({
                         <Typography className="my-2 md:my-4">
                           Allowed file type: <span className="font-bold">png, jpg, jpeg, gif</span>
                         </Typography>
+                        <Typography className="my-2 md:my-4">
+                          Max allowed image size: <span className="font-bold">2 MB</span>
+                        </Typography>
                         {selectedImageFile && (
                           <Input onChange={(e) => setImageUploadTitle(e.target.value)} label="Image title" />
                         )}
@@ -233,7 +243,7 @@ export default function MediaBrowser({
                             return (
                               <img
                                 key={index}
-                                onClick={() => setSelectedImage(item.url)}
+                                onClick={() => setSelectedImage((cur) => (cur === item.url ? "" : item.url))}
                                 className={`w-full aspect-video object-cover cursor-pointer ${
                                   selectedImage === item.url ? "border-[3px] border-red-500" : ""
                                 }`}

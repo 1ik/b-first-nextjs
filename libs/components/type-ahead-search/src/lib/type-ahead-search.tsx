@@ -126,7 +126,7 @@ export function TypeAheadSearch({
   useEffect(() => {
     itemsSelected(selectedItem);
   }, [selectedItem]);
-  console.log(height);
+
   return (
     <div ref={containerRef} className="relative h-full">
       <Input
