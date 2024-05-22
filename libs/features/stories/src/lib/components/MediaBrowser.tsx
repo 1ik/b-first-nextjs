@@ -60,16 +60,21 @@ export default function MediaBrowser({
   };
 
   const handleAddToNews = async () => {
-    if (!imageUploadTitle) {
-      toast.error("image title is required");
-    }
     if (selectedImage) {
       handleImageSelect(selectedImage);
     } else {
-      if (!selectedImageFile || !imageUploadTitle) return;
+      if (!selectedImageFile && !selectedImage) {
+        return toast.error("Please Select an Image first");
+      }
+
+      if (!imageUploadTitle) {
+        return toast.error("image title is required");
+      }
 
       // image size should be less than or equal to 2 MB
-      if (selectedImageFile.size > 2 * 1024 * 1024) return toast.error("Image size exceeds the maximum limit of 2MB");
+      if (selectedImageFile.size > 2 * 1024 * 1024) {
+        return toast.error("Image size exceeds the maximum limit of 2MB");
+      }
 
       const formData = new FormData();
       formData.append("image", selectedImageFile);
@@ -139,6 +144,8 @@ export default function MediaBrowser({
       setSelectedImageFile(null);
       setImageUploadTitle("");
       setSelectedUploadImage("");
+    } else if (activeTab === "upload") {
+      setSelectedImage("");
     }
   }, [activeTab]);
 
