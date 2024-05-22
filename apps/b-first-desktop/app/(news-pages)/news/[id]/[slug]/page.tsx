@@ -6,7 +6,6 @@ import { SocialShare } from "@bfirst/components-social-share";
 import { SquareGrid } from "@bfirst/components-square-grid";
 import { getImageUrl } from "@bfirst/utilities";
 import { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import BreadCrumb from "../../../../components/BreadCrumb/BreadCrumb";
 import ImagePreview from "../../../../components/ImagePreview/ImagePreview";
@@ -78,7 +77,7 @@ export default async function NewsDetails({ params }) {
   return (
     <>
       <Navbar activeLink={`/${detailsData?.story.categories[0].name.toLowerCase()}`} />
-      <TrendingTopics Link={Link} className="desktop-container mb-8" title="Trending Topics" items={trendingTopics} />
+      <TrendingTopics className="desktop-container mb-8" title="Trending Topics" items={trendingTopics} />
 
       <div className="desktop-container">
         <img className="mx-auto my-12" src="/ads/chopstick-ads.gif" alt="Ads" />
@@ -123,7 +122,6 @@ export default async function NewsDetails({ params }) {
               />
               {categoryNews?.slice(0, 5).map((item: any, index: number) => (
                 <ItemCardHorizontal
-                  Link={Link}
                   className="pb-6 mb-6 border-b dark:border-dark-300"
                   key={index}
                   data={item}
@@ -175,18 +173,12 @@ export default async function NewsDetails({ params }) {
             <img className="my-10 mx-auto" src="/ads/Global.gif" alt="Ads" />
             <div>
               <AccentHeader header="Latest News" color="#5D26D1" />
-              <ItemList
-                Link={Link}
-                listType="circle"
-                data={latestNews?.slice(0, 5)}
-                showButton
-                moreNewsLink="/latest"
-              />
+              <ItemList listType="circle" data={latestNews?.slice(0, 5)} showButton moreNewsLink="/latest" />
             </div>
             <div className="sticky top-[100px]">
               <img className="my-10 mx-auto" src="/ads/union-bank-ad.gif" alt="Ads" />
               <AccentHeader header="Top News" color="#119F9F" />
-              <ItemList Link={Link} data={topNews?.slice(0, 6)} listType="number" />
+              <ItemList data={topNews?.slice(0, 6)} listType="number" />
             </div>
           </div>
         </div>

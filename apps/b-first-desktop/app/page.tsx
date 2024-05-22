@@ -7,7 +7,6 @@ import { BlockNews5 } from "@bfirst/components-block-news-5";
 import { ItemList } from "@bfirst/components-item-list";
 import { ListGrid } from "@bfirst/components-list-grid";
 import { SquareGrid } from "@bfirst/components-square-grid";
-import Link from "next/link";
 import Navbar from "./components/Navbar/Navbar";
 import TrendingTopics from "./components/TrendingTopics/TrendingTopics";
 import { getData } from "./utils/dataFetch";
@@ -60,16 +59,15 @@ export default async function Index() {
         data={topNews.slice(0, 5)}
         ads1="/ads/Global.gif"
         ads2="/ads/union-bank-ad.gif"
-        Link={Link}
       />
       <img className="mx-auto my-14" src="/ads/nagad.png" alt="Ads" />
-      <SquareGrid Link={Link} showAccentHeader className="desktop-container" data={topNews.slice(5, 13)} gridCols={4} />
+      <SquareGrid showAccentHeader className="desktop-container" data={topNews.slice(5, 13)} gridCols={4} />
       <img className="mx-auto my-12" src="/ads/ads_top.png" alt="Ads" />
 
       <div className="bg-[#F6EFEF] dark:bg-dark-300 py-8">
         <div className="desktop-container">
           <AccentHeader header="Politics" color="#228B22" />
-          <SquareGrid Link={Link} data={politicsNews?.slice(0, 4)} gridCols={4} />
+          <SquareGrid data={politicsNews?.slice(0, 4)} gridCols={4} />
         </div>
       </div>
       <img className="mx-auto my-12" src="/ads/bkash.png" alt="Ads" />
@@ -77,7 +75,6 @@ export default async function Index() {
       <div className="desktop-container">
         <div className="grid grid-cols-4">
           <BlockNews2
-            Link={Link}
             sectionHeader="Economy"
             headerColor="#00479B"
             adsUrl="/ads/social_islami.png"
@@ -87,7 +84,7 @@ export default async function Index() {
 
           <div>
             <AccentHeader header="Latest News" color="#5D26D1" />
-            <ItemList Link={Link} data={latestNews?.slice(0, 6)} listType="circle" showButton moreNewsLink="/latest" />
+            <ItemList data={latestNews?.slice(0, 6)} listType="circle" showButton moreNewsLink="/latest" />
             <img className="mt-4 mx-auto" src="/ads/Global.gif" alt="Ads" />
           </div>
         </div>
@@ -96,17 +93,11 @@ export default async function Index() {
       <div className="desktop-container my-10">
         <div className="grid grid-cols-4">
           <div className="col-span-3 border-r dark:border-dark-300 pr-4 mr-4">
-            <BlockNews3
-              Link={Link}
-              sectionHeader="Feature"
-              headerColor="#8BD032"
-              adsUrl="/ads/ads_three.png"
-              data={featureNews}
-            />
+            <BlockNews3 sectionHeader="Feature" headerColor="#8BD032" adsUrl="/ads/ads_three.png" data={featureNews} />
           </div>
           <div>
             <AccentHeader header="Most Viewed" color="#119F9F" />
-            <ItemList Link={Link} data={latestNews?.slice(6, 11)} listType="number" />
+            <ItemList data={latestNews?.slice(6, 11)} listType="number" />
             <img className="mt-4 mx-auto" src="/ads/Global.gif" alt="Ads" />
           </div>
         </div>
@@ -115,7 +106,6 @@ export default async function Index() {
       <div className="desktop-container mt-20">
         <div className="grid grid-cols-4">
           <BlockNews4
-            Link={Link}
             sectionHeader="Lifestyle"
             headerColor="#EF2D8A"
             adsUrl="/ads/social_islami.png"
@@ -124,7 +114,7 @@ export default async function Index() {
           />
           <div>
             <AccentHeader header="On this day" color="#A49A46" />
-            <ItemList Link={Link} showImage showDate data={latestNews?.slice(12, 16)} />
+            <ItemList showImage showDate data={latestNews?.slice(12, 16)} />
             <div className="flex flex-col gap-y-3 items-center">
               <img src="ads/SIBL_Profit_300x250.gif" alt="Ads" />
               <img src="ads/Global.gif" alt="Ads" />
@@ -134,7 +124,6 @@ export default async function Index() {
       </div>
 
       <BlockNews5
-        Link={Link}
         sectionHeader="entertainment"
         headerColor="#5D26D1"
         className="desktop-container my-10"
@@ -142,7 +131,7 @@ export default async function Index() {
       />
       <img className="mx-auto my-16" src="/ads/ads_six.png" alt="Ads" />
 
-      <ListGrid Link={Link} className="desktop-container" data={[bangladeshNews, worldNews, sportsNews, techNews]} />
+      <ListGrid className="desktop-container" data={[bangladeshNews, worldNews, sportsNews, techNews]} />
 
       <img className="mx-auto mt-12" src="/ads/fresh.gif" alt="Ads" />
     </>
