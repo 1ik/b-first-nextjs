@@ -13,12 +13,13 @@ import { getData } from "../../utils/dataFetch";
 
 export default async function CategoryPage({ params }) {
   const { category } = params;
-  const [trendingTopics, categroyNews, latestNews] = await Promise.all([
+  const [trendingTopics, categroyNews, latestNews, topNews] = await Promise.all([
     getData("trendy-topics"),
     getData(
       `${category === "latest" ? "latest/stories?size=20&page=1" : `categories/${category}/stories?size=20&page=1`}`
     ),
     getData("latest/stories"),
+    getData("categories/0/featured-stories"),
   ]);
 
   if (!categroyNews?.data.length) return notFound();
@@ -61,13 +62,19 @@ export default async function CategoryPage({ params }) {
           <div>
             <Image className="mx-auto block my-10" width={320} height={250} src="/ads/Global.gif" alt="Ads" />
             <div>
-              <AccentHeader header="Latest" />
-              <ItemList Link={Link} listType="circle" data={latestNews?.data.slice(0, 6)} moreNewsLink="/latest" showButton/>
+              <AccentHeader header="Latest News" color="#5D26D1" />
+              <ItemList
+                Link={Link}
+                listType="circle"
+                data={latestNews?.data.slice(0, 6)}
+                moreNewsLink="/latest"
+                showButton
+              />
             </div>
             <Image className="mx-auto block my-10" width={320} height={250} src="/ads/union-bank-ad.gif" alt="Ads" />
             <div>
-              <AccentHeader header="Most Viewed" color="#119F9F" />
-              <ItemList Link={Link} data={latestNews?.data.slice(14, 22)} listType="number" />
+              <AccentHeader header="Top News" color="#119F9F" />
+              <ItemList Link={Link} data={topNews?.data.slice(0, 6)} listType="number" />
             </div>
             <Image
               className="mx-auto block my-10 sticky top-20"

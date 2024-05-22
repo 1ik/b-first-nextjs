@@ -15,7 +15,7 @@ export const getImageUrl = (path: string, w?: number, h?: number, q?: number) =>
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const getNewsUrl = (news: any) =>
-  `/news/${news.id}/${news.title
+  `/news/${news?.id}/${news?.title
     .replaceAll(" ", "-")
     .replace(/[^\w\s-]/g, "")
     .toLowerCase()}`;

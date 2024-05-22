@@ -30,16 +30,16 @@ export function ItemList({
             <Link href={getNewsUrl(data?.[0])}>
               <img
                 className="hover:scale-110 duration-300 aspect-video object-cover w-full mb-5"
-                src={getImageUrl(data?.[0].meta.featured_image)}
-                alt={data?.[0].meta.image_caption}
+                src={getImageUrl(data?.[0]?.meta.featured_image)}
+                alt={data?.[0]?.meta.image_caption}
               />
             </Link>
           ) : (
             <a href={getNewsUrl(data?.[0])}>
               <img
                 className="hover:scale-110 duration-300 aspect-video object-cover w-full mb-5"
-                src={getImageUrl(data?.[0].meta.featured_image)}
-                alt={data?.[0].meta.image_caption}
+                src={getImageUrl(data?.[0]?.meta.featured_image)}
+                alt={data?.[0]?.meta.image_caption}
               />
             </a>
           )}
