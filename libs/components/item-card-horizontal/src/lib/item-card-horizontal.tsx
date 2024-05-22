@@ -87,7 +87,7 @@ export function ItemCardHorizontal({
             <SocialShare
               title="Share Trending On :"
               textPlacement="left"
-              shareLink={getNewsUrl(data)}
+              shareLink={`https://bangladeshfirst.com/${getNewsUrl(data)}`}
               className="text-[#6F6F6F] dark:text-white mt-auto"
             />
           )}

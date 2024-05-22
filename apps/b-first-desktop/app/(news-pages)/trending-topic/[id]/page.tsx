@@ -1,13 +1,19 @@
-import Navbar from "apps/b-first-desktop/app/components/Navbar/Navbar";
-import { getData } from "apps/b-first-desktop/app/utils/dataFetch";
-import { ItemCardHorizontal } from "@bfirst/components-item-card-horizontal";
 import { AccentHeader } from "@bfirst/components-accent-header";
+import { ItemCardHorizontal } from "@bfirst/components-item-card-horizontal";
 import { ItemList } from "@bfirst/components-item-list";
 import Link from "next/link";
-import BreadCrumb from "apps/b-first-desktop/app/components/BreadCrumb/BreadCrumb";
+import BreadCrumb from "../../../components/BreadCrumb/BreadCrumb";
+import Navbar from "../../../components/Navbar/Navbar";
+import { getData } from "../../../utils/dataFetch";
+
 export default async function TrendingTopic({ params }) {
-  const trenndingNews = await getData(`trending-topics/${params.id}`);
-  const latestNews = await getData("latest/stories");
+  const [trendingNews, latestNews, topNews] = (
+    await Promise.all([
+      getData(`trending-topics/${params.id}`),
+      getData("latest/stories?size=10"),
+      getData("categories/0/featured-stories"),
+    ])
+  ).map((item) => item.data);
 
   return (
     <div>
@@ -26,7 +32,7 @@ export default async function TrendingTopic({ params }) {
         </div>
         <div className="grid grid-cols-4 gap-x-6">
           <div className="col-span-3">
-            {trenndingNews.data?.map((item: any, index: number) => (
+            {trendingNews?.map((item: any, index: number) => (
               <ItemCardHorizontal
                 className=" border-b pb-4  dark:border-dark-300"
                 key={index}
@@ -46,7 +52,7 @@ export default async function TrendingTopic({ params }) {
               <AccentHeader header="LATEST NEWS" color="#5D26D1" />
               <ItemList
                 Link={Link}
-                data={latestNews?.data.slice(0, 6)}
+                data={latestNews?.slice(0, 6)}
                 listType="circle"
                 showButton
                 moreNewsLink="/latest"
@@ -54,8 +60,8 @@ export default async function TrendingTopic({ params }) {
               <img className="mt-4 mx-auto" src="/ads/IBBL.gif" alt="Ads" />
             </div>
             <div>
-              <AccentHeader header="MOST VIEWED" color="#119F9F" />
-              <ItemList Link={Link} data={latestNews?.data.slice(6, 12)} listType="number" />
+              <AccentHeader header="Top News" color="#119F9F" />
+              <ItemList Link={Link} data={topNews?.slice(0, 6)} listType="number" />
               <img className="mt-4 mx-auto" src="/ads/Global.gif" alt="Ads" />
             </div>
           </div>
