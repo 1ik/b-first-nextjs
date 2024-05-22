@@ -20,7 +20,7 @@ export function ManageStories() {
   const [search, setSearch] = useState("");
   const [showConfirmModalFor, setShowConfirmModalFor] = useState<number>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
+ 
   let debounce: string | number | NodeJS.Timeout | undefined;
   const debounceSearch = function (callback: () => void) {
     clearTimeout(debounce);
@@ -221,7 +221,7 @@ export function ManageStories() {
         <div className="h-10 pt-5 flex items-center justify-end gap-x-6 w-full border-t bg-white border-gray-100 fixed bottom-0 pb-5 right-10">
           <button
             type="button"
-            onClick={() => window.location.reload()}
+            onClick={() => setFeaturedStories(data.data)}
             className="text-sm font-semibold leading-6 text-gray-900"
           >
             Cancel

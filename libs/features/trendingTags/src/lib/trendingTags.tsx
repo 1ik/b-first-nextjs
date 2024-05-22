@@ -14,10 +14,12 @@ const dropTarget = (
 export function TrendingTags() {
   const [search, setSearch] = useState("");
   const { data: searchedNews } = useGet(`api/v1/tags?name=${search}`);
-  const { data: TrendingTagsList, isSuccess: trendingLoadSuccess } = useGet(`api/v1/public/trendy-topics`);
+  const { data: trendingTagsList, isSuccess: trendingLoadSuccess } = useGet(`api/v1/public/trendy-topics`);
   const [trendingTopic, setTrendingTopic] = useState([]);
   const [showConfirmModalFor, setShowConfirmModalFor] = useState<number>();
   const { request, isSuccess: trendingList } = usePost(`api/v1/trendy-topic/create`);
+
+  
 
   const move = <T,>(array: T[], from: number, to: number): T[] => {
     const newArray: T[] = [...array];
@@ -82,9 +84,9 @@ export function TrendingTags() {
 
   useEffect(() => {
     if (trendingLoadSuccess) {
-      setTrendingTopic([...TrendingTagsList.data] as never);
+      setTrendingTopic([...trendingTagsList.data] as never);
     }
-  }, [TrendingTagsList, trendingLoadSuccess]);
+  }, [trendingTagsList, trendingLoadSuccess]);
 
   return (
     <div className="p-5">
@@ -179,7 +181,7 @@ export function TrendingTags() {
         <div className="h-10 pt-5 flex items-center justify-end gap-x-6 w-full border-t bg-white border-gray-100 fixed bottom-0 pb-5 right-10">
           <button
             type="button"
-            onClick={() => window.location.reload()}
+            onClick={() => setTrendingTopic(trendingTagsList.data)}
             className="text-sm font-semibold leading-6 text-gray-900"
           >
             Cancel
