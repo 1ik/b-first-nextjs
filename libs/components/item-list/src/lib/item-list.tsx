@@ -103,7 +103,7 @@ export function ItemList({
           <div className="flex justify-center cursor-pointer border-b dark:border-dark-300">
             <Link
               href={moreNewsLink}
-              className="text-[22px] border px-10 py-2 duration-300 hover:bg-[#fb8d8d] dark:hover:bg-dark-300 dark:border-dark-300"
+              className="text-[22px] border px-10 py-2 duration-300 hover:bg-[#efeff0] dark:hover:bg-dark-300 dark:border-dark-300"
             >
               More News
             </Link>
@@ -112,7 +112,7 @@ export function ItemList({
           <div className="flex justify-center cursor-pointer border-b dark:border-dark-300">
             <a
               href={moreNewsLink}
-              className="text-[22px] border px-10 py-2 duration-300 hover:bg-[#fb8d8d] dark:hover:bg-dark-300 dark:border-dark-300"
+              className="text-[22px] border px-10 py-2 duration-300 hover:bg-[#efeff0] dark:hover:bg-dark-300 dark:border-dark-300"
             >
               More News
             </a>
