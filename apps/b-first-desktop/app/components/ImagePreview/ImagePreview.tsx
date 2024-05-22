@@ -1,24 +1,26 @@
 "use client";
-
-import ModalImage from "react-modal-image";
+import { useState } from "react";
+import { Dialog, DialogBody, Card } from "@bfirst/material-tailwind";
 
 interface ImagepreviewProps {
   url: string;
-  url_md?: string;
-  url_lg?: string;
   alt?: string;
 }
 
-export default function ImagePreview({ url, url_md, url_lg, alt }: ImagepreviewProps) {
+export default function ImagePreview({ url, alt }: ImagepreviewProps) {
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen((cur) => !cur);
+
   return (
-    <ModalImage
-      className="w-full"
-      hideDownload
-      style={{ zIndex: "9999" }}
-      small={url}
-      medium={url_md || url}
-      large={url_lg || url}
-      alt={alt || "featured image"}
-    />
+    <>
+      <Card className="cursor-pointer" onClick={handleOpen}>
+        <img className="w-full" src={url} alt={alt || "featured image"} />
+      </Card>
+      <Dialog size="lg" open={open} handler={handleOpen}>
+        <DialogBody className="p-0 m-0">
+          <img alt={alt || "featured image"} className="w-full object-cover" src={url} />
+        </DialogBody>
+      </Dialog>
+    </>
   );
 }
