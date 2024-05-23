@@ -12,7 +12,7 @@ import { AuthorAddLazy, AuthorEditLazy, AuthorsListLazy, TrashAuthorsListLazy } 
 import { AddLazy, EditLazy, ListLazy, TrashCategoriesListLazy } from "./internal/categories";
 import { HomeLazy } from "./internal/home";
 import { ManageStories } from "./internal/manageStories/manageStories";
-import RecommendedStoriesLazy from "./internal/recommendedStories";
+import RecommendedStoriesLazy from "./internal/recommended";
 import { AddEditStoriesLazy, StoriesListLazy, StoryPreviewLazy, TrashStoriesListLazy } from "./internal/stories";
 import { TagAddLazy, TagEditLazy, TagsListLazy, TrashTagsListLazy } from "./internal/tags";
 import { TrendingTagsLazy } from "./internal/trendingTags";

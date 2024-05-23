@@ -1,7 +1,7 @@
 import { Icon } from "@bfirst/components-icon";
 import { HCF } from "@bfirst/components-layout";
-import { Breadcrumbs } from "@bfirst/material-tailwind";
 import { TrendingTags } from "@bfirst/components-trendingTags";
+import { Breadcrumbs } from "@bfirst/material-tailwind";
 import { Link } from "react-router-dom";
 
 export default function trendingTags() {
@@ -13,7 +13,7 @@ export default function trendingTags() {
             <Link to="/">
               <Icon name="home" variant="text" />
             </Link>
-            <Link to="/trending-tags">Trending-Topic</Link>
+            <Link to="/trending-topic">Trending-Topic</Link>
           </Breadcrumbs>
         </div>
       </HCF.Header>

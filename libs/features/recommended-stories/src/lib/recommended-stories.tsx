@@ -21,9 +21,11 @@ export function RecommendedStories(props: RecommendedStoriesProps) {
   const [showConfirmModalFor, setShowConfirmModalFor] = useState<number>();
 
   // API CALLS
-  const { data: trendingTagsList, isSuccess: trendingLoadSuccess } = useGet(`api/v1/public/trendy-topics`);
-  const { data: searchedNews } = useGet(`api/v1/tags?name=${search}`);
-  const { request, isSuccess: trendingList } = usePost(`api/v1/trendy-topic/create`);
+  const { data: recommendedStoriesList, isSuccess: recommendedStoriesLoadSuccess } = useGet(
+    `api/v1/public/recommended-stories`
+  );
+  const { data: searchedNews } = useGet(`api/v1/stories?title=${search}`);
+  const { request, isSuccess: saveSuccess } = usePost(`api/v1/recommended-stories/create`);
 
   // HANDLER FUNCTIONS
   const move = <T,>(array: T[], from: number, to: number): T[] => {
@@ -46,28 +48,37 @@ export function RecommendedStories(props: RecommendedStoriesProps) {
   };
 
   const handleAddRecommendedStories = function (news: any) {
+    console.log(news);
     if (!news) return;
-    if (recommendedStories.length >= 10) {
+    if (recommendedStories.length >= 4) {
       toast.success("Last item removed and new one added", {
         position: "top-center",
       });
       setRecommendedStories((cur) => {
         const newList = cur.slice(0, -1);
-        return [{ id: news.id, name: news.name, created_at: news.created_at }, ...newList] as never;
+        return [{ id: news.id, title: news.title, created_at: news.created_at }, ...newList] as never;
       });
     } else
-      setRecommendedStories((cur) => [{ id: news.id, name: news.name, created_at: news.created_at }, ...cur] as never);
+      setRecommendedStories(
+        (cur) => [{ id: news.id, title: news.title, created_at: news.created_at }, ...cur] as never
+      );
     setSearch("");
   };
 
   const handleSubmit = async function (e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (recommendedStories.length !== 4) {
+      toast.warning("Total recommended story must be 4", {
+        position: "top-center",
+      });
+      return;
+    }
 
-    const newTrendingTopicId = {
-      tag_ids: recommendedStories.map((story) => (story as { id: number }).id),
+    const newRecommendedStoriesId = {
+      story_ids: recommendedStories.map((story) => (story as { id: number }).id),
     };
 
-    request(newTrendingTopicId);
+    request(newRecommendedStoriesId);
   };
 
   const handleConfirm = (id: number) => {
@@ -82,18 +93,18 @@ export function RecommendedStories(props: RecommendedStoriesProps) {
 
   // EFFECT HOOKS
   useEffect(() => {
-    if (trendingList) {
-      toast.success("Trending list saved succesfully", {
+    if (saveSuccess) {
+      toast.success("Recommended stories list saved succesfully", {
         position: "top-center",
       });
     }
-  }, [trendingList]);
+  }, [saveSuccess]);
 
   useEffect(() => {
-    if (trendingLoadSuccess) {
-      setRecommendedStories([...trendingTagsList.data] as never);
+    if (recommendedStoriesLoadSuccess) {
+      setRecommendedStories([...recommendedStoriesList.data] as never);
     }
-  }, [trendingTagsList, trendingLoadSuccess]);
+  }, [recommendedStoriesList, recommendedStoriesLoadSuccess]);
 
   return (
     <div className="p-5">
@@ -101,7 +112,7 @@ export function RecommendedStories(props: RecommendedStoriesProps) {
       <form onSubmit={handleSubmit}>
         <div className="col-span-3">
           <TypeAheadSearch
-            displayValue="name"
+            displayValue="title"
             label="Type for news"
             items={searchedNews?.data.filter((sN: any) => !recommendedStories.some((fN: any) => fN.id === sN.id))}
             onSearch={(s) => debounceSearch(() => setSearch(s))}
@@ -112,7 +123,7 @@ export function RecommendedStories(props: RecommendedStoriesProps) {
         </div>
         <div className="col-span-full">
           <div className="col-span-full">
-            <label className="block text-sm font-medium leading-6 mb-4 text-gray-900">Recommended News</label>
+            <label className="block text-lg font-medium leading-6 my-4 text-gray-900">Recommended Stories</label>
             <div className="grid grid-cols-3 py-4 mb-4 border-b">
               <p className="grid-col-1">Serial</p>
               <p className="grid-col-2 text-center">Title</p>
@@ -187,7 +198,7 @@ export function RecommendedStories(props: RecommendedStoriesProps) {
         <div className="h-10 pt-5 flex items-center justify-end gap-x-6 w-full border-t bg-white border-gray-100 fixed bottom-0 pb-5 right-10">
           <button
             type="button"
-            onClick={() => setRecommendedStories(trendingTagsList.data)}
+            onClick={() => setRecommendedStories(recommendedStoriesList.data)}
             className="text-sm font-semibold leading-6 text-gray-900"
           >
             Cancel
