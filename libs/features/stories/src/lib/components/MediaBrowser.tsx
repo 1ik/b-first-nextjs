@@ -40,9 +40,11 @@ export default function MediaBrowser({
   const [currentPage, setCurrentPage] = useState(1);
   const [activeTab, setActiveTab] = useState("upload");
   const [selectedImageFile, setSelectedImageFile] = useState<any>(null);
+  const [selectedUploadImage, setSelectedUploadImage] = useState("");
   const [selectedImage, setSelectedImage] = useState("");
   const [imageUploadTitle, setImageUploadTitle] = useState("");
   const [searchImageTitle, setSearchImageTitle] = useState("");
+  const [imageCaption, setImageCaption] = useState("");
 
   const { data: mediaImageData, isPending } = useGet(
     `api/v1/media-image-list?title=${searchImageTitle}&sort=desc&page=${currentPage}`
@@ -58,25 +60,38 @@ export default function MediaBrowser({
   };
 
   const handleAddToNews = async () => {
-    if (!selectedImageFile || !imageUploadTitle) return;
+    if (selectedImage) {
+      handleImageSelect(selectedImage);
+    } else {
+      if (!selectedImageFile && !selectedImage) {
+        return toast.error("Please Select an Image first");
+      }
 
-    const formData = new FormData();
-    formData.append("image", selectedImageFile);
-    formData.append("title", imageUploadTitle);
-    const data = await requestAsync(formData);
+      if (!imageUploadTitle) {
+        return toast.error("image title is required");
+      }
 
-    setImageUploadTitle("");
-    setSelectedImage("");
-    setSelectedImageFile(null);
+      // image size should be less than or equal to 2 MB
+      if (selectedImageFile.size > 2 * 1024 * 1024) {
+        return toast.error("Image size exceeds the maximum limit of 2MB");
+      }
 
-    handleImageSelect(data.data.url);
+      const formData = new FormData();
+      formData.append("image", selectedImageFile);
+      formData.append("title", imageUploadTitle);
+      const data = await requestAsync(formData);
+      handleImageSelect(data.data.url);
+    }
   };
 
   const handleImageSelect = function (path: string) {
     if (state.openFrom === "storyForm") onFeaturedImgUrl(path);
     if (state.openFrom === "textEditor") {
       tinymce.activeEditor?.insertContent(
-        `<img width="100%" src="https://images.bangladeshfirst.com/smartcrop?width=1600&height=900&format=webp&quality=85&path=${path}" alt=""/>`
+        `<div>
+          <img width="100%" src="https://images.bangladeshfirst.com/smartcrop?width=1600&height=900&format=webp&quality=85&path=${path}" alt=""/>
+          <h4>${imageCaption && imageCaption}</h4>
+        </div>`
       );
     }
     dispatch({ type: "setDialogOpen", payload: false });
@@ -104,7 +119,7 @@ export default function MediaBrowser({
     if (!selectedImageFile) return;
     const reader = new FileReader();
     reader.onload = function (e) {
-      setSelectedImage(e.target?.result as string);
+      setSelectedUploadImage(e.target?.result as string);
     };
     reader.readAsDataURL(selectedImageFile);
   }, [selectedImageFile]);
@@ -114,6 +129,25 @@ export default function MediaBrowser({
       toast.success("Image uploaded");
     }
   }, [isSuccess]);
+
+  useEffect(() => {
+    if (!state.dialogOpen) {
+      setImageUploadTitle("");
+      setSelectedImage("");
+      setSelectedImageFile(null);
+      setSelectedUploadImage("");
+    }
+  }, [state.dialogOpen]);
+
+  useEffect(() => {
+    if (activeTab === "library") {
+      setSelectedImageFile(null);
+      setImageUploadTitle("");
+      setSelectedUploadImage("");
+    } else if (activeTab === "upload") {
+      setSelectedImage("");
+    }
+  }, [activeTab]);
 
   return (
     <Dialog open={state.dialogOpen} handler={handleDialogOpen} size="xl">
@@ -141,11 +175,7 @@ export default function MediaBrowser({
             )}
 
             {state.openFrom === "textEditor" && (
-              <Input
-                {...register("imageCaption")}
-                defaultValue={defaultData?.story.meta.imageCaption}
-                label="Image Caption"
-              />
+              <Input onChange={(e) => setImageCaption(e.target.value)} label="Image Caption" />
             )}
 
             {activeTab === "library" && <Input onChange={handleImageSearch} label="Search" />}
@@ -157,11 +187,11 @@ export default function MediaBrowser({
                   <div className="flex gap-x-4">
                     <div className="flex flex-1 items-center justify-center flex-col gap-y-4">
                       <div className="md:mt-5 md:mb-4">
-                        <label className="md:w-80 flex flex-col items-center px-4 py-6 bg-[#e1e2e4] rounded-lg shadow-lg cursor-pointer hover:bg-blue hover:shadow-xl">
-                          {selectedImage ? (
-                            <img src={selectedImage} alt="selected file" />
+                        <label className="md:w-80 flex flex-col items-center p-4 bg-[#e1e2e4] rounded-lg shadow-lg cursor-pointer hover:bg-blue hover:shadow-xl">
+                          {selectedUploadImage ? (
+                            <img src={selectedUploadImage} alt="selected file" />
                           ) : (
-                            <>
+                            <div className="py-4">
                               <svg
                                 fill="#b3b6bc"
                                 height="100px"
@@ -192,7 +222,7 @@ export default function MediaBrowser({
                                 </g>
                               </svg>
                               <span>Upload Image</span>
-                            </>
+                            </div>
                           )}
 
                           <input
@@ -204,7 +234,10 @@ export default function MediaBrowser({
                         <Typography className="my-2 md:my-4">
                           Allowed file type: <span className="font-bold">png, jpg, jpeg, gif</span>
                         </Typography>
-                        {selectedImage && (
+                        <Typography className="my-2 md:my-4">
+                          Max allowed image size: <span className="font-bold">2 MB</span>
+                        </Typography>
+                        {selectedImageFile && (
                           <Input onChange={(e) => setImageUploadTitle(e.target.value)} label="Image title" />
                         )}
                       </div>
@@ -220,14 +253,16 @@ export default function MediaBrowser({
                           <Loader />
                         </div>
                       ) : (
-                        <div className="grid grid-cols-2 md:grid-cols-5 gap-x-6 gap-y-5   md:gap-y-0 md:h-72 h-[250px] w-full  overflow-y-scroll md:overflow-auto">
+                        <div className="grid grid-cols-2 md:grid-cols-5 gap-x-6 gap-y-5 md:h-72 h-[250px] w-full overflow-y-scroll md:overflow-auto">
                           {mediaImageData?.media_images.data.map((item: { url: string }, index: number) => {
                             return (
                               <img
                                 key={index}
-                                onClick={() => handleImageSelect(item.url)}
-                                className="w-full aspect-video object-cover cursor-pointer"
-                                src={`https://images.bangladeshfirst.com/resize?width=1600&height=900&format=webp&quality=85&path=${item.url}`}
+                                onClick={() => setSelectedImage((cur) => (cur === item.url ? "" : item.url))}
+                                className={`w-full aspect-video object-cover cursor-pointer ${
+                                  selectedImage === item.url ? "border-[3px] border-red-500" : ""
+                                }`}
+                                src={`https://images.bangladeshfirst.com/smartcrop?width=1600&height=900&format=webp&quality=85&path=${item.url}`}
                                 alt={item.url}
                               />
                             );

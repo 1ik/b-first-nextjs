@@ -43,7 +43,7 @@ export const TinymceEditor = function ({ label, defaultValue, onChange, dispatch
               const response = await requestAsync(formData);
 
               callback(
-                `https://images.bangladeshfirst.com/resize?width=1600&height=900&format=webp&quality=85&path=${response.data.url}`,
+                `https://images.bangladeshfirst.com/smartcrop?width=1600&height=900&format=webp&quality=85&path=${response.data.url}`,
                 { title: file.name }
               );
             } catch (error) {

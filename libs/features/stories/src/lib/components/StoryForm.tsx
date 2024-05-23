@@ -240,7 +240,7 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
               {featuredImgUrl && (
                 <img
                   className="md:w-[720px] w-full aspect-video object-cover"
-                  src={`https://images.bangladeshfirst.com/resize?width=1600&height=900&format=webp&quality=85&path=${featuredImgUrl}`}
+                  src={`https://images.bangladeshfirst.com/smartcrop?width=1600&height=900&format=webp&quality=85&path=${featuredImgUrl}`}
                   alt="Featured_Image"
                 />
               )}
