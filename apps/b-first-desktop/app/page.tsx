@@ -14,13 +14,22 @@ import { getData } from "./utils/dataFetch";
 import filterOutOTD from "./utils/filterOutOTD";
 
 export default async function Index() {
-  const topNews = (await getData("categories/0/featured-stories"))?.data;
+  const [topNews, recommendedNews] = (
+    await Promise.all([getData("categories/0/featured-stories"), getData("recommended-stories")])
+  ).map((item) => item.data);
+
+  const filterRecommended = function (item: { id: number }) {
+    return !recommendedNews?.find((rN: { id: number }) => rN.id === item.id);
+  };
 
   const filterTopNews = function (item: any) {
     return !topNews?.find((tN: { id: number }) => tN.id === (item as { id: number }).id);
   };
 
-  const latestNews = (await getData("latest/stories?size=30"))?.data.filter(filterTopNews).filter(filterOutOTD);
+  const latestNews = (await getData("latest/stories?size=30"))?.data
+    .filter(filterTopNews)
+    .filter(filterRecommended)
+    .filter(filterOutOTD);
 
   const filterLatestNews = function (item: any) {
     return !latestNews?.find((lN: { id: number }) => lN.id === (item as { id: number }).id);
@@ -32,7 +41,6 @@ export default async function Index() {
     featureNews,
     entertainmentNews,
     lifestyleNews,
-    politicsNews,
     bangladeshNews,
     worldNews,
     sportsNews,
@@ -44,13 +52,12 @@ export default async function Index() {
       getData("categories/feature/stories"),
       getData("categories/entertainment/stories"),
       getData("categories/lifestyle/stories"),
-      getData("categories/politics/stories"),
       getData("categories/bangladesh/stories"),
       getData("categories/world/stories"),
       getData("categories/sports/stories"),
       getData("categories/tech/stories"),
     ])
-  ).map((item) => item?.data.filter(filterTopNews).filter(filterLatestNews));
+  ).map((item) => item?.data.filter(filterTopNews).filter(filterRecommended).filter(filterLatestNews));
 
   const trendingTopics = (await getData("trendy-topics"))?.data;
 
@@ -71,8 +78,8 @@ export default async function Index() {
 
       <div className="bg-[#F6EFEF] dark:bg-dark-300 py-8">
         <div className="desktop-container">
-          <AccentHeader header="Politics" color="#228B22" />
-          <SquareGrid Link={Link} data={politicsNews?.slice(0, 4)} gridCols={4} />
+          <AccentHeader header="recommended" color="#228B22" />
+          <SquareGrid Link={Link} data={recommendedNews?.slice(0, 4)} gridCols={4} />
         </div>
       </div>
       <img className="mx-auto my-12" src="/ads/bkash.png" alt="Ads" />
