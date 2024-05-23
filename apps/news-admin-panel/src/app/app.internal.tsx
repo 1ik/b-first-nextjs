@@ -3,17 +3,18 @@ import { Accordion, AccordionBody, AccordionHeader } from "@bfirst/material-tail
 import { useContext, useEffect, useState } from "react";
 import { IoMenuSharp } from "react-icons/io5";
 // import { FaUserCircle } from "react-icons/fa";
+import { Icon } from "@bfirst/components-icon";
+import { Menu, MenuHandler, MenuItem, MenuList, Typography } from "@bfirst/material-tailwind";
 import { MdChevronRight } from "react-icons/md";
 import { Link, Route, Routes, useLocation } from "react-router-dom";
 import { AppContext } from "./app.context";
 import { AuthorAddLazy, AuthorEditLazy, AuthorsListLazy, TrashAuthorsListLazy } from "./internal/authors";
 import { AddLazy, EditLazy, ListLazy, TrashCategoriesListLazy } from "./internal/categories";
+import { HomeLazy } from "./internal/home";
 import { ManageStories } from "./internal/manageStories/manageStories";
+import RecommendedStoriesLazy from "./internal/recommendedStories";
 import { AddEditStoriesLazy, StoriesListLazy, StoryPreviewLazy, TrashStoriesListLazy } from "./internal/stories";
 import { TagAddLazy, TagEditLazy, TagsListLazy, TrashTagsListLazy } from "./internal/tags";
-import { Menu, MenuHandler, MenuList, MenuItem, Typography } from "@bfirst/material-tailwind";
-import { Icon } from "@bfirst/components-icon";
-import { HomeLazy } from "./internal/home";
 import { TrendingTagsLazy } from "./internal/trendingTags";
 export const NavBar = () => {
   return (
@@ -140,7 +141,7 @@ export function AppInternal() {
                       </Typography>
                     </MenuItem>
                     <MenuItem className="flex items-center gap-2">
-                    <Icon name="theme" size={18} variant="text"/>
+                      <Icon name="theme" size={18} variant="text" />
 
                       <Typography variant="small" className="font-medium">
                         Theme
@@ -174,6 +175,7 @@ export function AppInternal() {
             <Routes>
               <Route path="/" element={<HomeLazy />} />
               <Route path="/trending-topic" element={<TrendingTagsLazy />} />
+              <Route path="/recommended-stories" element={<RecommendedStoriesLazy />} />
               <Route path="/categories" element={<ListLazy />} />
               <Route path="/categories/add" element={<AddLazy />} />
               <Route path="/categories/:id" element={<EditLazy />} />
@@ -191,7 +193,6 @@ export function AppInternal() {
               <Route path="/trash-authors" element={<TrashAuthorsListLazy />} />
               <Route path="/trash-tags" element={<TrashTagsListLazy />} />
               <Route path="/trash-categories" element={<TrashCategoriesListLazy />} />
-        
             </Routes>
           </div>
         </div>
