@@ -24,6 +24,11 @@ export function ItemList({
 }: ItemListProps) {
   return (
     <ul className={`${className}`}>
+      {showDate && (
+        <h3 className="bg-[#FDC269] text-black font-montserrat font-semibold text-[22px] px-8 py-1.5 w-fit my-3">
+          {moment().format("D MMMM")}
+        </h3>
+      )}
       {showImage && (
         <div className="overflow-hidden">
           {Link ? (
@@ -44,11 +49,6 @@ export function ItemList({
             </a>
           )}
         </div>
-      )}
-      {showDate && (
-        <h3 className="bg-[#FDC269] text-black font-montserrat font-semibold text-[22px] px-8 py-1.5 w-fit my-3">
-          {moment().format("D MMMM")}
-        </h3>
       )}
       {data?.map((item: any, index: number) =>
         Link ? (

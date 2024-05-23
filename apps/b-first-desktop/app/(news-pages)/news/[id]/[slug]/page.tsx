@@ -5,6 +5,7 @@ import { ProfileCard } from "@bfirst/components-profile-card";
 import { SocialShare } from "@bfirst/components-social-share";
 import { SquareGrid } from "@bfirst/components-square-grid";
 import { getImageUrl } from "@bfirst/utilities";
+import filterOutOTD from "apps/b-first-desktop/app/utils/filterOutOTD";
 import { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -70,6 +71,7 @@ export default async function NewsDetails({ params }) {
 
   if (!detailsData) return notFound();
 
+  const filteredLatestNews = latestNews.filter(filterOutOTD);
   const tagsArr = detailsData?.story.tags.map((tag: { id: any }) => tag.id);
   const relatedNews = (await getData(`related-stories?tags=${tagsArr.join(",")}`))?.data.filter(
     (rN: { id: any }) => rN.id != params.id
@@ -178,7 +180,7 @@ export default async function NewsDetails({ params }) {
               <ItemList
                 Link={Link}
                 listType="circle"
-                data={latestNews?.slice(0, 5)}
+                data={filteredLatestNews?.slice(0, 5)}
                 showButton
                 moreNewsLink="/latest"
               />

@@ -1,6 +1,7 @@
 import { AccentHeader } from "@bfirst/components-accent-header";
 import { ItemCardHorizontal } from "@bfirst/components-item-card-horizontal";
 import { ItemList } from "@bfirst/components-item-list";
+import filterOutOTD from "apps/b-first-desktop/app/utils/filterOutOTD";
 import Link from "next/link";
 import BreadCrumb from "../../../components/BreadCrumb/BreadCrumb";
 import Navbar from "../../../components/Navbar/Navbar";
@@ -15,6 +16,7 @@ export default async function TrendingTopic({ params }) {
     ])
   ).map((item) => item.data);
 
+  const filteredLatestNews = latestNews.filter(filterOutOTD);
   return (
     <div>
       <Navbar />
@@ -52,7 +54,7 @@ export default async function TrendingTopic({ params }) {
               <AccentHeader header="LATEST NEWS" color="#5D26D1" />
               <ItemList
                 Link={Link}
-                data={latestNews?.slice(0, 6)}
+                data={filteredLatestNews?.slice(0, 6)}
                 listType="circle"
                 showButton
                 moreNewsLink="/latest"
