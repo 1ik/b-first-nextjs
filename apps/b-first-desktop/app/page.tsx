@@ -78,7 +78,7 @@ export default async function Index() {
 
       <div className="bg-[#F6EFEF] dark:bg-dark-300 py-8">
         <div className="desktop-container">
-          <AccentHeader header="recommended" color="#228B22" />
+          <AccentHeader header="recommended for you" color="#228B22" />
           <SquareGrid Link={Link} data={recommendedNews?.slice(0, 4)} gridCols={4} />
         </div>
       </div>

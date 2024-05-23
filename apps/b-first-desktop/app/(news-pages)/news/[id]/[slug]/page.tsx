@@ -87,7 +87,7 @@ export default async function NewsDetails({ params }) {
         <BreadCrumb
           links={[
             {
-              name: detailsData?.story.categories[0].name,
+              name: detailsData?.story.categories[0].name.split("_").join(" "),
               href: `/${detailsData?.story.categories[0].name.toLowerCase()}`,
             },
           ]}
@@ -120,7 +120,7 @@ export default async function NewsDetails({ params }) {
             <img className="my-10 mx-auto" src="/ads/SIBL_Profit_300x250.gif" alt="Ads" />
             <div className="sticky top-[100px]">
               <AccentHeader
-                header={`more from ${detailsData?.story.categories[0].name}`}
+                header={`more from ${detailsData?.story.categories[0].name.split("_").join(" ")}`}
                 color={detailsData?.story.categories[0].color_code}
               />
               {categoryNews?.slice(0, 5).map((item: any, index: number) => (
