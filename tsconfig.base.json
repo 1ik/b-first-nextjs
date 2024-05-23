@@ -34,6 +34,7 @@
       "@bfirst/components-loader": ["libs/components/loader/src/index.ts"],
       "@bfirst/components-multiselect-search": ["libs/components/multiselect-search/src/index.ts"],
       "@bfirst/components-popover-notify": ["libs/components/popover-notify/src/index.ts"],
+      "@bfirst/components-recommended-stories": ["libs/features/recommended-stories/src/index.ts"],
       "@bfirst/components-stories": ["libs/features/stories/src/index.ts"],
       "@bfirst/components-table": ["libs/components/table/src/index.ts"],
       "@bfirst/components-tags": ["libs/features/tags/src/index.ts"],

@@ -1,10 +1,10 @@
 import { Icon } from "@bfirst/components-icon";
 import { HCF } from "@bfirst/components-layout";
-import { TrendingTags } from "@bfirst/components-trendingTags";
+import { RecommendedStories } from "@bfirst/components-recommended-stories";
 import { Breadcrumbs } from "@bfirst/material-tailwind";
 import { Link } from "react-router-dom";
 
-export default function trendingTags() {
+export default function Recommended() {
   return (
     <HCF>
       <HCF.Header>
@@ -13,12 +13,12 @@ export default function trendingTags() {
             <Link to="/">
               <Icon name="home" variant="text" />
             </Link>
-            <Link to="/trending-topic">Trending-Topic</Link>
+            <Link to="/recommended-stories">Recommended Stories</Link>
           </Breadcrumbs>
         </div>
       </HCF.Header>
       <HCF.Content>
-        <TrendingTags />
+        <RecommendedStories />
       </HCF.Content>
     </HCF>
   );
