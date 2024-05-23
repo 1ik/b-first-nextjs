@@ -10,6 +10,7 @@ import LoadMore from "../../components/LoadMore/LoadMore";
 import Navbar from "../../components/Navbar/Navbar";
 import TrendingTopics from "../../components/TrendingTopics/TrendingTopics";
 import { getData } from "../../utils/dataFetch";
+import filterOutOTD from "../../utils/filterOutOTD";
 
 export default async function CategoryPage({ params }) {
   const { category } = params;
@@ -21,6 +22,8 @@ export default async function CategoryPage({ params }) {
     getData("latest/stories"),
     getData("categories/0/featured-stories"),
   ]);
+
+  const filteredLatestNews = latestNews?.data.filter(filterOutOTD);
 
   if (!categroyNews?.data.length) return notFound();
 
@@ -66,7 +69,7 @@ export default async function CategoryPage({ params }) {
               <ItemList
                 Link={Link}
                 listType="circle"
-                data={latestNews?.data.slice(0, 6)}
+                data={filteredLatestNews?.slice(0, 6)}
                 moreNewsLink="/latest"
                 showButton
               />

@@ -11,21 +11,23 @@ import Link from "next/link";
 import Navbar from "./components/Navbar/Navbar";
 import TrendingTopics from "./components/TrendingTopics/TrendingTopics";
 import { getData } from "./utils/dataFetch";
+import filterOutOTD from "./utils/filterOutOTD";
 
 export default async function Index() {
   const topNews = (await getData("categories/0/featured-stories"))?.data;
 
   const filterTopNews = function (item: any) {
-    return !topNews?.find((fN: { id: number }) => fN.id === (item as { id: number }).id);
+    return !topNews?.find((tN: { id: number }) => tN.id === (item as { id: number }).id);
   };
 
-  const latestNews = (await getData("latest/stories?size=30"))?.data.filter(filterTopNews);
+  const latestNews = (await getData("latest/stories?size=30"))?.data.filter(filterTopNews).filter(filterOutOTD);
 
   const filterLatestNews = function (item: any) {
-    return !latestNews?.find((fN: { id: number }) => fN.id === (item as { id: number }).id);
+    return !latestNews?.find((lN: { id: number }) => lN.id === (item as { id: number }).id);
   };
 
   const [
+    onThisDay,
     economyNews,
     featureNews,
     entertainmentNews,
@@ -37,6 +39,7 @@ export default async function Index() {
     techNews,
   ] = (
     await Promise.all([
+      getData("categories/on_this_day/stories"),
       getData("categories/economy/stories"),
       getData("categories/feature/stories"),
       getData("categories/entertainment/stories"),
@@ -124,8 +127,8 @@ export default async function Index() {
           />
           <div>
             <AccentHeader header="On this day" color="#A49A46" />
-            <ItemList Link={Link} showImage showDate data={latestNews?.slice(12, 16)} />
-            <div className="flex flex-col gap-y-3 items-center">
+            <ItemList Link={Link} showImage showDate data={onThisDay} />
+            <div className="flex flex-col mt-8 gap-y-8 items-center">
               <img src="ads/SIBL_Profit_300x250.gif" alt="Ads" />
               <img src="ads/Global.gif" alt="Ads" />
             </div>
