@@ -1,7 +1,8 @@
 "use client";
 
 import { ItemCardHorizontal } from "@bfirst/components-item-card-horizontal";
-import { Key, useEffect, useRef, useState } from "react";
+import { Key, useCallback, useEffect, useState } from "react";
+import { useInView } from "react-intersection-observer";
 import { getData } from "../../utils/dataFetch";
 
 interface LoadMoreProps {
@@ -14,10 +15,10 @@ interface LoadMoreProps {
 export default function LoadMore({ initialPage = 1, lastPage = 1, category, size = 10 }: LoadMoreProps) {
   const [page, setPage] = useState(initialPage);
   const [stories, setStories] = useState<any>([]);
-  const loaderRef = useRef(null);
+  const { ref, inView } = useInView();
 
-  useEffect(() => {
-    const loadMoreStoris = async function () {
+  const loadMoreStoris = useCallback(
+    async function () {
       const next = page + 1;
       const moreStories = await getData(
         `${
@@ -30,21 +31,15 @@ export default function LoadMore({ initialPage = 1, lastPage = 1, category, size
         setPage(next);
         setStories((cur: any) => [...cur, ...(moreStories?.data ? moreStories.data : [])]);
       }
-    };
+    },
+    [category, page, size]
+  );
 
-    const loader = loaderRef.current;
-    if (!loader) return;
-
-    const observer = new IntersectionObserver(function (entries) {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          loadMoreStoris();
-        }
-      });
-    });
-
-    observer.observe(loader);
-  }, [category, page, size]);
+  useEffect(() => {
+    if (inView) {
+      loadMoreStoris();
+    }
+  }, [inView, loadMoreStoris]);
 
   return (
     <>
@@ -59,7 +54,7 @@ export default function LoadMore({ initialPage = 1, lastPage = 1, category, size
       ))}
       {page < lastPage && (
         <div className="flex items-center justify-center h-20">
-          <img ref={loaderRef} className="animate-ping w-12" src="/img/logo-mini.png" alt="logo" />
+          <img ref={ref} className="animate-ping w-12" src="/img/logo-mini.png" alt="logo" />
         </div>
       )}
     </>
