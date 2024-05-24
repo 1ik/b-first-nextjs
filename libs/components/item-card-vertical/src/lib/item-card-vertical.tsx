@@ -48,13 +48,21 @@ export function ItemCardVertical({
         {titlePosition === "inset" &&
           (Link ? (
             <Link href={getNewsUrl(data)}>
-              <h2 className="bg-white hover:text-accent dark:hover:text-accent-light duration-150 text-black dark:bg-dark-400 dark:text-white absolute right-0 bottom-0 text-5xl w-3/5 px-10 py-8">
+              <h2
+                className={`bg-white hover:text-accent dark:hover:text-accent-light duration-150 text-black dark:bg-dark-400 dark:text-white absolute right-0 bottom-0 ${
+                  size === "lg" ? "text-5xl" : "text-2xl"
+                } w-3/5 px-10 py-8`}
+              >
                 {data?.title}
               </h2>
             </Link>
           ) : (
             <a href={getNewsUrl(data)}>
-              <h2 className="bg-white hover:text-accent dark:hover:text-accent-light duration-150 text-black dark:bg-dark-400 dark:text-white absolute right-0 bottom-0 text-5xl w-3/5 px-10 py-8">
+              <h2
+                className={`bg-white hover:text-accent dark:hover:text-accent-light duration-150 text-black dark:bg-dark-400 dark:text-white absolute right-0 bottom-0 ${
+                  size === "lg" ? "text-5xl" : "text-2xl"
+                } w-3/5 px-10 py-8`}
+              >
                 {data?.title}
               </h2>
             </a>
