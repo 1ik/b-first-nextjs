@@ -1,3 +1,4 @@
+import { BlockNewsMob } from "@bfirst/components-block-news-mob";
 import { getData } from "./utils/dataFetch";
 import filterOutOTD from "./utils/filterOutOTD";
 import Navbar from "./components/Navbar/Navbar";
