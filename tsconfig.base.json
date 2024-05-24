@@ -33,6 +33,7 @@
       "@bfirst/components-block-news-4": ["libs/features/desktop/block-news-4/src/index.ts"],
       "@bfirst/components-block-news-5": ["libs/features/desktop/block-news-5/src/index.ts"],
       "@bfirst/components-block-news-6": ["libs/features/desktop/block-news-6/src/index.ts"],
+      "@bfirst/components-breadcrumb": ["libs/components/breadcrumb/src/index.ts"],
       "@bfirst/components-button": ["libs/components/button/src/index.ts"],
       "@bfirst/components-categories": ["libs/features/categories/src/index.ts"],
       "@bfirst/components-confirm-button": ["libs/components/confirm-button/src/index.ts"],
