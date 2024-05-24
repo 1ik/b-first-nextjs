@@ -21,7 +21,8 @@ export function ItemCardVertical({
   className,
   Link,
 }: ItemCardVerticalProps) {
-  const fontSize = size === "lg" ? "text-4xl" : size === "md" ? "text-[20px] leading-5" : size === "sm" ? "text-[19px]" : "";
+  const fontSize =
+    size === "lg" ? "text-4xl" : size === "md" ? "text-[20px] leading-5" : size === "sm" ? "text-[19px]" : "";
 
   return (
     <div className={`${className && className}`}>
@@ -82,7 +83,11 @@ export function ItemCardVertical({
           </a>
         )}
 
-        {showIntro && <p className="text-xl mt-3 dark:text-[#bebdbd] text-[#6f6f6f]">{data?.meta.intro}</p>}
+        {showIntro && (
+          <p className={`${size === "lg" ? "text-xl" : "text-sm"} mt-3 dark:text-[#bebdbd] text-[#6f6f6f]`}>
+            {data?.meta.intro}
+          </p>
+        )}
 
         {showRelatedStory && (
           <ul>
