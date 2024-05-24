@@ -1,8 +1,9 @@
 import moment from "moment";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { FaFacebookF, FaInstagram, FaSearch, FaYoutube } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { IoIosArrowDown } from "react-icons/io";
+import { useInView } from "react-intersection-observer";
 
 /* eslint-disable-next-line */
 export interface DesktopNavProps {
@@ -83,38 +84,28 @@ export function DesktopNav({
 }: DesktopNavProps) {
   const [isMounted, setIsMounted] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
-  const navRef = useRef(null);
+  const { ref, inView } = useInView({
+    rootMargin: "-80px",
+  });
 
   const handleToggleTheme = function () {
     onThemeChange(theme === "light" ? "dark" : "light");
   };
 
   useEffect(() => {
-    const navbar = navRef.current;
-    if (!navbar) return;
-
-    const observer = new IntersectionObserver(
-      function (entries) {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) {
-            setIsSticky(true);
-          } else {
-            setIsSticky(false);
-          }
-        });
-      },
-      { rootMargin: "-80px" }
-    );
-
-    observer.observe(navbar);
-  }, [setIsSticky]);
+    if (inView) {
+      setIsSticky(false);
+    } else {
+      setIsSticky(true);
+    }
+  }, [inView]);
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
   return (
-    <nav ref={navRef} className="flex flex-col gap-y-5">
+    <nav ref={ref} className="flex flex-col gap-y-5">
       <div className="bg-[#f6efef] dark:bg-dark-500">
         <div className="desktop-container flex justify-between items-center">
           <p className="text-xl">{moment().format("dddd, MMMM Do, YYYY")}</p>
@@ -133,16 +124,28 @@ export function DesktopNav({
               ></button>
             </div>
             <div className="flex gap-x-1 py-5">
-              <a href="https://www.facebook.com/Bangladeshfirst.news" target="_blank" className="bg-black dark:bg-dark-300 p-2.5 rounded-md">
+              <a
+                href="https://www.facebook.com/Bangladeshfirst.news"
+                target="_blank"
+                className="bg-black dark:bg-dark-300 p-2.5 rounded-md"
+              >
                 <FaFacebookF className="text-white" />
               </a>
-              <a href="https://www.instagram.com/bdfirstnews" target="_blank" className="bg-black dark:bg-dark-300 p-2.5 rounded-md">
+              <a
+                href="https://www.instagram.com/bdfirstnews"
+                target="_blank"
+                className="bg-black dark:bg-dark-300 p-2.5 rounded-md"
+              >
                 <FaInstagram className="text-white" />
               </a>
               <a href="https://x.com/BFirstnews" target="_blank" className="bg-black dark:bg-dark-300 p-2.5 rounded-md">
                 <FaXTwitter className="text-white" />
               </a>
-              <a href="https://www.youtube.com/channel/UCKv8bP1Ewcai3Z53v88pPSw" target="_blank" className="bg-black dark:bg-dark-300 p-2.5 rounded-md">
+              <a
+                href="https://www.youtube.com/channel/UCKv8bP1Ewcai3Z53v88pPSw"
+                target="_blank"
+                className="bg-black dark:bg-dark-300 p-2.5 rounded-md"
+              >
                 <FaYoutube className="text-white" />
               </a>
             </div>
