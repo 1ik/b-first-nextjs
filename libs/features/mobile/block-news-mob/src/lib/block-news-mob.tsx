@@ -12,24 +12,24 @@ export interface BlockNewsMobProps {
 
 export function BlockNewsMob({ data, sectionHeader, ads1, ads2, className }: BlockNewsMobProps) {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2">
-      <ItemCardVertical className="sm:w-[65%]" showImageBorder data={data?.[0]} size="md" />
-
-      <div className="my-6 gap-y-3 item-center w-[90%] mx-auto sm:w-[35%] flex flex-col">
-        <img src={ads1} alt="Ads" />
-        <img src={ads2} alt="Ads" />
+    <div className="flex flex-col gap-y-10">
+      <div className="grid grid-cols-1 sm:grid-cols-5 gap-4">
+        <ItemCardVertical className="sm:col-span-3" showImageBorder data={data?.[0]} size="lg" />
+        <div className="sm:col-span-2 gap-3 item-center mx-auto flex flex-col">
+          <img src={ads1} alt="Ads" />
+          <img src={ads2} alt="Ads" />
+        </div>
       </div>
 
-      <div className="flex flex-col gap-y-4">
-        <div className="flex flex-col justify-between">
-          {data?.slice(1, 5).map((item: any, index: number) => (
-            <div key={index}>
-              <ItemCardHorizontal showTitleBorderSmall data={item} size="sm" />
-              {index + 1 < 4 && <hr className="mt-4 dark:border-dark-300" />}
-            </div>
-          ))}
-        </div>
-
+      <div className="grid grid-cols-1 gap-x-8 sm:grid-cols-2">
+        {data?.slice(1, 5).map((item: any, index: number) => (
+          <div
+            className={`mb-4 pb-4 ${index === 3 ? "" : index > 1 ? "sm:border-b-0 border-b" : "border-b"}`}
+            key={index}
+          >
+            <ItemCardHorizontal showTitleBorderSmall data={item} size="sm" />
+          </div>
+        ))}
       </div>
     </div>
   );
