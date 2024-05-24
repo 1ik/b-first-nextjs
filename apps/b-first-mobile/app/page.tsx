@@ -1,4 +1,3 @@
-import { AccentHeader } from "@bfirst/components-accent-header";
 import { getData } from "./utils/dataFetch";
 import filterOutOTD from "./utils/filterOutOTD";
 import Navbar from "./components/Navbar/Navbar";
