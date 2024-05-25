@@ -6,8 +6,6 @@ export default function AboutUs() {
       <Navbar />
       <div className="px-3 py-6">
         <h2 className="font-montserrat font-semibold text-xl mb-2">About Us</h2>
-        <h2 className="font-montserrat font-semibold text-xl mb-2"></h2>
-        <p className="font-montserrat text-sm mb-4"></p>
         <p className="font-montserrat text-sm mb-4">Welcome to Bangladesh First!</p>
         <p className="font-montserrat text-sm mb-4">
           We are dedicated to providing our readers with the most accurate, timely, and engaging news content. Our
@@ -69,8 +67,8 @@ export default function AboutUs() {
             <span className="font-semibold mr-2">Phone</span>+880 961 332 2782
           </li>
           <li className="font-montserrat text-base mb-2">
-            <span className="font-semibold mr-2">Mail</span>115 Kazi Nazrul Islam Avenue, Level 12, Bangla Motor, Dhaka 1000,
-            Bangladesh
+            <span className="font-semibold mr-2">Mail</span>115 Kazi Nazrul Islam Avenue, Level 12, Bangla Motor, Dhaka
+            1000, Bangladesh
           </li>
         </ul>
 
