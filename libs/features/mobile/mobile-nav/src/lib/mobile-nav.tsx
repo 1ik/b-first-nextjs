@@ -83,7 +83,7 @@ export function MobileNav({ Link, logoLight, logoDark, activeLink, theme, onThem
 
   return (
     <>
-      <nav className="sticky top-0 left-0 w-full bg-white dark:bg-dark-400 p-3 border-b dark:border-dark-300 z-[999]">
+      <nav className="sticky top-0 left-0 w-full bg-white dark:bg-dark-400 px-3 py-4 shadow-md border-b dark:border-dark-300 z-[999]">
         <div className="grid grid-cols-3 gap-x-3 items-center">
           <div className="flex gap-x-2 sm:gap-x-4">
             <button onClick={() => setshowSidebar((cur) => !cur)}>
@@ -111,7 +111,7 @@ export function MobileNav({ Link, logoLight, logoDark, activeLink, theme, onThem
           </div>
         </div>
         <div
-          className={`py-10 w-[200px] overflow-y-auto flex flex-col items-center text-sm sm:text-base shadow-[5px_0px_10px_0px_rgba(0,0,0,0.2)] dark:shadow-[5px_0px_10px_0px_rgba(0,0,0,0.4)] absolute z-[9999] top-0 left-0 ${
+          className={`py-10 w-[200px] overflow-y-auto flex flex-col items-center text-base shadow-[5px_0px_10px_0px_rgba(0,0,0,0.2)] dark:shadow-[5px_0px_10px_0px_rgba(0,0,0,0.4)] absolute z-[9999] top-0 left-0 ${
             showSidebar ? "" : "-translate-x-[calc(100%+20px)]"
           } h-[100svh] duration-300 backdrop-blur bg-white/70 dark:bg-dark-500/80`}
         >
@@ -151,7 +151,7 @@ export function MobileNav({ Link, logoLight, logoDark, activeLink, theme, onThem
               </li>
             ))}
           </ul>
-          <div className="flex gap-x-1 sm:gap-x-2 my-3 py-5 border-t justify-center text-xs sm:text-sm w-full dark:border-dark-300">
+          <div className="flex gap-x-1 sm:gap-x-2 my-3 py-5 border-t border-black/40 justify-center text-xs sm:text-sm w-full dark:border-dark-300">
             <a
               href="https://www.facebook.com/Bangladeshfirst.news"
               target="_blank"
@@ -183,7 +183,9 @@ export function MobileNav({ Link, logoLight, logoDark, activeLink, theme, onThem
           </div>
         </div>
       </nav>
-      {showSidebar && <div onClick={() => setshowSidebar(false)} className="absolute h-full w-full top-0 left-0"></div>}
+      {showSidebar && (
+        <div onClick={() => setshowSidebar(false)} className="fixed z-[99] h-full w-full top-0 left-0"></div>
+      )}
     </>
   );
 }
