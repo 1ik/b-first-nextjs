@@ -37,6 +37,7 @@
       "@bfirst/components-block-news-mob-3": ["libs/features/mobile/block-news-mob-3/src/index.ts"],
       "@bfirst/components-block-news-mob-4": ["libs/features/mobile/block-news-mob-4/src/index.ts"],
       "@bfirst/components-block-news-mob-5": ["libs/features/mobile/block-news-mob-5/src/index.ts"],
+      "@bfirst/components-block-news-mob-6": ["libs/features/mobile/block-news-mob-6/src/index.ts"],
       "@bfirst/components-breadcrumb": ["libs/components/breadcrumb/src/index.ts"],
       "@bfirst/components-button": ["libs/components/button/src/index.ts"],
       "@bfirst/components-categories": ["libs/features/categories/src/index.ts"],
