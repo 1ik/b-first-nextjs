@@ -49,9 +49,11 @@ export function ItemCardVertical({
           (Link ? (
             <Link href={getNewsUrl(data)}>
               <h2
-                className={`bg-white hover:text-accent dark:hover:text-accent-light duration-150 text-black dark:bg-dark-400 dark:text-white absolute right-0 bottom-0 ${
-                  size === "lg" ? "text-5xl" : "text-2xl"
-                } w-3/5 px-10 py-8`}
+                className={`bg-white hover:text-accent dark:hover:text-accent-light duration-150 text-black dark:bg-dark-400 dark:text-white absolute ${
+                  size === "lg"
+                    ? "text-5xl right-0 bottom-0 w-3/5 px-10 py-8px-10 py-8"
+                    : "text-2xl w-full -bottom-1/2 left-0"
+                }`}
               >
                 {data?.title}
               </h2>
@@ -59,9 +61,11 @@ export function ItemCardVertical({
           ) : (
             <a href={getNewsUrl(data)}>
               <h2
-                className={`bg-white hover:text-accent dark:hover:text-accent-light duration-150 text-black dark:bg-dark-400 dark:text-white absolute right-0 bottom-0 ${
-                  size === "lg" ? "text-5xl" : "text-2xl"
-                } w-3/5 px-10 py-8`}
+                className={`bg-white hover:text-accent dark:hover:text-accent-light duration-150 text-black dark:bg-dark-400 dark:text-white absolute ${
+                  size === "lg"
+                    ? "text-5xl right-0 bottom-0 w-3/5 px-10 py-8px-10 py-8"
+                    : "text-2xl w-full bottom-0 translate-y-2 px-2 py-1 left-0"
+                }`}
               >
                 {data?.title}
               </h2>
