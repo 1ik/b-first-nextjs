@@ -1,6 +1,6 @@
 import Navbar from "../../components/Navbar/Navbar";
 
-export default function CoolieSettings() {
+export default function CookieSettings() {
   return (
     <div>
       <Navbar />
