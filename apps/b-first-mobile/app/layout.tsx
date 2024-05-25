@@ -1,3 +1,4 @@
+import { Footer } from "@bfirst/components-footer";
 import { Montserrat } from "@next/font/google";
 import localFont from "@next/font/local";
 import BackToTop from "./components/BackToTop/BackToTop";
@@ -22,6 +23,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           >
             {children}
           </main>
+          <footer className="bg-black">
+            <Footer className="px-3" logo="/img/logo-light.svg" />
+          </footer>
           <BackToTop />
         </Provider>
       </body>
