@@ -8,7 +8,7 @@ export interface FooterProps {
 const links = [
   {
     name: "Terms of Use",
-    href: "/#",
+    href: "/terms",
   },
   {
     name: "Privacy Policy",
