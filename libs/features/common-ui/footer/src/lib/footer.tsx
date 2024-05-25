@@ -28,7 +28,7 @@ const links = [
   },
   {
     name: "About",
-    href: "/#",
+    href: "/about-us",
   },
   {
     name: "Newsletters",
