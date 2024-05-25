@@ -27,12 +27,7 @@ export function BlockNewsMob5({ data, className, sectionHeader, headerColor, Lin
       <div className="grid grid-cols-1 my-4 sm:grid-cols-3 gap-4">
         {data?.slice(1, 4).map((item: any, index: Key | null | undefined) => (
           <div key={index}>
-            <div className="sm:block hidden">
-              <ItemCardVertical data={item} size="md" />
-            </div>
-            <div className="sm:hidden">
-              <ItemCardVertical data={item} size="lg" />
-            </div>
+            <ItemCardVertical data={item} size="md" />
           </div>
         ))}
       </div>

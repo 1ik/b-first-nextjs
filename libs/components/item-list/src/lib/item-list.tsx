@@ -30,11 +30,11 @@ export function ItemList({
         </h3>
       )}
       {showImage && (
-        <div className="overflow-hidden">
+        <div className="overflow-hidden mb-5">
           {Link ? (
             <Link href={getNewsUrl(data?.[0])}>
               <img
-                className="hover:scale-110 duration-300 aspect-video object-cover w-full mb-5"
+                className="hover:scale-110 duration-300 aspect-video object-cover w-full"
                 src={getImageUrl(data?.[0]?.meta.featured_image)}
                 alt={data?.[0]?.meta.image_caption}
               />
@@ -42,7 +42,7 @@ export function ItemList({
           ) : (
             <a href={getNewsUrl(data?.[0])}>
               <img
-                className="hover:scale-110 duration-300 aspect-video object-cover w-full mb-5"
+                className="hover:scale-110 duration-300 aspect-video object-cover w-full"
                 src={getImageUrl(data?.[0]?.meta.featured_image)}
                 alt={data?.[0]?.meta.image_caption}
               />
