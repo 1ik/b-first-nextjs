@@ -31,7 +31,7 @@ export function BlockNewsMob4({ data, className, sectionHeader, headerColor, Lin
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-y-8 mt-4">
         <div className="sm:col-span-2 sm:border-r dark:border-dark-300 sm:pr-3 sm:mr-3">
-          <ItemCardVertical Link={Link} data={data?.[1]} size="lg" />
+          <ItemCardVertical Link={Link} data={data?.[1]} size="md" />
         </div>
         <ItemList Link={Link} data={data?.slice(2, 7)} listType="circle" />
       </div>
