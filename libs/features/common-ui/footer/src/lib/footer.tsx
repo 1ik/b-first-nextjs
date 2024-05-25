@@ -20,11 +20,11 @@ const links = [
   },
   {
     name: "Cookie Settings",
-    href: "/#",
+    href: "/cookie-settings",
   },
   {
     name: "Accessibility & CC",
-    href: "/#",
+    href: "/accessibility",
   },
   {
     name: "About",
