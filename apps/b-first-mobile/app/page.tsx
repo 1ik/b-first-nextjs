@@ -1,5 +1,6 @@
 import { BlockNewsMob3 } from "@bfirst/components-block-news-mob-3";
 import { BlockNewsMob4 } from "@bfirst/components-block-news-mob-4";
+import { BlockNewsMob5 } from "@bfirst/components-block-news-mob-5";
 import Navbar from "./components/Navbar/Navbar";
 import TrendingTopics from "./components/TrendingTopics/TrendingTopics";
 import { getData } from "./utils/dataFetch";
@@ -59,6 +60,12 @@ export default async function Index() {
       <TrendingTopics items={trendingTopics} title="Trending Topics" />
       <BlockNewsMob3 data={featureNews} sectionHeader="feature" headerColor="#8BD032" />
       <BlockNewsMob4 data={lifestyleNews} sectionHeader="Lifestyle" headerColor="#EF2D8A" />
+      <BlockNewsMob5
+        data={entertainmentNews}
+        ads="/ads/SIBL_Profit_300x250.gif"
+        sectionHeader="entertainment"
+        headerColor="#5D26D1"
+      />
     </>
   );
 }
