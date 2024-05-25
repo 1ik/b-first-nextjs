@@ -21,7 +21,8 @@ export function ItemCardVertical({
   className,
   Link,
 }: ItemCardVerticalProps) {
-  const fontSize = size === "lg" ? "text-4xl" : size === "md" ? "text-[20px] leading-5" : size === "sm" ? "text-[19px]" : "";
+  const fontSize =
+    size === "lg" ? "text-4xl" : size === "md" ? "text-[20px] leading-5" : size === "sm" ? "text-[19px]" : "";
 
   return (
     <div className={`${className && className}`}>
@@ -47,13 +48,25 @@ export function ItemCardVertical({
         {titlePosition === "inset" &&
           (Link ? (
             <Link href={getNewsUrl(data)}>
-              <h2 className="bg-white hover:text-accent dark:hover:text-accent-light duration-150 text-black dark:bg-dark-400 dark:text-white absolute right-0 bottom-0 text-5xl w-3/5 px-10 py-8">
+              <h2
+                className={`bg-white hover:text-accent dark:hover:text-accent-light duration-150 text-black dark:bg-dark-400 dark:text-white absolute ${
+                  size === "lg"
+                    ? "text-5xl right-0 bottom-0 w-3/5 px-10 py-8px-10 py-8"
+                    : "text-2xl w-full -bottom-1/2 left-0"
+                }`}
+              >
                 {data?.title}
               </h2>
             </Link>
           ) : (
             <a href={getNewsUrl(data)}>
-              <h2 className="bg-white hover:text-accent dark:hover:text-accent-light duration-150 text-black dark:bg-dark-400 dark:text-white absolute right-0 bottom-0 text-5xl w-3/5 px-10 py-8">
+              <h2
+                className={`bg-white hover:text-accent dark:hover:text-accent-light duration-150 text-black dark:bg-dark-400 dark:text-white absolute ${
+                  size === "lg"
+                    ? "text-5xl right-0 bottom-0 w-3/5 px-10 py-8px-10 py-8"
+                    : "text-2xl w-full bottom-0 translate-y-2 px-2 py-1 left-0"
+                }`}
+              >
                 {data?.title}
               </h2>
             </a>
@@ -82,7 +95,11 @@ export function ItemCardVertical({
           </a>
         )}
 
-        {showIntro && <p className="text-xl mt-3 dark:text-[#bebdbd] text-[#6f6f6f]">{data?.meta.intro}</p>}
+        {showIntro && (
+          <p className={`${size === "lg" ? "text-xl" : "text-sm"} mt-3 dark:text-[#bebdbd] text-[#6f6f6f]`}>
+            {data?.meta.intro}
+          </p>
+        )}
 
         {showRelatedStory && (
           <ul>

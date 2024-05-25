@@ -38,6 +38,18 @@ export function ItemCardHorizontal({
       : ""
   }`;
 
+  const introFontSize = `leading-[110%] ${
+    size === "xl"
+      ? "text-2xl"
+      : size === "sm"
+      ? "text-sm"
+      : size === "md"
+      ? "text-sm"
+      : size === "lg"
+      ? "text-base"
+      : ""
+  }`;
+
   return (
     <div
       className={`flex ${className} ${showTitleBorderBig ? "border-t border-accent" : ""} ${
@@ -75,13 +87,7 @@ export function ItemCardHorizontal({
             </p>
           )}
           {showIntro && (
-            <p
-              className={`mt-4 leading-[110%] dark:text-[#bebdbd] text-[#727272] ${
-                size === "xl" ? "text-2xl" : "text-xl"
-              }`}
-            >
-              {data?.meta.intro}
-            </p>
+            <p className={`mt-4 ${introFontSize} dark:text-[#bebdbd] text-[#727272]`}>{data?.meta.intro}</p>
           )}
           {showSocialShare && (
             <SocialShare

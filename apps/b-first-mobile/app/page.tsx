@@ -1,7 +1,9 @@
-import { getData } from "./utils/dataFetch";
-import filterOutOTD from "./utils/filterOutOTD";
+import { BlockNewsMob3 } from "@bfirst/components-block-news-mob-3";
+import { BlockNewsMob4 } from "@bfirst/components-block-news-mob-4";
 import Navbar from "./components/Navbar/Navbar";
 import TrendingTopics from "./components/TrendingTopics/TrendingTopics";
+import { getData } from "./utils/dataFetch";
+import filterOutOTD from "./utils/filterOutOTD";
 
 export default async function Index() {
   const [topNews, recommendedNews] = (
@@ -52,9 +54,11 @@ export default async function Index() {
   const trendingTopics = (await getData("trendy-topics"))?.data;
   return (
     <>
-      <Navbar/>
-      <img className="mx-auto my-14" src="/ads/nagad.png" alt="Ads"/>
-      <TrendingTopics items={trendingTopics} title="Trending Topics"/>
+      <Navbar />
+      <img className="mx-auto my-14" src="/ads/nagad.png" alt="Ads" />
+      <TrendingTopics items={trendingTopics} title="Trending Topics" />
+      <BlockNewsMob3 data={featureNews} sectionHeader="feature" headerColor="#8BD032" />
+      <BlockNewsMob4 data={lifestyleNews} sectionHeader="Lifestyle" headerColor="#EF2D8A" />
     </>
-  )
+  );
 }
