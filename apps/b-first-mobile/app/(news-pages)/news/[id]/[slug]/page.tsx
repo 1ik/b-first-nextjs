@@ -81,9 +81,9 @@ export default async function NewsDetails({ params }) {
 
       <div className="px-3">
         {/* TRENDING TOPICS */}
-        <img className="mx-auto mt-3" src="/ads/nagad.png" alt="Ads" />
+        <img className="mx-auto mt-3" src="/ads/banner_ibbl.gif" alt="Ads" />
         <TrendingTopics className="my-5" items={trendingTopics} title="Trending" />
-        <img className="mx-auto mb-4" src="/ads/nagad.png" alt="Ads" />
+        <img className="mx-auto mb-4" src="/ads/FSB-banner-ad.gif" alt="Ads" />
 
         {/* BREADCRUMB */}
         <BreadCrumb
@@ -133,7 +133,7 @@ export default async function NewsDetails({ params }) {
               <AccentHeader header="LATEST News" color="#5D26D1" />
               <ItemList listType="circle" data={filteredLatestNews?.slice(0, 5)} showButton moreNewsLink="/latest" />
             </div>
-            <img className="my-10 mx-auto" src="/ads/Global.gif" alt="Ads" />
+            <img className="my-10 mx-auto" src="/ads/union-bank-ad.gif" alt="Ads" />
 
             {/* TOP NEWS SECTION LIST */}
             <div>
@@ -149,7 +149,7 @@ export default async function NewsDetails({ params }) {
             <p className="font-montserrat text-xs mt-2">{detailsData?.story.meta.imageCaption}</p>
 
             <div className="sm:hidden">
-              <img className="my-10 mx-auto" src="/ads/Global.gif" alt="Ads" />
+              <img className="my-10 mx-auto" src="/ads/ibbl.gif" alt="Ads" />
               {/* INTRO */}
               <h3 className="text-base font-montserrat">{detailsData?.story.meta.intro}</h3>
 
@@ -177,7 +177,7 @@ export default async function NewsDetails({ params }) {
               </ul>
             </div>
 
-            <img className="mx-auto mb-4" src="/ads/nagad.png" alt="Ads" />
+            <img className="mx-auto mb-4" src="/ads/banner_ibbl.gif" alt="Ads" />
 
             {relatedNews?.length ? (
               <div>
