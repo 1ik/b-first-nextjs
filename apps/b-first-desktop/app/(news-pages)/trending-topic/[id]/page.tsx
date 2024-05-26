@@ -1,11 +1,12 @@
 import { AccentHeader } from "@bfirst/components-accent-header";
 import { ItemCardHorizontal } from "@bfirst/components-item-card-horizontal";
 import { ItemList } from "@bfirst/components-item-list";
-import filterOutOTD from "apps/b-first-desktop/app/utils/filterOutOTD";
-import Link from "next/link";
+import { getNewsUrl } from "@bfirst/utilities";
 import BreadCrumb from "../../../components/BreadCrumb/BreadCrumb";
 import Navbar from "../../../components/Navbar/Navbar";
 import { getData } from "../../../utils/dataFetch";
+import filterOutOTD from "../../../utils/filterOutOTD";
+import TrendingTopics from "../../../components/TrendingTopics/TrendingTopics";
 
 export default async function TrendingTopic({ params }) {
   const [trendingNews, latestNews, topNews] = (
@@ -17,10 +18,12 @@ export default async function TrendingTopic({ params }) {
   ).map((item) => item.data);
 
   const filteredLatestNews = latestNews.filter(filterOutOTD);
+  const trendingTopics = (await getData("trendy-topics"))?.data;
   return (
     <div>
       <Navbar />
-
+      <TrendingTopics className="desktop-container mb-8" items={trendingTopics} title="Trending Topics" />
+      <img className="mx-auto my-4" src="/ads//ads/banner_ibbl.gif" alt="" />
       <div className="desktop-container">
         <div className="mb-6">
           <BreadCrumb
@@ -41,7 +44,7 @@ export default async function TrendingTopic({ params }) {
                 data={item}
                 size="lg"
                 showCreatedAt
-                showSocialShare
+                socialShareLink={`${process.env.BASE_URL}/${getNewsUrl(item)}`}
               />
             ))}
           </div>
@@ -52,18 +55,12 @@ export default async function TrendingTopic({ params }) {
             </div>
             <div className="my-10">
               <AccentHeader header="LATEST NEWS" color="#5D26D1" />
-              <ItemList
-                Link={Link}
-                data={filteredLatestNews?.slice(0, 6)}
-                listType="circle"
-                showButton
-                moreNewsLink="/latest"
-              />
+              <ItemList data={filteredLatestNews?.slice(0, 6)} listType="circle" showButton moreNewsLink="/latest" />
               <img className="mt-4 mx-auto" src="/ads/IBBL.gif" alt="Ads" />
             </div>
             <div>
               <AccentHeader header="Top News" color="#119F9F" />
-              <ItemList Link={Link} data={topNews?.slice(0, 6)} listType="number" />
+              <ItemList data={topNews?.slice(0, 6)} listType="number" />
               <img className="mt-4 mx-auto" src="/ads/Global.gif" alt="Ads" />
             </div>
           </div>

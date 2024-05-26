@@ -10,8 +10,9 @@ export interface ItemCardHorizontalProps {
   showIntro?: boolean;
   className?: string;
   Link?: any;
-  showSocialShare?: boolean;
+  socialShareLink?: string;
   showCreatedAt?: boolean;
+  showTime?: boolean;
 }
 
 export function ItemCardHorizontal({
@@ -23,8 +24,9 @@ export function ItemCardHorizontal({
   showIntro,
   className,
   Link,
-  showSocialShare,
+  socialShareLink,
   showCreatedAt,
+  showTime,
 }: ItemCardHorizontalProps) {
   const fontSize = `leading-[110%] ${
     size === "xl"
@@ -81,6 +83,11 @@ export function ItemCardHorizontal({
             </a>
           )}
 
+          {showTime && (
+            <p className="font-montserrat  text-[#6F6F6F] md:pt-4 pt-2 dark:border-dark-300 dark:text-white">
+              {`${moment(data?.created_at).startOf(data?.created_at).fromNow()}`}
+            </p>
+          )}
           {showCreatedAt && (
             <p className="font-montserrat text-lg text-[#6F6F6F] mt-10 border-t pt-4  dark:border-dark-300 dark:text-white">
               Created At : {`${moment(data?.created_at).format("MMM Do, YYYY")}`}
@@ -89,11 +96,11 @@ export function ItemCardHorizontal({
           {showIntro && (
             <p className={`mt-4 ${introFontSize} dark:text-[#bebdbd] text-[#727272]`}>{data?.meta.intro}</p>
           )}
-          {showSocialShare && (
+          {socialShareLink && (
             <SocialShare
               title="Share Trending On :"
               textPlacement="left"
-              shareLink={`https://bangladeshfirst.com/${getNewsUrl(data)}`}
+              shareLink={socialShareLink}
               className="text-[#6F6F6F] dark:text-white mt-auto"
             />
           )}

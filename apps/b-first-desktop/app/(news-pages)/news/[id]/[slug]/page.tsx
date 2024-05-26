@@ -5,15 +5,14 @@ import { ProfileCard } from "@bfirst/components-profile-card";
 import { SocialShare } from "@bfirst/components-social-share";
 import { SquareGrid } from "@bfirst/components-square-grid";
 import { getImageUrl } from "@bfirst/utilities";
-import filterOutOTD from "apps/b-first-desktop/app/utils/filterOutOTD";
 import { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import BreadCrumb from "../../../../components/BreadCrumb/BreadCrumb";
 import ImagePreview from "../../../../components/ImagePreview/ImagePreview";
 import Navbar from "../../../../components/Navbar/Navbar";
 import TrendingTopics from "../../../../components/TrendingTopics/TrendingTopics";
 import { getData } from "../../../../utils/dataFetch";
+import filterOutOTD from "../../../../utils/filterOutOTD";
 
 export async function generateMetadata({ params }): Promise<Metadata> {
   const data = await getData(`story/details/${params.id}`);
@@ -50,13 +49,13 @@ export async function generateMetadata({ params }): Promise<Metadata> {
       ],
     },
     alternates: {
-      canonical: `https://bangladeshfirst.com/news/${params.id}/${params.slug}`,
+      canonical: `${process.env.BASE_URL}/news/${params.id}/${params.slug}`,
     },
   };
 }
 
 export default async function NewsDetails({ params }) {
-  const link_url = `http://bangladeshfirst.com/news/${params.id}/${params.slug}`;
+  const link_url = `${process.env.BASE_URL}/news/${params.id}/${params.slug}`;
 
   const detailsData = await getData(`story/details/${params.id}`);
 
@@ -80,10 +79,10 @@ export default async function NewsDetails({ params }) {
   return (
     <>
       <Navbar activeLink={`/${detailsData?.story.categories[0].name.toLowerCase()}`} />
-      <TrendingTopics Link={Link} className="desktop-container mb-8" title="Trending Topics" items={trendingTopics} />
+      <TrendingTopics className="desktop-container mb-8" title="Trending Topics" items={trendingTopics} />
 
       <div className="desktop-container">
-        <img className="mx-auto my-12" src="/ads/chopstick-ads.gif" alt="Ads" />
+        <img className="mx-auto my-12" src="/ads/banner_ibbl.gif" alt="Ads" />
         <BreadCrumb
           links={[
             {
@@ -117,21 +116,24 @@ export default async function NewsDetails({ params }) {
 
           {/* ======== row 2 ======= */}
           <div>
-            <img className="my-10 mx-auto" src="/ads/SIBL_Profit_300x250.gif" alt="Ads" />
+            <img className="my-10 mx-auto" src="/ads/union-bank-ad.gif" alt="Ads" />
             <div className="sticky top-[100px]">
               <AccentHeader
                 header={`more from ${detailsData?.story.categories[0].name.split("_").join(" ")}`}
                 color={detailsData?.story.categories[0].color_code}
               />
-              {categoryNews?.slice(0, 5).map((item: any, index: number) => (
-                <ItemCardHorizontal
-                  Link={Link}
-                  className="pb-6 mb-6 border-b dark:border-dark-300"
-                  key={index}
-                  data={item}
-                  size="sm"
-                />
-              ))}
+
+              {categoryNews
+                ?.filter((item: { id: any }) => item.id !== detailsData.story.id)
+                ?.slice(0, 5)
+                .map((item: any, index: number) => (
+                  <ItemCardHorizontal
+                    className="pb-6 mb-6 border-b dark:border-dark-300"
+                    key={index}
+                    data={item}
+                    size="sm"
+                  />
+                ))}
               <img className="my-10 mx-auto" src="/ads/SIBL_Profit_300x250.gif" alt="Ads" />
             </div>
           </div>
@@ -177,18 +179,12 @@ export default async function NewsDetails({ params }) {
             <img className="my-10 mx-auto" src="/ads/Global.gif" alt="Ads" />
             <div>
               <AccentHeader header="Latest News" color="#5D26D1" />
-              <ItemList
-                Link={Link}
-                listType="circle"
-                data={filteredLatestNews?.slice(0, 5)}
-                showButton
-                moreNewsLink="/latest"
-              />
+              <ItemList listType="circle" data={filteredLatestNews?.slice(0, 5)} showButton moreNewsLink="/latest" />
             </div>
             <div className="sticky top-[100px]">
-              <img className="my-10 mx-auto" src="/ads/union-bank-ad.gif" alt="Ads" />
+              <img className="my-10 mx-auto" src="/ads/ibbl.gif" alt="Ads" />
               <AccentHeader header="Top News" color="#119F9F" />
-              <ItemList Link={Link} data={topNews?.slice(0, 6)} listType="number" />
+              <ItemList data={topNews?.slice(0, 6)} listType="number" />
             </div>
           </div>
         </div>
