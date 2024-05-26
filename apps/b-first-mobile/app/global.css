@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/* wihtout '!important' news body iframes overflows */
 iframe {
-  width: 100%;
+  width: 100% !important;
 }
