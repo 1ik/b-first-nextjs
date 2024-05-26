@@ -117,7 +117,7 @@ export default async function Index() {
           <div>
             <AccentHeader header="Most Viewed" color="#119F9F" />
             <ItemList Link={Link} data={latestNews?.slice(6, 11)} listType="number" />
-            <img className="mt-4 mx-auto" src="/ads/Global.gif" alt="Ads" />
+            <img className="mt-4 mx-auto" src="/ads/FSIBL-November-2023-20.gif" alt="Ads" />
           </div>
         </div>
       </div>
@@ -128,7 +128,7 @@ export default async function Index() {
             Link={Link}
             sectionHeader="Lifestyle"
             headerColor="#EF2D8A"
-            adsUrl="/ads/social_islami.png"
+            adsUrl="/ads/banner_ibbl.gif"
             className="col-span-3 border-r dark:border-dark-300 pr-4 mr-4"
             data={lifestyleNews}
           />
@@ -137,7 +137,7 @@ export default async function Index() {
             <ItemList Link={Link} showImage showDate data={onThisDay} />
             <div className="flex flex-col mt-8 gap-y-8 items-center">
               <img src="ads/SIBL_Profit_300x250.gif" alt="Ads" />
-              <img src="ads/Global.gif" alt="Ads" />
+              <img src="ads/FSIBL-November-2023-20.gif" alt="Ads" />
             </div>
           </div>
         </div>
@@ -150,11 +150,11 @@ export default async function Index() {
         className="desktop-container my-10"
         data={entertainmentNews}
       />
-      <img className="mx-auto my-16" src="/ads/ads_six.png" alt="Ads" />
+      <img className="mx-auto my-16" src="/ads/FSB-banner-ad.gif" alt="Ads" />
 
       <ListGrid Link={Link} className="desktop-container" data={[bangladeshNews, worldNews, sportsNews, techNews]} />
 
-      <img className="mx-auto mt-12" src="/ads/fresh.gif" alt="Ads" />
+      <img className="mx-auto mt-12" src="/ads/banner_ibbl.gif" alt="Ads" />
     </>
   );
 }
