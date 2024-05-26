@@ -5,3 +5,8 @@
 .desktop-container {
   @apply max-w-[1400px] px-[30px] mx-auto;
 }
+
+/* wihtout '!important' news body iframes overflows */
+iframe {
+  width: 100% !important;
+}
