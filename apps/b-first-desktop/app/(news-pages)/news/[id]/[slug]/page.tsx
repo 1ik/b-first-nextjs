@@ -12,6 +12,7 @@ import ImagePreview from "../../../../components/ImagePreview/ImagePreview";
 import Navbar from "../../../../components/Navbar/Navbar";
 import TrendingTopics from "../../../../components/TrendingTopics/TrendingTopics";
 import { getData } from "../../../../utils/dataFetch";
+import filterOutOTD from "../../../../utils/filterOutOTD";
 
 export async function generateMetadata({ params }): Promise<Metadata> {
   const data = await getData(`story/details/${params.id}`);
@@ -69,6 +70,7 @@ export default async function NewsDetails({ params }) {
 
   if (!detailsData) return notFound();
 
+  const filteredLatestNews = latestNews.filter(filterOutOTD);
   const tagsArr = detailsData?.story.tags.map((tag: { id: any }) => tag.id);
   const relatedNews = (await getData(`related-stories?tags=${tagsArr.join(",")}`))?.data.filter(
     (rN: { id: any }) => rN.id != params.id
@@ -84,7 +86,7 @@ export default async function NewsDetails({ params }) {
         <BreadCrumb
           links={[
             {
-              name: detailsData?.story.categories[0].name,
+              name: detailsData?.story.categories[0].name.split("_").join(" "),
               href: `/${detailsData?.story.categories[0].name.toLowerCase()}`,
             },
           ]}
@@ -117,7 +119,7 @@ export default async function NewsDetails({ params }) {
             <img className="my-10 mx-auto" src="/ads/SIBL_Profit_300x250.gif" alt="Ads" />
             <div className="sticky top-[100px]">
               <AccentHeader
-                header={`more from ${detailsData?.story.categories[0].name}`}
+                header={`more from ${detailsData?.story.categories[0].name.split("_").join(" ")}`}
                 color={detailsData?.story.categories[0].color_code}
               />
               {categoryNews?.slice(0, 5).map((item: any, index: number) => (
@@ -173,7 +175,7 @@ export default async function NewsDetails({ params }) {
             <img className="my-10 mx-auto" src="/ads/Global.gif" alt="Ads" />
             <div>
               <AccentHeader header="Latest News" color="#5D26D1" />
-              <ItemList listType="circle" data={latestNews?.slice(0, 5)} showButton moreNewsLink="/latest" />
+              <ItemList listType="circle" data={filteredLatestNews?.slice(0, 5)} showButton moreNewsLink="/latest" />
             </div>
             <div className="sticky top-[100px]">
               <img className="my-10 mx-auto" src="/ads/union-bank-ad.gif" alt="Ads" />

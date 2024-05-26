@@ -1,7 +1,6 @@
 import { Footer } from "@bfirst/components-footer";
 import { Montserrat } from "@next/font/google";
 import localFont from "@next/font/local";
-import Link from "next/link";
 import BackToTop from "./components/BackToTop/BackToTop";
 import { Provider } from "./components/ThemeProvider/Provider";
 import "./global.css";
@@ -25,7 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {children}
           </main>
           <footer className="bg-black">
-            <Footer Link={Link} className="desktop-container" logo="/img/logo-light.svg" />
+            <Footer className="desktop-container" logo="/img/logo-light.svg" />
           </footer>
           <BackToTop />
         </Provider>

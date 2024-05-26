@@ -1,6 +1,7 @@
 import { AccentHeader } from "@bfirst/components-accent-header";
 import { ItemCardHorizontal } from "@bfirst/components-item-card-horizontal";
 import { ItemList } from "@bfirst/components-item-list";
+import filterOutOTD from "apps/b-first-desktop/app/utils/filterOutOTD";
 import BreadCrumb from "../../../components/BreadCrumb/BreadCrumb";
 import Navbar from "../../../components/Navbar/Navbar";
 import { getData } from "../../../utils/dataFetch";
@@ -14,6 +15,7 @@ export default async function TrendingTopic({ params }) {
     ])
   ).map((item) => item.data);
 
+  const filteredLatestNews = latestNews.filter(filterOutOTD);
   return (
     <div>
       <Navbar />
@@ -49,7 +51,7 @@ export default async function TrendingTopic({ params }) {
             </div>
             <div className="my-10">
               <AccentHeader header="LATEST NEWS" color="#5D26D1" />
-              <ItemList data={latestNews?.slice(0, 6)} listType="circle" showButton moreNewsLink="/latest" />
+              <ItemList data={filteredLatestNews?.slice(0, 6)} listType="circle" showButton moreNewsLink="/latest" />
               <img className="mt-4 mx-auto" src="/ads/IBBL.gif" alt="Ads" />
             </div>
             <div>

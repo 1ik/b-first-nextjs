@@ -10,44 +10,48 @@ import { SquareGrid } from "@bfirst/components-square-grid";
 import Navbar from "./components/Navbar/Navbar";
 import TrendingTopics from "./components/TrendingTopics/TrendingTopics";
 import { getData } from "./utils/dataFetch";
+import filterOutOTD from "./utils/filterOutOTD";
 
 export default async function Index() {
-  const topNews = (await getData("categories/0/featured-stories"))?.data;
+  const [topNews, recommendedNews] = (
+    await Promise.all([getData("categories/0/featured-stories"), getData("recommended-stories")])
+  ).map((item) => item.data);
+
+  const filterRecommended = function (item: { id: number }) {
+    return !recommendedNews?.find((rN: { id: number }) => rN.id === item.id);
+  };
 
   const filterTopNews = function (item: any) {
-    return !topNews?.find((fN: { id: number }) => fN.id === (item as { id: number }).id);
+    return !topNews?.find((tN: { id: number }) => tN.id === (item as { id: number }).id);
   };
 
-  const latestNews = (await getData("latest/stories?size=30"))?.data.filter(filterTopNews);
+  const latestNews = (await getData("latest/stories?size=30"))?.data
+    .filter(filterTopNews)
+    .filter(filterRecommended)
+    .filter(filterOutOTD);
 
   const filterLatestNews = function (item: any) {
-    return !latestNews?.find((fN: { id: number }) => fN.id === (item as { id: number }).id);
+    return !latestNews?.find((lN: { id: number }) => lN.id === (item as { id: number }).id);
   };
 
-  const [
-    economyNews,
-    featureNews,
-    entertainmentNews,
-    lifestyleNews,
-    politicsNews,
-    bangladeshNews,
-    worldNews,
-    sportsNews,
-    techNews,
-  ] = (
-    await Promise.all([
-      getData("categories/economy/stories"),
-      getData("categories/feature/stories"),
-      getData("categories/entertainment/stories"),
-      getData("categories/lifestyle/stories"),
-      getData("categories/politics/stories"),
-      getData("categories/bangladesh/stories"),
-      getData("categories/world/stories"),
-      getData("categories/sports/stories"),
-      getData("categories/tech/stories"),
-    ])
-  ).map((item) => item?.data.filter(filterTopNews).filter(filterLatestNews));
+  const [economyNews, featureNews, entertainmentNews, lifestyleNews, bangladeshNews, worldNews, sportsNews, techNews] =
+    (
+      await Promise.all([
+        getData("categories/economy/stories"),
+        getData("categories/feature/stories"),
+        getData("categories/entertainment/stories"),
+        getData("categories/lifestyle/stories"),
+        getData("categories/bangladesh/stories"),
+        getData("categories/world/stories"),
+        getData("categories/sports/stories"),
+        getData("categories/tech/stories"),
+      ])
+    ).map((item) => item?.data.filter(filterTopNews).filter(filterRecommended).filter(filterLatestNews));
 
+  const onThisDay = (await getData("categories/on_this_day/stories")).data.filter(
+    (item: { created_at: moment.MomentInput }) =>
+      moment().format("MMM D YYYY") === moment(item.created_at).format("MMM D YYYY")
+  );
   const trendingTopics = (await getData("trendy-topics"))?.data;
 
   return (
@@ -66,8 +70,8 @@ export default async function Index() {
 
       <div className="bg-[#F6EFEF] dark:bg-dark-300 py-8">
         <div className="desktop-container">
-          <AccentHeader header="Politics" color="#228B22" />
-          <SquareGrid data={politicsNews?.slice(0, 4)} gridCols={4} />
+          <AccentHeader header="recommended for you" color="#228B22" />
+          <SquareGrid data={recommendedNews?.slice(0, 4)} gridCols={4} />
         </div>
       </div>
       <img className="mx-auto my-12" src="/ads/bkash.png" alt="Ads" />
@@ -114,8 +118,8 @@ export default async function Index() {
           />
           <div>
             <AccentHeader header="On this day" color="#A49A46" />
-            <ItemList showImage showDate data={latestNews?.slice(12, 16)} />
-            <div className="flex flex-col gap-y-3 items-center">
+            <ItemList showImage showDate data={onThisDay} />
+            <div className="flex flex-col mt-8 gap-y-8 items-center">
               <img src="ads/SIBL_Profit_300x250.gif" alt="Ads" />
               <img src="ads/Global.gif" alt="Ads" />
             </div>

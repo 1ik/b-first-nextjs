@@ -9,6 +9,7 @@ import LoadMore from "../../components/LoadMore/LoadMore";
 import Navbar from "../../components/Navbar/Navbar";
 import TrendingTopics from "../../components/TrendingTopics/TrendingTopics";
 import { getData } from "../../utils/dataFetch";
+import filterOutOTD from "../../utils/filterOutOTD";
 
 export default async function CategoryPage({ params }) {
   const { category } = params;
@@ -20,6 +21,8 @@ export default async function CategoryPage({ params }) {
     getData("latest/stories"),
     getData("categories/0/featured-stories"),
   ]);
+
+  const filteredLatestNews = latestNews?.data.filter(filterOutOTD);
 
   if (!categroyNews?.data.length) return notFound();
 
@@ -57,7 +60,7 @@ export default async function CategoryPage({ params }) {
             <Image className="mx-auto block my-10" width={320} height={250} src="/ads/Global.gif" alt="Ads" />
             <div>
               <AccentHeader header="Latest News" color="#5D26D1" />
-              <ItemList listType="circle" data={latestNews?.data.slice(0, 6)} moreNewsLink="/latest" showButton />
+              <ItemList listType="circle" data={filteredLatestNews?.slice(0, 6)} moreNewsLink="/latest" showButton />
             </div>
             <Image className="mx-auto block my-10" width={320} height={250} src="/ads/union-bank-ad.gif" alt="Ads" />
             <div>
