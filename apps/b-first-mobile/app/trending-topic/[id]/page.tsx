@@ -1,12 +1,13 @@
 import { BreadCrumb } from "@bfirst/components-breadcrumb";
 import Navbar from "../../components/Navbar/Navbar";
 import { ItemCardHorizontal } from "@bfirst/components-item-card-horizontal";
-import filterOutOTD from "apps/b-first-desktop/app/utils/filterOutOTD";
+import filterOutOTD from "../../utils/filterOutOTD";
 import { getData } from "../../utils/dataFetch";
 import { SocialShare } from "@bfirst/components-social-share";
 import { AccentHeader } from "@bfirst/components-accent-header";
 import { ItemList } from "@bfirst/components-item-list";
 import { getNewsUrl } from "@bfirst/utilities";
+import TrendingTopics from "../../components/TrendingTopics/TrendingTopics";
 
 export default async function TrendingTopic({ params }) {
   const [trendingNews, latestNews, topNews] = (
@@ -17,11 +18,13 @@ export default async function TrendingTopic({ params }) {
     ])
   ).map((item) => item.data);
 
+  const trendingTopics = (await getData("trendy-topics"))?.data;
   const filteredLatestNews = latestNews.filter(filterOutOTD);
   return (
-    <div>
+    <>
       <Navbar />
       <div className="px-3">
+        <TrendingTopics className="px-3 my-4" items={trendingTopics} title="Trending" />
         <div>
           <BreadCrumb
             className="mb-6"
@@ -71,6 +74,6 @@ export default async function TrendingTopic({ params }) {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
