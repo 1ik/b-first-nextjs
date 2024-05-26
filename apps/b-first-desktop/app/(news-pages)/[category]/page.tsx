@@ -3,7 +3,6 @@ import { BlockNews6 } from "@bfirst/components-block-news-6";
 import { ItemCardHorizontal } from "@bfirst/components-item-card-horizontal";
 import { ItemList } from "@bfirst/components-item-list";
 import Image from "next/image";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import BreadCrumb from "../../components/BreadCrumb/BreadCrumb";
 import LoadMore from "../../components/LoadMore/LoadMore";
@@ -30,12 +29,7 @@ export default async function CategoryPage({ params }) {
   return (
     <>
       <Navbar activeLink={`/${category}`} />
-      <TrendingTopics
-        Link={Link}
-        className="desktop-container mb-8"
-        title="Trending Topics"
-        items={trendingTopics?.data}
-      />
+      <TrendingTopics className="desktop-container mb-8" title="Trending Topics" items={trendingTopics?.data} />
       <div className="desktop-container">
         <Image className="mx-auto block" width={728} height={90} src="/ads/chopstick-ads.gif" alt="Ads" />
         <BreadCrumb
@@ -66,18 +60,12 @@ export default async function CategoryPage({ params }) {
             <Image className="mx-auto block my-10" width={320} height={250} src="/ads/Global.gif" alt="Ads" />
             <div>
               <AccentHeader header="Latest News" color="#5D26D1" />
-              <ItemList
-                Link={Link}
-                listType="circle"
-                data={filteredLatestNews?.slice(0, 6)}
-                moreNewsLink="/latest"
-                showButton
-              />
+              <ItemList listType="circle" data={filteredLatestNews?.slice(0, 6)} moreNewsLink="/latest" showButton />
             </div>
             <Image className="mx-auto block my-10" width={320} height={250} src="/ads/union-bank-ad.gif" alt="Ads" />
             <div>
               <AccentHeader header="Top News" color="#119F9F" />
-              <ItemList Link={Link} data={topNews?.data.slice(0, 6)} listType="number" />
+              <ItemList data={topNews?.data.slice(0, 6)} listType="number" />
             </div>
             <Image
               className="mx-auto block my-10 sticky top-20"

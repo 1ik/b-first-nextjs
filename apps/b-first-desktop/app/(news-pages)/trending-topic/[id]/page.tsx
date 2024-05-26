@@ -2,7 +2,6 @@ import { AccentHeader } from "@bfirst/components-accent-header";
 import { ItemCardHorizontal } from "@bfirst/components-item-card-horizontal";
 import { ItemList } from "@bfirst/components-item-list";
 import filterOutOTD from "apps/b-first-desktop/app/utils/filterOutOTD";
-import Link from "next/link";
 import BreadCrumb from "../../../components/BreadCrumb/BreadCrumb";
 import Navbar from "../../../components/Navbar/Navbar";
 import { getData } from "../../../utils/dataFetch";
@@ -52,18 +51,12 @@ export default async function TrendingTopic({ params }) {
             </div>
             <div className="my-10">
               <AccentHeader header="LATEST NEWS" color="#5D26D1" />
-              <ItemList
-                Link={Link}
-                data={filteredLatestNews?.slice(0, 6)}
-                listType="circle"
-                showButton
-                moreNewsLink="/latest"
-              />
+              <ItemList data={filteredLatestNews?.slice(0, 6)} listType="circle" showButton moreNewsLink="/latest" />
               <img className="mt-4 mx-auto" src="/ads/IBBL.gif" alt="Ads" />
             </div>
             <div>
               <AccentHeader header="Top News" color="#119F9F" />
-              <ItemList Link={Link} data={topNews?.slice(0, 6)} listType="number" />
+              <ItemList data={topNews?.slice(0, 6)} listType="number" />
               <img className="mt-4 mx-auto" src="/ads/Global.gif" alt="Ads" />
             </div>
           </div>
