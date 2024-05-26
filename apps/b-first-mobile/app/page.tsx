@@ -7,6 +7,7 @@ import { BlockNewsMob5 } from "@bfirst/components-block-news-mob-5";
 import { ItemList } from "@bfirst/components-item-list";
 import { ListGridMob } from "@bfirst/components-list-grid-mob";
 import { SquareGrid } from "@bfirst/components-square-grid";
+import moment from "moment";
 import Navbar from "./components/Navbar/Navbar";
 import TrendingTopics from "./components/TrendingTopics/TrendingTopics";
 import { getData } from "./utils/dataFetch";
@@ -34,31 +35,25 @@ export default async function Index() {
     return !latestNews?.find((lN: { id: number }) => lN.id === (item as { id: number }).id);
   };
 
-  const [
-    onThisDay,
-    economyNews,
-    featureNews,
-    entertainmentNews,
-    lifestyleNews,
-    bangladeshNews,
-    worldNews,
-    sportsNews,
-    techNews,
-  ] = (
-    await Promise.all([
-      getData("categories/on_this_day/stories"),
-      getData("categories/economy/stories"),
-      getData("categories/feature/stories"),
-      getData("categories/entertainment/stories"),
-      getData("categories/lifestyle/stories"),
-      getData("categories/bangladesh/stories"),
-      getData("categories/world/stories"),
-      getData("categories/sports/stories"),
-      getData("categories/tech/stories"),
-    ])
-  ).map((item) => item?.data.filter(filterTopNews).filter(filterRecommended).filter(filterLatestNews));
+  const [economyNews, featureNews, entertainmentNews, lifestyleNews, bangladeshNews, worldNews, sportsNews, techNews] =
+    (
+      await Promise.all([
+        getData("categories/economy/stories"),
+        getData("categories/feature/stories"),
+        getData("categories/entertainment/stories"),
+        getData("categories/lifestyle/stories"),
+        getData("categories/bangladesh/stories"),
+        getData("categories/world/stories"),
+        getData("categories/sports/stories"),
+        getData("categories/tech/stories"),
+      ])
+    ).map((item) => item?.data.filter(filterTopNews).filter(filterRecommended).filter(filterLatestNews));
 
   const trendingTopics = (await getData("trendy-topics"))?.data;
+  const onThisDay = (await getData("categories/on_this_day/stories")).data.filter(
+    (item: { created_at: moment.MomentInput }) =>
+      moment().format("MMM D YYYY") === moment(item.created_at).format("MMM D YYYY")
+  );
   return (
     <>
       <Navbar />
