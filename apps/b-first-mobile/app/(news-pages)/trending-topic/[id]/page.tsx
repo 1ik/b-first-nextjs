@@ -1,13 +1,13 @@
-import { BreadCrumb } from "@bfirst/components-breadcrumb";
-import Navbar from "../../components/Navbar/Navbar";
-import { ItemCardHorizontal } from "@bfirst/components-item-card-horizontal";
-import filterOutOTD from "../../utils/filterOutOTD";
-import { getData } from "../../utils/dataFetch";
-import { SocialShare } from "@bfirst/components-social-share";
 import { AccentHeader } from "@bfirst/components-accent-header";
+import { BreadCrumb } from "@bfirst/components-breadcrumb";
+import { ItemCardHorizontal } from "@bfirst/components-item-card-horizontal";
 import { ItemList } from "@bfirst/components-item-list";
+import { SocialShare } from "@bfirst/components-social-share";
 import { getNewsUrl } from "@bfirst/utilities";
-import TrendingTopics from "../../components/TrendingTopics/TrendingTopics";
+import Navbar from "../../../components/Navbar/Navbar";
+import TrendingTopics from "../../../components/TrendingTopics/TrendingTopics";
+import { getData } from "../../../utils/dataFetch";
+import filterOutOTD from "../../../utils/filterOutOTD";
 
 export default async function TrendingTopic({ params }) {
   const [trendingNews, latestNews, topNews] = (
@@ -50,7 +50,7 @@ export default async function TrendingTopic({ params }) {
                   <SocialShare
                     title="Share Trending On :"
                     textPlacement="left"
-                    shareLink={`https://bangladeshfirst.com/${getNewsUrl(item)}`}
+                    shareLink={`${process.env.BASE_URL}/${getNewsUrl(item)}`}
                     className="text-[#6F6F6F] items-center dark:text-white mt-4 border-b pb-4 dark:border-dark-300"
                   />
                   <img className="my-10 mx-auto" src="/ads/ibbl.gif" alt="Ads" />
