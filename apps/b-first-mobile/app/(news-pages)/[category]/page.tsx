@@ -1,15 +1,15 @@
+import { AccentHeader } from "@bfirst/components-accent-header";
 import { BlockNewsMob6 } from "@bfirst/components-block-news-mob-6";
-import { notFound } from "next/navigation";
 import { BreadCrumb } from "@bfirst/components-breadcrumb";
+import { ItemCardHorizontal } from "@bfirst/components-item-card-horizontal";
+import { ItemList } from "@bfirst/components-item-list";
+import Image from "next/image";
+import { notFound } from "next/navigation";
+import LoadMore from "../../components/LoadMore/LoadMore";
 import Navbar from "../../components/Navbar/Navbar";
 import TrendingTopics from "../../components/TrendingTopics/TrendingTopics";
 import { getData } from "../../utils/dataFetch";
 import filterOutOTD from "../../utils/filterOutOTD";
-import { ItemCardHorizontal } from "@bfirst/components-item-card-horizontal";
-import LoadMore from "../../components/LoadMore/LoadMore";
-import { AccentHeader } from "@bfirst/components-accent-header";
-import { ItemList } from "@bfirst/components-item-list";
-import Image from "next/image";
 
 export default async function CategoryPage({ params }) {
   const { category } = params;
@@ -28,10 +28,10 @@ export default async function CategoryPage({ params }) {
 
   return (
     <>
-      <Navbar activeLink={`/${category}`}/>
+      <Navbar activeLink={`/${category}`} />
       <div className="px-3">
         <img className="mx-auto my-14" src="/ads/nagad.png" alt="Ads" />
-        <TrendingTopics className="desktop-container mb-8" title="Trending Topics" items={trendingTopics?.data} />
+        <TrendingTopics className="mb-8" title="Trending Topics" items={trendingTopics?.data} />
         <img className="mx-auto my-14" src="/ads/nagad.png" alt="Ads" />
         <BreadCrumb
           className="my-10"
