@@ -77,7 +77,7 @@ export default async function NewsDetails({ params }) {
 
   return (
     <div>
-      <Navbar />
+      <Navbar activeLink={`/${detailsData?.story.categories[0].name.toLowerCase()}`}/>
 
       <div className="px-3">
         {/* TRENDING TOPICS */}

@@ -100,7 +100,7 @@ export function ItemList({
 
       {showButton &&
         (Link ? (
-          <div className="flex justify-center cursor-pointer border-b dark:border-dark-300">
+          <div className="flex justify-center border-b dark:border-dark-300">
             <Link
               href={moreNewsLink}
               className="text-[22px] border px-10 py-2 duration-300 hover:bg-[#efeff0] dark:hover:bg-dark-300 dark:border-dark-300"

@@ -1,5 +1,5 @@
 import moment from "moment";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaBars, FaFacebookF, FaInstagram, FaSearch, FaTimes, FaYoutube } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 
@@ -66,12 +66,13 @@ const _links = [
 
 export function MobileNav({ Link, logoLight, logoDark, activeLink, theme, onThemeChange }: MobileNavProps) {
   const [showSidebar, setshowSidebar] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
-  /*   const handleToggleTheme = function () {
+  const handleToggleTheme = function () {
     onThemeChange(theme === "light" ? "dark" : "light");
-  }; */
+  };
 
-  /*   useEffect(() => {
+  useEffect(() => {
     const document = window.document.documentElement;
 
     if (showSidebar) {
@@ -79,7 +80,11 @@ export function MobileNav({ Link, logoLight, logoDark, activeLink, theme, onThem
     } else {
       document.style.overflow = "auto";
     }
-  }); */
+  }, [showSidebar]);
+
+  useEffect(()=> {
+    setIsMounted(true)
+  }, [])
 
   return (
     <>
@@ -116,7 +121,7 @@ export function MobileNav({ Link, logoLight, logoDark, activeLink, theme, onThem
           } h-[100svh] duration-300 backdrop-blur bg-white/70 dark:bg-dark-500/80`}
         >
           {/* need to change theme toglle buttons position */}
-          {/* <button
+          <button
             onClick={handleToggleTheme}
             className="bg-black absolute top-3 left-4 dark:bg-dark-300 p-1.5 self-center rounded-md cursor-pointer"
           >
@@ -127,7 +132,7 @@ export function MobileNav({ Link, logoLight, logoDark, activeLink, theme, onThem
                   : "bg-transparent shadow-[inset_-3px_-2px_0px_1px_white]"
               } `}
             ></span>
-          </button> */}
+          </button>
           <button onClick={() => setshowSidebar(false)} className="absolute top-4 right-4">
             <FaTimes />
           </button>

@@ -28,7 +28,7 @@ export default async function CategoryPage({ params }) {
 
   return (
     <>
-      <Navbar />
+      <Navbar activeLink={`/${category}`}/>
       <div className="px-3">
         <img className="mx-auto my-14" src="/ads/nagad.png" alt="Ads" />
         <TrendingTopics className="desktop-container mb-8" title="Trending Topics" items={trendingTopics?.data} />
