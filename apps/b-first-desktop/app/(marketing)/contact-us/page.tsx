@@ -5,7 +5,7 @@ export default function ContactUs() {
     <>
       <Navbar />
       <div className="desktop-container pt-16 pb-24 font-montserrat">
-        <h2 className="font-semibold text-3xl mb-2">Contact Us</h2>
+        <h1 className="font-semibold text-3xl mb-2">Contact Us</h1>
 
         <p className="text-sm mb-4">
           We are here to serve you and welcome any questions, comments, or suggestions you may have. Feel free to reach

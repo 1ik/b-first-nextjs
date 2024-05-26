@@ -5,7 +5,7 @@ export default function Accessibility() {
     <>
       <Navbar />
       <div className="desktop-container pt-16 pb-24 font-montserrat">
-        <h2 className="font-semibold text-3xl mb-2">Accessibility & Closed Captioning Policy</h2>
+        <h1 className="font-semibold text-3xl mb-2">Accessibility & Closed Captioning Policy</h1>
         <p className="text-sm mb-4">
           Bangladesh First ("we," "us," or "our") is committed to ensuring digital accessibility for all users,
           including individuals with disabilities. We strive to continually improve the user experience for everyone and

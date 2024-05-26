@@ -5,7 +5,7 @@ export default function Terms() {
     <>
       <Navbar />
       <div className="desktop-container pt-16 pb-24 font-montserrat">
-        <h2 className="font-semibold text-3xl mb-6">Terms of Use</h2>
+        <h1 className="font-semibold text-3xl mb-6">Terms of Use</h1>
         <ul className="list-decimal pl-4">
           <li className="text-base mb-2">
             Acceptance of Terms <br /> By accessing and using the Bangladesh First website BangladeshFirst.com, you
