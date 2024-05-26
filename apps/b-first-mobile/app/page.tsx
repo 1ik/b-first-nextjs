@@ -15,7 +15,7 @@ import filterOutOTD from "./utils/filterOutOTD";
 
 export default async function Index() {
   const [topNews, recommendedNews] = (
-    await Promise.all([getData("categories/0/featured-stories"), getData("recommended-stories")])
+    await Promise.all([getData("categories/0/featured-stories?size=13"), getData("recommended-stories")])
   ).map((item) => item.data);
 
   const filterRecommended = function (item: { id: number }) {
