@@ -82,15 +82,15 @@ export function MobileNav({ Link, logoLight, logoDark, activeLink, theme, onThem
     }
   }, [showSidebar]);
 
-  useEffect(()=> {
-    setIsMounted(true)
-  }, [])
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   return (
     <>
-      <nav className="sticky top-0 left-0 w-full bg-white dark:bg-dark-400 px-3 py-4 shadow-md border-b dark:border-dark-300 z-[999]">
+      <nav className="sticky top-0 left-0 w-full bg-white dark:bg-dark-400 px-3 py-5 shadow-md border-b dark:border-dark-300 z-[999]">
         <div className="grid grid-cols-3 gap-x-3 items-center">
-          <div className="flex gap-x-2 sm:gap-x-4">
+          <div className="flex gap-x-3 sm:gap-x-5 text-xl">
             <button onClick={() => setshowSidebar((cur) => !cur)}>
               <FaBars />
             </button>
@@ -98,7 +98,7 @@ export function MobileNav({ Link, logoLight, logoDark, activeLink, theme, onThem
               <FaSearch />
             </button>
           </div>
-          <div className="w-[100px] sm:w-[180px] mx-auto">
+          <div className="w-[120px] sm:w-[200px] mx-auto">
             {Link ? (
               <Link href="/">
                 <img className="w-full dark:hidden block" src={logoDark} alt="Logo" />
@@ -116,7 +116,7 @@ export function MobileNav({ Link, logoLight, logoDark, activeLink, theme, onThem
           </div>
         </div>
         <div
-          className={`py-10 w-[200px] overflow-y-auto flex flex-col items-center text-base shadow-[5px_0px_10px_0px_rgba(0,0,0,0.2)] dark:shadow-[5px_0px_10px_0px_rgba(0,0,0,0.4)] absolute z-[9999] top-0 left-0 ${
+          className={`py-12 w-[200px] overflow-y-auto flex flex-col items-center text-lg shadow-[5px_0px_10px_0px_rgba(0,0,0,0.2)] dark:shadow-[5px_0px_10px_0px_rgba(0,0,0,0.4)] absolute z-[9999] top-0 left-0 ${
             showSidebar ? "" : "-translate-x-[calc(100%+20px)]"
           } h-[100svh] duration-300 backdrop-blur bg-white/70 dark:bg-dark-500/80`}
         >
@@ -133,7 +133,7 @@ export function MobileNav({ Link, logoLight, logoDark, activeLink, theme, onThem
               } `}
             ></span>
           </button>
-          <button onClick={() => setshowSidebar(false)} className="absolute top-4 right-4">
+          <button onClick={() => setshowSidebar(false)} className="absolute top-4 right-4 text-xl">
             <FaTimes />
           </button>
           <ul className="flex flex-col gap-y-1 w-full">
