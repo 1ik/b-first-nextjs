@@ -68,13 +68,13 @@ export default async function Index() {
       <BlockNews
         className="desktop-container"
         data={topNews.slice(0, 5)}
-        ads1="/ads/Global.gif"
-        ads2="/ads/union-bank-ad.gif"
+        ads1="/ads/sibl-march-300x250.gif"
+        ads2="/ads/ibbl.gif"
         Link={Link}
       />
-      <img className="mx-auto my-14" src="/ads/nagad.png" alt="Ads" />
+      <img className="mx-auto my-14" src="/ads/FSB-banner-ad.gif" alt="Ads" />
       <SquareGrid Link={Link} showAccentHeader className="desktop-container" data={topNews.slice(5, 13)} gridCols={4} />
-      <img className="mx-auto my-12" src="/ads/ads_top.png" alt="Ads" />
+      <img className="mx-auto my-12" src="/ads/banner_ibbl.gif" alt="Ads" />
 
       <div className="bg-[#F6EFEF] dark:bg-dark-300 py-8">
         <div className="desktop-container">
@@ -82,7 +82,7 @@ export default async function Index() {
           <SquareGrid Link={Link} data={recommendedNews?.slice(0, 4)} gridCols={4} />
         </div>
       </div>
-      <img className="mx-auto my-12" src="/ads/bkash.png" alt="Ads" />
+      <img className="mx-auto my-12" src="/ads/FSB-banner-ad.gif" alt="Ads" />
 
       <div className="desktop-container">
         <div className="grid grid-cols-4">
