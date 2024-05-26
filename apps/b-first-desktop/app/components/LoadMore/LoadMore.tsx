@@ -10,9 +10,18 @@ interface LoadMoreProps {
   lastPage?: number;
   size?: number;
   category: string;
+  showIntro?: boolean;
+  showTime?: boolean;
 }
 
-export default function LoadMore({ initialPage = 1, lastPage = 1, category, size = 10 }: LoadMoreProps) {
+export default function LoadMore({
+  initialPage = 1,
+  lastPage = 1,
+  category,
+  size = 10,
+  showIntro = true,
+  showTime = false,
+}: LoadMoreProps) {
   const [page, setPage] = useState(initialPage);
   const [stories, setStories] = useState<any>([]);
   const { ref, inView } = useInView();
@@ -46,7 +55,8 @@ export default function LoadMore({ initialPage = 1, lastPage = 1, category, size
       {stories.map((story: { id: Key | null | undefined }) => (
         <ItemCardHorizontal
           size="lg"
-          showIntro
+          showTime={showTime}
+          showIntro={showIntro}
           className="pb-5 border-b dark:border-dark-300"
           key={story.id}
           data={story}

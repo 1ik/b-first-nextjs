@@ -82,7 +82,7 @@ export default async function NewsDetails({ params }) {
       <TrendingTopics className="desktop-container mb-8" title="Trending Topics" items={trendingTopics} />
 
       <div className="desktop-container">
-        <img className="mx-auto my-12" src="/ads/chopstick-ads.gif" alt="Ads" />
+        <img className="mx-auto my-12" src="/ads/banner_ibbl.gif" alt="Ads" />
         <BreadCrumb
           links={[
             {
@@ -116,7 +116,7 @@ export default async function NewsDetails({ params }) {
 
           {/* ======== row 2 ======= */}
           <div>
-            <img className="my-10 mx-auto" src="/ads/SIBL_Profit_300x250.gif" alt="Ads" />
+            <img className="my-10 mx-auto" src="/ads/union-bank-ad.gif" alt="Ads" />
             <div className="sticky top-[100px]">
               <AccentHeader
                 header={`more from ${detailsData?.story.categories[0].name.split("_").join(" ")}`}
@@ -182,7 +182,7 @@ export default async function NewsDetails({ params }) {
               <ItemList listType="circle" data={filteredLatestNews?.slice(0, 5)} showButton moreNewsLink="/latest" />
             </div>
             <div className="sticky top-[100px]">
-              <img className="my-10 mx-auto" src="/ads/union-bank-ad.gif" alt="Ads" />
+              <img className="my-10 mx-auto" src="/ads/ibbl.gif" alt="Ads" />
               <AccentHeader header="Top News" color="#119F9F" />
               <ItemList data={topNews?.slice(0, 6)} listType="number" />
             </div>

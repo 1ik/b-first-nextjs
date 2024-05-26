@@ -59,15 +59,16 @@ export default async function Index() {
     <>
       <Navbar />
       <TrendingTopics className="desktop-container mb-8" items={trendingTopics} title="Trending Topics" />
+     
       <BlockNews
         className="desktop-container"
         data={topNews.slice(0, 5)}
         ads1="/ads/Global.gif"
         ads2="/ads/union-bank-ad.gif"
       />
-      <img className="mx-auto my-14" src="/ads/nagad.png" alt="Ads" />
+      <img className="mx-auto my-14" src="/ads/FSB-banner-ad.gif" alt="Ads" />
       <SquareGrid showAccentHeader className="desktop-container" data={topNews.slice(5, 13)} gridCols={4} />
-      <img className="mx-auto my-12" src="/ads/ads_top.png" alt="Ads" />
+      <img className="mx-auto my-12" src="/ads/banner_ibbl.gif" alt="Ads" />
 
       <div className="bg-[#F6EFEF] dark:bg-dark-300 py-8">
         <div className="desktop-container">
@@ -75,7 +76,7 @@ export default async function Index() {
           <SquareGrid data={recommendedNews?.slice(0, 4)} gridCols={4} />
         </div>
       </div>
-      <img className="mx-auto my-12" src="/ads/bkash.png" alt="Ads" />
+      <img className="mx-auto my-12" src="/ads/FSB-banner-ad.gif" alt="Ads" />
 
       <div className="desktop-container">
         <div className="grid grid-cols-4">
@@ -98,7 +99,7 @@ export default async function Index() {
       <div className="desktop-container my-10">
         <div className="grid grid-cols-4">
           <div className="col-span-3 border-r dark:border-dark-300 pr-4 mr-4">
-            <BlockNews3 sectionHeader="Feature" headerColor="#8BD032" adsUrl="/ads/ads_three.png" data={featureNews} />
+            <BlockNews3 sectionHeader="Feature" headerColor="#8BD032" adsUrl="/ads/banner_ibbl.gif" data={featureNews} />
           </div>
           <div>
             <AccentHeader header="Most Viewed" color="#119F9F" />
@@ -113,7 +114,7 @@ export default async function Index() {
           <BlockNews4
             sectionHeader="Lifestyle"
             headerColor="#EF2D8A"
-            adsUrl="/ads/social_islami.png"
+            adsUrl="/ads/banner_ibbl.gif"
             className="col-span-3 border-r dark:border-dark-300 pr-4 mr-4"
             data={lifestyleNews}
           />
@@ -122,7 +123,7 @@ export default async function Index() {
             <ItemList showImage showDate data={onThisDay} />
             <div className="flex flex-col mt-8 gap-y-8 items-center">
               <img src="ads/SIBL_Profit_300x250.gif" alt="Ads" />
-              <img src="ads/Global.gif" alt="Ads" />
+              <img src="ads/FSIBL-November-2023-20.gif" alt="Ads" />
             </div>
           </div>
         </div>
@@ -134,11 +135,11 @@ export default async function Index() {
         className="desktop-container my-10"
         data={entertainmentNews}
       />
-      <img className="mx-auto my-16" src="/ads/ads_six.png" alt="Ads" />
+      <img className="mx-auto my-16" src="/ads/FSB-banner-ad.gif" alt="Ads" />
 
       <ListGrid className="desktop-container" data={[bangladeshNews, worldNews, sportsNews, techNews]} />
 
-      <img className="mx-auto mt-12" src="/ads/fresh.gif" alt="Ads" />
+      <img className="mx-auto mt-12" src="/ads/banner_ibbl.gif" alt="Ads" />
     </>
   );
 }

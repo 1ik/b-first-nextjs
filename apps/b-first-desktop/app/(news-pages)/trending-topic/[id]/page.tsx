@@ -6,6 +6,7 @@ import BreadCrumb from "../../../components/BreadCrumb/BreadCrumb";
 import Navbar from "../../../components/Navbar/Navbar";
 import { getData } from "../../../utils/dataFetch";
 import filterOutOTD from "../../../utils/filterOutOTD";
+import TrendingTopics from "../../../components/TrendingTopics/TrendingTopics";
 
 export default async function TrendingTopic({ params }) {
   const [trendingNews, latestNews, topNews] = (
@@ -17,10 +18,12 @@ export default async function TrendingTopic({ params }) {
   ).map((item) => item.data);
 
   const filteredLatestNews = latestNews.filter(filterOutOTD);
+  const trendingTopics = (await getData("trendy-topics"))?.data;
   return (
     <div>
       <Navbar />
-
+      <TrendingTopics className="desktop-container mb-8" items={trendingTopics} title="Trending Topics" />
+      <img className="mx-auto my-4" src="/ads//ads/banner_ibbl.gif" alt="" />
       <div className="desktop-container">
         <div className="mb-6">
           <BreadCrumb
