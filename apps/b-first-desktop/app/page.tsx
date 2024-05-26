@@ -7,6 +7,7 @@ import { BlockNews5 } from "@bfirst/components-block-news-5";
 import { ItemList } from "@bfirst/components-item-list";
 import { ListGrid } from "@bfirst/components-list-grid";
 import { SquareGrid } from "@bfirst/components-square-grid";
+import moment from "moment";
 import Navbar from "./components/Navbar/Navbar";
 import TrendingTopics from "./components/TrendingTopics/TrendingTopics";
 import { getData } from "./utils/dataFetch";

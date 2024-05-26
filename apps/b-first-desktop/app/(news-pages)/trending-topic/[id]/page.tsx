@@ -1,7 +1,7 @@
 import { AccentHeader } from "@bfirst/components-accent-header";
 import { ItemCardHorizontal } from "@bfirst/components-item-card-horizontal";
 import { ItemList } from "@bfirst/components-item-list";
-import filterOutOTD from "apps/b-first-desktop/app/utils/filterOutOTD";
+import filterOutOTD from "../../../utils/filterOutOTD";
 import BreadCrumb from "../../../components/BreadCrumb/BreadCrumb";
 import Navbar from "../../../components/Navbar/Navbar";
 import { getData } from "../../../utils/dataFetch";
