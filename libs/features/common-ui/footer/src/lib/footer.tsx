@@ -8,7 +8,7 @@ export interface FooterProps {
 const links = [
   {
     name: "Terms of Use",
-    href: "/#",
+    href: "/terms",
   },
   {
     name: "Privacy Policy",
@@ -20,15 +20,15 @@ const links = [
   },
   {
     name: "Cookie Settings",
-    href: "/#",
+    href: "/cookie-settings",
   },
   {
     name: "Accessibility & CC",
-    href: "/#",
+    href: "/accessibility",
   },
   {
     name: "About",
-    href: "/#",
+    href: "/about-us",
   },
   {
     name: "Newsletters",
@@ -36,7 +36,7 @@ const links = [
   },
   {
     name: "Contact",
-    href: "/#",
+    href: "/contact-us",
   },
 ];
 
