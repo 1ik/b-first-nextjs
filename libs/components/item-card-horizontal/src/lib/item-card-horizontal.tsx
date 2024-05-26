@@ -12,7 +12,7 @@ export interface ItemCardHorizontalProps {
   Link?: any;
   showSocialShare?: boolean;
   showCreatedAt?: boolean;
-  showTime: boolean;
+  showTime?: boolean;
 }
 
 export function ItemCardHorizontal({
