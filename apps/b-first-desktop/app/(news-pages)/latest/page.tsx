@@ -5,15 +5,21 @@ import { getData } from "../../utils/dataFetch";
 import { AccentHeader } from "@bfirst/components-accent-header";
 import { ItemList } from "@bfirst/components-item-list";
 import LoadMore from "../../components/LoadMore/LoadMore";
+import TrendingTopics from "../../components/TrendingTopics/TrendingTopics";
 
 export default async function Latest() {
-  const [latestNews, topNews] = (
-    await Promise.all([getData("latest/stories"), getData("categories/0/featured-stories")])
-  )
+  const [latestNews, topNews] = await Promise.all([
+    getData("latest/stories"),
+    getData("categories/0/featured-stories"),
+  ]);
+
+  const trendingTopics = (await getData("trendy-topics"))?.data;
 
   return (
     <>
       <Navbar />
+      <TrendingTopics className="desktop-container mb-8" items={trendingTopics} title="Trending Topics" />
+      <img className="mx-auto my-4" src="/ads/banner_ibbl.gif" alt="" />
       <div className="desktop-container">
         {/*============= BREDCRUMB ========== */}
         <BreadCrumb
@@ -37,7 +43,13 @@ export default async function Latest() {
                 showTime
               />
             ))}
-            <LoadMore initialPage={2} lastPage={latestNews?.meta.last_page} category="latest" />
+            <LoadMore
+              showIntro={false}
+              showTime
+              initialPage={2}
+              lastPage={latestNews?.meta.last_page}
+              category="latest"
+            />
           </div>
 
           <div>

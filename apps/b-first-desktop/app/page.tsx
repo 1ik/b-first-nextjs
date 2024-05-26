@@ -65,6 +65,7 @@ export default async function Index() {
     <>
       <Navbar />
       <TrendingTopics className="desktop-container mb-8" items={trendingTopics} title="Trending Topics" />
+     
       <BlockNews
         className="desktop-container"
         data={topNews.slice(0, 5)}
