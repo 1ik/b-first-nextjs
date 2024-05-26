@@ -15,9 +15,7 @@ export default async function CategoryPage({ params }) {
   const { category } = params;
   const [trendingTopics, categroyNews, latestNews, topNews] = await Promise.all([
     getData("trendy-topics"),
-    getData(
-      `${category === "latest" ? "latest/stories?size=20&page=1" : `categories/${category}/stories?size=20&page=1`}`
-    ),
+    getData(`categories/${category}/stories?size=20&page=1`),
     getData("latest/stories"),
     getData("categories/0/featured-stories"),
   ]);
@@ -30,9 +28,9 @@ export default async function CategoryPage({ params }) {
     <>
       <Navbar activeLink={`/${category}`} />
       <div className="px-3">
-        <img className="mx-auto my-14" src="/ads/nagad.png" alt="Ads" />
+        <img className="mx-auto my-14" src="/ads/banner_ibbl.gif" alt="Ads" />
         <TrendingTopics className="mb-8" title="Trending" items={trendingTopics?.data} />
-        <img className="mx-auto my-14" src="/ads/nagad.png" alt="Ads" />
+        <img className="mx-auto my-14" src="/ads/FSB-banner-ad.gif" alt="Ads" />
         <BreadCrumb
           className="my-10"
           links={[
@@ -43,7 +41,7 @@ export default async function CategoryPage({ params }) {
           ]}
         />
         <BlockNewsMob6 data={categroyNews?.data.slice(0, 4)} />
-        <img className="mx-auto my-14" src="/ads/nagad.png" alt="Ads" />
+        <img className="mx-auto my-14" src="/ads/banner_ibbl.gif" alt="Ads" />
         <div className="grid grid-cols-1 sm:grid-cols-3 sm:gap-x-5">
           <div className="sm:col-span-2">
             {categroyNews?.data.slice(4).map((news) => (

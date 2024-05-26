@@ -15,7 +15,7 @@ import filterOutOTD from "./utils/filterOutOTD";
 
 export default async function Index() {
   const [topNews, recommendedNews] = (
-    await Promise.all([getData("categories/0/featured-stories"), getData("recommended-stories")])
+    await Promise.all([getData("categories/0/featured-stories?size=13"), getData("recommended-stories")])
   ).map((item) => item.data);
 
   const filterRecommended = function (item: { id: number }) {
@@ -58,7 +58,7 @@ export default async function Index() {
     <>
       <Navbar />
       <div className="px-3">
-        <img className="mx-auto my-6" src="/ads/nagad.png" alt="Ads" />
+        <img className="mx-auto my-6" src="/ads/banner_ibbl.gif" alt="Ads" />
         <TrendingTopics className="px-3 my-4" items={trendingTopics} title="Trending" />
 
         {/* TOP NEWS SECTION */}

@@ -1,30 +1,23 @@
 "use client";
-import Link from "next/link";
 import Navbar from "./components/Navbar/Navbar";
-import { Button } from "@bfirst/material-tailwind";
 
 export default function NotFound() {
   return (
     <>
       <Navbar />
-      <div className="flex flex-col items-center justify-center pt-14 pb-20 font-montserrat ">
-        <h2 className="flex items-center gap-x-4 text-9xl font-semibold">
+      <div className="flex flex-col items-center justify-center pt-14 pb-20 font-montserrat px-3">
+        <h2 className="flex items-center gap-x-2 text-6xl font-semibold">
           <span>4</span>
-          <img className="w-20" src="/img/logo-mini.png" alt="logo" />
+          <img className="w-12" src="/img/logo-mini.png" alt="logo" />
           <span>4</span>
         </h2>
-        <p className="text-center text-2xl font-medium mt-1 mb-">
+        <p className="text-center text-xl font-medium mt-3">
           Sorry! The page you are looking for could not be found.
         </p>
-        <p className="text-xl mt-1 mb-4">You can return to our homepage. Thanks for your understanding.</p>
-        <Link href="/">
-          <Button
-            size="lg"
-            className="border bg-transparent border-accent text-accent px-6 py-2.5 text-xl font-medium rounded-md hover:text-white hover:bg-accent duration-200"
-          >
+        <p className="text-lg text-center mt-3 mb-4">You can return to our homepage. Thanks for your understanding.</p>
+        <a href="/" className="border bg-transparent border-accent text-accent px-5 py-2 text-lg font-medium rounded-md hover:text-white hover:bg-accent duration-200">
             Return Home
-          </Button>
-        </Link>
+        </a>
       </div>
     </>
   );
