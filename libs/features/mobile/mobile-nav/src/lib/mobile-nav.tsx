@@ -89,7 +89,7 @@ export function MobileNav({ Link, logoLight, logoDark, activeLink, theme, onThem
   return (
     <>
       <nav className="sticky top-0 left-0 w-full bg-white dark:bg-dark-400 px-3 py-5 shadow-md border-b dark:border-dark-300 z-[999]">
-        <div className="grid grid-cols-3 gap-x-3 items-center">
+        <div className="flex items-center justify-between">
           <div className="flex gap-x-3 sm:gap-x-5 text-xl">
             <button onClick={() => setshowSidebar((cur) => !cur)}>
               <FaBars />
@@ -98,7 +98,7 @@ export function MobileNav({ Link, logoLight, logoDark, activeLink, theme, onThem
               <FaSearch />
             </button>
           </div>
-          <div className="w-[120px] sm:w-[200px] mx-auto">
+          <div className="w-[150px] sm:w-[220px] mx-auto">
             {Link ? (
               <Link href="/">
                 <img className="w-full dark:hidden block" src={logoDark} alt="Logo" />
@@ -112,11 +112,11 @@ export function MobileNav({ Link, logoLight, logoDark, activeLink, theme, onThem
             )}
           </div>
           <div className="text-end">
-            <p className="text-[8px] sm:text-[12px]">{moment().format("dddd, MMMM Do, YYYY")}</p>
+            <p className="text-[12px] sm:text-[14px]">{moment().format("MMMM Do, YYYY")}</p>
           </div>
         </div>
         <div
-          className={`py-12 w-[200px] overflow-y-auto flex flex-col items-center text-lg shadow-[5px_0px_10px_0px_rgba(0,0,0,0.2)] dark:shadow-[5px_0px_10px_0px_rgba(0,0,0,0.4)] absolute z-[9999] top-0 left-0 ${
+          className={`py-16 w-[250px] overflow-y-auto flex flex-col items-center text-xl shadow-[5px_0px_10px_0px_rgba(0,0,0,0.2)] dark:shadow-[5px_0px_10px_0px_rgba(0,0,0,0.4)] absolute z-[9999] top-0 left-0 ${
             showSidebar ? "" : "-translate-x-[calc(100%+20px)]"
           } h-[100svh] duration-300 backdrop-blur bg-white/70 dark:bg-dark-500/80`}
         >
@@ -126,14 +126,14 @@ export function MobileNav({ Link, logoLight, logoDark, activeLink, theme, onThem
             className="bg-black absolute top-3 left-4 dark:bg-dark-300 p-1.5 self-center rounded-md cursor-pointer"
           >
             <span
-              className={`bg-black p-1.5 block self-center w-3 aspect-square rounded-full duration-500 ${
+              className={`bg-black p-2 block self-center w-4 aspect-square rounded-full duration-500 ${
                 isMounted && theme === "dark"
                   ? "bg-yellow-400"
                   : "bg-transparent shadow-[inset_-3px_-2px_0px_1px_white]"
               } `}
             ></span>
           </button>
-          <button onClick={() => setshowSidebar(false)} className="absolute top-4 right-4 text-xl">
+          <button onClick={() => setshowSidebar(false)} className="absolute top-4 right-4 text-2xl">
             <FaTimes />
           </button>
           <ul className="flex flex-col gap-y-1 w-full">
@@ -156,7 +156,7 @@ export function MobileNav({ Link, logoLight, logoDark, activeLink, theme, onThem
               </li>
             ))}
           </ul>
-          <div className="flex gap-x-1 sm:gap-x-2 my-3 py-5 border-t border-black/40 justify-center text-xs sm:text-sm w-full dark:border-dark-300">
+          <div className="flex gap-x-3 sm:gap-x-5 my-3 py-5 border-t border-black/40 justify-center text-xs sm:text-sm w-full dark:border-dark-300">
             <a
               href="https://www.facebook.com/Bangladeshfirst.news"
               target="_blank"
