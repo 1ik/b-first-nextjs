@@ -23,7 +23,7 @@ export function SocialShare({ shareLink, className, textPlacement = "top", title
   return (
     <div className={`${className}`}>
       <div className={`${textPlacement === "left" ? "flex gap-x-4 items-center" : "flex flex-col gap-2"}`}>
-        <h3 className="font-montserrat text-lg">{title}</h3>
+        <h3 className="font-montserrat md:text-lg">{title}</h3>
         <div className="flex gap-x-2">
           <FacebookShareButton url={shareLink}>
             <div className="bg-black/90 hover:bg-black p-1.5 text-white rounded-md">

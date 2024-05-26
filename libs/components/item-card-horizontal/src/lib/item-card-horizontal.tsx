@@ -40,6 +40,18 @@ export function ItemCardHorizontal({
       : ""
   }`;
 
+  const introFontSize = `leading-[110%] ${
+    size === "xl"
+      ? "text-2xl"
+      : size === "sm"
+      ? "text-sm"
+      : size === "md"
+      ? "text-sm"
+      : size === "lg"
+      ? "text-base"
+      : ""
+  }`;
+
   return (
     <div
       className={`flex ${className} ${showTitleBorderBig ? "border-t border-accent" : ""} ${
@@ -77,18 +89,12 @@ export function ItemCardHorizontal({
             </p>
           )}
           {showCreatedAt && (
-            <p className="font-montserrat text-lg text-[#6F6F6F] mt-10 border-t pt-4  dark:border-dark-300 dark:text-white">
+            <p className="font-montserrat text-xs md:text-lg text-[#6F6F6F] mt-4 md:mt-10 border-t md:pt-4 pt-2  dark:border-dark-300 dark:text-white">
               Created At : {`${moment(data?.created_at).format("MMM Do, YYYY")}`}
             </p>
           )}
           {showIntro && (
-            <p
-              className={`mt-4 leading-[110%] dark:text-[#bebdbd] text-[#727272] ${
-                size === "xl" ? "text-2xl" : "text-xl"
-              }`}
-            >
-              {data?.meta.intro}
-            </p>
+            <p className={`mt-4 ${introFontSize} dark:text-[#bebdbd] text-[#727272]`}>{data?.meta.intro}</p>
           )}
           {socialShareLink && (
             <SocialShare

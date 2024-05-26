@@ -46,15 +46,15 @@ export function Footer({ logo, Link, className }: FooterProps) {
       <div className="flex items-center justify-center">
         {Link ? (
           <Link href="/">
-            <img src={logo} alt="Logo" className="mb-14 w-[400px]" />
+            <img src={logo} alt="Logo" className="mb-14 w-[200px] md:w-[400px]" />
           </Link>
         ) : (
           <a href="/">
-            <img src={logo} alt="Logo" className="mb-14 w-[400px]" />
+            <img src={logo} alt="Logo" className="mb-14 w-[200px] md:w-[400px]" />
           </a>
         )}
       </div>
-      <ul className="flex font-semibold items-center justify-center">
+      <ul className="flex font-semibold items-center justify-center flex-wrap">
         {links.map((link, index) => (
           <li
             key={index}
