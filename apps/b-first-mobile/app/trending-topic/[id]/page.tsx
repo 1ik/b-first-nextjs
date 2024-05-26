@@ -32,8 +32,8 @@ export default async function TrendingTopic({ params }) {
             ]}
           />
 
-          <div className="sm:grid grid-cols-6 gap-4">
-            <div className="order-2 col-span-4">
+          <div className="grid grid-cols-1 sm:grid-cols-6 gap-4">
+            <div className="sm:col-span-4">
               {trendingNews?.map((item: any, index: number) => (
                 <>
                   <ItemCardHorizontal
@@ -54,7 +54,7 @@ export default async function TrendingTopic({ params }) {
               ))}
             </div>
 
-            <div className="col-span-2">
+            <div className="sm:order-2 sm:col-span-2">
               <div className="mb-8">
                 <AccentHeader header="LATEST NEWS" color="#5D26D1" />
                 <ItemList data={filteredLatestNews?.slice(0, 6)} listType="circle" showButton moreNewsLink="/latest" />
