@@ -48,7 +48,7 @@ export default async function TrendingTopic({ params }) {
                     className="border-b pb-4 dark:border-dark-300"
                   />
                   <SocialShare
-                    title="Share Trending On :"
+                    title="Share On :"
                     textPlacement="left"
                     shareLink={`${process.env.BASE_URL}/${getNewsUrl(item)}`}
                     className="text-[#6F6F6F] items-center dark:text-white mt-4 border-b pb-4 dark:border-dark-300"
