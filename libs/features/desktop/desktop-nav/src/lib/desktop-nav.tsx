@@ -159,7 +159,7 @@ export function DesktopNav({
       )}
       <div className="desktop-container w-full">
         <div className="flex justify-between items-center">
-          <div className="w-80">{adsLeft && <img src={adsLeft} alt="Ads" />}</div>
+          <div className="w-80">{adsLeft && <img className="hidden" src={adsLeft} alt="Ads" />}</div>
           <div className="w-80">
             {Link ? (
               <Link href="/">
@@ -173,7 +173,7 @@ export function DesktopNav({
               </a>
             )}
           </div>
-          <div className="w-80">{adsRight && <img src={adsRight} alt="Ads" />}</div>
+          <div className="w-80">{adsRight && <img className="hidden" src={adsRight} alt="Ads" />}</div>
         </div>
       </div>
 

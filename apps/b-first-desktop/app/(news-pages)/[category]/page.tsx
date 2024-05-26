@@ -29,7 +29,7 @@ export default async function CategoryPage({ params }) {
       <Navbar activeLink={`/${category}`} />
       <TrendingTopics className="desktop-container mb-8" title="Trending Topics" items={trendingTopics?.data} />
       <div className="desktop-container">
-        <Image className="mx-auto block" width={728} height={90} src="/ads/chopstick-ads.gif" alt="Ads" />
+        <Image className="mx-auto block" width={728} height={90} src="/ads/FSB-banner-ad.gif" alt="Ads" />
         <BreadCrumb
           className="my-10"
           links={[
@@ -40,7 +40,7 @@ export default async function CategoryPage({ params }) {
           ]}
         />
         <BlockNews6 data={categroyNews?.data.slice(0, 4)} />
-        <Image className="mx-auto block my-10" width={728} height={90} src="/ads/chopstick-ads.gif" alt="Ads" />
+        <Image className="mx-auto block my-10" width={728} height={90} src="/ads/banner_ibbl.gif" alt="Ads" />
         <div className="grid grid-cols-4 gap-x-10">
           <div className="col-span-3 flex flex-col gap-y-5">
             {categroyNews?.data.slice(4).map((news) => (
