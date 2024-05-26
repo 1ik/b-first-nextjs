@@ -5,7 +5,7 @@ export default function PrivacyPolicy() {
     <>
       <Navbar />
       <div className="px-3 py-6 font-montserrat">
-        <h2 className="font-semibold text-2xl mb-6 text-center">Privacy Policy</h2>
+        <h1 className="font-semibold text-2xl mb-6 text-center">Privacy Policy</h1>
         <p className="text-base  mb-5">
           At Bangladesh First, we are committed to protecting the privacy and security of our readers and visitors to
           our website. This Privacy Policy outlines how we collect, use, disclose, and protect your personal information

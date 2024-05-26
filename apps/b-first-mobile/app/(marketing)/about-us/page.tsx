@@ -5,7 +5,7 @@ export default function AboutUs() {
     <>
       <Navbar />
       <div className="px-3 py-6 font-montserrat">
-        <h2 className="font-semibold text-2xl mb-2">About Us</h2>
+        <h1 className="font-semibold text-2xl mb-2">About Us</h1>
         <p className="text-sm mb-4">Welcome to Bangladesh First!</p>
         <p className="text-sm mb-4">
           We are dedicated to providing our readers with the most accurate, timely, and engaging news content. Our
