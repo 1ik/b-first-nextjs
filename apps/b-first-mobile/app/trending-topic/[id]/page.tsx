@@ -6,6 +6,7 @@ import { getData } from "../../utils/dataFetch";
 import { SocialShare } from "@bfirst/components-social-share";
 import { AccentHeader } from "@bfirst/components-accent-header";
 import { ItemList } from "@bfirst/components-item-list";
+import { getNewsUrl } from "@bfirst/utilities";
 
 export default async function TrendingTopic({ params }) {
   const [trendingNews, latestNews, topNews] = (
@@ -34,7 +35,7 @@ export default async function TrendingTopic({ params }) {
 
           <div className="grid grid-cols-1 sm:grid-cols-6 gap-4">
             <div className="sm:col-span-4">
-              {trendingNews?.map((item: any, index: number) => (
+              {trendingNews.map((item: any, index: number) => (
                 <>
                   <ItemCardHorizontal
                     showCreatedAt
@@ -46,7 +47,7 @@ export default async function TrendingTopic({ params }) {
                   <SocialShare
                     title="Share Trending On :"
                     textPlacement="left"
-                    shareLink={`https://bangladeshfirst.com/d}`}
+                    shareLink={`https://bangladeshfirst.com/${getNewsUrl(trendingNews[0])}`}
                     className="text-[#6F6F6F] items-center dark:text-white mt-4 border-b pb-4 dark:border-dark-300"
                   />
                   <img className="my-10 mx-auto" src="/ads/ibbl.gif" alt="Ads" />
