@@ -48,7 +48,7 @@ export async function generateMetadata({ params }): Promise<Metadata> {
       ],
     },
     alternates: {
-      canonical: `https://bangladeshfirst.com/news/${params.id}/${params.slug}`,
+      canonical: `${process.env.BASE_URL}/news/${params.id}/${params.slug}`,
     },
   };
 }
