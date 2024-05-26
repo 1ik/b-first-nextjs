@@ -122,14 +122,18 @@ export default async function NewsDetails({ params }) {
                 header={`more from ${detailsData?.story.categories[0].name.split("_").join(" ")}`}
                 color={detailsData?.story.categories[0].color_code}
               />
-              {categoryNews?.slice(0, 5).map((item: any, index: number) => (
-                <ItemCardHorizontal
-                  className="pb-6 mb-6 border-b dark:border-dark-300"
-                  key={index}
-                  data={item}
-                  size="sm"
-                />
-              ))}
+
+              {categoryNews
+                ?.filter((item: { id: any }) => item.id !== detailsData.story.id)
+                ?.slice(0, 5)
+                .map((item: any, index: number) => (
+                  <ItemCardHorizontal
+                    className="pb-6 mb-6 border-b dark:border-dark-300"
+                    key={index}
+                    data={item}
+                    size="sm"
+                  />
+                ))}
               <img className="my-10 mx-auto" src="/ads/SIBL_Profit_300x250.gif" alt="Ads" />
             </div>
           </div>
