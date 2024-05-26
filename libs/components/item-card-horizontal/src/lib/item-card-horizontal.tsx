@@ -12,6 +12,7 @@ export interface ItemCardHorizontalProps {
   Link?: any;
   showSocialShare?: boolean;
   showCreatedAt?: boolean;
+  showTime?: boolean;
 }
 
 export function ItemCardHorizontal({
@@ -25,6 +26,7 @@ export function ItemCardHorizontal({
   Link,
   showSocialShare,
   showCreatedAt,
+  showTime,
 }: ItemCardHorizontalProps) {
   const fontSize = `leading-[110%] ${
     size === "xl"
@@ -69,6 +71,11 @@ export function ItemCardHorizontal({
             </a>
           )}
 
+          {showTime && (
+            <p className="font-montserrat  text-[#6F6F6F] pt-4  dark:border-dark-300 dark:text-white">
+              {`1 hours`} Ago
+            </p>
+          )}
           {showCreatedAt && (
             <p className="font-montserrat text-lg text-[#6F6F6F] mt-10 border-t pt-4  dark:border-dark-300 dark:text-white">
               Created At : {`${moment(data?.created_at).format("MMM Do, YYYY")}`}

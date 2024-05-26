@@ -16,9 +16,7 @@ export default async function CategoryPage({ params }) {
   const { category } = params;
   const [trendingTopics, categroyNews, latestNews, topNews] = await Promise.all([
     getData("trendy-topics"),
-    getData(
-      `${category === "latest" ? "latest/stories?size=20&page=1" : `categories/${category}/stories?size=20&page=1`}`
-    ),
+    getData(`categories/${category}/stories?size=20&page=1`),
     getData("latest/stories"),
     getData("categories/0/featured-stories"),
   ]);
