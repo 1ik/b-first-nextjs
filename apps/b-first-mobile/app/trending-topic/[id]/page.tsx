@@ -35,7 +35,7 @@ export default async function TrendingTopic({ params }) {
 
           <div className="grid grid-cols-1 sm:grid-cols-6 gap-4">
             <div className="sm:col-span-4">
-              {trendingNews.map((item: any, index: number) => (
+              {trendingNews?.map((item: any, index: number) => (
                 <>
                   <ItemCardHorizontal
                     showCreatedAt
@@ -47,7 +47,7 @@ export default async function TrendingTopic({ params }) {
                   <SocialShare
                     title="Share Trending On :"
                     textPlacement="left"
-                    shareLink={`https://bangladeshfirst.com/${getNewsUrl(trendingNews[0])}`}
+                    shareLink={`https://bangladeshfirst.com/${getNewsUrl(item)}`}
                     className="text-[#6F6F6F] items-center dark:text-white mt-4 border-b pb-4 dark:border-dark-300"
                   />
                   <img className="my-10 mx-auto" src="/ads/ibbl.gif" alt="Ads" />
