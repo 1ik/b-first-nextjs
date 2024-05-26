@@ -117,7 +117,7 @@ export default async function NewsDetails({ params }) {
           {/* ======== row 2 ======= */}
           <div>
             <img className="my-10 mx-auto" src="/ads/union-bank-ad.gif" alt="Ads" />
-            <div className="sticky top-[100px]">
+            <div>
               <AccentHeader
                 header={`more from ${detailsData?.story.categories[0].name.split("_").join(" ")}`}
                 color={detailsData?.story.categories[0].color_code}
@@ -134,8 +134,8 @@ export default async function NewsDetails({ params }) {
                     size="sm"
                   />
                 ))}
-              <img className="my-10 mx-auto" src="/ads/SIBL_Profit_300x250.gif" alt="Ads" />
             </div>
+            <img className="my-10 mx-auto sticky top-[100px]" src="/ads/SIBL_Profit_300x250.gif" alt="Ads" />
           </div>
           <div className="col-span-2">
             <div
@@ -181,7 +181,7 @@ export default async function NewsDetails({ params }) {
               <AccentHeader header="Latest News" color="#5D26D1" />
               <ItemList listType="circle" data={filteredLatestNews?.slice(0, 5)} showButton moreNewsLink="/latest" />
             </div>
-            <div className="sticky top-[100px]">
+            <div>
               <img className="my-10 mx-auto" src="/ads/ibbl.gif" alt="Ads" />
               <AccentHeader header="Top News" color="#119F9F" />
               <ItemList data={topNews?.slice(0, 6)} listType="number" />
