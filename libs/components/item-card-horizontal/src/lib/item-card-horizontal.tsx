@@ -10,7 +10,7 @@ export interface ItemCardHorizontalProps {
   showIntro?: boolean;
   className?: string;
   Link?: any;
-  showSocialShare?: boolean;
+  socialShareLink?: string;
   showCreatedAt?: boolean;
 }
 
@@ -23,7 +23,7 @@ export function ItemCardHorizontal({
   showIntro,
   className,
   Link,
-  showSocialShare,
+  socialShareLink,
   showCreatedAt,
 }: ItemCardHorizontalProps) {
   const fontSize = `leading-[110%] ${
@@ -83,11 +83,11 @@ export function ItemCardHorizontal({
               {data?.meta.intro}
             </p>
           )}
-          {showSocialShare && (
+          {socialShareLink && (
             <SocialShare
               title="Share Trending On :"
               textPlacement="left"
-              shareLink={`https://bangladeshfirst.com/${getNewsUrl(data)}`}
+              shareLink={socialShareLink}
               className="text-[#6F6F6F] dark:text-white mt-auto"
             />
           )}

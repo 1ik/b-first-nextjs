@@ -1,10 +1,11 @@
 import { AccentHeader } from "@bfirst/components-accent-header";
 import { ItemCardHorizontal } from "@bfirst/components-item-card-horizontal";
 import { ItemList } from "@bfirst/components-item-list";
-import filterOutOTD from "../../../utils/filterOutOTD";
+import { getNewsUrl } from "@bfirst/utilities";
 import BreadCrumb from "../../../components/BreadCrumb/BreadCrumb";
 import Navbar from "../../../components/Navbar/Navbar";
 import { getData } from "../../../utils/dataFetch";
+import filterOutOTD from "../../../utils/filterOutOTD";
 
 export default async function TrendingTopic({ params }) {
   const [trendingNews, latestNews, topNews] = (
@@ -40,7 +41,7 @@ export default async function TrendingTopic({ params }) {
                 data={item}
                 size="lg"
                 showCreatedAt
-                showSocialShare
+                socialShareLink={`${process.env.BASE_URL}/${getNewsUrl(item)}`}
               />
             ))}
           </div>

@@ -49,13 +49,13 @@ export async function generateMetadata({ params }): Promise<Metadata> {
       ],
     },
     alternates: {
-      canonical: `https://bangladeshfirst.com/news/${params.id}/${params.slug}`,
+      canonical: `${process.env.BASE_URL}/news/${params.id}/${params.slug}`,
     },
   };
 }
 
 export default async function NewsDetails({ params }) {
-  const link_url = `http://bangladeshfirst.com/news/${params.id}/${params.slug}`;
+  const link_url = `${process.env.BASE_URL}/news/${params.id}/${params.slug}`;
 
   const detailsData = await getData(`story/details/${params.id}`);
 
