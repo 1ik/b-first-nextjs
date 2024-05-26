@@ -20,7 +20,9 @@ export function HighlightChip({ items, title, className, Link, enableDragScroll 
       className={`flex items-start gap-2 scrollbar-hide ${enableDragScroll ? "overflow-x-scroll" : ""} ${className}`}
     >
       {title && (
-        <h3 className="font-montserrat px-6 py-2 bg-[#643FA1] text-white font-bold w-fit whitespace-nowrap">{title}</h3>
+        <h3 className="font-montserrat px-3 py-1 sm:px-6 sm:py-2 bg-[#643FA1] text-white font-bold w-fit whitespace-nowrap">
+          {title}
+        </h3>
       )}
       <ul className={`flex gap-2 ${enableDragScroll ? "flex-nowrap" : "flex-wrap"} self-center`}>
         {items?.map((item: any, index: number) => (

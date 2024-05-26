@@ -59,7 +59,7 @@ export default async function Index() {
       <Navbar />
       <div className="px-3">
         <img className="mx-auto my-6" src="/ads/nagad.png" alt="Ads" />
-        <TrendingTopics className="px-3 my-4" items={trendingTopics} title="Trending Topics" />
+        <TrendingTopics className="px-3 my-4" items={trendingTopics} title="Trending" />
 
         {/* TOP NEWS SECTION */}
         <BlockNewsMob

@@ -77,12 +77,12 @@ export default async function NewsDetails({ params }) {
 
   return (
     <div>
-      <Navbar activeLink={`/${detailsData?.story.categories[0].name.toLowerCase()}`}/>
+      <Navbar activeLink={`/${detailsData?.story.categories[0].name.toLowerCase()}`} />
 
       <div className="px-3">
         {/* TRENDING TOPICS */}
         <img className="mx-auto mt-3" src="/ads/nagad.png" alt="Ads" />
-        <TrendingTopics className="my-5" items={trendingTopics} title="Trending Topics" />
+        <TrendingTopics className="my-5" items={trendingTopics} title="Trending" />
         <img className="mx-auto mb-4" src="/ads/nagad.png" alt="Ads" />
 
         {/* BREADCRUMB */}
