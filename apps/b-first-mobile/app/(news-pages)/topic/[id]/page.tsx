@@ -53,9 +53,9 @@ export default async function Topic({ params }) {
                     shareLink={`${process.env.BASE_URL}/${getNewsUrl(item)}`}
                     className="text-[#6F6F6F] items-center dark:text-white mt-4 border-b pb-4 dark:border-dark-300"
                   />
-                  <img className="my-10 mx-auto" src="/ads/ibbl.gif" alt="Ads" />
                 </>
               ))}
+              <img className="my-10 mx-auto" src="/ads/ibbl.gif" alt="Ads" />
             </div>
 
             <div className="sm:order-2 sm:col-span-2">
