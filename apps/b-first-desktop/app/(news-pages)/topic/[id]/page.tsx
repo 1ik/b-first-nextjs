@@ -8,10 +8,10 @@ import TrendingTopics from "../../../components/TrendingTopics/TrendingTopics";
 import { getData } from "../../../utils/dataFetch";
 import filterOutOTD from "../../../utils/filterOutOTD";
 
-export default async function TrendingTopic({ params }) {
+export default async function Topic({ params }) {
   const [trendingNews, latestNews, topNews] = (
     await Promise.all([
-      getData(`trending-topics/${params.id}`),
+      getData(`topic/${params.id}`),
       getData("latest/stories?size=10"),
       getData("categories/0/featured-stories"),
     ])
@@ -30,7 +30,7 @@ export default async function TrendingTopic({ params }) {
             links={[
               {
                 name: "Trending Now",
-                href: `/trending-topic/${params.id}`,
+                href: `/topic/${params.id}`,
               },
             ]}
           />
