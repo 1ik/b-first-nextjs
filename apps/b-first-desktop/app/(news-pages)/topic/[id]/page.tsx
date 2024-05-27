@@ -29,7 +29,7 @@ export default async function Topic({ params }) {
           <BreadCrumb
             links={[
               {
-                name: "Trending Now",
+                name: "Topic",
                 href: `/topic/${params.id}`,
               },
             ]}

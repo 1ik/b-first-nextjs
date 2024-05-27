@@ -167,11 +167,13 @@ export default async function NewsDetails({ params }) {
               <h4 className="text-sm">Tags:</h4>
               <ul className="flex gap-2 flex-wrap">
                 {detailsData?.story.tags.map((tag: any, index: number) => (
-                  <li
-                    key={index}
-                    className="text-xs font-montserrat font-semibold py-0.5 px-2 rounded-md bg-[#2B2B2B] text-white"
-                  >
-                    {tag.name}
+                  <li key={index}>
+                    <a
+                      className="text-xs font-montserrat font-semibold py-0.5 px-2 rounded-md bg-[#2B2B2B] text-white"
+                      href={`/topic/${tag.id}`}
+                    >
+                      {tag.name}
+                    </a>
                   </li>
                 ))}
               </ul>

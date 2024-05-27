@@ -30,8 +30,8 @@ export default async function Topic({ params }) {
             className="mb-6"
             links={[
               {
-                name: "Trending Now",
-                href: `/trending-topic/${params.id}`,
+                name: "Topic",
+                href: `/topic/${params.id}`,
               },
             ]}
           />
