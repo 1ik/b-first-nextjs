@@ -1,4 +1,5 @@
 import { AccentHeader } from "@bfirst/components-accent-header";
+import { BreadCrumb } from "@bfirst/components-breadcrumb";
 import { ItemCardHorizontal } from "@bfirst/components-item-card-horizontal";
 import { ItemList } from "@bfirst/components-item-list";
 import { ProfileCard } from "@bfirst/components-profile-card";
@@ -7,7 +8,6 @@ import { SquareGrid } from "@bfirst/components-square-grid";
 import { getImageUrl } from "@bfirst/utilities";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import BreadCrumb from "../../../../components/BreadCrumb/BreadCrumb";
 import ImagePreview from "../../../../components/ImagePreview/ImagePreview";
 import Navbar from "../../../../components/Navbar/Navbar";
 import TrendingTopics from "../../../../components/TrendingTopics/TrendingTopics";
@@ -91,7 +91,7 @@ export default async function NewsDetails({ params }) {
             },
           ]}
         />
-        <h1 className="text-7xl my-10">{detailsData?.story.title}</h1>
+        <h1 className="text-7xl my-10 font-bold">{detailsData?.story.title}</h1>
 
         <div className="grid grid-cols-4 gap-x-10 gap-y-11">
           {/* ====== row 1 ===== */}

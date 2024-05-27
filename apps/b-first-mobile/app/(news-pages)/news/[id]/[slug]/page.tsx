@@ -98,7 +98,7 @@ export default async function NewsDetails({ params }) {
         <div className="grid sm:grid-cols-8 grid-cols-1 gap-x-4">
           {/* NEWS TITLE */}
           <div className="sm:col-span-8">
-            <h1 className="text-3xl sm:text-4xl my-10">{detailsData?.story.title}</h1>
+            <h1 className="text-3xl sm:text-4xl font-bold my-10">{detailsData?.story.title}</h1>
           </div>
 
           {/* ==================== GRID LEFT BOX (TAB) | GRID BOTTOM BOX (MOBILE) ==================== */}

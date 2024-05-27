@@ -1,5 +1,5 @@
 import { ItemCardHorizontal } from "@bfirst/components-item-card-horizontal";
-import BreadCrumb from "../../components/BreadCrumb/BreadCrumb";
+import { BreadCrumb } from "@bfirst/components-breadcrumb";
 import Navbar from "../../components/Navbar/Navbar";
 import { getData } from "../../utils/dataFetch";
 import { AccentHeader } from "@bfirst/components-accent-header";

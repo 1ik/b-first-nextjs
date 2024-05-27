@@ -136,7 +136,7 @@ export function MobileNav({ Link, logoLight, logoDark, activeLink, theme, onThem
           <button onClick={() => setshowSidebar(false)} className="absolute top-4 right-4 text-2xl">
             <FaTimes />
           </button>
-          <ul className="flex flex-col gap-y-1 w-full">
+          <ul className="flex flex-col gap-y-1 w-full washington-regular">
             {_links.map((link, index) => (
               <li
                 key={index}
