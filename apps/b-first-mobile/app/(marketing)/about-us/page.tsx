@@ -28,15 +28,15 @@ export default function AboutUs() {
 
         <ul className="list-decimal pl-4 mb-4">
           <li className="text-base mb-2">
-            <span className="font-semibold">Accuracy: </span>Ensuring all our reports are well-researched and
+            <span className="font-semibold mr-1">Accuracy : </span>Ensuring all our reports are well-researched and
             fact-checked.
           </li>
           <li className="text-base mb-2">
-            <span className="font-semibold">Fairness:</span> Presenting news in an unbiased manner, giving voice to
+            <span className="font-semibold mr-1">Fairness :</span> Presenting news in an unbiased manner, giving voice to
             multiple perspectives.
           </li>
           <li className="text-base mb-2">
-            <span className="font-semibold">Integrity:</span> Upholding ethical standards in all our journalistic
+            <span className="font-semibold mr-1">Integrity :</span> Upholding ethical standards in all our journalistic
             endeavors.
           </li>
         </ul>
@@ -61,13 +61,13 @@ export default function AboutUs() {
 
         <ul className="list-disc pl-4 mb-4">
           <li className="text-base mb-2">
-            <span className="font-semibold mr-2">Email</span>editor@bangladeshfirst.com
+            <span className="font-semibold mr-1">Email :</span>editor@bangladeshfirst.com
           </li>
           <li className="text-base mb-2">
-            <span className="font-semibold mr-2">Phone</span>+880 961 332 2782
+            <span className="font-semibold mr-1">Phone :</span>+880 961 332 2782
           </li>
           <li className="text-base mb-2">
-            <span className="font-semibold mr-2">Mail</span>115 Kazi Nazrul Islam Avenue, Level 12, Bangla Motor, Dhaka
+            <span className="font-semibold mr-1">Mail :</span>115 Kazi Nazrul Islam Avenue, Level 12, Bangla Motor, Dhaka
             1000, Bangladesh
           </li>
         </ul>
