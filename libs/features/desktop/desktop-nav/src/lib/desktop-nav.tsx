@@ -206,7 +206,7 @@ export function DesktopNav({
                   </a>
                 ))}
             </div>
-            <ul className="flex text-[22px]">
+            <ul className="flex text-[22px] washington-regular">
               {_links.slice(0, 7).map((link, index) => (
                 <li
                   key={index}

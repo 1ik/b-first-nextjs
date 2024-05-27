@@ -1,12 +1,12 @@
 import { AccentHeader } from "@bfirst/components-accent-header";
+import { BreadCrumb } from "@bfirst/components-breadcrumb";
 import { ItemCardHorizontal } from "@bfirst/components-item-card-horizontal";
 import { ItemList } from "@bfirst/components-item-list";
 import { getNewsUrl } from "@bfirst/utilities";
-import BreadCrumb from "../../../components/BreadCrumb/BreadCrumb";
 import Navbar from "../../../components/Navbar/Navbar";
+import TrendingTopics from "../../../components/TrendingTopics/TrendingTopics";
 import { getData } from "../../../utils/dataFetch";
 import filterOutOTD from "../../../utils/filterOutOTD";
-import TrendingTopics from "../../../components/TrendingTopics/TrendingTopics";
 
 export default async function TrendingTopic({ params }) {
   const [trendingNews, latestNews, topNews] = (
