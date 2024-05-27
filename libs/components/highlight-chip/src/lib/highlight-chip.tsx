@@ -31,11 +31,11 @@ export function HighlightChip({ items, title, className, Link, enableDragScroll 
             className="bg-[#FAF6FF] dark:bg-dark-300 dark:text-white text-black whitespace-nowrap rounded-md"
           >
             {Link ? (
-              <Link className="px-3 py-1 inline-block" href={`/trending-topic/${item.id}`}>
+              <Link className="px-3 py-1 inline-block" href={`/topic/${item.id}`}>
                 {item.name}
               </Link>
             ) : (
-              <a className="px-3 py-1 inline-block" href={`/trending-topic/${item.id}`}>
+              <a className="px-3 py-1 inline-block" href={`/topic/${item.id}`}>
                 {item.name}
               </a>
             )}
