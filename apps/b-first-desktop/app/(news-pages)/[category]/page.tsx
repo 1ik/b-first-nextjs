@@ -1,10 +1,10 @@
 import { AccentHeader } from "@bfirst/components-accent-header";
 import { BlockNews6 } from "@bfirst/components-block-news-6";
+import { BreadCrumb } from "@bfirst/components-breadcrumb";
 import { ItemCardHorizontal } from "@bfirst/components-item-card-horizontal";
 import { ItemList } from "@bfirst/components-item-list";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import BreadCrumb from "../../components/BreadCrumb/BreadCrumb";
 import LoadMore from "../../components/LoadMore/LoadMore";
 import Navbar from "../../components/Navbar/Navbar";
 import TrendingTopics from "../../components/TrendingTopics/TrendingTopics";
