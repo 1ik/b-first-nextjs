@@ -91,7 +91,10 @@ export default async function Index() {
           <div>
             <AccentHeader header="Latest News" color="#5D26D1" />
             <ItemList data={latestNews?.slice(0, 6)} listType="circle" showButton moreNewsLink="/latest" />
-            <img className="mt-4 mx-auto" src="/ads/Global.gif" alt="Ads" />
+            <div className="text-center mt-4">
+              <p className="mb-2">Advertisement</p>
+              <img className="mt-4 mx-auto" src="/ads/Global.gif" alt="Ads" />
+            </div>
           </div>
         </div>
       </div>
@@ -109,7 +112,10 @@ export default async function Index() {
           <div>
             <AccentHeader header="Most Viewed" color="#119F9F" />
             <ItemList data={latestNews?.slice(6, 11)} listType="number" />
-            <img className="mt-4 mx-auto" src="/ads/Global.gif" alt="Ads" />
+            <div className="text-center">
+              <p className="mb-2">Advertisement</p>
+              <img className="mt-4 mx-auto" src="/ads/Global.gif" alt="Ads" />
+            </div>
           </div>
         </div>
       </div>
@@ -127,8 +133,14 @@ export default async function Index() {
             <AccentHeader header="On this day" color="#A49A46" />
             <ItemList showImage showDate data={onThisDay} />
             <div className="flex flex-col mt-8 gap-y-8 items-center">
-              <img src="ads/SIBL_Profit_300x250.gif" alt="Ads" />
-              <img src="ads/FSIBL-November-2023-20.gif" alt="Ads" />
+              <div className="text-center">
+                <p className="mb-2">Advertisement</p>
+                <img src="ads/SIBL_Profit_300x250.gif" alt="Ads" />
+              </div>
+              <div className="text-center">
+                <p className="mb-2">Advertisement</p>
+                <img src="ads/FSIBL-November-2023-20.gif" alt="Ads" />
+              </div>
             </div>
           </div>
         </div>

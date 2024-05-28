@@ -115,7 +115,10 @@ export default async function NewsDetails({ params }) {
 
           {/* ======== row 2 ======= */}
           <div>
-            <img className="my-10 mx-auto" src="/ads/union-bank-ad.gif" alt="Ads" />
+            <div className="text-center my-8">
+              <p className="mb-2">Advertisement</p>
+              <img className="mx-auto" src="/ads/union-bank-ad.gif" alt="Ads" />
+            </div>
             <div>
               <AccentHeader
                 header={`more from ${detailsData?.story.categories[0].name.split("_").join(" ")}`}
@@ -134,7 +137,10 @@ export default async function NewsDetails({ params }) {
                   />
                 ))}
             </div>
-            <img className="my-10 mx-auto sticky top-[100px]" src="/ads/SIBL_Profit_300x250.gif" alt="Ads" />
+            <div className="text-center my-8 sticky top-[80px]">
+              <p className="mb-2">Advertisement</p>
+              <img className="mx-auto" src="/ads/SIBL_Profit_300x250.gif" alt="Ads" />
+            </div>
           </div>
           <div className="col-span-2">
             <div
@@ -177,13 +183,19 @@ export default async function NewsDetails({ params }) {
             ) : null}
           </div>
           <div>
-            <img className="my-10 mx-auto" src="/ads/Global.gif" alt="Ads" />
+            <div className="text-center my-8">
+              <p className="mb-2">Advertisement</p>
+              <img className="mx-auto" src="/ads/Global.gif" alt="Ads" />
+            </div>
             <div>
               <AccentHeader header="Latest News" color="#5D26D1" />
               <ItemList listType="circle" data={filteredLatestNews?.slice(0, 5)} showButton moreNewsLink="/latest" />
             </div>
             <div>
-              <img className="my-10 mx-auto" src="/ads/ibbl.gif" alt="Ads" />
+              <div className="text-center my-8">
+                <p className="mb-2">Advertisement</p>
+                <img className="mx-auto" src="/ads/ibbl.gif" alt="Ads" />
+              </div>
               <AccentHeader header="Top News" color="#119F9F" />
               <ItemList data={topNews?.slice(0, 6)} listType="number" />
             </div>
