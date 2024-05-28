@@ -3,7 +3,6 @@ import { BreadCrumb } from "@bfirst/components-breadcrumb";
 import { ItemCardHorizontal } from "@bfirst/components-item-card-horizontal";
 import { ItemList } from "@bfirst/components-item-list";
 import { ProfileCard } from "@bfirst/components-profile-card";
-import { SocialShare } from "@bfirst/components-social-share";
 import { SquareGrid } from "@bfirst/components-square-grid";
 import { getImageUrl } from "@bfirst/utilities";
 import { Metadata } from "next";
@@ -54,8 +53,7 @@ export async function generateMetadata({ params }): Promise<Metadata> {
 }
 
 export default async function NewsDetails({ params }) {
-  const link_url = `${process.env.BASE_URL}/news/${params.id}/${params.slug}`;
-
+  const news_link_url = `${process.env.BASE_URL}/news/${params.id}/${params.slug}`;
   const detailsData = await getData(`story/details/${params.id}`);
 
   const [trendingTopics, latestNews, topNews, categoryNews] = (
@@ -108,8 +106,11 @@ export default async function NewsDetails({ params }) {
               <h3 className="text-base font-montserrat">{detailsData?.story.meta.intro}</h3>
 
               {/* SOCIAL SHARE & PROFILE CARD */}
-              <SocialShare className="my-4" title="Share News" shareLink={link_url} />
-              <ProfileCard data={detailsData?.story.authors[0]} createdTime={detailsData?.story.created_at} />
+              <ProfileCard
+                data={detailsData?.story.authors[0]}
+                createdTime={detailsData?.story.created_at}
+                shareLink={news_link_url}
+              />
             </div>
             <img className="my-5 mx-auto" src="/ads/SIBL_Profit_300x250.gif" alt="Ads" />
 
@@ -152,10 +153,11 @@ export default async function NewsDetails({ params }) {
               <img className="my-10 mx-auto" src="/ads/ibbl.gif" alt="Ads" />
               {/* INTRO */}
               <h3 className="text-base font-montserrat">{detailsData?.story.meta.intro}</h3>
-
-              {/* SOCIAL SHARE & PROFILE CARD */}
-              <SocialShare className="my-4" title="Share News" shareLink={link_url} />
-              <ProfileCard data={detailsData?.story.authors[0]} createdTime={detailsData?.story.created_at} />
+              <ProfileCard
+                data={detailsData?.story.authors[0]}
+                createdTime={detailsData?.story.created_at}
+                shareLink={news_link_url}
+              />
             </div>
 
             <div

@@ -2,7 +2,6 @@ import { AccentHeader } from "@bfirst/components-accent-header";
 import { BreadCrumb } from "@bfirst/components-breadcrumb";
 import { ItemCardHorizontal } from "@bfirst/components-item-card-horizontal";
 import { ItemList } from "@bfirst/components-item-list";
-import { getNewsUrl } from "@bfirst/utilities";
 import Navbar from "../../../components/Navbar/Navbar";
 import TrendingTopics from "../../../components/TrendingTopics/TrendingTopics";
 import { getData } from "../../../utils/dataFetch";
@@ -44,7 +43,6 @@ export default async function Topic({ params }) {
                 data={item}
                 size="lg"
                 showCreatedAt
-                socialShareLink={`${process.env.BASE_URL}/${getNewsUrl(item)}`}
               />
             ))}
           </div>
