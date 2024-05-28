@@ -59,15 +59,15 @@ export default async function Index() {
     <>
       <Navbar />
       <TrendingTopics className="desktop-container mb-8" items={trendingTopics} title="Trending Topics" />
-     
+
       <BlockNews
         className="desktop-container"
-        data={topNews.slice(0, 5)}
+        data={topNews.slice(0, 8)}
         ads1="/ads/Global.gif"
         ads2="/ads/union-bank-ad.gif"
       />
       <img className="mx-auto my-14" src="/ads/FSB-banner-ad.gif" alt="Ads" />
-      <SquareGrid showAccentHeader className="desktop-container" data={topNews.slice(5, 13)} gridCols={4} />
+      <SquareGrid showAccentHeader className="desktop-container" data={topNews.slice(8, 16)} gridCols={4} />
       <img className="mx-auto my-12" src="/ads/banner_ibbl.gif" alt="Ads" />
 
       <div className="bg-[#F6EFEF] dark:bg-dark-300 py-8">
@@ -99,7 +99,12 @@ export default async function Index() {
       <div className="desktop-container my-10">
         <div className="grid grid-cols-4">
           <div className="col-span-3 border-r dark:border-dark-300 pr-4 mr-4">
-            <BlockNews3 sectionHeader="Feature" headerColor="#8BD032" adsUrl="/ads/banner_ibbl.gif" data={featureNews} />
+            <BlockNews3
+              sectionHeader="Feature"
+              headerColor="#8BD032"
+              adsUrl="/ads/banner_ibbl.gif"
+              data={featureNews}
+            />
           </div>
           <div>
             <AccentHeader header="Most Viewed" color="#119F9F" />
