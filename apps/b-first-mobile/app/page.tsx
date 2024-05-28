@@ -64,18 +64,18 @@ export default async function Index() {
         {/* TOP NEWS SECTION */}
         <BlockNewsMob
           className="px-3"
-          data={topNews?.slice(0, 5)}
+          data={topNews?.slice(0, 8)}
           ads1="/ads/Global.gif"
           ads2="/ads/union-bank-ad.gif"
         />
-        <img className="mx-auto mb-5 mt-1" src="/ads/banner_ibbl.gif" />
+        <img className="mx-auto my-6" src="/ads/banner_ibbl.gif" />
         <div className="sm:hidden">
-          <SquareGrid showAccentHeader data={topNews.slice(5, 13)} gridCols={1} />
+          <SquareGrid showAccentHeader data={topNews.slice(8, 16)} gridCols={1} />
         </div>
         <div className="hidden sm:block">
-          <SquareGrid showAccentHeader data={topNews.slice(5, 13)} gridCols={2} />
+          <SquareGrid showAccentHeader data={topNews.slice(8, 16)} gridCols={2} />
         </div>
-        <img className="mx-auto my-5" src="/ads/banner_ibbl.gif" />
+        <img className="mx-auto my-6" src="/ads/banner_ibbl.gif" />
       </div>
 
       {/* RECOMMENDED FOR YOU SECTION */}

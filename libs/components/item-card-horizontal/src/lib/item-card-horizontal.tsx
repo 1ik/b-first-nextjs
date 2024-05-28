@@ -13,6 +13,8 @@ export interface ItemCardHorizontalProps {
   socialShareLink?: string;
   showCreatedAt?: boolean;
   showTime?: boolean;
+  titleFontSize?: `${number}${"px" | "rem" | "em"}`;
+  introFontSize?: `${number}${"px" | "rem" | "em"}`;
 }
 
 export function ItemCardHorizontal({
@@ -27,8 +29,10 @@ export function ItemCardHorizontal({
   socialShareLink,
   showCreatedAt,
   showTime,
+  titleFontSize,
+  introFontSize,
 }: ItemCardHorizontalProps) {
-  const fontSize = `leading-[110%] ${
+  const titleFont = `leading-[110%] ${
     size === "xl"
       ? "text-4xl"
       : size === "sm"
@@ -40,7 +44,7 @@ export function ItemCardHorizontal({
       : ""
   }`;
 
-  const introFontSize = `leading-[110%] ${
+  const introFont = `leading-[110%] ${
     size === "xl"
       ? "text-2xl"
       : size === "sm"
@@ -67,14 +71,18 @@ export function ItemCardHorizontal({
         <div className={`pl-2 ${showTitleBorderSmall || showTitleBorderBig ? "pt-2" : "pt-0"} flex flex-col h-full`}>
           {Link ? (
             <Link className="" href={getNewsUrl(data)}>
-              <h2 className={` ${fontSize} hover:text-accent dark:hover:text-accent-light duration-150`}>
+              <h2
+                style={{ fontSize: titleFontSize }}
+                className={` ${titleFont} hover:text-accent dark:hover:text-accent-light duration-150`}
+              >
                 {data?.title}
               </h2>
             </Link>
           ) : (
             <a href={getNewsUrl(data)}>
               <h2
-                className={` ${fontSize} ${
+                style={{ fontSize: titleFontSize }}
+                className={` ${titleFont} ${
                   showTitleBorderBig || showTitleBorderSmall ? "pt-2" : ""
                 } hover:text-accent dark:hover:text-accent-light duration-150`}
               >
@@ -94,7 +102,9 @@ export function ItemCardHorizontal({
             </p>
           )}
           {showIntro && (
-            <p className={`mt-4 ${introFontSize} dark:text-[#bebdbd] text-[#727272]`}>{data?.meta.intro}</p>
+            <p style={{ fontSize: introFontSize }} className={`mt-4 ${introFont} dark:text-[#bebdbd] text-[#727272]`}>
+              {data?.meta.intro}
+            </p>
           )}
           {socialShareLink && (
             <SocialShare

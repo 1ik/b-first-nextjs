@@ -9,6 +9,8 @@ export interface ItemCardVerticalProps {
   titlePosition?: "normal" | "inset";
   className?: string;
   Link?: any;
+  titleFontSize?: `${number}${"px" | "rem" | "em"}`;
+  introFontSize?: `${number}${"px" | "rem" | "em"}`;
 }
 
 export function ItemCardVertical({
@@ -20,12 +22,17 @@ export function ItemCardVertical({
   titlePosition = "normal",
   className,
   Link,
+  titleFontSize,
+  introFontSize,
 }: ItemCardVerticalProps) {
-  const fontSize =
-    size === "lg" ? "text-4xl" : size === "md" ? "text-[20px] leading-5" : size === "sm" ? "text-[19px]" : "";
+  const fontSize = `${
+    size === "lg" ? "text-4xl" : size === "md" ? "text-[20px] leading-[110%]" : size === "sm" ? "text-[19px]" : ""
+  }`;
+
+  const introFont = `${size === "lg" ? "text-xl" : "text-sm"}`;
 
   return (
-    <div className={`${className && className}`}>
+    <div className={`${className}`}>
       <div className={`mb-5 relative overflow-hidden ${showImageBorder ? "border-b-[5px] border-accent" : ""}`}>
         {Link ? (
           <Link href={getNewsUrl(data)}>
@@ -76,6 +83,7 @@ export function ItemCardVertical({
         {Link ? (
           <Link href={getNewsUrl(data)}>
             <h2
+              style={{ fontSize: titleFontSize }}
               className={`hover:text-accent dark:hover:text-accent-light duration-150 ${fontSize} ${
                 titlePosition === "inset" ? "hidden" : ""
               }`}
@@ -86,6 +94,7 @@ export function ItemCardVertical({
         ) : (
           <a href={getNewsUrl(data)}>
             <h2
+              style={{ fontSize: titleFontSize }}
               className={`hover:text-accent dark:hover:text-accent-light duration-150 ${fontSize} ${
                 titlePosition === "inset" ? "hidden" : ""
               }`}
@@ -96,7 +105,7 @@ export function ItemCardVertical({
         )}
 
         {showIntro && (
-          <p className={`${size === "lg" ? "text-xl" : "text-sm"} mt-3 dark:text-[#bebdbd] text-[#6f6f6f]`}>
+          <p style={{ fontSize: introFontSize }} className={`${introFont} mt-3 dark:text-[#bebdbd] text-[#6f6f6f]`}>
             {data?.meta.intro}
           </p>
         )}
