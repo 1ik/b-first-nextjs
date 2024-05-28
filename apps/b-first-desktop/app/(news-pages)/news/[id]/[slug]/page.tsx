@@ -111,7 +111,7 @@ export default async function NewsDetails({ params }) {
               src={getImageUrl(detailsData?.story.meta.featured_image)}
               alt={detailsData?.story.title}
             /> */}
-            <p className="font-montserrat text-xl mt-4">{detailsData?.story.meta.imageCaption}</p>
+            <p className="font-montserrat font-medium italic text-xl mt-4">{detailsData?.story.meta.imageCaption}</p>
           </div>
 
           {/* ======== row 2 ======= */}

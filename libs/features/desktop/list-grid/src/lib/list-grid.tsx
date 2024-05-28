@@ -20,7 +20,7 @@ export function ListGrid({ data, Link, className }: ListGridProps) {
               : ""
           }`}
         >
-          <AccentHeader header={list?.[0].categories[0].name} color={list?.[0].categories[0].color_code} />
+          <AccentHeader header={list?.[0]?.categories[0].name} color={list?.[0]?.categories[0].color_code} />
           <ItemList Link={Link} key={index} data={list?.slice(0, 5)} showImage />
         </div>
       ))}
