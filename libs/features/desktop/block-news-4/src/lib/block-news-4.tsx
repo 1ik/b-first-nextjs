@@ -1,4 +1,5 @@
 import { AccentHeader } from "@bfirst/components-accent-header";
+import { Ads } from "@bfirst/components-ads";
 import { ItemCardVertical } from "@bfirst/components-item-card-vertical";
 import { ItemList } from "@bfirst/components-item-list";
 
@@ -31,7 +32,7 @@ export function BlockNews4({ data, Link, sectionHeader, headerColor, className, 
         </div>
         <ItemList Link={Link} data={data?.slice(2, 7)} listType="circle" />
       </div>
-      {adsUrl && <img className="mx-auto mt-5" src={adsUrl} alt="Ads" />}
+      {adsUrl && <Ads className="mt-5" src={adsUrl} alt="ads" showHeader={false}/>}
     </div>
   );
 }

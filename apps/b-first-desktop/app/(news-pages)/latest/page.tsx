@@ -6,6 +6,7 @@ import { AccentHeader } from "@bfirst/components-accent-header";
 import { ItemList } from "@bfirst/components-item-list";
 import LoadMore from "../../components/LoadMore/LoadMore";
 import TrendingTopics from "../../components/TrendingTopics/TrendingTopics";
+import { Ads } from "@bfirst/components-ads";
 
 export default async function Latest() {
   const [latestNews, topNews] = await Promise.all([
@@ -19,7 +20,8 @@ export default async function Latest() {
     <>
       <Navbar />
       <TrendingTopics className="desktop-container mb-8" items={trendingTopics} title="Trending Topics" />
-      <img className="mx-auto my-4" src="/ads/banner_ibbl.gif" alt="" />
+      <Ads className="my-4" src="/ads/banner_ibbl.gif" alt="Ads" showHeader={false} />
+
       <div className="desktop-container">
         {/*============= BREDCRUMB ========== */}
         <BreadCrumb
@@ -55,16 +57,10 @@ export default async function Latest() {
           <div>
             {/*============= TOP NEWS ========== */}
             <div>
-              <div className="text-center mb-4">
-                <p className="mb-2">Advertisement</p>
-                <img className="mx-auto" src="/ads/Global.gif" alt="Ads" />
-              </div>
+              <Ads className="mb-2" src="/ads/Global.gif" alt="Ads" />
               <AccentHeader header="Top News" color="#119F9F" />
               <ItemList data={topNews.data?.slice(0, 6)} listType="number" />
-              <div className="text-center mt-4">
-                <p className="mb-2">Advertisement</p>
-                <img className="mx-auto" src="/ads/Global.gif" alt="Ads" />
-              </div>
+              <Ads className="mt-4" src="/ads/Global.gif" alt="Ads" />
             </div>
           </div>
         </div>
