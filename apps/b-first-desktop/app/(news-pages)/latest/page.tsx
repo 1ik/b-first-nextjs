@@ -38,7 +38,7 @@ export default async function Latest() {
           <div className="col-span-3">
             {latestNews.data?.map((item: any, index: number) => (
               <ItemCardHorizontal
-                className="border-b pb-4  dark:border-dark-300"
+                className="border-b-2 pb-4 mb-4 dark:border-dark-300"
                 key={index}
                 data={item}
                 size="lg"

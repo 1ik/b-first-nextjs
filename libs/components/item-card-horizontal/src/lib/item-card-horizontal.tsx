@@ -95,7 +95,7 @@ export function ItemCardHorizontal({
           )}
           {showCreatedAt && (
             <p className="font-montserrat text-xs md:text-lg text-[#6F6F6F] mt-4 md:mt-10 border-t md:pt-4 pt-2  dark:border-dark-300 dark:text-white">
-              Created At : {`${moment(data?.created_at).format("MMM Do, YYYY")}`}
+              Published At : {`${moment(data?.created_at).format("MMM Do, YYYY")}`}
             </p>
           )}
           {showIntro && (

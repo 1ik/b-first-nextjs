@@ -40,7 +40,7 @@ export default async function Topic({ params }) {
           <div className="col-span-3">
             {trendingNews?.map((item: any, index: number) => (
               <ItemCardHorizontal
-                className=" border-b pb-4  dark:border-dark-300"
+                className=" border-b-2 pb-4 mb-4 dark:border-dark-300"
                 key={index}
                 data={item}
                 size="lg"
