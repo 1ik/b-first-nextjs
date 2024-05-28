@@ -57,7 +57,7 @@ export default async function Latest() {
           <div>
             {/*============= TOP NEWS ========== */}
             <div>
-              <Ads className="mb-2" src="/ads/Global.gif" alt="Ads" />
+              <Ads className="mb-6" src="/ads/Global.gif" alt="Ads" />
               <AccentHeader header="Top News" color="#119F9F" />
               <ItemList data={topNews.data?.slice(0, 6)} listType="number" />
               <Ads className="mt-4" src="/ads/Global.gif" alt="Ads" />

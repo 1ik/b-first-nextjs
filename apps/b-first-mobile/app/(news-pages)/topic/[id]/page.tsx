@@ -47,7 +47,7 @@ export default async function Topic({ params }) {
                 />
               ))}
 
-              <Ads className="my-8" src="/ads/ibbl.gif" alt="Ads" />
+              <Ads className="my-10" src="/ads/social_islami.png" alt="Ads" showHeader={false}/>
             </div>
 
             <div className="sm:order-2 sm:col-span-2">
@@ -60,7 +60,7 @@ export default async function Topic({ params }) {
               <div>
                 <AccentHeader header="Top News" color="#119F9F" />
                 <ItemList data={topNews?.slice(0, 6)} listType="number" />
-                <Ads className="mt-4" src="/ads/social_islami.png" alt="Ads" />
+                <Ads className="mt-4" src="/ads/ibbl.gif" alt="Ads" />
               </div>
             </div>
           </div>

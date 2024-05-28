@@ -2,14 +2,15 @@ import { SocialShare } from "@bfirst/components-social-share";
 import moment from "moment-timezone";
 
 export interface ProfileCardProps {
+  className?: string;
   data: any;
   createdTime: string;
   shareLink: string;
 }
 
-export function ProfileCard({ data, createdTime, shareLink }: ProfileCardProps) {
+export function ProfileCard({ data, createdTime, shareLink, className }: ProfileCardProps) {
   return (
-    <div className="bg-[#F2F2F2] p-4 dark:bg-dark-300 grid grid-cols-5 gap-x-2 gap-y-6 items-center">
+    <div className={`bg-[#F2F2F2] p-4 dark:bg-dark-300 grid grid-cols-5 gap-x-2 gap-y-6 items-center ${className}`}>
       <div className="col-span-2">
         <img
           className="h-[100px] w-[100px] rounded-full object-center"

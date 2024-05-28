@@ -117,7 +117,7 @@ export default async function Index() {
           </div>
         </div>
         {/* ENTERTAINMENT SECTION */}
-        <Ads className="mx-auto my-5" src="/ads/banner_ibbl.gif" alt="ads" showHeader={false}/>
+        <Ads className="mx-auto my-6" src="/ads/banner_ibbl.gif" alt="ads" showHeader={false}/>
         <BlockNewsMob5
           data={entertainmentNews}
           ads="/ads/SIBL_Profit_300x250.gif"
@@ -126,9 +126,9 @@ export default async function Index() {
         />
 
         {/* GRID LIST SECTION */}
-        <Ads className="my-5" src="/ads/banner_ibbl.gif" alt="ads" showHeader={false}/>
+        <Ads className="my-6" src="/ads/banner_ibbl.gif" alt="ads" showHeader={false}/>
         <ListGridMob className="desktop-container" data={[bangladeshNews, worldNews, sportsNews, techNews]} />
-        <Ads className="my-5" src="/ads/banner_ibbl.gif" alt="ads" showHeader={false}/>
+        <Ads className="my-6" src="/ads/banner_ibbl.gif" alt="ads" showHeader={false}/>
       </div>
     </>
   );

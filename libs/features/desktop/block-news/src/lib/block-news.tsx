@@ -27,10 +27,10 @@ export function BlockNews({ data, sectionHeader, ads1, ads2, className, Link }: 
         ))}
       </div>
 
-      <div className="w-[20%] flex flex-col gap-y-5 bg-[#FFF3ED] dark:bg-dark-400">
+      <div className="w-[20%] flex flex-col gap-y-5 bg-[#FFF3ED] dark:bg-dark-300">
         {data?.slice(6, 8).map((item: any, index: Key | null | undefined) => (
-          <div key={index} className="border-b dark:border-dark-300 pb-3 last:border-0">
-            <ItemCardVertical className="p-2.5 dark:p-0" data={item} size="md" titleFontSize="26px" />
+          <div key={index} className="border-b-2 border-black/25 pb-3 last:border-0">
+            <ItemCardVertical className="p-2.5" data={item} size="md" titleFontSize="26px" />
           </div>
         ))}
       </div>

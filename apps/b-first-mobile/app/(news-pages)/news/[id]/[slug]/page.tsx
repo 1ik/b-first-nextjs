@@ -108,6 +108,7 @@ export default async function NewsDetails({ params }) {
 
               {/* SOCIAL SHARE & PROFILE CARD */}
               <ProfileCard
+                className="my-5"
                 data={detailsData?.story.authors[0]}
                 createdTime={detailsData?.story.created_at}
                 shareLink={news_link_url}
@@ -152,13 +153,14 @@ export default async function NewsDetails({ params }) {
           {/* ==================== GRID RIGHT BOX (TAB) | GRID TOP BOX (MOBILE) ===================== */}
           <div className="sm:col-span-5 order-1">
             <img src={getImageUrl(detailsData?.story.meta.featured_image)} alt={detailsData?.story.title} />
-            <p className="font-montserrat text-xs mt-2">{detailsData?.story.meta.imageCaption}</p>
+            <p className="font-montserrat font-medium italic text-xs mt-2">{detailsData?.story.meta.imageCaption}</p>
 
             <div className="sm:hidden">
               <Ads className="my-8" src="/ads/ibbl.gif" alt="Ads" />
               {/* INTRO */}
               <h3 className="text-base font-montserrat">{detailsData?.story.meta.intro}</h3>
               <ProfileCard
+                className="my-5"
                 data={detailsData?.story.authors[0]}
                 createdTime={detailsData?.story.created_at}
                 shareLink={news_link_url}
@@ -186,7 +188,7 @@ export default async function NewsDetails({ params }) {
               </ul>
             </div>
 
-            <Ads className="mx-auto mb-4" src="/ads/banner_ibbl.gif" alt="Ads" showHeader={false}/>
+            <Ads className="mx-auto mb-4" src="/ads/banner_ibbl.gif" alt="Ads" showHeader={false} />
 
             {relatedNews?.length ? (
               <div>

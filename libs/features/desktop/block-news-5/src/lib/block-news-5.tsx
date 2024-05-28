@@ -25,7 +25,7 @@ export function BlockNews5({ data, Link, sectionHeader, headerColor, className }
         <div className="col-span-3 grid grid-cols-3 gap-5">
           <ItemCardVertical Link={Link} className="col-span-2" data={data?.[6]} size="lg" />
 
-          <div className="flex flex-col gap-y-10 items-center">
+          <div className="flex flex-col gap-y-2 items-center">
             <Ads src="/ads/Global.gif" alt="Ads" />
             <Ads src="/ads/SIBL_Profit_300x250.gif" alt="Ads" />
           </div>

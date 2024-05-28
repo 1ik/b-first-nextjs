@@ -18,9 +18,9 @@ export function BlockNewsMob({ data, ads1, ads2, className }: BlockNewsMobProps)
       <div className="grid grid-cols-1 sm:grid-cols-5 gap-4">
         <ItemCardVertical className="sm:col-span-3" showImageBorder data={data?.[0]} size="lg" />
 
-        <div className="sm:col-span-2 gap-4 item-center mx-auto flex flex-col order-1 sm:order-none bg-[#FFF3ED] dark:bg-dark-400">
+        <div className="sm:col-span-2 gap-4 item-center mx-auto flex flex-col order-1 sm:order-none bg-[#FFF3ED] dark:bg-dark-300">
           {data?.slice(1, 3).map((item: any, index: Key | null | undefined) => (
-            <div className="border-b dark:border-dark-300 pb-3 last:border-0" key={index}>
+            <div className="border-b-2 border-black/25 pb-3 last:border-0" key={index}>
               <ItemCardVertical className="p-2.5" data={item} />
             </div>
           ))}
@@ -36,7 +36,7 @@ export function BlockNewsMob({ data, ads1, ads2, className }: BlockNewsMobProps)
               >
                 <ItemCardHorizontal showTitleBorderSmall data={item} size="sm" />
               </div>
-              {index === 1 && <Ads className="my-4 sm:hidden" src={ads2} alt="Ads" />}
+              {index === 2 && <Ads className="my-4 sm:hidden" src={ads2} alt="Ads" />}
             </div>
           ))}
         </div>
