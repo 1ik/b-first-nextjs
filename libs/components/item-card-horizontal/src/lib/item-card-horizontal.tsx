@@ -1,4 +1,3 @@
-import { SocialShare } from "@bfirst/components-social-share";
 import { getImageUrl, getNewsUrl } from "@bfirst/utilities";
 import moment from "moment-timezone";
 export interface ItemCardHorizontalProps {
@@ -10,7 +9,6 @@ export interface ItemCardHorizontalProps {
   showIntro?: boolean;
   className?: string;
   Link?: any;
-  socialShareLink?: string;
   showCreatedAt?: boolean;
   showTime?: boolean;
   titleFontSize?: `${number}${"px" | "rem" | "em"}`;
@@ -26,7 +24,6 @@ export function ItemCardHorizontal({
   showIntro,
   className,
   Link,
-  socialShareLink,
   showCreatedAt,
   showTime,
   titleFontSize,
@@ -105,14 +102,6 @@ export function ItemCardHorizontal({
             <p style={{ fontSize: introFontSize }} className={`mt-4 ${introFont} dark:text-[#bebdbd] text-[#727272]`}>
               {data?.meta.intro}
             </p>
-          )}
-          {socialShareLink && (
-            <SocialShare
-              title="Share Trending On :"
-              textPlacement="left"
-              shareLink={socialShareLink}
-              className="text-[#6F6F6F] dark:text-white mt-auto"
-            />
           )}
         </div>
       </div>
