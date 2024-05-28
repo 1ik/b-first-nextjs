@@ -21,7 +21,10 @@ export function BlockNewsMob5({ data, className, sectionHeader, headerColor, Lin
           <ItemCardVertical data={data?.[0]} size="lg" />
         </div>
         <div className="sm:col-span-3 mx-auto">
-          <img src={ads} alt="Ads" />
+          <div className="text-center">
+            <p className="mb-2">Advertisement</p>
+            <img src={ads} alt="Ads" />
+          </div>
         </div>
       </div>
       <div className="grid grid-cols-1 my-4 sm:grid-cols-3 gap-4">

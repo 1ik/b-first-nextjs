@@ -49,17 +49,26 @@ export default async function CategoryPage({ params }) {
             ))}
             <LoadMore initialPage={2} lastPage={categroyNews?.meta.last_page} category={category} />
           </div>
-          <div className="">
-            <div className="">
-              <Image className="mx-auto block mb-10" width={320} height={250} src="/ads/union-bank-ad.gif" alt="Ads" />
+          <div>
+            <div>
+              <div className="text-center block mb-8">
+                <p className="mb-2">Advertisement</p>
+                <Image className="mx-auto" width={320} height={250} src="/ads/union-bank-ad.gif" alt="Ads" />
+              </div>
               <AccentHeader header="Latest News" color="#5D26D1" />
               <ItemList listType="circle" data={filteredLatestNews?.slice(0, 6)} moreNewsLink="/latest" showButton />
             </div>
             <div>
-              <Image className="mx-auto block my-10" width={320} height={250} src="/ads/union-bank-ad.gif" alt="Ads" />
+              <div className="text-center block my-8">
+                <p className="mb-2">Advertisement</p>
+                <Image className="mx-auto" width={320} height={250} src="/ads/union-bank-ad.gif" alt="Ads" />
+              </div>
               <AccentHeader header="Top News" color="#119F9F" />
               <ItemList data={topNews?.data.slice(0, 6)} listType="number" />
-              <Image className="mx-auto block my-10" width={320} height={250} src="/ads/union-bank-ad.gif" alt="Ads" />
+              <div className="text-center block my-8">
+                <p className="mb-2">Advertisement</p>
+                <Image className="mx-auto" width={320} height={250} src="/ads/union-bank-ad.gif" alt="Ads" />
+              </div>
             </div>
           </div>
         </div>

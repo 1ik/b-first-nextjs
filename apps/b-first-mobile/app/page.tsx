@@ -107,8 +107,14 @@ export default async function Index() {
         {/* ON THIS DAY SECTION */}
         <div className="grid grid-cols-1 sm:grid-cols-7 gap-4">
           <div className="sm:col-span-3 flex flex-col items-center gap-2">
-            <img src="/ads/SIBL_Profit_300x250.gif" alt="Ads" />
-            <img src="/ads/Global.gif" alt="Ads" />
+            <div className="text-center">
+              <p className="mb-2">Advertisement</p>
+              <img src="/ads/SIBL_Profit_300x250.gif" alt="Ads" />
+            </div>
+            <div className="text-center">
+              <p className="mb-2">Advertisement</p>
+              <img src="/ads/Global.gif" alt="Ads" />
+            </div>
           </div>
           <div className="sm:col-span-4">
             <AccentHeader header="On this day" color="#A49A46" />

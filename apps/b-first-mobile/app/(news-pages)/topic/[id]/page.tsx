@@ -45,14 +45,20 @@ export default async function Topic({ params }) {
                   className="border-b pb-4 dark:border-dark-300"
                 />
               ))}
-              <img className="my-10 mx-auto" src="/ads/ibbl.gif" alt="Ads" />
+              <div className="text-center my-8">
+                <p className="mb-2">Advertisement</p>
+                <img className="mx-auto" src="/ads/ibbl.gif" alt="Ads" />
+              </div>
             </div>
 
             <div className="sm:order-2 sm:col-span-2">
               <div className="mb-8">
                 <AccentHeader header="LATEST NEWS" color="#5D26D1" />
                 <ItemList data={filteredLatestNews?.slice(0, 6)} listType="circle" showButton moreNewsLink="/latest" />
-                <img className="mt-6 mx-auto" src="/ads/union-bank-ad.gif" alt="Ads" />
+                <div className="text-center mt-6">
+                  <p className="mb-2">Advertisement</p>
+                  <img className="mx-auto" src="/ads/union-bank-ad.gif" alt="Ads" />
+                </div>
               </div>
 
               <div>

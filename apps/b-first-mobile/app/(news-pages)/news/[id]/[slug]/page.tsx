@@ -112,7 +112,10 @@ export default async function NewsDetails({ params }) {
                 shareLink={news_link_url}
               />
             </div>
-            <img className="my-5 mx-auto" src="/ads/SIBL_Profit_300x250.gif" alt="Ads" />
+            <div className="text-center my-5">
+              <p className="mb-2">Advertisement</p>
+              <img className="mx-auto" src="/ads/SIBL_Profit_300x250.gif" alt="Ads" />
+            </div>
 
             {/* MORE FROM SECTION LIST */}
             <div>
@@ -127,21 +130,30 @@ export default async function NewsDetails({ params }) {
                   <ItemCardHorizontal key={index} className="mb-8 last:mb-0" size="md" data={item} />
                 ))}
             </div>
-            <img className="my-10 mx-auto" src="/ads/Global.gif" alt="Ads" />
+            <div className="text-center my-8">
+              <p className="mb-2">Advertisement</p>
+              <img className="mx-auto" src="/ads/Global.gif" alt="Ads" />
+            </div>
 
             {/* LATEST NEWS SECTION LIST */}
             <div>
               <AccentHeader header="LATEST News" color="#5D26D1" />
               <ItemList listType="circle" data={filteredLatestNews?.slice(0, 5)} showButton moreNewsLink="/latest" />
             </div>
-            <img className="my-10 mx-auto" src="/ads/union-bank-ad.gif" alt="Ads" />
+            <div className="text-center my-8">
+              <p className="mb-2">Advertisement</p>
+              <img className="mx-auto" src="/ads/union-bank-ad.gif" alt="Ads" />
+            </div>
 
             {/* TOP NEWS SECTION LIST */}
             <div>
               <AccentHeader header="Top News" color="#119F9F" />
               <ItemList listType="number" data={topNews?.slice(0, 6)} />
             </div>
-            <img className="my-10 mx-auto" src="/ads/Global.gif" alt="Ads" />
+            <div className="text-center my-8">
+              <p className="mb-2">Advertisement</p>
+              <img className="mx-auto" src="/ads/Global.gif" alt="Ads" />
+            </div>
           </div>
 
           {/* ==================== GRID RIGHT BOX (TAB) | GRID TOP BOX (MOBILE) ===================== */}
@@ -150,7 +162,10 @@ export default async function NewsDetails({ params }) {
             <p className="font-montserrat text-xs mt-2">{detailsData?.story.meta.imageCaption}</p>
 
             <div className="sm:hidden">
-              <img className="my-10 mx-auto" src="/ads/ibbl.gif" alt="Ads" />
+              <div className="text-center my-8">
+                <p className="mb-2">Advertisement</p>
+                <img className="mx-auto" src="/ads/ibbl.gif" alt="Ads" />
+              </div>
               {/* INTRO */}
               <h3 className="text-base font-montserrat">{detailsData?.story.meta.intro}</h3>
               <ProfileCard
