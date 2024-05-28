@@ -1,3 +1,4 @@
+import { Ads } from "@bfirst/components-ads";
 import { ItemCardHorizontal } from "@bfirst/components-item-card-horizontal";
 import { ItemCardVertical } from "@bfirst/components-item-card-vertical";
 import { Key } from "react";
@@ -40,21 +41,13 @@ export function BlockNewsMob({ data, ads1, ads2, className }: BlockNewsMobProps)
               </div>
             </div>
           ))}
-          <div className="text-center sm:hidden mt-4 mb-6">
-            <p className="mb-2">Advertisement</p>
-            <img className="mx-auto" src={ads2} alt="Ads" />
-          </div>
+
+          <Ads className="mx-auto" src={ads2} alt="Ads" />
         </div>
 
         <div className="sm:col-span-2 flex-col gap-y-12 mt-6 order-last hidden sm:flex">
-          <div className="mx-auto text-center">
-            <p className="mb-2">Advertisement</p>
-            <img src={ads1} alt="Ads" />
-          </div>
-          <div className="mx-auto text-center">
-            <p className="mb-2">Advertisement</p>
-            <img src={ads2} alt="Ads" />
-          </div>
+          <Ads src={ads1} alt="Ads" />
+          <Ads src={ads2} alt="Ads" />
         </div>
       </div>
     </div>

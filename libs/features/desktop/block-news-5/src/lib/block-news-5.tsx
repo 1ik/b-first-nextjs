@@ -1,4 +1,5 @@
 import { AccentHeader } from "@bfirst/components-accent-header";
+import { Ads } from "@bfirst/components-ads";
 import { ItemCardHorizontal } from "@bfirst/components-item-card-horizontal";
 import { ItemCardVertical } from "@bfirst/components-item-card-vertical";
 
@@ -25,14 +26,8 @@ export function BlockNews5({ data, Link, sectionHeader, headerColor, className }
           <ItemCardVertical Link={Link} className="col-span-2" data={data?.[6]} size="lg" />
 
           <div className="flex flex-col gap-y-10 items-center">
-            <div className="text-center">
-              <p className="mb-2">Advertisement</p>
-              <img src="/ads/Global.gif" alt="Ads" />
-            </div>
-            <div className="text-center">
-              <p className="mb-2">Advertisement</p>
-              <img src="/ads/SIBL_Profit_300x250.gif" alt="Ads" />
-            </div>
+            <Ads src="/ads/Global.gif" alt="Ads" />
+            <Ads src="/ads/SIBL_Profit_300x250.gif" alt="Ads" />
           </div>
           {data?.slice(7, 10).map((item: any, index: number) => (
             <ItemCardVertical Link={Link} key={index} data={item} size="md" />
