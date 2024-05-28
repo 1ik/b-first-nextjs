@@ -24,7 +24,7 @@ export function BlockNews3({ data, Link, sectionHeader, headerColor, className, 
           return <ItemCardVertical Link={Link} key={item.id} size="md" data={item} />;
         })}
       </div>
-      <div className="flex justify-end mt-16">
+      <div className="flex justify-center mt-16">
         <Ads src={adsUrl} alt="ads" showHeader={false}/>
       </div>
     </div>

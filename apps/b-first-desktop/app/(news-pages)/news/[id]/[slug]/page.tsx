@@ -159,7 +159,7 @@ export default async function NewsDetails({ params }) {
                 ))}
               </ul>
             </div>
-            <Ads className="my-10" src="/ads/banner_ibbl.gif" alt="Ads" />
+            <Ads className="my-10" src="/ads/banner_ibbl.gif" alt="Ads" showHeader={false}/>
 
             {/* ======== Comment section ======== */}
 
