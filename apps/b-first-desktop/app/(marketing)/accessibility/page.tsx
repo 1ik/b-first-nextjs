@@ -4,8 +4,8 @@ export default function Accessibility() {
   return (
     <>
       <Navbar />
-      <div className="desktop-container pt-16 pb-24 font-montserrat">
-        <h1 className="font-semibold text-3xl mb-2">Accessibility & Closed Captioning Policy</h1>
+      <div className="desktop-container pt-8 font-montserrat">
+        <h1 className="font-semibold text-3xl mb-8 text-center">Accessibility & Closed Captioning Policy</h1>
         <p className="text-sm mb-4">
           Bangladesh First ("we," "us," or "our") is committed to ensuring digital accessibility for all users,
           including individuals with disabilities. We strive to continually improve the user experience for everyone and
@@ -20,7 +20,7 @@ export default function Accessibility() {
           </li>
 
           <li className="text-base mb-2">
-            <span className="font-semibold">Regular Testing : </span> We conduct regular testing of our website to
+            <span className="font-semibold">Regular Testing :</span> We conduct regular testing of our website to
             identify and address accessibility issues. This includes both automated testing tools and manual testing by
             individuals with disabilities.
           </li>
@@ -37,17 +37,17 @@ export default function Accessibility() {
         </p>
         <ul className="list-decimal pl-4 mb-4">
           <li className="text-base mb-2">
-            <span className="font-semibold">Captioned Videos:</span> We provide closed captions for all pre-recorded
+            <span className="font-semibold">Captioned Videos :</span> We provide closed captions for all pre-recorded
             video content published on our website. This ensures that users can access and understand the information
             regardless of their hearing ability.
           </li>
           <li className="text-base mb-2">
-            <span className="font-semibold">Real-Time Captioning:</span> For live-streamed events, we strive to provide
+            <span className="font-semibold">Real-Time Captioning :</span> For live-streamed events, we strive to provide
             real-time captioning when possible. If real-time captioning is not available, we aim to offer a transcript
             or captioned version of the event recording as soon as possible after the event.
           </li>
           <li className="text-base mb-2">
-            <span className="font-semibold">Accuracy and Synchronization:</span> We ensure that captions are accurate,
+            <span className="font-semibold">Accuracy and Synchronization :</span> We ensure that captions are accurate,
             complete, and synchronized with the audio content of the videos. This includes capturing spoken dialogue and
             relevant non-speech information, such as sound effects and music.
           </li>
@@ -80,13 +80,13 @@ export default function Accessibility() {
         </p>
         <ul className="list-disc pl-4 mb-4">
           <li className="text-base mb-2">
-            <span className="font-semibold">Email</span>editor@bangladeshfirst.com
+            <span className="font-semibold mr-2">Email :</span>editor@bangladeshfirst.com
           </li>
           <li className="text-base mb-2">
-            <span className="font-semibold">Phone</span>+880 961 332 2782
+            <span className="font-semibold mr-2">Phone :</span>+880 961 332 2782
           </li>
           <li className="text-base mb-2">
-            <span className="font-semibold">Mail</span>115 Kazi Nazrul Islam Avenue, Level 12, Bangla Motor, Dhaka 1000,
+            <span className="font-semibold mr-2">Mail :</span>115 Kazi Nazrul Islam Avenue, Level 12, Bangla Motor, Dhaka 1000,
             Bangladesh
           </li>
         </ul>
@@ -100,7 +100,7 @@ export default function Accessibility() {
           practices or for other operational, legal, or regulatory reasons. We will notify users of any significant
           changes by posting the updated policy on our website with an updated effective date.
         </p>
-        <p className="text-sm mb-4">Effective Date: May 25, 2024</p>
+        <p className="text-sm mb-4">Effective Date : May 25, 2024</p>
       </div>
     </>
   );

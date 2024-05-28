@@ -84,7 +84,7 @@ export function ItemCardHorizontal({
           )}
 
           {showTime && (
-            <p className="font-montserrat  text-[#6F6F6F] md:pt-4 pt-2 dark:border-dark-300 dark:text-white">
+            <p className="font-montserrat text-xs text-[#6F6F6F] md:pt-4 pt-2 dark:border-dark-300 dark:text-white">
               {`${moment(data?.created_at).startOf(data?.created_at).fromNow()}`}
             </p>
           )}

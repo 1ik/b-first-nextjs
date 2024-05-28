@@ -5,7 +5,7 @@ export default function CookieSettings() {
     <>
       <Navbar />
       <div className="px-3 py-6 font-montserrat">
-        <h1 className="font-semibold text-2xl mb-2">Cookie Settings Policy</h1>
+        <h1 className="font-semibold text-2xl mb-4 text-center">Cookie Settings Policy</h1>
         <h2 className="font-semibold text-xl mb-4">Introduction</h2>
         <p className="text-sm mb-4">
           Bangladesh First ("we," "us," or "our") uses cookies and similar technologies to enhance your browsing
