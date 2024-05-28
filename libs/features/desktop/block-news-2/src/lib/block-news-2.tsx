@@ -1,4 +1,5 @@
 import { AccentHeader } from "@bfirst/components-accent-header";
+import { Ads } from "@bfirst/components-ads";
 import { ItemCardHorizontal } from "@bfirst/components-item-card-horizontal";
 export interface BlockNews2Props {
   data: any;
@@ -21,7 +22,7 @@ export function BlockNews2({ data, Link, sectionHeader, headerColor, className, 
           <ItemCardHorizontal Link={Link} key={item.id} data={item} showTitleBorderBig size="sm" />
         ))}
       </div>
-      {adsUrl && <img className="mx-auto mt-28" src={adsUrl} alt="Ads" />}
+      {adsUrl && <Ads className="mt-28" src={adsUrl} alt="ads" showHeader={false}/>}
     </div>
   );
 }

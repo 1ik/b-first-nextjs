@@ -12,6 +12,7 @@ import Navbar from "../../../../components/Navbar/Navbar";
 import TrendingTopics from "../../../../components/TrendingTopics/TrendingTopics";
 import { getData } from "../../../../utils/dataFetch";
 import filterOutOTD from "../../../../utils/filterOutOTD";
+import { Ads } from "@bfirst/components-ads";
 
 export async function generateMetadata({ params }): Promise<Metadata> {
   const data = await getData(`story/details/${params.id}`);
@@ -80,7 +81,8 @@ export default async function NewsDetails({ params }) {
       <TrendingTopics className="desktop-container mb-8" title="Trending Topics" items={trendingTopics} />
 
       <div className="desktop-container">
-        <img className="mx-auto my-12" src="/ads/banner_ibbl.gif" alt="Ads" />
+        <Ads src="/ads/banner_ibbl.gif" alt="ads" showHeader={false} />
+
         <BreadCrumb
           links={[
             {
@@ -115,7 +117,7 @@ export default async function NewsDetails({ params }) {
 
           {/* ======== row 2 ======= */}
           <div>
-            <img className="my-10 mx-auto" src="/ads/union-bank-ad.gif" alt="Ads" />
+            <Ads className="my-8" src="/ads/union-bank-ad.gif" alt="ads" />
             <div>
               <AccentHeader
                 header={`more from ${detailsData?.story.categories[0].name.split("_").join(" ")}`}
@@ -134,7 +136,8 @@ export default async function NewsDetails({ params }) {
                   />
                 ))}
             </div>
-            <img className="my-10 mx-auto sticky top-[100px]" src="/ads/SIBL_Profit_300x250.gif" alt="Ads" />
+
+            <Ads className="my-8 sticky top-[80px]" src="/ads/SIBL_Profit_300x250.gif" alt="ads" />
           </div>
           <div className="col-span-2">
             <div
@@ -156,7 +159,7 @@ export default async function NewsDetails({ params }) {
                 ))}
               </ul>
             </div>
-            <img className="my-10 mx-auto" src="/ads/banner_ibbl.gif" alt="Ads" />
+            <Ads className="my-10" src="/ads/banner_ibbl.gif" alt="Ads" />
 
             {/* ======== Comment section ======== */}
 
@@ -177,13 +180,13 @@ export default async function NewsDetails({ params }) {
             ) : null}
           </div>
           <div>
-            <img className="my-10 mx-auto" src="/ads/Global.gif" alt="Ads" />
+            <Ads className="my-8" src="/ads/Global.gif" alt="ads" />
             <div>
               <AccentHeader header="Latest News" color="#5D26D1" />
               <ItemList listType="circle" data={filteredLatestNews?.slice(0, 5)} showButton moreNewsLink="/latest" />
             </div>
             <div>
-              <img className="my-10 mx-auto" src="/ads/ibbl.gif" alt="Ads" />
+              <Ads className="my-8" src="/ads/ibbl.gif" alt="ads" />
               <AccentHeader header="Top News" color="#119F9F" />
               <ItemList data={topNews?.slice(0, 6)} listType="number" />
             </div>

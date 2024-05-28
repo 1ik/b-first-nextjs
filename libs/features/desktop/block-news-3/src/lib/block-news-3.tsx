@@ -1,4 +1,5 @@
 import { AccentHeader } from "@bfirst/components-accent-header";
+import { Ads } from "@bfirst/components-ads";
 import { ItemCardHorizontal } from "@bfirst/components-item-card-horizontal";
 import { ItemCardVertical } from "@bfirst/components-item-card-vertical";
 
@@ -24,7 +25,7 @@ export function BlockNews3({ data, Link, sectionHeader, headerColor, className, 
         })}
       </div>
       <div className="flex justify-end mt-16">
-        <img src={adsUrl} alt="Ads" />
+        <Ads src={adsUrl} alt="ads" showHeader={false}/>
       </div>
     </div>
   );

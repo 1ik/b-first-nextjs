@@ -12,6 +12,7 @@ import Navbar from "./components/Navbar/Navbar";
 import TrendingTopics from "./components/TrendingTopics/TrendingTopics";
 import { getData } from "./utils/dataFetch";
 import filterOutOTD from "./utils/filterOutOTD";
+import { Ads } from "@bfirst/components-ads";
 
 export default async function Index() {
   const [topNews, recommendedNews] = (
@@ -66,18 +67,17 @@ export default async function Index() {
         ads1="/ads/Global.gif"
         ads2="/ads/union-bank-ad.gif"
       />
-      <img className="mx-auto my-14" src="/ads/FSB-banner-ad.gif" alt="Ads" />
+      <Ads className="my-14" src="/ads/FSB-banner-ad.gif" alt="ads" showHeader={false}/>
       <SquareGrid showAccentHeader className="desktop-container" data={topNews.slice(8, 16)} gridCols={4} />
-      <img className="mx-auto my-12" src="/ads/banner_ibbl.gif" alt="Ads" />
-
+      <Ads className="my-12" src="/ads/banner_ibbl.gif" alt="ads" showHeader={false}/>
       <div className="bg-[#F6EFEF] dark:bg-dark-300 py-8">
         <div className="desktop-container">
           <AccentHeader header="recommended for you" color="#228B22" />
           <SquareGrid data={recommendedNews?.slice(0, 4)} gridCols={4} />
         </div>
       </div>
-      <img className="mx-auto my-12" src="/ads/FSB-banner-ad.gif" alt="Ads" />
 
+      <Ads className="my-12" src="/ads/FSB-banner-ad.gif" alt="ads" showHeader={false} />
       <div className="desktop-container">
         <div className="grid grid-cols-4">
           <BlockNews2
@@ -91,7 +91,7 @@ export default async function Index() {
           <div>
             <AccentHeader header="Latest News" color="#5D26D1" />
             <ItemList data={latestNews?.slice(0, 6)} listType="circle" showButton moreNewsLink="/latest" />
-            <img className="mt-4 mx-auto" src="/ads/Global.gif" alt="Ads" />
+            <Ads src="/ads/Global.gif" alt="ads" />
           </div>
         </div>
       </div>
@@ -109,7 +109,7 @@ export default async function Index() {
           <div>
             <AccentHeader header="Most Viewed" color="#119F9F" />
             <ItemList data={latestNews?.slice(6, 11)} listType="number" />
-            <img className="mt-4 mx-auto" src="/ads/Global.gif" alt="Ads" />
+            <Ads className="mt-4" src="/ads/Global.gif" alt="ads" />
           </div>
         </div>
       </div>
@@ -127,8 +127,8 @@ export default async function Index() {
             <AccentHeader header="On this day" color="#A49A46" />
             <ItemList showImage showDate data={onThisDay} />
             <div className="flex flex-col mt-8 gap-y-8 items-center">
-              <img src="ads/SIBL_Profit_300x250.gif" alt="Ads" />
-              <img src="ads/FSIBL-November-2023-20.gif" alt="Ads" />
+              <Ads className="mt-4" src="/ads/SIBL_Profit_300x250.gif" alt="ads" />
+              <Ads className="mt-4" src="/ads/FSIBL-November-2023-20.gif" alt="ads" />
             </div>
           </div>
         </div>
@@ -140,11 +140,10 @@ export default async function Index() {
         className="desktop-container my-10"
         data={entertainmentNews}
       />
-      <img className="mx-auto my-16" src="/ads/FSB-banner-ad.gif" alt="Ads" />
 
+      <Ads className="my-16" src="/ads/FSB-banner-ad.gif" alt="ads" showHeader={false}/>
       <ListGrid className="desktop-container" data={[bangladeshNews, worldNews, sportsNews, techNews]} />
-
-      <img className="mx-auto mt-12" src="/ads/banner_ibbl.gif" alt="Ads" />
+      <Ads className="mt-12" src="/ads/banner_ibbl.gif" alt="ads" showHeader={false}/>
     </>
   );
 }

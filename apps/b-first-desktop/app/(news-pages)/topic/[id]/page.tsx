@@ -6,6 +6,7 @@ import Navbar from "../../../components/Navbar/Navbar";
 import TrendingTopics from "../../../components/TrendingTopics/TrendingTopics";
 import { getData } from "../../../utils/dataFetch";
 import filterOutOTD from "../../../utils/filterOutOTD";
+import { Ads } from "@bfirst/components-ads";
 
 export default async function Topic({ params }) {
   const [trendingNews, latestNews, topNews] = (
@@ -19,10 +20,11 @@ export default async function Topic({ params }) {
   const filteredLatestNews = latestNews.filter(filterOutOTD);
   const trendingTopics = (await getData("trendy-topics"))?.data;
   return (
-    <div>
+    <>
       <Navbar />
       <TrendingTopics className="desktop-container mb-8" items={trendingTopics} title="Trending Topics" />
-      <img className="mx-auto my-4" src="/ads//ads/banner_ibbl.gif" alt="" />
+      <Ads className="my-4" src="/ads/FSB-banner-ad.gif" alt="Ads" showHeader={false} />
+
       <div className="desktop-container">
         <div className="mb-6">
           <BreadCrumb
@@ -48,22 +50,21 @@ export default async function Topic({ params }) {
           </div>
 
           <div>
-            <div>
-              <img className="mt-4 mx-auto" src="/ads/SIBL_Profit_300x250.gif" alt="Ads" />
-            </div>
+            <Ads className="mt-4" src="/ads/SIBL_Profit_300x250.gif" alt="Ads" />
             <div className="my-10">
               <AccentHeader header="LATEST NEWS" color="#5D26D1" />
               <ItemList data={filteredLatestNews?.slice(0, 6)} listType="circle" showButton moreNewsLink="/latest" />
-              <img className="mt-4 mx-auto" src="/ads/IBBL.gif" alt="Ads" />
+              <Ads className="mt-4" src="/ads/IBBL.gif" alt="Ads" />
             </div>
             <div>
               <AccentHeader header="Top News" color="#119F9F" />
               <ItemList data={topNews?.slice(0, 6)} listType="number" />
-              <img className="mt-4 mx-auto" src="/ads/Global.gif" alt="Ads" />
+
+              <Ads className="mt-4" src="/ads/Global.gif" alt="Ads" />
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

@@ -1,3 +1,4 @@
+import { Ads } from "@bfirst/components-ads";
 import { ItemCardHorizontal } from "@bfirst/components-item-card-horizontal";
 import { ItemCardVertical } from "@bfirst/components-item-card-vertical";
 import { Key } from "react";
@@ -14,7 +15,7 @@ export interface BlockNewsProps {
 
 export function BlockNews({ data, sectionHeader, ads1, ads2, className, Link }: BlockNewsProps) {
   return (
-    <div className={`flex gap-x-7 ${className}`}>
+    <div className={`flex gap-x-4 ${className}`}>
       <ItemCardVertical Link={Link} className="w-[35%]" showImageBorder data={data?.[0]} size="lg" />
 
       <div className="w-[25%]">
@@ -26,17 +27,17 @@ export function BlockNews({ data, sectionHeader, ads1, ads2, className, Link }: 
         ))}
       </div>
 
-      <div className="w-[20%] flex flex-col gap-y-5">
+      <div className="w-[20%] flex flex-col gap-y-5 bg-[#FFF3ED] dark:bg-dark-400">
         {data?.slice(6, 8).map((item: any, index: Key | null | undefined) => (
-          <div key={index}>
-            <ItemCardVertical data={item} size="md" titleFontSize="26px" />
+          <div key={index} className="border-b dark:border-dark-300 pb-3 last:border-0">
+            <ItemCardVertical className="p-2.5 dark:p-0" data={item} size="md" titleFontSize="26px" />
           </div>
         ))}
       </div>
 
-      <div className="w-[20%] flex flex-col gap-y-3">
-        <img src={ads1} alt="Ads" />
-        <img src={ads2} alt="Ads" />
+      <div className="w-[20%] flex flex-col gap-y-4 text-center">
+        <Ads src={ads1} alt="Ads" />
+        <Ads src={ads2} alt="Ads" />
       </div>
     </div>
   );

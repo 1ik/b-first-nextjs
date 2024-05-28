@@ -7,6 +7,7 @@ import LoadMore from "../../components/LoadMore/LoadMore";
 import { BreadCrumb } from "@bfirst/components-breadcrumb";
 import Navbar from "../../components/Navbar/Navbar";
 import TrendingTopics from "../../components/TrendingTopics/TrendingTopics";
+import { Ads } from "@bfirst/components-ads";
 
 export default async function Latest() {
   const [latestNews, topNews] = await Promise.all([
@@ -19,7 +20,7 @@ export default async function Latest() {
     <>
       <Navbar />
       <div className="px-3">
-        <img className="mx-auto my-4" src="/ads/banner_ibbl.gif" alt="" />
+        <Ads className="mx-auto my-4" src="/ads/banner_ibbl.gif" alt="ads" />
         <TrendingTopics className="desktop-container mb-8" items={trendingTopics} title="Trending Topics" />
         {/*============= BREDCRUMB ========== */}
         <div className="mt-4">
@@ -57,10 +58,10 @@ export default async function Latest() {
           <div className="sm:col-span-2">
             {/*============= TOP NEWS ========== */}
             <div>
-              <img className="mb-4 mx-auto" src="/ads/Global.gif" alt="Ads" />
+              <Ads className="my-4" src="/ads/Global.gif" alt="Ads" />
               <AccentHeader header="Top News" color="#119F9F" />
               <ItemList data={topNews.data?.slice(0, 6)} listType="number" />
-              <img className="mt-4 mx-auto" src="/ads/Global.gif" alt="Ads" />
+              <Ads className="mt-4" src="/ads/Global.gif" alt="Ads" />
             </div>
           </div>
         </div>
