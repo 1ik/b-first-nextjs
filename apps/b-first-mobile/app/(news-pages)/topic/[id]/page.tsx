@@ -2,8 +2,6 @@ import { AccentHeader } from "@bfirst/components-accent-header";
 import { BreadCrumb } from "@bfirst/components-breadcrumb";
 import { ItemCardHorizontal } from "@bfirst/components-item-card-horizontal";
 import { ItemList } from "@bfirst/components-item-list";
-import { SocialShare } from "@bfirst/components-social-share";
-import { getNewsUrl } from "@bfirst/utilities";
 import Navbar from "../../../components/Navbar/Navbar";
 import TrendingTopics from "../../../components/TrendingTopics/TrendingTopics";
 import { getData } from "../../../utils/dataFetch";
@@ -39,21 +37,13 @@ export default async function Topic({ params }) {
           <div className="grid grid-cols-1 sm:grid-cols-6 gap-4">
             <div className="sm:col-span-4">
               {trendingNews?.map((item: any, index: number) => (
-                <>
-                  <ItemCardHorizontal
-                    showCreatedAt
-                    key={index}
-                    data={item}
-                    size="sm"
-                    className="border-b pb-4 dark:border-dark-300"
-                  />
-                  <SocialShare
-                    title="Share On :"
-                    textPlacement="left"
-                    shareLink={`${process.env.BASE_URL}/${getNewsUrl(item)}`}
-                    className="text-[#6F6F6F] items-center dark:text-white mt-4 border-b pb-4 dark:border-dark-300"
-                  />
-                </>
+                <ItemCardHorizontal
+                  showCreatedAt
+                  key={index}
+                  data={item}
+                  size="sm"
+                  className="border-b pb-4 dark:border-dark-300"
+                />
               ))}
               <img className="my-10 mx-auto" src="/ads/ibbl.gif" alt="Ads" />
             </div>
