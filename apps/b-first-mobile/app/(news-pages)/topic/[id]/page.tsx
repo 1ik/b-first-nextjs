@@ -6,6 +6,7 @@ import Navbar from "../../../components/Navbar/Navbar";
 import TrendingTopics from "../../../components/TrendingTopics/TrendingTopics";
 import { getData } from "../../../utils/dataFetch";
 import filterOutOTD from "../../../utils/filterOutOTD";
+import { Ads } from "@bfirst/components-ads";
 
 export default async function Topic({ params }) {
   const [trendingNews, latestNews, topNews] = (
@@ -45,26 +46,21 @@ export default async function Topic({ params }) {
                   className="border-b pb-4 dark:border-dark-300"
                 />
               ))}
-              <div className="text-center my-8">
-                <p className="mb-2">Advertisement</p>
-                <img className="mx-auto" src="/ads/ibbl.gif" alt="Ads" />
-              </div>
+
+              <Ads className="my-8" src="/ads/ibbl.gif" alt="Ads" />
             </div>
 
             <div className="sm:order-2 sm:col-span-2">
               <div className="mb-8">
                 <AccentHeader header="LATEST NEWS" color="#5D26D1" />
                 <ItemList data={filteredLatestNews?.slice(0, 6)} listType="circle" showButton moreNewsLink="/latest" />
-                <div className="text-center mt-6">
-                  <p className="mb-2">Advertisement</p>
-                  <img className="mx-auto" src="/ads/union-bank-ad.gif" alt="Ads" />
-                </div>
+                <Ads className="mt-6" src="/ads/union-bank-ad.gif" alt="Ads" />
               </div>
 
               <div>
                 <AccentHeader header="Top News" color="#119F9F" />
                 <ItemList data={topNews?.slice(0, 6)} listType="number" />
-                <img className="mt-4 mx-auto" src="/ads/social_islami.png" alt="Ads" />
+                <Ads className="mt-4" src="/ads/social_islami.png" alt="Ads" />
               </div>
             </div>
           </div>

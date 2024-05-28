@@ -1,3 +1,4 @@
+import { Ads } from "@bfirst/components-ads";
 import moment from "moment";
 import { useEffect, useState } from "react";
 import { FaFacebookF, FaInstagram, FaSearch, FaYoutube } from "react-icons/fa";
@@ -154,12 +155,12 @@ export function DesktopNav({
       </div>
       {adsBanner && (
         <div>
-          <img className="mx-auto" src={adsBanner} alt="Ads" />
+          <Ads className="mx-auto" src={adsBanner} alt="Ads" showHeader={false} />
         </div>
       )}
       <div className="desktop-container w-full">
         <div className="flex justify-between items-center">
-          <div className="w-80">{adsLeft && <img className="hidden" src={adsLeft} alt="Ads" />}</div>
+          <div className="w-80">{adsLeft && <Ads className="hidden" src={adsLeft} alt="Ads" />}</div>
           <div className="w-80">
             {Link ? (
               <Link href="/">
@@ -173,7 +174,7 @@ export function DesktopNav({
               </a>
             )}
           </div>
-          <div className="w-80">{adsRight && <img className="hidden" src={adsRight} alt="Ads" />}</div>
+          <div className="w-80">{adsRight && <Ads className="hidden" src={adsRight} alt="Ads" />}</div>
         </div>
       </div>
 

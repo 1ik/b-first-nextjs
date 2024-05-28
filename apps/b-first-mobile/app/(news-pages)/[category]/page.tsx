@@ -10,6 +10,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import TrendingTopics from "../../components/TrendingTopics/TrendingTopics";
 import { getData } from "../../utils/dataFetch";
 import filterOutOTD from "../../utils/filterOutOTD";
+import { Ads } from "@bfirst/components-ads";
 
 export default async function CategoryPage({ params }) {
   const { category } = params;
@@ -28,9 +29,9 @@ export default async function CategoryPage({ params }) {
     <>
       <Navbar activeLink={`/${category}`} />
       <div className="px-3">
-        <img className="mx-auto my-14" src="/ads/banner_ibbl.gif" alt="Ads" />
+        <Ads className="my-14" src="/ads/banner_ibbl.gif" alt="Ads" showHeader={false}/>
         <TrendingTopics className="mb-8" title="Trending" items={trendingTopics?.data} />
-        <img className="mx-auto my-14" src="/ads/FSB-banner-ad.gif" alt="Ads" />
+        <Ads className="my-14" src="/ads/FSB-banner-ad.gif" alt="Ads" showHeader={false}/>
         <BreadCrumb
           className="my-10"
           links={[
@@ -41,7 +42,7 @@ export default async function CategoryPage({ params }) {
           ]}
         />
         <BlockNewsMob6 data={categroyNews?.data.slice(0, 4)} />
-        <img className="mx-auto my-14" src="/ads/banner_ibbl.gif" alt="Ads" />
+        <Ads className="mx-auto my-14" src="/ads/banner_ibbl.gif" alt="Ads" showHeader={false} />
         <div className="grid grid-cols-1 sm:grid-cols-3 sm:gap-x-5">
           <div className="sm:col-span-2">
             {categroyNews?.data.slice(4).map((news) => (
@@ -51,24 +52,15 @@ export default async function CategoryPage({ params }) {
           </div>
           <div>
             <div>
-              <div className="text-center block mb-8">
-                <p className="mb-2">Advertisement</p>
-                <Image className="mx-auto" width={320} height={250} src="/ads/union-bank-ad.gif" alt="Ads" />
-              </div>
+              <Ads className="my-8" src="/ads/union-bank-ad.gif" alt="Ads" />
               <AccentHeader header="Latest News" color="#5D26D1" />
               <ItemList listType="circle" data={filteredLatestNews?.slice(0, 6)} moreNewsLink="/latest" showButton />
             </div>
             <div>
-              <div className="text-center block my-8">
-                <p className="mb-2">Advertisement</p>
-                <Image className="mx-auto" width={320} height={250} src="/ads/union-bank-ad.gif" alt="Ads" />
-              </div>
+              <Ads className="my-8" src="/ads/union-bank-ad.gif" alt="Ads" />
               <AccentHeader header="Top News" color="#119F9F" />
               <ItemList data={topNews?.data.slice(0, 6)} listType="number" />
-              <div className="text-center block my-8">
-                <p className="mb-2">Advertisement</p>
-                <Image className="mx-auto" width={320} height={250} src="/ads/union-bank-ad.gif" alt="Ads" />
-              </div>
+              <Ads className="block my-8" src="/ads/union-bank-ad.gif" alt="Ads" />
             </div>
           </div>
         </div>

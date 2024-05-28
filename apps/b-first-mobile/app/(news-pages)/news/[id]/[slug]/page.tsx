@@ -11,6 +11,7 @@ import Navbar from "../../../../components/Navbar/Navbar";
 import TrendingTopics from "../../../../components/TrendingTopics/TrendingTopics";
 import { getData } from "../../../../utils/dataFetch";
 import filterOutOTD from "../../../../utils/filterOutOTD";
+import { Ads } from "@bfirst/components-ads";
 
 export async function generateMetadata({ params }): Promise<Metadata> {
   const data = await getData(`story/details/${params.id}`);
@@ -74,14 +75,14 @@ export default async function NewsDetails({ params }) {
   );
 
   return (
-    <div>
+    <>
       <Navbar activeLink={`/${detailsData?.story.categories[0].name.toLowerCase()}`} />
 
       <div className="px-3">
         {/* TRENDING TOPICS */}
-        <img className="mx-auto mt-3" src="/ads/banner_ibbl.gif" alt="Ads" />
+        <Ads className="mx-auto mt-3" src="/ads/banner_ibbl.gif" alt="Ads" showHeader={false} />
         <TrendingTopics className="my-5" items={trendingTopics} title="Trending" />
-        <img className="mx-auto mb-4" src="/ads/FSB-banner-ad.gif" alt="Ads" />
+        <Ads className="mx-auto mb-4" src="/ads/FSB-banner-ad.gif" alt="Ads" showHeader={false} />
 
         {/* BREADCRUMB */}
         <BreadCrumb
@@ -112,10 +113,8 @@ export default async function NewsDetails({ params }) {
                 shareLink={news_link_url}
               />
             </div>
-            <div className="text-center my-5">
-              <p className="mb-2">Advertisement</p>
-              <img className="mx-auto" src="/ads/SIBL_Profit_300x250.gif" alt="Ads" />
-            </div>
+
+            <Ads className="my-5" src="/ads/SIBL_Profit_300x250.gif" alt="Ads" />
 
             {/* MORE FROM SECTION LIST */}
             <div>
@@ -130,30 +129,24 @@ export default async function NewsDetails({ params }) {
                   <ItemCardHorizontal key={index} className="mb-8 last:mb-0" size="md" data={item} />
                 ))}
             </div>
-            <div className="text-center my-8">
-              <p className="mb-2">Advertisement</p>
-              <img className="mx-auto" src="/ads/Global.gif" alt="Ads" />
-            </div>
+
+            <Ads className="my-8" src="/ads/Global.gif" alt="Ads" />
 
             {/* LATEST NEWS SECTION LIST */}
             <div>
               <AccentHeader header="LATEST News" color="#5D26D1" />
               <ItemList listType="circle" data={filteredLatestNews?.slice(0, 5)} showButton moreNewsLink="/latest" />
             </div>
-            <div className="text-center my-8">
-              <p className="mb-2">Advertisement</p>
-              <img className="mx-auto" src="/ads/union-bank-ad.gif" alt="Ads" />
-            </div>
+
+            <Ads className="my-8" src="/ads/union-bank-ad.gif" alt="Ads" />
 
             {/* TOP NEWS SECTION LIST */}
             <div>
               <AccentHeader header="Top News" color="#119F9F" />
               <ItemList listType="number" data={topNews?.slice(0, 6)} />
             </div>
-            <div className="text-center my-8">
-              <p className="mb-2">Advertisement</p>
-              <img className="mx-auto" src="/ads/Global.gif" alt="Ads" />
-            </div>
+
+            <Ads className="my-8" src="/ads/Global.gif" alt="Ads" />
           </div>
 
           {/* ==================== GRID RIGHT BOX (TAB) | GRID TOP BOX (MOBILE) ===================== */}
@@ -162,10 +155,7 @@ export default async function NewsDetails({ params }) {
             <p className="font-montserrat text-xs mt-2">{detailsData?.story.meta.imageCaption}</p>
 
             <div className="sm:hidden">
-              <div className="text-center my-8">
-                <p className="mb-2">Advertisement</p>
-                <img className="mx-auto" src="/ads/ibbl.gif" alt="Ads" />
-              </div>
+              <Ads className="my-8" src="/ads/ibbl.gif" alt="Ads" />
               {/* INTRO */}
               <h3 className="text-base font-montserrat">{detailsData?.story.meta.intro}</h3>
               <ProfileCard
@@ -196,7 +186,7 @@ export default async function NewsDetails({ params }) {
               </ul>
             </div>
 
-            <img className="mx-auto mb-4" src="/ads/banner_ibbl.gif" alt="Ads" />
+            <Ads className="mx-auto mb-4" src="/ads/banner_ibbl.gif" alt="Ads" showHeader={false}/>
 
             {relatedNews?.length ? (
               <div>
@@ -207,6 +197,6 @@ export default async function NewsDetails({ params }) {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
