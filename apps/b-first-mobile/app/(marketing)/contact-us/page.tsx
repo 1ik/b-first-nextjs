@@ -5,11 +5,11 @@ export default function ContactUs() {
     <>
       <Navbar />
       <div className="px-3 py-6 font-montserrat">
-        <h1 className="font-semibold text-xl mb-2">Contact Us</h1>
+        <h1 className="font-semibold text-2xl mb-4 text-center">Contact Us</h1>
 
         <p className="text-sm mb-4">
           We are here to serve you and welcome any questions, comments, or suggestions you may have. Feel free to reach
-          out to us:
+          out to us :
         </p>
 
         <ul className="list-disc pl-4 mb-4">
@@ -17,10 +17,10 @@ export default function ContactUs() {
             <span className="font-semibold mr-2">Email :</span>editor@bangladeshfirst.com
           </li>
           <li className="text-base mb-2">
-            <span className="font-semibold mr-2">Phone :</span>+880 961 332 2782
+            <span className="font-semibold mr-1">Phone :</span>+880 961 332 2782
           </li>
           <li className="text-base mb-2">
-            <span className="font-semibold mr-2">Mail :</span>115 Kazi Nazrul Islam Avenue, Level 12, Bangla Motor,
+            <span className="font-semibold mr-1">Mail :</span>115 Kazi Nazrul Islam Avenue, Level 12, Bangla Motor,
             Dhaka 1000, Bangladesh
           </li>
         </ul>

@@ -5,7 +5,7 @@ export default function CommentsPolicy() {
     <>
       <Navbar />
       <div className="px-3 font-montserrat">
-        <h1 className="font-semibold text-2xl text-center  mt-4 mb-8">Comment Policy</h1>
+        <h1 className="font-semibold text-2xl text-center mt-4 mb-8">Comment Policy</h1>
         <p className="font-semibold sm:text-lg  mb-8">
           At Bangladesh First, we value open dialogue and constructive discourse as integral components of our online
           community. Our comment section provides readers with an opportunity to engage with our content, share their
