@@ -27,10 +27,7 @@ export function BlockNewsMob({ data, ads1, ads2, className }: BlockNewsMobProps)
         </div>
 
         <div className="sm:col-span-3 sm:mr-4">
-          <div className="text-center sm:hidden mt-4 mb-6">
-            <p className="mb-2">Advertisement</p>
-            <img className="mx-auto" src={ads1} alt="Ads" />
-          </div>
+          <Ads className="mx-auto" src={ads1} alt="Ads" />
           {data?.slice(3, 8).map((item: any, index: number) => (
             <div>
               <div
