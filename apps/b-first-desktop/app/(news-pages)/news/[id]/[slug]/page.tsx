@@ -3,7 +3,6 @@ import { BreadCrumb } from "@bfirst/components-breadcrumb";
 import { ItemCardHorizontal } from "@bfirst/components-item-card-horizontal";
 import { ItemList } from "@bfirst/components-item-list";
 import { ProfileCard } from "@bfirst/components-profile-card";
-import { SocialShare } from "@bfirst/components-social-share";
 import { SquareGrid } from "@bfirst/components-square-grid";
 import { getImageUrl } from "@bfirst/utilities";
 import { Metadata } from "next";
@@ -55,8 +54,7 @@ export async function generateMetadata({ params }): Promise<Metadata> {
 }
 
 export default async function NewsDetails({ params }) {
-  const link_url = `${process.env.BASE_URL}/news/${params.id}/${params.slug}`;
-
+  const news_link_url = `${process.env.BASE_URL}/news/${params.id}/${params.slug}`;
   const detailsData = await getData(`story/details/${params.id}`);
 
   const [trendingTopics, latestNews, topNews, categoryNews] = (
@@ -97,11 +95,12 @@ export default async function NewsDetails({ params }) {
           {/* ====== row 1 ===== */}
           <div className="flex flex-col">
             <h3 className="text-xl font-montserrat">{detailsData?.story.meta.intro}</h3>
-            <div className="border-t mt-10 pt-2 dark:border-dark-300">
-              <SocialShare title="Share News" shareLink={link_url} />
-            </div>
             <div className="mt-10">
-              <ProfileCard data={detailsData?.story.authors[0]} createdTime={detailsData?.story.created_at} />
+              <ProfileCard
+                data={detailsData?.story.authors[0]}
+                createdTime={detailsData?.story.created_at}
+                shareLink={news_link_url}
+              />
             </div>
           </div>
           <div className="col-span-3">
