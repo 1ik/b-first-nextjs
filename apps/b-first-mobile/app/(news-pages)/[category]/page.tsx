@@ -29,9 +29,9 @@ export default async function CategoryPage({ params }) {
     <>
       <Navbar activeLink={`/${category}`} />
       <div className="px-3">
-        <Ads className="my-14" src="/ads/banner_ibbl.gif" alt="Ads" showHeader={false}/>
+        <Ads className="my-14" src="/ads/banner_ibbl.gif" alt="Ads" showHeader={false} />
         <TrendingTopics className="mb-8" title="Trending" items={trendingTopics?.data} />
-        <Ads className="my-14" src="/ads/FSB-banner-ad.gif" alt="Ads" showHeader={false}/>
+        <Ads className="my-14" src="/ads/FSB-banner-ad.gif" alt="Ads" showHeader={false} />
         <BreadCrumb
           className="my-10"
           links={[
@@ -46,9 +46,21 @@ export default async function CategoryPage({ params }) {
         <div className="grid grid-cols-1 sm:grid-cols-3 sm:gap-x-5">
           <div className="sm:col-span-2">
             {categroyNews?.data.slice(4).map((news) => (
-              <ItemCardHorizontal size="md" className="pb-5 border-b dark:border-dark-300" key={news.id} data={news} />
+              <div key={news.id}>
+                <div className="hidden sm:block">
+                  <ItemCardHorizontal size="md" className="pb-4 mb-4 border-b dark:border-dark-300" data={news} showIntro/>
+                </div>
+                <div className="sm:hidden">
+                  <ItemCardHorizontal size="md" className="pb-4 mb-4 border-b dark:border-dark-300" data={news}/>
+                </div>
+              </div>
             ))}
-            <LoadMore initialPage={2} lastPage={categroyNews?.meta.last_page} category={category} />
+            <div className="hidden sm:block">
+              <LoadMore initialPage={2} lastPage={categroyNews?.meta.last_page} category={category} />
+            </div>
+            <div className="sm:hidden">
+              <LoadMore initialPage={2} lastPage={categroyNews?.meta.last_page} category={category} showIntro={false} />
+            </div>
           </div>
           <div>
             <div>

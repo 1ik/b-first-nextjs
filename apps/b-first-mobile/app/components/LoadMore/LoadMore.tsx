@@ -46,7 +46,7 @@ export default function LoadMore({
           showIntro={showIntro}
           showTime={showTime}
           size="md"
-          className="pb-5 border-b dark:border-dark-300"
+          className="pb-4 mb-4 border-b dark:border-dark-300"
           key={story.id}
           data={story}
         />

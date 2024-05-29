@@ -60,12 +60,12 @@ export function ItemCardHorizontal({
       }`}
     >
       <div
-        className={`${showTitleBorderSmall ? "border-t-[3px] border-accent" : ""} ${
+        className={`${showTitleBorderSmall ? "border-t border-accent" : ""} ${
           size === "xl" ? "w-4/12" : size === "md" ? "w-7/12" : size === "sm" ? "w-7/12" : size === "lg" ? "w-6/12" : ""
         }   
           ${imageSide === "left" ? "order-last" : imageSide === "right" ? "order-first" : ""} `}
       >
-        <div className={`pl-2 ${showTitleBorderSmall || showTitleBorderBig ? "pt-2" : "pt-0"} flex flex-col h-full`}>
+        <div className={`pl-2 flex flex-col h-full`}>
           {Link ? (
             <Link className="" href={getNewsUrl(data)}>
               <h2
@@ -113,19 +113,23 @@ export function ItemCardHorizontal({
       >
         {Link ? (
           <Link href={getNewsUrl(data)}>
-            <img
-              className={`hover:scale-110 duration-300 w-full object-cover aspect-video`}
-              src={getImageUrl(data?.meta.featured_image)}
-              alt={data?.meta.featured_image.imageCaption}
-            />
+            <div className={`${size=== "sm" ? "pt-3" : "pt-0"}`}>
+              <img
+                className={`hover:scale-110 duration-300 w-full object-cover aspect-video`}
+                src={getImageUrl(data?.meta.featured_image)}
+                alt={data?.meta.featured_image.imageCaption}
+              />
+            </div>
           </Link>
         ) : (
           <a href={getNewsUrl(data)}>
-            <img
-              className={`hover:scale-110 duration-300 w-full object-cover aspect-video`}
-              src={getImageUrl(data?.meta.featured_image)}
-              alt={data?.meta.featured_image.imageCaption}
-            />
+            <div className={`${size=== "sm" ? "pt-3" : "pt-0"}`}>
+              <img
+                className={`hover:scale-110 duration-300 w-full object-cover aspect-video`}
+                src={getImageUrl(data?.meta.featured_image)}
+                alt={data?.meta.featured_image.imageCaption}
+              />
+            </div>
           </a>
         )}
       </div>

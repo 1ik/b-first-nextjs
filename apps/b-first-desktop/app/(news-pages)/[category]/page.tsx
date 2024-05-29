@@ -49,7 +49,7 @@ export default async function CategoryPage({ params }) {
               <ItemCardHorizontal
                 size="lg"
                 showIntro
-                className="pb-5 border-b dark:border-dark-300"
+                className="pb-5 mb-5 border-b dark:border-dark-300"
                 key={news.id}
                 data={news}
               />

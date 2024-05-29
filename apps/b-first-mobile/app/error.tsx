@@ -15,8 +15,8 @@ export default function Error({ error, reset }: { error: Error & { digest?: stri
 
       <div className="desktop-container flex justify-center text-center my-6">
         <div>
-          <p className="capitalize font-black text-[150px] text-accent tracking-[10px]">Oops!</p>
-          <h3 className="font-montserrat text-2xl mb-4">Something went wrong!</h3>
+          <p className="capitalize font-black text-[100px] text-accent tracking-[10px]">Oops!</p>
+          <h3 className="font-montserrat text-xl mb-4">Something went wrong!</h3>
 
           <Button
             onClick={() => reset()}
