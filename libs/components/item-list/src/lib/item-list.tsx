@@ -23,7 +23,11 @@ export function ItemList({
   moreNewsLink,
 }: ItemListProps) {
   return (
-    <ul className={`${className}`}>
+    <ul
+      className={`${className} ${
+        listType === "circle" ? "list-disc pl-6 marker:text-[#D8D8D8] marker:text-[32px] dark:marker:text-dark-300" : ""
+      }`}
+    >
       {showDate && (
         <h3 className="bg-[#FDC269] text-black font-montserrat font-semibold text-[22px] px-8 py-1.5 w-fit my-3">
           {moment().format("D MMMM")}
@@ -64,12 +68,6 @@ export function ItemList({
                   {index + 1}
                 </span>
               )}
-              {listType === "circle" && (
-                <span className="text-[#D8D8D8] dark:text-[#313233] leading-[0px] font-semibold font-montserrat text-7xl pr-4">
-                  .
-                </span>
-              )}
-
               {item.title}
             </li>
           </Link>
@@ -86,12 +84,6 @@ export function ItemList({
                   {index + 1}
                 </span>
               )}
-              {listType === "circle" && (
-                <span className="text-[#D8D8D8] dark:text-[#313233] leading-[0px] font-semibold font-montserrat text-7xl pr-4">
-                  .
-                </span>
-              )}
-
               {item.title}
             </li>
           </a>
