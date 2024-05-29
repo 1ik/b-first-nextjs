@@ -93,7 +93,7 @@ export default async function Index() {
           <BlockNews2
             sectionHeader="Economy"
             headerColor="#00479B"
-            adsUrl="/ads/social_islami.png"
+            adsUrl="/ads/FSB-banner-ad.gif"
             className="col-span-3 border-r dark:border-dark-300 pr-4 mr-4"
             data={economyNews}
           />
