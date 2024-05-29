@@ -18,9 +18,9 @@ export function ProfileCard({ data, createdTime, shareLink, className }: Profile
           alt="profile"
         />
       </div>
-      <div className="col-span-3">
+      <div className="col-span-3 montserrat-regular">
         <h3 className="text-[22px]">{`By ${data?.name}`}</h3>
-        <p className="font-montserrat text-sm mt-2">{`Publisted at ${moment(createdTime)
+        <p className="text-sm mt-2 montserrat-regular">{`Publisted at ${moment(createdTime)
           .tz("Asia/Dhaka")
           .format("h:mm A, ddd MMM Do, YYYY")}`}</p>
       </div>
