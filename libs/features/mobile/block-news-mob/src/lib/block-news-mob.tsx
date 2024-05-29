@@ -16,7 +16,7 @@ export function BlockNewsMob({ data, ads1, ads2, className }: BlockNewsMobProps)
   return (
     <div className={`flex flex-col gap-y-10 ${className}`}>
       <div className="grid grid-cols-1 sm:grid-cols-5 gap-4">
-        <ItemCardVertical className="sm:col-span-3" showImageBorder data={data?.[0]} size="lg" />
+        <ItemCardVertical className="sm:col-span-3" showImageBorder data={data?.[0]} size="lg" titleFontSize="30px" showIntro introFontSize="16px"/>
 
         <div className="sm:col-span-2 gap-4 item-center mx-auto flex flex-col order-1 sm:order-none bg-[#FFF3ED] dark:bg-dark-300">
           {data?.slice(1, 3).map((item: any, index: Key | null | undefined) => (

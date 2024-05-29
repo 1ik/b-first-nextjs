@@ -67,7 +67,7 @@ export default async function Index() {
         ads1="/ads/Global.gif"
         ads2="/ads/union-bank-ad.gif"
       />
-      <Ads className="my-14" src="/ads/FSB-banner-ad.gif" alt="ads" showHeader={false} />
+      <Ads className="my-10" src="/ads/FSB-banner-ad.gif" alt="ads" showHeader={false} />
       <div className="desktop-container">
         <SquareGrid showAccentHeader data={topNews.slice(8, 16)} gridCols={4} />
         <div className="flex justify-center my-10 border-b dark:border-dark-300">

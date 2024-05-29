@@ -43,7 +43,7 @@ export default async function Index() {
         getData("categories/feature/stories"),
         getData("categories/entertainment/stories"),
         getData("categories/lifestyle/stories"),
-        getData("categories/bangladesh/stories"),
+        getData("categories/bangladesh/stories?size=30"),
         getData("categories/world/stories"),
         getData("categories/sports/stories"),
         getData("categories/tech/stories"),

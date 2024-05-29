@@ -28,7 +28,7 @@ export function BlockNews4({ data, Link, sectionHeader, headerColor, className, 
 
       <div className="grid grid-cols-3">
         <div className="col-span-2 border-r dark:border-dark-300 pr-3 mr-3">
-          <ItemCardVertical Link={Link} data={data?.[1]} size="lg" />
+          <ItemCardVertical Link={Link} data={data?.[1]} size="lg" titleFontSize="32px"/>
         </div>
         <ItemList Link={Link} data={data?.slice(2, 7)} listType="circle" />
       </div>

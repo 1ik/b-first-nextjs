@@ -18,6 +18,7 @@ export function BlockNews6({ className, Link, data }: BlockNews6Props) {
         data={data?.[0]}
         size="lg"
         showIntro
+        introFontSize="18px"
       />
 
       <div className="pl-5 border-l-[0.5px] dark:border-dark-300 flex flex-col justify-between">

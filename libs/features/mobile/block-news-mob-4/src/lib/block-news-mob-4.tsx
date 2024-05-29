@@ -26,12 +26,23 @@ export function BlockNewsMob4({ data, className, sectionHeader, headerColor, Lin
         />
       </div>
       <div className="sm:hidden">
-        <ItemCardVertical Link={Link} className="border-b dark:border-dark-300 mb-3 mt-3" data={data?.[0]} size="lg" />
+        <ItemCardVertical
+          Link={Link}
+          className="border-b dark:border-dark-300 mb-3 mt-3"
+          data={data?.[0]}
+          size="lg"
+          titleFontSize="30px"
+        />
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-y-8 mt-4">
         <div className="sm:col-span-2 sm:border-r dark:border-dark-300 sm:pr-3 sm:mr-3">
-          <ItemCardVertical Link={Link} data={data?.[1]} size="md" />
+          <div className="sm:hidden">
+            <ItemCardVertical Link={Link} data={data?.[1]} size="md" />
+          </div>
+          <div className="sm:block hidden">
+            <ItemCardVertical Link={Link} data={data?.[1]} size="md" showIntro/>
+          </div>
         </div>
         <ItemList Link={Link} data={data?.slice(2, 7)} listType="circle" />
       </div>

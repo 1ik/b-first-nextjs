@@ -10,7 +10,7 @@ interface BreadCrumbProps {
 
 export function BreadCrumb({ links, className, Link }: BreadCrumbProps) {
   return (
-    <ul className={`text-lg montserrat-regular sm:text-xl md:text-[26px] flex gap-x-1 items-center ${className}`}>
+    <ul className={`text-base montserrat-regular sm:text-lg md:text-[22px] flex gap-x-1 items-center ${className}`}>
       <li className="montserrat-semibold">
         {Link ? (
           <Link

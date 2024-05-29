@@ -92,7 +92,7 @@ export default async function NewsDetails({ params }) {
             },
           ]}
         />
-        <h1 className="text-7xl my-10 font-bold">{detailsData?.story.title}</h1>
+        <h1 className="text-5xl my-10 font-bold">{detailsData?.story.title}</h1>
 
         <div className="grid grid-cols-4 gap-x-10 gap-y-11">
           {/* ====== row 1 ===== */}
@@ -142,7 +142,7 @@ export default async function NewsDetails({ params }) {
           </div>
           <div className="col-span-2">
             <div
-              className="text-2xl leading-[110%] [&>p]:mt-8"
+              className="text-xl leading-[120%] [&>p]:mt-8"
               dangerouslySetInnerHTML={{ __html: detailsData?.story.content }}
             ></div>
             <div className="my-10 border-t border-b dark:border-dark-300 py-4 flex gap-x-4 items-center">

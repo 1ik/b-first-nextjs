@@ -52,6 +52,8 @@ export default async function CategoryPage({ params }) {
                 className="pb-5 mb-5 border-b dark:border-dark-300"
                 key={news.id}
                 data={news}
+                titleFontSize="24px"
+                introFontSize="14px"
               />
             ))}
             <LoadMore initialPage={2} lastPage={categroyNews?.meta.last_page} category={category} />

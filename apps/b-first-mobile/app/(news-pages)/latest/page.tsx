@@ -44,6 +44,7 @@ export default async function Latest() {
                 data={item}
                 size="md"
                 showTime
+                titleFontSize="16px"
               />
             ))}
             <LoadMore

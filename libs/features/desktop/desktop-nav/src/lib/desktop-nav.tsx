@@ -109,7 +109,7 @@ export function DesktopNav({
     <nav ref={ref} className="flex flex-col gap-y-5">
       <div className="bg-[#f6efef] dark:bg-dark-500">
         <div className="desktop-container flex justify-between items-center">
-          <p className="text-xl">{moment().format("dddd, MMMM Do, YYYY")}</p>
+          <p className="text-sm">{moment().format("dddd, MMMM Do, YYYY")}</p>
           <div className="flex gap-x-10">
             {/* ====== theme toggle button ====== */}
             <div
@@ -117,35 +117,35 @@ export function DesktopNav({
               className="bg-black dark:bg-dark-300 p-2 self-center rounded-md cursor-pointer"
             >
               <button
-                className={`bg-black p-2 block  self-center w-5 aspect-square rounded-full duration-500 ${
+                className={`bg-black block p-1 self-center w-3 aspect-square rounded-full duration-500 ${
                   isMounted && theme === "dark"
                     ? "bg-yellow-400"
-                    : "bg-transparent shadow-[inset_-7px_-4px_1px_1px_white]"
+                    : "bg-transparent shadow-[inset_-3px_-2px_1px_1px_white]"
                 } `}
               ></button>
             </div>
-            <div className="flex gap-x-1 py-5">
+            <div className="flex gap-x-1 py-3">
               <a
                 href="https://www.facebook.com/Bangladeshfirst.news"
                 target="_blank"
-                className="bg-black dark:bg-dark-300 p-2.5 rounded-md"
+                className="bg-black dark:bg-dark-300 p-1.5 rounded-md"
               >
                 <FaFacebookF className="text-white" />
               </a>
               <a
                 href="https://www.instagram.com/bdfirstnews"
                 target="_blank"
-                className="bg-black dark:bg-dark-300 p-2.5 rounded-md"
+                className="bg-black dark:bg-dark-300 p-1.5 rounded-md"
               >
                 <FaInstagram className="text-white" />
               </a>
-              <a href="https://x.com/BFirstnews" target="_blank" className="bg-black dark:bg-dark-300 p-2.5 rounded-md">
+              <a href="https://x.com/BFirstnews" target="_blank" className="bg-black dark:bg-dark-300 p-1.5 rounded-md">
                 <FaXTwitter className="text-white" />
               </a>
               <a
                 href="https://www.youtube.com/channel/UCKv8bP1Ewcai3Z53v88pPSw"
                 target="_blank"
-                className="bg-black dark:bg-dark-300 p-2.5 rounded-md"
+                className="bg-black dark:bg-dark-300 p-1.5 rounded-md"
               >
                 <FaYoutube className="text-white" />
               </a>
@@ -180,9 +180,9 @@ export function DesktopNav({
 
       <div className="h-24 relative ">
         <div
-          className={`w-full transition-[padding] duration-300 ${
+          className={`w-full transition-[padding] duration-300 z-[999] ${
             isSticky
-              ? "fixed top-0 left-0 bg-white/90 dark:bg-dark-400/90 backdrop-blur shadow-md py-3 z-[999]"
+              ? "fixed top-0 left-0 bg-white/90 dark:bg-dark-400/90 backdrop-blur shadow-md py-3"
               : "absolute top-1/2 -translate-y-1/2"
           }`}
         >
