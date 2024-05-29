@@ -52,16 +52,29 @@ export default function LoadMore({
 
   return (
     <>
-      {stories.map((story: { id: Key | null | undefined }) => (
-        <ItemCardHorizontal
-          size="lg"
-          showTime={showTime}
-          showIntro={showIntro}
-          className="pb-5 mb-5 border-b dark:border-dark-300"
-          key={story.id}
-          data={story}
-        />
-      ))}
+      {category === "latest"
+        ? stories
+            .filter((item: { categories: any[] }) => !item.categories.find((c) => c.name === "On_This_Day"))
+            .map((story: { id: Key | null | undefined }) => (
+              <ItemCardHorizontal
+                size="lg"
+                showTime={showTime}
+                showIntro={showIntro}
+                className="pb-5 mb-5 border-b dark:border-dark-300"
+                key={story.id}
+                data={story}
+              />
+            ))
+        : stories.map((story: { id: Key | null | undefined }) => (
+            <ItemCardHorizontal
+              size="lg"
+              showTime={showTime}
+              showIntro={showIntro}
+              className="pb-5 mb-5 border-b dark:border-dark-300"
+              key={story.id}
+              data={story}
+            />
+          ))}
       {page < lastPage && (
         <div className="flex items-center justify-center h-20">
           <img ref={ref} className="animate-ping w-12" src="/img/logo-mini.png" alt="logo" />
