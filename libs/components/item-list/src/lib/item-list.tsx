@@ -24,7 +24,7 @@ export function ItemList({
   moreNewsLink,
 }: ItemListProps) {
   return (
-    <ul className={`${className}`}>
+    <ul className={`${className} merriweather-regular`}>
       {showDate && (
         <h3 className="bg-[#FDC269] text-black montserrat-semibold text-[22px] px-8 py-1.5 w-fit my-3">
           {moment().format("D MMMM")}
