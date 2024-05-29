@@ -26,7 +26,7 @@ export function SquareGrid({
           {showAccentHeader && (
             <AccentHeader header={item.categories[0].name} color={item.categories[0].color_code} className="mb-[7px]" />
           )}
-          <ItemCardVertical Link={Link} data={item} size={size} />
+          <ItemCardVertical Link={Link} data={item} size={size} titleFontSize="18px"/>
         </div>
       ))}
     </div>

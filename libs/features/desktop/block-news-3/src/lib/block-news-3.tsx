@@ -18,10 +18,10 @@ export function BlockNews3({ data, Link, sectionHeader, headerColor, className, 
       {sectionHeader && <AccentHeader className="mb-4" header={sectionHeader} color={headerColor} />}
 
       <div className="grid grid-cols-3 gap-5">
-        <ItemCardHorizontal Link={Link} className="col-span-3" data={data?.[0]} showIntro />
+        <ItemCardHorizontal Link={Link} className="col-span-3" data={data?.[0]} showIntro introFontSize="18px"/>
 
         {data?.splice(1, 3).map((item: any) => {
-          return <ItemCardVertical Link={Link} key={item.id} size="md" data={item} />;
+          return <ItemCardVertical Link={Link} key={item.id} size="md" data={item} titleFontSize="18px"/>;
         })}
       </div>
       <div className="flex justify-center mt-16">

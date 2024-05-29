@@ -48,10 +48,10 @@ export default async function CategoryPage({ params }) {
             {categroyNews?.data.slice(4).map((news) => (
               <div key={news.id}>
                 <div className="hidden sm:block">
-                  <ItemCardHorizontal size="md" className="pb-4 mb-4 border-b dark:border-dark-300" data={news} showIntro/>
+                  <ItemCardHorizontal size="md" className="pb-4 mb-4 border-b dark:border-dark-300" data={news} showIntro titleFontSize="18px"/>
                 </div>
                 <div className="sm:hidden">
-                  <ItemCardHorizontal size="md" className="pb-4 mb-4 border-b dark:border-dark-300" data={news}/>
+                  <ItemCardHorizontal size="md" className="pb-4 mb-4 border-b dark:border-dark-300" data={news} titleFontSize="18px"/>
                 </div>
               </div>
             ))}

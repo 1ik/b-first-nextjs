@@ -15,6 +15,8 @@ export function BlockNewsMob6({ className, data }: BlockNewsMob6Props) {
           showImageBorder
           data={data?.[0]}
           size="lg"
+          titleFontSize="30px"
+          introFontSize="16px"
           showIntro
         />
 
@@ -22,10 +24,10 @@ export function BlockNewsMob6({ className, data }: BlockNewsMob6Props) {
           {data?.slice(1, 4).map((item: any, index: number) => (
             <div key={index} className={`${index > 0 ? "col-span-1":"col-span-2"} sm:col-span-1`}>
               <div className="hidden sm:block">
-                <ItemCardHorizontal data={item} size="md" />
+                <ItemCardHorizontal data={item} size="md" titleFontSize="18px"/>
               </div>
               <div className="sm:hidden">
-                <ItemCardVertical data={item} size="md" />
+                <ItemCardVertical data={item} size="md" titleFontSize="16px"/>
               </div>
             </div>
           ))}

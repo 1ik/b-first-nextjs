@@ -70,7 +70,7 @@ export function ItemCardHorizontal({
             <Link className="" href={getNewsUrl(data)}>
               <h2
                 style={{ fontSize: titleFontSize }}
-                className={` ${titleFont} hover:text-accent dark:hover:text-accent-light duration-150`}
+                className={` ${titleFont} hover:text-accent dark:hover:text-accent-light duration-150 leading-[120%]`}
               >
                 {data?.title}
               </h2>
@@ -80,8 +80,8 @@ export function ItemCardHorizontal({
               <h2
                 style={{ fontSize: titleFontSize }}
                 className={` ${titleFont} ${
-                  showTitleBorderBig || showTitleBorderSmall ? "pt-2" : ""
-                } hover:text-accent dark:hover:text-accent-light duration-150`}
+                  showTitleBorderBig || showTitleBorderSmall ? "mt-3" : ""
+                } hover:text-accent dark:hover:text-accent-light duration-150 leading-[120%]`}
               >
                 {data?.title}
               </h2>
@@ -99,7 +99,7 @@ export function ItemCardHorizontal({
             </p>
           )}
           {showIntro && (
-            <p style={{ fontSize: introFontSize }} className={`mt-4 ${introFont} dark:text-[#bebdbd] text-[#727272]`}>
+            <p style={{ fontSize: introFontSize }} className={`mt-4 ${introFont} leading-[120%]`}>
               {data?.meta.intro}
             </p>
           )}

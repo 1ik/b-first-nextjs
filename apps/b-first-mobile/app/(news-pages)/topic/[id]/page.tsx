@@ -44,6 +44,7 @@ export default async function Topic({ params }) {
                   data={item}
                   size="md"
                   className="border-b pb-4 mb-4 dark:border-dark-300"
+                  titleFontSize="16px"
                 />
               ))}
 

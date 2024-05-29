@@ -11,6 +11,7 @@ export interface ItemListProps {
   Link?: any;
   moreNewsLink?: string;
   showButton?: boolean;
+  titleFontSize?: `${number}${"px" | "rem" | "em"}`;
 }
 
 export function ItemList({
@@ -22,6 +23,7 @@ export function ItemList({
   className,
   showButton = false,
   moreNewsLink,
+  titleFontSize,
 }: ItemListProps) {
   return (
     <ul
@@ -30,7 +32,7 @@ export function ItemList({
       } ${className}`}
     >
       {showDate && (
-        <h3 className="bg-[#FDC269] text-black montserrat-semibold text-[22px] px-8 py-1.5 w-fit my-3">
+        <h3 className="bg-[#FDC269] text-black montserrat-semibold px-6 py-1.5 w-fit my-3">
           {moment().format("D MMMM")}
         </h3>
       )}
@@ -59,8 +61,9 @@ export function ItemList({
         Link ? (
           <Link href={getNewsUrl(item)}>
             <li
+              style={{ fontSize: titleFontSize }}
               key={item.id}
-              className={`hover:text-accent dark:hover:text-accent-light duration-200 text-[22px] leading-[110%] ${
+              className={`hover:text-accent dark:hover:text-accent-light duration-200 text-lg sm:text-xl leading-[120%] ${
                 data?.length !== index + 1 ? "border-b  dark:border-dark-300" : ""
               } pb-4 mb-4 ${listType === "number" && "flex items-center"}`}
             >
@@ -75,8 +78,9 @@ export function ItemList({
         ) : (
           <a href={getNewsUrl(item)}>
             <li
+              style={{ fontSize: titleFontSize }}
               key={item.id}
-              className={`hover:text-accent dark:hover:text-accent-light duration-200 text-[22px] leading-[110%] ${
+              className={`hover:text-accent dark:hover:text-accent-light duration-200 text-lg sm:text-xl leading-[120%] ${
                 data?.length !== index + 1 ? "border-b  dark:border-dark-300" : ""
               } pb-4 mb-4 ${listType === "number" && "flex items-center"}`}
             >
@@ -96,7 +100,7 @@ export function ItemList({
           <div className="flex justify-center merriweather-regular border-b dark:border-dark-300">
             <Link
               href={moreNewsLink}
-              className="text-[22px] border px-10 py-2 duration-300 hover:bg-[#efeff0] dark:hover:bg-dark-300 dark:border-dark-300"
+              className="text-lg md:text-[22px] border px-10 py-2 duration-300 hover:bg-[#efeff0] dark:hover:bg-dark-300 dark:border-dark-300"
             >
               More News
             </Link>
@@ -105,7 +109,7 @@ export function ItemList({
           <div className="flex justify-center merriweather-regular border-b dark:border-dark-300">
             <a
               href={moreNewsLink}
-              className="text-[22px] border px-10 py-2 duration-300 hover:bg-[#efeff0] dark:hover:bg-dark-300 dark:border-dark-300"
+              className="text-lg md:text-[22px] border px-10 py-2 duration-300 hover:bg-[#efeff0] dark:hover:bg-dark-300 dark:border-dark-300"
             >
               More News
             </a>

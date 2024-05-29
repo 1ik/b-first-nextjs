@@ -23,12 +23,12 @@ export function BlockNewsMob2({ data, Link, sectionHeader, headerColor, classNam
             <ItemCardHorizontal size="lg" Link={Link} data={data?.[0]} showIntro imageSide="right" />
           </div>
           <div className="md:hidden">
-            <ItemCardVertical Link={Link} data={data?.[0]} showIntro size="lg" />
+            <ItemCardVertical Link={Link} data={data?.[0]} showIntro size="lg" titleFontSize="28px" introFontSize="16px"/>
           </div>
         </div>
         {data?.slice(1, 7).map((item: any, index: Key | null | undefined) => (
           <div key={index}>
-            <ItemCardHorizontal Link={Link} key={item.id} data={item} showTitleBorderBig size="sm" />
+            <ItemCardHorizontal Link={Link} key={item.id} data={item} showTitleBorderBig size="sm" titleFontSize="16px"/>
           </div>
         ))}
       </div>

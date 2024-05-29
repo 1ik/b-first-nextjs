@@ -63,6 +63,8 @@ export default function LoadMore({
                 className="pb-5 mb-5 border-b dark:border-dark-300"
                 key={story.id}
                 data={story}
+                titleFontSize="24px"
+                introFontSize="14px"
               />
             ))
         : stories.map((story: { id: Key | null | undefined }) => (
@@ -73,6 +75,8 @@ export default function LoadMore({
               className="pb-5 mb-5 border-b dark:border-dark-300"
               key={story.id}
               data={story}
+              titleFontSize="24px"
+              introFontSize="14px"
             />
           ))}
       {page < lastPage && (
