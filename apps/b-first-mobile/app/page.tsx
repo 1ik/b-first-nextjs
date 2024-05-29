@@ -1,4 +1,5 @@
 import { AccentHeader } from "@bfirst/components-accent-header";
+import { Ads } from "@bfirst/components-ads";
 import { BlockNewsMob } from "@bfirst/components-block-news-mob";
 import { BlockNewsMob2 } from "@bfirst/components-block-news-mob-2";
 import { BlockNewsMob3 } from "@bfirst/components-block-news-mob-3";
@@ -12,7 +13,6 @@ import Navbar from "./components/Navbar/Navbar";
 import TrendingTopics from "./components/TrendingTopics/TrendingTopics";
 import { getData } from "./utils/dataFetch";
 import filterOutOTD from "./utils/filterOutOTD";
-import { Ads } from "@bfirst/components-ads";
 
 export default async function Index() {
   const [topNews, recommendedNews] = (
@@ -75,7 +75,7 @@ export default async function Index() {
           <div className="flex justify-center my-6 border-b dark:border-dark-300">
             <a
               href="/latest"
-              className="border text-sm px-6 py-2 hover:bg-[#efeff0] dark:hover:bg-dark-300 duration-300 dark:border-dark-300 font-medium"
+              className="border text-sm px-6 py-2 hover:bg-[#efeff0] dark:hover:bg-dark-300 duration-300 dark:border-dark-300 merriweather-medium"
             >
               More News
             </a>

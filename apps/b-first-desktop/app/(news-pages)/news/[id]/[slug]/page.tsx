@@ -1,4 +1,5 @@
 import { AccentHeader } from "@bfirst/components-accent-header";
+import { Ads } from "@bfirst/components-ads";
 import { BreadCrumb } from "@bfirst/components-breadcrumb";
 import { ItemCardHorizontal } from "@bfirst/components-item-card-horizontal";
 import { ItemList } from "@bfirst/components-item-list";
@@ -7,12 +8,12 @@ import { SquareGrid } from "@bfirst/components-square-grid";
 import { getImageUrl } from "@bfirst/utilities";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
+import "../../../../../../../libs/fonts/montserrat/index.css";
 import ImagePreview from "../../../../components/ImagePreview/ImagePreview";
 import Navbar from "../../../../components/Navbar/Navbar";
 import TrendingTopics from "../../../../components/TrendingTopics/TrendingTopics";
 import { getData } from "../../../../utils/dataFetch";
 import filterOutOTD from "../../../../utils/filterOutOTD";
-import { Ads } from "@bfirst/components-ads";
 
 export async function generateMetadata({ params }): Promise<Metadata> {
   const data = await getData(`story/details/${params.id}`);
@@ -96,7 +97,7 @@ export default async function NewsDetails({ params }) {
         <div className="grid grid-cols-4 gap-x-10 gap-y-11">
           {/* ====== row 1 ===== */}
           <div className="flex flex-col">
-            <h3 className="text-xl font-montserrat">{detailsData?.story.meta.intro}</h3>
+            <h3 className="text-xl montserrat-regular">{detailsData?.story.meta.intro}</h3>
             <div className="mt-10">
               <ProfileCard
                 data={detailsData?.story.authors[0]}
@@ -112,7 +113,7 @@ export default async function NewsDetails({ params }) {
               src={getImageUrl(detailsData?.story.meta.featured_image)}
               alt={detailsData?.story.title}
             /> */}
-            <p className="font-montserrat font-medium italic text-xl mt-4">{detailsData?.story.meta.imageCaption}</p>
+            <p className="montserrat-regular-italic text-xl mt-4">{detailsData?.story.meta.imageCaption}</p>
           </div>
 
           {/* ======== row 2 ======= */}
@@ -145,12 +146,12 @@ export default async function NewsDetails({ params }) {
               dangerouslySetInnerHTML={{ __html: detailsData?.story.content }}
             ></div>
             <div className="my-10 border-t border-b dark:border-dark-300 py-4 flex gap-x-4 items-center">
-              <h4 className="text-3xl">Tags:</h4>
+              <h4 className="text-3xl font-[inherit]">Tags : </h4>
               <ul className="flex gap-2 flex-wrap">
                 {detailsData?.story.tags.map((tag: any, index: number) => (
                   <li key={index}>
                     <a
-                      className="text-lg font-montserrat font-semibold py-0.5 px-2 rounded-md bg-[#2B2B2B] text-white"
+                      className="text-lg montserrat-semibold font-semibold py-0.5 px-2 rounded-md bg-[#2B2B2B] text-white"
                       href={`/topic/${tag.id}`}
                     >
                       {tag.name}
@@ -159,7 +160,7 @@ export default async function NewsDetails({ params }) {
                 ))}
               </ul>
             </div>
-            <Ads className="my-10" src="/ads/banner_ibbl.gif" alt="Ads" showHeader={false}/>
+            <Ads className="my-10" src="/ads/banner_ibbl.gif" alt="Ads" showHeader={false} />
 
             {/* ======== Comment section ======== */}
 

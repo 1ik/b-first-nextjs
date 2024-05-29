@@ -1,4 +1,5 @@
 import { AccentHeader } from "@bfirst/components-accent-header";
+import { Ads } from "@bfirst/components-ads";
 import { BlockNews } from "@bfirst/components-block-news";
 import { BlockNews2 } from "@bfirst/components-block-news-2";
 import { BlockNews3 } from "@bfirst/components-block-news-3";
@@ -12,7 +13,6 @@ import Navbar from "./components/Navbar/Navbar";
 import TrendingTopics from "./components/TrendingTopics/TrendingTopics";
 import { getData } from "./utils/dataFetch";
 import filterOutOTD from "./utils/filterOutOTD";
-import { Ads } from "@bfirst/components-ads";
 
 export default async function Index() {
   const [topNews, recommendedNews] = (
@@ -73,7 +73,7 @@ export default async function Index() {
         <div className="flex justify-center my-10 border-b dark:border-dark-300">
           <a
             href="/latest"
-            className="border text-xl px-6 py-2 hover:bg-[#efeff0] dark:hover:bg-dark-300 duration-300 dark:border-dark-300 font-medium"
+            className="border text-xl px-6 py-2 hover:bg-[#efeff0] dark:hover:bg-dark-300 duration-300 dark:border-dark-300 merriweather-medium"
           >
             More News
           </a>

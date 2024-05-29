@@ -1,4 +1,5 @@
 import { AccentHeader } from "@bfirst/components-accent-header";
+import { Ads } from "@bfirst/components-ads";
 import { BreadCrumb } from "@bfirst/components-breadcrumb";
 import { ItemCardHorizontal } from "@bfirst/components-item-card-horizontal";
 import { ItemList } from "@bfirst/components-item-list";
@@ -7,12 +8,12 @@ import { SquareGrid } from "@bfirst/components-square-grid";
 import { getImageUrl } from "@bfirst/utilities";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
+import "../../../../../../../libs/fonts/montserrat/index.css";
+import ImagePreview from "../../../../components/ImagePreview/ImagePreview";
 import Navbar from "../../../../components/Navbar/Navbar";
 import TrendingTopics from "../../../../components/TrendingTopics/TrendingTopics";
 import { getData } from "../../../../utils/dataFetch";
 import filterOutOTD from "../../../../utils/filterOutOTD";
-import { Ads } from "@bfirst/components-ads";
-import ImagePreview from "../../../../components/ImagePreview/ImagePreview";
 
 export async function generateMetadata({ params }): Promise<Metadata> {
   const data = await getData(`story/details/${params.id}`);
@@ -105,7 +106,7 @@ export default async function NewsDetails({ params }) {
           <div className="sm:col-span-3 order-last sm:order-1">
             <div className="sm:block hidden">
               {/* INTRO */}
-              <h3 className="text-base font-montserrat">{detailsData?.story.meta.intro}</h3>
+              <h3 className="text-base montserrat-regular">{detailsData?.story.meta.intro}</h3>
 
               {/* SOCIAL SHARE & PROFILE CARD */}
               <ProfileCard
@@ -154,12 +155,12 @@ export default async function NewsDetails({ params }) {
           {/* ==================== GRID RIGHT BOX (TAB) | GRID TOP BOX (MOBILE) ===================== */}
           <div className="sm:col-span-5 order-1">
             <ImagePreview url={getImageUrl(detailsData?.story.meta.featured_image)} alt={detailsData?.story.title} />
-            <p className="font-montserrat font-medium italic text-xs mt-2">{detailsData?.story.meta.imageCaption}</p>
+            <p className="montserrat-regular-italic text-xs mt-2">{detailsData?.story.meta.imageCaption}</p>
 
             <div className="sm:hidden">
               <Ads className="my-8" src="/ads/ibbl.gif" alt="Ads" />
               {/* INTRO */}
-              <h3 className="text-base font-montserrat">{detailsData?.story.meta.intro}</h3>
+              <h3 className="text-base montserrat-regular">{detailsData?.story.meta.intro}</h3>
               <ProfileCard
                 className="my-5"
                 data={detailsData?.story.authors[0]}
@@ -179,7 +180,7 @@ export default async function NewsDetails({ params }) {
                 {detailsData?.story.tags.map((tag: any, index: number) => (
                   <li key={index}>
                     <a
-                      className="text-xs font-montserrat font-semibold py-0.5 px-2 rounded-md bg-[#2B2B2B] text-white"
+                      className="text-xs montserrat-semibold py-0.5 px-2 rounded-md bg-[#2B2B2B] text-white"
                       href={`/topic/${tag.id}`}
                     >
                       {tag.name}

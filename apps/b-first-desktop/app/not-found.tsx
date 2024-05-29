@@ -1,14 +1,14 @@
 "use client";
+import { Button } from "@bfirst/material-tailwind";
 import Link from "next/link";
 import Navbar from "./components/Navbar/Navbar";
-import { Button } from "@bfirst/material-tailwind";
 
 export default function NotFound() {
   return (
     <>
       <Navbar />
-      <div className="flex flex-col items-center justify-center pt-14 pb-20 font-montserrat ">
-        <h2 className="flex items-center gap-x-4 text-9xl font-semibold">
+      <div className="flex flex-col items-center justify-center pt-14 pb-20 montserrat-regular">
+        <h2 className="flex items-center gap-x-4 text-9xl montserrat-semibold">
           <span>4</span>
           <img className="w-20" src="/img/logo-mini.png" alt="logo" />
           <span>4</span>
