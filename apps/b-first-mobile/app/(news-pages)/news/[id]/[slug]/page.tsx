@@ -9,6 +9,7 @@ import { getImageUrl } from "@bfirst/utilities";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import "../../../../../../../libs/fonts/montserrat/index.css";
+import ImagePreview from "../../../../components/ImagePreview/ImagePreview";
 import Navbar from "../../../../components/Navbar/Navbar";
 import TrendingTopics from "../../../../components/TrendingTopics/TrendingTopics";
 import { getData } from "../../../../utils/dataFetch";
@@ -153,7 +154,7 @@ export default async function NewsDetails({ params }) {
 
           {/* ==================== GRID RIGHT BOX (TAB) | GRID TOP BOX (MOBILE) ===================== */}
           <div className="sm:col-span-5 order-1">
-            <img src={getImageUrl(detailsData?.story.meta.featured_image)} alt={detailsData?.story.title} />
+            <ImagePreview url={getImageUrl(detailsData?.story.meta.featured_image)} alt={detailsData?.story.title} />
             <p className="montserrat-regular-italic text-xs mt-2">{detailsData?.story.meta.imageCaption}</p>
 
             <div className="sm:hidden">

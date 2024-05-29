@@ -1,4 +1,5 @@
 import { AccentHeader } from "@bfirst/components-accent-header";
+import { Ads } from "@bfirst/components-ads";
 import { BlockNewsMob } from "@bfirst/components-block-news-mob";
 import { BlockNewsMob2 } from "@bfirst/components-block-news-mob-2";
 import { BlockNewsMob3 } from "@bfirst/components-block-news-mob-3";
@@ -12,7 +13,6 @@ import Navbar from "./components/Navbar/Navbar";
 import TrendingTopics from "./components/TrendingTopics/TrendingTopics";
 import { getData } from "./utils/dataFetch";
 import filterOutOTD from "./utils/filterOutOTD";
-import { Ads } from "@bfirst/components-ads";
 
 export default async function Index() {
   const [topNews, recommendedNews] = (
@@ -59,7 +59,7 @@ export default async function Index() {
     <>
       <Navbar />
       <div className="px-3">
-        <Ads className="my-6" src="/ads/banner_ibbl.gif" alt="Ads" showHeader={false}/>
+        <Ads className="my-6" src="/ads/banner_ibbl.gif" alt="Ads" showHeader={false} />
         <TrendingTopics className="px-3 my-4" items={trendingTopics} title="Trending" />
 
         {/* TOP NEWS SECTION */}
@@ -69,14 +69,30 @@ export default async function Index() {
           ads1="/ads/Global.gif"
           ads2="/ads/union-bank-ad.gif"
         />
-        <Ads className="my-6" src="/ads/banner_ibbl.gif" alt="ads" showHeader={false}/>
+        <Ads className="my-6" src="/ads/banner_ibbl.gif" alt="ads" showHeader={false} />
         <div className="sm:hidden">
           <SquareGrid showAccentHeader data={topNews.slice(8, 16)} gridCols={1} />
+          <div className="flex justify-center my-6 border-b dark:border-dark-300">
+            <a
+              href="/latest"
+              className="border text-sm px-6 py-2 hover:bg-[#efeff0] dark:hover:bg-dark-300 duration-300 dark:border-dark-300 merriweather-medium"
+            >
+              More News
+            </a>
+          </div>
         </div>
         <div className="hidden sm:block">
           <SquareGrid showAccentHeader data={topNews.slice(8, 16)} gridCols={2} />
+          <div className="flex justify-center my-8 border-b dark:border-dark-300">
+            <a
+              href="/latest"
+              className="border text-base px-6 py-2 hover:bg-[#efeff0] dark:hover:bg-dark-300 duration-300 dark:border-dark-300 font-medium"
+            >
+              More News
+            </a>
+          </div>
         </div>
-        <Ads className="my-6" src="/ads/banner_ibbl.gif" alt="ads" showHeader={false}/>
+        <Ads className="my-6" src="/ads/banner_ibbl.gif" alt="ads" showHeader={false} />
       </div>
 
       {/* RECOMMENDED FOR YOU SECTION */}
@@ -94,15 +110,15 @@ export default async function Index() {
 
       <div className="px-3">
         {/* ECONOMY SECTION */}
-        <Ads className="my-5" src="/ads/banner_ibbl.gif" alt="ads" showHeader={false}/>
+        <Ads className="my-5" src="/ads/banner_ibbl.gif" alt="ads" showHeader={false} />
         <BlockNewsMob2 data={economyNews} sectionHeader="Economy" headerColor="#00479B" />
 
         {/* FEATURE SECTION */}
-        <Ads className="my-5" src="/ads/banner_ibbl.gif" alt="ads" showHeader={false}/>
+        <Ads className="my-5" src="/ads/banner_ibbl.gif" alt="ads" showHeader={false} />
         <BlockNewsMob3 data={featureNews} sectionHeader="feature" headerColor="#8BD032" />
 
         {/* LIFESTYLE SECTION */}
-        <Ads className="mx-auto my-5" src="/ads/banner_ibbl.gif" alt="ads" showHeader={false}/>
+        <Ads className="mx-auto my-5" src="/ads/banner_ibbl.gif" alt="ads" showHeader={false} />
         <BlockNewsMob4 data={lifestyleNews} sectionHeader="Lifestyle" headerColor="#EF2D8A" />
 
         {/* ON THIS DAY SECTION */}
@@ -117,7 +133,7 @@ export default async function Index() {
           </div>
         </div>
         {/* ENTERTAINMENT SECTION */}
-        <Ads className="mx-auto my-6" src="/ads/banner_ibbl.gif" alt="ads" showHeader={false}/>
+        <Ads className="mx-auto my-6" src="/ads/banner_ibbl.gif" alt="ads" showHeader={false} />
         <BlockNewsMob5
           data={entertainmentNews}
           ads="/ads/SIBL_Profit_300x250.gif"
@@ -126,9 +142,9 @@ export default async function Index() {
         />
 
         {/* GRID LIST SECTION */}
-        <Ads className="my-6" src="/ads/banner_ibbl.gif" alt="ads" showHeader={false}/>
+        <Ads className="my-6" src="/ads/banner_ibbl.gif" alt="ads" showHeader={false} />
         <ListGridMob className="desktop-container" data={[bangladeshNews, worldNews, sportsNews, techNews]} />
-        <Ads className="my-6" src="/ads/banner_ibbl.gif" alt="ads" showHeader={false}/>
+        <Ads className="my-6" src="/ads/banner_ibbl.gif" alt="ads" showHeader={false} />
       </div>
     </>
   );
