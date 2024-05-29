@@ -12,6 +12,7 @@ import TrendingTopics from "../../../../components/TrendingTopics/TrendingTopics
 import { getData } from "../../../../utils/dataFetch";
 import filterOutOTD from "../../../../utils/filterOutOTD";
 import { Ads } from "@bfirst/components-ads";
+import ImagePreview from "../../../../components/ImagePreview/ImagePreview";
 
 export async function generateMetadata({ params }): Promise<Metadata> {
   const data = await getData(`story/details/${params.id}`);
@@ -152,7 +153,7 @@ export default async function NewsDetails({ params }) {
 
           {/* ==================== GRID RIGHT BOX (TAB) | GRID TOP BOX (MOBILE) ===================== */}
           <div className="sm:col-span-5 order-1">
-            <img src={getImageUrl(detailsData?.story.meta.featured_image)} alt={detailsData?.story.title} />
+            <ImagePreview url={getImageUrl(detailsData?.story.meta.featured_image)} alt={detailsData?.story.title} />
             <p className="font-montserrat font-medium italic text-xs mt-2">{detailsData?.story.meta.imageCaption}</p>
 
             <div className="sm:hidden">
