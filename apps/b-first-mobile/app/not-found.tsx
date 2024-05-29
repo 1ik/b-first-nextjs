@@ -5,8 +5,8 @@ export default function NotFound() {
   return (
     <>
       <Navbar />
-      <div className="flex flex-col items-center justify-center pt-14 pb-20 font-montserrat px-3">
-        <h2 className="flex items-center gap-x-2 text-6xl font-semibold">
+      <div className="flex flex-col items-center justify-center pt-14 pb-20 montserrat-regular px-3">
+        <h2 className="flex items-center gap-x-2 text-6xl montserrat-semibold">
           <span>4</span>
           <img className="w-12" src="/img/logo-mini.png" alt="logo" />
           <span>4</span>

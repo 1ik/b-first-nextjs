@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import { IoMdHome } from "react-icons/io";
+import "../../../../fonts/montserrat/index.css";
 
 interface BreadCrumbProps {
   links: { name: string; href: string }[];
@@ -9,14 +10,20 @@ interface BreadCrumbProps {
 
 export function BreadCrumb({ links, className, Link }: BreadCrumbProps) {
   return (
-    <ul className={`font-montserrat text-lg sm:text-xl md:text-[26px] flex gap-x-1 items-center ${className}`}>
-      <li className="font-semibold">
+    <ul className={`text-lg montserrat-regular sm:text-xl md:text-[26px] flex gap-x-1 items-center ${className}`}>
+      <li className="montserrat-semibold">
         {Link ? (
-          <Link className="p-1 hover:text-accent dark:hover:text-accent-light duration-200 flex gap-x-2 items-center" href="/">
+          <Link
+            className="p-1 hover:text-accent dark:hover:text-accent-light duration-200 flex gap-x-2 items-center"
+            href="/"
+          >
             <IoMdHome /> <span>BFirst</span>
           </Link>
         ) : (
-          <a className="p-1 hover:text-accent dark:hover:text-accent-light duration-200 flex gap-x-2 items-center" href="/">
+          <a
+            className="p-1 hover:text-accent dark:hover:text-accent-light duration-200 flex gap-x-2 items-center"
+            href="/"
+          >
             <IoMdHome /> <span>BFirst</span>
           </a>
         )}
