@@ -1,12 +1,12 @@
-import { ItemCardHorizontal } from "@bfirst/components-item-card-horizontal";
-import { BreadCrumb } from "@bfirst/components-breadcrumb";
-import Navbar from "../../components/Navbar/Navbar";
-import { getData } from "../../utils/dataFetch";
 import { AccentHeader } from "@bfirst/components-accent-header";
+import { Ads } from "@bfirst/components-ads";
+import { BreadCrumb } from "@bfirst/components-breadcrumb";
+import { ItemCardHorizontal } from "@bfirst/components-item-card-horizontal";
 import { ItemList } from "@bfirst/components-item-list";
 import LoadMore from "../../components/LoadMore/LoadMore";
+import Navbar from "../../components/Navbar/Navbar";
 import TrendingTopics from "../../components/TrendingTopics/TrendingTopics";
-import { Ads } from "@bfirst/components-ads";
+import { getData } from "../../utils/dataFetch";
 
 export default async function Latest() {
   const [latestNews, topNews] = await Promise.all([
@@ -15,6 +15,9 @@ export default async function Latest() {
   ]);
 
   const trendingTopics = (await getData("trendy-topics"))?.data;
+  const filteredLatestNews = latestNews?.data.filter(
+    (item: { categories: any[] }) => !item.categories.find((c) => c.name === "On_This_Day")
+  );
 
   return (
     <>
@@ -36,7 +39,7 @@ export default async function Latest() {
         <div className="grid grid-cols-4 gap-x-6 mt-4">
           {/*============= LATEST NEWS ========== */}
           <div className="col-span-3">
-            {latestNews.data?.map((item: any, index: number) => (
+            {filteredLatestNews?.map((item: any, index: number) => (
               <ItemCardHorizontal
                 className="border-b-2 pb-4 mb-4 dark:border-dark-300"
                 key={index}

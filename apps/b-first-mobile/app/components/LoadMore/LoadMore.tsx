@@ -41,17 +41,33 @@ export default function LoadMore({
 
   return (
     <>
-      {stories.map((story: { id: Key | null | undefined }) => (
-        <ItemCardHorizontal
-          showIntro={showIntro}
-          showTime={showTime}
-          size="md"
-          className="pb-4 mb-4 border-b dark:border-dark-300"
-          key={story.id}
-          data={story}
-          titleFontSize="16px"
-        />
-      ))}
+      {category === "latest"
+        ? stories
+            .filter(
+              (item: { categories: any[] }) => !item.categories.find((c: { name: string }) => c.name === "On_This_Day")
+            )
+            .map((story: { id: Key | null | undefined }) => (
+              <ItemCardHorizontal
+                showIntro={showIntro}
+                showTime={showTime}
+                size="md"
+                className="pb-4 mb-4 border-b dark:border-dark-300"
+                key={story.id}
+                data={story}
+                titleFontSize="16px"
+              />
+            ))
+        : stories.map((story: { id: Key | null | undefined }) => (
+            <ItemCardHorizontal
+              showIntro={showIntro}
+              showTime={showTime}
+              size="md"
+              className="pb-4 mb-4 border-b dark:border-dark-300"
+              key={story.id}
+              data={story}
+              titleFontSize="16px"
+            />
+          ))}
       {page < lastPage && (
         <div className="flex items-center justify-center h-20">
           <button onClick={() => loadMoreStoris()} className="bg-[#EB1923] text-white font-semibold py-2 px-4 rounded">
