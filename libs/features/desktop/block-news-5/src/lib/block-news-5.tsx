@@ -18,7 +18,10 @@ export function BlockNews5({ data, Link, sectionHeader, headerColor, className }
       <div className="grid grid-cols-4 gap-x-5 mt-8">
         <div>
           {data?.slice(0, 6).map((item: any, index: number) => (
-            <ItemCardHorizontal Link={Link} key={index} className="mb-8 last:mb-0" size="md" data={item} />
+            <div className="flex flex-col" key={index}>
+              <ItemCardHorizontal Link={Link} key={index} className="last:mb-0" size="md" data={item} />
+              {index + 1 < 6 && <hr className="my-4 block dark:border-dark-300" />}
+            </div>
           ))}
         </div>
 

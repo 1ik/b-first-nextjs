@@ -42,8 +42,8 @@ export default async function Topic({ params }) {
                   showCreatedAt
                   key={index}
                   data={item}
-                  size="sm"
-                  className="border-b pb-4 dark:border-dark-300"
+                  size="md"
+                  className="border-b pb-4 mb-4 dark:border-dark-300"
                 />
               ))}
 

@@ -21,7 +21,7 @@ export function BlockNews({ data, sectionHeader, ads1, ads2, className, Link }: 
       <div className="w-[25%]">
         {data?.slice(1, 6).map((item: any, index: number) => (
           <div className="flex flex-col" key={index}>
-            <ItemCardHorizontal Link={Link} showTitleBorderSmall data={item} size="sm" titleFontSize="16px" />
+            <ItemCardHorizontal Link={Link} showTitleBorderBig data={item} size="sm" titleFontSize="16px" />
             {index + 1 < 5 && <hr className="my-6 block dark:border-dark-300" />}
           </div>
         ))}
