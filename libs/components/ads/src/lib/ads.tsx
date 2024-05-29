@@ -7,7 +7,7 @@ export interface AdsProps {
 export function Ads({ src, alt, className, showHeader = true }: AdsProps) {
   return (
     <div className={`text-center mt-4 ${className}`}>
-      {showHeader && <p className="mb-2">Advertisement</p>}
+      {showHeader && <p className="mb-2 text-xs">Advertisement</p>}
       <img className="mt-4 mx-auto" src={src} alt={alt} />
     </div>
   );
