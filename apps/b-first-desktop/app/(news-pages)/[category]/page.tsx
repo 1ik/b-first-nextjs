@@ -44,7 +44,7 @@ export default async function CategoryPage({ params }) {
         <Ads className="block my-10" src="/ads/banner_ibbl.gif" alt="Ads" showHeader={false}/>
 
         <div className="grid grid-cols-4 gap-x-10">
-          <div className="col-span-3 flex flex-col gap-y-5">
+          <div className="col-span-3 flex flex-col">
             {categroyNews?.data.slice(4).map((news) => (
               <ItemCardHorizontal
                 size="lg"
