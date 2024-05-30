@@ -19,3 +19,9 @@ export const getNewsUrl = (news: any) =>
     .replaceAll(" ", "-")
     .replace(/[^\w\s-]/g, "")
     .toLowerCase()}`;
+
+export const cropText = (text: string, maxWords?: number) => {
+  if (!maxWords) maxWords = 20;
+
+  return `${text.split(" ").slice(0, maxWords).join(" ")} ...`;
+};
