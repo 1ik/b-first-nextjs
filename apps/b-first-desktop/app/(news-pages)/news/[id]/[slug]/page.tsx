@@ -118,7 +118,7 @@ export default async function NewsDetails({ params }) {
 
           {/* ======== row 2 ======= */}
           <div>
-            <Ads className="my-8" src="/ads/union-bank-ad.gif" alt="ads" />
+            <Ads className="my-8" src="/ads/union-bank-ad.gif" alt="ads" showHeader={false} />
             <div>
               <AccentHeader
                 header={`more from ${detailsData?.story.categories[0].name.split("_").join(" ")}`}
@@ -130,7 +130,7 @@ export default async function NewsDetails({ params }) {
                 ?.slice(0, 5)
                 .map((item: any, index: number) => (
                   <ItemCardHorizontal
-                    className="pb-6 mb-6 border-b dark:border-dark-300"
+                    className="pb-4 mb-4 border-b dark:border-dark-300"
                     key={index}
                     data={item}
                     size="sm"
@@ -138,7 +138,7 @@ export default async function NewsDetails({ params }) {
                 ))}
             </div>
 
-            <Ads className="my-8 sticky top-[80px]" src="/ads/SIBL_Profit_300x250.gif" alt="ads" />
+            <Ads className="my-8 sticky top-[80px]" src="/ads/SIBL_Profit_300x250.gif" alt="ads" showHeader={false} />
           </div>
           <div className="col-span-2">
             <div
@@ -146,12 +146,12 @@ export default async function NewsDetails({ params }) {
               dangerouslySetInnerHTML={{ __html: detailsData?.story.content }}
             ></div>
             <div className="my-10 border-t border-b dark:border-dark-300 py-4 flex gap-x-4 items-center">
-              <h4 className="text-3xl font-[inherit]">Tags : </h4>
+              <h4 className="text-2xl merriweather-regular whitespace-nowrap self-start">Tags : </h4>
               <ul className="flex gap-2 flex-wrap">
                 {detailsData?.story.tags.map((tag: any, index: number) => (
                   <li key={index}>
                     <a
-                      className="text-lg montserrat-semibold font-semibold py-0.5 px-2 rounded-md bg-[#2B2B2B] text-white"
+                      className="montserrat-semibold py-1 px-3 rounded-[4px] bg-[#2B2B2B] text-white"
                       href={`/topic/${tag.id}`}
                     >
                       {tag.name}
@@ -181,15 +181,15 @@ export default async function NewsDetails({ params }) {
             ) : null}
           </div>
           <div>
-            <Ads className="my-8" src="/ads/Global.gif" alt="ads" />
+            <Ads className="my-8" src="/ads/Global.gif" alt="ads" showHeader={false} />
             <div>
               <AccentHeader header="Latest News" color="#5D26D1" />
-              <ItemList listType="circle" data={filteredLatestNews?.slice(0, 5)} showButton moreNewsLink="/latest" />
+              <ItemList listType="circle" data={filteredLatestNews?.slice(0, 5)} showButton moreNewsLink="/latest" titleFontSize="18px"/>
             </div>
             <div>
-              <Ads className="my-8" src="/ads/ibbl.gif" alt="ads" />
+              <Ads className="my-8" src="/ads/ibbl.gif" alt="ads" showHeader={false} />
               <AccentHeader header="Top News" color="#119F9F" />
-              <ItemList data={topNews?.slice(0, 6)} listType="number" />
+              <ItemList data={topNews?.slice(0, 6)} listType="number" titleFontSize="18px"/>
             </div>
           </div>
         </div>

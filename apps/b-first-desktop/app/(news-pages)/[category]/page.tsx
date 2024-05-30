@@ -41,7 +41,7 @@ export default async function CategoryPage({ params }) {
           ]}
         />
         <BlockNews6 data={categroyNews?.data.slice(0, 4)} />
-        <Ads className="block my-10" src="/ads/banner_ibbl.gif" alt="Ads" showHeader={false}/>
+        <Ads className="block my-10" src="/ads/banner_ibbl.gif" alt="Ads" showHeader={false} />
 
         <div className="grid grid-cols-4 gap-x-10">
           <div className="col-span-3 flex flex-col">
@@ -59,19 +59,19 @@ export default async function CategoryPage({ params }) {
             <LoadMore initialPage={2} lastPage={categroyNews?.meta.last_page} category={category} />
           </div>
           <div>
-            <Ads className="block my-8" src="/ads/Global.gif" alt="Ads" />
+            <Ads className="mb-8" src="/ads/Global.gif" alt="Ads" showHeader={false} />
             <div>
               <AccentHeader header="Latest News" color="#5D26D1" />
-              <ItemList listType="circle" data={filteredLatestNews?.slice(0, 6)} moreNewsLink="/latest" showButton />
+              <ItemList listType="circle" data={filteredLatestNews?.slice(0, 6)} moreNewsLink="/latest" showButton titleFontSize="18px"/>
             </div>
 
-            <Ads className="block my-8" src="/ads/union-bank-ad.gif" alt="Ads" />
+            <Ads className="my-8" src="/ads/union-bank-ad.gif" alt="Ads" showHeader={false} />
             <div>
               <AccentHeader header="Top News" color="#119F9F" />
-              <ItemList data={topNews?.data.slice(0, 6)} listType="number" />
+              <ItemList data={topNews?.data.slice(0, 6)} listType="number" titleFontSize="18px"/>
             </div>
 
-            <Ads className="block my-10 sticky top-20" src="/ads/Global.gif" alt="Ads" />
+            <Ads className="my-10 sticky top-20" src="/ads/Global.gif" alt="Ads" showHeader={false} />
           </div>
         </div>
       </div>

@@ -8,7 +8,7 @@ export function Ads({ src, alt, className, showHeader = true }: AdsProps) {
   return (
     <div className={`text-center ${className}`}>
       {showHeader && <p className="mb-2 text-[10px] montserrat-regular">Advertisement</p>}
-      <img className="mt-4 mx-auto" src={src} alt={alt} />
+      <img className="mx-auto" src={src} alt={alt} />
     </div>
   );
 }

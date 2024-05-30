@@ -15,6 +15,7 @@ export interface ItemCardHorizontalProps {
   introCrop?: number;
   titleFontSize?: `${number}${"px" | "rem" | "em"}`;
   introFontSize?: `${number}${"px" | "rem" | "em"}`;
+  titleBold?: boolean;
 }
 
 export function ItemCardHorizontal({
@@ -31,7 +32,8 @@ export function ItemCardHorizontal({
   titleFontSize,
   introFontSize,
   titleCrop,
-  introCrop
+  introCrop,
+  titleBold,
 }: ItemCardHorizontalProps) {
   const titleFont = `leading-[110%] ${
     size === "xl"
@@ -69,14 +71,14 @@ export function ItemCardHorizontal({
         }   
           ${imageSide === "left" ? "order-last" : imageSide === "right" ? "order-first" : ""} `}
       >
-        <div className={`pl-2 flex flex-col h-full`}>
+        <div className={`${titleBold ? "font-bold" : ""} pl-2 flex flex-col h-full`}>
           {Link ? (
             <Link className="" href={getNewsUrl(data)}>
               <h2
                 style={{ fontSize: titleFontSize }}
                 className={` ${titleFont} hover:text-accent dark:hover:text-accent-light duration-150 leading-[120%]`}
               >
-                {titleCrop? cropText(data?.title, titleCrop) : data?.title}
+                {titleCrop ? cropText(data?.title, titleCrop) : data?.title}
               </h2>
             </Link>
           ) : (
@@ -87,7 +89,7 @@ export function ItemCardHorizontal({
                   showTitleBorderSmall ? "mt-3" : ""
                 } hover:text-accent dark:hover:text-accent-light duration-150 leading-[120%]`}
               >
-                {titleCrop? cropText(data?.title, titleCrop) : data?.title}
+                {titleCrop ? cropText(data?.title, titleCrop) : data?.title}
               </h2>
             </a>
           )}
@@ -104,7 +106,7 @@ export function ItemCardHorizontal({
           )}
           {showIntro && (
             <p style={{ fontSize: introFontSize }} className={`mt-4 ${introFont} leading-[120%]`}>
-              {introCrop ? cropText(data?.meta.intro, introCrop): data?.meta.intro}
+              {introCrop ? cropText(data?.meta.intro, introCrop) : data?.meta.intro}
             </p>
           )}
         </div>

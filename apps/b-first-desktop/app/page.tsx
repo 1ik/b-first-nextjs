@@ -70,10 +70,10 @@ export default async function Index() {
       <Ads className="my-10" src="/ads/FSB-banner-ad.gif" alt="ads" showHeader={false} />
       <div className="desktop-container">
         <SquareGrid showAccentHeader data={topNews.slice(8, 16)} gridCols={4} />
-        <div className="flex justify-center my-10 border-b dark:border-dark-300">
+        <div className="flex justify-center mt-3 border-b dark:border-dark-300">
           <a
             href="/latest"
-            className="border text-xl px-6 py-2 hover:bg-[#efeff0] dark:hover:bg-dark-300 duration-300 dark:border-dark-300 merriweather-medium"
+            className="border text-sm px-4 py-1 hover:bg-[#efeff0] dark:hover:bg-dark-300 duration-300 dark:border-dark-300 merriweather-medium"
           >
             More News
           </a>
@@ -98,10 +98,16 @@ export default async function Index() {
             data={economyNews}
           />
 
-          <div>
+          <div className="flex flex-col justify-between">
             <AccentHeader header="Latest News" color="#5D26D1" />
-            <ItemList data={latestNews?.slice(0, 6)} listType="circle" showButton moreNewsLink="/latest" />
-            <Ads src="/ads/Global.gif" alt="ads" />
+            <ItemList
+              data={latestNews?.slice(0, 6)}
+              listType="circle"
+              showButton
+              moreNewsLink="/latest"
+              titleFontSize="18px"
+            />
+            <Ads className="mt-6" src="/ads/Global.gif" alt="ads" showHeader={false} />
           </div>
         </div>
       </div>
@@ -109,27 +115,21 @@ export default async function Index() {
       <div className="desktop-container my-10">
         <div className="grid grid-cols-4">
           <div className="col-span-3 border-r dark:border-dark-300 pr-4 mr-4">
-            <BlockNews3
-              sectionHeader="Feature"
-              headerColor="#8BD032"
-              adsUrl="/ads/banner_ibbl.gif"
-              data={featureNews}
-            />
+            <BlockNews3 sectionHeader="Feature" headerColor="#8BD032" data={featureNews} />
           </div>
           <div>
             <AccentHeader header="Most Viewed" color="#119F9F" />
-            <ItemList data={latestNews?.slice(6, 11)} listType="number" />
-            <Ads className="mt-4" src="/ads/Global.gif" alt="ads" />
+            <ItemList data={latestNews?.slice(6, 12)} listType="number" titleFontSize="18px" />
           </div>
         </div>
+        <Ads className="mt-4" src="/ads/banner_ibbl.gif" alt="ads" showHeader={false} />
       </div>
 
-      <div className="desktop-container mt-20">
+      <div className="desktop-container mt-10">
         <div className="grid grid-cols-4">
           <BlockNews4
             sectionHeader="Lifestyle"
             headerColor="#EF2D8A"
-            adsUrl="/ads/banner_ibbl.gif"
             className="col-span-3 border-r dark:border-dark-300 pr-4 mr-4"
             data={lifestyleNews}
           />
@@ -137,17 +137,18 @@ export default async function Index() {
             <AccentHeader header="On this day" color="#A49A46" />
             <ItemList showImage showDate data={onThisDay} />
             <div className="flex flex-col mt-8 gap-y-8 items-center">
-              <Ads className="mt-4" src="/ads/SIBL_Profit_300x250.gif" alt="ads" />
-              <Ads className="mt-4" src="/ads/FSIBL-November-2023-20.gif" alt="ads" />
+              <Ads className="mt-4" src="/ads/SIBL_Profit_300x250.gif" alt="ads" showHeader={false} />
+              <Ads className="mt-4" src="/ads/FSIBL-November-2023-20.gif" alt="ads" showHeader={false} />
             </div>
           </div>
         </div>
+        <Ads className="my-8" src="/ads/banner_ibbl.gif" alt="ads" showHeader={false} />
       </div>
 
       <BlockNews5
         sectionHeader="entertainment"
         headerColor="#5D26D1"
-        className="desktop-container my-10"
+        className="desktop-container"
         data={entertainmentNews}
       />
 

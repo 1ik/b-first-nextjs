@@ -28,11 +28,11 @@ export function ItemList({
   return (
     <ul
       className={`merriweather-regular ${
-        listType === "circle" ? "list-disc pl-6 marker:text-[#D8D8D8] marker:text-[32px] dark:marker:text-dark-300" : ""
+        listType === "circle" ? "list-disc pl-6 marker:text-[#D8D8D8] marker:text-[20px] dark:marker:text-dark-300" : ""
       } ${className}`}
     >
       {showDate && (
-        <h3 className="bg-[#FDC269] text-black montserrat-semibold px-6 py-1.5 w-fit my-3">
+        <h3 className="bg-[#FDC269] text-black montserrat-semibold px-6 py-1.5 w-fit my-6">
           {moment().format("D MMMM")}
         </h3>
       )}
@@ -63,12 +63,12 @@ export function ItemList({
             <li
               style={{ fontSize: titleFontSize }}
               key={item.id}
-              className={`hover:text-accent dark:hover:text-accent-light duration-200 text-lg sm:text-xl leading-[120%] ${
+              className={`hover:text-accent dark:hover:text-accent-light duration-200 text-lg sm:text-xl leading-[110%] ${
                 data?.length !== index + 1 ? "border-b  dark:border-dark-300" : ""
-              } pb-4 mb-4 ${listType === "number" && "flex items-center"}`}
+              } pb-2 mb-2 ${listType === "number" && "flex items-center"}`}
             >
               {listType === "number" && (
-                <span className="text-[#D8D8D8] block w-20 flex-shrink-0 dark:text-[#313233] montserrat-semibold text-[90px] py-8">
+                <span className="text-[#D8D8D8] block w-[70px] flex-shrink-0 dark:text-[#313233] montserrat-semibold text-[80px] py-8">
                   {index + 1}
                 </span>
               )}
@@ -80,12 +80,12 @@ export function ItemList({
             <li
               style={{ fontSize: titleFontSize }}
               key={item.id}
-              className={`hover:text-accent dark:hover:text-accent-light duration-200 text-lg sm:text-xl leading-[120%] ${
+              className={`hover:text-accent dark:hover:text-accent-light duration-200 text-lg sm:text-xl leading-[110%] ${
                 data?.length !== index + 1 ? "border-b  dark:border-dark-300" : ""
-              } pb-4 mb-4 ${listType === "number" && "flex items-center"}`}
+              } pb-2 mb-2 ${listType === "number" && "flex items-center"}`}
             >
               {listType === "number" && (
-                <span className="text-[#D8D8D8] block w-20 flex-shrink-0 dark:text-[#313233] montserrat-semibold text-[90px] py-8">
+                <span className="text-[#D8D8D8] block w-[70px] flex-shrink-0 dark:text-[#313233] montserrat-semibold text-[80px] py-8">
                   {index + 1}
                 </span>
               )}
@@ -100,7 +100,7 @@ export function ItemList({
           <div className="flex justify-center merriweather-regular border-b dark:border-dark-300">
             <Link
               href={moreNewsLink}
-              className="text-lg md:text-[22px] border px-10 py-2 duration-300 hover:bg-[#efeff0] dark:hover:bg-dark-300 dark:border-dark-300"
+              className="text-sm border px-8 py-1 duration-300 hover:bg-[#efeff0] dark:hover:bg-dark-300 dark:border-dark-300"
             >
               More News
             </Link>
@@ -109,7 +109,7 @@ export function ItemList({
           <div className="flex justify-center merriweather-regular border-b dark:border-dark-300">
             <a
               href={moreNewsLink}
-              className="text-lg md:text-[22px] border px-10 py-2 duration-300 hover:bg-[#efeff0] dark:hover:bg-dark-300 dark:border-dark-300"
+              className="text-sm border px-8 py-1 duration-300 hover:bg-[#efeff0] dark:hover:bg-dark-300 dark:border-dark-300"
             >
               More News
             </a>

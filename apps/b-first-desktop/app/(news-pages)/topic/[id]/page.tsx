@@ -51,17 +51,17 @@ export default async function Topic({ params }) {
           </div>
 
           <div>
-            <Ads className="mt-4" src="/ads/SIBL_Profit_300x250.gif" alt="Ads" />
+            <Ads className="" src="/ads/SIBL_Profit_300x250.gif" alt="Ads" showHeader={false} />
             <div className="my-10">
               <AccentHeader header="LATEST NEWS" color="#5D26D1" />
-              <ItemList data={filteredLatestNews?.slice(0, 6)} listType="circle" showButton moreNewsLink="/latest" />
-              <Ads className="mt-4" src="/ads/IBBL.gif" alt="Ads" />
+              <ItemList data={filteredLatestNews?.slice(0, 6)} listType="circle" showButton moreNewsLink="/latest" titleFontSize="18px"/>
+              <Ads className="mt-8" src="/ads/IBBL.gif" alt="Ads" showHeader={false} />
             </div>
             <div>
               <AccentHeader header="Top News" color="#119F9F" />
-              <ItemList data={topNews?.slice(0, 6)} listType="number" />
+              <ItemList data={topNews?.slice(0, 6)} listType="number" titleFontSize="18px"/>
             </div>
-            <Ads className="mt-4 sticky top-20" src="/ads/Global.gif" alt="Ads" />
+            <Ads className="mt-4 sticky top-20" src="/ads/Global.gif" alt="Ads" showHeader={false} />
           </div>
         </div>
       </div>
