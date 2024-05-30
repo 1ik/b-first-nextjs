@@ -55,7 +55,7 @@ export function ItemCardHorizontal({
 
   return (
     <div
-      className={`flex ${className} ${showTitleBorderBig ? "border-t border-accent" : ""} ${
+      className={`flex ${className} ${showTitleBorderBig ? "border-t border-accent pt-3" : ""} ${
         size === "xl" ? "gap-x-6" : size === "lg" ? "gap-x-5" : ""
       }`}
     >
@@ -80,7 +80,7 @@ export function ItemCardHorizontal({
               <h2
                 style={{ fontSize: titleFontSize }}
                 className={` ${titleFont} ${
-                  showTitleBorderBig || showTitleBorderSmall ? "mt-3" : ""
+                  showTitleBorderSmall ? "mt-3" : ""
                 } hover:text-accent dark:hover:text-accent-light duration-150 leading-[120%]`}
               >
                 {data?.title}
@@ -113,7 +113,7 @@ export function ItemCardHorizontal({
       >
         {Link ? (
           <Link href={getNewsUrl(data)}>
-            <div className={`${size=== "sm" ? "pt-3" : "pt-0"}`}>
+            <div>
               <img
                 className={`hover:scale-110 duration-300 w-full object-cover aspect-video`}
                 src={getImageUrl(data?.meta.featured_image)}
@@ -123,7 +123,7 @@ export function ItemCardHorizontal({
           </Link>
         ) : (
           <a href={getNewsUrl(data)}>
-            <div className={`${size=== "sm" ? "pt-3" : "pt-0"}`}>
+            <div>
               <img
                 className={`hover:scale-110 duration-300 w-full object-cover aspect-video`}
                 src={getImageUrl(data?.meta.featured_image)}
