@@ -129,7 +129,13 @@ export default async function NewsDetails({ params }) {
                 .filter((item: { id: any }) => item.id !== detailsData.story.id)
                 ?.slice(0, 6)
                 .map((item: any, index: number) => (
-                  <ItemCardHorizontal key={index} className="mb-8 last:mb-0" size="md" data={item} />
+                  <ItemCardHorizontal
+                    key={index}
+                    className="mb-8 last:mb-0"
+                    size="md"
+                    data={item}
+                    titleFontSize="16px"
+                  />
                 ))}
             </div>
 
@@ -138,7 +144,13 @@ export default async function NewsDetails({ params }) {
             {/* LATEST NEWS SECTION LIST */}
             <div>
               <AccentHeader header="LATEST News" color="#5D26D1" />
-              <ItemList listType="circle" data={filteredLatestNews?.slice(0, 5)} showButton moreNewsLink="/latest" />
+              <ItemList
+                listType="circle"
+                data={filteredLatestNews?.slice(0, 5)}
+                showButton
+                moreNewsLink="/latest"
+                titleFontSize="16px"
+              />
             </div>
 
             <Ads className="my-8" src="/ads/union-bank-ad.gif" alt="Ads" />
@@ -146,7 +158,7 @@ export default async function NewsDetails({ params }) {
             {/* TOP NEWS SECTION LIST */}
             <div>
               <AccentHeader header="Top News" color="#119F9F" />
-              <ItemList listType="number" data={topNews?.slice(0, 6)} />
+              <ItemList listType="number" data={topNews?.slice(0, 6)} titleFontSize="16px" />
             </div>
 
             <Ads className="my-8" src="/ads/Global.gif" alt="Ads" />
@@ -175,12 +187,12 @@ export default async function NewsDetails({ params }) {
             ></div>
 
             <div className="my-4 border-t border-b dark:border-dark-300 py-4 flex gap-x-4 items-center">
-              <h4 className="text-sm">Tags:</h4>
+              <h4 className="text-sm merriweather-regular whitespace-nowrap self-start">Tags:</h4>
               <ul className="flex gap-2 flex-wrap">
                 {detailsData?.story.tags.map((tag: any, index: number) => (
                   <li key={index}>
                     <a
-                      className="text-xs montserrat-semibold py-0.5 px-2 rounded-md bg-[#2B2B2B] text-white"
+                      className="text-xs montserrat-semibold block py-1 px-2 rounded-sm bg-[#2B2B2B] text-white"
                       href={`/topic/${tag.id}`}
                     >
                       {tag.name}
@@ -195,7 +207,7 @@ export default async function NewsDetails({ params }) {
             {relatedNews?.length ? (
               <div>
                 <AccentHeader header="related news" color="#8E7581" />
-                <SquareGrid className="grid-cols-2 gap-4" data={relatedNews.slice(0, 6)} size="md" gridCols={2} />
+                <SquareGrid className="gap-x-4 gap-y-4" data={relatedNews.slice(0, 6)} size="md" gridCols={2} />
               </div>
             ) : null}
           </div>

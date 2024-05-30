@@ -48,10 +48,21 @@ export default async function CategoryPage({ params }) {
             {categroyNews?.data.slice(4).map((news) => (
               <div key={news.id}>
                 <div className="hidden sm:block">
-                  <ItemCardHorizontal size="md" className="pb-4 mb-4 border-b dark:border-dark-300" data={news} showIntro titleFontSize="18px"/>
+                  <ItemCardHorizontal
+                    size="md"
+                    className="pb-4 mb-4 border-b dark:border-dark-300"
+                    data={news}
+                    showIntro
+                    titleFontSize="18px"
+                  />
                 </div>
                 <div className="sm:hidden">
-                  <ItemCardHorizontal size="md" className="pb-4 mb-4 border-b dark:border-dark-300" data={news} titleFontSize="18px"/>
+                  <ItemCardHorizontal
+                    size="md"
+                    className="pb-4 mb-4 border-b dark:border-dark-300"
+                    data={news}
+                    titleFontSize="18px"
+                  />
                 </div>
               </div>
             ))}
@@ -66,12 +77,18 @@ export default async function CategoryPage({ params }) {
             <div>
               <Ads className="my-8" src="/ads/union-bank-ad.gif" alt="Ads" />
               <AccentHeader header="Latest News" color="#5D26D1" />
-              <ItemList listType="circle" data={filteredLatestNews?.slice(0, 6)} moreNewsLink="/latest" showButton />
+              <ItemList
+                listType="circle"
+                data={filteredLatestNews?.slice(0, 6)}
+                moreNewsLink="/latest"
+                showButton
+                titleFontSize="16px"
+              />
             </div>
             <div>
               <Ads className="my-8" src="/ads/union-bank-ad.gif" alt="Ads" />
               <AccentHeader header="Top News" color="#119F9F" />
-              <ItemList data={topNews?.data.slice(0, 6)} listType="number" />
+              <ItemList data={topNews?.data.slice(0, 6)} listType="number" titleFontSize="16px" />
               <Ads className="block my-8" src="/ads/union-bank-ad.gif" alt="Ads" />
             </div>
           </div>

@@ -100,7 +100,7 @@ export function ItemList({
           <div className="flex justify-center merriweather-regular border-b dark:border-dark-300">
             <Link
               href={moreNewsLink}
-              className="text-sm border px-8 py-1 duration-300 hover:bg-[#efeff0] dark:hover:bg-dark-300 dark:border-dark-300"
+              className="text-xs md:text-sm border px-8 py-1 duration-300 hover:bg-[#efeff0] dark:hover:bg-dark-300 dark:border-dark-300"
             >
               More News
             </Link>
@@ -109,7 +109,7 @@ export function ItemList({
           <div className="flex justify-center merriweather-regular border-b dark:border-dark-300">
             <a
               href={moreNewsLink}
-              className="text-sm border px-8 py-1 duration-300 hover:bg-[#efeff0] dark:hover:bg-dark-300 dark:border-dark-300"
+              className="text-xs md:text-sm border px-8 py-1 duration-300 hover:bg-[#efeff0] dark:hover:bg-dark-300 dark:border-dark-300"
             >
               More News
             </a>

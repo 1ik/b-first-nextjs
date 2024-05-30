@@ -19,7 +19,7 @@ export function BlockNewsMob5({ data, className, sectionHeader, headerColor, Lin
       {sectionHeader && <AccentHeader header={sectionHeader} color={headerColor} />}
       <div className="grid grid-cols-1 sm:grid-cols-7 gap-5">
         <div className="sm:col-span-4">
-          <ItemCardVertical data={data?.[0]} size="lg" titleFontSize="30px"/>
+          <ItemCardVertical data={data?.[0]} size="lg" titleFontSize="30px" titleBold/>
         </div>
         <div className="sm:col-span-3 mx-auto">
           <Ads src={ads} alt="Ads" />

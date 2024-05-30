@@ -19,10 +19,10 @@ export function BlockNewsMob3({ className, sectionHeader, headerColor, Link, dat
       <div className="grid sm:grid-cols-3 grid-cols-1 gap-5">
         <div className="sm:col-span-3 border-b-2 mb-2 pb-4 dark:border-dark-300">
           <div className="sm:block hidden">
-            <ItemCardHorizontal Link={Link} data={data?.[0]} showIntro size="lg" />
+            <ItemCardHorizontal Link={Link} data={data?.[0]} showIntro size="lg" titleBold />
           </div>
           <div className="sm:hidden">
-            <ItemCardVertical Link={Link} className="sm:col-span-3" data={data?.[0]} showIntro size="md" titleFontSize="24px"/>
+            <ItemCardVertical Link={Link} className="sm:col-span-3" data={data?.[0]} showIntro size="md" titleFontSize="24px" titleBold/>
           </div>
         </div>
 

@@ -15,7 +15,6 @@ export default function Navbar({ activeLink }: { activeLink?: string }) {
       logoLight="/img/logo-light.svg"
       logoDark="/img/logo-dark.svg"
       adsLeft="/ads/ads_hader_left.png"
-      adsBanner="/ads/banner_ibbl.gif"
       logoMini="/img/logo-mini.png"
     />
   );

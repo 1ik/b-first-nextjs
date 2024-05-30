@@ -65,28 +65,28 @@ export default async function Index() {
         {/* TOP NEWS SECTION */}
         <BlockNewsMob
           className="px-3"
-          data={topNews?.slice(0, 8)}
+          data={topNews?.slice(0, 7)}
           ads1="/ads/Global.gif"
           ads2="/ads/union-bank-ad.gif"
         />
         <Ads className="my-6" src="/ads/banner_ibbl.gif" alt="ads" showHeader={false} />
         <div className="sm:hidden">
-          <SquareGrid showAccentHeader data={topNews.slice(8, 16)} gridCols={1} />
+          <SquareGrid showAccentHeader data={topNews.slice(7, 15)} gridCols={1} />
           <div className="flex justify-center my-6 border-b dark:border-dark-300">
             <a
               href="/latest"
-              className="border text-sm px-6 py-2 hover:bg-[#efeff0] dark:hover:bg-dark-300 duration-300 dark:border-dark-300 merriweather-medium"
+              className="border merriweather-regular text-xs px-6 py-2 hover:bg-[#efeff0] dark:hover:bg-dark-300 duration-300 dark:border-dark-300 merriweather-medium"
             >
               More News
             </a>
           </div>
         </div>
         <div className="hidden sm:block">
-          <SquareGrid showAccentHeader data={topNews.slice(8, 16)} gridCols={2} />
+          <SquareGrid showAccentHeader data={topNews.slice(7, 15)} gridCols={2} />
           <div className="flex justify-center my-8 border-b dark:border-dark-300">
             <a
               href="/latest"
-              className="border text-base px-6 py-2 hover:bg-[#efeff0] dark:hover:bg-dark-300 duration-300 dark:border-dark-300 font-medium"
+              className="border merriweather-regular text-sm px-6 py-2 hover:bg-[#efeff0] dark:hover:bg-dark-300 duration-300 dark:border-dark-300 font-medium"
             >
               More News
             </a>

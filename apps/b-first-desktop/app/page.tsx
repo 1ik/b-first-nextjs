@@ -61,15 +61,17 @@ export default async function Index() {
       <Navbar />
       <TrendingTopics className="desktop-container mb-8" items={trendingTopics} title="Trending Topics" />
 
+      <Ads className="my-10" src="/ads/banner_ibbl.gif" alt="Ads" />
+
       <BlockNews
         className="desktop-container"
-        data={topNews.slice(0, 8)}
+        data={topNews.slice(0, 7)}
         ads1="/ads/Global.gif"
         ads2="/ads/union-bank-ad.gif"
       />
       <Ads className="my-10" src="/ads/FSB-banner-ad.gif" alt="ads" showHeader={false} />
       <div className="desktop-container">
-        <SquareGrid showAccentHeader data={topNews.slice(8, 16)} gridCols={4} />
+        <SquareGrid showAccentHeader data={topNews.slice(7, 15)} gridCols={4} />
         <div className="flex justify-center mt-3 border-b dark:border-dark-300">
           <a
             href="/latest"

@@ -66,7 +66,7 @@ export default async function Latest() {
             <div>
               <Ads className="my-4" src="/ads/Global.gif" alt="Ads" />
               <AccentHeader header="Top News" color="#119F9F" />
-              <ItemList data={topNews.data?.slice(0, 6)} listType="number" />
+              <ItemList data={topNews.data?.slice(0, 6)} listType="number" titleFontSize="16px" />
               <Ads className="mt-4" src="/ads/Global.gif" alt="Ads" />
             </div>
           </div>
