@@ -19,26 +19,26 @@ export function BlockNews({ data, sectionHeader, ads1, ads2, className, Link }: 
       <ItemCardVertical
         Link={Link}
         className="w-[35%]"
-        showImageBorder
         data={data?.[0]}
         size="lg"
         showIntro
         introFontSize="14px"
+        titleFontSize="30px"
       />
 
       <div className="w-[25%]">
         {data?.slice(1, 6).map((item: any, index: number) => (
           <div className="flex flex-col" key={index}>
-            <ItemCardHorizontal Link={Link} data={item} size="sm" titleFontSize="16px" />
+            <ItemCardHorizontal Link={Link} data={item} size="sm" titleFontSize="16px" titleCrop={10} />
             {index + 1 < 5 && <hr className="my-4 block dark:border-dark-300" />}
           </div>
         ))}
       </div>
 
-      <div className="w-[20%] flex flex-col gap-y-5 bg-[#FFF3ED] dark:bg-dark-300">
+      <div className="w-[20%] flex flex-col gap-y-2 bg-[#FFF3ED] dark:bg-dark-300">
         {data?.slice(6, 8).map((item: any, index: Key | null | undefined) => (
-          <div key={index} className="border-b-2 border-black/25 pb-3 last:border-0">
-            <ItemCardVertical className="p-2.5" data={item} size="md" titleFontSize="20px" />
+          <div key={index} className="border-b pb-3 last:border-0 dark:border-black/25">
+            <ItemCardVertical className="p-2.5" data={item} size="md" titleFontSize="16px" />
           </div>
         ))}
       </div>

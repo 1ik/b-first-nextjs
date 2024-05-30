@@ -1,4 +1,4 @@
-import { getImageUrl, getNewsUrl } from "@bfirst/utilities";
+import { cropText, getImageUrl, getNewsUrl } from "@bfirst/utilities";
 import moment from "moment-timezone";
 export interface ItemCardHorizontalProps {
   data: any;
@@ -11,6 +11,8 @@ export interface ItemCardHorizontalProps {
   Link?: any;
   showCreatedAt?: boolean;
   showTime?: boolean;
+  titleCrop?: number;
+  introCrop?: number;
   titleFontSize?: `${number}${"px" | "rem" | "em"}`;
   introFontSize?: `${number}${"px" | "rem" | "em"}`;
 }
@@ -28,6 +30,8 @@ export function ItemCardHorizontal({
   showTime,
   titleFontSize,
   introFontSize,
+  titleCrop,
+  introCrop
 }: ItemCardHorizontalProps) {
   const titleFont = `leading-[110%] ${
     size === "xl"
@@ -72,7 +76,7 @@ export function ItemCardHorizontal({
                 style={{ fontSize: titleFontSize }}
                 className={` ${titleFont} hover:text-accent dark:hover:text-accent-light duration-150 leading-[120%]`}
               >
-                {data?.title}
+                {titleCrop? cropText(data?.title, titleCrop) : data?.title}
               </h2>
             </Link>
           ) : (
@@ -83,7 +87,7 @@ export function ItemCardHorizontal({
                   showTitleBorderSmall ? "mt-3" : ""
                 } hover:text-accent dark:hover:text-accent-light duration-150 leading-[120%]`}
               >
-                {data?.title}
+                {titleCrop? cropText(data?.title, titleCrop) : data?.title}
               </h2>
             </a>
           )}
@@ -100,7 +104,7 @@ export function ItemCardHorizontal({
           )}
           {showIntro && (
             <p style={{ fontSize: introFontSize }} className={`mt-4 ${introFont} leading-[120%]`}>
-              {data?.meta.intro}
+              {introCrop ? cropText(data?.meta.intro, introCrop): data?.meta.intro}
             </p>
           )}
         </div>

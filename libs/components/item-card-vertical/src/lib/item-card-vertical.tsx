@@ -1,4 +1,4 @@
-import { getImageUrl, getNewsUrl } from "@bfirst/utilities";
+import { cropText, getImageUrl, getNewsUrl } from "@bfirst/utilities";
 /* eslint-disable-next-line */
 export interface ItemCardVerticalProps {
   data: any;
@@ -9,6 +9,8 @@ export interface ItemCardVerticalProps {
   titlePosition?: "normal" | "inset";
   className?: string;
   Link?: any;
+  titleCrop?: number;
+  introCrop?: number;
   titleFontSize?: `${number}${"px" | "rem" | "em"}`;
   introFontSize?: `${number}${"px" | "rem" | "em"}`;
 }
@@ -22,6 +24,8 @@ export function ItemCardVertical({
   titlePosition = "normal",
   className,
   Link,
+  titleCrop,
+  introCrop,
   titleFontSize,
   introFontSize,
 }: ItemCardVerticalProps) {
@@ -62,7 +66,7 @@ export function ItemCardVertical({
                     : "text-2xl w-full -bottom-1/2 left-0"
                 }`}
               >
-                {data?.title}
+                {titleCrop ? cropText(data?.title, titleCrop) : data?.title}
               </h2>
             </Link>
           ) : (
@@ -74,7 +78,7 @@ export function ItemCardVertical({
                     : "text-2xl w-full bottom-0 translate-y-2 px-2 py-1 left-0"
                 }`}
               >
-                {data?.title}
+                {titleCrop ? cropText(data?.title, titleCrop) : data?.title}
               </h2>
             </a>
           ))}
@@ -88,7 +92,7 @@ export function ItemCardVertical({
                 titlePosition === "inset" ? "hidden" : ""
               }`}
             >
-              {data?.title}
+              {titleCrop ? cropText(data?.title, titleCrop) : data?.title}
             </h2>
           </Link>
         ) : (
@@ -99,14 +103,14 @@ export function ItemCardVertical({
                 titlePosition === "inset" ? "hidden" : ""
               }`}
             >
-              {data?.title}
+              {titleCrop ? cropText(data?.title, titleCrop) : data?.title}
             </h2>
           </a>
         )}
 
         {showIntro && (
           <p style={{ fontSize: introFontSize }} className={`${introFont} mt-3`}>
-            {data?.meta.intro}
+            {introCrop ? cropText(data?.meta.intro, introCrop) : data?.meta.intro}
           </p>
         )}
 
