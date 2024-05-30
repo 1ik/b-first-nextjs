@@ -31,14 +31,14 @@ export function ManageStories() {
 
   /* API calls */
   const { data, isSuccess: featuredLoadSuccess } = useGet(
-    `api/v1/public/categories/${categoryOption}/featured-stories?size=16`
+    `api/v1/public/categories/${categoryOption}/featured-stories?size=15`
   );
   const { data: searchedNews } = useGet(`api/v1/stories?title=${search}`);
   const { request, isSuccess: featuredSaveSuccess } = usePost(`api/v1/featured/stories/create`);
 
   const handleAddFeaturedStories = function (news: any) {
     if (!news) return;
-    if (featuredStories.length >= 16) {
+    if (featuredStories.length >= 15) {
       toast.success("Last item removed and new one added", {
         position: "top-center",
       });
@@ -53,8 +53,8 @@ export function ManageStories() {
 
   const handleSubmit = async function (e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (featuredStories.length !== 16) {
-      toast.warning("Total featured story must be 16", {
+    if (featuredStories.length !== 15) {
+      toast.warning("Total featured story must be 15", {
         position: "top-center",
       });
       return;
