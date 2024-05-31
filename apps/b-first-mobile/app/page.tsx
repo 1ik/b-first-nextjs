@@ -59,7 +59,7 @@ export default async function Index() {
     <>
       <Navbar />
       <div className="px-3">
-        <Ads className="my-6" src="/ads/banner_ibbl.gif" alt="Ads" showHeader={false} />
+        <Ads className="my-6" src="/ads/Ad-Master-50.gif" alt="Ads" showHeader={false} />
         <TrendingTopics className="px-3 my-4" items={trendingTopics} title="Trending" />
 
         {/* TOP NEWS SECTION */}

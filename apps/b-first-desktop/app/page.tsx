@@ -61,7 +61,7 @@ export default async function Index() {
       <Navbar />
       <TrendingTopics className="desktop-container mb-8" items={trendingTopics} title="Trending Topics" />
 
-      <Ads className="my-10" src="/ads/banner_ibbl.gif" alt="Ads" />
+      <Ads className="my-10" src="/ads/Ad-Master-50.gif" alt="Ads" />
 
       <BlockNews
         className="desktop-container"
