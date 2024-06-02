@@ -118,7 +118,7 @@ export function MobileNav({ Link, logoLight, logoDark, activeLink, theme, onThem
         <div
           className={`py-16 w-[250px] overflow-y-auto flex flex-col items-center text-xl shadow-[5px_0px_10px_0px_rgba(0,0,0,0.2)] dark:shadow-[5px_0px_10px_0px_rgba(0,0,0,0.4)] absolute z-[9999] top-0 left-0 ${
             showSidebar ? "" : "-translate-x-[calc(100%+20px)]"
-          } h-[100svh] duration-300 backdrop-blur bg-white/70 dark:bg-dark-500/80`}
+          } h-[100lvh] duration-300 backdrop-blur bg-white/70 dark:bg-dark-500/80`}
         >
           {/* need to change theme toglle buttons position */}
           <button

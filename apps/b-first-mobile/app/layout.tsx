@@ -1,4 +1,5 @@
 import { Footer } from "@bfirst/components-footer";
+import { GTMNoscript, GTMScript } from "@bfirst/gtm";
 import "../../../libs/fonts/merriweather/index.css";
 import "../../../libs/fonts/washington/index.css";
 import BackToTop from "./components/BackToTop/BackToTop";
@@ -13,7 +14,14 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
+      <head>
+        {/* ==== Google Tag Manager ==== */}
+        <GTMScript id="GTM-WD4DNL5P" />
+      </head>
       <body>
+        {/* ==== Google Tag Manager (noscript) ==== */}
+        <GTMNoscript id="GTM-WD4DNL5P" />
+
         <Provider>
           <main className={`duration-200 dark:bg-dark-400 dark:text-white pb-4`}>{children}</main>
           <footer className="bg-black">

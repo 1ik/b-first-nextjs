@@ -15,7 +15,7 @@ export default async function Topic({ params }) {
       getData("latest/stories?size=10"),
       getData("categories/0/featured-stories"),
     ])
-  ).map((item) => item.data);
+  ).map((item) => item?.data);
 
   const trendingTopics = (await getData("trendy-topics"))?.data;
   const filteredLatestNews = latestNews.filter(filterOutOTD);

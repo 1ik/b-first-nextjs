@@ -17,7 +17,7 @@ import filterOutOTD from "./utils/filterOutOTD";
 export default async function Index() {
   const [topNews, recommendedNews] = (
     await Promise.all([getData("categories/0/featured-stories?size=16"), getData("recommended-stories")])
-  ).map((item) => item.data);
+  ).map((item) => item?.data);
 
   const filterRecommended = function (item: { id: number }) {
     return !recommendedNews?.find((rN: { id: number }) => rN.id === item.id);
@@ -51,7 +51,7 @@ export default async function Index() {
     ).map((item) => item?.data.filter(filterTopNews).filter(filterRecommended).filter(filterLatestNews));
 
   const trendingTopics = (await getData("trendy-topics"))?.data;
-  const onThisDay = (await getData("categories/on_this_day/stories")).data.filter(
+  const onThisDay = (await getData("categories/on_this_day/stories"))?.data.filter(
     (item: { created_at: moment.MomentInput }) =>
       moment().format("MMM D YYYY") === moment(item.created_at).format("MMM D YYYY")
   );
