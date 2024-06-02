@@ -262,7 +262,7 @@ export default function MediaBrowser({
                                 className={`w-full aspect-video object-cover cursor-pointer ${
                                   selectedImage === item.url ? "border-[3px] border-red-500" : ""
                                 }`}
-                                src={`https://images.bangladeshfirst.com/smartcrop?width=1600&height=900&format=webp&quality=85&path=${item.url}`}
+                                src={`https://images.bangladeshfirst.com/smartcrop?width=320&height=180&format=webp&quality=50&path=${item.url}`}
                                 alt={item.url}
                               />
                             );
