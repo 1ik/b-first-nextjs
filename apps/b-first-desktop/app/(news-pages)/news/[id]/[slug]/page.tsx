@@ -142,7 +142,7 @@ export default async function NewsDetails({ params }) {
           </div>
           <div className="col-span-2">
             <div
-              className="text-xl leading-[120%] [&>p]:mt-8"
+              className="story-body text-xl leading-[120%] [&>p]:mt-8"
               dangerouslySetInnerHTML={{ __html: detailsData?.story.content }}
             ></div>
             <div className="my-10 border-t border-b dark:border-dark-300 py-4 flex gap-x-4 items-center">
@@ -184,12 +184,18 @@ export default async function NewsDetails({ params }) {
             <Ads className="my-8" src="/ads/Global.gif" alt="ads" showHeader={false} />
             <div>
               <AccentHeader header="Latest News" color="#5D26D1" />
-              <ItemList listType="circle" data={filteredLatestNews?.slice(0, 5)} showButton moreNewsLink="/latest" titleFontSize="18px"/>
+              <ItemList
+                listType="circle"
+                data={filteredLatestNews?.slice(0, 5)}
+                showButton
+                moreNewsLink="/latest"
+                titleFontSize="18px"
+              />
             </div>
             <div>
               <Ads className="my-8" src="/ads/ibbl.gif" alt="ads" showHeader={false} />
               <AccentHeader header="Top News" color="#119F9F" />
-              <ItemList data={topNews?.slice(0, 6)} listType="number" titleFontSize="18px"/>
+              <ItemList data={topNews?.slice(0, 6)} listType="number" titleFontSize="18px" />
             </div>
           </div>
         </div>
