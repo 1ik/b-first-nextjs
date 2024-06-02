@@ -1,6 +1,4 @@
-"use client";
-import { Button } from "@bfirst/material-tailwind";
-import Link from "next/link";
+import "../../../libs/fonts/montserrat/index.css";
 import Navbar from "./components/Navbar/Navbar";
 
 export default function NotFound() {
@@ -17,14 +15,12 @@ export default function NotFound() {
           Sorry! The page you are looking for could not be found.
         </p>
         <p className="text-xl mt-1 mb-4">You can return to our homepage. Thanks for your understanding.</p>
-        <Link href="/">
-          <Button
-            size="lg"
-            className="border bg-transparent border-accent text-accent px-6 py-2.5 text-xl font-medium rounded-md hover:text-white hover:bg-accent duration-200"
-          >
-            Return Home
-          </Button>
-        </Link>
+        <a
+          href="/"
+          className="border bg-transparent border-accent text-accent px-6 py-2.5 text-xl font-medium rounded-md hover:text-white hover:bg-accent duration-200"
+        >
+          Return Home
+        </a>
       </div>
     </>
   );

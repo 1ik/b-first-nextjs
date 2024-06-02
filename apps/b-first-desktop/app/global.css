@@ -6,6 +6,12 @@
   @apply max-w-[1400px] px-[30px] mx-auto;
 }
 
+.story-body table,
+.story-body table th,
+.story-body table td {
+  border: 1px solid gray;
+}
+
 /* wihtout '!important' news body iframes overflows */
 iframe {
   width: 100% !important;

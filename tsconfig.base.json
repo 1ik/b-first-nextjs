@@ -67,6 +67,7 @@
       "@bfirst/components-tags": ["libs/features/tags/src/index.ts"],
       "@bfirst/components-tinymce-editor": ["libs/components/tinymce-editor/src/index.ts"],
       "@bfirst/components-type-ahead-search": ["libs/components/type-ahead-search/src/index.ts"],
+      "@bfirst/gtm": ["libs/settings/gtm/src/index.ts"],
       "@bfirst/material-tailwind": ["libs/components/material-tailwind/src/index.ts"],
       "@bfirst/utilities": ["libs/utilities/src/index.ts"]
     }

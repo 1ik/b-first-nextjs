@@ -182,7 +182,7 @@ export default async function NewsDetails({ params }) {
             </div>
 
             <div
-              className="text-base leading-[120%] [&>p]:mt-4"
+              className="story-body text-base leading-[120%] [&>p]:mt-4"
               dangerouslySetInnerHTML={{ __html: detailsData?.story.content }}
             ></div>
 
