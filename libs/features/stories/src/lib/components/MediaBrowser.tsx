@@ -90,7 +90,7 @@ export default function MediaBrowser({
       tinymce.activeEditor?.insertContent(
         `<div>
           <img width="100%" src="https://images.bangladeshfirst.com/smartcrop?width=1600&height=900&format=webp&quality=85&path=${path}" alt=""/>
-          <h4>${imageCaption && imageCaption}</h4>
+          <p><em>${imageCaption && imageCaption}</em></p>
         </div>`
       );
     }
