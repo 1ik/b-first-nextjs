@@ -57,7 +57,9 @@ export function ItemCardVertical({
             />
           </a>
         )}
-
+        {data?.meta.shoulder && (
+          <h2 className="text-[30px] md:text-4xl font-bold mt-6 text-accent leading-[120%]">{`${data?.meta.shoulder}`}</h2>
+        )}
         {titlePosition === "inset" &&
           (Link ? (
             <Link href={getNewsUrl(data)}>
@@ -66,7 +68,7 @@ export function ItemCardVertical({
                   titleBold ? "font-bold" : ""
                 } hover:text-accent dark:hover:text-accent-light duration-150 text-black dark:bg-dark-400 dark:text-white absolute ${
                   size === "lg"
-                    ? "text-[28px] md:text-[36px] right-0 bottom-0 w-3/5 px-10 py-8px-10 py-8"
+                    ? "text-[28px] md:text-[36px] right-0 bottom-0 w-3/5 px-10 py-4"
                     : "text-2xl w-full -bottom-1/2 left-0"
                 }`}
               >
@@ -80,7 +82,7 @@ export function ItemCardVertical({
                   titleBold ? "font-bold" : ""
                 } hover:text-accent dark:hover:text-accent-light duration-150 text-black dark:bg-dark-400/80 dark:text-white absolute ${
                   size === "lg"
-                    ? "text-[28px] md:text-[36px] right-0 bottom-0 w-3/5 px-10 py-8px-10 py-8"
+                    ? "text-[28px] md:text-[36px] right-0 bottom-0 w-3/5 px-10 py-4"
                     : "text-2xl w-full bottom-0 translate-y-2 px-2 py-1 left-0"
                 }`}
               >

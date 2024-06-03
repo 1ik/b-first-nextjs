@@ -71,7 +71,8 @@ export function ItemCardHorizontal({
         }   
           ${imageSide === "left" ? "order-last" : imageSide === "right" ? "order-first" : ""} `}
       >
-        <div className={`${titleBold ? "font-bold" : ""} pl-2 flex flex-col h-full`}>
+        <div className={`${titleBold ? "font-bold" : ""} pl-2 flex flex-col h-full leading-[120%]`}>
+          {data?.meta.shoulder && <h2 className="text-xl text-accent pb-2">{`${data?.meta.shoulder}`}</h2>}
           {Link ? (
             <Link className="" href={getNewsUrl(data)}>
               <h2
