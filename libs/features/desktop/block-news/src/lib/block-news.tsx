@@ -39,7 +39,7 @@ export function BlockNews({ data, sectionHeader, ads1, ads2, className, Link }: 
       </div>
 
       <div className="w-[20%] flex flex-col gap-y-2 bg-[#FFF3ED] dark:bg-dark-300">
-        {data?.slice(5, 7).map((item: any, index: Key | null | undefined) => (
+        {data?.slice(6, 8).map((item: any, index: Key | null | undefined) => (
           <div key={index} className="border-b pb-3 last:border-0 dark:border-black/25">
             <ItemCardVertical className="p-2.5" data={item} size="md" titleFontSize="16px" titleCrop={15} />
           </div>
