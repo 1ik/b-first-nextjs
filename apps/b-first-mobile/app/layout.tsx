@@ -11,12 +11,56 @@ export const metadata = {
   description: "A newspaper that publishes news with authenticity and without fear.",
 };
 
+const organizationJsonLd = {
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  name: "Bangladesh First",
+  description:
+    "Find the latest breaking news and top stories on Politics, Sports, Entertainment, Arts, Business and Tech news. Visit Bfirst.news & get all the latest news in Bangladesh.",
+  legalName: "Bangladesh First",
+  url: "https://bfirst.news/",
+  logo: "https://bfirst.news/img/logo-dark.svg",
+  foundingDate: "2024",
+  founders: [
+    {
+      "@type": "Person",
+      name: "Bangladesh First",
+    },
+  ],
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Level 12, 115 Kazi Nazrul Islam Avenue",
+    addressLocality: "Bangla Motor",
+    addressRegion: "Dhaka",
+    postalCode: "1000",
+    addressCountry: "Bangladesh",
+  },
+  contactPoint: {
+    "@type": "ContactPoint",
+    contactType: "customer support",
+    telephone: "(+880) 961 332 2782",
+    email: "editor@bangladeshfirst.com",
+  },
+  sameAs: [
+    "https://www.facebook.com/Bangladeshfirst.news",
+    "https://www.instagram.com/bdfirstnews",
+    "https://x.com/BFirstnews",
+    "https://www.youtube.com/channel/UCKv8bP1Ewcai3Z53v88pPSw",
+  ],
+};
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
         {/* ==== Google Tag Manager ==== */}
         <GTMScript id="GTM-WD4DNL5P" />
+
+        {/* ===== organization schema markup ===== */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        ></script>
       </head>
       <body>
         {/* ==== Google Tag Manager (noscript) ==== */}

@@ -14,6 +14,17 @@ import TrendingTopics from "./components/TrendingTopics/TrendingTopics";
 import { getData } from "./utils/dataFetch";
 import filterOutOTD from "./utils/filterOutOTD";
 
+const webpageJsonLd = {
+  "@context": "http://schema.org",
+  "@type": "WebPage",
+  name: "Bangladesh First",
+  description: "A newspaper that publishes news with authenticity and without fear.",
+  publisher: {
+    "@type": "Organization",
+    name: "Bangladesh First",
+  },
+};
+
 export default async function Index() {
   const [topNews, recommendedNews] = (
     await Promise.all([getData("categories/0/featured-stories?size=16"), getData("recommended-stories")])
@@ -58,6 +69,9 @@ export default async function Index() {
 
   return (
     <>
+      {/* ==== webpage schema markup */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webpageJsonLd) }}></script>
+
       <Navbar />
       <TrendingTopics className="desktop-container mb-8" items={trendingTopics} title="Trending Topics" />
 
@@ -65,13 +79,13 @@ export default async function Index() {
 
       <BlockNews
         className="desktop-container"
-        data={topNews.slice(0, 8)}
+        data={topNews?.slice(0, 8)}
         ads1="/ads/Global.gif"
         ads2="/ads/union-bank-ad.gif"
       />
       <Ads className="my-10" src="/ads/FSB-banner-ad.gif" alt="ads" showHeader={false} />
       <div className="desktop-container">
-        <SquareGrid showAccentHeader data={topNews.slice(8, 16)} gridCols={4} />
+        <SquareGrid showAccentHeader data={topNews?.slice(8, 16)} gridCols={4} />
         <div className="flex justify-center mt-3 border-b dark:border-dark-300">
           <a
             href="/latest"
