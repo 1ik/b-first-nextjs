@@ -35,7 +35,7 @@ export function BlockNewsMob({ data, ads1, ads2, className }: BlockNewsMobProps)
         </div>
 
         <div className="sm:col-span-3 sm:mr-4 mt-4 sm:mt-0">
-          {data?.slice(3, 7).map((item: any, index: number) => (
+          {data?.slice(3, 8).map((item: any, index: number) => (
             <div key={index}>
               <div className={`mt-4 pt-4 border-t dark:border-dark-300`}>
                 <ItemCardHorizontal data={item} size="sm" />

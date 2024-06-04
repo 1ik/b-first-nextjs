@@ -72,13 +72,13 @@ export function FeatureTrashCategoryList() {
       render: (row) => {
         return (
           <div className="flex items-end gap-2 md:gap-4 justify-end w-full md:pt-0 pt-4">
-            <ConfirmButton
+            {/* <ConfirmButton
               onConfirm={() => handleDelete(row.id)}
               message="Do you want to permanently remove the category ?"
               confirmHandler={<Icon name="trash" />}
             >
               Delete
-            </ConfirmButton>
+            </ConfirmButton> */}
             <ConfirmButton
               onConfirm={() => handleRestore(row.id)}
               message="Do you want to restore the category ?"

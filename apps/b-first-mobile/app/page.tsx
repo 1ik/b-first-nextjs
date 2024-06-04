@@ -16,7 +16,7 @@ import filterOutOTD from "./utils/filterOutOTD";
 
 export default async function Index() {
   const [topNews, recommendedNews] = (
-    await Promise.all([getData("categories/0/featured-stories?size=15"), getData("recommended-stories")])
+    await Promise.all([getData("categories/0/featured-stories?size=16"), getData("recommended-stories")])
   ).map((item) => item?.data);
 
   const filterRecommended = function (item: { id: number }) {
@@ -65,13 +65,13 @@ export default async function Index() {
         {/* TOP NEWS SECTION */}
         <BlockNewsMob
           className="px-3"
-          data={topNews?.slice(0, 7)}
+          data={topNews?.slice(0, 8)}
           ads1="/ads/Global.gif"
           ads2="/ads/union-bank-ad.gif"
         />
         <Ads className="my-6" src="/ads/banner_ibbl.gif" alt="ads" showHeader={false} />
         <div className="sm:hidden">
-          <SquareGrid showAccentHeader data={topNews.slice(7, 15)} gridCols={1} />
+          <SquareGrid showAccentHeader data={topNews.slice(8, 16)} gridCols={1} />
           <div className="flex justify-center my-6 border-b dark:border-dark-300">
             <a
               href="/latest"

@@ -27,19 +27,19 @@ export function BlockNews({ data, sectionHeader, ads1, ads2, className, Link }: 
         titleBold
       />
 
-      <div className="w-[25%] flex flex-col justify-between">
-        {data?.slice(1, 5).map((item: any, index: number) => (
+      <div className="w-[25%] flex flex-col">
+        {data?.slice(1, 6).map((item: any, index: number) => (
           <>
             <div className="flex flex-col" key={index}>
               <ItemCardHorizontal Link={Link} data={item} size="sm" titleFontSize="16px" titleCrop={10} />
             </div>
-            {index + 1 < 4 && <hr className="my-4 block dark:border-dark-300" />}
+            {index + 1 < 5 && <hr className="my-4 block dark:border-dark-300" />}
           </>
         ))}
       </div>
 
       <div className="w-[20%] flex flex-col gap-y-2 bg-[#FFF3ED] dark:bg-dark-300">
-        {data?.slice(5, 7).map((item: any, index: Key | null | undefined) => (
+        {data?.slice(6, 8).map((item: any, index: Key | null | undefined) => (
           <div key={index} className="border-b pb-3 last:border-0 dark:border-black/25">
             <ItemCardVertical className="p-2.5" data={item} size="md" titleFontSize="16px" titleCrop={15} />
           </div>

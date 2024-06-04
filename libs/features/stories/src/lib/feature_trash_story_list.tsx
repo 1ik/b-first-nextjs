@@ -73,13 +73,13 @@ export function FeatureTrashStoryList() {
       render: (row) => {
         return (
           <div className="flex items-end md:gap-4 gap-2 justify-end w-full">
-            <ConfirmButton
+            {/* <ConfirmButton
               onConfirm={() => handleDelete(row.id)}
               message="Do you want to permanently remove the story ?"
               confirmHandler={<Icon name="trash" />}
             >
               Delete
-            </ConfirmButton>
+            </ConfirmButton> */}
             <ConfirmButton
               onConfirm={() => handleRestore(row.id)}
               message="Do you want to restore the story ?"

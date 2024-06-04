@@ -11,6 +11,7 @@ export default function NotFound() {
           <img className="w-12" src="/img/logo-mini.png" alt="logo" />
           <span>4</span>
         </h2>
+        <h1 className="montserrat-bold text-xl my-3">Page Not Found</h1>
         <p className="text-center text-xl font-medium mt-3">Sorry! The page you are looking for could not be found.</p>
         <p className="text-lg text-center mt-3 mb-4">You can return to our homepage. Thanks for your understanding.</p>
         <a

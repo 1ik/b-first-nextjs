@@ -1,13 +1,12 @@
 import { useDelete, useGet } from "@bfirst/api-client";
 import { ConfirmButton } from "@bfirst/components-confirm-button";
 import { Icon } from "@bfirst/components-icon";
-import { PopoverNotify } from "@bfirst/components-popover-notify";
+import { Loader } from "@bfirst/components-loader";
 import { Table, TableColumnDef } from "@bfirst/components-table";
 import { Typography } from "@bfirst/material-tailwind";
 import moment from "moment";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Loader } from "@bfirst/components-loader";
 
 interface FeatureStoryListProps {
   searchInput?: string;
@@ -96,7 +95,6 @@ export function FeatureStoryList({ searchInput }: FeatureStoryListProps) {
       render: (row) => {
         return (
           <div className="flex items-end gap-4 justify-end w-full">
-            <PopoverNotify trigger={<Icon name="copy" onClick={() => handleCopyEmbed(row.id)} />} message="copied" />
             <ConfirmButton
               onConfirm={() => handleDelete(row.id)}
               message="Do you want to remove the stories ?"
@@ -123,16 +121,9 @@ export function FeatureStoryList({ searchInput }: FeatureStoryListProps) {
     request();
   };
 
-  const handleCopyEmbed = (id: number) => {
-    navigator.clipboard.writeText(
-      `<iframe class="news-iframe" style="width: 100%; background: #F2F4F7; border-radius: 8px; padding: 8px 8px 0px 8px; box-sizing: border-box;" src="https://backend.bangladeshfirst.com/api/v1/public/preview-story/${id}" ></iframe>`
-    );
-  };
-
   useEffect(() => {
     if (isSuccess) refetch();
   }, [isSuccess, refetch]);
-
 
   if (isPending) {
     return <Loader />;
@@ -141,7 +132,7 @@ export function FeatureStoryList({ searchInput }: FeatureStoryListProps) {
   return (
     <Table
       columns={TABLE_COLUMNS}
-      data={ data?.data}
+      data={data?.data}
       pagination={{
         currentPage,
         lastPage: data?.meta.last_page,
