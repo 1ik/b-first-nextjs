@@ -19,6 +19,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import tinymce from "tinymce";
 import { StateInterface } from "./StoryForm";
+import { getImageUrl } from "@bfirst/utilities";
 
 interface MediaBrowserProps {
   defaultData?: any;
@@ -89,7 +90,7 @@ export default function MediaBrowser({
     if (state.openFrom === "textEditor") {
       tinymce.activeEditor?.insertContent(
         `<div>
-          <img width="100%" src="https://images.bangladeshfirst.com/smartcrop?width=1600&height=900&format=webp&quality=85&path=${path}" alt=""/>
+          <img width="100%" src="${getImageUrl(path)}" alt=""/>
           <p><em>${imageCaption && imageCaption}</em></p>
         </div>`
       );
@@ -262,7 +263,7 @@ export default function MediaBrowser({
                                 className={`w-full aspect-video object-cover cursor-pointer ${
                                   selectedImage === item.url ? "border-[3px] border-red-500" : ""
                                 }`}
-                                src={`https://images.bangladeshfirst.com/smartcrop?width=320&height=180&format=webp&quality=50&path=${item.url}`}
+                                src={`${getImageUrl(item.url)}`}
                                 alt={item.url}
                               />
                             );
