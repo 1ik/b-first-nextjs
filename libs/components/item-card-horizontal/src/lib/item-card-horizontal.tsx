@@ -72,13 +72,17 @@ export function ItemCardHorizontal({
           ${imageSide === "left" ? "order-last" : imageSide === "right" ? "order-first" : ""} `}
       >
         <div className={`${titleBold ? "font-bold" : ""} pl-2 flex flex-col h-full leading-[120%]`}>
-          {data?.meta.shoulder && <h2 className="text-xl text-accent pb-2">{`${data?.meta.shoulder}`}</h2>}
           {Link ? (
             <Link className="" href={getNewsUrl(data)}>
               <h2
                 style={{ fontSize: titleFontSize }}
                 className={` ${titleFont} hover:text-accent dark:hover:text-accent-light duration-150 leading-[120%]`}
               >
+                {data?.meta.shoulder && (
+                  <span className="text-accent mr-5 relative after:absolute after:content-[''] after:h-2/3 after:w-1 after:bg-accent after:-right-3 after:top-1/2 after:-translate-y-1/2 after:rounded-md after:dark:bg-accent-light dark:text-accent-light">
+                    {data?.meta.shoulder}
+                  </span>
+                )}
                 {titleCrop ? cropText(data?.title, titleCrop) : data?.title}
               </h2>
             </Link>
@@ -90,6 +94,11 @@ export function ItemCardHorizontal({
                   showTitleBorderSmall ? "mt-3" : ""
                 } hover:text-accent dark:hover:text-accent-light duration-150 leading-[120%]`}
               >
+                {data?.meta.shoulder && (
+                  <span className="text-accent mr-5 relative after:absolute after:content-[''] after:h-2/3 after:w-1 after:bg-accent after:-right-3 after:top-1/2 after:-translate-y-1/2 after:rounded-md after:dark:bg-accent-light dark:text-accent-light">
+                    {data?.meta.shoulder}
+                  </span>
+                )}
                 {titleCrop ? cropText(data?.title, titleCrop) : data?.title}
               </h2>
             </a>

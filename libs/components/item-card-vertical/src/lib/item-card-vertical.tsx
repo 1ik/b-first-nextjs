@@ -57,9 +57,6 @@ export function ItemCardVertical({
             />
           </a>
         )}
-        {data?.meta.shoulder && (
-          <h2 className="text-[30px] md:text-4xl font-bold mt-6 text-accent leading-[120%]">{`${data?.meta.shoulder}`}</h2>
-        )}
         {titlePosition === "inset" &&
           (Link ? (
             <Link href={getNewsUrl(data)}>
@@ -102,6 +99,12 @@ export function ItemCardVertical({
                 titlePosition === "inset" ? "hidden" : ""
               }`}
             >
+              {data?.meta.shoulder && (
+                <span className="text-accent mr-5 relative after:absolute after:content-[''] after:h-2/3 after:w-1 after:bg-accent after:-right-3 after:top-1/2 after:-translate-y-1/2 after:rounded-md after:dark:bg-accent-light dark:text-accent-light">
+                  {data?.meta.shoulder}
+                </span>
+              )}
+
               {titleCrop ? cropText(data?.title, titleCrop) : data?.title}
             </h2>
           </Link>
@@ -115,6 +118,11 @@ export function ItemCardVertical({
                 titlePosition === "inset" ? "hidden" : ""
               }`}
             >
+              {data?.meta.shoulder && (
+                <span className="text-accent mr-5 relative after:absolute after:content-[''] after:h-2/3 after:w-1 after:bg-accent after:-right-3 after:top-1/2 after:-translate-y-1/2 after:rounded-md after:dark:bg-accent-light dark:text-accent-light">
+                  {data?.meta.shoulder}
+                </span>
+              )}
               {titleCrop ? cropText(data?.title, titleCrop) : data?.title}
             </h2>
           </a>
