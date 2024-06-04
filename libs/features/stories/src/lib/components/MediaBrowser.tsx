@@ -182,7 +182,7 @@ export default function MediaBrowser({
           </div>
           <TabsBody>
             {data.map(({ value }) => (
-              <TabPanel className="h-[400px]" key={value} value={value}>
+              <TabPanel className="h-[400px] overflow-y-auto" key={value} value={value}>
                 {value === "upload" && (
                   <div className="flex gap-x-4">
                     <div className="flex flex-1 items-center justify-center flex-col gap-y-4">
