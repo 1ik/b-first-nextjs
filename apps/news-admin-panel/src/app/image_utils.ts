@@ -6,6 +6,6 @@ export const getImageUrl = (path: string, w?: number, h?: number) => {
     h = 900;
   }
 
-  const baseUrl = `https://images.bangladeshfirst.com`;
+  const baseUrl = `https://images.bfirst.news`;
   return baseUrl + `/resize?width=${w}&height=${h}&format=webp&quality=85&path=${path}`;
 };

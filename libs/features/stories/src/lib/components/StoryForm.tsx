@@ -231,7 +231,7 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
             <div>
               {featuredImgUrl && (
                 <img
-                  src={`https://images.bangladeshfirst.com/resize?width=1600&height=900&format=webp&quality=85&path=${featuredImgUrl}`}
+                  src={`https://images.bfirst.news/resize?width=1600&height=900&format=webp&quality=85&path=${featuredImgUrl}`}
                   alt="Featured_Image"
                 />
               )}

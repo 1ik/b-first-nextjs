@@ -9,7 +9,7 @@ export const getImageUrl = (path: string, w?: number, h?: number, q?: number) =>
     q = 85;
   }
 
-  const baseUrl = `https://images.bangladeshfirst.com`;
+  const baseUrl = `https://images.bfirst.news`;
   return baseUrl + `/smartcrop?width=${w}&height=${h}&format=webp&quality=${q}&path=${path}`;
 };
 
