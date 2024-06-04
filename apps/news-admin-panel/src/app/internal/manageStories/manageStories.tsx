@@ -1,4 +1,5 @@
 import { useGet, usePost } from "@bfirst/api-client";
+import { Loader } from "@bfirst/components-loader";
 import { TypeAheadSearch } from "@bfirst/components-type-ahead-search";
 import { useEffect, useState } from "react";
 import SortableList, { SortableItem } from "react-easy-sort";
@@ -6,7 +7,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Breadcrumb } from "../../components";
 import { dateFormatter } from "../../dateFormat_utils";
-import { Loader } from "@bfirst/components-loader";
 
 const dropTarget = (
   <div className="py-3 text-center text-blue-600/50 font-bold border-2 border-dashed border-blue-600/50 rounded-md">
@@ -31,14 +31,14 @@ export function ManageStories() {
 
   /* API calls */
   const { data, isSuccess: featuredLoadSuccess } = useGet(
-    `api/v1/public/categories/${categoryOption}/featured-stories`
+    `api/v1/public/categories/${categoryOption}/featured-stories?size=16`
   );
   const { data: searchedNews } = useGet(`api/v1/stories?title=${search}`);
   const { request, isSuccess: featuredSaveSuccess } = usePost(`api/v1/featured/stories/create`);
 
   const handleAddFeaturedStories = function (news: any) {
     if (!news) return;
-    if (featuredStories.length >= 11) {
+    if (featuredStories.length >= 16) {
       toast.success("Last item removed and new one added", {
         position: "top-center",
       });
@@ -53,8 +53,8 @@ export function ManageStories() {
 
   const handleSubmit = async function (e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (featuredStories.length !== 11) {
-      toast.warning("Total featured story must be 11", {
+    if (featuredStories.length !== 16) {
+      toast.warning("Total featured story must be 16", {
         position: "top-center",
       });
       return;
@@ -135,6 +135,7 @@ export function ManageStories() {
                   label="Type for News"
                   items={searchedNews?.data.filter((sN: any) => !featuredStories.some((fN: any) => fN.id === sN.id))}
                   onSearch={(s) => debounceSearch(() => setSearch(s))}
+                  displayValue="title"
                   itemsSelected={(i) => {
                     handleAddFeaturedStories(i);
                   }}
@@ -220,7 +221,7 @@ export function ManageStories() {
         <div className="h-10 pt-5 flex items-center justify-end gap-x-6 w-full border-t bg-white border-gray-100 fixed bottom-0 pb-5 right-10">
           <button
             type="button"
-            onClick={() => window.location.reload()}
+            onClick={() => setFeaturedStories(data.data)}
             className="text-sm font-semibold leading-6 text-gray-900"
           >
             Cancel

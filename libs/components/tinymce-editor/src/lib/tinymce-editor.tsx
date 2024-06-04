@@ -1,14 +1,16 @@
 import { usePost } from "@bfirst/api-client";
-import { useEffect, useRef } from "react";
+import { Dispatch, SetStateAction, useEffect, useRef } from "react";
 import tinymce from "tinymce";
 
 interface TinymceEditorProps {
   defaultValue?: string;
   label?: string;
   onChange: (content: string) => void;
+  dispatch: any;
+  onOpenEmbed: Dispatch<SetStateAction<boolean>>;
 }
 
-export const TinymceEditor = function ({ label, defaultValue, onChange }: TinymceEditorProps) {
+export const TinymceEditor = function ({ label, defaultValue, onChange, dispatch, onOpenEmbed }: TinymceEditorProps) {
   const { requestAsync } = usePost(`api/v1/media-upload-image`);
 
   const editorRef = useRef(null);
@@ -20,7 +22,7 @@ export const TinymceEditor = function ({ label, defaultValue, onChange }: Tinymc
       target: editorRef.current,
       plugins: "anchor charmap codesample emoticons image  lists media searchreplace table visualblocks wordcount code",
       toolbar:
-        "paste undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | code image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat",
+        "paste undo redo code | blocks fontfamily fontsize | bold italic underline strikethrough | embed-news media-library media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat",
 
       file_picker_callback: (callback, value, meta) => {
         const input = document.createElement("input");
@@ -56,6 +58,19 @@ export const TinymceEditor = function ({ label, defaultValue, onChange }: Tinymc
       setup: (editor) => {
         editor.on("change", () => {
           onChange(editor.getContent());
+        });
+        editor.ui.registry.addButton("media-library", {
+          icon: "gallery",
+          onAction: () => {
+            dispatch({ type: "setDialogOpen", paylaod: true });
+            dispatch({ type: "setOpenFrom", payload: "textEditor" });
+          },
+        });
+        editor.ui.registry.addButton("embed-news", {
+          icon: "embed-page",
+          onAction: () => {
+            onOpenEmbed(true);
+          },
         });
       },
       tinycomments_mode: "embedded",
