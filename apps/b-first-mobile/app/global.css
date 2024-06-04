@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.story-body table,
+.story-body table th,
+.story-body table td {
+  border: 1px solid gray;
+}
+
+/* wihtout '!important' news body iframes overflows */
+iframe {
+  width: 100% !important;
+  max-height: 400px !important;
+}

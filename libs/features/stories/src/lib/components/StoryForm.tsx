@@ -6,8 +6,8 @@ import { Button, CardBody, Input, Textarea } from "@bfirst/material-tailwind";
 import { useReducer, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import MediaBrowser from "./MediaBrowser";
 import EmbedRelatedNews from "./EmbedRelatedNews";
+import MediaBrowser from "./MediaBrowser";
 
 export type Inputs = {
   shoulder?: string;
@@ -239,15 +239,14 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
             <div>
               {featuredImgUrl && (
                 <img
-                  className="md:w-[720px] w-full aspect-video object-cover"
-                  src={`https://images.bangladeshfirst.com/smartcrop?width=1600&height=900&format=webp&quality=85&path=${featuredImgUrl}`}
+                  src={`https://images.bfirst.news/resize?width=1600&height=900&format=webp&quality=85&path=${featuredImgUrl}`}
                   alt="Featured_Image"
                 />
               )}
             </div>
 
             {/* ============== modal for related news embed ============ */}
-            <EmbedRelatedNews open={isOpenEmbed} onOpen={setIsOpenEmbed}/>
+            <EmbedRelatedNews open={isOpenEmbed} onOpen={setIsOpenEmbed} />
           </CardBody>
         </HCF.Content>
         <HCF.Footer className="flex w-full px-3 flex-row justify-end">
