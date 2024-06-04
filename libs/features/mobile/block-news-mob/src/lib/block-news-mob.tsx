@@ -32,9 +32,9 @@ export function BlockNewsMob({ data, ads1, ads2, className }: BlockNewsMobProps)
         </div>
 
         <div className="sm:col-span-2 gap-4 item-center mx-auto flex flex-col order-1 sm:order-none">
-          <div className="bg-[#FFF3ED] dark:bg-dark-300">
+          <div className="bg-[#FFF3ED] dark:bg-dark-300 pb-2">
             {data?.slice(1, 3).map((item: any, index: Key | null | undefined) => (
-              <div className="border-b-2 border-black/25 pb-3 last:border-0" key={index}>
+              <div className="border-b-2 border-black/25 py-2 last:border-0" key={index}>
                 <ItemCardVertical className="p-2.5" data={item} />
               </div>
             ))}
