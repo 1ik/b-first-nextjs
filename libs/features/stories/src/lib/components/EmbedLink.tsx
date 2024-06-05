@@ -9,24 +9,31 @@ interface EmbedLinkProps {
 }
 
 export default function EmbedLink({ open, onOpen }: EmbedLinkProps) {
-  const [embedUrl, setEmbedUrl] = useState("");
-  const [displayText, setDisplayText] = useState("");
+  const [state, setState] = useState({
+    embedUrl: "",
+    displayText: "",
+  });
+
+  const handleChange = (e) => {
+    setState({ ...state, [e.target.name]: e.target.value });
+  };
+
   const handleOpen = function () {
     onOpen((cur) => !cur);
   };
 
   const handleEmbedLink = () => {
-    if (!embedUrl) {
+    if (!state.embedUrl) {
       toast.error("Embed Url is required", {
         position: "top-center",
       });
-    } else if (!displayText) {
+    } else if (!state.displayText) {
       toast.error("Diplay name is required", {
         position: "top-center",
       });
     } else {
       tinymce.activeEditor?.insertContent(
-        `<a style = "text-decoration:underline; color:#544ce0" href=${embedUrl}>${displayText}</a>`
+        `<a style = "text-decoration:underline; color:#544ce0" href=${state.embedUrl}>${state.displayText}</a>`
       );
       onOpen(false);
     }
@@ -38,10 +45,10 @@ export default function EmbedLink({ open, onOpen }: EmbedLinkProps) {
       <DialogBody className="relative overflow-hidden">
         <ToastContainer />
         <div>
-          <Input label="Embed Url" onChange={(e) => setEmbedUrl(e.target.value)} />
+          <Input label="Embed Url" name="embedUrl" onChange={handleChange} />
         </div>
         <div className="mt-2">
-          <Input label="Display Text" onChange={(e) => setDisplayText(e.target.value)} />
+          <Input label="Display Text" name="displayText" onChange={handleChange} />
         </div>
       </DialogBody>
       <DialogFooter className="mt-4">
