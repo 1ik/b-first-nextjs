@@ -92,12 +92,12 @@ export default async function NewsDetails({ params }) {
             },
           ]}
         />
-        <h1 className="text-5xl my-10 font-bold">{detailsData?.story.title}</h1>
+        <h1 className="text-5xl my-10 font-bold leading-[120%]">{detailsData?.story.title}</h1>
 
         <div className="grid grid-cols-4 gap-x-10 gap-y-11">
           {/* ====== row 1 ===== */}
           <div className="flex flex-col">
-            <h3 className="text-xl montserrat-regular">{detailsData?.story.meta.intro}</h3>
+            <h3 className="text-[22px] montserrat-regular leading-[120%]">{detailsData?.story.meta.intro}</h3>
             <div className="mt-10">
               <ProfileCard
                 data={detailsData?.story.authors[0]}
