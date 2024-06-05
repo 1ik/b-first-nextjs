@@ -31,7 +31,7 @@ export const TinymceEditor = function ({
       plugins:
         "anchor charmap codesample emoticons image  lists media searchreplace table visualblocks wordcount code",
       toolbar:
-        "paste undo  redo code | blocks fontfamily fontsize | bold italic underline strikethrough | embed-news media-library media table mergetags embed-link | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat",
+        "paste undo  redo code | blocks fontfamily fontsize | bold italic underline strikethrough embed-link| embed-news media-library media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat",
 
       file_picker_callback: (callback, value, meta) => {
         const input = document.createElement("input");

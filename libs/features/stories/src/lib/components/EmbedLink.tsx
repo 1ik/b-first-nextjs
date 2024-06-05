@@ -26,7 +26,7 @@ export default function EmbedLink({ open, onOpen }: EmbedRelatedNewsProps) {
       });
     } else {
       tinymce.activeEditor?.insertContent(
-        `<a  style = "border-bottom: 1px solid; text-decoration:none" href=${embedUrl}>${displayText}</a>`
+        `<a style = "text-decoration:underline; color:#544ce0" href=${embedUrl}>${displayText}</a>`
       );
       onOpen(false);
     }
@@ -34,7 +34,7 @@ export default function EmbedLink({ open, onOpen }: EmbedRelatedNewsProps) {
 
   return (
     <Dialog open={open} handler={handleOpen} size="sm">
-      <DialogHeader>Link Embed</DialogHeader>
+      <DialogHeader>Insert Link</DialogHeader>
       <DialogBody className="relative overflow-hidden">
         <ToastContainer />
         <div>
