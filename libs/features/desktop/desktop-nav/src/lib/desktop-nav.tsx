@@ -126,24 +126,24 @@ export function DesktopNav({
             </div>
             <div className="flex gap-x-1 py-3">
               <a
-                href="https://www.facebook.com/Bangladeshfirst.news"
+                href="https://www.facebook.com/bfirstdotnews"
                 target="_blank"
                 className="bg-black dark:bg-dark-300 p-1.5 rounded-md"
               >
                 <FaFacebookF className="text-white" />
               </a>
               <a
-                href="https://www.instagram.com/bdfirstnews"
+                href="https://www.instagram.com/bfirstdotnews/"
                 target="_blank"
                 className="bg-black dark:bg-dark-300 p-1.5 rounded-md"
               >
                 <FaInstagram className="text-white" />
               </a>
-              <a href="https://x.com/BFirstnews" target="_blank" className="bg-black dark:bg-dark-300 p-1.5 rounded-md">
+              <a href="https://x.com/bfirstdotnews" target="_blank" className="bg-black dark:bg-dark-300 p-1.5 rounded-md">
                 <FaXTwitter className="text-white" />
               </a>
               <a
-                href="https://www.youtube.com/channel/UCKv8bP1Ewcai3Z53v88pPSw"
+                href="https://www.youtube.com/@bfirstdotnews"
                 target="_blank"
                 className="bg-black dark:bg-dark-300 p-1.5 rounded-md"
               >

@@ -158,28 +158,28 @@ export function MobileNav({ Link, logoLight, logoDark, activeLink, theme, onThem
           </ul>
           <div className="flex gap-x-3 sm:gap-x-5 my-3 py-5 border-t border-black/40 justify-center text-xs sm:text-sm w-full dark:border-dark-300">
             <a
-              href="https://www.facebook.com/Bangladeshfirst.news"
+              href="https://www.facebook.com/bfirstdotnews"
               target="_blank"
               className="bg-black dark:bg-dark-300 p-1.5 sm:p-2 rounded-md"
             >
               <FaFacebookF className="text-white" />
             </a>
             <a
-              href="https://www.instagram.com/bdfirstnews"
+              href="https://www.instagram.com/bfirstdotnews/"
               target="_blank"
               className="bg-black dark:bg-dark-300 p-1.5 sm:p-2 rounded-md"
             >
               <FaInstagram className="text-white" />
             </a>
             <a
-              href="https://x.com/BFirstnews"
+              href="https://x.com/bfirstdotnews"
               target="_blank"
               className="bg-black dark:bg-dark-300 p-1.5 sm:p-2 rounded-md"
             >
               <FaXTwitter className="text-white" />
             </a>
             <a
-              href="https://www.youtube.com/channel/UCKv8bP1Ewcai3Z53v88pPSw"
+              href="https://www.youtube.com/@bfirstdotnews"
               target="_blank"
               className="bg-black dark:bg-dark-300 p-1.5 sm:p-2 rounded-md"
             >
