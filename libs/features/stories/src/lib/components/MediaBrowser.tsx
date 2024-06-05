@@ -263,7 +263,7 @@ export default function MediaBrowser({
                                 className={`w-full aspect-video object-cover cursor-pointer ${
                                   selectedImage === item.url ? "border-[3px] border-red-500" : ""
                                 }`}
-                                src={`${getImageUrl(item.url)}`}
+                                src={`${getImageUrl(item.url, 320, 180, 50)}`}
                                 alt={item.url}
                               />
                             );
