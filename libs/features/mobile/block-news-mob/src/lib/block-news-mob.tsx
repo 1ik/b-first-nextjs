@@ -18,7 +18,7 @@ export function BlockNewsMob({ data, ads1, ads2, className }: BlockNewsMobProps)
       <div className="grid grid-cols-1 sm:grid-cols-5 gap-4">
         <div className="sm:col-span-3">
           <ItemCardVertical data={data?.[0]} size="lg" titleFontSize="30px" showIntro introFontSize="16px" titleBold />
-          <div className="mt-5">
+          <div className="mt-8">
             {data?.slice(3, 8).map((item: any, index: number) => (
               <div key={index}>
                 <div className={`mt-5 pt-5 border-t dark:border-dark-300`}>
