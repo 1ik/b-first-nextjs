@@ -43,9 +43,10 @@ const organizationJsonLd = {
     email: "editor@bangladeshfirst.com",
   },
   sameAs: [
-    "https://www.facebook.com/Bangladeshfirst.news",
-    "https://www.instagram.com/bdfirstnews",
-    "https://x.com/BFirstnews",
+    "https://www.facebook.com/bfirstdotnews",
+    "https://www.instagram.com/bfirstdotnews/",
+    "https://x.com/bfirstdotnews",
+    "https://www.threads.net/@bfirstdotnews",
     "https://www.youtube.com/channel/UCKv8bP1Ewcai3Z53v88pPSw",
   ],
 };
