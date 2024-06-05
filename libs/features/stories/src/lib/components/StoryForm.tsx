@@ -244,6 +244,8 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
 
             {/* ============== modal for related news embed ============ */}
             <EmbedRelatedNews open={isOpenEmbed} onOpen={setIsOpenEmbed} />
+            
+            {/* ============== modal for link embed ============ */}
             <EmbedLink open={isOpenEmbedLink} onOpen={setIsOpenEmbedLink} />
           </CardBody>
         </HCF.Content>
