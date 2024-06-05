@@ -3,12 +3,12 @@ import { Button, Dialog, DialogBody, DialogFooter, DialogHeader, Input } from "@
 import { Dispatch, SetStateAction, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import tinymce from "tinymce";
-interface EmbedRelatedNewsProps {
+interface EmbedLinkProps {
   open: boolean;
   onOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-export default function EmbedLink({ open, onOpen }: EmbedRelatedNewsProps) {
+export default function EmbedLink({ open, onOpen }: EmbedLinkProps) {
   const [embedUrl, setEmbedUrl] = useState("");
   const [displayText, setDisplayText] = useState("");
   const handleOpen = function () {
