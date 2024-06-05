@@ -122,8 +122,8 @@ export default async function Index() {
         <BlockNewsMob4 data={lifestyleNews} sectionHeader="Lifestyle" headerColor="#EF2D8A" />
 
         {/* ON THIS DAY SECTION */}
-        <div className="grid grid-cols-1 sm:grid-cols-7 gap-4">
-          <div className="sm:col-span-3 flex flex-col items-center gap-2">
+        <div className="grid grid-cols-1 sm:grid-cols-7 gap-4 mt-5">
+          <div className="sm:col-span-3 flex flex-col items-center gap-4">
             <Ads src="/ads/SIBL_Profit_300x250.gif" alt="Ads" />
             <Ads src="/ads/Global.gif" alt="Ads" />
           </div>
