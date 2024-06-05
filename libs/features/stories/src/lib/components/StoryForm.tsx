@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import EmbedRelatedNews from "./EmbedRelatedNews";
 import MediaBrowser from "./MediaBrowser";
+import EmbedLink from "./EmbedLink";
 
 export type Inputs = {
   shoulder?: string;
@@ -62,6 +63,7 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const [isOpenEmbed, setIsOpenEmbed] = useState(false);
+  const [isOpenEmbedLink, setIsOpenEmbedLink] = useState(false);
   const [error, setError] = useState({ authors: "", tags: "", categories: "", body: "", featuredImg: "" });
   const [body, setBody] = useState(defaultData?.story.content || "");
   const [featuredImgUrl, setFeaturedImgUrl] = useState(defaultData?.story.meta.featured_image || "");
@@ -175,6 +177,7 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
                 label="Body*"
                 dispatch={dispatch}
                 onOpenEmbed={setIsOpenEmbed}
+                onOpenEmbedLink={setIsOpenEmbedLink}
                 onChange={(content) => {
                   setBody(content);
                   setError((cur) => ({ ...cur, body: "" }));
@@ -247,6 +250,7 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
 
             {/* ============== modal for related news embed ============ */}
             <EmbedRelatedNews open={isOpenEmbed} onOpen={setIsOpenEmbed} />
+            <EmbedLink open={isOpenEmbedLink} onOpen={setIsOpenEmbedLink} />
           </CardBody>
         </HCF.Content>
         <HCF.Footer className="flex w-full px-3 flex-row justify-end">

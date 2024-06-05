@@ -8,9 +8,17 @@ interface TinymceEditorProps {
   onChange: (content: string) => void;
   dispatch: any;
   onOpenEmbed: Dispatch<SetStateAction<boolean>>;
+  onOpenEmbedLink: Dispatch<SetStateAction<boolean>>;
 }
 
-export const TinymceEditor = function ({ label, defaultValue, onChange, dispatch, onOpenEmbed }: TinymceEditorProps) {
+export const TinymceEditor = function ({
+  label,
+  defaultValue,
+  onChange,
+  dispatch,
+  onOpenEmbed,
+  onOpenEmbedLink,
+}: TinymceEditorProps) {
   const { requestAsync } = usePost(`api/v1/media-upload-image`);
 
   const editorRef = useRef(null);
@@ -20,9 +28,10 @@ export const TinymceEditor = function ({ label, defaultValue, onChange, dispatch
 
     tinymce.init({
       target: editorRef.current,
-      plugins: "anchor charmap codesample emoticons image  lists media searchreplace table visualblocks wordcount code",
+      plugins:
+        "anchor charmap codesample emoticons image  lists media searchreplace table visualblocks wordcount code",
       toolbar:
-        "paste undo redo code | blocks fontfamily fontsize | bold italic underline strikethrough | embed-news media-library media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat",
+        "paste undo  redo code | blocks fontfamily fontsize | bold italic underline strikethrough | embed-news media-library media table mergetags embed-link | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat",
 
       file_picker_callback: (callback, value, meta) => {
         const input = document.createElement("input");
@@ -58,6 +67,12 @@ export const TinymceEditor = function ({ label, defaultValue, onChange, dispatch
       setup: (editor) => {
         editor.on("change", () => {
           onChange(editor.getContent());
+        });
+        editor.ui.registry.addButton("embed-link", {
+          icon: "link",
+          onAction: () => {
+            onOpenEmbedLink(true);
+          },
         });
         editor.ui.registry.addButton("media-library", {
           icon: "gallery",
