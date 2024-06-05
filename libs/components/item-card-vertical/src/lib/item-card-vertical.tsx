@@ -100,9 +100,7 @@ export function ItemCardVertical({
               }`}
             >
               {data?.meta.shoulder && (
-                <span className="text-[#191970] mr-5 relative after:absolute after:content-[''] after:h-2/3 after:w-1 after:bg-[#191970] after:-right-3 after:top-1/2 after:-translate-y-1/2 after:rounded-md after:dark:bg-[#6565c4ec] dark:text-[#6565c4ec]">
-                  {data?.meta.shoulder}
-                </span>
+                <span className="text-[#191970] mr-3 dark:text-[#6565c4ec]">{data?.meta.shoulder} |</span>
               )}
 
               {titleCrop ? cropText(data?.title, titleCrop) : data?.title}
@@ -119,10 +117,7 @@ export function ItemCardVertical({
               }`}
             >
               {data?.meta.shoulder && (
-                <span className="text-[#191970] mr-5 relative after:absolute after:content-[''] after:h-2/3 after:w-1 after:bg-[#191970] after:-right-3 after:top-1/2 after:-translate-y-1/2 after:rounded-md after:dark:bg-[#6565c4ec]
-               dark:text-[#6565c4ec]">
-                  {data?.meta.shoulder}
-                </span>
+                <span className="text-[#191970] mr-3 dark:text-[#6565c4ec]">{data?.meta.shoulder} |</span>
               )}
               {titleCrop ? cropText(data?.title, titleCrop) : data?.title}
             </h2>
