@@ -2,10 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Styles for news details body (removed by default due to tailwind preflight) */
+
 .story-body table,
 .story-body table th,
 .story-body table td {
   border: 1px solid gray;
+}
+
+.story-body ul {
+  list-style: disc inside;
+}
+
+.story-body ol {
+  list-style: decimal inside;
 }
 
 /* wihtout '!important' news body iframes overflows */
