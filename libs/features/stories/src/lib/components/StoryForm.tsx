@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import EmbedRelatedNews from "./EmbedRelatedNews";
 import MediaBrowser from "./MediaBrowser";
+import { getImageUrl } from "@bfirst/utilities";
 
 export type Inputs = {
   shoulder?: string;
@@ -236,14 +237,7 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
               onFeaturedImgUrl={setFeaturedImgUrl}
             />
 
-            <div>
-              {featuredImgUrl && (
-                <img
-                  src={`https://images.bfirst.news/resize?width=1600&height=900&format=webp&quality=85&path=${featuredImgUrl}`}
-                  alt="Featured_Image"
-                />
-              )}
-            </div>
+            <div>{featuredImgUrl && <img src={`${getImageUrl(featuredImgUrl)}`} alt="Featured_Image" />}</div>
 
             {/* ============== modal for related news embed ============ */}
             <EmbedRelatedNews open={isOpenEmbed} onOpen={setIsOpenEmbed} />
