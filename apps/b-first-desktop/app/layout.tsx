@@ -1,5 +1,6 @@
 import { Footer } from "@bfirst/components-footer";
-import { GTMNoscript, GTMScript } from "@bfirst/gtm";
+import { GTMNoscript, gtmString } from "@bfirst/gtm";
+import Script from "next/script";
 import "../../../libs/fonts/merriweather/index.css";
 import "../../../libs/fonts/washington/index.css";
 import BackToTop from "./components/BackToTop/BackToTop";
@@ -54,7 +55,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <head>
         {/* ==== Google Tag Manager ==== */}
-        <GTMScript id="GTM-WD4DNL5P" />
+        <Script id="gtm" strategy="afterInteractive">
+          {gtmString("GTM-WD4DNL5P")}
+        </Script>
 
         {/* ===== organization schema markup ===== */}
         <script
