@@ -28,7 +28,7 @@ export default function EmbedLink({ open, onOpen }: EmbedLinkProps) {
         position: "top-center",
       });
     } else if (!state.displayText) {
-      toast.error("Diplay name is required", {
+      toast.error("Display text is required", {
         position: "top-center",
       });
     } else {
