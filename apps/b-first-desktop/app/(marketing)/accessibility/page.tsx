@@ -86,7 +86,7 @@ export default function Accessibility() {
             <span className="font-semibold mr-2">Phone :</span>+880 961 332 2782
           </li>
           <li className="text-base mb-2">
-            <span className="font-semibold mr-2">Mail :</span>115 Kazi Nazrul Islam Avenue, Level 12, Bangla Motor, Dhaka 1000,
+            <span className="font-semibold mr-2">Address :</span>115 Kazi Nazrul Islam Avenue, Level 12, Bangla Motor, Dhaka 1000,
             Bangladesh
           </li>
         </ul>
