@@ -1,5 +1,9 @@
 import Navbar from "../../components/Navbar/Navbar";
 
+export const metadata = {
+  title: "Comment Policy | Bangladesh First",
+};
+
 export default function CommentsPolicy() {
   return (
     <>

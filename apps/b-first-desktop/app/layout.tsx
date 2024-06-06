@@ -8,8 +8,22 @@ import { Provider } from "./components/ThemeProvider/Provider";
 import "./global.css";
 
 export const metadata = {
-  title: "Bangladesh First",
-  description: "A newspaper that publishes news with authenticity and without fear.",
+  title: "Bangladesh First | Bangladeshi News, Economy, and Business Updates",
+  description:
+    "Stay informed with the Bangladesh First for breaking news from Bangladesh, comprehensive economic and business insights, and engaging multimedia content. Enjoy 24/7 coverage of national and international news, entertainment, sports, technology, lifestyle, and more at Bfirst.news",
+  openGraph: {
+    title: "Bangladesh First",
+    url: `${process.env.BASE_URL}/`,
+    images: [
+      {
+        url: `${process.env.BASE_URL}/img/logo-dark.svg`,
+        width: 1200,
+        height: 630,
+      },
+    ],
+    type: "website",
+    site_name: "Bangladesh First",
+  },
 };
 
 const organizationJsonLd = {
@@ -19,8 +33,8 @@ const organizationJsonLd = {
   description:
     "Find the latest breaking news and top stories on Politics, Sports, Entertainment, Arts, Business and Tech news. Visit Bfirst.news & get all the latest news in Bangladesh.",
   legalName: "Bangladesh First",
-  url: "https://bfirst.news/",
-  logo: "https://bfirst.news/img/logo-dark.svg",
+  url: `${process.env.BASE_URL}/`,
+  logo: `${process.env.BASE_URL}/img/logo-dark.svg`,
   foundingDate: "2024",
   founders: [
     {
