@@ -71,13 +71,16 @@ export function ItemCardHorizontal({
         }   
           ${imageSide === "left" ? "order-last" : imageSide === "right" ? "order-first" : ""} `}
       >
-        <div className={`${titleBold ? "font-bold" : ""} pl-2 flex flex-col h-full`}>
+        <div className={`${titleBold ? "font-bold" : ""} pl-2 flex flex-col h-full leading-[120%]`}>
           {Link ? (
             <Link className="" href={getNewsUrl(data)}>
               <h2
                 style={{ fontSize: titleFontSize }}
                 className={` ${titleFont} hover:text-accent dark:hover:text-accent-light duration-150 leading-[120%]`}
               >
+                {data?.meta.shoulder && (
+                  <span className="text-[#191970] mr-3 dark:text-[#6565c4ec]">{data?.meta.shoulder} |</span>
+                )}
                 {titleCrop ? cropText(data?.title, titleCrop) : data?.title}
               </h2>
             </Link>
@@ -89,6 +92,9 @@ export function ItemCardHorizontal({
                   showTitleBorderSmall ? "mt-3" : ""
                 } hover:text-accent dark:hover:text-accent-light duration-150 leading-[120%]`}
               >
+                {data?.meta.shoulder && (
+                  <span className="text-[#191970] mr-3 dark:text-[#6565c4ec]">{data?.meta.shoulder} |</span>
+                )}
                 {titleCrop ? cropText(data?.title, titleCrop) : data?.title}
               </h2>
             </a>
