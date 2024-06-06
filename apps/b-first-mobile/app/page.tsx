@@ -14,6 +14,17 @@ import TrendingTopics from "./components/TrendingTopics/TrendingTopics";
 import { getData } from "./utils/dataFetch";
 import filterOutOTD from "./utils/filterOutOTD";
 
+const webpageJsonLd = {
+  "@context": "http://schema.org",
+  "@type": "WebPage",
+  name: "Bangladesh First",
+  description: "A newspaper that publishes news with authenticity and without fear.",
+  publisher: {
+    "@type": "Organization",
+    name: "Bangladesh First",
+  },
+};
+
 export default async function Index() {
   const [topNews, recommendedNews] = (
     await Promise.all([getData("categories/0/featured-stories?size=16"), getData("recommended-stories")])
@@ -57,6 +68,9 @@ export default async function Index() {
   );
   return (
     <>
+      {/* ==== webpage schema markup */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webpageJsonLd) }}></script>
+
       <Navbar />
       <div className="px-3">
         <Ads className="my-6" src="/ads/Ad-Master-50.gif" alt="Ads" showHeader={false} />
