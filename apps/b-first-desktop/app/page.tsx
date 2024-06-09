@@ -50,7 +50,7 @@ export default async function Index() {
   const [economyNews, featureNews, entertainmentNews, lifestyleNews, bangladeshNews, worldNews, sportsNews, techNews] =
     (
       await Promise.all([
-        getData("categories/economy/stories"),
+        getData("categories/economy/stories?size=40"),
         getData("categories/feature/stories"),
         getData("categories/entertainment/stories"),
         getData("categories/lifestyle/stories"),
