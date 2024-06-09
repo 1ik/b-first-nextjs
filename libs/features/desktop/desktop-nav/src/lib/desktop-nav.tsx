@@ -18,58 +18,8 @@ export interface DesktopNavProps {
   theme?: string;
   onThemeChange?: any;
   Link?: any;
+  navList;
 }
-
-const _links = [
-  {
-    name: "Bangladesh",
-    href: "/bangladesh",
-  },
-  {
-    name: "World",
-    href: "/world",
-  },
-  {
-    name: "Economy",
-    href: "/economy",
-  },
-  {
-    name: "Feature",
-    href: "/feature",
-  },
-  {
-    name: "Sports",
-    href: "/sports",
-  },
-  {
-    name: "Tech",
-    href: "/tech",
-  },
-  {
-    name: "Entertainment",
-    href: "/entertainment",
-  },
-  {
-    name: "Lifestyle",
-    href: "/lifestyle",
-  },
-  {
-    name: "Education",
-    href: "/education",
-  },
-  {
-    name: "Interview",
-    href: "/interview",
-  },
-  {
-    name: "Corporates",
-    href: "/corporates",
-  },
-  {
-    name: "Politics",
-    href: "/politics",
-  },
-];
 
 export function DesktopNav({
   Link,
@@ -82,6 +32,7 @@ export function DesktopNav({
   activeLink,
   theme,
   onThemeChange,
+  navList,
 }: DesktopNavProps) {
   const [isMounted, setIsMounted] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
@@ -139,7 +90,11 @@ export function DesktopNav({
               >
                 <FaInstagram className="text-white" />
               </a>
-              <a href="https://x.com/bfirstdotnews" target="_blank" className="bg-black dark:bg-dark-300 p-1.5 rounded-md">
+              <a
+                href="https://x.com/bfirstdotnews"
+                target="_blank"
+                className="bg-black dark:bg-dark-300 p-1.5 rounded-md"
+              >
                 <FaXTwitter className="text-white" />
               </a>
               <a
@@ -178,6 +133,7 @@ export function DesktopNav({
         </div>
       </div>
 
+      {/* Navbar */}
       <div className="h-24 relative ">
         <div
           className={`w-full transition-[padding] duration-300 z-[999] ${
@@ -188,80 +144,61 @@ export function DesktopNav({
         >
           <div className="desktop-container flex justify-between items-center">
             <div className="w-9">
-              {logoMini &&
-                (Link ? (
-                  <Link href="/">
-                    <img
-                      className={`w-full duration-300 ${isSticky ? "scale-100" : "scale-0"}`}
-                      src={logoMini}
-                      alt="Logo"
-                    />
-                  </Link>
-                ) : (
-                  <a href="/">
-                    <img
-                      className={`w-full duration-300 ${isSticky ? "scale-100" : "scale-0"}`}
-                      src={logoMini}
-                      alt="Logo"
-                    />
-                  </a>
-                ))}
+              {logoMini && (
+                <a href="/">
+                  <img
+                    className={`w-full duration-300 ${isSticky ? "scale-100" : "scale-0"}`}
+                    src={logoMini}
+                    alt="Logo"
+                  />
+                </a>
+              )}
             </div>
             <ul className="flex text-[22px] washington-regular">
-              {_links.slice(0, 7).map((link, index) => (
+              {navList.map((link: any, index: number) => (
                 <li
                   key={index}
-                  className={`relative before:content-[''] before:absolute before:h-2/5 before:w-[2px] before:bg-[#cccccc] before:right-0 before:top-1/2 before:-translate-y-1/2 after:content-[''] after:absolute after:h-[3px] ${
+                  className={`relative before:content-[''] before:absolute before:top-1/2 before:h-2/5 before:w-[2px] last:before:w-0 before:bg-[#cccccc] before:right-0 before:-translate-y-1/2 after:content-[''] after:absolute after:h-[3px] ${
                     link.href === activeLink ? "after:w-1/3" : "after:w-0"
-                  } after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:bg-accent hover:after:w-1/3 z after:duration-300`}
+                  } after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:bg-accent hover:after:w-1/3  after:duration-300 group group-hover:scale-y-110 flex items-center`}
                 >
-                  {Link ? (
-                    <Link className="px-5 py-1 block" href={link.href}>
-                      {link.name}
-                    </Link>
-                  ) : (
+                  {link.href ? (
                     <a className="px-5 py-1 block" href={link.href}>
                       {link.name}
                     </a>
+                  ) : (
+                    <div
+                      className={`pl-5 pr-2 py-1 block relative cursor-pointer after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:bg-accent after:duration-300 after:h-[3px] ${
+                        activeLink && link.subList.map((item: any) => item.href).includes(activeLink)
+                          ? "after:w-1/3"
+                          : ""
+                      }`}
+                    >
+                      {link.name}
+                    </div>
+                  )}
+                  {link.subList && (
+                    <>
+                      <IoIosArrowDown className="mr-1.5" />
+                      <ul
+                        className={`absolute z-50 -translate-y-2 rounded-md px-4 py-6 top-10 left-1/2 -translate-x-1/2 bg-white dark:bg-dark-300 shadow-lg shadow-black/20 dark:shadow-black/80 duration-500 origin-top scale-y-0 group-hover:scale-y-110 flex flex-col gap-y-1.5`}
+                      >
+                        {link.subList.map((list: any) => (
+                          <li
+                            className={`relative after:content-[''] after:absolute after:h-[3px] ${
+                              list.href === activeLink ? "after:w-1/3" : "after:w-0"
+                            } after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:bg-accent hover:after:w-1/3 z after:duration-300`}
+                          >
+                            <a className="px-5 py-1 block" href={list.href}>
+                              {list.name}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </>
                   )}
                 </li>
               ))}
-              <li
-                suppressHydrationWarning
-                className={`relative px-5 py-1 flex items-center gap-x-1 group cursor-pointer after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:bg-accent after:duration-300 after:h-[3px] ${
-                  activeLink &&
-                  _links
-                    .slice(8)
-                    .map((item) => item.href)
-                    .includes(activeLink)
-                    ? "after:w-1/3"
-                    : ""
-                }`}
-              >
-                More <IoIosArrowDown />
-                <ul
-                  className={`px-4 z-[100] -translate-y-2 rounded-md py-6 absolute top-10 -right-6  bg-white dark:bg-dark-300 shadow-lg shadow-black/20 dark:shadow-black/80 duration-500 origin-top scale-y-0 group-hover:scale-y-110 flex flex-col gap-y-1.5`}
-                >
-                  {_links.slice(8).map((link, index) => (
-                    <li
-                      key={index}
-                      className={`relative after:absolute after:h-[3px] ${
-                        link.href === activeLink ? "after:w-1/3" : "after:w-0"
-                      } after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:bg-accent hover:after:w-1/3 z after:duration-300 last:mb-2`}
-                    >
-                      {Link ? (
-                        <Link className="px-5 py-1 block" href={link.href}>
-                          {link.name}
-                        </Link>
-                      ) : (
-                        <a className="px-5 py-1 block" href={link.href}>
-                          {link.name}
-                        </a>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </li>
             </ul>
             <button className="w-9 block text-2xl">
               <FaSearch />

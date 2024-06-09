@@ -11,60 +11,12 @@ export interface MobileNavProps {
   theme?: string;
   onThemeChange?: any;
   Link?: any;
+  navList:any
 }
 
-const _links = [
-  {
-    name: "Bangladesh",
-    href: "/bangladesh",
-  },
-  {
-    name: "World",
-    href: "/world",
-  },
-  {
-    name: "Economy",
-    href: "/economy",
-  },
-  {
-    name: "Feature",
-    href: "/feature",
-  },
-  {
-    name: "Sports",
-    href: "/sports",
-  },
-  {
-    name: "Tech",
-    href: "/tech",
-  },
-  {
-    name: "Entertainment",
-    href: "/entertainment",
-  },
-  {
-    name: "Lifestyle",
-    href: "/lifestyle",
-  },
-  {
-    name: "Education",
-    href: "/education",
-  },
-  {
-    name: "Interview",
-    href: "/interview",
-  },
-  {
-    name: "Corporates",
-    href: "/corporates",
-  },
-  {
-    name: "Politics",
-    href: "/politics",
-  },
-];
 
-export function MobileNav({ Link, logoLight, logoDark, activeLink, theme, onThemeChange }: MobileNavProps) {
+
+export function MobileNav({ Link, logoLight, logoDark, activeLink, theme, onThemeChange,navList }: MobileNavProps) {
   const [showSidebar, setshowSidebar] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
 
@@ -137,7 +89,7 @@ export function MobileNav({ Link, logoLight, logoDark, activeLink, theme, onThem
             <FaTimes />
           </button>
           <ul className="flex flex-col gap-y-1 w-full washington-regular">
-            {_links.map((link, index) => (
+            {navList.map((link, index) => (
               <li
                 key={index}
                 className={`relative before:content-[''] before:absolute before:h-0 before:w-[3px] before:bg-accent before:right-0 before:top-1/2 before:-translate-y-1/2 ${
