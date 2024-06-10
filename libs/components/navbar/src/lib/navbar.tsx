@@ -6,14 +6,14 @@ import { FaFacebookF, FaInstagram, FaTimes, FaYoutube } from "react-icons/fa";
 
 export interface NavbarProps {
   activeLink?: string;
-  navList?: any;
   isSticky?: boolean;
   logoMini?: string;
   type?: "navbar" | "sidebar";
   onThemeChange?: any;
   theme?: string;
-  showSidebar?: any;
+  showSidebar?: boolean;
   setshowSidebar?: any;
+  navList: any;
 }
 
 export function Navbar({
@@ -100,8 +100,9 @@ export function Navbar({
                         <ul
                           className={`absolute z-50 -translate-y-2 rounded-md px-4 py-6 top-10 left-1/2 -translate-x-1/2 bg-white dark:bg-dark-300 shadow-lg shadow-black/20 dark:shadow-black/80 duration-500 origin-top scale-y-0 group-hover:scale-y-110 flex flex-col gap-y-1.5`}
                         >
-                          {link.subList.map((list: any) => (
+                          {link.subList.map((list: any, index: number) => (
                             <li
+                              key={index}
                               className={`relative after:content-[''] after:absolute after:h-[3px] ${
                                 list.href === activeLink ? "after:w-1/3" : "after:w-0"
                               } after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:bg-accent hover:after:w-1/3 z after:duration-300`}
@@ -148,7 +149,7 @@ export function Navbar({
               <FaTimes />
             </button>
             <ul className="flex flex-col gap-y-1 w-full washington-regular">
-              {navList.map((link, index) => (
+              {navList.map((link: any, index: number) => (
                 <li
                   key={index}
                   className={`relative before:content-[''] before:absolute before:h-0 before:w-[3px] before:bg-accent before:right-0 before:top-1/2 before:-translate-y-1/2 ${
@@ -192,10 +193,14 @@ export function Navbar({
               </a>
             </div>
           </div>
+          {showSidebar && (
+            <div
+              onClick={() => setshowSidebar(false)}
+              className="fixed z-[999] h-full w-full top-0 left-0"
+            ></div>
+          )}
         </>
-      ) : (
-        <></>
-      )}
+      ) : null}
     </>
   );
 }
