@@ -1,16 +1,15 @@
 import { AccentHeader } from "@bfirst/components-accent-header";
+import { Ads } from "@bfirst/components-ads";
 import { BlockNewsMob6 } from "@bfirst/components-block-news-mob-6";
 import { BreadCrumb } from "@bfirst/components-breadcrumb";
 import { ItemCardHorizontal } from "@bfirst/components-item-card-horizontal";
 import { ItemList } from "@bfirst/components-item-list";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import LoadMore from "../../components/LoadMore/LoadMore";
 import Navbar from "../../components/Navbar/Navbar";
 import TrendingTopics from "../../components/TrendingTopics/TrendingTopics";
 import { getData } from "../../utils/dataFetch";
 import filterOutOTD from "../../utils/filterOutOTD";
-import { Ads } from "@bfirst/components-ads";
 
 export default async function CategoryPage({ params }) {
   const { category } = params;
@@ -67,10 +66,19 @@ export default async function CategoryPage({ params }) {
               </div>
             ))}
             <div className="hidden sm:block">
-              <LoadMore initialPage={2} lastPage={categroyNews?.meta.last_page} category={category} />
+              <LoadMore
+                initialPage={2}
+                lastPage={categroyNews?.meta.last_page}
+                url={`categories/${category}/stories`}
+              />
             </div>
             <div className="sm:hidden">
-              <LoadMore initialPage={2} lastPage={categroyNews?.meta.last_page} category={category} showIntro={false} />
+              <LoadMore
+                initialPage={2}
+                lastPage={categroyNews?.meta.last_page}
+                url={`categories/${category}/stories`}
+                showIntro={false}
+              />
             </div>
           </div>
           <div>

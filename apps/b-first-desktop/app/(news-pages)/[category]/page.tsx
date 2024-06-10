@@ -1,16 +1,15 @@
 import { AccentHeader } from "@bfirst/components-accent-header";
+import { Ads } from "@bfirst/components-ads";
 import { BlockNews6 } from "@bfirst/components-block-news-6";
 import { BreadCrumb } from "@bfirst/components-breadcrumb";
 import { ItemCardHorizontal } from "@bfirst/components-item-card-horizontal";
 import { ItemList } from "@bfirst/components-item-list";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import LoadMore from "../../components/LoadMore/LoadMore";
 import Navbar from "../../components/Navbar/Navbar";
 import TrendingTopics from "../../components/TrendingTopics/TrendingTopics";
 import { getData } from "../../utils/dataFetch";
 import filterOutOTD from "../../utils/filterOutOTD";
-import { Ads } from "@bfirst/components-ads";
 
 export default async function CategoryPage({ params }) {
   const { category } = params;
@@ -56,19 +55,25 @@ export default async function CategoryPage({ params }) {
                 introFontSize="14px"
               />
             ))}
-            <LoadMore initialPage={2} lastPage={categroyNews?.meta.last_page} category={category} />
+            <LoadMore initialPage={2} lastPage={categroyNews?.meta.last_page} url={`categories/${category}/stories`} />
           </div>
           <div>
             <Ads className="mb-8" src="/ads/Global.gif" alt="Ads" showHeader={false} />
             <div>
               <AccentHeader header="Latest News" color="#5D26D1" />
-              <ItemList listType="circle" data={filteredLatestNews?.slice(0, 6)} moreNewsLink="/latest" showButton titleFontSize="18px"/>
+              <ItemList
+                listType="circle"
+                data={filteredLatestNews?.slice(0, 6)}
+                moreNewsLink="/latest"
+                showButton
+                titleFontSize="18px"
+              />
             </div>
 
             <Ads className="my-8" src="/ads/union-bank-ad.gif" alt="Ads" showHeader={false} />
             <div>
               <AccentHeader header="Top News" color="#119F9F" />
-              <ItemList data={topNews?.data.slice(0, 6)} listType="number" titleFontSize="18px"/>
+              <ItemList data={topNews?.data.slice(0, 6)} listType="number" titleFontSize="18px" />
             </div>
 
             <Ads className="my-10 sticky top-20" src="/ads/Global.gif" alt="Ads" showHeader={false} />
