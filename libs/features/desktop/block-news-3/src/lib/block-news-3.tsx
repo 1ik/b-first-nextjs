@@ -7,7 +7,6 @@ export interface BlockNews3Props {
   sectionHeader?: string;
   headerColor?: string;
   className?: string;
-  Link?: any;
 }
 
 export function BlockNews3({ data, Link, sectionHeader, headerColor, className }: BlockNews3Props) {
@@ -17,7 +16,6 @@ export function BlockNews3({ data, Link, sectionHeader, headerColor, className }
 
       <div className="grid grid-cols-3 gap-5">
         <ItemCardHorizontal
-          Link={Link}
           className="col-span-3"
           data={data?.[0]}
           showIntro
@@ -27,7 +25,7 @@ export function BlockNews3({ data, Link, sectionHeader, headerColor, className }
         />
 
         {data?.splice(1, 3).map((item: any) => {
-          return <ItemCardVertical Link={Link} key={item.id} size="md" data={item} titleFontSize="16px" />;
+          return <ItemCardVertical key={item.id} size="md" data={item} titleFontSize="16px" />;
         })}
       </div>
     </div>

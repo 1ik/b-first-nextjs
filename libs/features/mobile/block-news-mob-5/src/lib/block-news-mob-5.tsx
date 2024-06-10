@@ -9,11 +9,10 @@ export interface BlockNewsMob5Props {
   className?: string;
   sectionHeader?: string;
   headerColor?: string;
-  Link?: any;
   ads: string;
 }
 
-export function BlockNewsMob5({ data, className, sectionHeader, headerColor, Link, ads }: BlockNewsMob5Props) {
+export function BlockNewsMob5({ data, className, sectionHeader, headerColor,  ads }: BlockNewsMob5Props) {
   return (
     <div className={className}>
       {sectionHeader && <AccentHeader header={sectionHeader} color={headerColor} />}

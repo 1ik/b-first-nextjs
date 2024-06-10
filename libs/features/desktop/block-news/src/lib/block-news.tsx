@@ -17,7 +17,6 @@ export function BlockNews({ data, sectionHeader, ads1, ads2, className, Link }: 
   return (
     <div className={`flex gap-x-4 ${className}`}>
       <ItemCardVertical
-        Link={Link}
         className="w-[35%]"
         data={data?.[0]}
         size="lg"
@@ -31,7 +30,7 @@ export function BlockNews({ data, sectionHeader, ads1, ads2, className, Link }: 
         {data?.slice(1, 6).map((item: any, index: number) => (
           <>
             <div className="flex flex-col" key={index}>
-              <ItemCardHorizontal Link={Link} data={item} size="sm" titleFontSize="16px" titleCrop={10} />
+              <ItemCardHorizontal data={item} size="sm" titleFontSize="16px" titleCrop={10} />
             </div>
             {index + 1 < 5 && <hr className="my-4 block dark:border-dark-300" />}
           </>

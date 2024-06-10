@@ -8,7 +8,6 @@ export interface ItemCardHorizontalProps {
   showTitleBorderBig?: boolean;
   showIntro?: boolean;
   className?: string;
-  Link?: any;
   showCreatedAt?: boolean;
   showTime?: boolean;
   titleCrop?: number;
@@ -26,7 +25,6 @@ export function ItemCardHorizontal({
   showTitleBorderBig,
   showIntro,
   className,
-  Link,
   showCreatedAt,
   showTime,
   titleFontSize,
@@ -72,33 +70,19 @@ export function ItemCardHorizontal({
           ${imageSide === "left" ? "order-last" : imageSide === "right" ? "order-first" : ""} `}
       >
         <div className={`${titleBold ? "font-bold" : ""} pl-2 flex flex-col h-full leading-[120%]`}>
-          {Link ? (
-            <Link className="" href={getNewsUrl(data)}>
-              <h2
-                style={{ fontSize: titleFontSize }}
-                className={` ${titleFont} hover:text-accent dark:hover:text-accent-light duration-150 leading-[120%]`}
-              >
-                {data?.meta.shoulder && (
-                  <span className="text-[#191970] dark:text-[#6565c4ec]">{data?.meta.shoulder}: </span>
-                )}
-                {titleCrop ? cropText(data?.title, titleCrop) : data?.title}
-              </h2>
-            </Link>
-          ) : (
-            <a href={getNewsUrl(data)}>
-              <h2
-                style={{ fontSize: titleFontSize }}
-                className={` ${titleFont} ${
-                  showTitleBorderSmall ? "mt-3" : ""
-                } hover:text-accent dark:hover:text-accent-light duration-150 leading-[120%]`}
-              >
-                {data?.meta.shoulder && (
-                  <span className="text-[#191970] dark:text-[#6565c4ec]">{data?.meta.shoulder}: </span>
-                )}
-                {titleCrop ? cropText(data?.title, titleCrop) : data?.title}
-              </h2>
-            </a>
-          )}
+          <a href={getNewsUrl(data)}>
+            <h2
+              style={{ fontSize: titleFontSize }}
+              className={` ${titleFont} ${
+                showTitleBorderSmall ? "mt-3" : ""
+              } hover:text-accent dark:hover:text-accent-light duration-150 leading-[120%]`}
+            >
+              {data?.meta.shoulder && (
+                <span className="text-[#191970] dark:text-[#6565c4ec]">{data?.meta.shoulder}: </span>
+              )}
+              {titleCrop ? cropText(data?.title, titleCrop) : data?.title}
+            </h2>
+          </a>
 
           {showTime && (
             <p className="font-montserrat text-xs text-[#6F6F6F] md:pt-4 pt-2 dark:border-dark-300 dark:text-white">
@@ -123,27 +107,15 @@ export function ItemCardHorizontal({
           size === "xl" ? "w-8/12" : size === "md" ? "w-5/12" : size === "sm" ? "w-5/12" : size === "lg" ? "w-5/12" : ""
         }`}
       >
-        {Link ? (
-          <Link href={getNewsUrl(data)}>
-            <div>
-              <img
-                className={`hover:scale-110 duration-300 w-full object-cover aspect-video`}
-                src={getImageUrl(data?.meta.featured_image)}
-                alt={data?.meta.featured_image.imageCaption}
-              />
-            </div>
-          </Link>
-        ) : (
-          <a href={getNewsUrl(data)}>
-            <div>
-              <img
-                className={`hover:scale-110 duration-300 w-full object-cover aspect-video`}
-                src={getImageUrl(data?.meta.featured_image)}
-                alt={data?.meta.featured_image.imageCaption}
-              />
-            </div>
-          </a>
-        )}
+        <a href={getNewsUrl(data)}>
+          <div>
+            <img
+              className={`hover:scale-110 duration-300 w-full object-cover aspect-video`}
+              src={getImageUrl(data?.meta.featured_image)}
+              alt={data?.meta.featured_image.imageCaption}
+            />
+          </div>
+        </a>
       </div>
     </div>
   );

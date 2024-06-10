@@ -5,10 +5,9 @@ import { ItemList } from "@bfirst/components-item-list";
 export interface ListGridProps {
   data: any;
   className?: string;
-  Link?: any;
 }
 
-export function ListGrid({ data, Link, className }: ListGridProps) {
+export function ListGrid({ data, className }: ListGridProps) {
   return (
     <div className={`grid grid-cols-4 gap-x-8 ${className}`}>
       {data?.map((list: any, index: number) => (
@@ -21,7 +20,7 @@ export function ListGrid({ data, Link, className }: ListGridProps) {
           }`}
         >
           <AccentHeader header={list?.[0]?.categories[0].name} color={list?.[0]?.categories[0].color_code} />
-          <ItemList Link={Link} key={index} data={list?.slice(0, 5)} showImage titleFontSize="18px"/>
+          <ItemList key={index} data={list?.slice(0, 5)} showImage titleFontSize="18px" />
         </div>
       ))}
     </div>

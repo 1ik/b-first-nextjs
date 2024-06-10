@@ -6,11 +6,10 @@ export interface HighlightChipProps {
   items: any[];
   title?: string;
   className?: string;
-  Link?: any;
   enableDragScroll?: boolean;
 }
 
-export function HighlightChip({ items, title, className, Link, enableDragScroll = false }: HighlightChipProps) {
+export function HighlightChip({ items, title, className, enableDragScroll = false }: HighlightChipProps) {
   const ref = useRef<HTMLDivElement>() as React.MutableRefObject<HTMLInputElement>;
   const { events } = useDraggable(ref, { applyRubberBandEffect: true });
   return (
@@ -28,15 +27,9 @@ export function HighlightChip({ items, title, className, Link, enableDragScroll 
             key={index}
             className="bg-[#FAF6FF] dark:bg-dark-300 dark:text-white text-black whitespace-nowrap rounded-md"
           >
-            {Link ? (
-              <Link className="px-3 py-1 inline-block" href={`/topic/${item.id}`}>
-                {item.name}
-              </Link>
-            ) : (
-              <a className="px-3 py-1 inline-block" href={`/topic/${item.id}`}>
-                {item.name}
-              </a>
-            )}
+            <a className="px-3 py-1 inline-block" href={`/topic/${item.id}`}>
+              {item.name}
+            </a>
           </li>
         ))}
       </ul>
