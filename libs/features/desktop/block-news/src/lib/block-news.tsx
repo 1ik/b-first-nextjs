@@ -6,14 +6,12 @@ import { Key } from "react";
 /* eslint-disable-next-line */
 export interface BlockNewsProps {
   data: any;
-  sectionHeader?: string;
   ads1?: string;
   ads2?: string;
   className?: string;
-  Link?: any;
 }
 
-export function BlockNews({ data, sectionHeader, ads1, ads2, className, Link }: BlockNewsProps) {
+export function BlockNews({ data, ads1, ads2, className }: BlockNewsProps) {
   return (
     <div className={`flex gap-x-4 ${className}`}>
       <ItemCardVertical

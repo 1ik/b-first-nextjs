@@ -42,7 +42,7 @@ export function ItemCardVertical({
           <img
             className={`hover:scale-110 duration-300 aspect-video object-cover w-full`}
             src={getImageUrl(data?.meta.featured_image)}
-            alt={data?.meta.imageCaption}
+            alt={data?.title}
           />
         </a>
         {titlePosition === "inset" && (

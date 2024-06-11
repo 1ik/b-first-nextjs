@@ -112,7 +112,7 @@ export function ItemCardHorizontal({
             <img
               className={`hover:scale-110 duration-300 w-full object-cover aspect-video`}
               src={getImageUrl(data?.meta.featured_image)}
-              alt={data?.meta.featured_image.imageCaption}
+              alt={data?.title}
             />
           </div>
         </a>

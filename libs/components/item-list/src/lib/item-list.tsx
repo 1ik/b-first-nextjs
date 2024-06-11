@@ -40,7 +40,7 @@ export function ItemList({
             <img
               className="hover:scale-110 duration-300 aspect-video object-cover w-full"
               src={getImageUrl(data?.[0]?.meta.featured_image)}
-              alt={data?.[0]?.meta.image_caption}
+              alt={data?.[0]?.title}
             />
           </a>
         </div>
