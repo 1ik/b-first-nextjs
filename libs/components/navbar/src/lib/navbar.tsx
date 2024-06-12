@@ -194,10 +194,7 @@ export function Navbar({
             </div>
           </div>
           {showSidebar && (
-            <div
-              onClick={() => setshowSidebar(false)}
-              className="fixed z-[999] h-full w-full top-0 left-0"
-            ></div>
+            <div onClick={() => setshowSidebar(false)} className="fixed z-[999] h-full w-full top-0 left-0"></div>
           )}
         </>
       ) : null}
