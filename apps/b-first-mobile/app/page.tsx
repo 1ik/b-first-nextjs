@@ -74,11 +74,10 @@ export default async function Index() {
       <Navbar />
       <div className="px-3">
         <Ads className="my-6" src="/ads/Ad-Master-50.gif" alt="Ads" showHeader={false} />
-        <TrendingTopics className="px-3 my-4" items={trendingTopics} title="Trending" />
+        <TrendingTopics className="my-4" items={trendingTopics} title="Trending" />
 
         {/* TOP NEWS SECTION */}
         <BlockNewsMob
-          className="px-3"
           data={topNews?.slice(0, 8)}
           ads1="/ads/Global.gif"
           ads2="/ads/union-bank-ad.gif"
