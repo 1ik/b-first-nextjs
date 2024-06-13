@@ -1,5 +1,9 @@
 import Navbar from "../../components/Navbar/Navbar";
 
+export const metadata = {
+  title: "Terms of Use | Bangladesh First",
+};
+
 export default function Terms() {
   return (
     <>

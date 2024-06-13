@@ -1,5 +1,9 @@
 import Navbar from "../../components/Navbar/Navbar";
 
+export const metadata = {
+  title: "About Us | Bangladesh First",
+};
+
 export default function AboutUs() {
   return (
     <>
@@ -32,8 +36,8 @@ export default function AboutUs() {
             fact-checked.
           </li>
           <li className="text-base mb-2">
-            <span className="font-semibold mr-2">Fairness :</span> Presenting news in an unbiased manner, giving voice to
-            multiple perspectives.
+            <span className="font-semibold mr-2">Fairness :</span> Presenting news in an unbiased manner, giving voice
+            to multiple perspectives.
           </li>
           <li className="text-base mb-2">
             <span className="font-semibold mr-2">Integrity :</span> Upholding ethical standards in all our journalistic
