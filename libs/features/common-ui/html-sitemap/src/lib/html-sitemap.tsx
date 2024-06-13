@@ -3,30 +3,30 @@ export interface htmlSitemapProps {
 }
 export function HtmlSitemap({ className }: htmlSitemapProps) {
   return (
-    <div className={`desktop-container ${className}`}>
-      <h2 className="font-semibold text-2xl text-accent mb-2 mt-5">
+    <div className={`${className}`}>
+      <h1 className="font-semibold text-2xl text-accent mb-2 mt-5">
         <a className="hover:text-accent" href="/">
           Home
         </a>
-      </h2>
+      </h1>
       <ul className="pl-4 font-semibold text-base">
         <li className="mb-2">
-          <a className="hover:text-accent" href="/Bangladesh">
+          <a className="hover:text-accent" href="/bangladesh">
             Bangladesh
           </a>
         </li>
         <li className="mb-2">
-          <a className="hover:text-accent" href="/World">
+          <a className="hover:text-accent" href="/world">
             World
           </a>
         </li>
         <li className="mb-2">
-          <a className="hover:text-accent" href="/Politics">
+          <a className="hover:text-accent" href="/politics">
             Politis
           </a>
         </li>
         <li className="mb-2">
-          <a className="hover:text-accent" href="/Sports">
+          <a className="hover:text-accent" href="/sports">
             Sports
           </a>
         </li>
@@ -36,17 +36,17 @@ export function HtmlSitemap({ className }: htmlSitemapProps) {
           </a>
         </li>
         <li className="mb-2">
-          <a className="hover:text-accent" href="/Teach">
+          <a className="hover:text-accent" href="/teach">
             Teach
           </a>
         </li>
         <li className="mb-2">
-          <a className="hover:text-accent" href="/Lifestyle">
+          <a className="hover:text-accent" href="/lifestyle">
             LifeStyle
           </a>
         </li>
         <li className="mb-2">
-          <a className="hover:text-accent" href="/Education">
+          <a className="hover:text-accent" href="/education">
             Education
           </a>
         </li>

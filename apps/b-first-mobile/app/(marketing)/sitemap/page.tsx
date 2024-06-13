@@ -4,7 +4,7 @@ function sitemap() {
   return (
     <>
       <Navbar />
-      <HtmlSitemap className="px-3"/>
+      <HtmlSitemap className="px-3" />
     </>
   );
 }

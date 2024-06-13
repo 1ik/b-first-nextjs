@@ -38,6 +38,10 @@ const links = [
     name: "Contact",
     href: "/contact-us",
   },
+  {
+    name: "Sitemap",
+    href: "/sitemap",
+  },
 ];
 
 export function Footer({ logo, Link, className }: FooterProps) {

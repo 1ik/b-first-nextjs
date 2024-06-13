@@ -4,7 +4,7 @@ function sitemap() {
   return (
     <>
       <Navbar />
-      <HtmlSitemap />
+      <HtmlSitemap className="desktop-container" />
     </>
   );
 }
