@@ -1,5 +1,9 @@
 import Navbar from "../../components/Navbar/Navbar";
 
+export const metadata = {
+  title: "Contact Us | Bangladesh First",
+};
+
 export default function ContactUs() {
   return (
     <>

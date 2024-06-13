@@ -1,5 +1,9 @@
 import Navbar from "../../components/Navbar/Navbar";
 
+export const metadata = {
+  title: "About Us | Bangladesh First",
+};
+
 export default function AboutUs() {
   return (
     <>
@@ -32,8 +36,8 @@ export default function AboutUs() {
             fact-checked.
           </li>
           <li className="text-base mb-2">
-            <span className="font-semibold mr-2">Fairness :</span> Presenting news in an unbiased manner, giving voice to
-            multiple perspectives.
+            <span className="font-semibold mr-2">Fairness :</span> Presenting news in an unbiased manner, giving voice
+            to multiple perspectives.
           </li>
           <li className="text-base mb-2">
             <span className="font-semibold mr-2">Integrity :</span> Upholding ethical standards in all our journalistic
@@ -67,8 +71,8 @@ export default function AboutUs() {
             <span className="font-semibold mr-2">Phone :</span>+880 961 332 2782
           </li>
           <li className="text-base mb-2">
-            <span className="font-semibold mr-2">Address :</span>115 Kazi Nazrul Islam Avenue, Level 12, Bangla Motor, Dhaka
-            1000, Bangladesh
+            <span className="font-semibold mr-2">Address :</span>115 Kazi Nazrul Islam Avenue, Level 12, Bangla Motor,
+            Dhaka 1000, Bangladesh
           </li>
         </ul>
 
