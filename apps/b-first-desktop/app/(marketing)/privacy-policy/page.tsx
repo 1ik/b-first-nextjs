@@ -1,5 +1,9 @@
 import Navbar from "../../components/Navbar/Navbar";
 
+export const metadata = {
+  title: "Privacy Policy | Bangladesh First",
+};
+
 export default function PrivacyPolicy() {
   return (
     <>

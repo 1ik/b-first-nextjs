@@ -59,6 +59,47 @@ export default async function NewsDetails({ params }) {
   const news_link_url = `${process.env.BASE_URL}/news/${params.id}/${params.slug}`;
   const detailsData = await getData(`story/details/${params.id}`);
 
+  const webpageJsonLd = {
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    name: detailsData?.story.title,
+    description: detailsData?.story.meta.intro,
+    publisher: {
+      "@type": "Organization",
+      name: "Bangladesh First",
+    },
+  };
+
+  const newsarticleJsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "NewsArticle",
+        headline: detailsData?.story.title,
+        description: detailsData?.story.meta.intro,
+        author: {
+          "@type": "Person",
+          name: detailsData?.story.authors[0].name,
+        },
+        publisher: {
+          "@type": "Organization",
+          name: "Bangladesh First",
+          url: "https://bfirst.news",
+          logo: {
+            "@type": "ImageObject",
+            url: "https://bfirst.news/img/logo-dark.svg",
+          },
+        },
+        datePublished: detailsData?.story.created_at,
+        image: {
+          "@type": "ImageObject",
+          url: getImageUrl(detailsData?.story.meta.featured_image),
+        },
+        mainEntityOfPage: news_link_url,
+      },
+    ],
+  };
+
   const [trendingTopics, latestNews, topNews, categoryNews] = (
     await Promise.all([
       getData("trendy-topics"),
@@ -78,6 +119,15 @@ export default async function NewsDetails({ params }) {
 
   return (
     <>
+      {/* ====== webpage schema markup */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webpageJsonLd) }}></script>
+
+      {/* ====== news article schema markup */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(newsarticleJsonLd) }}
+      ></script>
+
       <Navbar activeLink={`/${detailsData?.story.categories[0].name.toLowerCase()}`} />
 
       <div className="px-3">

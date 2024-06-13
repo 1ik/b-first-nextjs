@@ -1,5 +1,9 @@
 import Navbar from "../../components/Navbar/Navbar";
 
+export const metadata = {
+  title: "Accessibility & Closed Captioning Policy | Bangladesh First",
+};
+
 export default function Accessibility() {
   return (
     <>
@@ -86,8 +90,8 @@ export default function Accessibility() {
             <span className="font-semibold mr-2">Phone :</span>+880 961 332 2782
           </li>
           <li className="text-base mb-2">
-            <span className="font-semibold mr-2">Mail :</span>115 Kazi Nazrul Islam Avenue, Level 12, Bangla Motor, Dhaka 1000,
-            Bangladesh
+            <span className="font-semibold mr-2">Mail :</span>115 Kazi Nazrul Islam Avenue, Level 12, Bangla Motor,
+            Dhaka 1000, Bangladesh
           </li>
         </ul>
         <p className="text-sm mb-4">
