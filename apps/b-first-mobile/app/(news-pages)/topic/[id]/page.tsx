@@ -1,12 +1,13 @@
 import { AccentHeader } from "@bfirst/components-accent-header";
+import { Ads } from "@bfirst/components-ads";
 import { BreadCrumb } from "@bfirst/components-breadcrumb";
 import { ItemCardHorizontal } from "@bfirst/components-item-card-horizontal";
 import { ItemList } from "@bfirst/components-item-list";
+import { notFound } from "next/navigation";
 import Navbar from "../../../components/Navbar/Navbar";
 import TrendingTopics from "../../../components/TrendingTopics/TrendingTopics";
 import { getData } from "../../../utils/dataFetch";
 import filterOutOTD from "../../../utils/filterOutOTD";
-import { Ads } from "@bfirst/components-ads";
 
 export default async function Topic({ params }) {
   const [trendingNews, latestNews, topNews] = (
@@ -16,6 +17,8 @@ export default async function Topic({ params }) {
       getData("categories/0/featured-stories"),
     ])
   ).map((item) => item?.data);
+
+  if (!trendingNews) return notFound();
 
   const trendingTopics = (await getData("trendy-topics"))?.data;
   const filteredLatestNews = latestNews.filter(filterOutOTD);
@@ -48,13 +51,19 @@ export default async function Topic({ params }) {
                 />
               ))}
 
-              <Ads className="my-10" src="/ads/banner_ibbl.gif" alt="Ads" showHeader={false}/>
+              <Ads className="my-10" src="/ads/banner_ibbl.gif" alt="Ads" showHeader={false} />
             </div>
 
             <div className="sm:order-2 sm:col-span-2">
               <div className="mb-8">
                 <AccentHeader header="LATEST NEWS" color="#5D26D1" />
-                <ItemList data={filteredLatestNews?.slice(0, 6)} listType="circle" showButton moreNewsLink="/latest"  titleFontSize="16px"/>
+                <ItemList
+                  data={filteredLatestNews?.slice(0, 6)}
+                  listType="circle"
+                  showButton
+                  moreNewsLink="/latest"
+                  titleFontSize="16px"
+                />
                 <Ads className="mt-6" src="/ads/union-bank-ad.gif" alt="Ads" />
               </div>
 

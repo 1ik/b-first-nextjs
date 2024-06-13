@@ -4,6 +4,13 @@ import Navbar from "./components/Navbar/Navbar";
 export default function NotFound() {
   return (
     <>
+      <head>
+        <title>Page Not Found | Bangladesh First</title>
+        <meta
+          name="description"
+          content="Oops! The page you were looking for isn't here. Navigate back to our latest news and updates or explore trending topics on Bangladesh First."
+        />
+      </head>
       <Navbar />
       <div className="flex flex-col items-center justify-center pt-14 pb-20 montserrat-regular">
         <h2 className="flex items-center gap-x-4 text-9xl montserrat-semibold">

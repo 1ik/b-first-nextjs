@@ -19,31 +19,31 @@ export async function generateMetadata({ params }): Promise<Metadata> {
   const data = await getData(`story/details/${params.id}`);
 
   return {
-    title: data?.story.title,
-    description: data?.story.meta.intro,
+    title: data?.story?.title,
+    description: data?.story?.meta?.intro,
     openGraph: {
-      title: data?.story.title,
-      description: data?.story.meta.intro,
+      title: data?.story?.title,
+      description: data?.story?.meta?.intro,
       images: [
         {
-          url: getImageUrl(data?.story.meta.featured_image, 600, 315, 20),
-          secureUrl: getImageUrl(data?.story.meta.featured_image, 600, 315, 20),
+          url: getImageUrl(data?.story?.meta?.featured_image, 600, 315, 20),
+          secureUrl: getImageUrl(data?.story?.meta?.featured_image, 600, 315, 20),
           width: 1200,
           height: 630,
-          alt: data?.story.title,
+          alt: data?.story?.title,
         },
       ],
       type: "article",
     },
     twitter: {
       card: "summary_large_image",
-      title: data?.story.title,
-      description: data?.story.meta.intro,
+      title: data?.story?.title,
+      description: data?.story?.meta?.intro,
       images: [
         {
-          url: getImageUrl(data?.story.meta.featured_image),
-          secureUrl: getImageUrl(data?.story.meta.featured_image),
-          alt: data?.story.title,
+          url: getImageUrl(data?.story?.meta?.featured_image),
+          secureUrl: getImageUrl(data?.story?.meta?.featured_image),
+          alt: data?.story?.title,
           width: 1600,
           height: 900,
         },
@@ -58,6 +58,8 @@ export async function generateMetadata({ params }): Promise<Metadata> {
 export default async function NewsDetails({ params }) {
   const news_link_url = `${process.env.BASE_URL}/news/${params.id}/${params.slug}`;
   const detailsData = await getData(`story/details/${params.id}`);
+
+  if (!detailsData) return notFound();
 
   const webpageJsonLd = {
     "@context": "http://schema.org",
@@ -108,8 +110,6 @@ export default async function NewsDetails({ params }) {
       getData(`categories/${detailsData?.story.categories[0].name}/stories`),
     ])
   ).map((item) => item?.data);
-
-  if (!detailsData) return notFound();
 
   const filteredLatestNews = latestNews.filter(filterOutOTD);
   const tagsArr = detailsData?.story.tags.map((tag: { id: any }) => tag.id);
