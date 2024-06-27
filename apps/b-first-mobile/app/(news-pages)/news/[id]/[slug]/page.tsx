@@ -167,7 +167,7 @@ export default async function NewsDetails({ params }) {
               />
             </div>
 
-            <Ads className="my-5" src="/ads/SIBL_Profit_300x250.gif" alt="Ads" />
+            <Ads className="my-5" src="/ads/sibl.png" alt="Ads" />
 
             {/* MORE FROM SECTION LIST */}
             <div>

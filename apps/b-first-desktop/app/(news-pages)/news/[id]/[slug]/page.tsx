@@ -188,7 +188,7 @@ export default async function NewsDetails({ params }) {
                 ))}
             </div>
 
-            <Ads className="my-8 sticky top-[80px]" src="/ads/SIBL_Profit_300x250.gif" alt="ads" showHeader={false} />
+            <Ads className="my-8 sticky top-[80px]" src="/ads/sibl.png" alt="ads" showHeader={false} />
           </div>
           <div className="col-span-2">
             <div
@@ -210,7 +210,7 @@ export default async function NewsDetails({ params }) {
                 ))}
               </ul>
             </div>
-            <Ads className="my-10" src="/ads/banner_ibbl.gif" alt="Ads" showHeader={false} />
+            <Ads className="my-10" src="/ads/FSB-banner-ad.gif" alt="ads" showHeader={false} />
 
             {/* ======== Comment section ======== */}
 

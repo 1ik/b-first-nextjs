@@ -153,7 +153,7 @@ export default async function Index() {
             <AccentHeader header="On this day" color="#A49A46" />
             <ItemList showImage showDate data={onThisDay} />
             <div className="flex flex-col mt-8 gap-y-8 items-center">
-              <Ads className="mt-4" src="/ads/SIBL_Profit_300x250.gif" alt="ads" showHeader={false} />
+              <Ads className="mt-4" src="/ads/sibl.png" alt="ads" showHeader={false} />
               <Ads className="mt-4" src="/ads/FSIBL-November-2023-20.gif" alt="ads" showHeader={false} />
             </div>
           </div>

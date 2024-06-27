@@ -37,7 +37,7 @@ export function BlockNews5({ data, Link, sectionHeader, headerColor, className }
 
           <div className="flex flex-col gap-y-2 items-center">
             <Ads src="/ads/Global.gif" alt="Ads" showHeader={false} />
-            <Ads src="/ads/SIBL_Profit_300x250.gif" alt="Ads" showHeader={false} />
+            <Ads src="/ads/sibl.png" alt="Ads" showHeader={false} />
           </div>
           {data?.slice(1, 4).map((item: any, index: number) => (
             <ItemCardVertical
