@@ -192,7 +192,7 @@ export default async function NewsDetails({ params }) {
           </div>
           <div className="col-span-2">
             <div
-              className="story-body text-xl leading-[120%] [&>p]:mt-8"
+              className="story-body text-lg leading-[120%] [&>p]:mt-8"
               dangerouslySetInnerHTML={{ __html: detailsData?.story.content }}
             ></div>
             <div className="my-10 border-t border-b dark:border-dark-300 py-4 flex gap-x-4 items-center">
