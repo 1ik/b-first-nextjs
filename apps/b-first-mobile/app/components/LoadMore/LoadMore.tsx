@@ -17,7 +17,7 @@ export default function LoadMore({
   initialPage = 1,
   lastPage = 1,
   url,
-  size = 10,
+  size = 20,
   showIntro = true,
   showTime = false,
 }: LoadMoreProps) {
