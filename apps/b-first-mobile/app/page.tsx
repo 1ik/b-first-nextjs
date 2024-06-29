@@ -77,11 +77,7 @@ export default async function Index() {
         <TrendingTopics className="my-4" items={trendingTopics} title="Trending" />
 
         {/* TOP NEWS SECTION */}
-        <BlockNewsMob
-          data={topNews?.slice(0, 8)}
-          ads1="/ads/Global.gif"
-          ads2="/ads/union-bank-ad.gif"
-        />
+        <BlockNewsMob data={topNews?.slice(0, 8)} ads1="/ads/Global.gif" ads2="/ads/union-bank-ad.gif" />
         <Ads className="my-6" src="/ads/banner_ibbl.gif" alt="ads" showHeader={false} />
         <div className="sm:hidden">
           <SquareGrid showAccentHeader data={topNews.slice(8, 16)} gridCols={1} />
@@ -137,7 +133,7 @@ export default async function Index() {
         {/* ON THIS DAY SECTION */}
         <div className="grid grid-cols-1 sm:grid-cols-7 gap-4 mt-5">
           <div className="sm:col-span-3 flex flex-col items-center gap-4">
-            <Ads src="/ads/SIBL_Profit_300x250.gif" alt="Ads" />
+            <Ads src="/ads/sibl.png" alt="Ads" />
             <Ads src="/ads/Global.gif" alt="Ads" />
           </div>
           <div className="sm:col-span-4">
@@ -149,7 +145,7 @@ export default async function Index() {
         <Ads className="mx-auto my-6" src="/ads/banner_ibbl.gif" alt="ads" showHeader={false} />
         <BlockNewsMob5
           data={entertainmentNews}
-          ads="/ads/SIBL_Profit_300x250.gif"
+          ads="/ads/sibl.png"
           sectionHeader="entertainment"
           headerColor="#5D26D1"
         />

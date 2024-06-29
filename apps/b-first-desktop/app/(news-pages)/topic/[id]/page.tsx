@@ -54,7 +54,7 @@ export default async function Topic({ params }) {
           </div>
 
           <div>
-            <Ads className="" src="/ads/SIBL_Profit_300x250.gif" alt="Ads" showHeader={false} />
+            <Ads className="" src="/ads/sibl.png" alt="Ads" showHeader={false} />
             <div className="my-10">
               <AccentHeader header="LATEST NEWS" color="#5D26D1" />
               <ItemList
