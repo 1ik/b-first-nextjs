@@ -83,7 +83,7 @@ export default async function CategoryPage({ params }) {
                 introFontSize="14px"
               />
             ))}
-            <LoadMore initialPage={2} lastPage={categroyNews?.meta.last_page} category={category} />
+            <LoadMore initialPage={2} lastPage={categroyNews?.meta.last_page} url={`categories/${category}/stories`} />
           </div>
           <div>
             <Ads className="mb-8" src="/ads/Global.gif" alt="Ads" showHeader={false} />

@@ -57,7 +57,7 @@ export default async function Latest() {
               showTime
               initialPage={2}
               lastPage={latestNews?.meta.last_page}
-              category="latest"
+              url="latest/stories"
             />
           </div>
 

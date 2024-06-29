@@ -94,10 +94,19 @@ export default async function CategoryPage({ params }) {
               </div>
             ))}
             <div className="hidden sm:block">
-              <LoadMore initialPage={2} lastPage={categroyNews?.meta.last_page} category={category} />
+              <LoadMore
+                initialPage={2}
+                lastPage={categroyNews?.meta.last_page}
+                url={`categories/${category}/stories`}
+              />
             </div>
             <div className="sm:hidden">
-              <LoadMore initialPage={2} lastPage={categroyNews?.meta.last_page} category={category} showIntro={false} />
+              <LoadMore
+                initialPage={2}
+                lastPage={categroyNews?.meta.last_page}
+                url={`categories/${category}/stories`}
+                showIntro={false}
+              />
             </div>
           </div>
           <div>

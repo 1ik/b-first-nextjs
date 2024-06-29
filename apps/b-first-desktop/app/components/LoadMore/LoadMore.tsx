@@ -9,7 +9,7 @@ interface LoadMoreProps {
   initialPage?: number;
   lastPage?: number;
   size?: number;
-  category: string;
+  url: string;
   showIntro?: boolean;
   showTime?: boolean;
 }
@@ -17,8 +17,8 @@ interface LoadMoreProps {
 export default function LoadMore({
   initialPage = 1,
   lastPage = 1,
-  category,
-  size = 10,
+  url,
+  size = 20,
   showIntro = true,
   showTime = false,
 }: LoadMoreProps) {
@@ -29,19 +29,13 @@ export default function LoadMore({
   const loadMoreStoris = useCallback(
     async function () {
       const next = page + 1;
-      const moreStories = await getData(
-        `${
-          category === "latest"
-            ? `latest/stories?size=${size}&page=${next}`
-            : `categories/${category}/stories?size=${size}&page=${next}`
-        }`
-      );
+      const moreStories = await getData(`${url}?size=${size}&page=${next}`);
       if (moreStories?.data.length) {
         setPage(next);
         setStories((cur: any) => [...cur, ...(moreStories?.data ? moreStories.data : [])]);
       }
     },
-    [category, page, size]
+    [url, page, size]
   );
 
   useEffect(() => {
@@ -52,33 +46,20 @@ export default function LoadMore({
 
   return (
     <>
-      {category === "latest"
-        ? stories
-            .filter((item: { categories: any[] }) => !item.categories.find((c) => c.name === "On_This_Day"))
-            .map((story: { id: Key | null | undefined }) => (
-              <ItemCardHorizontal
-                size="lg"
-                showTime={showTime}
-                showIntro={showIntro}
-                className="pb-5 mb-5 border-b dark:border-dark-300"
-                key={story.id}
-                data={story}
-                titleFontSize="24px"
-                introFontSize="14px"
-              />
-            ))
-        : stories.map((story: { id: Key | null | undefined }) => (
-            <ItemCardHorizontal
-              size="lg"
-              showTime={showTime}
-              showIntro={showIntro}
-              className="pb-5 mb-5 border-b dark:border-dark-300"
-              key={story.id}
-              data={story}
-              titleFontSize="24px"
-              introFontSize="14px"
-            />
-          ))}
+      {stories
+        .filter((item: { categories: any[] }) => !item.categories.find((c) => c.name === "On_This_Day"))
+        .map((story: { id: Key | null | undefined }) => (
+          <ItemCardHorizontal
+            size="lg"
+            showTime={showTime}
+            showIntro={showIntro}
+            className="pb-5 mb-5 border-b dark:border-dark-300"
+            key={story.id}
+            data={story}
+            titleFontSize="24px"
+            introFontSize="14px"
+          />
+        ))}
       {page < lastPage && (
         <div className="flex items-center justify-center h-20">
           <img ref={ref} className="animate-ping w-12" src="/img/logo-mini.png" alt="logo" />
