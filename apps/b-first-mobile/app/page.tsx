@@ -14,6 +14,17 @@ import TrendingTopics from "./components/TrendingTopics/TrendingTopics";
 import { getData } from "./utils/dataFetch";
 import filterOutOTD from "./utils/filterOutOTD";
 
+const webpageJsonLd = {
+  "@context": "http://schema.org",
+  "@type": "WebPage",
+  name: "Bangladesh First",
+  description: "A newspaper that publishes news with authenticity and without fear.",
+  publisher: {
+    "@type": "Organization",
+    name: "Bangladesh First",
+  },
+};
+
 export default async function Index() {
   const [topNews, recommendedNews] = (
     await Promise.all([getData("categories/0/featured-stories?size=16"), getData("recommended-stories")])
@@ -57,18 +68,16 @@ export default async function Index() {
   );
   return (
     <>
+      {/* ==== webpage schema markup */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webpageJsonLd) }}></script>
+
       <Navbar />
       <div className="px-3">
         <Ads className="my-6" src="/ads/Ad-Master-50.gif" alt="Ads" showHeader={false} />
-        <TrendingTopics className="px-3 my-4" items={trendingTopics} title="Trending" />
+        <TrendingTopics className="my-4" items={trendingTopics} title="Trending" />
 
         {/* TOP NEWS SECTION */}
-        <BlockNewsMob
-          className="px-3"
-          data={topNews?.slice(0, 8)}
-          ads1="/ads/Global.gif"
-          ads2="/ads/union-bank-ad.gif"
-        />
+        <BlockNewsMob data={topNews?.slice(0, 8)} ads1="/ads/Global.gif" ads2="/ads/union-bank-ad.gif" />
         <Ads className="my-6" src="/ads/banner_ibbl.gif" alt="ads" showHeader={false} />
         <div className="sm:hidden">
           <SquareGrid showAccentHeader data={topNews.slice(8, 16)} gridCols={1} />
@@ -124,7 +133,7 @@ export default async function Index() {
         {/* ON THIS DAY SECTION */}
         <div className="grid grid-cols-1 sm:grid-cols-7 gap-4 mt-5">
           <div className="sm:col-span-3 flex flex-col items-center gap-4">
-            <Ads src="/ads/SIBL_Profit_300x250.gif" alt="Ads" />
+            <Ads src="/ads/sibl.png" alt="Ads" />
             <Ads src="/ads/Global.gif" alt="Ads" />
           </div>
           <div className="sm:col-span-4">
@@ -136,7 +145,7 @@ export default async function Index() {
         <Ads className="mx-auto my-6" src="/ads/banner_ibbl.gif" alt="ads" showHeader={false} />
         <BlockNewsMob5
           data={entertainmentNews}
-          ads="/ads/SIBL_Profit_300x250.gif"
+          ads="/ads/sibl.png"
           sectionHeader="entertainment"
           headerColor="#5D26D1"
         />

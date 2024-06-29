@@ -11,21 +11,49 @@ import TrendingTopics from "../../components/TrendingTopics/TrendingTopics";
 import { getData } from "../../utils/dataFetch";
 import filterOutOTD from "../../utils/filterOutOTD";
 
+export async function generateMetadata({ params }) {
+  const categoryDetails = await getData(`categories?name=${params.category}`);
+
+  return {
+    title: categoryDetails?.data?.[0]?.meta?.title
+      ? `${categoryDetails?.data?.[0]?.meta?.title} | Bangladesh First`
+      : "Bangladesh First",
+    description: categoryDetails?.data?.[0]?.meta?.description,
+  };
+}
+
 export default async function CategoryPage({ params }) {
   const { category } = params;
-  const [trendingTopics, categroyNews, latestNews, topNews] = await Promise.all([
+  const [categoryDetails, trendingTopics, categroyNews, latestNews, topNews] = await Promise.all([
+    getData(`categories?name=${category}`),
     getData("trendy-topics"),
     getData(`categories/${category}/stories?size=20&page=1`),
     getData("latest/stories"),
     getData("categories/0/featured-stories"),
   ]);
 
-  const filteredLatestNews = latestNews?.data.filter(filterOutOTD);
-
   if (!categroyNews?.data.length) return notFound();
+
+  const webpageJsonLd = {
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    name: categoryDetails?.data?.[0].meta?.title
+      ? `${categoryDetails?.data?.[0].meta?.title} | Bangladesh First`
+      : "Bangladesh First",
+    description: categoryDetails?.data?.[0].meta?.description,
+    publisher: {
+      "@type": "Organization",
+      name: "Bangladesh First",
+    },
+  };
+
+  const filteredLatestNews = latestNews?.data.filter(filterOutOTD);
 
   return (
     <>
+      {/* ========= webpage schema markups */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webpageJsonLd) }}></script>
+
       <Navbar activeLink={`/${category}`} />
       <div className="px-3">
         <Ads className="my-14" src="/ads/banner_ibbl.gif" alt="Ads" showHeader={false} />
