@@ -31,15 +31,16 @@ iframe {
 .slick-slider .slick-track {
   display: flex;
   justify-content: space-between;
+  margin: 0;
+  padding: 0;
 }
 
 .slick-slider .slick-slide {
-margin-left: 25px;
+margin-left: 12px;
 }
 .slick-slider .slick-slide:first-child{
 
 margin-left: 0px;}
 .slick-slider .slick-slide:last-child{
-
 margin-left: 0px;
 }

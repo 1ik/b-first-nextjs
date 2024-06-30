@@ -45,7 +45,7 @@ export function ItemSlide({ data }: BlockNews5Props) {
   };
   return (
     <div className="slider-container m-0 p-0">
-      <Slider  {...settings}>
+      <Slider className="flex justify-between" {...settings}>
         {data.map((item: any, index: any) => {
           return <ItemCardVertical key={index} data={item} size="sm"/>;
         })}
@@ -57,8 +57,8 @@ export function ItemSlide({ data }: BlockNews5Props) {
 export function NextArrow(props) {
   const { onClick } = props;
   return (
-    <div className="absolute top-1/2 -translate-y-1/2 left-0 z-40 cursor-pointer" onClick={onClick}>
-      <MdArrowBackIosNew size={30} className="dark:text-white" />
+    <div className="absolute bottom-[-40px]  left-1/2 translate-x-1 cursor-pointer z-10" onClick={onClick}>
+      <button className="px-2 py-1 bg-accent text-white text-sm">Prev</button>
     </div>
   );
 }
@@ -66,8 +66,8 @@ export function NextArrow(props) {
 export function PrevArrow(props) {
   const { onClick } = props;
   return (
-    <div className=" absolute top-1/2 -translate-y-1/2 right-0 z-40  cursor-pointer" onClick={onClick}>
-      <MdArrowForwardIos size={30} className="dark:text-white" />
+    <div className=" absolute bottom-[-40px] right-1/2 -translate-x-2 cursor-pointer z-10" onClick={onClick}>
+      <button className="px-2 py-1 bg-accent text-white text-sm">Next</button>
     </div>
   );
 }
