@@ -26,3 +26,20 @@
 iframe {
   width: 100% !important;
 }
+
+
+.slick-slider .slick-track {
+  display: flex;
+  justify-content: space-between;
+}
+
+.slick-slider .slick-slide {
+margin-left: 25px;
+}
+.slick-slider .slick-slide:first-child{
+
+margin-left: 0px;}
+.slick-slider .slick-slide:last-child{
+
+margin-left: 0px;
+}
