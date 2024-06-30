@@ -15,8 +15,8 @@ export function ItemSlide({ data }: BlockNews5Props) {
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />,
+    nextArrow: <PrevArrow />,
+    prevArrow: <NextArrow />,
     responsive: [
       {
         breakpoint: 1024,
@@ -47,7 +47,7 @@ export function ItemSlide({ data }: BlockNews5Props) {
     <div className="slider-container">
       <Slider {...settings}>
         {data.map((item: any, index: any) => {
-          return <ItemCardVertical key={index} data={item} size="sm" className="mr-4"/>;
+          return <ItemCardVertical key={index} data={item} size="sm" className="mr-4 ml-0.5" />;
         })}
       </Slider>
     </div>
@@ -57,7 +57,7 @@ export function ItemSlide({ data }: BlockNews5Props) {
 export function NextArrow(props) {
   const { onClick } = props;
   return (
-    <div className="absolute top-1/2 -translate-y-1/2 lg:-left-8 -left-2 z-40 cursor-pointer" onClick={onClick}>
+    <div className="absolute top-1/2 -translate-y-1/2 lg:-left-2 -left-2 z-40 cursor-pointer" onClick={onClick}>
       <MdArrowBackIosNew size={30} className="dark:text-white" />
     </div>
   );
@@ -66,7 +66,7 @@ export function NextArrow(props) {
 export function PrevArrow(props) {
   const { onClick } = props;
   return (
-    <div className=" absolute top-1/2 -translate-y-1/2 lg:-right-4 right-2 z-40  cursor-pointer" onClick={onClick}>
+    <div className=" absolute top-1/2 -translate-y-1/2 lg:right-1.5 right-2 z-40  cursor-pointer" onClick={onClick}>
       <MdArrowForwardIos size={30} className="dark:text-white" />
     </div>
   );
