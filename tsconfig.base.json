@@ -52,6 +52,7 @@
       "@bfirst/components-item-card-horizontal": ["libs/components/item-card-horizontal/src/index.ts"],
       "@bfirst/components-item-card-vertical": ["libs/components/item-card-vertical/src/index.ts"],
       "@bfirst/components-item-list": ["libs/components/item-list/src/index.ts"],
+      "@bfirst/components-item-slide": ["libs/components/item-slide/src/index.ts"],
       "@bfirst/components-layout": ["libs/components/layouts/src/index.ts"],
       "@bfirst/components-list-grid": ["libs/features/desktop/list-grid/src/index.ts"],
       "@bfirst/components-list-grid-mob": ["libs/features/mobile/list-grid-mob/src/index.ts"],

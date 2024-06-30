@@ -13,7 +13,7 @@ import Navbar from "./components/Navbar/Navbar";
 import TrendingTopics from "./components/TrendingTopics/TrendingTopics";
 import { getData } from "./utils/dataFetch";
 import filterOutOTD from "./utils/filterOutOTD";
-
+import { ItemSlide } from "@bfirst/components-item-slide";
 const webpageJsonLd = {
   "@context": "http://schema.org",
   "@type": "WebPage",
@@ -100,6 +100,12 @@ export default async function Index() {
         <div className="desktop-container">
           <AccentHeader header="recommended for you" color="#228B22" />
           <SquareGrid data={recommendedNews?.slice(0, 4)} gridCols={4} />
+        </div>
+      </div>
+
+      <div className="pb-2 pt-4 my-10">
+        <div className="desktop-container">
+          <ItemSlide data={featureNews} />
         </div>
       </div>
 
