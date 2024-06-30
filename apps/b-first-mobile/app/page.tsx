@@ -13,6 +13,7 @@ import Navbar from "./components/Navbar/Navbar";
 import TrendingTopics from "./components/TrendingTopics/TrendingTopics";
 import { getData } from "./utils/dataFetch";
 import filterOutOTD from "./utils/filterOutOTD";
+import { ItemSlide } from "@bfirst/components-item-slide";
 
 const webpageJsonLd = {
   "@context": "http://schema.org",
@@ -114,6 +115,12 @@ export default async function Index() {
           <div className="hidden sm:block">
             <SquareGrid data={recommendedNews?.slice(0, 4)} gridCols={2} />
           </div>
+        </div>
+      </div>
+
+      <div className="pb-2 pt-4 my-10">
+        <div className="px-3">
+          <ItemSlide data={featureNews} />
         </div>
       </div>
 

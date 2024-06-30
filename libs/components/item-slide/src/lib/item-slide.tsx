@@ -10,18 +10,44 @@ export interface BlockNews5Props {
 }
 export function ItemSlide({ data }: BlockNews5Props) {
   const settings = {
+    dots: false,
     infinite: true,
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
   return (
-    <div>
+    <div className="slider-container">
       <Slider {...settings}>
         {data.map((item: any, index: any) => {
-          return <ItemCardVertical key={index} data={item} size="sm" className="mr-4" />;
+          return <ItemCardVertical key={index} data={item} size="sm" className="mr-4"/>;
         })}
       </Slider>
     </div>
@@ -31,7 +57,7 @@ export function ItemSlide({ data }: BlockNews5Props) {
 export function NextArrow(props) {
   const { onClick } = props;
   return (
-    <div className=" absolute top-1/2 -translate-y-1/2 -left-8  cursor-pointer" onClick={onClick}>
+    <div className="absolute top-1/2 -translate-y-1/2 lg:-left-8 -left-2 z-40 cursor-pointer" onClick={onClick}>
       <MdArrowBackIosNew size={30} className="dark:text-white" />
     </div>
   );
@@ -40,7 +66,7 @@ export function NextArrow(props) {
 export function PrevArrow(props) {
   const { onClick } = props;
   return (
-    <div className=" absolute top-1/2 -translate-y-1/2 -right-4 z-40  cursor-pointer" onClick={onClick}>
+    <div className=" absolute top-1/2 -translate-y-1/2 lg:-right-4 right-2 z-40  cursor-pointer" onClick={onClick}>
       <MdArrowForwardIos size={30} className="dark:text-white" />
     </div>
   );
