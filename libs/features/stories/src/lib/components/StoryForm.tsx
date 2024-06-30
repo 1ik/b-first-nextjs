@@ -3,7 +3,7 @@ import { ColorPicker } from "@bfirst/components-color-picker";
 import { HCF } from "@bfirst/components-layout";
 import { MultiselectSearch } from "@bfirst/components-multiselect-search";
 import { TinymceEditor } from "@bfirst/components-tinymce-editor";
-import { Button, CardBody, Input, Textarea } from "@bfirst/material-tailwind";
+import { Button, CardBody, Checkbox, Input, Textarea } from "@bfirst/material-tailwind";
 import { getImageUrl } from "@bfirst/utilities";
 import { useReducer, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -64,7 +64,8 @@ const reducer = function (curState: StateInterface, action: { type: string; payl
 export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }: StoryFormProps) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const [shoulderColor, setShoulderColor] = useState(defaultData?.story.meta.shoulderColor || "#5F5FB7");
+  const [shoulderColor, setShoulderColor] = useState(defaultData?.story?.meta?.shoulder_color || "#5F5FB7");
+  const [shoulderBlink, setShoulderBlink] = useState(defaultData?.story?.meta?.shoulder_blink || false);
   const [isOpenEmbed, setIsOpenEmbed] = useState(false);
   const [isOpenEmbedLink, setIsOpenEmbedLink] = useState(false);
   const [error, setError] = useState({ authors: "", tags: "", categories: "", body: "", featuredImg: "" });
@@ -112,6 +113,7 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
         featured_image: featuredImgUrl,
         shoulder: data.shoulder,
         shoulder_color: shoulderColor,
+        shoulder_blink: shoulderBlink,
         imageCaption: data.imageCaption || defaultData?.story.meta.imageCaption,
         altheadline: data.altheadline,
         intro: data.standfirst,
@@ -134,6 +136,18 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
 
             {/* =========== shoulder color picker ============ */}
             <ColorPicker title="Shoulder Color" color={shoulderColor} onColorChange={setShoulderColor} />
+
+            {/* ============ shoulder blink toggle ============ */}
+            <div className="flex items-center gap-x-1 mb-5">
+              <Checkbox
+                checked={shoulderBlink}
+                id="shoulder-blink-checkbox"
+                onChange={(e) => setShoulderBlink(e.target.checked)}
+              />
+              <label htmlFor="shoulder-blink-checkbox" className="text-sm cursor-pointer py-1 select-none">
+                Use Shoulder Blink Effect
+              </label>
+            </div>
 
             {/* ========== headline ========== */}
             <div>
@@ -250,7 +264,7 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
 
             {/* ============== modal for related news embed ============ */}
             <EmbedRelatedNews open={isOpenEmbed} onOpen={setIsOpenEmbed} />
-            
+
             {/* ============== modal for link embed ============ */}
             <EmbedLink open={isOpenEmbedLink} onOpen={setIsOpenEmbedLink} />
           </CardBody>

@@ -46,7 +46,7 @@ export function ColorPicker({ title, className, color = "#5F5FB7", onColorChange
   return (
     <>
       <button
-        className="flex items-center w-fit gap-x-2 p-2 bg-gray-200 rounded-md"
+        className="flex text-sm items-center w-fit gap-x-2 p-2 bg-gray-200 rounded-md"
         type="button"
         ref={refs.setReference}
         {...getReferenceProps()}
