@@ -1,15 +1,16 @@
 import { useGet, usePost } from "@bfirst/api-client";
+import { ColorPicker } from "@bfirst/components-color-picker";
 import { HCF } from "@bfirst/components-layout";
 import { MultiselectSearch } from "@bfirst/components-multiselect-search";
 import { TinymceEditor } from "@bfirst/components-tinymce-editor";
 import { Button, CardBody, Input, Textarea } from "@bfirst/material-tailwind";
+import { getImageUrl } from "@bfirst/utilities";
 import { useReducer, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import EmbedLink from "./EmbedLink";
 import EmbedRelatedNews from "./EmbedRelatedNews";
 import MediaBrowser from "./MediaBrowser";
-import EmbedLink from "./EmbedLink";
-import { getImageUrl } from "@bfirst/utilities";
 
 export type Inputs = {
   shoulder?: string;
@@ -63,6 +64,7 @@ const reducer = function (curState: StateInterface, action: { type: string; payl
 export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }: StoryFormProps) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  const [shoulderColor, setShoulderColor] = useState(defaultData?.story.meta.shoulderColor || "#5F5FB7");
   const [isOpenEmbed, setIsOpenEmbed] = useState(false);
   const [isOpenEmbedLink, setIsOpenEmbedLink] = useState(false);
   const [error, setError] = useState({ authors: "", tags: "", categories: "", body: "", featuredImg: "" });
@@ -109,6 +111,7 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
       meta: {
         featured_image: featuredImgUrl,
         shoulder: data.shoulder,
+        shoulder_color: shoulderColor,
         imageCaption: data.imageCaption || defaultData?.story.meta.imageCaption,
         altheadline: data.altheadline,
         intro: data.standfirst,
@@ -128,6 +131,9 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
           <CardBody className="flex flex-col gap-4">
             {/* ========== shoulder ========= */}
             <Input defaultValue={defaultData?.story.meta.shoulder} {...register("shoulder")} label="Shoulder" />
+
+            {/* =========== shoulder color picker ============ */}
+            <ColorPicker title="Shoulder Color" color={shoulderColor} onColorChange={setShoulderColor} />
 
             {/* ========== headline ========== */}
             <div>
