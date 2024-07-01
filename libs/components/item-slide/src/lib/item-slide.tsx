@@ -43,7 +43,7 @@ export function ItemSlide({ data }: BlockNews5Props) {
     ],
   };
   return (
-    <div className="slider-container">
+    <div className="slider-container p-0 m-0">
       <Slider className="flex justify-between" {...settings}>
         {data.map((item: any, index: any) => {
           return <ItemCardVertical key={index} data={item} size="sm" />;
@@ -57,7 +57,7 @@ export function NextArrow({ onClick }: any) {
   return (
     <div className="absolute bottom-1/2  -left-10 translate-x-1 cursor-pointer z-10" onClick={onClick}>
       <button className="">
-        <RiArrowLeftSLine size={22} />
+        <RiArrowLeftSLine size={30} />
       </button>
     </div>
   );
@@ -67,7 +67,7 @@ export function PrevArrow({ onClick }: any) {
   return (
     <div className=" absolute bottom-1/2 -right-10 -translate-x-2 cursor-pointer z-10" onClick={onClick}>
       <button className="">
-        <RiArrowRightSLine size={22} />
+        <RiArrowRightSLine size={30} />
       </button>
     </div>
   );
