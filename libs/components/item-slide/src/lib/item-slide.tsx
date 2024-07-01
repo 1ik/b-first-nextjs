@@ -1,7 +1,8 @@
 "use client";
 import "slick-carousel/slick/slick.css";
-
+import { RiArrowRightSLine } from "react-icons/ri";
 import { ItemCardVertical } from "@bfirst/components-item-card-vertical";
+import { RiArrowLeftSLine } from "react-icons/ri";
 import Slider from "react-slick";
 export interface BlockNews5Props {
   data: any;
@@ -13,8 +14,8 @@ export function ItemSlide({ data }: BlockNews5Props) {
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
-    nextArrow:<NextArrow />,
-    prevArrow: <PrevArrow /> ,
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
     responsive: [
       {
         breakpoint: 1024,
@@ -45,26 +46,29 @@ export function ItemSlide({ data }: BlockNews5Props) {
     <div className="slider-container">
       <Slider className="flex justify-between" {...settings}>
         {data.map((item: any, index: any) => {
-          return <ItemCardVertical key={index} data={item} size="sm"/>;
+          return <ItemCardVertical key={index} data={item} size="sm" />;
         })}
       </Slider>
     </div>
   );
 }
 
-export function NextArrow({onClick}:any) {
-
+export function NextArrow({ onClick }: any) {
   return (
-    <div className="absolute bottom-[-40px]  left-1/2 translate-x-1 cursor-pointer z-10" onClick={onClick}>
-      <button className="px-2 py-1 bg-accent text-white text-sm">Next</button>
+    <div className="absolute bottom-1/2  -left-10 translate-x-1 cursor-pointer z-10" onClick={onClick}>
+      <button className="">
+        <RiArrowLeftSLine size={22} />
+      </button>
     </div>
   );
 }
 
-export function PrevArrow({onClick}:any) {
+export function PrevArrow({ onClick }: any) {
   return (
-    <div className=" absolute bottom-[-40px] right-1/2 -translate-x-2 cursor-pointer z-10" onClick={onClick}>
-      <button className="px-2 py-1 bg-accent text-white text-sm">Prev</button>
+    <div className=" absolute bottom-1/2 -right-10 -translate-x-2 cursor-pointer z-10" onClick={onClick}>
+      <button className="">
+        <RiArrowRightSLine size={22} />
+      </button>
     </div>
   );
 }

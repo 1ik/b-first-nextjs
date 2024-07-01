@@ -38,8 +38,8 @@ iframe {
 margin-left: 12px;
 }
 .slick-slider .slick-slide:first-child{
-
-margin-left: 0px!important}
+   margin-left: 0px!important
+}
 .slick-slider .slick-slide:last-child{
 margin-left: 0px!important;
 }
