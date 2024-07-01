@@ -109,21 +109,9 @@ export default async function Index() {
       <div className="bg-[#F6EFEF] dark:bg-dark-300 py-8">
         <div className="px-3">
           <AccentHeader header="recommended for you" color="#228B22" />
-          <div className="sm:hidden">
-            <SquareGrid data={recommendedNews?.slice(0, 4)} gridCols={1} />
-          </div>
-          <div className="hidden sm:block">
-            <SquareGrid data={recommendedNews?.slice(0, 4)} gridCols={2} />
-          </div>
-        </div>
-      </div>
-
-      <div className="pb-2 pt-4 my-10">
-        <div className="px-3">
           <ItemSlide data={featureNews} />
         </div>
       </div>
-
       <div className="px-3">
         {/* ECONOMY SECTION */}
         <Ads className="my-5" src="/ads/banner_ibbl.gif" alt="ads" showHeader={false} />

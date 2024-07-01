@@ -99,13 +99,7 @@ export default async function Index() {
       <div className="bg-[#F6EFEF] dark:bg-dark-300 py-8">
         <div className="desktop-container">
           <AccentHeader header="recommended for you" color="#228B22" />
-          <SquareGrid data={recommendedNews?.slice(0, 4)} gridCols={4} />
-        </div>
-      </div>
-
-      <div className="pb-2 pt-4 my-10">
-        <div className="desktop-container">
-          <ItemSlide data={featureNews} />
+          <ItemSlide data={recommendedNews} />
         </div>
       </div>
 

@@ -53,20 +53,26 @@ export function ItemSlide({ data }: BlockNews5Props) {
   );
 }
 
-export function NextArrow({ onClick }: any) {
+export function PrevArrow({ onClick }: any) {
   return (
-    <div className="absolute bottom-1/2  -left-10 translate-x-1 cursor-pointer z-10" onClick={onClick}>
-      <button className="">
+    <div
+      className="absolute bottom-1/3 sm:bottom-2/3 md:bottom-1/2 left-0   xl:-left-10 -translate-y-1/2 cursor-pointer z-10"
+      onClick={onClick}
+    >
+      <button >
         <RiArrowLeftSLine size={30} />
       </button>
     </div>
   );
 }
 
-export function PrevArrow({ onClick }: any) {
+export function NextArrow({ onClick }: any) {
   return (
-    <div className=" absolute bottom-1/2 -right-10 -translate-x-2 cursor-pointer z-10" onClick={onClick}>
-      <button className="">
+    <div
+      className=" absolute bottom-1/3 sm:bottom-2/3 md:bottom-1/2 right-0 md:right-5 xl:-right-10 -translate-y-1/2 cursor-pointer z-10"
+      onClick={onClick}
+    >
+      <button>
         <RiArrowRightSLine size={30} />
       </button>
     </div>
