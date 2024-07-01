@@ -27,17 +27,11 @@ iframe {
   width: 100% !important;
 }
 
-.slick-slider .slick-track {
-  display: flex;
-  justify-content: space-between !important;
+/* Slick Slider  */
+.slick-slide {
+  padding-right: 10px;
 }
 
-.slick-slider .slick-slide {
-  margin-right: 12px;
-}
-.slick-slider .slick-slide:first-child {
-  margin-right: 0px !important;
-}
-.slick-slider .slick-slide:last-child {
-  margin-right: 0px !important;
+.slick-list {
+  margin-right: -10px !important;
 }

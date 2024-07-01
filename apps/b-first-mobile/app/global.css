@@ -26,24 +26,11 @@ iframe {
 
 /* Slick Slider  */
 @media (min-width: 450px) and (max-width: 1600.99px) {
-  .slick-slider .slick-track {
-    display: flex;
-    justify-content: space-between !important;
+  .slick-slide {
+    padding-right: 10px;
   }
-}
-@media (min-width: 450px) and (max-width: 1600.99px) {
-  .slick-slider .slick-slide {
-    margin-right: 16px;
-  }
-}
 
-@media (min-width: 450px) and (max-width: 1600.99px) {
-  .slick-slider .slick-slide:first-child {
-    margin-right: 0px !important;
-  }
-}
-@media (min-width: 450px) and (max-width: 1600.99px) {
-  .slick-slider .slick-slide:last-child {
-    margin-right: 0px !important;
+  .slick-list {
+    margin-right: -10px !important;
   }
 }
