@@ -36,8 +36,23 @@ export function HtmlSitemap({ className }: htmlSitemapProps) {
           </a>
         </li>
         <li className="mb-2">
-          <a className="hover:text-accent" href="/teach">
-            Teach
+          <a className="hover:text-accent" href="/economy">
+            Economy
+          </a>
+        </li>
+        <li className="mb-2">
+          <a className="hover:text-accent" href="/feature">
+            Feature
+          </a>
+        </li>
+        <li className="mb-2">
+          <a className="hover:text-accent" href="/tech">
+            Tech
+          </a>
+        </li>
+        <li className="mb-2">
+          <a className="hover:text-accent" href="/interview">
+            Interview
           </a>
         </li>
         <li className="mb-2">
