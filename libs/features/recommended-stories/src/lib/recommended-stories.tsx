@@ -48,26 +48,17 @@ export function RecommendedStories(props: RecommendedStoriesProps) {
   };
 
   const handleAddRecommendedStories = function (news: any) {
-    console.log(news);
     if (!news) return;
-    if (recommendedStories.length >= 4) {
-      toast.success("Last item removed and new one added", {
-        position: "top-center",
-      });
-      setRecommendedStories((cur) => {
-        const newList = cur.slice(0, -1);
-        return [{ id: news.id, title: news.title, created_at: news.created_at }, ...newList] as never;
-      });
-    } else
-      setRecommendedStories(
-        (cur) => [{ id: news.id, title: news.title, created_at: news.created_at }, ...cur] as never
-      );
+    setRecommendedStories((cur) => [{ id: news.id, title: news.title, created_at: news.created_at }, ...cur] as never);
+    toast.success("New one added", {
+      position: "top-center",
+    });
     setSearch("");
   };
 
   const handleSubmit = async function (e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (recommendedStories.length !== 4) {
+    if (recommendedStories.length < 4) {
       toast.warning("Total recommended story must be 4", {
         position: "top-center",
       });
