@@ -3,7 +3,7 @@ import {
   autoUpdate,
   flip,
   offset,
-  shift,
+  size,
   useClick,
   useDismiss,
   useFloating,
@@ -28,11 +28,23 @@ export function ColorPicker({ title, className, color = "#5F5FB7", onColorChange
     setIsOpen(false);
   };
 
-  const { refs, floatingStyles, context } = useFloating({
+  const { refs, floatingStyles, context } = useFloating<HTMLInputElement>({
+    whileElementsMounted: autoUpdate,
     open: isOpen,
     onOpenChange: setIsOpen,
-    middleware: [offset(10), flip({ fallbackAxisSideDirection: "end" }), shift()],
-    whileElementsMounted: autoUpdate,
+    middleware: [
+      flip({ padding: 10 }),
+      size({
+        apply({ rects, availableHeight, elements }) {
+          Object.assign(elements.floating.style, {
+            width: `${rects.reference.width}px`,
+            maxHeight: `${availableHeight}px`,
+          });
+        },
+        padding: 10,
+      }),
+      offset({ crossAxis: -20 }),
+    ],
   });
 
   const click = useClick(context);
@@ -64,6 +76,7 @@ export function ColorPicker({ title, className, color = "#5F5FB7", onColorChange
             {...getFloatingProps()}
           >
             <PhotoshopPicker
+              className="max-w-[100vw]"
               header={title || "Color Picker"}
               color={color}
               onChangeComplete={(newColor) => {
