@@ -10,7 +10,7 @@ export interface SocialShareProps {
   shareLink: string;
   className?: string;
   textPlacement?: "top" | "left";
-  title: string;
+  title?: string;
 }
 
 export function SocialShare({ shareLink, className, textPlacement = "top", title }: SocialShareProps) {
@@ -23,8 +23,8 @@ export function SocialShare({ shareLink, className, textPlacement = "top", title
   return (
     <div className={`${className}`}>
       <div className={`${textPlacement === "left" ? "flex gap-x-4 items-center" : "flex flex-col gap-2"}`}>
-        <h3 className="montserrat-regular md:text-lg">{title}</h3>
-        <div className="flex gap-x-2">
+        {title && <h3 className="montserrat-regular md:text-lg">{title}</h3>}
+        <div className="flex gap-x-3">
           <FacebookShareButton url={shareLink}>
             <div className="bg-black/90 hover:bg-black p-1.5 text-white rounded-md">
               <FaFacebookF size={20} />

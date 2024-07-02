@@ -20,6 +20,12 @@ export const getNewsUrl = (news: any) =>
     .replace(/[^\w\s-]/g, "")
     .toLowerCase()}`;
 
+export const getAuthorProfileUrl = (author: any) =>
+  `/author/${author?.id}/${author?.name
+    .replaceAll(" ", "-")
+    .replace(/[^\w\s-]/g, "")
+    .toLowerCase()}`;
+
 export const cropText = (text: string, maxWords?: number) => {
   if (!maxWords) maxWords = 20;
 
