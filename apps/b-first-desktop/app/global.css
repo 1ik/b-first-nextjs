@@ -43,9 +43,3 @@ iframe {
   background: #eb1923;
   border-radius: 100%;
 }
-
-/* @media (min-width: 320px) and (max-width: 575.99px) {
-  .slick-dots ul .slick-active::after {
-    bottom: 28px;
-  }
-} */

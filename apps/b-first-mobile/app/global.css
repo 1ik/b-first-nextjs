@@ -23,3 +23,19 @@ iframe {
   width: 100% !important;
   max-height: 400px !important;
 }
+.slick-dots ul .slick-active {
+  position: relative;
+}
+.slick-dots ul li {
+  cursor: pointer;
+}
+.slick-dots ul .slick-active::after {
+  content: "";
+  position: absolute;
+  height: 12px;
+  width: 12px;
+  bottom: -1px;
+  left: -1px;
+  background: #eb1923;
+  border-radius: 100%;
+}

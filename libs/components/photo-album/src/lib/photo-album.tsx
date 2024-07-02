@@ -46,8 +46,10 @@ export function PhotoAlbum({ data, showTitle = false, showIntro = false }: Photo
               className="absolute top-0 h-full w-full flex text-center text-white px-8 z-50"
             >
               <div>
-                {showTitle && <h2 className="font-montserrat mb-2 text-3xl font-bold">{item.title}</h2>}
-                {showIntro && <p>{item.meta.intro}</p>}
+                {showTitle && (
+                  <h2 className="font-montserrat mb-2 text-lg md:text-3xl font-bold leading-[120%]">{item.title}</h2>
+                )}
+                {showIntro && <p className="text-xs lg:text-base">{item.meta.intro}</p>}
               </div>
             </div>
           </div>
