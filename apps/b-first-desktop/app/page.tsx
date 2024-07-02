@@ -13,6 +13,7 @@ import Navbar from "./components/Navbar/Navbar";
 import TrendingTopics from "./components/TrendingTopics/TrendingTopics";
 import { getData } from "./utils/dataFetch";
 import filterOutOTD from "./utils/filterOutOTD";
+import { PhotoAlbum } from "@bfirst/components-photo-album";
 
 const webpageJsonLd = {
   "@context": "http://schema.org",
@@ -139,6 +140,18 @@ export default async function Index() {
           </div>
         </div>
         <Ads className="mt-4" src="/ads/banner_ibbl.gif" alt="ads" showHeader={false} />
+      </div>
+
+      <div className="desktop-container my-10">
+        <div className="grid grid-cols-4">
+          <div className="col-span-3 border-r dark:border-dark-300 pr-4 mr-4">
+            <AccentHeader header="Photo" color="#119F9F" />
+            <PhotoAlbum data={featureNews} />
+          </div>
+          <div>
+            <AccentHeader header="Stories" color="#119F9F" />
+          </div>
+        </div>
       </div>
 
       <div className="desktop-container mt-10">

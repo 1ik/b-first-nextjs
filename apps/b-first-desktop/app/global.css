@@ -26,3 +26,26 @@
 iframe {
   width: 100% !important;
 }
+
+.slick-dots ul .slick-active {
+  position: relative;
+}
+.slick-dots ul li {
+  cursor: pointer;
+}
+.slick-dots ul .slick-active::after {
+  content: "";
+  position: absolute;
+  height: 12px;
+  width: 12px;
+  bottom: -1px;
+  left: -1px;
+  background: #eb1923;
+  border-radius: 100%;
+}
+
+/* @media (min-width: 320px) and (max-width: 575.99px) {
+  .slick-dots ul .slick-active::after {
+    bottom: 28px;
+  }
+} */
