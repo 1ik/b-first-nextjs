@@ -4,7 +4,9 @@ import { BreadCrumb } from "@bfirst/components-breadcrumb";
 import { ItemCardHorizontal } from "@bfirst/components-item-card-horizontal";
 import { ItemList } from "@bfirst/components-item-list";
 import { SquareGrid } from "@bfirst/components-square-grid";
-import { getAuthorProfileUrl } from "@bfirst/utilities";
+import { getAuthorProfileUrl, getImageUrl } from "@bfirst/utilities";
+import filterOutOTD from "apps/b-first-desktop/app/utils/filterOutOTD";
+import { FaLinkedin } from "react-icons/fa6";
 import LoadMore from "../../../../components/LoadMore/LoadMore";
 import Navbar from "../../../../components/Navbar/Navbar";
 import TrendingTopics from "../../../../components/TrendingTopics/TrendingTopics";
@@ -24,9 +26,10 @@ const dummyData = {
 };
 
 export async function generateMetadata({ params }) {
+  const authorDetails = (await getData(`author-details/${params.id}`)).data;
   return {
-    title: `${dummyData.name} | Bangladesh First`,
-    description: dummyData.meta.description,
+    title: `${authorDetails.name} | Bangladesh First`,
+    description: authorDetails?.meta?.description,
     alternates: {
       canonical: `${process.env.BASE_URL}/author/${params.id}/${params.name}`,
     },
@@ -34,15 +37,16 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function AuthorProfile({ params }) {
-  const [latestNews, topNews] = await Promise.all([
-    getData("latest/stories"),
+  const [authorRelatedNews, topNews] = await Promise.all([
+    getData(`author-stories/${params.id}`),
     getData("categories/0/featured-stories"),
   ]);
 
-  const trendingTopics = (await getData("trendy-topics"))?.data;
-  const filteredLatestNews = latestNews?.data.filter(
-    (item: { categories: any[] }) => !item.categories.find((c) => c.name === "On_This_Day")
-  );
+  const [trendingTopics, authorDetails] = (
+    await Promise.all([getData("trendy-topics"), getData(`author-details/${params.id}`)])
+  ).map((item) => item?.data);
+
+  const filteredAuthorRelatedNews = authorRelatedNews?.data?.filter(filterOutOTD);
 
   return (
     <>
@@ -61,44 +65,68 @@ export default async function AuthorProfile({ params }) {
             },
           ]}
         />
-
-        <div className="flex items-center gap-x-4 pb-6 my-8 border-b dark:border-dark-300">
-          <img className="w-32 aspect-square object-cover" src={dummyData.meta.profile_image} alt={dummyData.name} />
-          <div className="[&>p]:text-sm">
-            <h1 className="text-2xl font-medium">{dummyData.name}</h1>
-            <p>{dummyData.meta.description}</p>
-            <p>
-              <a href={`mailto:${dummyData.meta.email}`}>{dummyData.meta.email}</a>
-            </p>
-            <p>
-              <a href={`tel:${dummyData.meta.phone_number}`}>{dummyData.meta.phone_number}</a>
-            </p>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-4 gap-x-6 gap-y-10 mt-4">
-          <div className="col-span-full">
-            <SquareGrid data={filteredLatestNews.slice(0, 8)} gridCols={4} />
-          </div>
-
+        <div className="grid grid-cols-4 gap-x-6 gap-y-10">
           <div className="col-span-3">
-            {filteredLatestNews?.slice(8, 21)?.map((item: any, index: number) => (
-              <ItemCardHorizontal
-                className="border-b-2 pb-4 mb-4 dark:border-dark-300"
-                key={index}
-                data={item}
-                size="lg"
-                showTime
-                titleFontSize="24px"
+            <div className="pb-6 my-8 border-b-2 dark:border-dark-300">
+              <div className="flex items-center gap-x-4 mb-4">
+                {/*  eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  className="w-32 aspect-square object-cover rounded-full"
+                  src={
+                    authorDetails?.meta?.profile_image
+                      ? getImageUrl(authorDetails?.meta?.profile_image, 128, 128)
+                      : `https://avatar.iran.liara.run/username?username=${authorDetails.name}`
+                  }
+                  alt={authorDetails?.name}
+                />
+                <div>
+                  <h1 className="text-3xl font-semibold">{authorDetails?.name}</h1>
+                  <p>
+                    <a href={`mailto:${authorDetails?.meta?.email}`}>{authorDetails?.meta?.email}</a>
+                  </p>
+                  <p>
+                    <a href={`tel:${authorDetails?.meta?.phone_number}`}>{authorDetails?.meta?.phone_number}</a>
+                  </p>
+                  <div className="flex items-center gap-x-2 text-xl">
+                    <FaLinkedin />
+                    <FaLinkedin />
+                    <FaLinkedin />
+                    <FaLinkedin />
+                  </div>
+                </div>
+              </div>
+              <div>
+                <p>
+                  Alexandra Del Rosario is an entertainment reporter on the Los Angeles Times Fast Break Desk. Before
+                  The Times, she was a television reporter at Deadline Hollywood, where she first served as an associate
+                  editor. She has written about a wide range of topics
+                </p>
+              </div>
+            </div>
+            <div className="mt-4">
+              <SquareGrid
+                className="mb-6 pb-6 border-b-2 dark:border-dark-300"
+                data={filteredAuthorRelatedNews.slice(0, 6)}
+                gridCols={3}
               />
-            ))}
-            <LoadMore
-              showIntro={false}
-              showTime
-              initialPage={2}
-              lastPage={latestNews?.meta.last_page}
-              url="latest/stories"
-            />
+              {filteredAuthorRelatedNews?.slice(6, 21)?.map((item: any, index: number) => (
+                <ItemCardHorizontal
+                  className="border-b-2 pb-4 mb-4 dark:border-dark-300"
+                  key={index}
+                  data={item}
+                  size="lg"
+                  showTime
+                  titleFontSize="24px"
+                />
+              ))}
+              <LoadMore
+                showIntro={false}
+                showTime
+                initialPage={2}
+                lastPage={authorRelatedNews?.meta?.last_page}
+                url={`author-stories/${params.id}`}
+              />
+            </div>
           </div>
           <div>
             <div>

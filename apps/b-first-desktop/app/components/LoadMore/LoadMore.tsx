@@ -4,6 +4,7 @@ import { ItemCardHorizontal } from "@bfirst/components-item-card-horizontal";
 import { Key, useCallback, useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { getData } from "../../utils/dataFetch";
+import filterOutOTD from "../../utils/filterOutOTD";
 
 interface LoadMoreProps {
   initialPage?: number;
@@ -47,7 +48,7 @@ export default function LoadMore({
   return (
     <>
       {stories
-        .filter((item: { categories: any[] }) => !item.categories.find((c) => c.name === "On_This_Day"))
+        .filter(filterOutOTD)
         .map((story: { id: Key | null | undefined }) => (
           <ItemCardHorizontal
             size="lg"
