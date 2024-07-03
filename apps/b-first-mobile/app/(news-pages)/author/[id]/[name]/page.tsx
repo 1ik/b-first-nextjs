@@ -39,10 +39,10 @@ export default async function AuthorProfile({ params }) {
     <>
       <Navbar />
 
-      <TrendingTopics className="desktop-container mb-8" items={trendingTopics} title="Trending Topics" />
-      <Ads className="my-4" src="/ads/banner_ibbl.gif" alt="Ads" showHeader={false} />
+      <div className="px-3">
+        <Ads className="mx-auto my-4" src="/ads/banner_ibbl.gif" alt="ads" />
+        <TrendingTopics className="mb-8" items={trendingTopics} title="Trending Topics" />
 
-      <div className="desktop-container">
         {/*============= BREDCRUMB ========== */}
         <BreadCrumb
           links={[
@@ -52,41 +52,50 @@ export default async function AuthorProfile({ params }) {
             },
           ]}
         />
-        <div className="grid grid-cols-4 gap-x-6 gap-y-10">
-          <div className="col-span-3">
-            <AuthorDetails data={authorDetails} />
-            <div className="mt-4">
-              <SquareGrid
-                className="mb-6 pb-6 border-b-2 dark:border-dark-300"
-                data={filteredAuthorRelatedNews.slice(0, 6)}
-                gridCols={3}
-              />
-              {filteredAuthorRelatedNews?.slice(6, 21)?.map((item: any, index: number) => (
+
+        <div>
+          <AuthorDetails data={authorDetails} />
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-5 gap-6 mt-4">
+          {/*============= LATEST NEWS ========== */}
+          <div className="sm:col-span-3">
+            <div className="hidden sm:block">
+              <SquareGrid data={filteredAuthorRelatedNews.slice(0, 6)} gridCols={2} />
+            </div>
+            <div className="sm:hidden">
+              <SquareGrid data={filteredAuthorRelatedNews.slice(0, 6)} gridCols={1} />
+            </div>
+
+            <div className="mt-3 pt-3 border-t-2 dark:border-dark-300">
+              {filteredAuthorRelatedNews?.map((item: any, index: number) => (
                 <ItemCardHorizontal
-                  className="border-b-2 pb-4 mb-4 dark:border-dark-300"
+                  className="border-b pb-4 mb-4 dark:border-dark-300"
                   key={index}
                   data={item}
-                  size="lg"
+                  size="md"
                   showTime
-                  titleFontSize="24px"
+                  titleFontSize="16px"
                 />
               ))}
               <LoadMore
                 showIntro={false}
                 showTime
                 initialPage={2}
-                lastPage={authorRelatedNews?.meta?.last_page}
+                lastPage={authorRelatedNews?.meta.last_page}
                 url={`author-stories/${params.id}`}
               />
             </div>
           </div>
-          <div>
+
+          <div className="sm:col-span-2">
+            {/*============= TOP NEWS ========== */}
             <div>
-              <Ads className="mb-6" src="/ads/Global.gif" alt="Ads" showHeader={false} />
+              <Ads className="my-4" src="/ads/Global.gif" alt="Ads" />
               <AccentHeader header="Top News" color="#119F9F" />
-              <ItemList data={topNews.data?.slice(0, 6)} listType="number" />
+              <ItemList data={topNews.data?.slice(0, 6)} listType="number" titleFontSize="16px" />
             </div>
-            <Ads className="mt-4 sticky top-20" src="/ads/Global.gif" alt="Ads" showHeader={false} />
+            <Ads className="mt-4 sm:sticky top-20" src="/ads/Global.gif" alt="Ads" />
           </div>
         </div>
       </div>

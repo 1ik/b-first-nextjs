@@ -48,8 +48,8 @@ export default function LoadMore({
   return (
     <>
       {stories
-        .filter(filterOutOTD)
-        .map((story: { id: Key | null | undefined }) => (
+        ?.filter(filterOutOTD)
+        ?.map((story: { id: Key | null | undefined }) => (
           <ItemCardHorizontal
             size="lg"
             showTime={showTime}
