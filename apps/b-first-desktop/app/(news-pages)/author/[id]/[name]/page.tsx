@@ -95,13 +95,15 @@ export default async function AuthorProfile({ params }) {
                   </div>
                 </div>
               </div>
-              <div>
-                <p>
-                  Alexandra Del Rosario is an entertainment reporter on the Los Angeles Times Fast Break Desk. Before
-                  The Times, she was a television reporter at Deadline Hollywood, where she first served as an associate
-                  editor. She has written about a wide range of topics
-                </p>
-              </div>
+              {authorDetails?.meta?.description && (
+                <div>
+                  <p>
+                    Alexandra Del Rosario is an entertainment reporter on the Los Angeles Times Fast Break Desk. Before
+                    The Times, she was a television reporter at Deadline Hollywood, where she first served as an
+                    associate editor. She has written about a wide range of topics
+                  </p>
+                </div>
+              )}
             </div>
             <div className="mt-4">
               <SquareGrid
