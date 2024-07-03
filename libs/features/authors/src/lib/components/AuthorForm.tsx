@@ -45,6 +45,7 @@ export function AuthorForm({ onSubmit, loading, isError, defaultData }: AuthorFo
         profile_image: profileImageUrl,
         description: data?.description,
         email: data?.email,
+        phone_number: data?.phone,
         linkedin_account: data?.linkedin,
         facebook_account: data?.facebook,
         instagram_account: data?.instagram,
@@ -124,7 +125,7 @@ export function AuthorForm({ onSubmit, loading, isError, defaultData }: AuthorFo
             </label>
             <Typography className="my-2">Contacts</Typography>
             <Input defaultValue={defaultData?.meta?.email} {...register("email")} type="email" label="Author Email" />
-            <Input defaultValue={defaultData?.meta?.phone} {...register("phone")} label="Author Phone Number" />
+            <Input defaultValue={defaultData?.meta?.phone_number} {...register("phone")} label="Author Phone Number" />
 
             <Typography className="my-2">Social Accounts</Typography>
             <div className="flex items-center gap-x-1">

@@ -1,5 +1,5 @@
 import { getImageUrl } from "@bfirst/utilities";
-import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa6";
+import { FaFacebook, FaLinkedin, FaSquareInstagram, FaSquareXTwitter } from "react-icons/fa6";
 
 /* eslint-disable-next-line */
 export interface AuthorDetailsProps {
@@ -34,18 +34,18 @@ export function AuthorDetails({ data }: AuthorDetailsProps) {
               </a>
             )}
             {data?.meta?.facebook_account && (
-              <a href={data?.meta?.linkedin_account}>
+              <a href={data?.meta?.facebook_account}>
                 <FaFacebook />
               </a>
             )}
             {data?.meta?.instagram_account && (
-              <a href={data?.meta?.linkedin_account}>
-                <FaInstagram />
+              <a href={data?.meta?.instagram_account}>
+                <FaSquareInstagram />
               </a>
             )}
             {data?.meta?.twitter_account && (
-              <a href={data?.meta?.linkedin_account}>
-                <FaTwitter />
+              <a href={data?.meta?.twitter_account}>
+                <FaSquareXTwitter />
               </a>
             )}
           </div>
