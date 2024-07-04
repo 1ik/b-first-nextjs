@@ -13,7 +13,7 @@ import { getData } from "../../../../utils/dataFetch";
 import filterOutOTD from "../../../../utils/filterOutOTD";
 
 export async function generateMetadata({ params }) {
-  const authorDetails = (await getData(`author-details/${params.id}`)).data;
+  const authorDetails = (await getData(`author-details/${params.id}`))?.data;
   return {
     title: `${authorDetails.name} | Bangladesh First`,
     description: authorDetails?.meta?.description,

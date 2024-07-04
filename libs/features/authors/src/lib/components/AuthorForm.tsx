@@ -85,13 +85,18 @@ export function AuthorForm({ onSubmit, loading, isError, defaultData }: AuthorFo
             />
 
             <Typography className="my-2">Profile Image</Typography>
-            <label className="md:w-48 aspect-square flex flex-col items-center p-4 bg-[#e1e2e4] rounded-lg shadow-lg cursor-pointer hover:bg-blue hover:shadow-xl">
+            <label className="relative group overflow-hidden md:w-48 aspect-square flex flex-col items-center justify-center p-4 bg-[#e1e2e4] rounded-lg shadow-lg cursor-pointer hover:shadow-xl">
               {profileImage ? (
-                <img
-                  className="w-full aspect-square rounded-full object-cover"
-                  src={profileImage}
-                  alt="selected file"
-                />
+                <div>
+                  <img
+                    className="w-full aspect-square rounded-full object-cover"
+                    src={profileImage}
+                    alt="selected file"
+                  />
+                  <div className="pointer-events-none absolute opacity-0 group-hover:opacity-100 h-full w-full flex items-center justify-center top-0 left-0 bg-gray-400/20 duration-100">
+                    Edit
+                  </div>
+                </div>
               ) : (
                 <div className="py-4">
                   <svg
