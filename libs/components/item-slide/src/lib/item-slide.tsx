@@ -55,7 +55,7 @@ export function ItemSlide({ data }: BlockNews5Props) {
 
 export function PrevArrow({ onClick }: any) {
   return (
-    <div className="absolute top-1/2 left-0 sm:-left-10 -translate-y-1/2 cursor-pointer z-10" onClick={onClick}>
+    <div className="absolute top-1/3 xl:top-1/2 left-0 xl:-left-10 -translate-y-1/2 cursor-pointer z-10" onClick={onClick}>
       <button>
         <RiArrowLeftSLine size={30} />
       </button>
@@ -65,7 +65,7 @@ export function PrevArrow({ onClick }: any) {
 
 export function NextArrow({ onClick }: any) {
   return (
-    <div className="absolute top-1/2 right-0 sm:-right-10 -translate-y-1/2 cursor-pointer z-10" onClick={onClick}>
+    <div className="absolute top-1/3 xl:top-1/2 right-0 xl:-right-10 -translate-y-1/2 cursor-pointer z-10" onClick={onClick}>
       <button>
         <RiArrowRightSLine size={30} />
       </button>
