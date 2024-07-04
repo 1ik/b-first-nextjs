@@ -146,7 +146,7 @@ export default async function Index() {
         <div className="grid grid-cols-4">
           <div className="col-span-3 border-r dark:border-dark-300 pr-4 mr-4">
             <AccentHeader header="Photo" color="#119F9F" />
-            <PhotoAlbum data={featureNews}/>
+            <PhotoAlbum data={featureNews} />
           </div>
           <div>
             <AccentHeader header="Stories" color="#119F9F" />

@@ -38,13 +38,7 @@ export function PhotoAlbum({ data, showTitle = false, showIntro = false }: Photo
               src={getImageUrl(item.meta.featured_image)}
               alt={item.title}
             />
-            <div
-              style={{
-                alignItems: "end",
-                paddingBottom: "40px",
-              }}
-              className="absolute top-0 h-full w-full flex text-center text-white px-8 z-50 bg-black/30"
-            >
+            <div  className="absolute top-0 h-full w-full flex text-center text-white px-8 z-50 bg-black/30 pb-10 items-end justify-center">
               <div>
                 {showTitle && (
                   <h2 className="font-montserrat mb-2 text-lg md:text-3xl font-bold leading-[120%]">{item.title}</h2>
