@@ -35,9 +35,15 @@ export function AuthorForm({ onSubmit, loading, isError, defaultData }: AuthorFo
   const { requestAsync } = usePost(`api/v1/media-upload-image`);
 
   const handleFormSubmit = async function (data: Inputs) {
-    const formData = new FormData();
-    formData.append("image", profileImageFile);
-    const profileImageUrl = (await requestAsync(formData)).data.url;
+    let profileImageUrl: undefined | string;
+
+    if (profileImageFile) {
+      const formData = new FormData();
+      formData.append("image", profileImageFile);
+      profileImageUrl = (await requestAsync(formData)).data.url;
+    } else if (defaultData?.meta?.profile_image) {
+      profileImageUrl = defaultData?.meta?.profile_image;
+    }
 
     const author = {
       name: data.name,
