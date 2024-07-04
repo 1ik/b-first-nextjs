@@ -27,7 +27,7 @@ export function AuthorDetails({ data }: AuthorDetailsProps) {
           <p>
             <a href={`tel:${data?.meta?.phone_number}`}>{data?.meta?.phone_number}</a>
           </p>
-          <div className="flex items-center gap-x-3 text-lg sm:text-xl mt-1">
+          <div className="flex items-center gap-x-3 text-lg sm:text-xl mt-2">
             {data?.meta?.linkedin_account && (
               <a href={data?.meta?.linkedin_account}>
                 <FaLinkedin />
