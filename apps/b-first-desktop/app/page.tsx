@@ -13,6 +13,7 @@ import Navbar from "./components/Navbar/Navbar";
 import TrendingTopics from "./components/TrendingTopics/TrendingTopics";
 import { getData } from "./utils/dataFetch";
 import filterOutOTD from "./utils/filterOutOTD";
+import { VideoAlbum } from "@bfirst/components-video-album";
 
 const webpageJsonLd = {
   "@context": "http://schema.org",
@@ -95,6 +96,13 @@ export default async function Index() {
           </a>
         </div>
       </div>
+
+      <div className="bg-black text-white py-4 mt-8">
+        <div className="desktop-container my-10">
+          <VideoAlbum data={featureNews} />
+        </div>
+      </div>
+
       <Ads className="my-12" src="/ads/banner_ibbl.gif" alt="ads" showHeader={false} />
       <div className="bg-[#F6EFEF] dark:bg-dark-300 py-8">
         <div className="desktop-container">
