@@ -50,7 +50,7 @@ export function RecommendedStories(props: RecommendedStoriesProps) {
   const handleAddRecommendedStories = function (news: any) {
     if (!news) return;
     setRecommendedStories((cur) => [{ id: news.id, title: news.title, created_at: news.created_at }, ...cur] as never);
-    toast.success("New one added", {
+    toast.success("New item added", {
       position: "top-center",
     });
     setSearch("");
@@ -59,7 +59,7 @@ export function RecommendedStories(props: RecommendedStoriesProps) {
   const handleSubmit = async function (e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (recommendedStories.length < 4) {
-      toast.warning("Total recommended story must be 4", {
+      toast.warning("Total recommended story minimum be 4", {
         position: "top-center",
       });
       return;
