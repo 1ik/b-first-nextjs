@@ -16,6 +16,7 @@ import RecommendedStoriesLazy from "./internal/recommended";
 import { AddEditStoriesLazy, StoriesListLazy, StoryPreviewLazy, TrashStoriesListLazy } from "./internal/stories";
 import { TagAddLazy, TagEditLazy, TagsListLazy, TrashTagsListLazy } from "./internal/tags";
 import { TrendingTagsLazy } from "./internal/trendingTags";
+import { AdListLazy, CreateAdLazy } from "./internal/admanager";
 export const NavBar = () => {
   return (
     <div className="navbar bg-base-300">
@@ -52,6 +53,7 @@ const _links = [
   { name: "Categories", href: "/categories", isActive: true },
   { name: "Authors", href: "/authors" },
   { name: "Tags", href: "/tags" },
+  { name: "Ad Manager", href: "/ads-list" },
 ];
 
 const _subLinks = [
@@ -193,6 +195,8 @@ export function AppInternal() {
               <Route path="/trash-authors" element={<TrashAuthorsListLazy />} />
               <Route path="/trash-tags" element={<TrashTagsListLazy />} />
               <Route path="/trash-categories" element={<TrashCategoriesListLazy />} />
+              <Route path="/ads-list" element={<AdListLazy />} />
+              <Route path="/ads-list/create-ad" element={<CreateAdLazy />} />
             </Routes>
           </div>
         </div>
