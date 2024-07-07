@@ -6,6 +6,7 @@ import { ItemList } from "@bfirst/components-item-list";
 import { ProfileCard } from "@bfirst/components-profile-card";
 import { SquareGrid } from "@bfirst/components-square-grid";
 import { getImageUrl } from "@bfirst/utilities";
+import moment from "moment-timezone";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import "../../../../../../../libs/fonts/montserrat/index.css";
@@ -92,7 +93,7 @@ export default async function NewsDetails({ params }) {
             url: "https://bfirst.news/img/logo-dark.svg",
           },
         },
-        datePublished: detailsData?.story.created_at,
+        datePublished: moment.utc(detailsData?.story.created_at).tz("Asia/Dhaka").format(),
         image: {
           "@type": "ImageObject",
           url: getImageUrl(detailsData?.story.meta.featured_image),
@@ -150,7 +151,7 @@ export default async function NewsDetails({ params }) {
             <h3 className="text-[22px] montserrat-regular leading-[120%]">{detailsData?.story.meta.intro}</h3>
             <div className="mt-10">
               <ProfileCard
-                data={detailsData?.story.authors[0]}
+                data={detailsData?.story.authors}
                 createdTime={detailsData?.story.created_at}
                 shareLink={news_link_url}
               />

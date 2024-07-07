@@ -1,4 +1,5 @@
 import { SocialShare } from "@bfirst/components-social-share";
+import { getAuthorProfileUrl } from "@bfirst/utilities";
 import moment from "moment-timezone";
 
 export interface ProfileCardProps {
@@ -10,7 +11,7 @@ export interface ProfileCardProps {
 
 export function ProfileCard({ data, createdTime, shareLink, className }: ProfileCardProps) {
   return (
-    <div className={`bg-[#F2F2F2] p-4 dark:bg-dark-300 gap-x-2 gap-y-6 items-center ${className}`}>
+    <div className={`flex gap-y-[2px] rounded-lg overflow-hidden flex-col ${className}`}>
       {/* <div className="col-span-2">
         <img
           className="h-[100px] w-[100px] rounded-full object-center"
@@ -18,14 +19,21 @@ export function ProfileCard({ data, createdTime, shareLink, className }: Profile
           alt="profile"
         />
       </div> */}
-      <div className="montserrat-regular">
-        <h3 className="text-[22px]">{data?.name}</h3>
+      <div className="montserrat-regular p-4 bg-[#F2F2F2] dark:bg-dark-300">
+        {data?.map((item: { name: string }, index: number) => (
+          <h3 key={index} className="text-lg">
+            <a href={getAuthorProfileUrl(item)}>
+              {item?.name} {!(index >= data.length - 1) && <span>,</span>}
+            </a>
+          </h3>
+        ))}
+
         <p className="text-sm mt-2 montserrat-regular">{`Publisted at ${moment(createdTime)
           .tz("Asia/Dhaka")
           .format("h:mm A, ddd MMM Do, YYYY")}`}</p>
       </div>
-      <div className="border-t dark:border-dark-300 pt-2">
-        <SocialShare title="Share News" shareLink={shareLink} />
+      <div className="px-4 py-3 bg-[#F2F2F2] dark:bg-dark-300">
+        <SocialShare shareLink={shareLink} />
       </div>
     </div>
   );

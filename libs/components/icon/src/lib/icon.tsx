@@ -3,15 +3,13 @@ import React from "react";
 import { IconType } from "react-icons";
 import { BiSolidTrashAlt } from "react-icons/bi";
 import { FaUserCircle } from "react-icons/fa";
+import { FaFacebook, FaSquareInstagram, FaLinkedin, FaSquareXTwitter } from "react-icons/fa6";
 import { HiHome } from "react-icons/hi";
 import { HiOutlinePencilSquare } from "react-icons/hi2";
-import { IoIosSearch } from "react-icons/io";
+import { IoIosColorPalette, IoIosSearch } from "react-icons/io";
+import { IoLogOutSharp, IoSettingsSharp } from "react-icons/io5";
 import { MdAdd, MdContentCopy, MdRestore } from "react-icons/md";
-import { IoSettingsSharp } from "react-icons/io5";
-import { IoLogOutSharp } from "react-icons/io5";
-import { IoIosColorPalette } from "react-icons/io";
-import { RiArrowLeftSLine } from "react-icons/ri";
-import { RiArrowRightSLine } from "react-icons/ri";
+import { RiArrowLeftSLine, RiArrowRightSLine } from "react-icons/ri";
 
 /* eslint-disable-next-line */
 export interface IconProps {
@@ -28,7 +26,11 @@ export interface IconProps {
     | "theme"
     | "leftArrow"
     | "rightArrow"
-    | "copy";
+    | "copy"
+    | "linkedin"
+    | "facebook"
+    | "instagram"
+    | "twitter";
   variant?: "filled" | "gradient" | "outlined" | "text";
   size?: number;
   onClick?: () => void;
@@ -76,6 +78,18 @@ export const Icon = React.forwardRef<HTMLButtonElement, IconProps>(
         break;
       case "copy":
         Icon = MdContentCopy;
+        break;
+      case "linkedin":
+        Icon = FaLinkedin;
+        break;
+      case "facebook":
+        Icon = FaFacebook;
+        break;
+      case "instagram":
+        Icon = FaSquareInstagram;
+        break;
+      case "twitter":
+        Icon = FaSquareXTwitter;
         break;
     }
 

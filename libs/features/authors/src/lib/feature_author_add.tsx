@@ -22,7 +22,8 @@ export const FeatureAuthorAdd: React.FC<FeatureAuthorAddProps> = (props: Feature
       isError={false}
       loading={isPending}
       onSubmit={(data) => {
-        request(data);
+        console.log(data);
+        // request(data);
       }}
     />
   );
