@@ -1,5 +1,6 @@
 import { useGet, usePost } from "@bfirst/api-client";
 import { ColorPicker } from "@bfirst/components-color-picker";
+import { Icon } from "@bfirst/components-icon";
 import { HCF } from "@bfirst/components-layout";
 import { MultiselectSearch } from "@bfirst/components-multiselect-search";
 import { TinymceEditor } from "@bfirst/components-tinymce-editor";
@@ -71,6 +72,7 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
   const [error, setError] = useState({ authors: "", tags: "", categories: "", body: "", featuredImg: "" });
   const [body, setBody] = useState(defaultData?.story.content || "");
   const [featuredImgUrl, setFeaturedImgUrl] = useState(defaultData?.story.meta.featured_image || "");
+  const [moreImages, setMoreImages] = useState(defaultData?.story.meta.more_images || []);
   const [search, setSearch] = useState({ authors: "", tags: "", categories: "" });
   const [selectedAuthors, setSelectedAuthors] = useState([]);
   const [selectedTags, setSelectedTags] = useState([]);
@@ -117,6 +119,7 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
         imageCaption: data.imageCaption || defaultData?.story.meta.imageCaption,
         altheadline: data.altheadline,
         intro: data.standfirst,
+        more_images: moreImages,
       },
       authors: selectedAuthors.map((author) => (author as { id: number }).id),
       tags: selectedTags.map((tag) => (tag as { id: number }).id),
@@ -125,6 +128,8 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
     };
     onSubmit(story);
   };
+
+  console.log(moreImages);
 
   return (
     <form onSubmit={handleSubmit(onValidate)} className="h-full">
@@ -192,6 +197,22 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
               <p className="text-xs p-1 font-light">{errors.standfirst && errors.standfirst.message}</p>
             </div>
 
+            {/* ========== media browser for featured image ======= */}
+            <div>
+              <Button
+                variant="gradient"
+                onClick={() => {
+                  dispatch({ type: "setDialogOpen" });
+                  dispatch({ type: "setOpenFrom", payload: "featuredImage" });
+                }}
+              >
+                Featured Image
+              </Button>
+            </div>
+            <div className="max-w-[500px]">
+              {featuredImgUrl && <img src={`${getImageUrl(featuredImgUrl)}`} alt="Featured_Image" />}
+            </div>
+
             {/* ======== text editor (body) ========= */}
             <div>
               <TinymceEditor
@@ -239,28 +260,65 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
               <p className="text-xs p-1 font-light">{error.categories}</p>
             </div>
 
-            {/* ========== media browser ======= */}
+            {/* ========== media browser for more images ======= */}
             <div>
               <Button
                 variant="gradient"
                 onClick={() => {
                   dispatch({ type: "setDialogOpen" });
-                  dispatch({ type: "setOpenFrom", payload: "storyForm" });
+                  dispatch({ type: "setOpenFrom", payload: "moreImages" });
                 }}
               >
-                Browse
+                More Images
               </Button>
             </div>
+            <div className="grid grid-cols-4 gap-3">
+              {moreImages.map((item: { imageUrl: string; imageCaption: string }, index: number) => (
+                <div className="relative flex flex-col gap-y-2" key={index}>
+                  <img
+                    className="w-full rounded-md aspect-video object-cover"
+                    src={getImageUrl(item.imageUrl)}
+                    alt={item.imageUrl}
+                  />
+                  <Input
+                    onChange={(e) =>
+                      setMoreImages((cur: { imageCaption: string }[]) => {
+                        cur[index].imageCaption = e.target.value;
+                        return cur;
+                      })
+                    }
+                    type="text"
+                    label="Caption"
+                    defaultValue={item.imageCaption}
+                  />
+                  <div className="absolute bg-white/75 rounded-lg top-2 right-2">
+                    <Icon onClick={() => setMoreImages((cur) => cur.filter((_, idx) => idx !== index))} name="trash" />
+                  </div>
+                </div>
+              ))}
+              <div
+                onClick={() => {
+                  dispatch({ type: "setDialogOpen" });
+                  dispatch({ type: "setOpenFrom", payload: "moreImages" });
+                }}
+                className="w-full rounded-md cursor-pointer aspect-video bg-gray-300 flex flex-col gap-y-2 items-center justify-center"
+              >
+                <span className="text-4xl text-gray-500 rounded-full border-2 border-gray-500 aspect-square w-12 flex items-center justify-center">
+                  +
+                </span>
+                <span className="text-gray-500">Add More</span>
+              </div>
+            </div>
+
+            {/* =========== media browser =========== */}
             <MediaBrowser
               defaultData={defaultData}
               register={register}
               state={state}
               dispatch={dispatch}
-              featuredImgUrl={featuredImgUrl}
               onFeaturedImgUrl={setFeaturedImgUrl}
+              onMoreImgsUrl={setMoreImages}
             />
-
-            <div>{featuredImgUrl && <img src={`${getImageUrl(featuredImgUrl)}`} alt="Featured_Image" />}</div>
 
             {/* ============== modal for related news embed ============ */}
             <EmbedRelatedNews open={isOpenEmbed} onOpen={setIsOpenEmbed} />
