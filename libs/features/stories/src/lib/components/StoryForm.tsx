@@ -294,18 +294,20 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
                   </div>
                 </div>
               ))}
-              <div
-                onClick={() => {
-                  dispatch({ type: "setDialogOpen" });
-                  dispatch({ type: "setOpenFrom", payload: "moreImages" });
-                }}
-                className="w-full rounded-md cursor-pointer aspect-video bg-gray-300 flex flex-col gap-y-2 items-center justify-center"
-              >
-                <span className="text-4xl text-gray-500 rounded-full border-2 border-gray-500 aspect-square w-12 flex items-center justify-center">
-                  +
-                </span>
-                <span className="text-gray-500">Add More</span>
-              </div>
+              {moreImages?.length ? (
+                <div
+                  onClick={() => {
+                    dispatch({ type: "setDialogOpen" });
+                    dispatch({ type: "setOpenFrom", payload: "moreImages" });
+                  }}
+                  className="w-full rounded-md cursor-pointer aspect-video bg-gray-300 flex flex-col gap-y-2 items-center justify-center"
+                >
+                  <span className="text-4xl text-gray-500 rounded-full border-2 border-gray-500 aspect-square w-12 flex items-center justify-center">
+                    +
+                  </span>
+                  <span className="text-gray-500">Add More</span>
+                </div>
+              ) : null}
             </div>
 
             {/* =========== media browser =========== */}
