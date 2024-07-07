@@ -6,6 +6,7 @@ import { ItemList } from "@bfirst/components-item-list";
 import { ProfileCard } from "@bfirst/components-profile-card";
 import { SquareGrid } from "@bfirst/components-square-grid";
 import { getImageUrl } from "@bfirst/utilities";
+import moment from "moment-timezone";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import "../../../../../../../libs/fonts/montserrat/index.css";
@@ -92,7 +93,7 @@ export default async function NewsDetails({ params }) {
             url: "https://bfirst.news/img/logo-dark.svg",
           },
         },
-        datePublished: detailsData?.story.created_at,
+        datePublished: moment.utc(detailsData?.story.created_at).tz("Asia/Dhaka").format(),
         image: {
           "@type": "ImageObject",
           url: getImageUrl(detailsData?.story.meta.featured_image),
