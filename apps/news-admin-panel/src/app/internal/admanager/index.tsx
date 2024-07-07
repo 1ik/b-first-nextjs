@@ -1,36 +1,22 @@
 import { lazy, Suspense } from "react";
 
-const LoadCreatead = lazy(
+
+const LoadAdManager = lazy(
   () =>
     // eslint-disable-next-line
     new Promise<any>((resolve) => {
-      import("./createAd").then((component) => {
-        resolve(component);
-      });
-    })
-);
-const LoadAdsList = lazy(
-  () =>
-    // eslint-disable-next-line
-    new Promise<any>((resolve) => {
-      import("./adsList").then((component) => {
+      import("./ad-manager").then((component) => {
         resolve(component);
       });
     })
 );
 
 
-export function CreateAdLazy() {
+
+export function AdManagerLazy() {
   return (
     <Suspense>
-      <LoadCreatead />
-    </Suspense>
-  );
-}
-export function AdListLazy() {
-  return (
-    <Suspense>
-      <LoadAdsList />
+      <LoadAdManager />
     </Suspense>
   );
 }
