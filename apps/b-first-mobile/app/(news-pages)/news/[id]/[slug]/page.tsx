@@ -162,7 +162,7 @@ export default async function NewsDetails({ params }) {
               {/* SOCIAL SHARE & PROFILE CARD */}
               <ProfileCard
                 className="my-5"
-                data={detailsData?.story.authors[0]}
+                data={detailsData?.story.authors}
                 createdTime={detailsData?.story.created_at}
                 shareLink={news_link_url}
               />
@@ -226,7 +226,7 @@ export default async function NewsDetails({ params }) {
               <h3 className="text-base montserrat-regular">{detailsData?.story.meta.intro}</h3>
               <ProfileCard
                 className="my-5"
-                data={detailsData?.story.authors[0]}
+                data={detailsData?.story.authors}
                 createdTime={detailsData?.story.created_at}
                 shareLink={news_link_url}
               />

@@ -151,7 +151,7 @@ export default async function NewsDetails({ params }) {
             <h3 className="text-[22px] montserrat-regular leading-[120%]">{detailsData?.story.meta.intro}</h3>
             <div className="mt-10">
               <ProfileCard
-                data={detailsData?.story.authors[0]}
+                data={detailsData?.story.authors}
                 createdTime={detailsData?.story.created_at}
                 shareLink={news_link_url}
               />
