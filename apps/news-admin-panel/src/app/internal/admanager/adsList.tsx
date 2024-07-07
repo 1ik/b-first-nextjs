@@ -2,7 +2,8 @@ import { Breadcrumbs, Button } from "@bfirst/material-tailwind";
 import { Icon } from "@bfirst/components-icon";
 import { HCF } from "@bfirst/components-layout";
 import { Link } from "react-router-dom";
-
+import {AdList} from "@bfirst/components-ad-manager"
+import CreateAd from "./createAd";
 export default function AdsList() {
   return (
     <HCF>
@@ -26,7 +27,10 @@ export default function AdsList() {
           </div>
         </div>
       </HCF.Header>
-      <HCF.Content>List of ad manager</HCF.Content>
+      <HCF.Content>
+        <CreateAd/>
+        <AdList />
+      </HCF.Content>
     </HCF>
   );
 }
