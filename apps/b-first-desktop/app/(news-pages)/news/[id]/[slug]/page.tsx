@@ -5,7 +5,7 @@ import { ItemCardHorizontal } from "@bfirst/components-item-card-horizontal";
 import { ItemList } from "@bfirst/components-item-list";
 import { ProfileCard } from "@bfirst/components-profile-card";
 import { SquareGrid } from "@bfirst/components-square-grid";
-import { getImageUrl } from "@bfirst/utilities";
+import { getAdsObj, getAdsUrl, getImageUrl } from "@bfirst/utilities";
 import moment from "moment-timezone";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -59,6 +59,8 @@ export async function generateMetadata({ params }): Promise<Metadata> {
 export default async function NewsDetails({ params }) {
   const news_link_url = `${process.env.BASE_URL}/news/${params.id}/${params.slug}`;
   const detailsData = await getData(`story/details/${params.id}`);
+  const ads_list = await getData("ads?page=news_details");
+  const ads_obj = getAdsObj(ads_list.ads);
 
   if (!detailsData) return notFound();
 
@@ -133,7 +135,7 @@ export default async function NewsDetails({ params }) {
       <TrendingTopics className="desktop-container mb-8" title="Trending Topics" items={trendingTopics} />
 
       <div className="desktop-container">
-        <Ads src="/ads/banner_ibbl.gif" alt="ads" showHeader={false} />
+        <Ads src={getAdsUrl(ads_obj?.banner1)} alt="Ads" />
 
         <BreadCrumb
           links={[
@@ -169,7 +171,7 @@ export default async function NewsDetails({ params }) {
 
           {/* ======== row 2 ======= */}
           <div>
-            <Ads className="my-8" src="/ads/union-bank-ad.gif" alt="ads" showHeader={false} />
+            <Ads className="my-8" src={getAdsUrl(ads_obj?.square1)} alt="Ads" />
             <div>
               <AccentHeader
                 header={`more from ${detailsData?.story.categories[0].name.split("_").join(" ")}`}
@@ -189,7 +191,7 @@ export default async function NewsDetails({ params }) {
                 ))}
             </div>
 
-            <Ads className="my-8 sticky top-[80px]" src="/ads/sibl.png" alt="ads" showHeader={false} />
+            <Ads className="my-8" src={getAdsUrl(ads_obj?.square2)} alt="Ads" />
           </div>
           <div className="col-span-2">
             <div
@@ -211,7 +213,8 @@ export default async function NewsDetails({ params }) {
                 ))}
               </ul>
             </div>
-            <Ads className="my-10" src="/ads/FSB-banner-ad.gif" alt="ads" showHeader={false} />
+
+            <Ads className="my-10" src={getAdsUrl(ads_obj?.banner2)} alt="Ads" />
 
             {/* ======== Comment section ======== */}
 
@@ -232,7 +235,7 @@ export default async function NewsDetails({ params }) {
             ) : null}
           </div>
           <div>
-            <Ads className="my-8" src="/ads/Global.gif" alt="ads" showHeader={false} />
+            <Ads className="my-10" src={getAdsUrl(ads_obj?.square3)} alt="Ads" />
             <div>
               <AccentHeader header="Latest News" color="#5D26D1" />
               <ItemList
@@ -244,7 +247,7 @@ export default async function NewsDetails({ params }) {
               />
             </div>
             <div>
-              <Ads className="my-8" src="/ads/ibbl.gif" alt="ads" showHeader={false} />
+              <Ads className="my-10" src={getAdsUrl(ads_obj?.square4)} alt="Ads" />
               <AccentHeader header="Top News" color="#119F9F" />
               <ItemList data={topNews?.slice(0, 6)} listType="number" titleFontSize="18px" />
             </div>

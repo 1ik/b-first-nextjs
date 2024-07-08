@@ -143,6 +143,10 @@ const ad_items = [
         position: "banner1",
       },
       {
+        title: "Related news top banner",
+        position: "banner2",
+      },
+      {
         title: "More from economy top square 1",
         position: "square1",
       },
