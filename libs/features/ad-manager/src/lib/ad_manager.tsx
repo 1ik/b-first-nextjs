@@ -7,51 +7,67 @@ const ad_items = [
     page: "home",
     ads: [
       {
+        title: "Top news top banner",
         position: "banner 1",
       },
       {
+        title: "Top news middle banner",
         position: "banner 2",
       },
       {
+        title: "Top news bottom banner",
         position: "banner 3",
       },
       {
+        title: "Economy news top banner",
         position: "banner 4",
       },
       {
+        title: "Economy news bottom banner",
         position: "banner 5",
       },
       {
+        title: "Lifestyle news top banner",
         position: "banner 6",
       },
       {
+        title: "Lifestyle news bottom banner",
         position: "banner 7",
       },
       {
+        title: "Entertianment news bottom banner",
         position: "banner 8",
       },
       {
+        title: "Footer top banner",
         position: "banner 9",
       },
       {
+        title: "Top news right square 1",
         position: "square 1",
       },
       {
+        title: "Top news right square 2",
         position: "square 2",
       },
       {
+        title: "Latest news bottom square",
         position: "square 3",
       },
       {
+        title: "On this day news bottom square 1",
         position: "square 4",
       },
       {
-        position: "square 5",
+        title: "On this day news bottom square 2",
+        position: "square 4",
       },
       {
+        title: "Entertainment news right square 1",
         position: "square 6",
       },
       {
+        title: "Entertainment news right square 2",
         position: "square 7",
       },
     ],
@@ -60,19 +76,24 @@ const ad_items = [
     page: "categoy ",
     ads: [
       {
+        title: "Top news top banner",
         position: "banner 1",
       },
       {
+        title: "Top news bottom banner",
         position: "banner 2",
       },
       {
+        title: "Latest news top square 1",
         position: "square 1",
       },
       {
+        title: "Latest news bottom square 2",
         position: "square 2",
       },
       {
-        position: "square 3",
+        title: "Top news bottom square 2",
+        position: "square 4",
       },
     ],
   },
@@ -80,13 +101,15 @@ const ad_items = [
     page: "latest",
     ads: [
       {
+        title: "Top news top banner",
         position: "banner 1",
       },
-
       {
+        title: "Top news top square 1",
         position: "square 1",
       },
       {
+        title: "Top news bottom square 2",
         position: "square 2",
       },
     ],
@@ -95,18 +118,19 @@ const ad_items = [
     page: "topic ",
     ads: [
       {
+        title: "Top news top banner",
         position: "banner 1",
       },
       {
-        position: "banner 2",
-      },
-      {
+        title: "Latest news top square 1",
         position: "square 1",
       },
       {
+        title: "Latest news bottom square 2",
         position: "square 2",
       },
       {
+        title: "Top news bottom square",
         position: "square 3",
       },
     ],
@@ -115,21 +139,23 @@ const ad_items = [
     page: "news_details",
     ads: [
       {
+        title: "Top news top banner",
         position: "banner 1",
       },
       {
-        position: "banner 2",
-      },
-      {
+        title: "More from economy top square 1",
         position: "square 1",
       },
       {
+        title: "More from economy bottom square 2",
         position: "square 2",
       },
       {
+        title: "Latest news top square 1",
         position: "square 3",
       },
       {
+        title: "Latest news bottom square 2",
         position: "square 4",
       },
     ],
@@ -183,10 +209,10 @@ export function AdManager() {
             (item) =>
               item.page === page &&
               item.ads.map((item2, index) => (
-                <div key={index}>
-                  <p>{item2.position}</p>
+                <div key={index} className="mb-4">
+                  <p className="text-lg font-medium">{item2.title}</p>
                   <div className="flex items-end">
-                    <label className="md:w-80 flex flex-col items-center p-4 bg-[#e1e2e4] rounded-lg shadow-lg cursor-pointer hover:bg-blue hover:shadow-xl">
+                    <label className="md:w-[600px] flex flex-col items-center p-4 bg-[#e1e2e4] rounded-lg shadow-lg cursor-pointer hover:bg-blue hover:shadow-xl">
                       {selectedUploadImage[item2.position] ? (
                         <img src={selectedUploadImage[item2.position]} alt="selected file" />
                       ) : data?.ads?.find((d) => d.position === item2.position) ? (

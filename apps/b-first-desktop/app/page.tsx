@@ -37,7 +37,8 @@ export default async function Index() {
   const filterTopNews = function (item: any) {
     return !topNews?.find((tN: { id: number }) => tN.id === (item as { id: number }).id);
   };
-
+  // const ads = await getData("ads?page=home");
+  // console.log(ads);
   const latestNews = (await getData("latest/stories?size=30"))?.data
     .filter(filterTopNews)
     .filter(filterRecommended)
@@ -76,7 +77,12 @@ export default async function Index() {
       <TrendingTopics className="desktop-container mb-8" items={trendingTopics} title="Trending Topics" />
 
       <Ads className="my-10" src="/ads/Ad-Master-50.gif" alt="Ads" />
-
+      {/* {ads.ads.map(
+        (ad, index) =>
+          ad.position === "banner 1" && (
+            <Ads key={index} className="my-10" src={`https://backend.bangladeshfirst.com/${ad.image_path}`} alt="Ads" />
+          )
+      )} */}
       <BlockNews
         className="desktop-container"
         data={topNews?.slice(0, 8)}
