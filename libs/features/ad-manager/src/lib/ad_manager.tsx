@@ -8,92 +8,92 @@ const ad_items = [
     ads: [
       {
         title: "Top news top banner",
-        position: "banner 1",
+        position: "banner1",
       },
       {
         title: "Top news middle banner",
-        position: "banner 2",
+        position: "banner2",
       },
       {
         title: "Top news bottom banner",
-        position: "banner 3",
+        position: "banner3",
       },
       {
         title: "Economy news top banner",
-        position: "banner 4",
+        position: "banner4",
       },
       {
         title: "Economy news bottom banner",
-        position: "banner 5",
+        position: "banner5",
       },
       {
         title: "Lifestyle news top banner",
-        position: "banner 6",
+        position: "banner6",
       },
       {
         title: "Lifestyle news bottom banner",
-        position: "banner 7",
+        position: "banner7",
       },
       {
         title: "Entertianment news bottom banner",
-        position: "banner 8",
+        position: "banner8",
       },
       {
         title: "Footer top banner",
-        position: "banner 9",
+        position: "banner9",
       },
       {
         title: "Top news right square 1",
-        position: "square 1",
+        position: "square1",
       },
       {
         title: "Top news right square 2",
-        position: "square 2",
+        position: "square2",
       },
       {
         title: "Latest news bottom square",
-        position: "square 3",
+        position: "square3",
       },
       {
         title: "On this day news bottom square 1",
-        position: "square 4",
+        position: "square4",
       },
       {
         title: "On this day news bottom square 2",
-        position: "square 4",
+        position: "square5",
       },
       {
         title: "Entertainment news right square 1",
-        position: "square 6",
+        position: "square6",
       },
       {
         title: "Entertainment news right square 2",
-        position: "square 7",
+        position: "square7",
       },
     ],
   },
   {
-    page: "categoy ",
+    page: "category",
     ads: [
       {
         title: "Top news top banner",
-        position: "banner 1",
+        position: "banner1",
       },
       {
         title: "Top news bottom banner",
-        position: "banner 2",
+        position: "banner2",
       },
       {
         title: "Latest news top square 1",
-        position: "square 1",
+        position: "square1",
       },
       {
         title: "Latest news bottom square 2",
-        position: "square 2",
+        position: "square2",
       },
       {
         title: "Top news bottom square 2",
-        position: "square 4",
+        position: "square4",
       },
     ],
   },
@@ -102,15 +102,15 @@ const ad_items = [
     ads: [
       {
         title: "Top news top banner",
-        position: "banner 1",
+        position: "banner1",
       },
       {
         title: "Top news top square 1",
-        position: "square 1",
+        position: "square1",
       },
       {
         title: "Top news bottom square 2",
-        position: "square 2",
+        position: "square2",
       },
     ],
   },
@@ -119,19 +119,19 @@ const ad_items = [
     ads: [
       {
         title: "Top news top banner",
-        position: "banner 1",
+        position: "banner1",
       },
       {
         title: "Latest news top square 1",
-        position: "square 1",
+        position: "square1",
       },
       {
         title: "Latest news bottom square 2",
-        position: "square 2",
+        position: "square2",
       },
       {
         title: "Top news bottom square",
-        position: "square 3",
+        position: "square3",
       },
     ],
   },
@@ -140,23 +140,23 @@ const ad_items = [
     ads: [
       {
         title: "Top news top banner",
-        position: "banner 1",
+        position: "banner1",
       },
       {
         title: "More from economy top square 1",
-        position: "square 1",
+        position: "square1",
       },
       {
         title: "More from economy bottom square 2",
-        position: "square 2",
+        position: "square2",
       },
       {
         title: "Latest news top square 1",
-        position: "square 3",
+        position: "square3",
       },
       {
         title: "Latest news bottom square 2",
-        position: "square 4",
+        position: "square4",
       },
     ],
   },
@@ -215,10 +215,10 @@ export function AdManager() {
                     <label className="md:w-[600px] flex flex-col items-center p-4 bg-[#e1e2e4] rounded-lg shadow-lg cursor-pointer hover:bg-blue hover:shadow-xl">
                       {selectedUploadImage[item2.position] ? (
                         <img src={selectedUploadImage[item2.position]} alt="selected file" />
-                      ) : data?.ads?.find((d) => d.position === item2.position) ? (
+                      ) : data?.ads?.find((d: any) => d.position === item2.position) ? (
                         <img
                           src={`https://backend.bangladeshfirst.com/${
-                            data.ads.find((d) => d.position === item2.position).image_path
+                            data.ads.find((d: any) => d.position === item2.position).image_path
                           }`}
                           alt="ads"
                         />

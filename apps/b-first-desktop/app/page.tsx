@@ -13,6 +13,7 @@ import Navbar from "./components/Navbar/Navbar";
 import TrendingTopics from "./components/TrendingTopics/TrendingTopics";
 import { getData } from "./utils/dataFetch";
 import filterOutOTD from "./utils/filterOutOTD";
+import { getAdsObj, getAdsUrl } from "@bfirst/utilities";
 
 const webpageJsonLd = {
   "@context": "http://schema.org",
@@ -37,8 +38,10 @@ export default async function Index() {
   const filterTopNews = function (item: any) {
     return !topNews?.find((tN: { id: number }) => tN.id === (item as { id: number }).id);
   };
-  // const ads = await getData("ads?page=home");
-  // console.log(ads);
+  const ads_list = await getData("ads?page=home");
+
+  const ads_obj = getAdsObj(ads_list.ads);
+
   const latestNews = (await getData("latest/stories?size=30"))?.data
     .filter(filterTopNews)
     .filter(filterRecommended)
@@ -76,20 +79,11 @@ export default async function Index() {
       <Navbar />
       <TrendingTopics className="desktop-container mb-8" items={trendingTopics} title="Trending Topics" />
 
-      <Ads className="my-10" src="/ads/Ad-Master-50.gif" alt="Ads" />
-      {/* {ads.ads.map(
-        (ad, index) =>
-          ad.position === "banner 1" && (
-            <Ads key={index} className="my-10" src={`https://backend.bangladeshfirst.com/${ad.image_path}`} alt="Ads" />
-          )
-      )} */}
-      <BlockNews
-        className="desktop-container"
-        data={topNews?.slice(0, 8)}
-        ads1="/ads/Global.gif"
-        ads2="/ads/union-bank-ad.gif"
-      />
-      <Ads className="my-10" src="/ads/FSB-banner-ad.gif" alt="ads" showHeader={false} />
+      <Ads className="my-10" src={getAdsUrl(ads_obj?.banner1)} alt="Ads" />
+
+      <BlockNews className="desktop-container" data={topNews?.slice(0, 8)} ads={ads_list.ads} />
+      <Ads className="my-10" src={getAdsUrl(ads_obj?.banner2)} alt="Ads" />
+
       <div className="desktop-container">
         <SquareGrid showAccentHeader data={topNews?.slice(8, 16)} gridCols={4} />
         <div className="flex justify-center mt-3 border-b dark:border-dark-300">
@@ -101,7 +95,7 @@ export default async function Index() {
           </a>
         </div>
       </div>
-      <Ads className="my-12" src="/ads/banner_ibbl.gif" alt="ads" showHeader={false} />
+      <Ads className="my-12" src={getAdsUrl(ads_obj?.banner3)} alt="Ads" />
       <div className="bg-[#F6EFEF] dark:bg-dark-300 py-8">
         <div className="desktop-container">
           <AccentHeader header="recommended for you" color="#228B22" />
@@ -109,7 +103,8 @@ export default async function Index() {
         </div>
       </div>
 
-      <Ads className="my-12" src="/ads/FSB-banner-ad.gif" alt="ads" showHeader={false} />
+      <Ads className="my-10" src={getAdsUrl(ads_obj?.banner5)} alt="Ads" />
+
       <div className="desktop-container">
         <div className="grid grid-cols-4">
           <BlockNews2
@@ -129,7 +124,7 @@ export default async function Index() {
               moreNewsLink="/latest"
               titleFontSize="18px"
             />
-            <Ads className="mt-6" src="/ads/Global.gif" alt="ads" showHeader={false} />
+            <Ads className="mt-6" src={getAdsUrl(ads_obj?.square3)} alt="Ads" />
           </div>
         </div>
       </div>
@@ -144,7 +139,7 @@ export default async function Index() {
             <ItemList data={latestNews?.slice(6, 12)} listType="number" titleFontSize="18px" />
           </div>
         </div>
-        <Ads className="mt-4" src="/ads/banner_ibbl.gif" alt="ads" showHeader={false} />
+        <Ads className="mt-4" src={getAdsUrl(ads_obj?.banner6)} alt="Ads" />
       </div>
 
       <div className="desktop-container mt-10">
@@ -159,24 +154,24 @@ export default async function Index() {
             <AccentHeader header="On this day" color="#A49A46" />
             <ItemList showImage showDate data={onThisDay} />
             <div className="flex flex-col mt-8 gap-y-8 items-center">
-              <Ads className="mt-4" src="/ads/sibl.png" alt="ads" showHeader={false} />
-              <Ads className="mt-4" src="/ads/FSIBL-November-2023-20.gif" alt="ads" showHeader={false} />
+              <Ads className="mt-4" src={getAdsUrl(ads_obj?.square4)} alt="Ads" />
+              <Ads className="mt-4" src={getAdsUrl(ads_obj?.square5)} alt="Ads" />
             </div>
           </div>
         </div>
-        <Ads className="my-8" src="/ads/banner_ibbl.gif" alt="ads" showHeader={false} />
+        <Ads className="my-8" src={getAdsUrl(ads_obj?.banner7)} alt="Ads" />
       </div>
 
       <BlockNews5
         sectionHeader="entertainment"
         headerColor="#5D26D1"
         className="desktop-container"
+        ads ={ads_list.ads}
         data={entertainmentNews}
       />
-
-      <Ads className="my-16" src="/ads/FSB-banner-ad.gif" alt="ads" showHeader={false} />
+      <Ads className="my-16" src={getAdsUrl(ads_obj?.banner8)} alt="Ads" />
       <ListGrid className="desktop-container" data={[bangladeshNews, worldNews, sportsNews, techNews]} />
-      <Ads className="mt-12" src="/ads/banner_ibbl.gif" alt="ads" showHeader={false} />
+      <Ads className="my-12" src={getAdsUrl(ads_obj?.banner9)} alt="Ads" />
     </>
   );
 }
