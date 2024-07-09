@@ -8,7 +8,8 @@ import LoadMore from "../../components/LoadMore/LoadMore";
 import Navbar from "../../components/Navbar/Navbar";
 import TrendingTopics from "../../components/TrendingTopics/TrendingTopics";
 import { getData } from "../../utils/dataFetch";
-import { getAdsObj, getAdsUrl } from "@bfirst/utilities";
+import { getAdsUrl } from "@bfirst/utilities";
+import { getAdsObj } from "../../utils/getAdsObj";
 
 export default async function Latest() {
   const [latestNews, topNews] = await Promise.all([

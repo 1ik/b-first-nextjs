@@ -18,11 +18,6 @@ export const getAdsUrl = (path: string) => {
   return baseUrl + `/${path}`;
 };
 
-export const getAdsObj = function (adsArr) {
-  if (!adsArr) return;
-  const obj = Object.fromEntries(adsArr?.map((item: any) => [item.position, item.image_path]));
-  return obj;
-};
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const getNewsUrl = (news: any) =>

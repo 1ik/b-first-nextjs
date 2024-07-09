@@ -5,7 +5,7 @@ import { ItemCardHorizontal } from "@bfirst/components-item-card-horizontal";
 import { ItemList } from "@bfirst/components-item-list";
 import { ProfileCard } from "@bfirst/components-profile-card";
 import { SquareGrid } from "@bfirst/components-square-grid";
-import { getAdsObj, getAdsUrl, getImageUrl } from "@bfirst/utilities";
+import { getAdsUrl, getImageUrl } from "@bfirst/utilities";
 import moment from "moment-timezone";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -15,7 +15,7 @@ import Navbar from "../../../../components/Navbar/Navbar";
 import TrendingTopics from "../../../../components/TrendingTopics/TrendingTopics";
 import { getData } from "../../../../utils/dataFetch";
 import filterOutOTD from "../../../../utils/filterOutOTD";
-
+import { getAdsObj } from "../../../../utils/getAdsObj";
 export async function generateMetadata({ params }): Promise<Metadata> {
   const data = await getData(`story/details/${params.id}`);
 

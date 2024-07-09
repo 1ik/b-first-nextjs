@@ -13,7 +13,8 @@ import Navbar from "./components/Navbar/Navbar";
 import TrendingTopics from "./components/TrendingTopics/TrendingTopics";
 import { getData } from "./utils/dataFetch";
 import filterOutOTD from "./utils/filterOutOTD";
-import { getAdsObj, getAdsUrl } from "@bfirst/utilities";
+import { getAdsUrl } from "@bfirst/utilities";
+import { getAdsObj } from "./utils/getAdsObj";
 
 const webpageJsonLd = {
   "@context": "http://schema.org",

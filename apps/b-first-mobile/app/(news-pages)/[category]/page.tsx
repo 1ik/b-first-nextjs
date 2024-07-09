@@ -10,7 +10,8 @@ import Navbar from "../../components/Navbar/Navbar";
 import TrendingTopics from "../../components/TrendingTopics/TrendingTopics";
 import { getData } from "../../utils/dataFetch";
 import filterOutOTD from "../../utils/filterOutOTD";
-import { getAdsObj, getAdsUrl } from "@bfirst/utilities";
+import { getAdsUrl } from "@bfirst/utilities";
+import { getAdsObj } from "../../utils/getAdsObj";
 
 export async function generateMetadata({ params }) {
   const categoryDetails = await getData(`categories?name=${params.category}`);

@@ -225,7 +225,7 @@ export function AdManager() {
               item.ads.map((ad, index) => (
                 <div key={index} className="mb-4">
                   <p className="text-lg font-medium">{ad.title}</p>
-                  <div className="flex items-end">
+                  <div className="flex items-end gap-2">
                     <label className="md:w-[600px] flex flex-col items-center p-4 bg-[#e1e2e4] rounded-lg shadow-lg cursor-pointer hover:bg-blue hover:shadow-xl">
                       {selectedUploadImage[ad.position] ? (
                         <img src={selectedUploadImage[ad.position]} alt="selected file" />
