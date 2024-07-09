@@ -103,14 +103,14 @@ export default async function Index() {
         </div>
       </div>
 
-      <Ads className="my-10" src={getAdsUrl(ads_obj?.banner5)} alt="Ads" />
+      <Ads className="my-10" src={getAdsUrl(ads_obj?.banner4)} alt="Ads" />
 
       <div className="desktop-container">
         <div className="grid grid-cols-4">
           <BlockNews2
             sectionHeader="Economy"
             headerColor="#00479B"
-            adsUrl="/ads/FSB-banner-ad.gif"
+            ads={ads_list.ads}
             className="col-span-3 border-r dark:border-dark-300 pr-4 mr-4"
             data={economyNews}
           />
