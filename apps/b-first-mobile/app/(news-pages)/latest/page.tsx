@@ -8,6 +8,7 @@ import LoadMore from "../../components/LoadMore/LoadMore";
 import Navbar from "../../components/Navbar/Navbar";
 import TrendingTopics from "../../components/TrendingTopics/TrendingTopics";
 import { getData } from "../../utils/dataFetch";
+import { getAdsObj, getAdsUrl } from "@bfirst/utilities";
 
 export default async function Latest() {
   const [latestNews, topNews] = await Promise.all([
@@ -16,6 +17,8 @@ export default async function Latest() {
   ]);
 
   const trendingTopics = (await getData("trendy-topics"))?.data;
+  const ads_list = await getData("ads?page=latest");
+  const ads_obj = getAdsObj(ads_list.ads);
 
   const filteredLatestNews = latestNews?.data.filter(
     (item: { categories: any[] }) => !item.categories.find((c) => c.name === "On_This_Day")
@@ -25,7 +28,7 @@ export default async function Latest() {
     <>
       <Navbar />
       <div className="px-3">
-        <Ads className="mx-auto my-4" src="/ads/banner_ibbl.gif" alt="ads" />
+        <Ads className="mx-auto my-4" src={getAdsUrl(ads_obj?.banner1)} alt="Ads" />
         <TrendingTopics className="desktop-container mb-8" items={trendingTopics} title="Trending Topics" />
         {/*============= BREDCRUMB ========== */}
         <div className="mt-4">
@@ -64,10 +67,10 @@ export default async function Latest() {
           <div className="sm:col-span-2">
             {/*============= TOP NEWS ========== */}
             <div>
-              <Ads className="my-4" src="/ads/Global.gif" alt="Ads" />
+              <Ads className="my-4" src={getAdsUrl(ads_obj?.square1)} alt="Ads" />
               <AccentHeader header="Top News" color="#119F9F" />
               <ItemList data={topNews.data?.slice(0, 6)} listType="number" titleFontSize="16px" />
-              <Ads className="mt-4" src="/ads/Global.gif" alt="Ads" />
+              <Ads className="mt-4" src={getAdsUrl(ads_obj?.square2)} alt="Ads" />
             </div>
           </div>
         </div>

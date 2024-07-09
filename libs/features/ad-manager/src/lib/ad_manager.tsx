@@ -93,7 +93,7 @@ const ad_items = [
       },
       {
         title: "Top news bottom square 2",
-        position: "square4",
+        position: "square3",
       },
     ],
   },

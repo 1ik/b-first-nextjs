@@ -38,8 +38,8 @@ export default async function Index() {
   const filterTopNews = function (item: any) {
     return !topNews?.find((tN: { id: number }) => tN.id === (item as { id: number }).id);
   };
-  const ads_list = await getData("ads?page=home");
 
+  const ads_list = await getData("ads?page=home");
   const ads_obj = getAdsObj(ads_list.ads);
 
   const latestNews = (await getData("latest/stories?size=30"))?.data
@@ -166,7 +166,7 @@ export default async function Index() {
         sectionHeader="entertainment"
         headerColor="#5D26D1"
         className="desktop-container"
-        ads ={ads_list.ads}
+        ads={ads_list.ads}
         data={entertainmentNews}
       />
       <Ads className="my-16" src={getAdsUrl(ads_obj?.banner8)} alt="Ads" />
