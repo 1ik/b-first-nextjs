@@ -19,6 +19,7 @@ export type Inputs = {
   altheadline?: string;
   standfirst: string;
   imageCaption?: string;
+  videoLink?: string;
 };
 
 export type StoryInputs = {
@@ -141,6 +142,7 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
         altheadline: data.altheadline,
         intro: data.standfirst,
         more_images: moreImages,
+        video_link: data.videoLink,
       },
       authors: selectedAuthors.map((author) => (author as { id: number }).id),
       tags: selectedTags.map((tag) => (tag as { id: number }).id),
@@ -313,6 +315,13 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
               />
               <p className="text-xs p-1 font-light">{error.categories}</p>
             </div>
+
+            {/* ======== Video embed link ======== */}
+            <Input
+              defaultValue={defaultData?.story.meta.video_link}
+              {...register("videoLink")}
+              label="Video Embed Link"
+            />
 
             {/* ========== media browser for more images ======= */}
             <div>
