@@ -129,8 +129,6 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
     onSubmit(story);
   };
 
-  console.log(moreImages);
-
   return (
     <form onSubmit={handleSubmit(onValidate)} className="h-full">
       <HCF>
@@ -272,12 +270,12 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
                 More Images
               </Button>
             </div>
-            <div className="grid grid-cols-4 gap-3">
+            <div className="grid sm:grid-cols-2 grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-3">
               {moreImages.map((item: { imageUrl: string; imageCaption: string }, index: number) => (
                 <div className="relative flex flex-col gap-y-2" key={index}>
                   <img
                     className="w-full rounded-md aspect-video object-cover"
-                    src={getImageUrl(item.imageUrl)}
+                    src={getImageUrl(item.imageUrl, 320, 180, 40)}
                     alt={item.imageUrl}
                   />
                   <Input
@@ -296,18 +294,20 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
                   </div>
                 </div>
               ))}
-              <div
-                onClick={() => {
-                  dispatch({ type: "setDialogOpen" });
-                  dispatch({ type: "setOpenFrom", payload: "moreImages" });
-                }}
-                className="w-full rounded-md cursor-pointer aspect-video bg-gray-300 flex flex-col gap-y-2 items-center justify-center"
-              >
-                <span className="text-4xl text-gray-500 rounded-full border-2 border-gray-500 aspect-square w-12 flex items-center justify-center">
-                  +
-                </span>
-                <span className="text-gray-500">Add More</span>
-              </div>
+              {moreImages?.length ? (
+                <div
+                  onClick={() => {
+                    dispatch({ type: "setDialogOpen" });
+                    dispatch({ type: "setOpenFrom", payload: "moreImages" });
+                  }}
+                  className="w-full rounded-md cursor-pointer aspect-video bg-gray-300 flex flex-col gap-y-2 items-center justify-center"
+                >
+                  <span className="text-4xl text-gray-500 rounded-full border-2 border-gray-500 aspect-square w-12 flex items-center justify-center">
+                    +
+                  </span>
+                  <span className="text-gray-500">Add More</span>
+                </div>
+              ) : null}
             </div>
 
             {/* =========== media browser =========== */}
