@@ -1,6 +1,7 @@
 import { useGet, usePost } from "@bfirst/api-client";
 import { Button } from "@bfirst/material-tailwind";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
 
 const ad_items = [
   {
@@ -20,7 +21,7 @@ const ad_items = [
       },
       {
         title: "Economy news top banner",
-        
+
         position: "banner4",
       },
       {
@@ -171,12 +172,21 @@ export function AdManager() {
   const [page, setpage] = useState("home");
   const [imageFile, setImageFile] = useState<any>(null);
   const [selectedUploadImage, setSelectedUploadImage] = useState({});
-  const { requestAsync } = usePost(`api/v1/ads`);
+  const { requestAsync, isSuccess } = usePost(`api/v1/ads`);
   const { data } = useGet(`api/v1/public/ads?page=${page}`);
 
   const handlePageChange = (e: any) => {
     setSelectedUploadImage({});
     setpage(e.target.value);
+  };
+
+  const handleFileChange = (e: any, position: any) => {
+    const file = e.target.files[0];
+    setImageFile((prev: any) => ({ ...prev, [position]: file }));
+    setSelectedUploadImage((prev) => ({
+      ...prev,
+      [position]: URL.createObjectURL(file),
+    }));
   };
 
   const handleSubmit = async (data: any) => {
@@ -186,18 +196,17 @@ export function AdManager() {
     formData.append("position", data.position);
     const datas = await requestAsync(formData);
   };
-
-  const handleFileChange = (e: any, position: any) => {
-    const file = e.target.files[0];
-    setImageFile((prev) => ({ ...prev, [position]: file }));
-    setSelectedUploadImage((prev) => ({
-      ...prev,
-      [position]: URL.createObjectURL(file),
-    }));
-  };
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("Ad upadate succesfully", {
+        position: "top-center",
+      });
+    }
+  }, [isSuccess]);
 
   return (
     <div className="m-5">
+      <ToastContainer />
       <div>
         <select onChange={handlePageChange}>
           {ad_items.map((item, index) => (
@@ -213,17 +222,17 @@ export function AdManager() {
           {ad_items.map(
             (item) =>
               item.page === page &&
-              item.ads.map((item2, index) => (
+              item.ads.map((ad, index) => (
                 <div key={index} className="mb-4">
-                  <p className="text-lg font-medium">{item2.title}</p>
+                  <p className="text-lg font-medium">{ad.title}</p>
                   <div className="flex items-end">
                     <label className="md:w-[600px] flex flex-col items-center p-4 bg-[#e1e2e4] rounded-lg shadow-lg cursor-pointer hover:bg-blue hover:shadow-xl">
-                      {selectedUploadImage[item2.position] ? (
-                        <img src={selectedUploadImage[item2.position]} alt="selected file" />
-                      ) : data?.ads?.find((d: any) => d.position === item2.position) ? (
+                      {selectedUploadImage[ad.position] ? (
+                        <img src={selectedUploadImage[ad.position]} alt="selected file" />
+                      ) : data?.ads?.find((d: any) => d.position === ad.position) ? (
                         <img
                           src={`https://backend.bangladeshfirst.com/${
-                            data.ads.find((d: any) => d.position === item2.position).image_path
+                            data.ads.find((d: any) => d.position === ad.position).image_path
                           }`}
                           alt="ads"
                         />
@@ -261,10 +270,10 @@ export function AdManager() {
                           <span>Upload Image</span>
                         </div>
                       )}
-                      <input className="hidden" onChange={(e) => handleFileChange(e, item2.position)} type="file" />
+                      <input className="hidden" onChange={(e) => handleFileChange(e, ad.position)} type="file" />
                     </label>
                     <div>
-                      <Button onClick={() => handleSubmit(item2)}>Submit</Button>
+                      <Button onClick={() => handleSubmit(ad)}>Submit</Button>
                     </div>
                   </div>
                 </div>
