@@ -81,7 +81,7 @@ export default async function Index() {
         <TrendingTopics className="my-4" items={trendingTopics} title="Trending" />
 
         {/* TOP NEWS SECTION */}
-        <BlockNewsMob data={topNews?.slice(0, 8)} ads={ads_list.ads} />
+        <BlockNewsMob data={topNews?.slice(0, 8)} ads1={ads_obj?.square1} ads2={ads_obj?.square2} />
         <Ads className="my-6" src={getAdsUrl(ads_obj?.banner2)} alt="Ads" />
         <div className="sm:hidden">
           <SquareGrid showAccentHeader data={topNews.slice(8, 16)} gridCols={1} />
@@ -150,7 +150,7 @@ export default async function Index() {
         <Ads className="my-6" src={getAdsUrl(ads_obj?.banner7)} alt="Ads" />
         <BlockNewsMob5
           data={entertainmentNews}
-          ads={ads_list.ads}
+          ads={ads_obj?.square5}
           sectionHeader="entertainment"
           headerColor="#5D26D1"
         />

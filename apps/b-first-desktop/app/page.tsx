@@ -42,6 +42,7 @@ export default async function Index() {
   const ads_list = await getData("ads?page=home");
   const ads_obj = getAdsObj(ads_list.ads);
 
+
   const latestNews = (await getData("latest/stories?size=30"))?.data
     .filter(filterTopNews)
     .filter(filterRecommended)
@@ -81,7 +82,7 @@ export default async function Index() {
 
       <Ads className="my-10" src={getAdsUrl(ads_obj?.banner1)} alt="Ads" />
 
-      <BlockNews className="desktop-container" data={topNews?.slice(0, 8)} ads={ads_list.ads} />
+      <BlockNews className="desktop-container" data={topNews?.slice(0, 8)}   ads1={ads_obj?.square1} ads2={ads_obj?.square2} />
       <Ads className="my-10" src={getAdsUrl(ads_obj?.banner2)} alt="Ads" />
 
       <div className="desktop-container">
@@ -110,7 +111,7 @@ export default async function Index() {
           <BlockNews2
             sectionHeader="Economy"
             headerColor="#00479B"
-            ads={ads_list.ads}
+            ads={ads_obj?.banner5}
             className="col-span-3 border-r dark:border-dark-300 pr-4 mr-4"
             data={economyNews}
           />
@@ -166,7 +167,8 @@ export default async function Index() {
         sectionHeader="entertainment"
         headerColor="#5D26D1"
         className="desktop-container"
-        ads={ads_list.ads}
+        ads1={ads_obj?.square6}
+        ads2={ads_obj?.square7}
         data={entertainmentNews}
       />
       <Ads className="my-16" src={getAdsUrl(ads_obj?.banner8)} alt="Ads" />
