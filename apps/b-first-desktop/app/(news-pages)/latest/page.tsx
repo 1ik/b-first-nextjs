@@ -17,7 +17,7 @@ export default async function Latest() {
     getData("categories/0/featured-stories"),
   ]);
 
-  const ads_list = await getData("ads?page=news_details");
+  const ads_list = await getData("ads?page=latest");
   const ads_obj = getAdsObj(ads_list.ads);
   const trendingTopics = (await getData("trendy-topics"))?.data;
   const filteredLatestNews = latestNews?.data.filter(

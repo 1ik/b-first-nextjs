@@ -100,7 +100,7 @@ export default async function CategoryPage({ params }) {
               />
             </div>
 
-            <Ads className="my-8" src={getAdsUrl(ads_obj?.square1)} alt="Ads" />
+            <Ads className="my-8" src={getAdsUrl(ads_obj?.square2)} alt="Ads" />
             <div>
               <AccentHeader header="Top News" color="#119F9F" />
               <ItemList data={topNews?.data.slice(0, 6)} listType="number" titleFontSize="18px" />
