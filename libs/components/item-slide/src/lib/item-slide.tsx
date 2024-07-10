@@ -4,6 +4,7 @@ import { RiArrowRightSLine } from "react-icons/ri";
 import { ItemCardVertical } from "@bfirst/components-item-card-vertical";
 import { RiArrowLeftSLine } from "react-icons/ri";
 import Slider from "react-slick";
+import "./item-slide.css"
 export interface BlockNews5Props {
   data: any;
 }

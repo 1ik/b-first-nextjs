@@ -23,14 +23,3 @@ iframe {
   width: 100% !important;
   max-height: 400px !important;
 }
-
-/* Slick Slider  */
-@media (min-width: 450px) and (max-width: 1600.99px) {
-  .slick-slide {
-    padding-right: 10px;
-  }
-
-  .slick-list {
-    margin-right: -10px !important;
-  }
-}
