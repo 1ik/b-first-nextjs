@@ -23,3 +23,9 @@ iframe {
   width: 100% !important;
   max-height: 400px !important;
 }
+
+.featured_video > iframe {
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 16/9 !important;
+}

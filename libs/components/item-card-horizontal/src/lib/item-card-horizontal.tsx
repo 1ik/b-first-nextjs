@@ -144,15 +144,21 @@ export function ItemCardHorizontal({
             </div>
           </Link>
         ) : (
-          <a href={getNewsUrl(data)}>
-            <div>
-              <img
-                className={`hover:scale-110 duration-300 w-full object-cover aspect-video`}
-                src={getImageUrl(data?.meta.featured_image)}
-                alt={data?.meta.featured_image.imageCaption}
-              />
-            </div>
-          </a>
+          <div>
+            {data?.meta?.featured_element === "video" ? (
+              <div className="featured_video" dangerouslySetInnerHTML={{ __html: data?.meta?.featured_video }}></div>
+            ) : (
+              <a href={getNewsUrl(data)}>
+                <div>
+                  <img
+                    className={`hover:scale-110 duration-300 w-full object-cover aspect-video`}
+                    src={getImageUrl(data?.meta.featured_image)}
+                    alt={data?.meta.featured_image.imageCaption}
+                  />
+                </div>
+              </a>
+            )}
+          </div>
         )}
       </div>
     </div>

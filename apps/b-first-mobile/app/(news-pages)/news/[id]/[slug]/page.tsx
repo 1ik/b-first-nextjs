@@ -217,8 +217,20 @@ export default async function NewsDetails({ params }) {
 
           {/* ==================== GRID RIGHT BOX (TAB) | GRID TOP BOX (MOBILE) ===================== */}
           <div className="sm:col-span-5 order-1">
-            <ImagePreview url={getImageUrl(detailsData?.story.meta.featured_image)} alt={detailsData?.story.title} />
-            <p className="montserrat-regular-italic text-xs mt-2">{detailsData?.story.meta.imageCaption}</p>
+            {detailsData?.story?.meta?.featured_element === "video" ? (
+              <div
+                className="featured_video mb-3"
+                dangerouslySetInnerHTML={{ __html: detailsData?.story?.meta?.featured_video }}
+              ></div>
+            ) : (
+              <div>
+                <ImagePreview
+                  url={getImageUrl(detailsData?.story.meta.featured_image)}
+                  alt={detailsData?.story.title}
+                />
+                <p className="montserrat-regular-italic text-xs mt-2">{detailsData?.story.meta.imageCaption}</p>
+              </div>
+            )}
 
             <div className="sm:hidden">
               <Ads className="my-8" src="/ads/ibbl.gif" alt="Ads" />
