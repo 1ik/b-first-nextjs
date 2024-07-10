@@ -6,11 +6,9 @@ import "./photo-album.css";
 import { RiArrowLeftSLine, RiArrowRightSLine } from "react-icons/ri";
 export interface PhotoAlbumProps {
   data: any;
-  showTitle?: boolean;
-  showIntro?: boolean;
 }
 
-export function PhotoAlbum({ data, showTitle = false, showIntro = false }: PhotoAlbumProps) {
+export function PhotoAlbum({ data }: PhotoAlbumProps) {
   const settings = {
     dots: true,
     infinite: true,
@@ -35,19 +33,14 @@ export function PhotoAlbum({ data, showTitle = false, showIntro = false }: Photo
       <Slider {...settings}>
         {data.map((item: any, index: number) => (
           <div key={index} className="relative">
-            <img
-              className="aspect-video object-cover w-full"
-              src={getImageUrl(item.meta.featured_image)}
-              alt={item.title}
-            />
-            <div  className="absolute top-0 h-full w-full flex text-center text-white px-8 z-50 bg-black/30 pb-10 items-end justify-center">
-              <div>
-                {showTitle && (
-                  <h2 className="font-montserrat mb-2 text-lg md:text-3xl font-bold leading-[120%]">{item.title}</h2>
-                )}
-                {showIntro && <p className="text-xs lg:text-base">{item.meta.intro}</p>}
-              </div>
-            </div>
+            <a href={getNewsUrl(item)}>
+              <img
+                className="aspect-video object-cover w-full"
+                src={getImageUrl(item.meta.featured_image)}
+                alt={item.title}
+              />
+              <div className="absolute top-0 h-full w-full flex text-center text-white px-8 z-50 bg-black/30 pb-10 items-end justify-center"></div>
+            </a>
           </div>
         ))}
       </Slider>
@@ -57,7 +50,7 @@ export function PhotoAlbum({ data, showTitle = false, showIntro = false }: Photo
 
 export function PrevArrow({ onClick }: any) {
   return (
-    <div className="absolute top-1/2 z-10 -translate-y-1/2" onClick={onClick}>
+    <div className="absolute top-1/2 z-50 -translate-y-1/2" onClick={onClick}>
       <button className="text-white">
         <RiArrowLeftSLine size={40} />
       </button>
@@ -67,7 +60,7 @@ export function PrevArrow({ onClick }: any) {
 
 export function NextArrow({ onClick }: any) {
   return (
-    <div className="absolute top-1/2 right-0 z-10 -translate-y-1/2" onClick={onClick}>
+    <div className="absolute top-1/2 right-0 z-50 -translate-y-1/2" onClick={onClick}>
       <button className="text-white">
         <RiArrowRightSLine size={40} />
       </button>
