@@ -121,10 +121,9 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
 
   const onValidate = function (data: Inputs) {
     if (!body) setError((cur) => ({ ...cur, body: "Body is required" }));
-    if (featuredElement === "image" && !featuredImgUrl)
-      return setError((cur) => ({ ...cur, featuredImage: "Featured Image is required" }));
     if (featuredElement === "video" && !featuredVideo)
       return setError((cur) => ({ ...cur, featuredVideo: "Featured Video is required" }));
+    if (!featuredImgUrl) return setError((cur) => ({ ...cur, featuredImage: "Featured Image is required" }));
     if (!selectedAuthors.length) return setError((cur) => ({ ...cur, authors: "Author is required" }));
     if (!selectedTags.length) return setError((cur) => ({ ...cur, tags: "Tag is required" }));
     if (!selectedCategories.length) return setError((cur) => ({ ...cur, categories: "Category is required" }));
@@ -259,11 +258,14 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
                 />
                 <Input
                   defaultValue={defaultData?.story.meta.featured_video}
-                  onChange={(e) => setFeaturedVideo(e.target.value)}
+                  onChange={(e) => {
+                    setFeaturedVideo(e.target.value);
+                    setError((cur) => ({ ...cur, featuredVideo: "" }));
+                  }}
                   label="Featured Embeded Video"
                 />
                 <div className="mt-3">
-                  {featuredImgUrl && <div dangerouslySetInnerHTML={{ __html: featuredVideo }}></div>}
+                  {featuredVideo && <div dangerouslySetInnerHTML={{ __html: featuredVideo }}></div>}
                 </div>
                 <p className="text-xs p-1 font-light">{error.featuredVideo}</p>
               </div>
