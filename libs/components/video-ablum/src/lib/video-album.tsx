@@ -3,6 +3,7 @@
 import "slick-carousel/slick/slick.css";
 import Slider from "react-slick";
 import { ItemCardVertical } from "@bfirst/components-item-card-vertical";
+import "./video-album.css"
 
 export interface BlockNews5Props {
   data: any;
@@ -11,7 +12,7 @@ export function VideoAlbum({ data }: BlockNews5Props) {
   const settings = {
     dots: false,
     infinite: true,
-    speed: 2000,
+    speed: 1500,
     slidesToShow: 4,
     slidesToScroll: 1,
     autoplay: true,
