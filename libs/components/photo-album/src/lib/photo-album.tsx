@@ -1,8 +1,9 @@
 "use client";
-import { getImageUrl } from "@bfirst/utilities";
+import { getImageUrl, getNewsUrl } from "@bfirst/utilities";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
-
+import "./photo-album.css";
+import { RiArrowLeftSLine, RiArrowRightSLine } from "react-icons/ri";
 export interface PhotoAlbumProps {
   data: any;
   showTitle?: boolean;
@@ -16,7 +17,8 @@ export function PhotoAlbum({ data, showTitle = false, showIntro = false }: Photo
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    arrows: false,
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
     appendDots: (dots: any) => (
       <div>
         <ul style={{ bottom: "20px", gap: "6px" }} className="flex absolute left-1/2 -translate-x-1/2">
@@ -49,6 +51,26 @@ export function PhotoAlbum({ data, showTitle = false, showIntro = false }: Photo
           </div>
         ))}
       </Slider>
+    </div>
+  );
+}
+
+export function PrevArrow({ onClick }: any) {
+  return (
+    <div className="absolute top-1/2 z-10 -translate-y-1/2" onClick={onClick}>
+      <button className="text-white">
+        <RiArrowLeftSLine size={40} />
+      </button>
+    </div>
+  );
+}
+
+export function NextArrow({ onClick }: any) {
+  return (
+    <div className="absolute top-1/2 right-0 z-10 -translate-y-1/2" onClick={onClick}>
+      <button className="text-white">
+        <RiArrowRightSLine size={40} />
+      </button>
     </div>
   );
 }
