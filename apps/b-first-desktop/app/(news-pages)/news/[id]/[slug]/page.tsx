@@ -158,13 +158,25 @@ export default async function NewsDetails({ params }) {
             </div>
           </div>
           <div className="col-span-3">
-            <ImagePreview url={getImageUrl(detailsData?.story.meta.featured_image)} alt={detailsData?.story.title} />
-            {/* <img
+            {detailsData?.story?.meta?.featured_element === "video" ? (
+              <div
+                className="featured_video"
+                dangerouslySetInnerHTML={{ __html: detailsData?.story?.meta?.featured_video }}
+              ></div>
+            ) : (
+              <div>
+                <ImagePreview
+                  url={getImageUrl(detailsData?.story.meta.featured_image)}
+                  alt={detailsData?.story.title}
+                />
+                {/* <img
               className="w-full"
               src={getImageUrl(detailsData?.story.meta.featured_image)}
               alt={detailsData?.story.title}
-            /> */}
-            <p className="montserrat-regular-italic text-xl mt-4">{detailsData?.story.meta.imageCaption}</p>
+              /> */}
+                <p className="montserrat-regular-italic text-xl mt-4">{detailsData?.story.meta.imageCaption}</p>
+              </div>
+            )}
           </div>
 
           {/* ======== row 2 ======= */}

@@ -49,13 +49,19 @@ export function ItemCardVertical({
             />
           </Link>
         ) : (
-          <a href={getNewsUrl(data)}>
-            <img
-              className={`hover:scale-110 duration-300 aspect-video object-cover w-full`}
-              src={getImageUrl(data?.meta.featured_image)}
-              alt={data?.meta.imageCaption}
-            />
-          </a>
+          <div>
+            {data?.meta.featured_element === "video" ? (
+              <div className="featured_video" dangerouslySetInnerHTML={{ __html: data?.meta?.featured_video }}></div>
+            ) : (
+              <a href={getNewsUrl(data)}>
+                <img
+                  className={`hover:scale-110 duration-300 aspect-video object-cover w-full`}
+                  src={getImageUrl(data?.meta.featured_image)}
+                  alt={data?.meta.imageCaption}
+                />
+              </a>
+            )}
+          </div>
         )}
         {titlePosition === "inset" &&
           (Link ? (
