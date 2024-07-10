@@ -1,9 +1,10 @@
 import { useGet, usePost } from "@bfirst/api-client";
 import { ColorPicker } from "@bfirst/components-color-picker";
+import { Icon } from "@bfirst/components-icon";
 import { HCF } from "@bfirst/components-layout";
 import { MultiselectSearch } from "@bfirst/components-multiselect-search";
 import { TinymceEditor } from "@bfirst/components-tinymce-editor";
-import { Button, CardBody, Checkbox, Input, Textarea } from "@bfirst/material-tailwind";
+import { Button, CardBody, Checkbox, Input, Radio, Textarea } from "@bfirst/material-tailwind";
 import { getImageUrl } from "@bfirst/utilities";
 import { useReducer, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -18,6 +19,7 @@ export type Inputs = {
   altheadline?: string;
   standfirst: string;
   imageCaption?: string;
+  videoLink?: string;
 };
 
 export type StoryInputs = {
@@ -68,13 +70,25 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
   const [shoulderBlink, setShoulderBlink] = useState(defaultData?.story?.meta?.shoulder_blink || false);
   const [isOpenEmbed, setIsOpenEmbed] = useState(false);
   const [isOpenEmbedLink, setIsOpenEmbedLink] = useState(false);
-  const [error, setError] = useState({ authors: "", tags: "", categories: "", body: "", featuredImg: "" });
+  const [error, setError] = useState({
+    authors: "",
+    tags: "",
+    categories: "",
+    body: "",
+    featuredImage: "",
+    featuredVideo: "",
+  });
   const [body, setBody] = useState(defaultData?.story.content || "");
   const [featuredImgUrl, setFeaturedImgUrl] = useState(defaultData?.story.meta.featured_image || "");
+  const [moreImages, setMoreImages] = useState(defaultData?.story.meta.more_images || []);
+  const [featuredVideo, setFeaturedVideo] = useState(defaultData?.story.meta.featured_video || "");
   const [search, setSearch] = useState({ authors: "", tags: "", categories: "" });
   const [selectedAuthors, setSelectedAuthors] = useState([]);
   const [selectedTags, setSelectedTags] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
+  const [featuredElement, setFeaturedElement] = useState<"image" | "video">(
+    defaultData?.story.meta.featured_element || "image"
+  );
 
   const { requestAsync: tagRequestAsync } = usePost(`api/v1/tags`);
   const { data: authorsData } = useGet(`api/v1/authors?name=${search.authors}`);
@@ -100,9 +114,16 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
     }, 500);
   };
 
+  const handleSelectFeaturedElement = function (e: any) {
+    setFeaturedElement(e.target.value);
+    setError((cur) => ({ ...cur, featuredImage: "", featuredVideo: "" }));
+  };
+
   const onValidate = function (data: Inputs) {
     if (!body) setError((cur) => ({ ...cur, body: "Body is required" }));
-    if (!featuredImgUrl) return setError((cur) => ({ ...cur, featuredImg: "Featured Image is required" }));
+    if (featuredElement === "video" && !featuredVideo)
+      return setError((cur) => ({ ...cur, featuredVideo: "Featured Video is required" }));
+    if (!featuredImgUrl) return setError((cur) => ({ ...cur, featuredImage: "Featured Image is required" }));
     if (!selectedAuthors.length) return setError((cur) => ({ ...cur, authors: "Author is required" }));
     if (!selectedTags.length) return setError((cur) => ({ ...cur, tags: "Tag is required" }));
     if (!selectedCategories.length) return setError((cur) => ({ ...cur, categories: "Category is required" }));
@@ -110,19 +131,24 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
     const story = {
       title: data.headline,
       meta: {
+        featured_element: featuredElement,
         featured_image: featuredImgUrl,
+        featured_video: featuredVideo,
         shoulder: data.shoulder,
         shoulder_color: shoulderColor,
         shoulder_blink: shoulderBlink,
         imageCaption: data.imageCaption || defaultData?.story.meta.imageCaption,
         altheadline: data.altheadline,
         intro: data.standfirst,
+        more_images: moreImages,
+        video_link: data.videoLink,
       },
       authors: selectedAuthors.map((author) => (author as { id: number }).id),
       tags: selectedTags.map((tag) => (tag as { id: number }).id),
       categories: selectedCategories.map((category) => (category as { id: number }).id),
       content: body,
     };
+
     onSubmit(story);
   };
 
@@ -192,8 +218,61 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
               <p className="text-xs p-1 font-light">{errors.standfirst && errors.standfirst.message}</p>
             </div>
 
+            {/* ============= choosing between featured image and featured video ========== */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+              <div className="flex flex-col gap-y-4">
+                <Radio
+                  label="Featured Image"
+                  value="image"
+                  checked={featuredElement === "image"}
+                  onChange={handleSelectFeaturedElement}
+                />
+
+                {/* ========== media browser for featured image ======= */}
+                <div className="flex flex-col gap-y-3">
+                  <div>
+                    <Button
+                      variant="gradient"
+                      onClick={() => {
+                        dispatch({ type: "setDialogOpen" });
+                        dispatch({ type: "setOpenFrom", payload: "featuredImage" });
+                      }}
+                    >
+                      Featured Image
+                    </Button>
+                  </div>
+                  <div className="max-w-[500px] mt-3">
+                    {featuredImgUrl && <img src={`${getImageUrl(featuredImgUrl)}`} alt="Featured_Image" />}
+                  </div>
+                </div>
+                <p className="text-xs p-1 font-light">{error.featuredImage}</p>
+              </div>
+
+              {/* ============ featured video ================ */}
+              <div className="flex flex-col gap-y-3">
+                <Radio
+                  label="Featured Embeded Video"
+                  value="video"
+                  checked={featuredElement === "video"}
+                  onChange={handleSelectFeaturedElement}
+                />
+                <Input
+                  defaultValue={defaultData?.story.meta.featured_video}
+                  onChange={(e) => {
+                    setFeaturedVideo(e.target.value);
+                    setError((cur) => ({ ...cur, featuredVideo: "" }));
+                  }}
+                  label="Featured Embeded Video"
+                />
+                <div className="mt-3">
+                  {featuredVideo && <div dangerouslySetInnerHTML={{ __html: featuredVideo }}></div>}
+                </div>
+                <p className="text-xs p-1 font-light">{error.featuredVideo}</p>
+              </div>
+            </div>
+
             {/* ======== text editor (body) ========= */}
-            <div>
+            <div className="mt-6">
               <TinymceEditor
                 label="Body*"
                 dispatch={dispatch}
@@ -239,28 +318,75 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
               <p className="text-xs p-1 font-light">{error.categories}</p>
             </div>
 
-            {/* ========== media browser ======= */}
+            {/* ======== Video embed link ======== */}
+            <Input
+              defaultValue={defaultData?.story.meta.video_link}
+              {...register("videoLink")}
+              label="Video Embed Link"
+            />
+
+            {/* ========== media browser for more images ======= */}
             <div>
               <Button
                 variant="gradient"
                 onClick={() => {
                   dispatch({ type: "setDialogOpen" });
-                  dispatch({ type: "setOpenFrom", payload: "storyForm" });
+                  dispatch({ type: "setOpenFrom", payload: "moreImages" });
                 }}
               >
-                Browse
+                More Images
               </Button>
             </div>
+            <div className="grid sm:grid-cols-2 grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-3">
+              {moreImages.map((item: { imageUrl: string; imageCaption: string }, index: number) => (
+                <div className="relative flex flex-col gap-y-2" key={index}>
+                  <img
+                    className="w-full rounded-md aspect-video object-cover"
+                    src={getImageUrl(item.imageUrl, 320, 180, 40)}
+                    alt={item.imageUrl}
+                  />
+                  <Input
+                    onChange={(e) =>
+                      setMoreImages((cur: { imageCaption: string }[]) => {
+                        cur[index].imageCaption = e.target.value;
+                        return cur;
+                      })
+                    }
+                    type="text"
+                    label="Caption"
+                    defaultValue={item.imageCaption}
+                  />
+                  <div className="absolute bg-white/75 rounded-lg top-2 right-2">
+                    <Icon onClick={() => setMoreImages((cur) => cur.filter((_, idx) => idx !== index))} name="trash" />
+                  </div>
+                </div>
+              ))}
+              {moreImages?.length ? (
+                <div
+                  onClick={() => {
+                    dispatch({ type: "setDialogOpen" });
+                    dispatch({ type: "setOpenFrom", payload: "moreImages" });
+                  }}
+                  className="w-full rounded-md cursor-pointer aspect-video bg-gray-300 flex flex-col gap-y-2 items-center justify-center"
+                >
+                  <span className="text-4xl text-gray-500 rounded-full border-2 border-gray-500 aspect-square w-12 flex items-center justify-center">
+                    +
+                  </span>
+                  <span className="text-gray-500">Add More</span>
+                </div>
+              ) : null}
+            </div>
+
+            {/* =========== media browser =========== */}
             <MediaBrowser
               defaultData={defaultData}
               register={register}
               state={state}
               dispatch={dispatch}
-              featuredImgUrl={featuredImgUrl}
               onFeaturedImgUrl={setFeaturedImgUrl}
+              onMoreImgsUrl={setMoreImages}
+              onError={setError}
             />
-
-            <div>{featuredImgUrl && <img src={`${getImageUrl(featuredImgUrl)}`} alt="Featured_Image" />}</div>
 
             {/* ============== modal for related news embed ============ */}
             <EmbedRelatedNews open={isOpenEmbed} onOpen={setIsOpenEmbed} />
