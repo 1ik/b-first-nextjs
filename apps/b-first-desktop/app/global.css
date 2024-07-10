@@ -27,6 +27,7 @@ iframe {
   width: 100% !important;
 }
 
+/* need iframe related css for youtube embeded video to maintain the ratio on the view */
 .featured_video > iframe {
   width: 100% !important;
   height: auto !important;
