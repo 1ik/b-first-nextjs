@@ -19,14 +19,10 @@ export function PhotoAlbum({ data }: PhotoAlbumProps) {
     prevArrow: <PrevArrow />,
     appendDots: (dots: any) => (
       <div>
-        <ul style={{ bottom: "20px", gap: "6px" }} className="flex absolute left-1/2 -translate-x-1/2">
-          {dots}
-        </ul>
+        <ul className="flex absolute bottom-5 left-1/2 -translate-x-1/2 gap-1.5">{dots}</ul>
       </div>
     ),
-    customPaging: () => (
-      <div style={{ width: "10px", height: "10px" }} className="rounded-full bg-white cursor-pointer"></div>
-    ),
+    customPaging: () => <div className="w-2.5 h-2.5 rounded-full bg-white cursor-pointer"></div>,
   };
   return (
     <div>
