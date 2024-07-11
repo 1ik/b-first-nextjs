@@ -99,7 +99,7 @@ export default async function Index() {
 
       <div className="bg-black text-white py-4 mt-8">
         <div className="desktop-container my-10">
-          <VideoAlbum data={featureNews} />
+          <VideoAlbum data={featureNews}/>
         </div>
       </div>
 

@@ -1,4 +1,5 @@
 import { cropText, getImageUrl, getNewsUrl } from "@bfirst/utilities";
+import { FaPlay } from "react-icons/fa6";
 /* eslint-disable-next-line */
 export interface ItemCardVerticalProps {
   data: any;
@@ -8,7 +9,7 @@ export interface ItemCardVerticalProps {
   showImageBorder?: boolean;
   titlePosition?: "normal" | "inset";
   className?: string;
-  showVideo?: boolean;
+  showVideoIcon?: boolean;
   Link?: any;
   titleCrop?: number;
   introCrop?: number;
@@ -23,7 +24,7 @@ export function ItemCardVertical({
   showRelatedStory = false,
   showIntro = false,
   showImageBorder = false,
-  showVideo = false,
+  showVideoIcon = false,
   titlePosition = "normal",
   className,
   Link,
@@ -49,7 +50,11 @@ export function ItemCardVertical({
               src={getImageUrl(data?.meta.featured_image)}
               alt={data?.meta.imageCaption}
             />
-            {showVideo && <div className="absolute bottom-0 left-0">Icon</div>}
+            {showVideoIcon && (
+              <div className="absolute bottom-0 left-0 w-10 h-10 bg-accent flex items-center justify-center">
+                <FaPlay size={20}/>
+              </div>
+            )}
           </div>
         </a>
 
