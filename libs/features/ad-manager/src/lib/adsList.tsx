@@ -170,7 +170,7 @@ const ad_items = [
   },
 ];
 
-export function AdManager() {
+export function AdsList() {
   const [page, setpage] = useState("home");
   const [imageFile, setImageFile] = useState<any>(null);
   const [selectedUploadImage, setSelectedUploadImage] = useState({});

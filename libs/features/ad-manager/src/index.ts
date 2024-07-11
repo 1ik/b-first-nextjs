@@ -1,4 +1,4 @@
-export * from "./lib/ad_manager";
+export * from "./lib/adsList";
 
 
 

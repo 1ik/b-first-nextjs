@@ -5,7 +5,7 @@ const LoadAdManager = lazy(
   () =>
     // eslint-disable-next-line
     new Promise<any>((resolve) => {
-      import("./ad-manager").then((component) => {
+      import("./adManager").then((component) => {
         resolve(component);
       });
     })

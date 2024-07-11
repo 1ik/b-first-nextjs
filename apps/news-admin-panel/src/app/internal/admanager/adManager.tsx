@@ -1,14 +1,14 @@
-import { AdManager } from "@bfirst/components-ad-manager";
+import { AdsList } from "@bfirst/components-ad-manager";
 import { HCF } from "@bfirst/components-layout";
 
-function adManager() {
+function AdManager() {
   return (
     <HCF>
       <HCF.Content>
-        <AdManager />
+        <AdsList />
       </HCF.Content>
     </HCF>
   );
 }
 
-export default adManager;
+export default AdManager;
