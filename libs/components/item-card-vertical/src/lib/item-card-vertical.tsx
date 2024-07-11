@@ -8,9 +8,8 @@ export interface ItemCardVerticalProps {
   showImageBorder?: boolean;
   titlePosition?: "normal" | "inset";
   className?: string;
-  Link?: any;
-  showImage?: boolean;
   showVideo?: boolean;
+  Link?: any;
   titleCrop?: number;
   introCrop?: number;
   titleBold?: boolean;
@@ -21,11 +20,10 @@ export interface ItemCardVerticalProps {
 export function ItemCardVertical({
   data,
   size = "md",
-  showImage = true,
-  showVideo = false,
   showRelatedStory = false,
   showIntro = false,
   showImageBorder = false,
+  showVideo = false,
   titlePosition = "normal",
   className,
   Link,
@@ -44,21 +42,16 @@ export function ItemCardVertical({
   return (
     <div className={`${className}`}>
       <div className={`mb-5 relative overflow-hidden ${showImageBorder ? "border-b-[5px] border-accent" : ""}`}>
-        {showImage && (
-          <a href={getNewsUrl(data)}>
+        <a href={getNewsUrl(data)}>
+          <div className="relative">
             <img
               className={`hover:scale-110 duration-300 aspect-video object-cover w-full`}
               src={getImageUrl(data?.meta.featured_image)}
               alt={data?.meta.imageCaption}
             />
-          </a>
-        )}
-        {showVideo && (
-          <iframe
-            src="https://www.youtube.com/embed/GkwtCYZCHb8?si=-aqkCgd-gwAmsHZ6"
-            title="YouTube video"
-          ></iframe>
-        )}
+            {showVideo && <div className="absolute bottom-0 left-0">Icon</div>}
+          </div>
+        </a>
 
         {titlePosition === "inset" &&
           (Link ? (

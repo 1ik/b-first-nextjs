@@ -3,7 +3,7 @@
 import "slick-carousel/slick/slick.css";
 import Slider from "react-slick";
 import { ItemCardVertical } from "@bfirst/components-item-card-vertical";
-import "./video-album.css"
+import "./video-album.css";
 
 export interface BlockNews5Props {
   data: any;
@@ -49,7 +49,7 @@ export function VideoAlbum({ data }: BlockNews5Props) {
     <div className="slider-container p-0 m-0">
       <Slider {...settings}>
         {data.map((item: any, index: any) => {
-          return <ItemCardVertical key={index} data={item} size="sm" showVideo showImage={false} />;
+          return <ItemCardVertical key={index} data={item} size="sm" showVideo/>;
         })}
       </Slider>
     </div>
