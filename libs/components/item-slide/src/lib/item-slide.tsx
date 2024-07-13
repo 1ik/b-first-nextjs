@@ -15,7 +15,7 @@ export function ItemSlide({ data }: BlockNews5Props) {
   return (
     <div className="relative">
       <Swiper
-        slidesPerView={3}
+        slidesPerView={4}
         navigation={{ nextEl: ".arrow-left", prevEl: ".arrow-right" }}
         modules={[Navigation]}
         className="mySwiper"
