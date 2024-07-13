@@ -8,6 +8,7 @@ import { BlockNewsMob5 } from "@bfirst/components-block-news-mob-5";
 import { ItemList } from "@bfirst/components-item-list";
 import { ListGridMob } from "@bfirst/components-list-grid-mob";
 import { SquareGrid } from "@bfirst/components-square-grid";
+import {VideoAlbum} from "@bfirst/components-video-album"
 import moment from "moment";
 import Navbar from "./components/Navbar/Navbar";
 import TrendingTopics from "./components/TrendingTopics/TrendingTopics";
@@ -102,6 +103,14 @@ export default async function Index() {
           </div>
         </div>
         <Ads className="my-6" src="/ads/banner_ibbl.gif" alt="ads" showHeader={false} />
+      </div>
+
+
+      {/* VIDEO ALBUM SECTION */}
+      <div className="bg-black text-white py-2 mt-8">
+        <div className="px-3 my-8">
+          <VideoAlbum data={featureNews} />
+        </div>
       </div>
 
       {/* RECOMMENDED FOR YOU SECTION */}
