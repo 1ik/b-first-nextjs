@@ -162,7 +162,7 @@ export function MultiselectSearch({
                 },
               })}
             >
-              {onAddItem && !items?.find(i => i.name.toLowerCase() === inputValue.toLowerCase()) && (
+              {onAddItem && !items?.find((i) => i.name.toLowerCase() === inputValue.toLowerCase()) && (
                 <Item
                   {...getItemProps({
                     ref(node) {
@@ -206,7 +206,7 @@ export function MultiselectSearch({
           </FloatingFocusManager>
         )}
       </FloatingPortal>
-      <div className="flex flex-row gap-1">
+      <div className="flex flex-row gap-1 flex-wrap">
         {selectedItems?.map((item, index) => (
           <Chip key={index} className="mt-2 w-fit" variant="ghost" value={item.name} onClose={() => deleteChip(item)} />
         ))}

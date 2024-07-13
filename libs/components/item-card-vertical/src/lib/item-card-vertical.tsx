@@ -38,28 +38,19 @@ export function ItemCardVertical({
   return (
     <div className={`${className}`}>
       <div className={`mb-5 relative overflow-hidden ${showImageBorder ? "border-b-[5px] border-accent" : ""}`}>
-        <a href={getNewsUrl(data)}>
-          <img
-            className={`hover:scale-110 duration-300 aspect-video object-cover w-full`}
-            src={getImageUrl(data?.meta.featured_image)}
-            alt={data?.title}
-          />
-        </a>
-        {titlePosition === "inset" && (
-          <a href={getNewsUrl(data)}>
-            <h2
-              className={`bg-white/80 backdrop-blur-sm ${
-                titleBold ? "font-bold" : ""
-              } hover:text-accent dark:hover:text-accent-light duration-150 text-black dark:bg-dark-400/80 dark:text-white absolute ${
-                size === "lg"
-                  ? "text-[28px] md:text-[36px] right-0 bottom-0 w-3/5 px-10 py-4"
-                  : "text-2xl w-full bottom-0 translate-y-2 px-2 py-1 left-0"
-              }`}
-            >
-              {titleCrop ? cropText(data?.title, titleCrop) : data?.title}
-            </h2>
-          </a>
-        )}
+        <div>
+          {data?.meta.featured_element === "video" ? (
+            <div className="featured_video" dangerouslySetInnerHTML={{ __html: data?.meta?.featured_video }}></div>
+          ) : (
+            <a href={getNewsUrl(data)}>
+              <img
+                className={`hover:scale-110 duration-300 aspect-video object-cover w-full`}
+                src={getImageUrl(data?.meta.featured_image)}
+                alt={data?.meta.imageCaption}
+              />
+            </a>
+          )}
+        </div>
       </div>
       <div>
         <a href={getNewsUrl(data)}>

@@ -151,20 +151,32 @@ export default async function NewsDetails({ params }) {
             <h3 className="text-[22px] montserrat-regular leading-[120%]">{detailsData?.story.meta.intro}</h3>
             <div className="mt-10">
               <ProfileCard
-                data={detailsData?.story.authors[0]}
+                data={detailsData?.story.authors}
                 createdTime={detailsData?.story.created_at}
                 shareLink={news_link_url}
               />
             </div>
           </div>
           <div className="col-span-3">
-            <ImagePreview url={getImageUrl(detailsData?.story.meta.featured_image)} alt={detailsData?.story.title} />
-            {/* <img
+            {detailsData?.story?.meta?.featured_element === "video" ? (
+              <div
+                className="featured_video"
+                dangerouslySetInnerHTML={{ __html: detailsData?.story?.meta?.featured_video }}
+              ></div>
+            ) : (
+              <div>
+                <ImagePreview
+                  url={getImageUrl(detailsData?.story.meta.featured_image)}
+                  alt={detailsData?.story.title}
+                />
+                {/* <img
               className="w-full"
               src={getImageUrl(detailsData?.story.meta.featured_image)}
               alt={detailsData?.story.title}
-            /> */}
-            <p className="montserrat-regular-italic text-xl mt-4">{detailsData?.story.meta.imageCaption}</p>
+              /> */}
+                <p className="montserrat-regular-italic text-xl mt-4">{detailsData?.story.meta.imageCaption}</p>
+              </div>
+            )}
           </div>
 
           {/* ======== row 2 ======= */}

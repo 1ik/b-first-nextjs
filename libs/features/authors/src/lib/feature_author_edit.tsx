@@ -11,7 +11,7 @@ interface FeatureAuthorEditProps {
 export const FeatureAuthorEdit: React.FC<FeatureAuthorEditProps> = (props: FeatureAuthorEditProps) => {
   const { id } = useParams();
   const { request, isError, isPending, isSuccess, error } = usePut(`api/v1/authors/${id}`);
-  const { data: authorData, refetch } = useGet(`api/v1/authors/${id}`);
+  const { data: authorData, isPending: isAuthorPending, refetch } = useGet(`api/v1/authors/${id}`);
 
   useEffect(() => {
     if (isSuccess) refetch();
@@ -24,6 +24,8 @@ export const FeatureAuthorEdit: React.FC<FeatureAuthorEditProps> = (props: Featu
   if (isSuccess) {
     props.onSuccess && props.onSuccess();
   }
+
+  if (isAuthorPending) return null;
 
   return (
     <AuthorForm
