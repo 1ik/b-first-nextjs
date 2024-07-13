@@ -12,6 +12,7 @@ import { notFound } from "next/navigation";
 import "../../../../../../../libs/fonts/montserrat/index.css";
 import ImagePreview from "../../../../components/ImagePreview/ImagePreview";
 import Navbar from "../../../../components/Navbar/Navbar";
+import PhotoAlbum from "../../../../components/PhotoAlbum/PhotoAlbum";
 import TrendingTopics from "../../../../components/TrendingTopics/TrendingTopics";
 import { getData } from "../../../../utils/dataFetch";
 import filterOutOTD from "../../../../utils/filterOutOTD";
@@ -177,6 +178,19 @@ export default async function NewsDetails({ params }) {
                 <p className="montserrat-regular-italic text-xl mt-4">{detailsData?.story.meta.imageCaption}</p>
               </div>
             )}
+          </div>
+
+          <div className="col-span-full">
+            <PhotoAlbum
+              data={[
+                {
+                  imageUrl: detailsData?.story?.meta?.featured_image,
+                  imageCaption: detailsData?.story?.meta?.imageCaption,
+                },
+                // eslint-disable-next-line no-unsafe-optional-chaining
+                ...detailsData?.story?.meta?.more_images,
+              ]}
+            />
           </div>
 
           {/* ======== row 2 ======= */}
