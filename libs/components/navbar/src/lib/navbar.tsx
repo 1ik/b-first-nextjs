@@ -3,6 +3,7 @@ import { FaSearch } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { FaXTwitter } from "react-icons/fa6";
 import { FaFacebookF, FaInstagram, FaTimes, FaYoutube } from "react-icons/fa";
+import moment from "moment";
 
 export interface NavbarProps {
   activeLink?: string;
@@ -50,6 +51,7 @@ export function Navbar({
   return (
     <>
       {/*============== NAVBAR FOR DESKTOP  ==========*/}
+
       {type === "navbar" ? (
         <div className="h-24 relative ">
           <div
@@ -60,18 +62,22 @@ export function Navbar({
             }`}
           >
             <div className="desktop-container flex justify-between items-center">
-              <div className="w-9">
-                {logoMini && (
-                  <a href="/">
-                    <img
-                      className={`w-full duration-300 ${isSticky ? "scale-100" : "scale-0"}`}
-                      src={logoMini}
-                      alt="Logo"
-                    />
-                  </a>
-                )}
+              <div className={`flex flex-1 items-center gap-x-3`}>
+                <div className="w-9">
+                  {logoMini && (
+                    <a href="/">
+                      <img
+                        className={`w-full duration-300 ${isSticky ? "scale-100" : "scale-0"}`}
+                        src={logoMini}
+                        alt="Logo"
+                      />
+                    </a>
+                  )}
+                </div>
+                {isSticky && <p className="text-sm">{moment().format("MMMM D, YYYY")}</p>}
               </div>
-              <ul className="flex text-[22px] washington-regular">
+
+              <ul className="flex flex-1 text-[22px] washington-regular">
                 {navList.map((link: any, index: number) => (
                   <li
                     key={index}
@@ -118,9 +124,11 @@ export function Navbar({
                   </li>
                 ))}
               </ul>
-              <button className="w-9 block text-2xl">
-                <FaSearch />
-              </button>
+              <div className="flex-1 flex justify-end">
+                <button className="w-9 block text-2xl">
+                  <FaSearch />
+                </button>
+              </div>
             </div>
           </div>
         </div>

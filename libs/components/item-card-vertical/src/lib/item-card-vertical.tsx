@@ -71,9 +71,12 @@ export function ItemCardVertical({
               titlePosition === "inset" ? "hidden" : ""
             }`}
           >
-            {data?.meta.shoulder && (
-              <span className={`text-[#191970] dark:text-[#6565c4ec]  ${size === "lg" ? "md:text-[34px]" : ""}`}>
-                {data?.meta.shoulder}:{" "}
+            {data?.meta?.shoulder && (
+              <span
+                style={{ color: data?.meta?.shoulder_color || "#5F5FB7" }}
+                className={`${size === "lg" ? "md:text-[34px]" : ""}`}
+              >
+                <span className={`${data?.meta?.shoulder_blink ? "animate-pulse" : ""}`}>{data?.meta?.shoulder}</span> |{" "}
               </span>
             )}
             {titleCrop ? cropText(data?.title, titleCrop) : data?.title}

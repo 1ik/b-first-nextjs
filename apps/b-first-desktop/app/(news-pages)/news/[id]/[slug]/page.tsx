@@ -6,6 +6,7 @@ import { ItemList } from "@bfirst/components-item-list";
 import { ProfileCard } from "@bfirst/components-profile-card";
 import { SquareGrid } from "@bfirst/components-square-grid";
 import { getImageUrl } from "@bfirst/utilities";
+import moment from "moment-timezone";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import "../../../../../../../libs/fonts/montserrat/index.css";
@@ -19,31 +20,31 @@ export async function generateMetadata({ params }): Promise<Metadata> {
   const data = await getData(`story/details/${params.id}`);
 
   return {
-    title: data?.story.title,
-    description: data?.story.meta.intro,
+    title: data?.story?.title,
+    description: data?.story?.meta?.intro,
     openGraph: {
-      title: data?.story.title,
-      description: data?.story.meta.intro,
+      title: data?.story?.title,
+      description: data?.story?.meta?.intro,
       images: [
         {
-          url: getImageUrl(data?.story.meta.featured_image, 600, 315, 20),
-          secureUrl: getImageUrl(data?.story.meta.featured_image, 600, 315, 20),
+          url: getImageUrl(data?.story?.meta?.featured_image, 600, 315, 20),
+          secureUrl: getImageUrl(data?.story?.meta?.featured_image, 600, 315, 20),
           width: 1200,
           height: 630,
-          alt: data?.story.title,
+          alt: data?.story?.title,
         },
       ],
       type: "article",
     },
     twitter: {
       card: "summary_large_image",
-      title: data?.story.title,
-      description: data?.story.meta.intro,
+      title: data?.story?.title,
+      description: data?.story?.meta?.intro,
       images: [
         {
-          url: getImageUrl(data?.story.meta.featured_image),
-          secureUrl: getImageUrl(data?.story.meta.featured_image),
-          alt: data?.story.title,
+          url: getImageUrl(data?.story?.meta?.featured_image),
+          secureUrl: getImageUrl(data?.story?.meta?.featured_image),
+          alt: data?.story?.title,
           width: 1600,
           height: 900,
         },
@@ -58,6 +59,8 @@ export async function generateMetadata({ params }): Promise<Metadata> {
 export default async function NewsDetails({ params }) {
   const news_link_url = `${process.env.BASE_URL}/news/${params.id}/${params.slug}`;
   const detailsData = await getData(`story/details/${params.id}`);
+
+  if (!detailsData) return notFound();
 
   const webpageJsonLd = {
     "@context": "http://schema.org",
@@ -90,7 +93,7 @@ export default async function NewsDetails({ params }) {
             url: "https://bfirst.news/img/logo-dark.svg",
           },
         },
-        datePublished: detailsData?.story.created_at,
+        datePublished: moment.utc(detailsData?.story.created_at).tz("Asia/Dhaka").format(),
         image: {
           "@type": "ImageObject",
           url: getImageUrl(detailsData?.story.meta.featured_image),
@@ -108,8 +111,6 @@ export default async function NewsDetails({ params }) {
       getData(`categories/${detailsData?.story.categories[0].name}/stories`),
     ])
   ).map((item) => item?.data);
-
-  if (!detailsData) return notFound();
 
   const filteredLatestNews = latestNews.filter(filterOutOTD);
   const tagsArr = detailsData?.story.tags.map((tag: { id: any }) => tag.id);
@@ -188,11 +189,11 @@ export default async function NewsDetails({ params }) {
                 ))}
             </div>
 
-            <Ads className="my-8 sticky top-[80px]" src="/ads/SIBL_Profit_300x250.gif" alt="ads" showHeader={false} />
+            <Ads className="my-8 sticky top-[80px]" src="/ads/sibl.png" alt="ads" showHeader={false} />
           </div>
           <div className="col-span-2">
             <div
-              className="story-body text-xl leading-[120%] [&>p]:mt-8"
+              className="story-body text-lg leading-[120%] [&>p]:mt-8"
               dangerouslySetInnerHTML={{ __html: detailsData?.story.content }}
             ></div>
             <div className="my-10 border-t border-b dark:border-dark-300 py-4 flex gap-x-4 items-center">
@@ -210,7 +211,7 @@ export default async function NewsDetails({ params }) {
                 ))}
               </ul>
             </div>
-            <Ads className="my-10" src="/ads/banner_ibbl.gif" alt="Ads" showHeader={false} />
+            <Ads className="my-10" src="/ads/FSB-banner-ad.gif" alt="ads" showHeader={false} />
 
             {/* ======== Comment section ======== */}
 

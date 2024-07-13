@@ -15,10 +15,10 @@ export async function generateMetadata({ params }) {
   const categoryDetails = await getData(`categories?name=${params.category}`);
 
   return {
-    title: categoryDetails?.data?.[0].meta?.title
-      ? `${categoryDetails?.data?.[0].meta?.title} | Bangladesh First`
+    title: categoryDetails?.data?.[0]?.meta?.title
+      ? `${categoryDetails?.data?.[0]?.meta?.title} | Bangladesh First`
       : "Bangladesh First",
-    description: categoryDetails?.data?.[0].meta?.description,
+    description: categoryDetails?.data?.[0]?.meta?.description,
   };
 }
 
@@ -31,6 +31,8 @@ export default async function CategoryPage({ params }) {
     getData("latest/stories"),
     getData("categories/0/featured-stories"),
   ]);
+
+  if (!categroyNews?.data.length) return notFound();
 
   const webpageJsonLd = {
     "@context": "http://schema.org",
@@ -46,8 +48,6 @@ export default async function CategoryPage({ params }) {
   };
 
   const filteredLatestNews = latestNews?.data.filter(filterOutOTD);
-
-  if (!categroyNews?.data.length) return notFound();
 
   return (
     <>
@@ -83,7 +83,7 @@ export default async function CategoryPage({ params }) {
                 introFontSize="14px"
               />
             ))}
-            <LoadMore initialPage={2} lastPage={categroyNews?.meta.last_page} category={category} />
+            <LoadMore initialPage={2} lastPage={categroyNews?.meta.last_page} url={`categories/${category}/stories`} />
           </div>
           <div>
             <Ads className="mb-8" src="/ads/Global.gif" alt="Ads" showHeader={false} />

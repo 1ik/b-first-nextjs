@@ -2,6 +2,7 @@ import { useGet, usePost } from "@bfirst/api-client";
 import { Loader } from "@bfirst/components-loader";
 import {
   Button,
+  Checkbox,
   Dialog,
   DialogBody,
   DialogFooter,
@@ -14,12 +15,12 @@ import {
   TabsHeader,
   Typography,
 } from "@bfirst/material-tailwind";
+import { getImageUrl } from "@bfirst/utilities";
 import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import tinymce from "tinymce";
 import { StateInterface } from "./StoryForm";
-import { getImageUrl } from "@bfirst/utilities";
 
 interface MediaBrowserProps {
   defaultData?: any;
@@ -46,6 +47,7 @@ export default function MediaBrowser({
   const [imageUploadTitle, setImageUploadTitle] = useState("");
   const [searchImageTitle, setSearchImageTitle] = useState("");
   const [imageCaption, setImageCaption] = useState("");
+  const [isPortrait, setIsPortrait] = useState(false);
 
   const { data: mediaImageData, isPending } = useGet(
     `api/v1/media-image-list?title=${searchImageTitle}&sort=desc&page=${currentPage}`
@@ -88,9 +90,11 @@ export default function MediaBrowser({
   const handleImageSelect = function (path: string) {
     if (state.openFrom === "storyForm") onFeaturedImgUrl(path);
     if (state.openFrom === "textEditor") {
+      const w = isPortrait ? 900 : undefined;
+      const h = isPortrait ? 1600 : undefined;
       tinymce.activeEditor?.insertContent(
         `<div>
-          <img width="100%" src="${getImageUrl(path)}" alt=""/>
+          <img width="100%" src="${getImageUrl(path, w, h)}" alt=""/>
           <p><em>${imageCaption && imageCaption}</em></p>
         </div>`
       );
@@ -137,6 +141,7 @@ export default function MediaBrowser({
       setSelectedImage("");
       setSelectedImageFile(null);
       setSelectedUploadImage("");
+      setIsPortrait(false);
     }
   }, [state.dialogOpen]);
 
@@ -180,6 +185,16 @@ export default function MediaBrowser({
             )}
 
             {activeTab === "library" && <Input onChange={handleImageSearch} label="Search" />}
+          </div>
+          <div className="flex items-center justify-center">
+            {state.openFrom === "textEditor" && (
+              <>
+                <Checkbox checked={isPortrait} onChange={(e) => setIsPortrait(e.target.checked)} id="isPortrait" />
+                <label className="select-none" htmlFor="isPortrait">
+                  Use Portrait Image
+                </label>
+              </>
+            )}
           </div>
           <TabsBody>
             {data.map(({ value }) => (
