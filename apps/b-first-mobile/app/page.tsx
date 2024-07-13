@@ -109,7 +109,7 @@ export default async function Index() {
       <div className="bg-[#F6EFEF] dark:bg-dark-300 py-8">
         <div className="px-3">
           <AccentHeader header="recommended for you" color="#228B22" />
-          <ItemSlide data={recommendedNews} />
+          <ItemSlide data={featureNews} />
         </div>
       </div>
 

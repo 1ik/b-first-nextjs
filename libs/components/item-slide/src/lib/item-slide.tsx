@@ -19,12 +19,12 @@ export function ItemSlide({ data }: BlockNews5Props) {
         navigation={{ nextEl: ".arrow-left", prevEl: ".arrow-right" }}
         modules={[Navigation]}
         className="mySwiper"
-        spaceBetween={30}
+        spaceBetween={20}
         breakpoints={{
-          360: {
+          320: {
             slidesPerView: 1,
           },
-          640: {
+          540: {
             slidesPerView: 2,
           },
           768: {
