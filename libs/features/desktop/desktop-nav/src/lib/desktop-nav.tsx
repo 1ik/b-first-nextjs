@@ -139,7 +139,11 @@ export function DesktopNav({
               >
                 <FaInstagram className="text-white" />
               </a>
-              <a href="https://x.com/bfirstdotnews" target="_blank" className="bg-black dark:bg-dark-300 p-1.5 rounded-md">
+              <a
+                href="https://x.com/bfirstdotnews"
+                target="_blank"
+                className="bg-black dark:bg-dark-300 p-1.5 rounded-md"
+              >
                 <FaXTwitter className="text-white" />
               </a>
               <a
@@ -187,27 +191,30 @@ export function DesktopNav({
           }`}
         >
           <div className="desktop-container flex justify-between items-center">
-            <div className="w-9">
-              {logoMini &&
-                (Link ? (
-                  <Link href="/">
-                    <img
-                      className={`w-full duration-300 ${isSticky ? "scale-100" : "scale-0"}`}
-                      src={logoMini}
-                      alt="Logo"
-                    />
-                  </Link>
-                ) : (
-                  <a href="/">
-                    <img
-                      className={`w-full duration-300 ${isSticky ? "scale-100" : "scale-0"}`}
-                      src={logoMini}
-                      alt="Logo"
-                    />
-                  </a>
-                ))}
+            <div className={`flex-1 flex items-center gap-x-3`}>
+              <div className="w-9">
+                {logoMini &&
+                  (Link ? (
+                    <Link href="/">
+                      <img
+                        className={`w-full duration-300 ${isSticky ? "scale-100" : "scale-0"}`}
+                        src={logoMini}
+                        alt="Logo"
+                      />
+                    </Link>
+                  ) : (
+                    <a href="/">
+                      <img
+                        className={`w-full duration-300 ${isSticky ? "scale-100" : "scale-0"}`}
+                        src={logoMini}
+                        alt="Logo"
+                      />
+                    </a>
+                  ))}
+              </div>
+              {isSticky && <p className="text-sm">{moment().format("MMMM D, YYYY")}</p>}
             </div>
-            <ul className="flex text-[22px] washington-regular">
+            <ul className="flex-1 flex text-[22px] washington-regular">
               {_links.slice(0, 7).map((link, index) => (
                 <li
                   key={index}
@@ -263,9 +270,11 @@ export function DesktopNav({
                 </ul>
               </li>
             </ul>
-            <button className="w-9 block text-2xl">
-              <FaSearch />
-            </button>
+            <div className="flex-1 flex justify-end">
+              <button className="w-9 block text-2xl">
+                <FaSearch />
+              </button>
+            </div>
           </div>
         </div>
       </div>
