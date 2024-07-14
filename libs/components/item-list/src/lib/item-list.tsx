@@ -47,13 +47,22 @@ export function ItemList({
               />
             </Link>
           ) : (
-            <a href={getNewsUrl(data?.[0])}>
-              <img
-                className="hover:scale-110 duration-300 aspect-video object-cover w-full"
-                src={getImageUrl(data?.[0]?.meta.featured_image)}
-                alt={data?.[0]?.meta.image_caption}
-              />
-            </a>
+            <div>
+              {data?.[0]?.meta.featured_element === "video" ? (
+                <div
+                  className="featured_vide0"
+                  dangerouslySetInnerHTML={{ __html: data?.[0]?.meta?.featured_video }}
+                ></div>
+              ) : (
+                <a href={getNewsUrl(data?.[0])}>
+                  <img
+                    className="hover:scale-110 duration-300 aspect-video object-cover w-full"
+                    src={getImageUrl(data?.[0]?.meta.featured_image)}
+                    alt={data?.[0]?.meta.image_caption}
+                  />
+                </a>
+              )}
+            </div>
           )}
         </div>
       )}

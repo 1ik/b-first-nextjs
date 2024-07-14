@@ -134,6 +134,8 @@ export function AuthorForm({ onSubmit, loading, isError, defaultData }: AuthorFo
 
               <input className="hidden" onChange={(e) => setProfileImageFile(e.target.files?.[0])} type="file" />
             </label>
+            <Typography className="text-sm font-semibold">*Square Image is preferred</Typography>
+
             <Typography className="my-2">Contacts</Typography>
             <Input defaultValue={defaultData?.meta?.email} {...register("email")} type="email" label="Author Email" />
             <Input defaultValue={defaultData?.meta?.phone_number} {...register("phone")} label="Author Phone Number" />
