@@ -6,16 +6,17 @@ import { BlockNews3 } from "@bfirst/components-block-news-3";
 import { BlockNews4 } from "@bfirst/components-block-news-4";
 import { BlockNews5 } from "@bfirst/components-block-news-5";
 import { ItemList } from "@bfirst/components-item-list";
+import { ItemSlide } from "@bfirst/components-item-slide";
 import { ListGrid } from "@bfirst/components-list-grid";
+import { PhotoAlbum } from "@bfirst/components-photo-album";
 import { SquareGrid } from "@bfirst/components-square-grid";
+import { VideoAlbum } from "@bfirst/components-video-album";
+import { getAdsUrl } from "@bfirst/utilities";
 import moment from "moment";
 import Navbar from "./components/Navbar/Navbar";
 import TrendingTopics from "./components/TrendingTopics/TrendingTopics";
 import { getData } from "./utils/dataFetch";
 import filterOutOTD from "./utils/filterOutOTD";
-import { ItemSlide } from "@bfirst/components-item-slide";
-import { VideoAlbum } from "@bfirst/components-video-album";
-import { getAdsUrl } from "@bfirst/utilities";
 import { getAdsObj } from "./utils/getAdsObj";
 
 const webpageJsonLd = {
@@ -45,7 +46,6 @@ export default async function Index() {
   const ads_list = await getData("ads?page=home");
   const ads_obj = getAdsObj(ads_list?.ads);
 
-
   const latestNews = (await getData("latest/stories?size=30"))?.data
     .filter(filterTopNews)
     .filter(filterRecommended)
@@ -64,6 +64,8 @@ export default async function Index() {
     worldNews,
     sportsNews,
     techNews,
+    educationNews,
+    photoGalleryNews,
     videoGalleryNews,
   ] = (
     await Promise.all([
@@ -75,6 +77,8 @@ export default async function Index() {
       getData("categories/world/stories"),
       getData("categories/sports/stories"),
       getData("categories/tech/stories"),
+      getData("categories/education/stories"),
+      getData("categories/photo_gallery/stories"),
       getData("categories/video_gallery/stories"),
     ])
   ).map((item) => item?.data.filter(filterTopNews).filter(filterRecommended).filter(filterLatestNews));
@@ -95,7 +99,12 @@ export default async function Index() {
 
       <Ads className="my-10" src={getAdsUrl(ads_obj?.banner1)} alt="Ads" />
 
-      <BlockNews className="desktop-container" data={topNews?.slice(0, 8)}   ads1={ads_obj?.square1} ads2={ads_obj?.square2} />
+      <BlockNews
+        className="desktop-container"
+        data={topNews?.slice(0, 8)}
+        ads1={ads_obj?.square1}
+        ads2={ads_obj?.square2}
+      />
       <Ads className="my-10" src={getAdsUrl(ads_obj?.banner2)} alt="Ads" />
 
       <div className="desktop-container">
@@ -116,7 +125,6 @@ export default async function Index() {
         </div>
       </div>
 
-    
       <Ads className="my-12" src={getAdsUrl(ads_obj?.banner3)} alt="Ads" />
       <div className="bg-[#F6EFEF] dark:bg-dark-300 py-8">
         <div className="desktop-container">
@@ -162,6 +170,26 @@ export default async function Index() {
           </div>
         </div>
         <Ads className="mt-4" src={getAdsUrl(ads_obj?.banner6)} alt="Ads" />
+      </div>
+
+      <div className="desktop-container my-10">
+        <div className="grid grid-cols-4">
+          <div className="col-span-3 border-r dark:border-dark-300 pr-4 mr-4">
+            <AccentHeader header="Photo" color="#119F9F" />
+            <PhotoAlbum data={photoGalleryNews} showTitle showIntro />
+          </div>
+          <div>
+            <AccentHeader header="Education" color="#119F9F" />
+            <ItemList
+              data={educationNews?.slice(0, 7)}
+              listType="circle"
+              showButton
+              moreNewsLink="/latest"
+              titleFontSize="18px"
+            />
+          </div>
+        </div>
+        <Ads className="my-10" src="/ads/banner_ibbl.gif" alt="ads" showHeader={false} />
       </div>
 
       <div className="desktop-container mt-10">

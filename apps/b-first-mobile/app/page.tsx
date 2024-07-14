@@ -14,6 +14,7 @@ import Navbar from "./components/Navbar/Navbar";
 import TrendingTopics from "./components/TrendingTopics/TrendingTopics";
 import { getData } from "./utils/dataFetch";
 import filterOutOTD from "./utils/filterOutOTD";
+import { PhotoAlbum } from "@bfirst/components-photo-album";
 import { ItemSlide } from "@bfirst/components-item-slide";
 import { getAdsUrl } from "@bfirst/utilities";
 import { getAdsObj } from "./utils/getAdsObj";
@@ -63,6 +64,8 @@ export default async function Index() {
     worldNews,
     sportsNews,
     techNews,
+    educationNews,
+    photoGalleryNews,
     videoGalleryNews,
   ] = (
     await Promise.all([
@@ -74,6 +77,8 @@ export default async function Index() {
       getData("categories/world/stories"),
       getData("categories/sports/stories"),
       getData("categories/tech/stories"),
+      getData("categories/education/stories"),
+      getData("categories/photo_gallery/stories"),
       getData("categories/video_gallery/stories"),
     ])
   ).map((item) => item?.data.filter(filterTopNews).filter(filterRecommended).filter(filterLatestNews));
@@ -145,6 +150,27 @@ export default async function Index() {
         {/* FEATURE SECTION */}
         <Ads className="my-5" src={getAdsUrl(ads_obj?.banner5)} alt="Ads" />
         <BlockNewsMob3 data={featureNews} sectionHeader="feature" headerColor="#8BD032" />
+
+        {/* PHOTO ALBUM SECTION */}
+        <Ads className="mt-5" src="/ads/banner_ibbl.gif" alt="ads" showHeader={false} />
+        <div className="my-5">
+          <div className="grid grid-cols-4 gap-y-4">
+            <div className="col-span-4 md:col-span-3 border-r dark:border-dark-300 pr-4 mr-4">
+              <AccentHeader header="Photo" color="#119F9F" />
+              <PhotoAlbum data={photoGalleryNews} />
+            </div>
+            <div className="col-span-4 md:col-span-1">
+              <AccentHeader header="Education" color="#119F9F" />
+              <ItemList
+                data={educationNews?.slice(0, 7)}
+                listType="circle"
+                showButton
+                moreNewsLink="/latest"
+                titleFontSize="18px"
+              />
+            </div>
+          </div>
+        </div>
 
         {/* LIFESTYLE SECTION */}
         <Ads className="my-5" src={getAdsUrl(ads_obj?.banner6)} alt="Ads" />
