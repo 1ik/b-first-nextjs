@@ -48,19 +48,29 @@ export default async function Index() {
     return !latestNews?.find((lN: { id: number }) => lN.id === (item as { id: number }).id);
   };
 
-  const [economyNews, featureNews, entertainmentNews, lifestyleNews, bangladeshNews, worldNews, sportsNews, techNews] =
-    (
-      await Promise.all([
-        getData("categories/economy/stories?size=40"),
-        getData("categories/feature/stories"),
-        getData("categories/entertainment/stories"),
-        getData("categories/lifestyle/stories"),
-        getData("categories/bangladesh/stories?size=30"),
-        getData("categories/world/stories"),
-        getData("categories/sports/stories"),
-        getData("categories/tech/stories"),
-      ])
-    ).map((item) => item?.data.filter(filterTopNews).filter(filterRecommended).filter(filterLatestNews));
+  const [
+    economyNews,
+    featureNews,
+    entertainmentNews,
+    lifestyleNews,
+    bangladeshNews,
+    worldNews,
+    sportsNews,
+    techNews,
+    educationNews,
+  ] = (
+    await Promise.all([
+      getData("categories/economy/stories?size=40"),
+      getData("categories/feature/stories"),
+      getData("categories/entertainment/stories"),
+      getData("categories/lifestyle/stories"),
+      getData("categories/bangladesh/stories?size=30"),
+      getData("categories/world/stories"),
+      getData("categories/sports/stories"),
+      getData("categories/tech/stories"),
+      getData("categories/education/stories"),
+    ])
+  ).map((item) => item?.data.filter(filterTopNews).filter(filterRecommended).filter(filterLatestNews));
 
   const onThisDay = (await getData("categories/on_this_day/stories"))?.data.filter(
     (item: { created_at: moment.MomentInput }) =>
@@ -146,12 +156,20 @@ export default async function Index() {
         <div className="grid grid-cols-4">
           <div className="col-span-3 border-r dark:border-dark-300 pr-4 mr-4">
             <AccentHeader header="Photo" color="#119F9F" />
-            <PhotoAlbum data={featureNews}/>
+            <PhotoAlbum data={featureNews} />
           </div>
           <div>
-            <AccentHeader header="Stories" color="#119F9F" />
+            <AccentHeader header="Education" color="#119F9F" />
+            <ItemList
+              data={educationNews?.slice(0, 7)}
+              listType="circle"
+              showButton
+              moreNewsLink="/latest"
+              titleFontSize="18px"
+            />
           </div>
         </div>
+        <Ads className="my-10" src="/ads/banner_ibbl.gif" alt="ads" showHeader={false} />
       </div>
 
       <div className="desktop-container mt-10">

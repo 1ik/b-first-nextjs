@@ -6,7 +6,7 @@ import { RiArrowLeftSLine, RiArrowRightSLine } from "react-icons/ri";
 import { getImageUrl, getNewsUrl } from "@bfirst/utilities";
 import "swiper/css";
 import "swiper/css/pagination";
-
+import "./photo-album.css";
 export interface PhotoAlbumProps {
   data: any;
 }
