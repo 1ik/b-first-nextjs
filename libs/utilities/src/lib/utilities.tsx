@@ -13,6 +13,12 @@ export const getImageUrl = (path: string, w?: number, h?: number, q?: number) =>
   return baseUrl + `/smartcrop?width=${w}&height=${h}&format=webp&quality=${q}&path=${path}`;
 };
 
+export const getAdsUrl = (path: string) => {
+  const baseUrl = `https://backend.bangladeshfirst.com`;
+  return baseUrl + `/${path}`;
+};
+
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const getNewsUrl = (news: any) =>
   `/news/${news?.id}/${news?.title

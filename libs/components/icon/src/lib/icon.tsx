@@ -10,6 +10,8 @@ import { IoIosColorPalette, IoIosSearch } from "react-icons/io";
 import { IoLogOutSharp, IoSettingsSharp } from "react-icons/io5";
 import { MdAdd, MdContentCopy, MdRestore } from "react-icons/md";
 import { RiArrowLeftSLine, RiArrowRightSLine } from "react-icons/ri";
+import { GiCheckMark } from "react-icons/gi";
+import { RiCloseFill } from "react-icons/ri";
 
 /* eslint-disable-next-line */
 export interface IconProps {
@@ -30,7 +32,9 @@ export interface IconProps {
     | "linkedin"
     | "facebook"
     | "instagram"
-    | "twitter";
+    | "twitter"
+    | "close"
+    | "tick";
   variant?: "filled" | "gradient" | "outlined" | "text";
   size?: number;
   onClick?: () => void;
@@ -90,6 +94,12 @@ export const Icon = React.forwardRef<HTMLButtonElement, IconProps>(
         break;
       case "twitter":
         Icon = FaSquareXTwitter;
+        break;
+      case "tick":
+        Icon = GiCheckMark;
+        break;
+      case "close":
+        Icon = RiCloseFill;
         break;
     }
 
