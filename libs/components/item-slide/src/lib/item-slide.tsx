@@ -7,11 +7,17 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 import { Navigation } from "swiper/modules";
+import { useEffect, useState } from "react";
 export interface BlockNews5Props {
   data: any;
 }
 export function ItemSlide({ data }: BlockNews5Props) {
-  return (
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => {
+    setIsMounted(true);
+  }, [isMounted]);
+
+  return isMounted ? (
     <div className="relative">
       <Swiper
         slidesPerView={4}
@@ -49,5 +55,5 @@ export function ItemSlide({ data }: BlockNews5Props) {
         <RiArrowRightSLine size={30} />
       </button>
     </div>
-  );
+  ) : null;
 }
