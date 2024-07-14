@@ -5,7 +5,7 @@ import { ItemCardHorizontal } from "@bfirst/components-item-card-horizontal";
 import { ItemList } from "@bfirst/components-item-list";
 import { ProfileCard } from "@bfirst/components-profile-card";
 import { SquareGrid } from "@bfirst/components-square-grid";
-import { getImageUrl } from "@bfirst/utilities";
+import { getAdsUrl, getImageUrl } from "@bfirst/utilities";
 import PhotoAlbum from "apps/b-first-mobile/app/components/PhotoAlbum/PhotoAlbum";
 import moment from "moment-timezone";
 import { Metadata } from "next";
@@ -16,7 +16,7 @@ import ImagePreview from "../../../../components/PreviewImage/PreviewImage";
 import TrendingTopics from "../../../../components/TrendingTopics/TrendingTopics";
 import { getData } from "../../../../utils/dataFetch";
 import filterOutOTD from "../../../../utils/filterOutOTD";
-
+import { getAdsObj } from "../../../../utils/getAdsObj";
 export async function generateMetadata({ params }): Promise<Metadata> {
   const data = await getData(`story/details/${params.id}`);
 
@@ -104,6 +104,8 @@ export default async function NewsDetails({ params }) {
     ],
   };
 
+  const ads_list = await getData("ads?page=news_details");
+  const ads_obj = getAdsObj(ads_list.ads);
   const [trendingTopics, latestNews, topNews, categoryNews] = (
     await Promise.all([
       getData("trendy-topics"),
@@ -134,9 +136,8 @@ export default async function NewsDetails({ params }) {
 
       <div className="px-3">
         {/* TRENDING TOPICS */}
-        <Ads className="mx-auto mt-3" src="/ads/banner_ibbl.gif" alt="Ads" showHeader={false} />
-        <TrendingTopics className="my-5" items={trendingTopics} title="Trending" />
-        <Ads className="mx-auto mb-4" src="/ads/FSB-banner-ad.gif" alt="Ads" showHeader={false} />
+        <Ads className="my-4" src={getAdsUrl(ads_obj?.banner1)} alt="Ads" />
+        <TrendingTopics className="mb-8" items={trendingTopics} title="Trending" />
 
         {/* BREADCRUMB */}
         <BreadCrumb
@@ -169,7 +170,7 @@ export default async function NewsDetails({ params }) {
               />
             </div>
 
-            <Ads className="my-5" src="/ads/sibl.png" alt="Ads" />
+            <Ads className="my-5" src={getAdsUrl(ads_obj?.square2)} alt="Ads" />
 
             {/* MORE FROM SECTION LIST */}
             <div>
@@ -191,7 +192,8 @@ export default async function NewsDetails({ params }) {
                 ))}
             </div>
 
-            <Ads className="my-8" src="/ads/Global.gif" alt="Ads" />
+            <Ads className="my-8" src={getAdsUrl(ads_obj?.square3)} alt="Ads" />
+         
 
             {/* LATEST NEWS SECTION LIST */}
             <div>
@@ -205,15 +207,13 @@ export default async function NewsDetails({ params }) {
               />
             </div>
 
-            <Ads className="my-8" src="/ads/union-bank-ad.gif" alt="Ads" />
+            <Ads className="my-8" src={getAdsUrl(ads_obj?.square4)} alt="Ads" />
 
             {/* TOP NEWS SECTION LIST */}
             <div>
               <AccentHeader header="Top News" color="#119F9F" />
               <ItemList listType="number" data={topNews?.slice(0, 6)} titleFontSize="16px" />
             </div>
-
-            <Ads className="my-8" src="/ads/Global.gif" alt="Ads" />
           </div>
 
           {/* ==================== GRID RIGHT BOX (TAB) | GRID TOP BOX (MOBILE) ===================== */}
@@ -247,7 +247,7 @@ export default async function NewsDetails({ params }) {
             )}
 
             <div className="sm:hidden">
-              <Ads className="my-8" src="/ads/ibbl.gif" alt="Ads" />
+            <Ads className="my-8" src={getAdsUrl(ads_obj?.square1)} alt="Ads" />
               {/* INTRO */}
               <h3 className="text-base montserrat-regular">{detailsData?.story.meta.intro}</h3>
               <ProfileCard
@@ -279,8 +279,7 @@ export default async function NewsDetails({ params }) {
               </ul>
             </div>
 
-            <Ads className="mx-auto mb-4" src="/ads/banner_ibbl.gif" alt="Ads" showHeader={false} />
-
+            <Ads className="mb-4" src={getAdsUrl(ads_obj?.banner2)} alt="Ads" />
             {relatedNews?.length ? (
               <div>
                 <AccentHeader header="related news" color="#8E7581" />

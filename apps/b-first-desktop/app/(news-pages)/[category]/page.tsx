@@ -10,6 +10,8 @@ import Navbar from "../../components/Navbar/Navbar";
 import TrendingTopics from "../../components/TrendingTopics/TrendingTopics";
 import { getData } from "../../utils/dataFetch";
 import filterOutOTD from "../../utils/filterOutOTD";
+import { getAdsUrl } from "@bfirst/utilities";
+import { getAdsObj } from "../../utils/getAdsObj";
 
 export async function generateMetadata({ params }) {
   const categoryDetails = await getData(`categories?name=${params.category}`);
@@ -48,7 +50,8 @@ export default async function CategoryPage({ params }) {
   };
 
   const filteredLatestNews = latestNews?.data.filter(filterOutOTD);
-
+  const ads_list = await getData("ads?page=category");
+  const ads_obj = getAdsObj(ads_list.ads);
   return (
     <>
       {/* ========= webpage schema markups */}
@@ -57,7 +60,7 @@ export default async function CategoryPage({ params }) {
       <Navbar activeLink={`/${category}`} />
       <TrendingTopics className="desktop-container mb-8" title="Trending Topics" items={trendingTopics?.data} />
       <div className="desktop-container">
-        <Ads className="block" src="/ads/FSB-banner-ad.gif" alt="Ads" showHeader={false} />
+        <Ads src={getAdsUrl(ads_obj?.banner1)} alt="Ads" />
         <BreadCrumb
           className="my-10"
           links={[
@@ -68,8 +71,7 @@ export default async function CategoryPage({ params }) {
           ]}
         />
         <BlockNews6 data={categroyNews?.data.slice(0, 4)} />
-        <Ads className="block my-10" src="/ads/banner_ibbl.gif" alt="Ads" showHeader={false} />
-
+        <Ads className="my-10" src={getAdsUrl(ads_obj?.banner2)} alt="Ads" />
         <div className="grid grid-cols-4 gap-x-10">
           <div className="col-span-3 flex flex-col">
             {categroyNews?.data.slice(4).map((news) => (
@@ -86,7 +88,7 @@ export default async function CategoryPage({ params }) {
             <LoadMore initialPage={2} lastPage={categroyNews?.meta.last_page} url={`categories/${category}/stories`} />
           </div>
           <div>
-            <Ads className="mb-8" src="/ads/Global.gif" alt="Ads" showHeader={false} />
+            <Ads className="mb-8" src={getAdsUrl(ads_obj?.square1)} alt="Ads" />
             <div>
               <AccentHeader header="Latest News" color="#5D26D1" />
               <ItemList
@@ -98,13 +100,12 @@ export default async function CategoryPage({ params }) {
               />
             </div>
 
-            <Ads className="my-8" src="/ads/union-bank-ad.gif" alt="Ads" showHeader={false} />
+            <Ads className="my-8" src={getAdsUrl(ads_obj?.square2)} alt="Ads" />
             <div>
               <AccentHeader header="Top News" color="#119F9F" />
               <ItemList data={topNews?.data.slice(0, 6)} listType="number" titleFontSize="18px" />
             </div>
-
-            <Ads className="my-10 sticky top-20" src="/ads/Global.gif" alt="Ads" showHeader={false} />
+            <Ads className="my-10 sticky top-20" src={getAdsUrl(ads_obj?.square3)} alt="Ads" />
           </div>
         </div>
       </div>
