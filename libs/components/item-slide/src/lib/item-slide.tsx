@@ -48,11 +48,11 @@ export function ItemSlide({ data }: BlockNews5Props) {
           );
         })}
       </Swiper>
-      <button className="arrow-right arrow absolute top-1/3 xl:top-1/2 left-0 xl:-left-8 z-20 -translate-y-1/2">
-        <RiArrowLeftSLine size={30} />
+      <button className="arrow-right arrow absolute top-1/3 xl:top-1/2 left-0 z-20 -translate-y-1/2 text-white">
+        <RiArrowLeftSLine size={40} />
       </button>
-      <button className="arrow-left arrow absolute top-1/3 xl:top-1/2 right-0 xl:-right-8 z-10 -translate-y-1/2">
-        <RiArrowRightSLine size={30} />
+      <button className="arrow-left arrow absolute top-1/3 xl:top-1/2 right-0 z-10 -translate-y-1/2 text-white">
+        <RiArrowRightSLine size={40} />
       </button>
     </div>
   ) : null;
