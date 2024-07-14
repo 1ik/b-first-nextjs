@@ -8,7 +8,8 @@ import Navbar from "../../../components/Navbar/Navbar";
 import TrendingTopics from "../../../components/TrendingTopics/TrendingTopics";
 import { getData } from "../../../utils/dataFetch";
 import filterOutOTD from "../../../utils/filterOutOTD";
-
+import { getAdsUrl } from "@bfirst/utilities";
+import {getAdsObj} from "../../../utils/getAdsObj"
 export default async function Topic({ params }) {
   const [trendingNews, latestNews, topNews] = (
     await Promise.all([
@@ -20,14 +21,15 @@ export default async function Topic({ params }) {
 
   if (!trendingNews) return notFound();
 
+  const ads_list = await getData("ads?page=topic");
+  const ads_obj = getAdsObj(ads_list.ads);
   const filteredLatestNews = latestNews.filter(filterOutOTD);
   const trendingTopics = (await getData("trendy-topics"))?.data;
   return (
     <>
       <Navbar />
       <TrendingTopics className="desktop-container mb-8" items={trendingTopics} title="Trending Topics" />
-      <Ads className="my-4" src="/ads/FSB-banner-ad.gif" alt="Ads" showHeader={false} />
-
+      <Ads className="my-4" src={getAdsUrl(ads_obj?.banner1)} alt="Ads" />
       <div className="desktop-container">
         <div className="mb-6">
           <BreadCrumb
@@ -54,7 +56,7 @@ export default async function Topic({ params }) {
           </div>
 
           <div>
-            <Ads className="" src="/ads/sibl.png" alt="Ads" showHeader={false} />
+            <Ads src={getAdsUrl(ads_obj?.square1)} alt="Ads" />
             <div className="my-10">
               <AccentHeader header="LATEST NEWS" color="#5D26D1" />
               <ItemList
@@ -64,13 +66,13 @@ export default async function Topic({ params }) {
                 moreNewsLink="/latest"
                 titleFontSize="18px"
               />
-              <Ads className="mt-8" src="/ads/IBBL.gif" alt="Ads" showHeader={false} />
+              <Ads className="mt-8" src={getAdsUrl(ads_obj?.square2)} alt="Ads" />
             </div>
             <div>
               <AccentHeader header="Top News" color="#119F9F" />
               <ItemList data={topNews?.slice(0, 6)} listType="number" titleFontSize="18px" />
             </div>
-            <Ads className="mt-4 sticky top-20" src="/ads/Global.gif" alt="Ads" showHeader={false} />
+            <Ads className="mb-4" src={getAdsUrl(ads_obj?.square3)} alt="Ads" />
           </div>
         </div>
       </div>
