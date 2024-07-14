@@ -11,8 +11,8 @@ import moment from "moment-timezone";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import "../../../../../../../libs/fonts/montserrat/index.css";
-import ImagePreview from "../../../../components/ImagePreview/ImagePreview";
 import Navbar from "../../../../components/Navbar/Navbar";
+import ImagePreview from "../../../../components/PreviewImage/PreviewImage";
 import TrendingTopics from "../../../../components/TrendingTopics/TrendingTopics";
 import { getData } from "../../../../utils/dataFetch";
 import filterOutOTD from "../../../../utils/filterOutOTD";
@@ -218,22 +218,9 @@ export default async function NewsDetails({ params }) {
 
           {/* ==================== GRID RIGHT BOX (TAB) | GRID TOP BOX (MOBILE) ===================== */}
           <div className="sm:col-span-5 order-1">
-            {/* {detailsData?.story?.meta?.featured_element === "video" ? (
-              <div
-                className="featured_video mb-3"
-                dangerouslySetInnerHTML={{ __html: detailsData?.story?.meta?.featured_video }}
-              ></div>
-            ) : (
-              <div>
-                <ImagePreview
-                  url={getImageUrl(detailsData?.story.meta.featured_image)}
-                  alt={detailsData?.story.title}
-                />
-                <p className="montserrat-regular-italic text-xs mt-2">{detailsData?.story.meta.imageCaption}</p>
-              </div>
-            )} */}
+            {/* */}
 
-            {detailsData?.story?.meta?.more_images && (
+            {detailsData?.story?.meta?.more_images?.length ? (
               <PhotoAlbum
                 images={[
                   {
@@ -244,6 +231,19 @@ export default async function NewsDetails({ params }) {
                   ...detailsData?.story?.meta?.more_images,
                 ]}
               />
+            ) : detailsData?.story?.meta?.featured_element === "video" ? (
+              <div
+                className="featured_video mb-3"
+                dangerouslySetInnerHTML={{ __html: detailsData?.story?.meta?.featured_video }}
+              ></div>
+            ) : (
+              <div>
+                <ImagePreview
+                  url={getImageUrl(detailsData?.story.meta.featured_image)}
+                  caption={detailsData?.story?.meta?.imageCaption}
+                />
+                <p className="montserrat-regular-italic text-xs mt-2">{detailsData?.story.meta.imageCaption}</p>
+              </div>
             )}
 
             <div className="sm:hidden">
