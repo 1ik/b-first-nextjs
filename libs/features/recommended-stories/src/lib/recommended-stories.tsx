@@ -59,7 +59,7 @@ export function RecommendedStories(props: RecommendedStoriesProps) {
   const handleSubmit = async function (e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (recommendedStories.length < 4) {
-      toast.warning("Total recommended story minimum be 4", {
+      toast.warning("Minimum story must be 4", {
         position: "top-center",
       });
       return;
