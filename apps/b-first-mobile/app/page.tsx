@@ -48,7 +48,7 @@ export default async function Index() {
     return !latestNews?.find((lN: { id: number }) => lN.id === (item as { id: number }).id);
   };
 
-  const [economyNews, featureNews, entertainmentNews, lifestyleNews, bangladeshNews, worldNews, sportsNews, techNews] =
+  const [economyNews, featureNews, entertainmentNews, lifestyleNews, bangladeshNews, worldNews, sportsNews, techNews,videoGalleryNews] =
     (
       await Promise.all([
         getData("categories/economy/stories?size=40"),
@@ -59,6 +59,7 @@ export default async function Index() {
         getData("categories/world/stories"),
         getData("categories/sports/stories"),
         getData("categories/tech/stories"),
+        getData("categories/video_gallery/stories"),
       ])
     ).map((item) => item?.data.filter(filterTopNews).filter(filterRecommended).filter(filterLatestNews));
 
@@ -109,7 +110,7 @@ export default async function Index() {
       {/* VIDEO ALBUM SECTION */}
       <div className="bg-black text-white py-2 mt-8">
         <div className="px-3 my-8">
-          <VideoAlbum data={featureNews} />
+          <VideoAlbum data={videoGalleryNews} />
         </div>
       </div>
 
