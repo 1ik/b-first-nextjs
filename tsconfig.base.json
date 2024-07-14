@@ -76,6 +76,7 @@
       "@bfirst/components-tinymce-editor": ["libs/components/tinymce-editor/src/index.ts"],
       "@bfirst/components-trendingTags": ["libs/features/trendingTags/src/index.ts"],
       "@bfirst/components-type-ahead-search": ["libs/components/type-ahead-search/src/index.ts"],
+      "@bfirst/components-video-album": ["libs/components/video-ablum/src/index.ts"],
       "@bfirst/gtm": ["libs/settings/gtm/src/index.ts"],
       "@bfirst/material-tailwind": ["libs/components/material-tailwind/src/index.ts"],
       "@bfirst/utilities": ["libs/utilities/src/index.ts"]
