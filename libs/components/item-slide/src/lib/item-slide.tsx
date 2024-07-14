@@ -1,13 +1,13 @@
 "use client";
-import { RiArrowRightSLine } from "react-icons/ri";
+
 import { ItemCardVertical } from "@bfirst/components-item-card-vertical";
-import { RiArrowLeftSLine } from "react-icons/ri";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { RiArrowLeftSLine, RiArrowRightSLine } from "react-icons/ri";
 import "swiper/css";
 import "swiper/css/navigation";
+import { Swiper, SwiperSlide } from "swiper/react";
 
-import { Navigation } from "swiper/modules";
 import { useEffect, useState } from "react";
+import { Navigation } from "swiper/modules";
 export interface BlockNews5Props {
   data: any;
 }
@@ -42,8 +42,8 @@ export function ItemSlide({ data }: BlockNews5Props) {
       >
         {data.map((item: any, index: any) => {
           return (
-            <SwiperSlide>
-              <ItemCardVertical key={index} data={item} size="sm" />
+            <SwiperSlide key={index}>
+              <ItemCardVertical data={item} size="sm" />
             </SwiperSlide>
           );
         })}
