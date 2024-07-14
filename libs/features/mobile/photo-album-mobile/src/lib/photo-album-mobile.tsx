@@ -15,25 +15,15 @@ import "swiper/css/thumbs";
 import { FreeMode, Navigation, Thumbs } from "swiper/modules";
 
 import { Loader } from "@bfirst/components-loader";
-import { ProfileCard } from "@bfirst/components-profile-card";
 import { getImageUrl } from "@bfirst/utilities";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 
-export interface PhotoAlbumDesktopProps {
+export interface PhotoAlbumMobileProps {
   images: any;
-  authors: any;
-  createdTime: string;
-  shareLink: string;
   bottomSlidesPerView?: number;
 }
 
-export function PhotoAlbumDesktop({
-  images,
-  authors,
-  createdTime,
-  shareLink,
-  bottomSlidesPerView = 4,
-}: PhotoAlbumDesktopProps) {
+export function PhotoAlbumMobile({ images, bottomSlidesPerView = 2 }: PhotoAlbumMobileProps) {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperClass | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isMounted, setIsMounted] = useState(false);
@@ -53,50 +43,46 @@ export function PhotoAlbumDesktop({
 
   return (
     <>
-      <div className="grid grid-cols-4 gap-8">
-        <div className="flex flex-col justify-between">
-          <p className="text-[22px] montserrat-regular leading-[120%]">{images?.[activeIndex].imageCaption}</p>
-          <ProfileCard data={authors} createdTime={createdTime} shareLink={shareLink} />
-        </div>
-        <div className="col-span-3">
-          {isMounted ? (
-            <Swiper
-              onActiveIndexChange={(e) => setActiveIndex(e.activeIndex)}
-              spaceBetween={10}
-              thumbs={{ swiper: thumbsSwiper }}
-              modules={[FreeMode, Navigation, Thumbs]}
-            >
-              {images?.map((image: any, index: number) => (
-                <SwiperSlide key={index}>
-                  <img
-                    className="w-full aspect-video object-cover"
-                    src={getImageUrl(image.imageUrl)}
-                    alt={image?.image_caption}
-                  />
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          ) : (
-            <img
-              className="w-full aspect-video object-cover"
-              src={getImageUrl(images?.[0].imageUrl)}
-              alt={images?.[0]?.image_caption}
-            />
-          )}
-        </div>
+      <div className="">
+        {isMounted ? (
+          <Swiper
+            onActiveIndexChange={(e) => setActiveIndex(e.activeIndex)}
+            spaceBetween={10}
+            thumbs={{ swiper: thumbsSwiper }}
+            modules={[FreeMode, Navigation, Thumbs]}
+          >
+            {images?.map((image: any, index: number) => (
+              <SwiperSlide key={index}>
+                <img
+                  className="w-full aspect-video object-cover"
+                  src={getImageUrl(image.imageUrl)}
+                  alt={image?.image_caption}
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        ) : (
+          <img
+            className="w-full aspect-video object-cover"
+            src={getImageUrl(images?.[0].imageUrl)}
+            alt={images?.[0]?.image_caption}
+          />
+        )}
+        <p className="montserrat-regular text-xs mt-2">{images?.[activeIndex].imageCaption}</p>
       </div>
-      <div className="flex items-center gap-x-2 mt-8">
+
+      <div className="flex items-center gap-x-2 my-4">
         {isMounted ? (
           <>
             {images?.length > bottomSlidesPerView && (
-              <button className="text-6xl disabled:opacity-30" ref={prevButtonRef}>
+              <button className="text-3xl disabled:opacity-30" ref={prevButtonRef}>
                 <FaAngleLeft />
               </button>
             )}
 
             <Swiper
               onSwiper={setThumbsSwiper}
-              spaceBetween={32}
+              spaceBetween={10}
               slidesPerView={bottomSlidesPerView}
               freeMode={true}
               watchSlidesProgress={true}
@@ -123,7 +109,7 @@ export function PhotoAlbumDesktop({
               ))}
             </Swiper>
             {images?.length > bottomSlidesPerView && (
-              <button className="text-6xl disabled:opacity-30" ref={nextButtonRef}>
+              <button className="text-3xl disabled:opacity-30" ref={nextButtonRef}>
                 <FaAngleRight />
               </button>
             )}

@@ -6,6 +6,7 @@ import { ItemList } from "@bfirst/components-item-list";
 import { ProfileCard } from "@bfirst/components-profile-card";
 import { SquareGrid } from "@bfirst/components-square-grid";
 import { getImageUrl } from "@bfirst/utilities";
+import PhotoAlbum from "apps/b-first-mobile/app/components/PhotoAlbum/PhotoAlbum";
 import moment from "moment-timezone";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -217,7 +218,7 @@ export default async function NewsDetails({ params }) {
 
           {/* ==================== GRID RIGHT BOX (TAB) | GRID TOP BOX (MOBILE) ===================== */}
           <div className="sm:col-span-5 order-1">
-            {detailsData?.story?.meta?.featured_element === "video" ? (
+            {/* {detailsData?.story?.meta?.featured_element === "video" ? (
               <div
                 className="featured_video mb-3"
                 dangerouslySetInnerHTML={{ __html: detailsData?.story?.meta?.featured_video }}
@@ -230,6 +231,19 @@ export default async function NewsDetails({ params }) {
                 />
                 <p className="montserrat-regular-italic text-xs mt-2">{detailsData?.story.meta.imageCaption}</p>
               </div>
+            )} */}
+
+            {detailsData?.story?.meta?.more_images && (
+              <PhotoAlbum
+                images={[
+                  {
+                    imageUrl: detailsData?.story?.meta?.featured_image,
+                    imageCaption: detailsData?.story?.meta?.imageCaption,
+                  },
+                  // eslint-disable-next-line no-unsafe-optional-chaining
+                  ...detailsData?.story?.meta?.more_images,
+                ]}
+              />
             )}
 
             <div className="sm:hidden">

@@ -61,6 +61,7 @@
       "@bfirst/components-mobile-nav": ["libs/features/mobile/mobile-nav/src/index.ts"],
       "@bfirst/components-multiselect-search": ["libs/components/multiselect-search/src/index.ts"],
       "@bfirst/components-photo-album-desktop": ["libs/features/desktop/photo-album-desktop/src/index.ts"],
+      "@bfirst/components-photo-album-mobile": ["libs/features/mobile/photo-album-mobile/src/index.ts"],
       "@bfirst/components-popover-notify": ["libs/components/popover-notify/src/index.ts"],
       "@bfirst/components-profile-card": ["libs/components/profile-card/src/index.ts"],
       "@bfirst/components-recommended-stories": ["libs/features/recommended-stories/src/index.ts"],
