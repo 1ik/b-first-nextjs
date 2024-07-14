@@ -4,12 +4,17 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { ItemCardVertical } from "@bfirst/components-item-card-vertical";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
+import { useEffect, useState } from "react";
 
 export interface BlockNews5Props {
   data: any;
 }
 export function VideoAlbum({ data }: BlockNews5Props) {
-  return (
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => {
+    setIsMounted(true);
+  }, [isMounted]);
+  return isMounted ? (
     <Swiper
       slidesPerView={4}
       autoplay={{
@@ -44,5 +49,5 @@ export function VideoAlbum({ data }: BlockNews5Props) {
         );
       })}
     </Swiper>
-  );
+  ) : null;
 }
