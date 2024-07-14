@@ -14,18 +14,7 @@ import "swiper/css/thumbs";
 // Import Swiper required modules
 import { FreeMode, Navigation, Thumbs } from "swiper/modules";
 
-// import LightGallery React components
-import LightGallery from "lightgallery/react";
-
-// Import LightGallery styles
-import "lightgallery/css/lg-fullscreen.css";
-import "lightgallery/css/lg-zoom.css";
-import "lightgallery/css/lightgallery.css";
-
-// Import LightGallery plugins
-import lgFullScreen from "lightgallery/plugins/fullscreen";
-import lgZoom from "lightgallery/plugins/zoom";
-
+import { ImagePreview } from "@bfirst/components-image-preview";
 import { Loader } from "@bfirst/components-loader";
 import { ProfileCard } from "@bfirst/components-profile-card";
 import { getImageUrl } from "@bfirst/utilities";
@@ -38,17 +27,6 @@ export interface PhotoAlbumDesktopProps {
   shareLink: string;
   bottomSlidesPerView?: number;
 }
-
-const lgSettings = {
-  counter: false,
-  enableSwipe: false,
-  enableDrag: false,
-  controls: false,
-  infiniteZoom: true,
-  showZoomInOutIcons: true,
-  actualSize: false,
-  plugins: [lgZoom, lgFullScreen],
-};
 
 export function PhotoAlbumDesktop({
   images,
@@ -91,15 +69,7 @@ export function PhotoAlbumDesktop({
             >
               {images?.map((image: any, index: number) => (
                 <SwiperSlide key={index}>
-                  <LightGallery {...lgSettings}>
-                    <div data-src={getImageUrl(image.imageUrl)}>
-                      <img
-                        className="w-full aspect-video object-cover cursor-pointer"
-                        src={getImageUrl(image.imageUrl)}
-                        alt={image?.image_caption}
-                      />
-                    </div>
-                  </LightGallery>
+                  <ImagePreview imageUrl={getImageUrl(image.imageUrl)} imageCaption={image.imageCaption} />
                 </SwiperSlide>
               ))}
             </Swiper>
