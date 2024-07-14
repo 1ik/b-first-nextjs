@@ -42,7 +42,7 @@ export default async function Index() {
   };
 
   const ads_list = await getData("ads?page=home");
-  const ads_obj = getAdsObj(ads_list.ads);
+  const ads_obj = getAdsObj(ads_list?.ads);
 
 
   const latestNews = (await getData("latest/stories?size=30"))?.data
