@@ -8,6 +8,7 @@ import { BlockNewsMob5 } from "@bfirst/components-block-news-mob-5";
 import { ItemList } from "@bfirst/components-item-list";
 import { ListGridMob } from "@bfirst/components-list-grid-mob";
 import { SquareGrid } from "@bfirst/components-square-grid";
+import { VideoAlbum } from "@bfirst/components-video-album";
 import moment from "moment";
 import Navbar from "./components/Navbar/Navbar";
 import TrendingTopics from "./components/TrendingTopics/TrendingTopics";
@@ -53,19 +54,29 @@ export default async function Index() {
   const ads_list = await getData("ads?page=home");
   const ads_obj = getAdsObj(ads_list.ads);
 
-  const [economyNews, featureNews, entertainmentNews, lifestyleNews, bangladeshNews, worldNews, sportsNews, techNews] =
-    (
-      await Promise.all([
-        getData("categories/economy/stories?size=40"),
-        getData("categories/feature/stories"),
-        getData("categories/entertainment/stories"),
-        getData("categories/lifestyle/stories"),
-        getData("categories/bangladesh/stories?size=30"),
-        getData("categories/world/stories"),
-        getData("categories/sports/stories"),
-        getData("categories/tech/stories"),
-      ])
-    ).map((item) => item?.data.filter(filterTopNews).filter(filterRecommended).filter(filterLatestNews));
+  const [
+    economyNews,
+    featureNews,
+    entertainmentNews,
+    lifestyleNews,
+    bangladeshNews,
+    worldNews,
+    sportsNews,
+    techNews,
+    videoGalleryNews,
+  ] = (
+    await Promise.all([
+      getData("categories/economy/stories?size=40"),
+      getData("categories/feature/stories"),
+      getData("categories/entertainment/stories"),
+      getData("categories/lifestyle/stories"),
+      getData("categories/bangladesh/stories?size=30"),
+      getData("categories/world/stories"),
+      getData("categories/sports/stories"),
+      getData("categories/tech/stories"),
+      getData("categories/video_gallery/stories"),
+    ])
+  ).map((item) => item?.data.filter(filterTopNews).filter(filterRecommended).filter(filterLatestNews));
 
   const trendingTopics = (await getData("trendy-topics"))?.data;
   const onThisDay = (await getData("categories/on_this_day/stories"))?.data.filter(
@@ -109,6 +120,13 @@ export default async function Index() {
         </div>
 
         <Ads className="my-6" src={getAdsUrl(ads_obj?.banner3)} alt="Ads" />
+      </div>
+
+      {/* VIDEO ALBUM SECTION */}
+      <div className="bg-black text-white py-2 mt-8">
+        <div className="px-3 my-8">
+          <VideoAlbum data={videoGalleryNews} />
+        </div>
       </div>
 
       {/* RECOMMENDED FOR YOU SECTION */}

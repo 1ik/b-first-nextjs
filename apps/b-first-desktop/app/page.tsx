@@ -14,6 +14,7 @@ import TrendingTopics from "./components/TrendingTopics/TrendingTopics";
 import { getData } from "./utils/dataFetch";
 import filterOutOTD from "./utils/filterOutOTD";
 import { ItemSlide } from "@bfirst/components-item-slide";
+import { VideoAlbum } from "@bfirst/components-video-album";
 import { getAdsUrl } from "@bfirst/utilities";
 import { getAdsObj } from "./utils/getAdsObj";
 
@@ -54,19 +55,29 @@ export default async function Index() {
     return !latestNews?.find((lN: { id: number }) => lN.id === (item as { id: number }).id);
   };
 
-  const [economyNews, featureNews, entertainmentNews, lifestyleNews, bangladeshNews, worldNews, sportsNews, techNews] =
-    (
-      await Promise.all([
-        getData("categories/economy/stories?size=40"),
-        getData("categories/feature/stories"),
-        getData("categories/entertainment/stories"),
-        getData("categories/lifestyle/stories"),
-        getData("categories/bangladesh/stories?size=30"),
-        getData("categories/world/stories"),
-        getData("categories/sports/stories"),
-        getData("categories/tech/stories"),
-      ])
-    ).map((item) => item?.data.filter(filterTopNews).filter(filterRecommended).filter(filterLatestNews));
+  const [
+    economyNews,
+    featureNews,
+    entertainmentNews,
+    lifestyleNews,
+    bangladeshNews,
+    worldNews,
+    sportsNews,
+    techNews,
+    videoGalleryNews,
+  ] = (
+    await Promise.all([
+      getData("categories/economy/stories?size=40"),
+      getData("categories/feature/stories"),
+      getData("categories/entertainment/stories"),
+      getData("categories/lifestyle/stories"),
+      getData("categories/bangladesh/stories?size=30"),
+      getData("categories/world/stories"),
+      getData("categories/sports/stories"),
+      getData("categories/tech/stories"),
+      getData("categories/video_gallery/stories"),
+    ])
+  ).map((item) => item?.data.filter(filterTopNews).filter(filterRecommended).filter(filterLatestNews));
 
   const onThisDay = (await getData("categories/on_this_day/stories"))?.data.filter(
     (item: { created_at: moment.MomentInput }) =>
@@ -98,6 +109,14 @@ export default async function Index() {
           </a>
         </div>
       </div>
+
+      <div className="bg-black text-white py-4 mt-8">
+        <div className="desktop-container my-10">
+          <VideoAlbum data={videoGalleryNews} />
+        </div>
+      </div>
+
+    
       <Ads className="my-12" src={getAdsUrl(ads_obj?.banner3)} alt="Ads" />
       <div className="bg-[#F6EFEF] dark:bg-dark-300 py-8">
         <div className="desktop-container">
