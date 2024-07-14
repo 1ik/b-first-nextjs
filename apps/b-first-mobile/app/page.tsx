@@ -69,6 +69,7 @@ export default async function Index() {
       getData("categories/sports/stories"),
       getData("categories/tech/stories"),
       getData("categories/education/stories"),
+      getData("categories/photo_gallery/stories"),
     ])
   ).map((item) => item?.data.filter(filterTopNews).filter(filterRecommended).filter(filterLatestNews));
 
@@ -143,7 +144,7 @@ export default async function Index() {
           <div className="grid grid-cols-4 gap-y-4">
             <div className="col-span-4 md:col-span-3 border-r dark:border-dark-300 pr-4 mr-4">
               <AccentHeader header="Photo" color="#119F9F" />
-              <PhotoAlbum data={featureNews} />
+              <PhotoAlbum data={photoGalleryNews} />
             </div>
             <div className="col-span-4 md:col-span-1">
               <AccentHeader header="Education" color="#119F9F" />
