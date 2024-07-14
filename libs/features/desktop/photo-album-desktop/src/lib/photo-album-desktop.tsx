@@ -14,19 +14,35 @@ import "swiper/css/thumbs";
 // import required modules
 import { FreeMode, Navigation, Thumbs } from "swiper/modules";
 
-// Import custom style-sheet
+import { Loader } from "@bfirst/components-loader";
+import { ProfileCard } from "@bfirst/components-profile-card";
 import { getImageUrl } from "@bfirst/utilities";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
-import "./photo-album-desktop-style.css";
 
-interface PhotoAlbumDesktopProps {
-  data: any;
+export interface PhotoAlbumDesktopProps {
+  images: any;
+  authors: any;
+  createdTime: string;
+  shareLink: string;
+  bottomSlidesPerView?: number;
 }
 
-export function PhotoAlbumDesktop({ data }: PhotoAlbumDesktopProps) {
+export function PhotoAlbumDesktop({
+  images,
+  authors,
+  createdTime,
+  shareLink,
+  bottomSlidesPerView = 4,
+}: PhotoAlbumDesktopProps) {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperClass | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isMounted, setIsMounted] = useState(false);
+
+  const slides = [...images];
+
+  while (slides.length < bottomSlidesPerView) {
+    slides.push({});
+  }
 
   const nextButtonRef = useRef(null);
   const prevButtonRef = useRef(null);
@@ -35,61 +51,89 @@ export function PhotoAlbumDesktop({ data }: PhotoAlbumDesktopProps) {
     setIsMounted(true);
   }, [setIsMounted]);
 
-  if (!isMounted) return <div className="animate-bounce h-4 w-4 bg-red-600"></div>;
-
   return (
     <>
-      <Swiper
-        onActiveIndexChange={(e) => setActiveIndex(e.activeIndex)}
-        loop={true}
-        spaceBetween={10}
-        thumbs={{ swiper: thumbsSwiper }}
-        modules={[FreeMode, Navigation, Thumbs]}
-      >
-        {data?.map((image: any, index: number) => (
-          <SwiperSlide key={index}>
-            <div className="grid grid-cols-4 gap-5">
-              <p className="col-span-1">{image?.imageCaption}</p>
-              <img className="col-span-3" src={getImageUrl(image.imageUrl)} alt={image?.image_caption || data?.title} />
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
-      <div className="flex items-center gap-x-2 mt-4">
-        {data?.length > 4 && (
-          <button className="text-6xl" ref={prevButtonRef}>
-            <FaAngleLeft />
-          </button>
-        )}
+      <div className="grid grid-cols-4 gap-8">
+        <div className="flex flex-col justify-between">
+          <p className="text-[22px] montserrat-regular leading-[120%]">{images?.[activeIndex].imageCaption}</p>
+          <ProfileCard data={authors} createdTime={createdTime} shareLink={shareLink} />
+        </div>
+        <div className="col-span-3">
+          {isMounted ? (
+            <Swiper
+              onActiveIndexChange={(e) => setActiveIndex(e.activeIndex)}
+              spaceBetween={10}
+              thumbs={{ swiper: thumbsSwiper }}
+              modules={[FreeMode, Navigation, Thumbs]}
+            >
+              {images?.map((image: any, index: number) => (
+                <SwiperSlide key={index}>
+                  <img
+                    className="w-full aspect-video object-cover"
+                    src={getImageUrl(image.imageUrl)}
+                    alt={image?.image_caption}
+                  />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          ) : (
+            <img
+              className="w-full aspect-video object-cover"
+              src={getImageUrl(images?.[0].imageUrl)}
+              alt={images?.[0]?.image_caption}
+            />
+          )}
+        </div>
+      </div>
+      <div className="flex items-center gap-x-2 mt-8">
+        {isMounted ? (
+          <>
+            {images?.length > bottomSlidesPerView && (
+              <button className="text-6xl disabled:opacity-30" ref={prevButtonRef}>
+                <FaAngleLeft />
+              </button>
+            )}
 
-        <Swiper
-          className="relative"
-          onSwiper={setThumbsSwiper}
-          loop={true}
-          spaceBetween={20}
-          slidesPerView={4}
-          freeMode={true}
-          watchSlidesProgress={true}
-          modules={[FreeMode, Navigation, Thumbs]}
-          navigation={{
-            nextEl: nextButtonRef.current,
-            prevEl: prevButtonRef.current,
-          }}
-        >
-          {data?.map((image: any, index: number) => (
-            <SwiperSlide key={index}>
-              <img
-                className={`${activeIndex === index ? "opacity-100" : "opacity-70"} border-red-600`}
-                src={getImageUrl(image.imageUrl)}
-                alt={image?.imageCaption || data?.title}
-              />
-            </SwiperSlide>
-          ))}
-        </Swiper>
-        {data?.length < 4 && (
-          <button className="text-6xl" ref={prevButtonRef}>
-            <FaAngleRight />
-          </button>
+            <Swiper
+              onSwiper={setThumbsSwiper}
+              spaceBetween={32}
+              slidesPerView={bottomSlidesPerView}
+              freeMode={true}
+              watchSlidesProgress={true}
+              modules={[FreeMode, Navigation, Thumbs]}
+              navigation={{
+                nextEl: nextButtonRef.current,
+                prevEl: prevButtonRef.current,
+              }}
+            >
+              {slides?.map((image: any, index: number) => (
+                <SwiperSlide key={index}>
+                  {image?.imageUrl ? (
+                    <img
+                      className={`${
+                        activeIndex === index ? "opacity-100" : "opacity-70"
+                      } border-red-600 w-full aspect-video object-cover`}
+                      src={getImageUrl(image.imageUrl)}
+                      alt={image?.imageCaption}
+                    />
+                  ) : (
+                    <div className="w-full h-20">
+                      <Loader />
+                    </div>
+                  )}
+                </SwiperSlide>
+              ))}
+            </Swiper>
+            {images?.length > bottomSlidesPerView && (
+              <button className="text-6xl disabled:opacity-30" ref={nextButtonRef}>
+                <FaAngleRight />
+              </button>
+            )}
+          </>
+        ) : (
+          <div className="w-full py-12">
+            <Loader />
+          </div>
         )}
       </div>
     </>

@@ -1,11 +1,7 @@
 "use client";
 
-import { PhotoAlbumDesktop } from "@bfirst/components-photo-album-desktop";
+import { PhotoAlbumDesktop, PhotoAlbumDesktopProps } from "@bfirst/components-photo-album-desktop";
 
-interface PhotoAlbumProps {
-  data: any;
-}
-
-export default function PhotoAlbum({ data }: PhotoAlbumProps) {
-  return <PhotoAlbumDesktop data={data} />;
+export default function PhotoAlbum({ images, authors, createdTime, shareLink }: PhotoAlbumDesktopProps) {
+  return <PhotoAlbumDesktop images={images} authors={authors} createdTime={createdTime} shareLink={shareLink} />;
 }
