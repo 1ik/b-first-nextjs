@@ -13,6 +13,7 @@ import Navbar from "./components/Navbar/Navbar";
 import TrendingTopics from "./components/TrendingTopics/TrendingTopics";
 import { getData } from "./utils/dataFetch";
 import filterOutOTD from "./utils/filterOutOTD";
+import { ItemSlide } from "@bfirst/components-item-slide";
 import { VideoAlbum } from "@bfirst/components-video-album";
 import { getAdsUrl } from "@bfirst/utilities";
 import { getAdsObj } from "./utils/getAdsObj";
@@ -42,7 +43,7 @@ export default async function Index() {
   };
 
   const ads_list = await getData("ads?page=home");
-  const ads_obj = getAdsObj(ads_list.ads);
+  const ads_obj = getAdsObj(ads_list?.ads);
 
 
   const latestNews = (await getData("latest/stories?size=30"))?.data
@@ -120,7 +121,7 @@ export default async function Index() {
       <div className="bg-[#F6EFEF] dark:bg-dark-300 py-8">
         <div className="desktop-container">
           <AccentHeader header="recommended for you" color="#228B22" />
-          <SquareGrid data={recommendedNews?.slice(0, 4)} gridCols={4} />
+          <ItemSlide data={recommendedNews} />
         </div>
       </div>
 

@@ -61,7 +61,7 @@ export default async function NewsDetails({ params }) {
   const news_link_url = `${process.env.BASE_URL}/news/${params.id}/${params.slug}`;
   const detailsData = await getData(`story/details/${params.id}`);
   const ads_list = await getData("ads?page=news_details");
-  const ads_obj = getAdsObj(ads_list.ads);
+  const ads_obj = getAdsObj(ads_list?.ads);
 
   if (!detailsData) return notFound();
 
