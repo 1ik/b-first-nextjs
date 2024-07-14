@@ -6,6 +6,8 @@ import { ItemList } from "@bfirst/components-item-list";
 import { ProfileCard } from "@bfirst/components-profile-card";
 import { SquareGrid } from "@bfirst/components-square-grid";
 import { getImageUrl } from "@bfirst/utilities";
+import PhotoAlbum from "apps/b-first-mobile/app/components/PhotoAlbum/PhotoAlbum";
+import moment from "moment-timezone";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import "../../../../../../../libs/fonts/montserrat/index.css";
@@ -92,7 +94,7 @@ export default async function NewsDetails({ params }) {
             url: "https://bfirst.news/img/logo-dark.svg",
           },
         },
-        datePublished: detailsData?.story.created_at,
+        datePublished: moment.utc(detailsData?.story.created_at).tz("Asia/Dhaka").format(),
         image: {
           "@type": "ImageObject",
           url: getImageUrl(detailsData?.story.meta.featured_image),
@@ -161,7 +163,7 @@ export default async function NewsDetails({ params }) {
               {/* SOCIAL SHARE & PROFILE CARD */}
               <ProfileCard
                 className="my-5"
-                data={detailsData?.story.authors[0]}
+                data={detailsData?.story.authors}
                 createdTime={detailsData?.story.created_at}
                 shareLink={news_link_url}
               />
@@ -216,8 +218,33 @@ export default async function NewsDetails({ params }) {
 
           {/* ==================== GRID RIGHT BOX (TAB) | GRID TOP BOX (MOBILE) ===================== */}
           <div className="sm:col-span-5 order-1">
-            <ImagePreview url={getImageUrl(detailsData?.story.meta.featured_image)} alt={detailsData?.story.title} />
-            <p className="montserrat-regular-italic text-xs mt-2">{detailsData?.story.meta.imageCaption}</p>
+            {/* {detailsData?.story?.meta?.featured_element === "video" ? (
+              <div
+                className="featured_video mb-3"
+                dangerouslySetInnerHTML={{ __html: detailsData?.story?.meta?.featured_video }}
+              ></div>
+            ) : (
+              <div>
+                <ImagePreview
+                  url={getImageUrl(detailsData?.story.meta.featured_image)}
+                  alt={detailsData?.story.title}
+                />
+                <p className="montserrat-regular-italic text-xs mt-2">{detailsData?.story.meta.imageCaption}</p>
+              </div>
+            )} */}
+
+            {detailsData?.story?.meta?.more_images && (
+              <PhotoAlbum
+                images={[
+                  {
+                    imageUrl: detailsData?.story?.meta?.featured_image,
+                    imageCaption: detailsData?.story?.meta?.imageCaption,
+                  },
+                  // eslint-disable-next-line no-unsafe-optional-chaining
+                  ...detailsData?.story?.meta?.more_images,
+                ]}
+              />
+            )}
 
             <div className="sm:hidden">
               <Ads className="my-8" src="/ads/ibbl.gif" alt="Ads" />
@@ -225,7 +252,7 @@ export default async function NewsDetails({ params }) {
               <h3 className="text-base montserrat-regular">{detailsData?.story.meta.intro}</h3>
               <ProfileCard
                 className="my-5"
-                data={detailsData?.story.authors[0]}
+                data={detailsData?.story.authors}
                 createdTime={detailsData?.story.created_at}
                 shareLink={news_link_url}
               />

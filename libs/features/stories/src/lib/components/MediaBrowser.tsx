@@ -26,8 +26,9 @@ interface MediaBrowserProps {
   defaultData?: any;
   state: StateInterface;
   dispatch: any;
-  featuredImgUrl: string;
   onFeaturedImgUrl: Dispatch<SetStateAction<string>>;
+  onMoreImgsUrl: Dispatch<SetStateAction<any>>;
+  onError?: Dispatch<SetStateAction<any>>;
   register?: any;
 }
 
@@ -35,8 +36,9 @@ export default function MediaBrowser({
   defaultData,
   state,
   dispatch,
-  featuredImgUrl,
   onFeaturedImgUrl,
+  onMoreImgsUrl,
+  onError,
   register,
 }: MediaBrowserProps) {
   const [currentPage, setCurrentPage] = useState(1);
@@ -88,7 +90,11 @@ export default function MediaBrowser({
   };
 
   const handleImageSelect = function (path: string) {
-    if (state.openFrom === "storyForm") onFeaturedImgUrl(path);
+    if (state.openFrom === "featuredImage") {
+      onFeaturedImgUrl(path);
+      onError && onError((cur) => ({ ...cur, featuredImage: "" }));
+    }
+    if (state.openFrom === "moreImages") onMoreImgsUrl((cur: any) => [...cur, { imageUrl: path, imageCaption }]);
     if (state.openFrom === "textEditor") {
       const w = isPortrait ? 900 : undefined;
       const h = isPortrait ? 1600 : undefined;
@@ -142,6 +148,7 @@ export default function MediaBrowser({
       setSelectedImageFile(null);
       setSelectedUploadImage("");
       setIsPortrait(false);
+      setImageCaption("");
     }
   }, [state.dialogOpen]);
 
@@ -172,7 +179,7 @@ export default function MediaBrowser({
             ))}
           </TabsHeader>
           <div className="h-12 mx-4 my-4 md:my-1 flex gap-2 flex-col md:flex-row">
-            {state.openFrom === "storyForm" && (
+            {state.openFrom === "featuredImage" && (
               <Input
                 {...register("imageCaption")}
                 defaultValue={defaultData?.story.meta.imageCaption}
@@ -180,9 +187,10 @@ export default function MediaBrowser({
               />
             )}
 
-            {state.openFrom === "textEditor" && (
-              <Input onChange={(e) => setImageCaption(e.target.value)} label="Image Caption" />
-            )}
+            {state.openFrom === "textEditor" ||
+              (state.openFrom === "moreImages" && (
+                <Input onChange={(e) => setImageCaption(e.target.value)} label="Image Caption" />
+              ))}
 
             {activeTab === "library" && <Input onChange={handleImageSearch} label="Search" />}
           </div>

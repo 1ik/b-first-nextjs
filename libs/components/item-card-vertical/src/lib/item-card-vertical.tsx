@@ -43,20 +43,26 @@ export function ItemCardVertical({
   return (
     <div className={`${className}`}>
       <div className={`mb-5 relative overflow-hidden ${showImageBorder ? "border-b-[5px] border-accent" : ""}`}>
-        <a href={getNewsUrl(data)}>
-          <div className="relative">
-            <img
-              className={`hover:scale-110 duration-300 aspect-video object-cover w-full`}
-              src={getImageUrl(data?.meta.featured_image)}
-              alt={data?.meta.imageCaption}
-            />
-            {showVideoIcon && (
-              <div className="absolute bottom-0 left-0 w-10 h-10 bg-accent flex items-center justify-center">
-                <FaPlay size={20}/>
-              </div>
-            )}
-          </div>
-        </a>
+        <div>
+          {data?.meta.featured_element === "video" ? (
+            <div className="featured_video" dangerouslySetInnerHTML={{ __html: data?.meta?.featured_video }}></div>
+          ) : (
+            <div className="relative">
+              <a href={getNewsUrl(data)}>
+                <img
+                  className={`hover:scale-110 duration-300 aspect-video object-cover w-full`}
+                  src={getImageUrl(data?.meta.featured_image)}
+                  alt={data?.meta.imageCaption}
+                />
+              </a>
+              {showVideoIcon && (
+                <div className="absolute bottom-0 left-0 w-10 h-10 bg-accent flex items-center justify-center">
+                  <FaPlay size={20} />
+                </div>
+              )}
+            </div>
+          )}
+        </div>
 
         {titlePosition === "inset" &&
           (Link ? (
