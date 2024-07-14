@@ -6,16 +6,17 @@ import { BlockNews3 } from "@bfirst/components-block-news-3";
 import { BlockNews4 } from "@bfirst/components-block-news-4";
 import { BlockNews5 } from "@bfirst/components-block-news-5";
 import { ItemList } from "@bfirst/components-item-list";
+import { ItemSlide } from "@bfirst/components-item-slide";
 import { ListGrid } from "@bfirst/components-list-grid";
+import { PhotoAlbum } from "@bfirst/components-photo-album";
 import { SquareGrid } from "@bfirst/components-square-grid";
+import { VideoAlbum } from "@bfirst/components-video-album";
+import { getAdsUrl } from "@bfirst/utilities";
 import moment from "moment";
 import Navbar from "./components/Navbar/Navbar";
 import TrendingTopics from "./components/TrendingTopics/TrendingTopics";
 import { getData } from "./utils/dataFetch";
 import filterOutOTD from "./utils/filterOutOTD";
-import { PhotoAlbum } from "@bfirst/components-photo-album";
-import { VideoAlbum } from "@bfirst/components-video-album";
-import { getAdsUrl } from "@bfirst/utilities";
 import { getAdsObj } from "./utils/getAdsObj";
 
 const webpageJsonLd = {
@@ -128,7 +129,7 @@ export default async function Index() {
       <div className="bg-[#F6EFEF] dark:bg-dark-300 py-8">
         <div className="desktop-container">
           <AccentHeader header="recommended for you" color="#228B22" />
-          <SquareGrid data={recommendedNews?.slice(0, 4)} gridCols={4} />
+          <ItemSlide data={recommendedNews} />
         </div>
       </div>
 

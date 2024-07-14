@@ -15,6 +15,7 @@ import TrendingTopics from "./components/TrendingTopics/TrendingTopics";
 import { getData } from "./utils/dataFetch";
 import filterOutOTD from "./utils/filterOutOTD";
 import { PhotoAlbum } from "@bfirst/components-photo-album";
+import { ItemSlide } from "@bfirst/components-item-slide";
 import { getAdsUrl } from "@bfirst/utilities";
 import { getAdsObj } from "./utils/getAdsObj";
 
@@ -137,12 +138,7 @@ export default async function Index() {
       <div className="bg-[#F6EFEF] dark:bg-dark-300 py-8">
         <div className="px-3">
           <AccentHeader header="recommended for you" color="#228B22" />
-          <div className="sm:hidden">
-            <SquareGrid data={recommendedNews?.slice(0, 4)} gridCols={1} />
-          </div>
-          <div className="hidden sm:block">
-            <SquareGrid data={recommendedNews?.slice(0, 4)} gridCols={2} />
-          </div>
+          <ItemSlide data={recommendedNews} />
         </div>
       </div>
 
