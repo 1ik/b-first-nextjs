@@ -11,6 +11,9 @@ export default function home() {
           Recommended Stories
         </button>
       </Link>
+      <Link to={"/ad-manager"}>
+        <button className="bg-black/80 font-medium text-white rounded-sm px-4 py-2 text-base ">Ad Manager</button>
+      </Link>
     </div>
   );
 }

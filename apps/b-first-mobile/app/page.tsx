@@ -8,12 +8,15 @@ import { BlockNewsMob5 } from "@bfirst/components-block-news-mob-5";
 import { ItemList } from "@bfirst/components-item-list";
 import { ListGridMob } from "@bfirst/components-list-grid-mob";
 import { SquareGrid } from "@bfirst/components-square-grid";
+import { VideoAlbum } from "@bfirst/components-video-album";
 import moment from "moment";
 import Navbar from "./components/Navbar/Navbar";
 import TrendingTopics from "./components/TrendingTopics/TrendingTopics";
 import { getData } from "./utils/dataFetch";
 import filterOutOTD from "./utils/filterOutOTD";
 import { PhotoAlbum } from "@bfirst/components-photo-album";
+import { getAdsUrl } from "@bfirst/utilities";
+import { getAdsObj } from "./utils/getAdsObj";
 
 const webpageJsonLd = {
   "@context": "http://schema.org",
@@ -48,6 +51,9 @@ export default async function Index() {
     return !latestNews?.find((lN: { id: number }) => lN.id === (item as { id: number }).id);
   };
 
+  const ads_list = await getData("ads?page=home");
+  const ads_obj = getAdsObj(ads_list.ads);
+
   const [
     economyNews,
     featureNews,
@@ -58,6 +64,8 @@ export default async function Index() {
     sportsNews,
     techNews,
     educationNews,
+    photoGalleryNews,
+    videoGalleryNews,
   ] = (
     await Promise.all([
       getData("categories/economy/stories?size=40"),
@@ -70,6 +78,7 @@ export default async function Index() {
       getData("categories/tech/stories"),
       getData("categories/education/stories"),
       getData("categories/photo_gallery/stories"),
+      getData("categories/video_gallery/stories"),
     ])
   ).map((item) => item?.data.filter(filterTopNews).filter(filterRecommended).filter(filterLatestNews));
 
@@ -85,12 +94,12 @@ export default async function Index() {
 
       <Navbar />
       <div className="px-3">
-        <Ads className="my-6" src="/ads/Ad-Master-50.gif" alt="Ads" showHeader={false} />
+        <Ads className="my-6" src={getAdsUrl(ads_obj?.banner1)} alt="Ads" />
         <TrendingTopics className="my-4" items={trendingTopics} title="Trending" />
 
         {/* TOP NEWS SECTION */}
-        <BlockNewsMob data={topNews?.slice(0, 8)} ads1="/ads/Global.gif" ads2="/ads/union-bank-ad.gif" />
-        <Ads className="my-6" src="/ads/banner_ibbl.gif" alt="ads" showHeader={false} />
+        <BlockNewsMob data={topNews?.slice(0, 8)} ads1={ads_obj?.square1} ads2={ads_obj?.square2} />
+        <Ads className="my-6" src={getAdsUrl(ads_obj?.banner2)} alt="Ads" />
         <div className="sm:hidden">
           <SquareGrid showAccentHeader data={topNews.slice(8, 16)} gridCols={1} />
           <div className="flex justify-center my-6 border-b dark:border-dark-300">
@@ -113,7 +122,15 @@ export default async function Index() {
             </a>
           </div>
         </div>
-        <Ads className="my-6" src="/ads/banner_ibbl.gif" alt="ads" showHeader={false} />
+
+        <Ads className="my-6" src={getAdsUrl(ads_obj?.banner3)} alt="Ads" />
+      </div>
+
+      {/* VIDEO ALBUM SECTION */}
+      <div className="bg-black text-white py-2 mt-8">
+        <div className="px-3 my-8">
+          <VideoAlbum data={videoGalleryNews} />
+        </div>
       </div>
 
       {/* RECOMMENDED FOR YOU SECTION */}
@@ -131,11 +148,11 @@ export default async function Index() {
 
       <div className="px-3">
         {/* ECONOMY SECTION */}
-        <Ads className="my-5" src="/ads/banner_ibbl.gif" alt="ads" showHeader={false} />
+        <Ads className="my-5" src={getAdsUrl(ads_obj?.banner4)} alt="Ads" />
         <BlockNewsMob2 data={economyNews} sectionHeader="Economy" headerColor="#00479B" />
 
         {/* FEATURE SECTION */}
-        <Ads className="my-5" src="/ads/banner_ibbl.gif" alt="ads" showHeader={false} />
+        <Ads className="my-5" src={getAdsUrl(ads_obj?.banner5)} alt="Ads" />
         <BlockNewsMob3 data={featureNews} sectionHeader="feature" headerColor="#8BD032" />
 
         {/* PHOTO ALBUM SECTION */}
@@ -160,14 +177,14 @@ export default async function Index() {
         </div>
 
         {/* LIFESTYLE SECTION */}
-        <Ads className="mx-auto my-5" src="/ads/banner_ibbl.gif" alt="ads" showHeader={false} />
+        <Ads className="my-5" src={getAdsUrl(ads_obj?.banner6)} alt="Ads" />
         <BlockNewsMob4 data={lifestyleNews} sectionHeader="Lifestyle" headerColor="#EF2D8A" />
 
         {/* ON THIS DAY SECTION */}
         <div className="grid grid-cols-1 sm:grid-cols-7 gap-4 mt-5">
           <div className="sm:col-span-3 flex flex-col items-center gap-4">
-            <Ads src="/ads/sibl.png" alt="Ads" />
-            <Ads src="/ads/Global.gif" alt="Ads" />
+            <Ads src={getAdsUrl(ads_obj?.square3)} alt="Ads" />
+            <Ads src={getAdsUrl(ads_obj?.square4)} alt="Ads" />
           </div>
           <div className="sm:col-span-4">
             <AccentHeader header="On this day" color="#A49A46" />
@@ -175,18 +192,18 @@ export default async function Index() {
           </div>
         </div>
         {/* ENTERTAINMENT SECTION */}
-        <Ads className="mx-auto my-6" src="/ads/banner_ibbl.gif" alt="ads" showHeader={false} />
+        <Ads className="my-6" src={getAdsUrl(ads_obj?.banner7)} alt="Ads" />
         <BlockNewsMob5
           data={entertainmentNews}
-          ads="/ads/sibl.png"
+          ads={ads_obj?.square5}
           sectionHeader="entertainment"
           headerColor="#5D26D1"
         />
 
         {/* GRID LIST SECTION */}
-        <Ads className="my-6" src="/ads/banner_ibbl.gif" alt="ads" showHeader={false} />
+        <Ads className="my-6" src={getAdsUrl(ads_obj?.banner8)} alt="Ads" />
         <ListGridMob className="desktop-container" data={[bangladeshNews, worldNews, sportsNews, techNews]} />
-        <Ads className="my-6" src="/ads/banner_ibbl.gif" alt="ads" showHeader={false} />
+        <Ads className="my-6" src={getAdsUrl(ads_obj?.banner9)} alt="Ads" />
       </div>
     </>
   );

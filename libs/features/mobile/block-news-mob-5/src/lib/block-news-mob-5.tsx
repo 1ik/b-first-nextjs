@@ -1,6 +1,7 @@
 import { AccentHeader } from "@bfirst/components-accent-header";
 import { Ads } from "@bfirst/components-ads";
 import { ItemCardVertical } from "@bfirst/components-item-card-vertical";
+import { getAdsUrl } from "@bfirst/utilities";
 import { Key } from "react";
 
 /* eslint-disable-next-line */
@@ -10,32 +11,32 @@ export interface BlockNewsMob5Props {
   sectionHeader?: string;
   headerColor?: string;
   Link?: any;
-  ads: string;
+  ads: any;
 }
 
-export function BlockNewsMob5({ data, className, sectionHeader, headerColor, Link, ads }: BlockNewsMob5Props) {
+export function BlockNewsMob5({ data, className, sectionHeader, headerColor, ads }: BlockNewsMob5Props) {
   return (
     <div className={className}>
       {sectionHeader && <AccentHeader header={sectionHeader} color={headerColor} />}
       <div className="grid grid-cols-1 sm:grid-cols-7 gap-5">
         <div className="sm:col-span-4">
-          <ItemCardVertical data={data?.[0]} size="lg" titleFontSize="30px" titleBold/>
+          <ItemCardVertical data={data?.[0]} size="lg" titleFontSize="30px" titleBold />
         </div>
         <div className="sm:col-span-3 mx-auto">
-          <Ads src={ads} alt="Ads" />
+          <Ads src={getAdsUrl(ads)} alt="Ads" />
         </div>
       </div>
       <div className="grid grid-cols-1 my-4 sm:grid-cols-3 gap-4">
         {data?.slice(1, 4).map((item: any, index: Key | null | undefined) => (
           <div key={index}>
-            <ItemCardVertical data={item} size="md" titleFontSize="18px"/>
+            <ItemCardVertical data={item} size="md" titleFontSize="18px" />
           </div>
         ))}
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
         {data?.slice(4, 10).map((item: any, index: Key | null | undefined) => (
           <div key={index}>
-            <ItemCardVertical data={item} size="md" titleFontSize="18px"/>
+            <ItemCardVertical data={item} size="md" titleFontSize="18px" />
           </div>
         ))}
       </div>
