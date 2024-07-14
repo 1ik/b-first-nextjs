@@ -54,7 +54,7 @@ export function PhotoAlbumMobile({ images, bottomSlidesPerView = 2 }: PhotoAlbum
           >
             {images?.map((image: any, index: number) => (
               <SwiperSlide key={index}>
-                <ImagePreview imageUrl={image.imageUrl} imageCaption={image.imageCaption} />
+                <ImagePreview imageUrl={getImageUrl(image.imageUrl)} imageCaption={image.imageCaption} />
               </SwiperSlide>
             ))}
           </Swiper>

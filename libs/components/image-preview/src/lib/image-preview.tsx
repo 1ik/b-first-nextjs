@@ -7,7 +7,6 @@ import "lightgallery/css/lg-zoom.css";
 import "lightgallery/css/lightgallery.css";
 
 // Import LightGallery plugins
-import { getImageUrl } from "@bfirst/utilities";
 import lgFullScreen from "lightgallery/plugins/fullscreen";
 import lgZoom from "lightgallery/plugins/zoom";
 
@@ -30,12 +29,8 @@ const lgSettings = {
 export function ImagePreview({ imageUrl, imageCaption = "Featured Image" }: ImagePreviewProps) {
   return (
     <LightGallery {...lgSettings}>
-      <div data-src={getImageUrl(imageUrl)}>
-        <img
-          className="w-full aspect-video object-cover cursor-pointer"
-          src={getImageUrl(imageUrl)}
-          alt={imageCaption}
-        />
+      <div data-src={imageUrl}>
+        <img className="w-full aspect-video object-cover cursor-pointer" src={imageUrl} alt={imageCaption} />
       </div>
     </LightGallery>
   );

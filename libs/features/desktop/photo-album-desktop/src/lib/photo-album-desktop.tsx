@@ -69,7 +69,7 @@ export function PhotoAlbumDesktop({
             >
               {images?.map((image: any, index: number) => (
                 <SwiperSlide key={index}>
-                  <ImagePreview imageUrl={image.imageUrl} imageCaption={image.imageCaption} />
+                  <ImagePreview imageUrl={getImageUrl(image.imageUrl)} imageCaption={image.imageCaption} />
                 </SwiperSlide>
               ))}
             </Swiper>
