@@ -22,29 +22,37 @@ const ad_items = [
         position: "banner3",
       },
       {
-        title: "Economy news top banner",
+        title: "Recommand news top banner",
 
         position: "banner4",
       },
       {
-        title: "Economy news bottom banner",
+        title: "Economy news top banner",
         position: "banner5",
       },
       {
-        title: "Lifestyle news top banner",
+        title: "Economy news bottom banner",
         position: "banner6",
       },
       {
-        title: "Lifestyle news bottom banner",
+        title: "Photo gallery news top banner",
         position: "banner7",
       },
       {
-        title: "Entertianment news bottom banner",
+        title: "Photo gallery news bottom banner",
         position: "banner8",
       },
       {
-        title: "Footer top banner",
+        title: "Lifestyle news bottom banner",
         position: "banner9",
+      },
+      {
+        title: "Entertianment news bottom banner",
+        position: "banner10",
+      },
+      {
+        title: "Footer top banner",
+        position: "banner11",
       },
       {
         title: "Top news right square 1",

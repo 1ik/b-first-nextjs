@@ -137,6 +137,7 @@ export default async function Index() {
       {/* RECOMMENDED FOR YOU SECTION */}
       <div className="bg-[#F6EFEF] dark:bg-dark-300 py-8">
         <div className="px-3">
+          <Ads className="my-6" src={getAdsUrl(ads_obj?.banner4)} alt="Ads" />
           <AccentHeader header="recommended for you" color="#228B22" />
           <ItemSlide data={recommendedNews} />
         </div>
@@ -144,18 +145,18 @@ export default async function Index() {
 
       <div className="px-3">
         {/* ECONOMY SECTION */}
-        <Ads className="my-5" src={getAdsUrl(ads_obj?.banner4)} alt="Ads" />
+        <Ads className="my-5" src={getAdsUrl(ads_obj?.banner5)} alt="Ads" />
         <BlockNewsMob2 data={economyNews} sectionHeader="Economy" headerColor="#00479B" />
 
         {/* FEATURE SECTION */}
-        <Ads className="my-5" src={getAdsUrl(ads_obj?.banner5)} alt="Ads" />
+        <Ads className="my-5" src={getAdsUrl(ads_obj?.banner6)} alt="Ads" />
         <BlockNewsMob3 data={featureNews} sectionHeader="feature" headerColor="#8BD032" />
 
         {/* PHOTO ALBUM SECTION */}
-        <Ads className="mt-5" src="/ads/banner_ibbl.gif" alt="ads" showHeader={false} />
+        <Ads className="my-6" src={getAdsUrl(ads_obj?.banner7)} alt="Ads" />
         <div className="my-5">
-          <div className="grid grid-cols-4 gap-y-4">
-            <div className="col-span-4 md:col-span-3 border-r dark:border-dark-300 pr-4 mr-4">
+          <div className="grid grid-cols-4 gap-y-5">
+            <div className="col-span-4 md:col-span-3 md:border-r dark:border-dark-300 md:pr-4 md:mr-4">
               <AccentHeader header="Photo" color="#119F9F" />
               <PhotoAlbum data={photoGalleryNews} />
             </div>
@@ -173,7 +174,7 @@ export default async function Index() {
         </div>
 
         {/* LIFESTYLE SECTION */}
-        <Ads className="my-5" src={getAdsUrl(ads_obj?.banner6)} alt="Ads" />
+        <Ads className="my-5" src={getAdsUrl(ads_obj?.banner8)} alt="Ads" />
         <BlockNewsMob4 data={lifestyleNews} sectionHeader="Lifestyle" headerColor="#EF2D8A" />
 
         {/* ON THIS DAY SECTION */}
@@ -188,7 +189,7 @@ export default async function Index() {
           </div>
         </div>
         {/* ENTERTAINMENT SECTION */}
-        <Ads className="my-6" src={getAdsUrl(ads_obj?.banner7)} alt="Ads" />
+        <Ads className="my-6" src={getAdsUrl(ads_obj?.banner9)} alt="Ads" />
         <BlockNewsMob5
           data={entertainmentNews}
           ads={ads_obj?.square5}
@@ -197,9 +198,9 @@ export default async function Index() {
         />
 
         {/* GRID LIST SECTION */}
-        <Ads className="my-6" src={getAdsUrl(ads_obj?.banner8)} alt="Ads" />
+        <Ads className="my-6" src={getAdsUrl(ads_obj?.banner10)} alt="Ads" />
         <ListGridMob className="desktop-container" data={[bangladeshNews, worldNews, sportsNews, techNews]} />
-        <Ads className="my-6" src={getAdsUrl(ads_obj?.banner9)} alt="Ads" />
+        <Ads className="my-6" src={getAdsUrl(ads_obj?.banner11)} alt="Ads" />
       </div>
     </>
   );
