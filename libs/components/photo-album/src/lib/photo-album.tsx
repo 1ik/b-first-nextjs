@@ -44,12 +44,16 @@ export function PhotoAlbum({ data, showTitle = false, showIntro = false }: Photo
           </div>
         </SwiperSlide>
       ))}
-      <button className="arrow-right arrow absolute top-1/2 -translate-y-1/2 left-0 z-50 text-5xl xl:text-7xl disabled:opacity-30">
-        <RiArrowLeftSLine />
-      </button>
-      <button className="arrow-left arrow absolute top-1/2 -translate-y-1/2 right-0 z-50 text-5xl xl:text-7xl disabled:opacity-30">
-        <RiArrowRightSLine />
-      </button>
+      {data.length > 1 && (
+        <button className="arrow-right arrow absolute top-1/2 -translate-y-1/2 left-0 z-50 text-5xl xl:text-7xl disabled:opacity-30">
+          <RiArrowLeftSLine />
+        </button>
+      )}
+      {data.length > 1 && (
+        <button className="arrow-left arrow absolute top-1/2 -translate-y-1/2 right-0 z-50 text-5xl xl:text-7xl disabled:opacity-30">
+          <RiArrowRightSLine />
+        </button>
+      )}
     </Swiper>
   );
 }
