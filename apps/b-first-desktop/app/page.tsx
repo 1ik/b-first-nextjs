@@ -185,7 +185,6 @@ export default async function Index() {
             <ItemList
               data={educationNews?.slice(0, 7)}
               listType="circle"
-              showButton
               moreNewsLink="/latest"
               titleFontSize="18px"
             />
