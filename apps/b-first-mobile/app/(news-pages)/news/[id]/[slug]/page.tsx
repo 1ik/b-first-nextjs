@@ -15,8 +15,8 @@ import Navbar from "../../../../components/Navbar/Navbar";
 import ImagePreview from "../../../../components/PreviewImage/PreviewImage";
 import TrendingTopics from "../../../../components/TrendingTopics/TrendingTopics";
 import { getData } from "../../../../utils/dataFetch";
-import filterOutOTD from "../../../../utils/filterOutOTD";
 import { getAdsObj } from "../../../../utils/getAdsObj";
+import filterCategory from "apps/b-first-mobile/app/utils/filterCategory";
 export async function generateMetadata({ params }): Promise<Metadata> {
   const data = await getData(`story/details/${params.id}`);
 
@@ -106,16 +106,20 @@ export default async function NewsDetails({ params }) {
 
   const ads_list = await getData("ads?page=news_details");
   const ads_obj = getAdsObj(ads_list?.ads);
-  const [trendingTopics, latestNews, topNews, categoryNews] = (
+  const [trendingTopics, topNews, categoryNews] = (
     await Promise.all([
       getData("trendy-topics"),
-      getData("latest/stories"),
       getData("categories/0/featured-stories"),
       getData(`categories/${detailsData?.story.categories[0].name}/stories`),
     ])
   ).map((item) => item?.data);
 
-  const filteredLatestNews = latestNews.filter(filterOutOTD);
+  const filteredLatestNews = filterCategory(
+    (await getData("latest/stories?size=30"))?.data,
+    "On_This_Day",
+    "Video_Gallery",
+    "Photo_Gallery",
+  )
   const tagsArr = detailsData?.story.tags.map((tag: { id: any }) => tag.id);
   const relatedNews = (await getData(`related-stories?tags=${tagsArr.join(",")}`))?.data.filter(
     (rN: { id: any }) => rN.id != params.id

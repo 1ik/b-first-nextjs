@@ -88,13 +88,7 @@ export default async function Index() {
       moment().format("MMM D YYYY") === moment(item.created_at).format("MMM D YYYY")
   );
 
-  const filterCategoris = filterCategory(
-    (await getData("latest/stories?size=30"))?.data,
-    "On_This_Day",
-    "Video_Gallery",
-    "Photo_Gallery",
-    "Bangladesh"
-  );
+
   return (
     <>
       {/* ==== webpage schema markup */}

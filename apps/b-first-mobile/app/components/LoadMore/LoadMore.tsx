@@ -3,7 +3,7 @@
 import { ItemCardHorizontal } from "@bfirst/components-item-card-horizontal";
 import { Key, useState } from "react";
 import { getData } from "../../utils/dataFetch";
-import filterOutOTD from "../../utils/filterOutOTD";
+
 
 interface LoadMoreProps {
   initialPage?: number;
@@ -33,10 +33,13 @@ export default function LoadMore({
       setStories((cur: any) => [...cur, ...(moreStories?.data ? moreStories.data : [])]);
     }
   };
+  const storiesFilter = stories.filter((item:any)=>
+    !item?.categories?.find((c:any) => c?.name === "On_This_Day")
+ )
 
   return (
     <>
-      {stories?.filter(filterOutOTD)?.map((story: { id: Key | null | undefined }) => (
+      {storiesFilter?.map((story: { id: Key | null | undefined }) => (
         <ItemCardHorizontal
           showIntro={showIntro}
           showTime={showTime}

@@ -7,15 +7,14 @@ import { notFound } from "next/navigation";
 import Navbar from "../../../components/Navbar/Navbar";
 import TrendingTopics from "../../../components/TrendingTopics/TrendingTopics";
 import { getData } from "../../../utils/dataFetch";
-import filterOutOTD from "../../../utils/filterOutOTD";
 import { getAdsUrl } from "@bfirst/utilities";
 import { getAdsObj } from "../../../utils/getAdsObj";
+import filterCategory from "apps/b-first-mobile/app/utils/filterCategory";
 
 export default async function Topic({ params }) {
-  const [trendingNews, latestNews, topNews] = (
+  const [trendingNews, topNews] = (
     await Promise.all([
       getData(`topic/${params.id}`),
-      getData("latest/stories?size=10"),
       getData("categories/0/featured-stories"),
     ])
   ).map((item) => item?.data);
@@ -25,7 +24,13 @@ export default async function Topic({ params }) {
   const ads_list = await getData("ads?page=topic");
   const ads_obj = getAdsObj(ads_list?.ads);
   const trendingTopics = (await getData("trendy-topics"))?.data;
-  const filteredLatestNews = latestNews.filter(filterOutOTD);
+
+  const filteredLatestNews = filterCategory(
+    (await getData("latest/stories?size=30"))?.data,
+    "On_This_Day",
+    "Video_Gallery",
+    "Photo_Gallery",
+  )
   return (
     <>
       <Navbar />

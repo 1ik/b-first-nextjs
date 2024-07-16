@@ -46,11 +46,14 @@ export default async function Index() {
   const ads_list = await getData("ads?page=home");
   const ads_obj = getAdsObj(ads_list?.ads);
 
-  const latestNews = (await getData("latest/stories?size=30"))?.data.filter(filterTopNews).filter(filterRecommended);
 
-  const filterLatestNews = function (item: any) {
-    return !latestNews?.find((lN: { id: number }) => lN.id === (item as { id: number }).id);
-  };
+  const filterLatestNews = filterCategory(
+    (await getData("latest/stories?size=30"))?.data,
+    "On_This_Day",
+    "Video_Gallery",
+    "Photo_Gallery",
+  ).filter(filterTopNews)
+
 
   const [
     economyNews,
@@ -78,7 +81,7 @@ export default async function Index() {
       getData("categories/photo_gallery/stories"),
       getData("categories/video_gallery/stories"),
     ])
-  ).map((item) => item?.data.filter(filterTopNews).filter(filterRecommended).filter(filterLatestNews));
+  ).map((item) => item?.data?.filter(filterTopNews).filter(filterRecommended));
 
   const onThisDay = (await getData("categories/on_this_day/stories"))?.data.filter(
     (item: { created_at: moment.MomentInput }) =>
@@ -86,12 +89,7 @@ export default async function Index() {
   );
   const trendingTopics = (await getData("trendy-topics"))?.data;
 
-  const filterCategoris = filterCategory(
-    (await getData("latest/stories?size=30"))?.data,
-    "On_This_Day",
-    "Video_Gallery",
-    "Photo_Gallery",
-  );
+
 
   return (
     <>
@@ -154,7 +152,7 @@ export default async function Index() {
           <div className="flex flex-col justify-between">
             <AccentHeader header="Latest News" color="#5D26D1" />
             <ItemList
-              data={latestNews?.slice(0, 6)}
+              data={filterLatestNews?.slice(0, 6)}
               listType="circle"
               showButton
               moreNewsLink="/latest"
@@ -172,7 +170,7 @@ export default async function Index() {
           </div>
           <div>
             <AccentHeader header="Most Viewed" color="#119F9F" />
-            <ItemList data={latestNews?.slice(6, 12)} listType="number" titleFontSize="18px" />
+            <ItemList data={filterLatestNews?.slice(6, 12)} listType="number" titleFontSize="18px" />
           </div>
         </div>
         <Ads className="mt-4" src={getAdsUrl(ads_obj?.banner7)} alt="Ads" />

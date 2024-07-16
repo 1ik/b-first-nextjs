@@ -9,9 +9,9 @@ import LoadMore from "../../components/LoadMore/LoadMore";
 import Navbar from "../../components/Navbar/Navbar";
 import TrendingTopics from "../../components/TrendingTopics/TrendingTopics";
 import { getData } from "../../utils/dataFetch";
-import filterOutOTD from "../../utils/filterOutOTD";
 import { getAdsUrl } from "@bfirst/utilities";
 import { getAdsObj } from "../../utils/getAdsObj";
+import filterCategory from "../../utils/filterCategory";
 
 export async function generateMetadata({ params }) {
   const categoryDetails = await getData(`categories?name=${params.category}`);
@@ -51,7 +51,12 @@ export default async function CategoryPage({ params }) {
     },
   };
 
-  const filteredLatestNews = latestNews?.data.filter(filterOutOTD);
+  const filteredLatestNews = filterCategory(
+    (await getData("latest/stories?size=30"))?.data,
+    "On_This_Day",
+    "Video_Gallery",
+    "Photo_Gallery",
+  )
 
   return (
     <>

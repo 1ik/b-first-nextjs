@@ -10,6 +10,7 @@ import TrendingTopics from "../../components/TrendingTopics/TrendingTopics";
 import { getData } from "../../utils/dataFetch";
 import { getAdsUrl } from "@bfirst/utilities";
 import { getAdsObj } from "../../utils/getAdsObj";
+import filterCategory from "../../utils/filterCategory";
 
 export default async function Latest() {
   const [latestNews, topNews] = await Promise.all([
@@ -21,10 +22,13 @@ export default async function Latest() {
   const ads_list = await getData("ads?page=latest");
   const ads_obj = getAdsObj(ads_list?.ads);
 
-  const filteredLatestNews = latestNews?.data.filter(
-    (item: { categories: any[] }) => !item.categories.find((c) => c.name === "On_This_Day")
-  );
-
+ 
+  const filteredLatestNews = filterCategory(
+    (await getData("latest/stories?size=30"))?.data,
+    "On_This_Day",
+    "Video_Gallery",
+    "Photo_Gallery",
+  )
   return (
     <>
       <Navbar />

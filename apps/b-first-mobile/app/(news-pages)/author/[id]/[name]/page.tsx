@@ -10,7 +10,8 @@ import LoadMore from "../../../../components/LoadMore/LoadMore";
 import Navbar from "../../../../components/Navbar/Navbar";
 import TrendingTopics from "../../../../components/TrendingTopics/TrendingTopics";
 import { getData } from "../../../../utils/dataFetch";
-import filterOutOTD from "../../../../utils/filterOutOTD";
+import filterCategory from "apps/b-first-mobile/app/utils/filterCategory";
+
 
 export async function generateMetadata({ params }) {
   const authorDetails = (await getData(`author-details/${params.id}`))?.data;
@@ -33,7 +34,13 @@ export default async function AuthorProfile({ params }) {
     await Promise.all([getData("trendy-topics"), getData(`author-details/${params.id}`)])
   ).map((item) => item?.data);
 
-  const filteredAuthorRelatedNews = authorRelatedNews?.data?.filter(filterOutOTD);
+
+  const filteredAuthorRelatedNews = filterCategory(
+    authorRelatedNews?.data,
+    "On_This_Day",
+    "Video_Gallery",
+    "Photo_Gallery",
+  )
 
   return (
     <>
