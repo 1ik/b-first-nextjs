@@ -16,8 +16,8 @@ import moment from "moment";
 import Navbar from "./components/Navbar/Navbar";
 import TrendingTopics from "./components/TrendingTopics/TrendingTopics";
 import { getData } from "./utils/dataFetch";
-import filterOutOTD from "./utils/filterOutOTD";
 import { getAdsObj } from "./utils/getAdsObj";
+import filterCategory from "./utils/filterCategory";
 
 const webpageJsonLd = {
   "@context": "http://schema.org",
@@ -46,10 +46,7 @@ export default async function Index() {
   const ads_list = await getData("ads?page=home");
   const ads_obj = getAdsObj(ads_list?.ads);
 
-  const latestNews = (await getData("latest/stories?size=30"))?.data
-    .filter(filterTopNews)
-    .filter(filterRecommended)
-    .filter(filterOutOTD);
+  const latestNews = (await getData("latest/stories?size=30"))?.data.filter(filterTopNews).filter(filterRecommended);
 
   const filterLatestNews = function (item: any) {
     return !latestNews?.find((lN: { id: number }) => lN.id === (item as { id: number }).id);
@@ -88,6 +85,13 @@ export default async function Index() {
       moment().format("MMM D YYYY") === moment(item.created_at).format("MMM D YYYY")
   );
   const trendingTopics = (await getData("trendy-topics"))?.data;
+
+  const filterCategoris = filterCategory(
+    (await getData("latest/stories?size=30"))?.data,
+    "On_This_Day",
+    "Video_Gallery",
+    "Photo_Gallery",
+  );
 
   return (
     <>
@@ -182,12 +186,7 @@ export default async function Index() {
           </div>
           <div>
             <AccentHeader header="Education" color="#119F9F" />
-            <ItemList
-              data={educationNews?.slice(0, 7)}
-              listType="circle"
-              moreNewsLink="/latest"
-              titleFontSize="18px"
-            />
+            <ItemList data={educationNews?.slice(0, 7)} listType="circle" moreNewsLink="/latest" titleFontSize="18px" />
           </div>
         </div>
         <Ads className="my-10" src={getAdsUrl(ads_obj?.banner8)} alt="Ads" />

@@ -19,7 +19,7 @@ export default async function Latest() {
 
   const trendingTopics = (await getData("trendy-topics"))?.data;
   const ads_list = await getData("ads?page=latest");
-  const ads_obj = getAdsObj(ads_list.ads);
+  const ads_obj = getAdsObj(ads_list?.ads);
 
   const filteredLatestNews = latestNews?.data.filter(
     (item: { categories: any[] }) => !item.categories.find((c) => c.name === "On_This_Day")

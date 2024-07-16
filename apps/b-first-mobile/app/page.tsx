@@ -13,11 +13,11 @@ import moment from "moment";
 import Navbar from "./components/Navbar/Navbar";
 import TrendingTopics from "./components/TrendingTopics/TrendingTopics";
 import { getData } from "./utils/dataFetch";
-import filterOutOTD from "./utils/filterOutOTD";
 import { PhotoAlbum } from "@bfirst/components-photo-album";
 import { ItemSlide } from "@bfirst/components-item-slide";
 import { getAdsUrl } from "@bfirst/utilities";
 import { getAdsObj } from "./utils/getAdsObj";
+import filterCategory from "./utils/filterCategory";
 
 const webpageJsonLd = {
   "@context": "http://schema.org",
@@ -46,14 +46,13 @@ export default async function Index() {
   const latestNews = (await getData("latest/stories?size=30"))?.data
     .filter(filterTopNews)
     .filter(filterRecommended)
-    .filter(filterOutOTD);
 
   const filterLatestNews = function (item: any) {
     return !latestNews?.find((lN: { id: number }) => lN.id === (item as { id: number }).id);
   };
 
   const ads_list = await getData("ads?page=home");
-  const ads_obj = getAdsObj(ads_list.ads);
+  const ads_obj = getAdsObj(ads_list?.ads);
 
   const [
     economyNews,
@@ -87,6 +86,14 @@ export default async function Index() {
   const onThisDay = (await getData("categories/on_this_day/stories"))?.data.filter(
     (item: { created_at: moment.MomentInput }) =>
       moment().format("MMM D YYYY") === moment(item.created_at).format("MMM D YYYY")
+  );
+
+  const filterCategoris = filterCategory(
+    (await getData("latest/stories?size=30"))?.data,
+    "On_This_Day",
+    "Video_Gallery",
+    "Photo_Gallery",
+    "Bangladesh"
   );
   return (
     <>

@@ -51,7 +51,7 @@ export default async function CategoryPage({ params }) {
 
   const filteredLatestNews = latestNews?.data.filter(filterOutOTD);
   const ads_list = await getData("ads?page=category");
-  const ads_obj = getAdsObj(ads_list.ads);
+  const ads_obj = getAdsObj(ads_list?.ads);
   return (
     <>
       {/* ========= webpage schema markups */}

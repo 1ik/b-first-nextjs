@@ -34,7 +34,7 @@ export default async function CategoryPage({ params }) {
     getData("categories/0/featured-stories"),
   ]);
   const ads_list = await getData("ads?page=category");
-  const ads_obj = getAdsObj(ads_list.ads);
+  const ads_obj = getAdsObj(ads_list?.ads);
 
   if (!categroyNews?.data.length) return notFound();
 

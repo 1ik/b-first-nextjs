@@ -105,7 +105,7 @@ export default async function NewsDetails({ params }) {
   };
 
   const ads_list = await getData("ads?page=news_details");
-  const ads_obj = getAdsObj(ads_list.ads);
+  const ads_obj = getAdsObj(ads_list?.ads);
   const [trendingTopics, latestNews, topNews, categoryNews] = (
     await Promise.all([
       getData("trendy-topics"),

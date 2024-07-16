@@ -22,7 +22,7 @@ export default async function Topic({ params }) {
   if (!trendingNews) return notFound();
 
   const ads_list = await getData("ads?page=topic");
-  const ads_obj = getAdsObj(ads_list.ads);
+  const ads_obj = getAdsObj(ads_list?.ads);
   const filteredLatestNews = latestNews.filter(filterOutOTD);
   const trendingTopics = (await getData("trendy-topics"))?.data;
   return (
