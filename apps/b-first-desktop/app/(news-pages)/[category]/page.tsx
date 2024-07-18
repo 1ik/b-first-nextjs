@@ -26,10 +26,11 @@ export async function generateMetadata({ params }) {
 
 export default async function CategoryPage({ params }) {
   const { category } = params;
-  const [categoryDetails, trendingTopics, categroyNews, topNews] = await Promise.all([
+  const [categoryDetails, trendingTopics, categroyNews, latestNews, topNews] = await Promise.all([
     getData(`categories?name=${category}`),
     getData("trendy-topics"),
     getData(`categories/${category}/stories?size=20&page=1`),
+    getData("latest/stories?size=30"),
     getData("categories/0/featured-stories"),
   ]);
 
@@ -48,15 +49,12 @@ export default async function CategoryPage({ params }) {
     },
   };
 
+  const filteredLatestNews = filterCategory(latestNews?.data, "On_This_Day", "Video_Gallery", "Photo_Gallery");
 
-  const filteredLatestNews = filterCategory(
-    (await getData("latest/stories?size=30"))?.data,
-    "On_This_Day",
-    "Video_Gallery",
-    "Photo_Gallery",
-  );
+  // data for ads
   const ads_list = await getData("ads?page=category");
   const ads_obj = getAdsObj(ads_list?.ads);
+
   return (
     <>
       {/* ========= webpage schema markups */}
