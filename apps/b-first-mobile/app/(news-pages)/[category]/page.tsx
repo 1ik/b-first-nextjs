@@ -30,11 +30,9 @@ export default async function CategoryPage({ params }) {
     getData(`categories?name=${category}`),
     getData("trendy-topics"),
     getData(`categories/${category}/stories?size=20&page=1`),
-    getData("latest/stories"),
+    getData("latest/stories?size=30"),
     getData("categories/0/featured-stories"),
   ]);
-  const ads_list = await getData("ads?page=category");
-  const ads_obj = getAdsObj(ads_list?.ads);
 
   if (!categroyNews?.data.length) return notFound();
 
@@ -51,12 +49,11 @@ export default async function CategoryPage({ params }) {
     },
   };
 
-  const filteredLatestNews = filterCategory(
-    (await getData("latest/stories?size=30"))?.data,
-    "On_This_Day",
-    "Video_Gallery",
-    "Photo_Gallery",
-  )
+  const filteredLatestNews = filterCategory(latestNews?.data, "On_This_Day", "Video_Gallery", "Photo_Gallery");
+  
+  // data for ads
+  const ads_list = await getData("ads?page=category");
+  const ads_obj = getAdsObj(ads_list?.ads);
 
   return (
     <>

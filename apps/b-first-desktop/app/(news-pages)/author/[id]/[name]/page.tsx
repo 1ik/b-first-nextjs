@@ -10,7 +10,7 @@ import LoadMore from "../../../../components/LoadMore/LoadMore";
 import Navbar from "../../../../components/Navbar/Navbar";
 import TrendingTopics from "../../../../components/TrendingTopics/TrendingTopics";
 import { getData } from "../../../../utils/dataFetch";
-import filterCategory from "apps/b-first-desktop/app/utils/filterCategory";
+import filterCategory from "../../../../utils/filterCategory";
 
 export async function generateMetadata({ params }) {
   const authorDetails = (await getData(`author-details/${params.id}`))?.data;

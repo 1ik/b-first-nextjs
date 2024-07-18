@@ -24,6 +24,7 @@ export default async function Latest() {
   // data for ads
   const ads_list = await getData("ads?page=latest");
   const ads_obj = getAdsObj(ads_list?.ads);
+  
 
   return (
     <>

@@ -17,7 +17,6 @@ import { PhotoAlbum } from "@bfirst/components-photo-album";
 import { ItemSlide } from "@bfirst/components-item-slide";
 import { getAdsUrl } from "@bfirst/utilities";
 import { getAdsObj } from "./utils/getAdsObj";
-import filterCategory from "./utils/filterCategory";
 
 const webpageJsonLd = {
   "@context": "http://schema.org",
@@ -43,12 +42,12 @@ export default async function Index() {
     return !topNews?.find((tN: { id: number }) => tN.id === (item as { id: number }).id);
   };
 
-  const latestNews = (await getData("latest/stories?size=30"))?.data
+  const latestNewsData = (await getData("latest/stories?size=30"))?.data
     .filter(filterTopNews)
-    .filter(filterRecommended)
+    .filter(filterRecommended);
 
   const filterLatestNews = function (item: any) {
-    return !latestNews?.find((lN: { id: number }) => lN.id === (item as { id: number }).id);
+    return !latestNewsData?.find((lN: { id: number }) => lN.id === (item as { id: number }).id);
   };
 
   const ads_list = await getData("ads?page=home");
@@ -87,7 +86,6 @@ export default async function Index() {
     (item: { created_at: moment.MomentInput }) =>
       moment().format("MMM D YYYY") === moment(item.created_at).format("MMM D YYYY")
   );
-
 
   return (
     <>
@@ -159,7 +157,7 @@ export default async function Index() {
           <div className="grid grid-cols-4 gap-y-5">
             <div className="col-span-4 md:col-span-3 md:border-r dark:border-dark-300 md:pr-4 md:mr-4">
               <AccentHeader header="Photo" color="#119F9F" />
-              <PhotoAlbum data={photoGalleryNews} showTitle/>
+              <PhotoAlbum data={photoGalleryNews} showTitle />
             </div>
             <div className="col-span-4 md:col-span-1">
               <AccentHeader header="Education" color="#119F9F" />
