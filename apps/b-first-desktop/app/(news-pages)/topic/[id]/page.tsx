@@ -8,28 +8,26 @@ import Navbar from "../../../components/Navbar/Navbar";
 import TrendingTopics from "../../../components/TrendingTopics/TrendingTopics";
 import { getData } from "../../../utils/dataFetch";
 import { getAdsUrl } from "@bfirst/utilities";
-import {getAdsObj} from "../../../utils/getAdsObj"
-import filterCategory from "apps/b-first-desktop/app/utils/filterCategory";
+import { getAdsObj } from "../../../utils/getAdsObj";
+import filterCategory from "../../../utils/filterCategory";
 export default async function Topic({ params }) {
-  const [trendingNews,  topNews] = (
+  const [trendingNews, topNews, latestNews] = (
     await Promise.all([
       getData(`topic/${params.id}`),
       getData("categories/0/featured-stories"),
+      getData("latest/stories?size=30"),
     ])
   ).map((item) => item?.data);
+  const trendingTopics = (await getData("trendy-topics"))?.data;
 
   if (!trendingNews) return notFound();
 
+  const filteredLatestNews = filterCategory(latestNews, "On_This_Day", "Video_Gallery", "Photo_Gallery");
+ 
+  // data for ads
   const ads_list = await getData("ads?page=topic");
   const ads_obj = getAdsObj(ads_list?.ads);
 
-  const filteredLatestNews = filterCategory(
-    (await getData("latest/stories?size=30"))?.data,
-    "On_This_Day",
-    "Video_Gallery",
-    "Photo_Gallery",
-  );
-  const trendingTopics = (await getData("trendy-topics"))?.data;
   return (
     <>
       <Navbar />
