@@ -3,7 +3,7 @@
 import { ItemCardHorizontal } from "@bfirst/components-item-card-horizontal";
 import { Key, useState } from "react";
 import { getData } from "../../utils/dataFetch";
-
+import filterCategory from "../../utils/filterCategory";
 
 interface LoadMoreProps {
   initialPage?: number;
@@ -33,13 +33,12 @@ export default function LoadMore({
       setStories((cur: any) => [...cur, ...(moreStories?.data ? moreStories.data : [])]);
     }
   };
-  const storiesFilter = stories.filter((item:any)=>
-    !item?.categories?.find((c:any) => c?.name === "On_This_Day")
- )
+
+  const storiesFilter = filterCategory(stories, "On_This_Day", "Video_Gallery", "Photo_Gallery");
 
   return (
     <>
-      {storiesFilter?.map((story: { id: Key | null | undefined }) => (
+      {storiesFilter?.map((story: any) => (
         <ItemCardHorizontal
           showIntro={showIntro}
           showTime={showTime}
