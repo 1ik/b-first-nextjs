@@ -49,8 +49,8 @@ export default async function Index() {
 
   const latestNews = filterCategory(latestNewsData, "On_This_Day", "Video_Gallery", "Photo_Gallery");
 
-  const filterLatestNews = function (item: any) {
-    return !latestNewsData?.find((lN: { id: number }) => lN.id === (item as { id: number }).id);
+  const filterLatestNews = function (item: { id: number }) {
+    return !latestNews?.find((lN: any) => lN.id === item.id);
   };
 
   const [
