@@ -34,11 +34,11 @@ export default function LoadMore({
     }
   };
 
-  const storiesFilter = filterCategory(stories, "On_This_Day", "Video_Gallery", "Photo_Gallery");
+  const filterStories = filterCategory(stories, "On_This_Day", "Video_Gallery", "Photo_Gallery");
 
   return (
     <>
-      {storiesFilter?.map((story: any) => (
+      {filterStories?.map((story: any) => (
         <ItemCardHorizontal
           showIntro={showIntro}
           showTime={showTime}

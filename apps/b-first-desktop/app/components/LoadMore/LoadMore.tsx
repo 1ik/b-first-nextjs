@@ -45,11 +45,11 @@ export default function LoadMore({
     }
   }, [inView, loadMoreStoris]);
 
-  const storiesFilter = filterCategory(stories, "On_This_Day", "Video_Gallery", "Photo_Gallery");
+  const filterStories = filterCategory(stories, "On_This_Day", "Video_Gallery", "Photo_Gallery");
 
   return (
     <>
-      {storiesFilter?.map((story: any) => (
+      {filterStories?.map((story: any) => (
         <ItemCardHorizontal
           size="lg"
           showTime={showTime}
