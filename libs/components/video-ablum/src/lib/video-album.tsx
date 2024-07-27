@@ -43,8 +43,8 @@ export function VideoAlbum({ data }: BlockNews5Props) {
     >
       {data.map((item: any, index: any) => {
         return (
-          <SwiperSlide>
-            <ItemCardVertical key={index} data={item} size="sm" showVideoIcon />
+          <SwiperSlide key={index}>
+            <ItemCardVertical data={item} size="sm" showVideoIcon />
           </SwiperSlide>
         );
       })}

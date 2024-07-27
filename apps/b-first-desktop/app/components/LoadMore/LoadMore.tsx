@@ -4,7 +4,7 @@ import { ItemCardHorizontal } from "@bfirst/components-item-card-horizontal";
 import { Key, useCallback, useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { getData } from "../../utils/dataFetch";
-import filterOutOTD from "../../utils/filterOutOTD";
+import filterCategory from "../../utils/filterCategory";
 
 interface LoadMoreProps {
   initialPage?: number;
@@ -45,22 +45,22 @@ export default function LoadMore({
     }
   }, [inView, loadMoreStoris]);
 
+  const filteredStories = filterCategory(stories, "On_This_Day", "Video_Gallery", "Photo_Gallery");
+
   return (
     <>
-      {stories
-        ?.filter(filterOutOTD)
-        ?.map((story: { id: Key | null | undefined }) => (
-          <ItemCardHorizontal
-            size="lg"
-            showTime={showTime}
-            showIntro={showIntro}
-            className="pb-5 mb-5 border-b dark:border-dark-300"
-            key={story.id}
-            data={story}
-            titleFontSize="24px"
-            introFontSize="14px"
-          />
-        ))}
+      {filteredStories?.map((story: any) => (
+        <ItemCardHorizontal
+          size="lg"
+          showTime={showTime}
+          showIntro={showIntro}
+          className="pb-5 mb-5 border-b dark:border-dark-300"
+          key={story.id}
+          data={story}
+          titleFontSize="24px"
+          introFontSize="14px"
+        />
+      ))}
       {page < lastPage && (
         <div className="flex items-center justify-center h-20">
           <img ref={ref} className="animate-ping w-12" src="/img/logo-mini.png" alt="logo" />
