@@ -21,7 +21,7 @@ export function PhotoAlbum({ data, showTitle = false, showIntro = false }: Photo
       spaceBetween={20}
       pagination={{ clickable: true }}
       modules={[Autoplay, Navigation, Pagination]}
-      navigation={{ nextEl: ".arrow-left", prevEl: ".arrow-right" }}
+      navigation={{ nextEl: ".button-prev", prevEl: ".button-next" }}
     >
       {data.map((item: any, index: number) => (
         <SwiperSlide key={index}>
@@ -32,7 +32,7 @@ export function PhotoAlbum({ data, showTitle = false, showIntro = false }: Photo
                 src={getImageUrl(item.meta.featured_image)}
                 alt={item.title}
               />
-              <div className="absolute top-0 h-full w-full flex text-center text-white px-8 z-10 bg-gradient-to-t from-black/20 to-white/20 pb-10 items-end justify-center">
+              <div className="absolute top-0 h-full w-full flex text-center text-white px-8 z-10 bg-gradient-to-t from-black/60 to-transparent pb-10 items-end justify-center">
                 <div>
                   {showTitle && (
                     <h2 className="font-montserrat mb-2 text-lg md:text-3xl font-bold leading-[120%]">{item.title}</h2>
@@ -45,12 +45,12 @@ export function PhotoAlbum({ data, showTitle = false, showIntro = false }: Photo
         </SwiperSlide>
       ))}
       {data.length > 1 && (
-        <button className="arrow-right arrow absolute top-1/2 -translate-y-1/2 left-0 z-50 text-5xl xl:text-7xl disabled:opacity-30">
+        <button className="button-next absolute top-1/2 -translate-y-1/2 left-0 z-50 text-5xl xl:text-7xl disabled:opacity-30">
           <RiArrowLeftSLine />
         </button>
       )}
       {data.length > 1 && (
-        <button className="arrow-left arrow absolute top-1/2 -translate-y-1/2 right-0 z-50 text-5xl xl:text-7xl disabled:opacity-30">
+        <button className="button-prev absolute top-1/2 -translate-y-1/2 right-0 z-50 text-5xl xl:text-7xl disabled:opacity-30">
           <RiArrowRightSLine />
         </button>
       )}
