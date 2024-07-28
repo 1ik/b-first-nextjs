@@ -30,20 +30,22 @@ export default function EmbedRelatedNews({ open, onOpen }: EmbedRelatedNewsProps
   const handleEmbedNews = function (news: any) {
     if (!news) return;
 
-    const content = ` <div id="embeded-related-news" style="display: flex; justify-content: space-between; align-items: center; gap: 10px; border-radius: 8px; padding: 10px 15px">
+    const content = ` <div id="embeded-related-news" style="background:rgb(106 112 112 / 15%); display: flex; justify-content: space-between; align-items: center; gap: 10px; border-radius: 8px; padding: 15px">
         <p style="font-size: 20px; font-weight: 700;">
           <a style="text-decoration: none" href="${getNewsUrl(news)}">
             ${news?.title}
           </a>
         </p>
-        <a style="width: 250px; display: block;" href=${getNewsUrl(news)}>
-          <img
-          style="width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 6px;"
-          src=${getImageUrl(news?.meta?.featured_image, 320, 180)}
-          alt=${news?.title}
-          />
-        </a>
-    </div>`;
+        <div style="width: 400px;">
+          <a href=${getNewsUrl(news)}>
+            <img
+            style="width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 6px;"
+            src=${getImageUrl(news?.meta?.featured_image, 320, 180)}
+            alt=${news?.title}
+            />
+          </a>
+        </div>
+    </div><br/>`;
 
     /* tinymce.activeEditor?.insertContent(
       `<iframe class="news-iframe" style="width: 100%; background: #F2F4F7; border-radius: 8px; padding: 8px 8px 0px 8px; box-sizing: border-box;" src="https://backend.bangladeshfirst.com/api/v1/public/preview-story/${id}" ></iframe>`
