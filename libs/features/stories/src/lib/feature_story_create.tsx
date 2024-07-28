@@ -23,7 +23,6 @@ export const FeatureStoryCreate: React.FC<FeatureStoryCreateProps> = (props: Fea
       isError={false}
       loading={isPending}
       onSubmit={(data) => {
-        return console.log(data);
         request(data);
       }}
     />
