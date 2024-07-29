@@ -1,5 +1,6 @@
 import { cropText, getImageUrl, getNewsUrl } from "@bfirst/utilities";
 import moment from "moment-timezone";
+import { FaPlay } from "react-icons/fa";
 export interface ItemCardHorizontalProps {
   data: any;
   size?: "sm" | "md" | "lg" | "xl";
@@ -58,6 +59,8 @@ export function ItemCardHorizontal({
       ? "text-base"
       : ""
   }`;
+
+  const videoIconSize = `${size === "sm" ? "w-7 h-7" : size === "md" ? "w-8 h-8" : "w-10 h-10 text-xl"}`;
 
   return (
     <div
@@ -148,15 +151,23 @@ export function ItemCardHorizontal({
             {data?.meta?.featured_element === "video" ? (
               <div className="featured_video" dangerouslySetInnerHTML={{ __html: data?.meta?.featured_video }}></div>
             ) : (
-              <a href={getNewsUrl(data)}>
-                <div>
+              <div className="relative">
+                <a href={getNewsUrl(data)}>
                   <img
                     className={`hover:scale-110 duration-300 w-full object-cover aspect-video`}
                     src={getImageUrl(data?.meta.featured_image)}
                     alt={data?.meta.featured_image.imageCaption}
                   />
-                </div>
-              </a>
+                </a>
+
+                {data?.categories?.find((c:any) => c.name === "Video_Gallery") && (
+                  <div
+                    className={`absolute bottom-0 left-0 bg-accent flex items-center justify-center text-white ${videoIconSize}`}
+                  >
+                    <FaPlay />
+                  </div>
+                )}
+              </div>
             )}
           </div>
         )}
