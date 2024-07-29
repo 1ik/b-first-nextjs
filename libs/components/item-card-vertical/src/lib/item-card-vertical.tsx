@@ -1,5 +1,6 @@
 import { cropText, getImageUrl, getNewsUrl } from "@bfirst/utilities";
 import { FaPlay } from "react-icons/fa6";
+import { MdPhotoSizeSelectActual } from "react-icons/md";
 /* eslint-disable-next-line */
 export interface ItemCardVerticalProps {
   data: any;
@@ -38,7 +39,7 @@ export function ItemCardVertical({
 
   const introFont = `${size === "lg" ? "text-xl" : "text-sm"}`;
 
-  const videoIconSize = `${size === "sm" ? "w-7 h-7" : size === "md" ? "w-8 h-8" : "w-10 h-10 text-xl"}`;
+  const iconSize = `${size === "sm" ? "w-7 h-7" : size === "md" ? "w-8 h-8" : "w-10 h-10 text-xl"}`;
 
   return (
     <div className={`${className}`}>
@@ -57,9 +58,16 @@ export function ItemCardVertical({
               </a>
               {data?.categories?.find((c: any) => c.name === "Video_Gallery") && (
                 <div
-                  className={`absolute bottom-0 left-0 bg-accent flex items-center justify-center text-white ${videoIconSize}`}
+                  className={`absolute bottom-0 left-0 bg-accent flex items-center justify-center text-white ${iconSize}`}
                 >
                   <FaPlay />
+                </div>
+              )}
+              {data?.categories?.find((c: any) => c.name === "Photo_Gallery") && (
+                <div
+                  className={`absolute bottom-0 left-0 bg-black bg-opacity-40 flex items-center justify-center text-white ${iconSize}`}
+                >
+                  <MdPhotoSizeSelectActual />
                 </div>
               )}
             </div>

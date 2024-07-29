@@ -1,6 +1,7 @@
 import { cropText, getImageUrl, getNewsUrl } from "@bfirst/utilities";
 import moment from "moment-timezone";
 import { FaPlay } from "react-icons/fa";
+import { MdPhotoSizeSelectActual } from "react-icons/md";
 export interface ItemCardHorizontalProps {
   data: any;
   size?: "sm" | "md" | "lg" | "xl";
@@ -60,7 +61,7 @@ export function ItemCardHorizontal({
       : ""
   }`;
 
-  const videoIconSize = `${size === "sm" ? "w-7 h-7" : size === "md" ? "w-8 h-8" : "w-10 h-10 text-xl"}`;
+  const iconSize = `${size === "sm" ? "w-7 h-7" : size === "md" ? "w-8 h-8" : "w-10 h-10 text-xl"}`;
 
   return (
     <div
@@ -160,11 +161,18 @@ export function ItemCardHorizontal({
                   />
                 </a>
 
-                {data?.categories?.find((c:any) => c.name === "Video_Gallery") && (
+                {data?.categories?.find((c: any) => c.name === "Video_Gallery") && (
                   <div
-                    className={`absolute bottom-0 left-0 bg-accent flex items-center justify-center text-white ${videoIconSize}`}
+                    className={`absolute bottom-0 left-0 bg-accent flex items-center justify-center text-white ${iconSize}`}
                   >
                     <FaPlay />
+                  </div>
+                )}
+                {data?.categories?.find((c: any) => c.name === "Photo_Gallery") && (
+                  <div
+                    className={`absolute bottom-0 left-0 bg-black bg-opacity-40 flex items-center justify-center text-white ${iconSize}`}
+                  >
+                    <MdPhotoSizeSelectActual />
                   </div>
                 )}
               </div>
