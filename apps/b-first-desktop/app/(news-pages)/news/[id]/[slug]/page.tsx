@@ -11,12 +11,11 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import "../../../../../../../libs/fonts/montserrat/index.css";
 import Navbar from "../../../../components/Navbar/Navbar";
-import PhotoAlbum from "../../../../components/PhotoAlbum/PhotoAlbum";
 import ImagePreview from "../../../../components/PreviewImage/PreviewImage";
 import TrendingTopics from "../../../../components/TrendingTopics/TrendingTopics";
 import { getData } from "../../../../utils/dataFetch";
-import { getAdsObj } from "../../../../utils/getAdsObj";
 import filterCategory from "../../../../utils/filterCategory";
+import { getAdsObj } from "../../../../utils/getAdsObj";
 export async function generateMetadata({ params }): Promise<Metadata> {
   const data = await getData(`story/details/${params.id}`);
 
@@ -154,57 +153,37 @@ export default async function NewsDetails({ params }) {
         <div className="grid grid-cols-4 gap-x-10 gap-y-11">
           {/* ======= photo album or featured image/video ========= */}
 
-          {detailsData?.story?.meta?.more_images?.length ? (
-            <div className="col-span-full">
-              <PhotoAlbum
-                images={[
-                  {
-                    imageUrl: detailsData?.story?.meta?.featured_image,
-                    imageCaption: detailsData?.story?.meta?.imageCaption,
-                  },
-                  // eslint-disable-next-line no-unsafe-optional-chaining
-                  ...detailsData?.story?.meta?.more_images,
-                ]}
-                authors={detailsData?.story.authors}
+          <div className="flex flex-col">
+            <h3 className="text-[22px] montserrat-regular leading-[120%]">{detailsData?.story.meta.intro}</h3>
+            <div className="mt-10">
+              <ProfileCard
+                data={detailsData?.story.authors}
                 createdTime={detailsData?.story.created_at}
                 shareLink={news_link_url}
               />
             </div>
-          ) : (
-            <>
-              <div className="flex flex-col">
-                <h3 className="text-[22px] montserrat-regular leading-[120%]">{detailsData?.story.meta.intro}</h3>
-                <div className="mt-10">
-                  <ProfileCard
-                    data={detailsData?.story.authors}
-                    createdTime={detailsData?.story.created_at}
-                    shareLink={news_link_url}
-                  />
-                </div>
-              </div>
-              <div className="col-span-3">
-                {detailsData?.story?.meta?.featured_element === "video" ? (
-                  <div
-                    className="featured_video"
-                    dangerouslySetInnerHTML={{ __html: detailsData?.story?.meta?.featured_video }}
-                  ></div>
-                ) : (
-                  <div>
-                    <ImagePreview
-                      url={getImageUrl(detailsData?.story.meta.featured_image)}
-                      caption={detailsData?.story?.meta?.imageCaption}
-                    />
-                    {/* <img
+          </div>
+          <div className="col-span-3">
+            {detailsData?.story?.meta?.featured_element === "video" ? (
+              <div
+                className="featured_video"
+                dangerouslySetInnerHTML={{ __html: detailsData?.story?.meta?.featured_video }}
+              ></div>
+            ) : (
+              <div>
+                <ImagePreview
+                  url={getImageUrl(detailsData?.story.meta.featured_image)}
+                  caption={detailsData?.story?.meta?.imageCaption}
+                />
+                {/* <img
               className="w-full"
               src={getImageUrl(detailsData?.story.meta.featured_image)}
               alt={detailsData?.story.title}
               /> */}
-                    <p className="montserrat-regular-italic text-xl mt-4">{detailsData?.story.meta.imageCaption}</p>
-                  </div>
-                )}
+                <p className="montserrat-regular-italic text-xl mt-4">{detailsData?.story.meta.imageCaption}</p>
               </div>
-            </>
-          )}
+            )}
+          </div>
 
           {/* ======== row 2 ======= */}
           <div>
