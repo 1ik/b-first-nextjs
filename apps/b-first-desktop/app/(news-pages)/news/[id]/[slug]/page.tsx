@@ -126,7 +126,7 @@ export default async function NewsDetails({ params }) {
   const ads_obj = getAdsObj(ads_list?.ads);
 
   if (detailsData?.story.categories[0].name === "Video_Gallery") {
-    redirect(`/videoGallery/${params?.id}/${params?.slug}`);
+    redirect(`/video_gallery/${params?.id}/${params?.slug}`);
   }
 
   return (
@@ -230,6 +230,7 @@ export default async function NewsDetails({ params }) {
                     data={item}
                     size="sm"
                   />
+
                 ))}
             </div>
 
