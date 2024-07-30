@@ -19,7 +19,7 @@ export default async function VideoGalleryDetails({ params }) {
     ])
   ).map((item) => item?.data);
 
-  const filteredCategoryNews = categoryNews?.filter((item: { id: number }) => item.id !== detailsData.story.id);
+  const moreVideoNews = categoryNews?.filter((item: { id: number }) => item.id !== detailsData.story.id);
 
   // data for ads
   const ads_list = await getData("ads?page=news_details");
@@ -54,9 +54,12 @@ export default async function VideoGalleryDetails({ params }) {
           className="featured_video"
           dangerouslySetInnerHTML={{ __html: detailsData?.story?.meta?.featured_video }}
         ></div>
-
-        <h2 className="text-2xl mt-10 mb-6 font-bold leading-[120%]">Videos you should watch</h2>
-        <SquareGrid data={filteredCategoryNews.slice(0, 10)} gridCols={1} />
+        {moreVideoNews?.length ? (
+          <div>
+            <h2 className="text-2xl mt-10 mb-6 font-bold leading-[120%]">Videos you should watch</h2>
+            <SquareGrid data={moreVideoNews.slice(0, 8)} gridCols={1} />
+          </div>
+        ) : null}
       </div>
     </>
   );

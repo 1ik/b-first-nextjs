@@ -19,7 +19,7 @@ export default async function VideoGalleryDetails({ params }) {
     ])
   ).map((item) => item?.data);
 
-  const filteredCategoryNews = categoryNews?.filter((item: { id: number }) => item.id !== detailsData.story.id);
+  const moreVideoNews = categoryNews?.filter((item: { id: number }) => item.id !== detailsData.story.id);
 
   // data for ads
   const ads_list = await getData("ads?page=news_details");
@@ -41,24 +41,26 @@ export default async function VideoGalleryDetails({ params }) {
         />
 
         <h1 className="text-5xl my-10 font-bold leading-[120%]">{detailsData?.story.title}</h1>
-        <div className="grid grid-cols-12 gap-10">
-          <div className="col-span-3">
-            <ProfileCard
-              data={detailsData?.story.authors}
-              createdTime={detailsData?.story.created_at}
-              shareLink={news_link_url}
-            />
-          </div>
-          <div className="col-span-full">
-            <div
-              className="featured_video"
-              dangerouslySetInnerHTML={{ __html: detailsData?.story?.meta?.featured_video }}
-            ></div>
-          </div>
+
+        <div className="w-80 mb-10">
+          <ProfileCard
+            data={detailsData?.story.authors}
+            createdTime={detailsData?.story.created_at}
+            shareLink={news_link_url}
+          />
         </div>
 
-        <h2 className="text-4xl mt-20 mb-6 font-bold leading-[120%]">Videos you should watch</h2>
-        <SquareGrid data={filteredCategoryNews.slice(0, 10)} gridCols={4} />
+        <div
+          className="featured_video"
+          dangerouslySetInnerHTML={{ __html: detailsData?.story?.meta?.featured_video }}
+        ></div>
+
+        {moreVideoNews.length ? (
+          <div>
+            <h2 className="text-4xl mt-20 mb-6 font-bold leading-[120%]">Videos you should watch</h2>
+            <SquareGrid data={moreVideoNews.slice(0, 8)} gridCols={4} />
+          </div>
+        ) : null}
       </div>
     </>
   );
