@@ -17,6 +17,7 @@ import TrendingTopics from "../../../../components/TrendingTopics/TrendingTopics
 import { getData } from "../../../../utils/dataFetch";
 import { getAdsObj } from "../../../../utils/getAdsObj";
 import filterCategory from "../../../../utils/filterCategory";
+import { redirect } from "next/navigation";
 export async function generateMetadata({ params }): Promise<Metadata> {
   const data = await getData(`story/details/${params.id}`);
 
@@ -123,6 +124,10 @@ export default async function NewsDetails({ params }) {
   // data for ads
   const ads_list = await getData("ads?page=news_details");
   const ads_obj = getAdsObj(ads_list?.ads);
+
+  if (detailsData?.story.categories[0].name === "Video_Gallery") {
+    redirect(`/videoGallery/${params?.id}/${params?.slug}`);
+  }
 
   return (
     <>
