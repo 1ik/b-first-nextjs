@@ -28,6 +28,7 @@ export const TinymceEditor = function ({
 
     tinymce.init({
       target: editorRef.current,
+      convert_urls: false,
       plugins:
         "anchor charmap codesample emoticons image  lists media searchreplace table visualblocks wordcount code",
       toolbar:
