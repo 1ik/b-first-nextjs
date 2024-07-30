@@ -9,7 +9,7 @@ import { getAdsUrl, getImageUrl } from "@bfirst/utilities";
 import PhotoAlbum from "apps/b-first-mobile/app/components/PhotoAlbum/PhotoAlbum";
 import moment from "moment-timezone";
 import { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import "../../../../../../../libs/fonts/montserrat/index.css";
 import Navbar from "../../../../components/Navbar/Navbar";
 import ImagePreview from "../../../../components/PreviewImage/PreviewImage";
@@ -120,6 +120,9 @@ export default async function NewsDetails({ params }) {
 
   const filteredLatestNews = filterCategory(latestNews, "On_This_Day", "Video_Gallery", "Photo_Gallery");
   
+  if (detailsData?.story.categories[0].name === "Video_Gallery") {
+    redirect(`/video_gallery/${params?.id}/${params?.slug}`);
+  }
   // data for ads
   const ads_list = await getData("ads?page=news_details");
   const ads_obj = getAdsObj(ads_list?.ads);
@@ -134,6 +137,7 @@ export default async function NewsDetails({ params }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(newsarticleJsonLd) }}
       ></script>
+
 
       <Navbar activeLink={`/${detailsData?.story.categories[0].name.toLowerCase()}`} />
 
