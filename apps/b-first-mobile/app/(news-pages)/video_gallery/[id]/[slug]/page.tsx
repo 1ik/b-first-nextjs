@@ -5,11 +5,12 @@ import { BreadCrumb } from "@bfirst/components-breadcrumb";
 import { Ads } from "@bfirst/components-ads";
 import { getAdsUrl, getAuthorProfileUrl, getImageUrl } from "@bfirst/utilities";
 import { getAdsObj } from "../../../../utils/getAdsObj";
-import { ProfileCard } from "@bfirst/components-profile-card";
 import { SquareGrid } from "@bfirst/components-square-grid";
 import { Metadata } from "next";
+import { notFound } from "next/navigation";
+import moment from "moment-timezone";
 import { SocialShare } from "@bfirst/components-social-share";
-import moment from "moment";
+import  ImagePreview  from "../../../../components/PreviewImage/PreviewImage";
 
 export async function generateMetadata({ params }): Promise<Metadata> {
   const data = await getData(`story/details/${params.id}`);
@@ -54,11 +55,53 @@ export async function generateMetadata({ params }): Promise<Metadata> {
 export default async function VideoGalleryDetails({ params }) {
   const detailsData = await getData(`story/details/${params.id}`);
   const news_link_url = `${process.env.BASE_URL}/video_gallery/${params.id}/${params.slug}`;
+  if (!detailsData) return notFound();
+
+  const webpageJsonLd = {
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    name: detailsData?.story.title,
+    description: detailsData?.story.meta.intro,
+    publisher: {
+      "@type": "Organization",
+      name: "Bangladesh First",
+    },
+  };
+
+  const newsarticleJsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "NewsArticle",
+        headline: detailsData?.story.title,
+        description: detailsData?.story.meta.intro,
+        author: {
+          "@type": "Person",
+          name: detailsData?.story.authors[0].name,
+        },
+        publisher: {
+          "@type": "Organization",
+          name: "Bangladesh First",
+          url: "https://bfirst.news",
+          logo: {
+            "@type": "ImageObject",
+            url: "https://bfirst.news/img/logo-dark.svg",
+          },
+        },
+        datePublished: moment.utc(detailsData?.story.created_at).tz("Asia/Dhaka").format(),
+        image: {
+          "@type": "ImageObject",
+          url: getImageUrl(detailsData?.story.meta.featured_image),
+        },
+        mainEntityOfPage: news_link_url,
+      },
+    ],
+  };
 
   const [trendingTopics, categoryNews] = (
     await Promise.all([
       getData("trendy-topics"),
-      getData(`categories/${detailsData?.story.categories[0].name}/stories`),
+      getData(`categories/video_gallery/stories`),
     ])
   ).map((item) => item?.data);
 
@@ -70,6 +113,15 @@ export default async function VideoGalleryDetails({ params }) {
 
   return (
     <>
+      {/* ====== webpage schema markup */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webpageJsonLd) }}></script>
+
+      {/* ====== news article schema markup */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(newsarticleJsonLd) }}
+      ></script>
+
       <Navbar />
       <div className="px-4">
         <Ads className="my-8" src={getAdsUrl(ads_obj?.banner1)} alt="Ads" />
@@ -77,26 +129,43 @@ export default async function VideoGalleryDetails({ params }) {
         <BreadCrumb
           links={[
             {
-              name: detailsData?.story.categories[0].name.split("_").join(" "),
-              href: `/${detailsData?.story.categories[0].name.toLowerCase()}`,
+              name: "Video Gallery",
+              href: `/video_gallery`,
             },
           ]}
         />
 
         <h1 className="text-3xl sm:text-4xl font-bold my-8">{detailsData?.story.title}</h1>
 
-        <div className="mb-10">
-          <ProfileCard
-            data={detailsData?.story.authors}
-            createdTime={detailsData?.story.created_at}
-            shareLink={news_link_url}
-          />
+
+        <div className="mt-8 mb-10">
+          <div className="border-b-2 pb-3 mb-3 dark:border-dark-300">
+            {detailsData?.story?.authors?.map((item: { name: string }, index: number) => (
+              <h3 key={index} className="text-lg washington-regular">
+                <a href={getAuthorProfileUrl(item)}>
+                  {item?.name} {!(index >= detailsData?.story?.authors.length - 1) && <span>,</span>}
+                </a>
+              </h3>
+            ))}
+            <p className="text-sm montserrat-regular">{`Publisted at ${moment(detailsData?.story?.updated_at)
+              .tz("Asia/Dhaka")
+              .format("h:mm A, ddd MMM Do, YYYY")}`}</p>
+          </div>
+          <SocialShare title="Share News" textPlacement="left" shareLink={news_link_url} />
         </div>
 
-        <div
-          className="featured_video"
-          dangerouslySetInnerHTML={{ __html: detailsData?.story?.meta?.featured_video }}
-        ></div>
+        {detailsData?.story?.meta?.featured_video ? (
+          <div
+            className="featured_video"
+            dangerouslySetInnerHTML={{ __html: detailsData?.story?.meta?.featured_video }}
+          ></div>
+        ) : (
+          <ImagePreview
+            url={getImageUrl(detailsData?.story.meta.featured_image)}
+            caption={detailsData?.story?.meta?.imageCaption}
+          />
+        )}
+
         {moreVideoNews?.length ? (
           <div>
             <h2 className="text-2xl mt-10 mb-6 font-bold leading-[120%]">Videos you should watch</h2>
