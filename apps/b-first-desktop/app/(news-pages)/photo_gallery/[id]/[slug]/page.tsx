@@ -47,13 +47,13 @@ export async function generateMetadata({ params }): Promise<Metadata> {
       ],
     },
     alternates: {
-      canonical: `${process.env.BASE_URL}/news/${params.id}/${params.slug}`,
+      canonical: `${process.env.BASE_URL}/photo_gallery/${params.id}/${params.slug}`,
     },
   };
 }
 
 export default async function PhotoGalleryDetails({ params }) {
-  const news_link_url = `${process.env.BASE_URL}/news/${params.id}/${params.slug}`;
+  const news_link_url = `${process.env.BASE_URL}/photo_gallery/${params.id}/${params.slug}`;
   const detailsData = await getData(`story/details/${params.id}`);
 
   if (!detailsData) return notFound();
