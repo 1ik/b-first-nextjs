@@ -17,7 +17,6 @@ import TrendingTopics from "../../../../components/TrendingTopics/TrendingTopics
 import { getData } from "../../../../utils/dataFetch";
 import { getAdsObj } from "../../../../utils/getAdsObj";
 import filterCategory from "../../../../utils/filterCategory";
-
 export async function generateMetadata({ params }): Promise<Metadata> {
   const data = await getData(`story/details/${params.id}`);
 
@@ -226,7 +225,6 @@ export default async function NewsDetails({ params }) {
                     data={item}
                     size="sm"
                   />
-
                 ))}
             </div>
 

@@ -10,7 +10,7 @@ import { SquareGrid } from "@bfirst/components-square-grid";
 
 export default async function VideoGalleryDetails({ params }) {
   const detailsData = await getData(`story/details/${params.id}`);
-  const news_link_url = `${process.env.BASE_URL}/news/${params.id}/${params.slug}`;
+  const news_link_url = `${process.env.BASE_URL}/video_gallery/${params.id}/${params.slug}`;
 
   const [trendingTopics, categoryNews] = (
     await Promise.all([
@@ -42,7 +42,7 @@ export default async function VideoGalleryDetails({ params }) {
 
         <h1 className="text-5xl my-10 font-bold leading-[120%]">{detailsData?.story.title}</h1>
 
-        <div className="w-80 mb-10">
+        <div className="mb-10">
           <ProfileCard
             data={detailsData?.story.authors}
             createdTime={detailsData?.story.created_at}
@@ -58,7 +58,7 @@ export default async function VideoGalleryDetails({ params }) {
         {moreVideoNews.length ? (
           <div>
             <h2 className="text-4xl mt-20 mb-6 font-bold leading-[120%]">Videos you should watch</h2>
-            <SquareGrid data={moreVideoNews.slice(0, 8)} gridCols={4} />
+            <SquareGrid data={moreVideoNews?.slice(0, 8)} gridCols={4} />
           </div>
         ) : null}
       </div>
