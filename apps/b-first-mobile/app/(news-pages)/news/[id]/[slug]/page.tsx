@@ -61,10 +61,10 @@ export default async function NewsDetails({ params }) {
   const detailsData = await getData(`story/details/${params.id}`);
 
   if (!detailsData) return notFound();
-  if (detailsData?.story?.categories?.find((c: { name: string }) => c.name === "Video_Gallery")) {
-    return redirect(getNewsUrl(detailsData?.story));
-  }
-  if (detailsData?.story?.categories?.find((c: { name: string }) => c.name === "Photo_Gallery")) {
+  if (
+    detailsData?.story?.categories?.find((c: { name: string }) => c.name === "Video_Gallery") ||
+    detailsData?.story?.categories?.find((c: { name: string }) => c.name === "Photo_Gallery")
+  ) {
     return redirect(getNewsUrl(detailsData?.story));
   }
 
