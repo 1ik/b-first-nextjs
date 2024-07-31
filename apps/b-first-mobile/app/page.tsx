@@ -122,17 +122,18 @@ export default async function Index() {
             </a>
           </div>
         </div>
-
-        <Ads className="my-6" src={getAdsUrl(ads_obj?.banner3)} alt="Ads" />
       </div>
 
       {/* VIDEO ALBUM SECTION */}
       {videoGalleryNews?.length ? (
-        <div className="bg-black text-white py-2 mt-8">
-          <div className="px-3 my-8">
-            <VideoAlbum data={videoGalleryNews} />
+        <>
+          <Ads className="my-6" src={getAdsUrl(ads_obj?.banner3)} alt="Ads" />
+          <div className="bg-black text-white py-2 mt-8">
+            <div className="px-3 my-8">
+              <VideoAlbum data={videoGalleryNews} />
+            </div>
           </div>
-        </div>
+        </>
       ) : null}
 
       {/* RECOMMENDED FOR YOU SECTION */}
