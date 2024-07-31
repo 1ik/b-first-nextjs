@@ -18,13 +18,20 @@ export const getAdsUrl = (path: string) => {
   return baseUrl + `/${path}`;
 };
 
-
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const getNewsUrl = (news: any) =>
-  `/news/${news?.id}/${news?.title
+export const getNewsUrl = (news: any) => {
+  let slug = "news";
+
+  if (news?.categories?.find((c: { name: string }) => c.name === "Video_Gallery")) {
+    slug = "video_gallery";
+  } else if (news?.categories?.find((c: { name: string }) => c.name === "Photo_Gallery")) {
+    slug = "photo_gallery";
+  }
+  return `/${slug}/${news?.id}/${news?.title
     .replaceAll(" ", "-")
     .replace(/[^\w\s-]/g, "")
     .toLowerCase()}`;
+};
 
 export const getAuthorProfileUrl = (author: any) =>
   `/author/${author?.id}/${author?.name

@@ -11,9 +11,10 @@ export interface SocialShareProps {
   className?: string;
   textPlacement?: "top" | "left";
   title?: string;
+  iconSize?: number;
 }
 
-export function SocialShare({ shareLink, className, textPlacement = "top", title }: SocialShareProps) {
+export function SocialShare({ shareLink, className, textPlacement = "top", title, iconSize = 20 }: SocialShareProps) {
   const [copied, setCopied] = useState(false);
   function copyToClipboard(url: string) {
     navigator.clipboard.writeText(url);
@@ -27,25 +28,25 @@ export function SocialShare({ shareLink, className, textPlacement = "top", title
         <div className="flex gap-x-3">
           <FacebookShareButton url={shareLink}>
             <div className="bg-black/90 hover:bg-black p-1.5 text-white rounded-md">
-              <FaFacebookF size={20} />
+              <FaFacebookF size={iconSize} />
             </div>
           </FacebookShareButton>
 
           <WhatsappShareButton url={shareLink}>
             <div className="bg-black/90 hover:bg-black p-1.5 text-white rounded-md">
-              <FaWhatsapp size={20} />
+              <FaWhatsapp size={iconSize} />
             </div>
           </WhatsappShareButton>
 
           {/* <InstapaperShareButton url={shareLink}>
           <div className="bg-black/90 hover:bg-black p-1.5 text-white rounded-md">
-            <FaInstagram size={20} />
+            <FaInstagram size={iconSize} />
           </div>
         </InstapaperShareButton> */}
 
           <TwitterShareButton url={shareLink}>
             <div className="bg-black/90 hover:bg-black p-1.5 text-white rounded-md">
-              <FaXTwitter size={20} />
+              <FaXTwitter size={iconSize} />
             </div>
           </TwitterShareButton>
 
