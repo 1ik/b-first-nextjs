@@ -8,6 +8,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 import { useEffect, useState } from "react";
 import { Navigation } from "swiper/modules";
+import { SquareGrid } from "@bfirst/components-square-grid";
 export interface BlockNews5Props {
   data: any;
 }
@@ -43,7 +44,7 @@ export function ItemSlide({ data }: BlockNews5Props) {
         {data.map((item: any, index: any) => {
           return (
             <SwiperSlide key={index}>
-              <ItemCardVertical data={item} size="sm" />
+              <ItemCardVertical data={item} size="md" />
             </SwiperSlide>
           );
         })}
@@ -55,5 +56,14 @@ export function ItemSlide({ data }: BlockNews5Props) {
         <RiArrowRightSLine />
       </button>
     </div>
-  ) : null;
+  ) : (
+    <>
+      <div className="md:hidden">
+        <SquareGrid data={data?.slice(0, 1)} gridCols={1} className="gap-[20px]" />
+      </div>
+      <div className="hidden md:block">
+        <SquareGrid data={data?.slice(0, 4)} gridCols={4} className="gap-[20px]" />
+      </div>
+    </>
+  );
 }

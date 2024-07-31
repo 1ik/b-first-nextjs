@@ -123,13 +123,17 @@ export default async function Index() {
 
       <Ads className="my-12" src={getAdsUrl(ads_obj?.banner3)} alt="Ads" />
 
-      <div className="bg-black text-white py-4 mt-8">
-        <div className="desktop-container my-10">
-          <VideoAlbum data={videoGalleryNews} />
-        </div>
-      </div>
+      {videoGalleryNews?.length ? (
+        <>
+          <div className="bg-black text-white py-4 mt-8">
+            <div className="desktop-container my-10">
+              <VideoAlbum data={videoGalleryNews} />
+            </div>
+          </div>
+          <Ads className="my-12" src={getAdsUrl(ads_obj?.banner4)} alt="Ads" />
+        </>
+      ) : null}
 
-      <Ads className="my-12" src={getAdsUrl(ads_obj?.banner4)} alt="Ads" />
       <div className="bg-[#F6EFEF] dark:bg-dark-300 py-8">
         <div className="desktop-container">
           <AccentHeader header="recommended for you" color="#228B22" />

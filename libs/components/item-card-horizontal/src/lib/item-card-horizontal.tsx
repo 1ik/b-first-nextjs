@@ -149,7 +149,8 @@ export function ItemCardHorizontal({
           </Link>
         ) : (
           <div>
-            {data?.meta?.featured_element === "video" ? (
+            {data?.meta?.featured_element === "video" &&
+            !data?.categories.find((c: { name: string }) => c.name === "Video_Gallery") ? (
               <div className="featured_video" dangerouslySetInnerHTML={{ __html: data?.meta?.featured_video }}></div>
             ) : (
               <div className="relative">
