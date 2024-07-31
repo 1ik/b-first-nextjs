@@ -1,16 +1,16 @@
-import TrendingTopics from "../../../../components/TrendingTopics/TrendingTopics";
-import Navbar from "../../../../components/Navbar/Navbar";
-import { getData } from "../../../../utils/dataFetch";
-import { BreadCrumb } from "@bfirst/components-breadcrumb";
 import { Ads } from "@bfirst/components-ads";
-import { getAdsUrl, getAuthorProfileUrl, getImageUrl } from "@bfirst/utilities";
-import { getAdsObj } from "../../../../utils/getAdsObj";
-import { SquareGrid } from "@bfirst/components-square-grid";
-import { Metadata } from "next";
+import { BreadCrumb } from "@bfirst/components-breadcrumb";
 import { SocialShare } from "@bfirst/components-social-share";
+import { SquareGrid } from "@bfirst/components-square-grid";
+import { getAdsUrl, getAuthorProfileUrl, getImageUrl, getNewsUrl } from "@bfirst/utilities";
 import moment from "moment-timezone";
+import { Metadata } from "next";
+import { notFound, redirect } from "next/navigation";
+import Navbar from "../../../../components/Navbar/Navbar";
 import ImagePreview from "../../../../components/PreviewImage/PreviewImage";
-import { notFound } from "next/navigation";
+import TrendingTopics from "../../../../components/TrendingTopics/TrendingTopics";
+import { getData } from "../../../../utils/dataFetch";
+import { getAdsObj } from "../../../../utils/getAdsObj";
 
 export async function generateMetadata({ params }): Promise<Metadata> {
   const data = await getData(`story/details/${params.id}`);
@@ -55,7 +55,11 @@ export async function generateMetadata({ params }): Promise<Metadata> {
 export default async function VideoGalleryDetails({ params }) {
   const detailsData = await getData(`story/details/${params.id}`);
   const news_link_url = `${process.env.BASE_URL}/video_gallery/${params.id}/${params.slug}`;
+
   if (!detailsData) return notFound();
+  if (!detailsData?.story?.categories?.find((c) => c?.name === "Video_Gallery")) {
+    redirect(getNewsUrl(detailsData?.story));
+  }
 
   const webpageJsonLd = {
     "@context": "http://schema.org",
