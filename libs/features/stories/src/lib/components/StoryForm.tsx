@@ -73,7 +73,6 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
     authors: "",
     tags: "",
     categories: "",
-    body: "",
     featuredImage: "",
     featuredVideo: "",
   });
@@ -119,7 +118,6 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
   };
 
   const onValidate = function (data: Inputs) {
-    if (!body) setError((cur) => ({ ...cur, body: "Body is required" }));
     if (featuredElement === "video" && !featuredVideo)
       return setError((cur) => ({ ...cur, featuredVideo: "Featured Video is required" }));
     if (!featuredImgUrl) return setError((cur) => ({ ...cur, featuredImage: "Featured Image is required" }));
@@ -278,11 +276,9 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
                 onOpenEmbedLink={setIsOpenEmbedLink}
                 onChange={(content) => {
                   setBody(content);
-                  setError((cur) => ({ ...cur, body: "" }));
                 }}
                 defaultValue={defaultData && defaultData.story.content}
               />
-              <p className="text-xs p-1 font-light">{error.body}</p>
             </div>
 
             {/* ========== tags ========== */}
