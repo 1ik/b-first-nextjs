@@ -3,10 +3,51 @@ import Navbar from "../../../../components/Navbar/Navbar";
 import { getData } from "../../../../utils/dataFetch";
 import { BreadCrumb } from "@bfirst/components-breadcrumb";
 import { Ads } from "@bfirst/components-ads";
-import { getAdsUrl } from "@bfirst/utilities";
+import { getAdsUrl, getImageUrl } from "@bfirst/utilities";
 import { getAdsObj } from "../../../../utils/getAdsObj";
 import { ProfileCard } from "@bfirst/components-profile-card";
 import { SquareGrid } from "@bfirst/components-square-grid";
+import { Metadata } from "next";
+
+export async function generateMetadata({ params }): Promise<Metadata> {
+  const data = await getData(`story/details/${params.id}`);
+
+  return {
+    title: data?.story?.title,
+    description: data?.story?.meta?.intro,
+    openGraph: {
+      title: data?.story?.title,
+      description: data?.story?.meta?.intro,
+      images: [
+        {
+          url: getImageUrl(data?.story?.meta?.featured_image, 600, 315, 20),
+          secureUrl: getImageUrl(data?.story?.meta?.featured_image, 600, 315, 20),
+          width: 1200,
+          height: 630,
+          alt: data?.story?.title,
+        },
+      ],
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: data?.story?.title,
+      description: data?.story?.meta?.intro,
+      images: [
+        {
+          url: getImageUrl(data?.story?.meta?.featured_image),
+          secureUrl: getImageUrl(data?.story?.meta?.featured_image),
+          alt: data?.story?.title,
+          width: 1600,
+          height: 900,
+        },
+      ],
+    },
+    alternates: {
+      canonical: `${process.env.BASE_URL}/video_gallery/${params.id}/${params.slug}`,
+    },
+  };
+}
 
 export default async function VideoGalleryDetails({ params }) {
   const detailsData = await getData(`story/details/${params.id}`);
