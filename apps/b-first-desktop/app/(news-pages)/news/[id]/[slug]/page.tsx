@@ -5,10 +5,10 @@ import { ItemCardHorizontal } from "@bfirst/components-item-card-horizontal";
 import { ItemList } from "@bfirst/components-item-list";
 import { ProfileCard } from "@bfirst/components-profile-card";
 import { SquareGrid } from "@bfirst/components-square-grid";
-import { getAdsUrl, getImageUrl } from "@bfirst/utilities";
+import { getAdsUrl, getImageUrl, getNewsUrl } from "@bfirst/utilities";
 import moment from "moment-timezone";
 import { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import "../../../../../../../libs/fonts/montserrat/index.css";
 import Navbar from "../../../../components/Navbar/Navbar";
 import ImagePreview from "../../../../components/PreviewImage/PreviewImage";
@@ -61,6 +61,12 @@ export default async function NewsDetails({ params }) {
   const detailsData = await getData(`story/details/${params.id}`);
 
   if (!detailsData) return notFound();
+  if (
+    detailsData?.story?.categories?.find((c: { name: string }) => c.name === "Video_Gallery") ||
+    detailsData?.story?.categories?.find((c: { name: string }) => c.name === "Photo_Gallery")
+  ) {
+    return redirect(getNewsUrl(detailsData?.story));
+  }
 
   const webpageJsonLd = {
     "@context": "http://schema.org",

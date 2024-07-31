@@ -5,18 +5,17 @@ import { ItemCardHorizontal } from "@bfirst/components-item-card-horizontal";
 import { ItemList } from "@bfirst/components-item-list";
 import { ProfileCard } from "@bfirst/components-profile-card";
 import { SquareGrid } from "@bfirst/components-square-grid";
-import { getAdsUrl, getImageUrl } from "@bfirst/utilities";
-import PhotoAlbum from "apps/b-first-mobile/app/components/PhotoAlbum/PhotoAlbum";
+import { getAdsUrl, getImageUrl, getNewsUrl } from "@bfirst/utilities";
 import moment from "moment-timezone";
 import { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import "../../../../../../../libs/fonts/montserrat/index.css";
 import Navbar from "../../../../components/Navbar/Navbar";
 import ImagePreview from "../../../../components/PreviewImage/PreviewImage";
 import TrendingTopics from "../../../../components/TrendingTopics/TrendingTopics";
 import { getData } from "../../../../utils/dataFetch";
-import { getAdsObj } from "../../../../utils/getAdsObj";
 import filterCategory from "../../../../utils/filterCategory";
+import { getAdsObj } from "../../../../utils/getAdsObj";
 export async function generateMetadata({ params }): Promise<Metadata> {
   const data = await getData(`story/details/${params.id}`);
 
@@ -62,6 +61,12 @@ export default async function NewsDetails({ params }) {
   const detailsData = await getData(`story/details/${params.id}`);
 
   if (!detailsData) return notFound();
+  if (detailsData?.story?.categories?.find((c: { name: string }) => c.name === "Video_Gallery")) {
+    return redirect(getNewsUrl(detailsData?.story));
+  }
+  if (detailsData?.story?.categories?.find((c: { name: string }) => c.name === "Photo_Gallery")) {
+    return redirect(getNewsUrl(detailsData?.story));
+  }
 
   const webpageJsonLd = {
     "@context": "http://schema.org",
@@ -119,7 +124,7 @@ export default async function NewsDetails({ params }) {
   );
 
   const filteredLatestNews = filterCategory(latestNews, "On_This_Day", "Video_Gallery", "Photo_Gallery");
-  
+
   // data for ads
   const ads_list = await getData("ads?page=news_details");
   const ads_obj = getAdsObj(ads_list?.ads);
@@ -222,18 +227,7 @@ export default async function NewsDetails({ params }) {
           <div className="sm:col-span-5 order-1">
             {/* */}
 
-            {detailsData?.story?.meta?.more_images?.length ? (
-              <PhotoAlbum
-                images={[
-                  {
-                    imageUrl: detailsData?.story?.meta?.featured_image,
-                    imageCaption: detailsData?.story?.meta?.imageCaption,
-                  },
-                  // eslint-disable-next-line no-unsafe-optional-chaining
-                  ...detailsData?.story?.meta?.more_images,
-                ]}
-              />
-            ) : detailsData?.story?.meta?.featured_element === "video" ? (
+            {detailsData?.story?.meta?.featured_element === "video" ? (
               <div
                 className="featured_video mb-3"
                 dangerouslySetInnerHTML={{ __html: detailsData?.story?.meta?.featured_video }}
