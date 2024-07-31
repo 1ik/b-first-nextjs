@@ -3,11 +3,13 @@ import Navbar from "../../../../components/Navbar/Navbar";
 import { getData } from "../../../../utils/dataFetch";
 import { BreadCrumb } from "@bfirst/components-breadcrumb";
 import { Ads } from "@bfirst/components-ads";
-import { getAdsUrl, getImageUrl } from "@bfirst/utilities";
+import { getAdsUrl, getAuthorProfileUrl, getImageUrl } from "@bfirst/utilities";
 import { getAdsObj } from "../../../../utils/getAdsObj";
 import { ProfileCard } from "@bfirst/components-profile-card";
 import { SquareGrid } from "@bfirst/components-square-grid";
 import { Metadata } from "next";
+import { SocialShare } from "@bfirst/components-social-share";
+import moment from "moment";
 
 export async function generateMetadata({ params }): Promise<Metadata> {
   const data = await getData(`story/details/${params.id}`);
