@@ -127,11 +127,13 @@ export default async function Index() {
       </div>
 
       {/* VIDEO ALBUM SECTION */}
-      <div className="bg-black text-white py-2 mt-8">
-        <div className="px-3 my-8">
-          <VideoAlbum data={videoGalleryNews} />
+      {videoGalleryNews?.length ? (
+        <div className="bg-black text-white py-2 mt-8">
+          <div className="px-3 my-8">
+            <VideoAlbum data={videoGalleryNews} />
+          </div>
         </div>
-      </div>
+      ) : null}
 
       {/* RECOMMENDED FOR YOU SECTION */}
       <div className="bg-[#F6EFEF] dark:bg-dark-300 py-8">
