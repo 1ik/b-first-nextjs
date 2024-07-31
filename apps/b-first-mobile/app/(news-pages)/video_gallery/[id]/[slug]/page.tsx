@@ -1,16 +1,16 @@
-import TrendingTopics from "../../../../components/TrendingTopics/TrendingTopics";
-import Navbar from "../../../../components/Navbar/Navbar";
-import { getData } from "../../../../utils/dataFetch";
-import { BreadCrumb } from "@bfirst/components-breadcrumb";
 import { Ads } from "@bfirst/components-ads";
-import { getAdsUrl, getAuthorProfileUrl, getImageUrl } from "@bfirst/utilities";
-import { getAdsObj } from "../../../../utils/getAdsObj";
-import { SquareGrid } from "@bfirst/components-square-grid";
-import { Metadata } from "next";
-import { notFound } from "next/navigation";
-import moment from "moment-timezone";
+import { BreadCrumb } from "@bfirst/components-breadcrumb";
 import { SocialShare } from "@bfirst/components-social-share";
-import  ImagePreview  from "../../../../components/PreviewImage/PreviewImage";
+import { SquareGrid } from "@bfirst/components-square-grid";
+import { getAdsUrl, getAuthorProfileUrl, getImageUrl, getNewsUrl } from "@bfirst/utilities";
+import moment from "moment-timezone";
+import { Metadata } from "next";
+import { notFound, redirect } from "next/navigation";
+import Navbar from "../../../../components/Navbar/Navbar";
+import ImagePreview from "../../../../components/PreviewImage/PreviewImage";
+import TrendingTopics from "../../../../components/TrendingTopics/TrendingTopics";
+import { getData } from "../../../../utils/dataFetch";
+import { getAdsObj } from "../../../../utils/getAdsObj";
 
 export async function generateMetadata({ params }): Promise<Metadata> {
   const data = await getData(`story/details/${params.id}`);
@@ -55,7 +55,11 @@ export async function generateMetadata({ params }): Promise<Metadata> {
 export default async function VideoGalleryDetails({ params }) {
   const detailsData = await getData(`story/details/${params.id}`);
   const news_link_url = `${process.env.BASE_URL}/video_gallery/${params.id}/${params.slug}`;
+
   if (!detailsData) return notFound();
+  if (!detailsData?.story?.categories?.find((c) => c?.name === "Video_Gallery")) {
+    redirect(getNewsUrl(detailsData?.story));
+  }
 
   const webpageJsonLd = {
     "@context": "http://schema.org",
@@ -99,10 +103,7 @@ export default async function VideoGalleryDetails({ params }) {
   };
 
   const [trendingTopics, categoryNews] = (
-    await Promise.all([
-      getData("trendy-topics"),
-      getData(`categories/video_gallery/stories`),
-    ])
+    await Promise.all([getData("trendy-topics"), getData(`categories/video_gallery/stories`)])
   ).map((item) => item?.data);
 
   const moreVideoNews = categoryNews?.filter((item: { id: number }) => item.id !== detailsData.story.id);
@@ -136,7 +137,6 @@ export default async function VideoGalleryDetails({ params }) {
         />
 
         <h1 className="text-3xl sm:text-4xl font-bold my-8">{detailsData?.story.title}</h1>
-
 
         <div className="mt-8 mb-10">
           <div className="border-b-2 pb-3 mb-3 dark:border-dark-300">
