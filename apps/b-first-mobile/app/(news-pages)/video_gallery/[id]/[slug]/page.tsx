@@ -57,7 +57,7 @@ export default async function VideoGalleryDetails({ params }) {
         {moreVideoNews?.length ? (
           <div>
             <h2 className="text-2xl mt-10 mb-6 font-bold leading-[120%]">Videos you should watch</h2>
-            <SquareGrid data={moreVideoNews.slice(0, 8)} gridCols={1} />
+            <SquareGrid data={moreVideoNews.slice(0, 8)} gridCols={2} />
           </div>
         ) : null}
       </div>
