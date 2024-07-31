@@ -140,7 +140,6 @@ export default async function NewsDetails({ params }) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(newsarticleJsonLd) }}
       ></script>
 
-
       <Navbar activeLink={`/${detailsData?.story.categories[0].name.toLowerCase()}`} />
 
       <div className="px-3">
