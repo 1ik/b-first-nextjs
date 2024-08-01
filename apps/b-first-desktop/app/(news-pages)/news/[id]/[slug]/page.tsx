@@ -5,17 +5,16 @@ import { ItemCardHorizontal } from "@bfirst/components-item-card-horizontal";
 import { ItemList } from "@bfirst/components-item-list";
 import { ProfileCard } from "@bfirst/components-profile-card";
 import { SquareGrid } from "@bfirst/components-square-grid";
-import { getAdsUrl, getImageUrl } from "@bfirst/utilities";
+import { getAdsUrl, getImageUrl, getNewsUrl } from "@bfirst/utilities";
 import moment from "moment-timezone";
 import { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import "../../../../../../../libs/fonts/montserrat/index.css";
 import Navbar from "../../../../components/Navbar/Navbar";
-import PhotoAlbum from "../../../../components/PhotoAlbum/PhotoAlbum";
 import ImagePreview from "../../../../components/PreviewImage/PreviewImage";
 import TrendingTopics from "../../../../components/TrendingTopics/TrendingTopics";
 import { getData } from "../../../../utils/dataFetch";
-import filterOutOTD from "../../../../utils/filterOutOTD";
+import filterCategory from "../../../../utils/filterCategory";
 import { getAdsObj } from "../../../../utils/getAdsObj";
 export async function generateMetadata({ params }): Promise<Metadata> {
   const data = await getData(`story/details/${params.id}`);
@@ -60,10 +59,14 @@ export async function generateMetadata({ params }): Promise<Metadata> {
 export default async function NewsDetails({ params }) {
   const news_link_url = `${process.env.BASE_URL}/news/${params.id}/${params.slug}`;
   const detailsData = await getData(`story/details/${params.id}`);
-  const ads_list = await getData("ads?page=news_details");
-  const ads_obj = getAdsObj(ads_list?.ads);
 
   if (!detailsData) return notFound();
+  if (
+    detailsData?.story?.categories?.find((c: { name: string }) => c.name === "Video_Gallery") ||
+    detailsData?.story?.categories?.find((c: { name: string }) => c.name === "Photo_Gallery")
+  ) {
+    return redirect(getNewsUrl(detailsData?.story));
+  }
 
   const webpageJsonLd = {
     "@context": "http://schema.org",
@@ -106,20 +109,25 @@ export default async function NewsDetails({ params }) {
     ],
   };
 
-  const [trendingTopics, latestNews, topNews, categoryNews] = (
+  const [trendingTopics, topNews, categoryNews, latestNews] = (
     await Promise.all([
       getData("trendy-topics"),
-      getData("latest/stories"),
       getData("categories/0/featured-stories"),
       getData(`categories/${detailsData?.story.categories[0].name}/stories`),
+      getData("latest/stories?size=30"),
     ])
   ).map((item) => item?.data);
 
-  const filteredLatestNews = latestNews.filter(filterOutOTD);
+  const filteredLatestNews = filterCategory(latestNews, "On_This_Day", "Video_Gallery", "Photo_Gallery");
+
   const tagsArr = detailsData?.story.tags.map((tag: { id: any }) => tag.id);
   const relatedNews = (await getData(`related-stories?tags=${tagsArr.join(",")}`))?.data.filter(
     (rN: { id: any }) => rN.id != params.id
   );
+
+  // data for ads
+  const ads_list = await getData("ads?page=news_details");
+  const ads_obj = getAdsObj(ads_list?.ads);
 
   return (
     <>
@@ -151,57 +159,37 @@ export default async function NewsDetails({ params }) {
         <div className="grid grid-cols-4 gap-x-10 gap-y-11">
           {/* ======= photo album or featured image/video ========= */}
 
-          {detailsData?.story?.meta?.more_images?.length ? (
-            <div className="col-span-full">
-              <PhotoAlbum
-                images={[
-                  {
-                    imageUrl: detailsData?.story?.meta?.featured_image,
-                    imageCaption: detailsData?.story?.meta?.imageCaption,
-                  },
-                  // eslint-disable-next-line no-unsafe-optional-chaining
-                  ...detailsData?.story?.meta?.more_images,
-                ]}
-                authors={detailsData?.story.authors}
+          <div className="flex flex-col">
+            <h3 className="text-[22px] montserrat-regular leading-[120%]">{detailsData?.story.meta.intro}</h3>
+            <div className="mt-10">
+              <ProfileCard
+                data={detailsData?.story.authors}
                 createdTime={detailsData?.story.created_at}
                 shareLink={news_link_url}
               />
             </div>
-          ) : (
-            <>
-              <div className="flex flex-col">
-                <h3 className="text-[22px] montserrat-regular leading-[120%]">{detailsData?.story.meta.intro}</h3>
-                <div className="mt-10">
-                  <ProfileCard
-                    data={detailsData?.story.authors}
-                    createdTime={detailsData?.story.created_at}
-                    shareLink={news_link_url}
-                  />
-                </div>
-              </div>
-              <div className="col-span-3">
-                {detailsData?.story?.meta?.featured_element === "video" ? (
-                  <div
-                    className="featured_video"
-                    dangerouslySetInnerHTML={{ __html: detailsData?.story?.meta?.featured_video }}
-                  ></div>
-                ) : (
-                  <div>
-                    <ImagePreview
-                      url={getImageUrl(detailsData?.story.meta.featured_image)}
-                      caption={detailsData?.story?.meta?.imageCaption}
-                    />
-                    {/* <img
+          </div>
+          <div className="col-span-3">
+            {detailsData?.story?.meta?.featured_element === "video" ? (
+              <div
+                className="featured_video"
+                dangerouslySetInnerHTML={{ __html: detailsData?.story?.meta?.featured_video }}
+              ></div>
+            ) : (
+              <div>
+                <ImagePreview
+                  url={getImageUrl(detailsData?.story.meta.featured_image)}
+                  caption={detailsData?.story?.meta?.imageCaption}
+                />
+                {/* <img
               className="w-full"
               src={getImageUrl(detailsData?.story.meta.featured_image)}
               alt={detailsData?.story.title}
               /> */}
-                    <p className="montserrat-regular-italic text-xl mt-4">{detailsData?.story.meta.imageCaption}</p>
-                  </div>
-                )}
+                <p className="montserrat-regular-italic text-xl mt-4">{detailsData?.story.meta.imageCaption}</p>
               </div>
-            </>
-          )}
+            )}
+          </div>
 
           {/* ======== row 2 ======= */}
           <div>

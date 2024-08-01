@@ -5,6 +5,7 @@ import { ItemCardVertical } from "@bfirst/components-item-card-vertical";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import { useEffect, useState } from "react";
+import { SquareGrid } from "@bfirst/components-square-grid";
 
 export interface BlockNews5Props {
   data: any;
@@ -43,11 +44,20 @@ export function VideoAlbum({ data }: BlockNews5Props) {
     >
       {data.map((item: any, index: any) => {
         return (
-          <SwiperSlide>
-            <ItemCardVertical key={index} data={item} size="sm" showVideoIcon />
+          <SwiperSlide key={index}>
+            <ItemCardVertical data={item} size="sm" />
           </SwiperSlide>
         );
       })}
     </Swiper>
-  ) : null;
+  ) : (
+    <>
+      <div className="md:hidden">
+        <SquareGrid data={data?.slice(0, 1)} gridCols={1} className="gap-[20px]" />
+      </div>
+      <div className="hidden md:block">
+        <SquareGrid data={data?.slice(0, 4)} gridCols={4} className="gap-[20px]" />
+      </div>
+    </>
+  );
 }

@@ -16,8 +16,8 @@ import moment from "moment";
 import Navbar from "./components/Navbar/Navbar";
 import TrendingTopics from "./components/TrendingTopics/TrendingTopics";
 import { getData } from "./utils/dataFetch";
-import filterOutOTD from "./utils/filterOutOTD";
 import { getAdsObj } from "./utils/getAdsObj";
+import filterCategory from "./utils/filterCategory";
 
 const webpageJsonLd = {
   "@context": "http://schema.org",
@@ -43,16 +43,14 @@ export default async function Index() {
     return !topNews?.find((tN: { id: number }) => tN.id === (item as { id: number }).id);
   };
 
-  const ads_list = await getData("ads?page=home");
-  const ads_obj = getAdsObj(ads_list?.ads);
-
-  const latestNews = (await getData("latest/stories?size=30"))?.data
+  const latestNewsData = (await getData("latest/stories?size=30"))?.data
     .filter(filterTopNews)
-    .filter(filterRecommended)
-    .filter(filterOutOTD);
+    .filter(filterRecommended);
 
-  const filterLatestNews = function (item: any) {
-    return !latestNews?.find((lN: { id: number }) => lN.id === (item as { id: number }).id);
+  const latestNews = filterCategory(latestNewsData, "On_This_Day", "Video_Gallery", "Photo_Gallery");
+
+  const filterLatestNews = function (item: { id: number }) {
+    return !latestNews?.find((lN: any) => lN.id === item.id);
   };
 
   const [
@@ -81,13 +79,17 @@ export default async function Index() {
       getData("categories/photo_gallery/stories"),
       getData("categories/video_gallery/stories"),
     ])
-  ).map((item) => item?.data.filter(filterTopNews).filter(filterRecommended).filter(filterLatestNews));
+  ).map((item) => item?.data?.filter(filterTopNews).filter(filterRecommended).filter(filterLatestNews));
 
   const onThisDay = (await getData("categories/on_this_day/stories"))?.data.filter(
     (item: { created_at: moment.MomentInput }) =>
       moment().format("MMM D YYYY") === moment(item.created_at).format("MMM D YYYY")
   );
   const trendingTopics = (await getData("trendy-topics"))?.data;
+
+  // data for ads
+  const ads_list = await getData("ads?page=home");
+  const ads_obj = getAdsObj(ads_list?.ads);
 
   return (
     <>
@@ -121,13 +123,17 @@ export default async function Index() {
 
       <Ads className="my-12" src={getAdsUrl(ads_obj?.banner3)} alt="Ads" />
 
-      <div className="bg-black text-white py-4 mt-8">
-        <div className="desktop-container my-10">
-          <VideoAlbum data={videoGalleryNews} />
-        </div>
-      </div>
+      {videoGalleryNews?.length ? (
+        <>
+          <div className="bg-black text-white py-4 mt-8">
+            <div className="desktop-container my-10">
+              <VideoAlbum data={videoGalleryNews} />
+            </div>
+          </div>
+          <Ads className="my-12" src={getAdsUrl(ads_obj?.banner4)} alt="Ads" />
+        </>
+      ) : null}
 
-      <Ads className="my-12" src={getAdsUrl(ads_obj?.banner4)} alt="Ads" />
       <div className="bg-[#F6EFEF] dark:bg-dark-300 py-8">
         <div className="desktop-container">
           <AccentHeader header="recommended for you" color="#228B22" />
@@ -182,12 +188,7 @@ export default async function Index() {
           </div>
           <div>
             <AccentHeader header="Education" color="#119F9F" />
-            <ItemList
-              data={educationNews?.slice(0, 7)}
-              listType="circle"
-              moreNewsLink="/latest"
-              titleFontSize="18px"
-            />
+            <ItemList data={educationNews?.slice(0, 7)} listType="circle" moreNewsLink="/latest" titleFontSize="18px" />
           </div>
         </div>
         <Ads className="my-10" src={getAdsUrl(ads_obj?.banner8)} alt="Ads" />

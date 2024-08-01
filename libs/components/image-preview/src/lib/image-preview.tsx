@@ -1,39 +1,33 @@
-// import LightGallery React components
-import LightGallery from "lightgallery/react";
+import PhotoSwipeLightbox from "photoswipe/lightbox";
+import "photoswipe/style.css";
+import { useEffect } from "react";
+import { FaExpandArrowsAlt } from "react-icons/fa";
 
-// Import LightGallery styles
-import "lightgallery/css/lg-fullscreen.css";
-import "lightgallery/css/lg-zoom.css";
-import "lightgallery/css/lightgallery.css";
-
-// Import LightGallery plugins
-import lgFullScreen from "lightgallery/plugins/fullscreen";
-import lgZoom from "lightgallery/plugins/zoom";
-
-export interface ImagePreviewProps {
+interface ImagePreviewProps {
   imageUrl: string;
   imageCaption?: string;
 }
 
-const lgSettings = {
-  counter: false,
-  enableSwipe: false,
-  enableDrag: false,
-  controls: false,
-  infiniteZoom: true,
-  showZoomInOutIcons: true,
-  actualSize: false,
-  plugins: [lgZoom, lgFullScreen],
-};
-
 export function ImagePreview({ imageUrl, imageCaption = "Featured Image" }: ImagePreviewProps) {
+  useEffect(() => {
+    const lightbox = new PhotoSwipeLightbox({
+      gallery: "#gallery",
+      children: "a",
+      wheelToZoom: true,
+      bgOpacity: 1,
+      showHideAnimationType: "none",
+      pswpModule: () => import("photoswipe"),
+    });
+    lightbox.init();
+  });
   return (
-    <LightGallery {...lgSettings}>
-      <div data-src={imageUrl}>
-        <img className="w-full aspect-video object-cover cursor-pointer" src={imageUrl} alt={imageCaption} />
+    <div className="pswp-gallery relative group" id="gallery">
+      <a href={imageUrl} data-pswp-width={1600} data-pswp-height={900} target="_blank" rel="noreferrer">
+        <img className="w-full object-cover aspect-video" src={imageUrl} alt="abcd" />
+      </a>
+      <div className="absolute top-3 right-3 text-xl text-white p-3 pointer-events-none bg-black/50 rounded-sm backdrop-blur-md opacity-0 group-hover:opacity-100 duration-300">
+        <FaExpandArrowsAlt />
       </div>
-    </LightGallery>
+    </div>
   );
 }
-
-export default ImagePreview;

@@ -1,5 +1,6 @@
 import { cropText, getImageUrl, getNewsUrl } from "@bfirst/utilities";
 import { FaPlay } from "react-icons/fa6";
+import { MdPhotoSizeSelectActual } from "react-icons/md";
 /* eslint-disable-next-line */
 export interface ItemCardVerticalProps {
   data: any;
@@ -9,7 +10,6 @@ export interface ItemCardVerticalProps {
   showImageBorder?: boolean;
   titlePosition?: "normal" | "inset";
   className?: string;
-  showVideoIcon?: boolean;
   Link?: any;
   titleCrop?: number;
   introCrop?: number;
@@ -24,7 +24,6 @@ export function ItemCardVertical({
   showRelatedStory = false,
   showIntro = false,
   showImageBorder = false,
-  showVideoIcon = false,
   titlePosition = "normal",
   className,
   Link,
@@ -40,11 +39,14 @@ export function ItemCardVertical({
 
   const introFont = `${size === "lg" ? "text-xl" : "text-sm"}`;
 
+  const iconSize = `${size === "sm" ? "w-7 h-7" : size === "md" ? "w-8 h-8" : "w-10 h-10 text-xl"}`;
+
   return (
     <div className={`${className}`}>
       <div className={`mb-5 relative overflow-hidden ${showImageBorder ? "border-b-[5px] border-accent" : ""}`}>
         <div>
-          {data?.meta.featured_element === "video" ? (
+          {data?.meta.featured_element === "video" &&
+          !data?.categories.find((c: { name: string }) => c.name === "Video_Gallery") ? (
             <div className="featured_video" dangerouslySetInnerHTML={{ __html: data?.meta?.featured_video }}></div>
           ) : (
             <div className="relative">
@@ -55,9 +57,18 @@ export function ItemCardVertical({
                   alt={data?.meta.imageCaption}
                 />
               </a>
-              {showVideoIcon && (
-                <div className="absolute bottom-0 left-0 w-10 h-10 bg-accent flex items-center justify-center">
-                  <FaPlay size={20} />
+              {data?.categories?.find((c: any) => c.name === "Video_Gallery") && (
+                <div
+                  className={`absolute bottom-0 left-0 bg-accent flex items-center justify-center text-white ${iconSize}`}
+                >
+                  <FaPlay />
+                </div>
+              )}
+              {data?.categories?.find((c: any) => c.name === "Photo_Gallery") && (
+                <div
+                  className={`absolute bottom-0 left-0 bg-black bg-opacity-40 flex items-center justify-center text-white ${iconSize}`}
+                >
+                  <MdPhotoSizeSelectActual />
                 </div>
               )}
             </div>
