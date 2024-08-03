@@ -20,12 +20,14 @@ export const getAdsUrl = (path: string) => {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const getNewsUrl = (news: any) => {
-  let slug = "news";
+  let slug: string;
 
   if (news?.categories?.find((c: { name: string }) => c.name === "Video_Gallery")) {
     slug = "video_gallery";
   } else if (news?.categories?.find((c: { name: string }) => c.name === "Photo_Gallery")) {
     slug = "photo_gallery";
+  } else {
+    slug = news?.categories?.[0].name.toLowerCase();
   }
   return `/${slug}/${news?.id}/${news?.title
     .replaceAll(" ", "-")
