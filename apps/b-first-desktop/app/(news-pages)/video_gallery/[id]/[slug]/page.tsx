@@ -105,7 +105,7 @@ export default async function VideoGalleryDetails({ params }) {
   const [trendingTopics, categoryNews] = (
     await Promise.all([
       getData("trendy-topics"),
-      getData(`categories/video_gallery/stories`),
+      getData(`categories/bangladesh/stories`),
     ])
   ).map((item) => item?.data);
 

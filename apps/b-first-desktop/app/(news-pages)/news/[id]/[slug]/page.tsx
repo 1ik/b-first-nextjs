@@ -1,6 +1,5 @@
 import { getNewsUrl } from "@bfirst/utilities";
-import { redirect } from "next/dist/server/api-utils";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { getData } from "../../../../utils/dataFetch";
 
 export default async function NewsDetailsPage({ params }) {
@@ -8,5 +7,5 @@ export default async function NewsDetailsPage({ params }) {
 
   if (!detailsData) return notFound();
 
-  return redirect(getNewsUrl(detailsData?.news));
+  return redirect(getNewsUrl(detailsData?.story));
 }

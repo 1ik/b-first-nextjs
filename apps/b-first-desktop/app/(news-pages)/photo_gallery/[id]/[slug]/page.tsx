@@ -105,7 +105,7 @@ export default async function PhotoGalleryDetails({ params }) {
 
   const trendingTopics = (await getData("trendy-topics"))?.data;
 
-  const moreGalleries = (await getData("categories/photo_gallery/stories"))?.data?.filter(
+  const moreGalleries = (await getData("categories/bangladesh/stories"))?.data?.filter(
     (item: any) => item?.id !== detailsData?.story?.id
   );
 
