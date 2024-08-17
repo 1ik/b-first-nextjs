@@ -2,7 +2,7 @@ import { Ads } from "@bfirst/components-ads";
 import { BreadCrumb } from "@bfirst/components-breadcrumb";
 import { SocialShare } from "@bfirst/components-social-share";
 import { SquareGrid } from "@bfirst/components-square-grid";
-import { getAuthorProfileUrl, getImageUrl, getNewsUrl } from "@bfirst/utilities";
+import { getAdsUrl, getAuthorProfileUrl, getImageUrl, getNewsUrl } from "@bfirst/utilities";
 import moment from "moment-timezone";
 import { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
@@ -11,6 +11,7 @@ import Navbar from "../../../../components/Navbar/Navbar";
 import PhotoAlbum from "../../../../components/PhotoAlbum/PhotoAlbum";
 import TrendingTopics from "../../../../components/TrendingTopics/TrendingTopics";
 import { getData } from "../../../../utils/dataFetch";
+import { getAdsObj } from "../../../../utils/getAdsObj";
 
 export async function generateMetadata({ params }): Promise<Metadata> {
   const data = await getData(`story/details/${params.id}`);
@@ -109,6 +110,10 @@ export default async function PhotoGalleryDetails({ params }) {
     (item: any) => item?.id !== detailsData?.story?.id
   );
 
+  // data for ads
+  const ads_list = await getData("ads?page=photo_gallery_details");
+  const ads_obj = getAdsObj(ads_list?.ads);
+
   return (
     <>
       {/* ====== webpage schema markup */}
@@ -123,8 +128,8 @@ export default async function PhotoGalleryDetails({ params }) {
       <Navbar activeLink={`/${detailsData?.story.categories[0].name.toLowerCase()}`} />
 
       <TrendingTopics className="desktop-container mb-8" title="Trending Topics" items={trendingTopics} />
-      <Ads className="my-4" src="/ads/banner_ibbl.gif" alt="Ads" showHeader={false} />
-
+      <Ads src={getAdsUrl(ads_obj?.banner1)} alt="Ads" />
+ 
       <div className="desktop-container">
         <BreadCrumb
           links={[
