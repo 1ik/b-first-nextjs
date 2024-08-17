@@ -109,7 +109,7 @@ export default async function VideoGalleryDetails({ params }) {
   const moreVideoNews = categoryNews?.filter((item: { id: number }) => item.id !== detailsData.story.id);
 
   // data for ads
-  const ads_list = await getData("ads?page=news_details");
+  const ads_list = await getData("ads?page=video_gallery_details");
   const ads_obj = getAdsObj(ads_list?.ads);
 
   return (
