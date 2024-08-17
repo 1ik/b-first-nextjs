@@ -176,6 +176,24 @@ const ad_items = [
       },
     ],
   },
+  {
+    page: "photo_gallery_details",
+    ads: [
+      {
+        title: "Top news top banner",
+        position: "banner1",
+      },
+    ],
+  },
+  {
+    page: "video_gallery_details",
+    ads: [
+      {
+        title: "Top news top banner",
+        position: "banner1",
+      },
+    ],
+  },
 ];
 
 export function AdsList() {
