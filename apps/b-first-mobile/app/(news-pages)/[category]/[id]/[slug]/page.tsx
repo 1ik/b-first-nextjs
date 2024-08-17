@@ -16,6 +16,7 @@ import TrendingTopics from "../../../../components/TrendingTopics/TrendingTopics
 import { getData } from "../../../../utils/dataFetch";
 import filterCategory from "../../../../utils/filterCategory";
 import { getAdsObj } from "../../../../utils/getAdsObj";
+import PhotoAlbum from "../../../../components/PhotoAlbum/PhotoAlbum";
 export async function generateMetadata({ params }): Promise<Metadata> {
   const data = await getData(`story/details/${params.id}`);
 
@@ -232,6 +233,8 @@ export default async function NewsDetails({ params }) {
                 className="featured_video mb-3"
                 dangerouslySetInnerHTML={{ __html: detailsData?.story?.meta?.featured_video }}
               ></div>
+            ) : detailsData?.story?.meta?.featured_element === "image" ? (
+              <PhotoAlbum data={detailsData?.story} />
             ) : (
               <div>
                 <ImagePreview
