@@ -10,7 +10,6 @@ import { ItemSlide } from "@bfirst/components-item-slide";
 import { ListGrid } from "@bfirst/components-list-grid";
 import { PhotoAlbum } from "@bfirst/components-photo-album";
 import { SquareGrid } from "@bfirst/components-square-grid";
-import { VideoAlbum } from "@bfirst/components-video-album";
 import { getAdsUrl } from "@bfirst/utilities";
 import moment from "moment";
 import Navbar from "./components/Navbar/Navbar";
@@ -123,7 +122,7 @@ export default async function Index() {
 
       <Ads className="my-12" src={getAdsUrl(ads_obj?.banner3)} alt="Ads" />
 
-      {videoGalleryNews?.length ? (
+      {/* {videoGalleryNews?.length ? (
         <>
           <div className="bg-black text-white py-4 mt-8">
             <div className="desktop-container my-10">
@@ -132,7 +131,7 @@ export default async function Index() {
           </div>
           <Ads className="my-12" src={getAdsUrl(ads_obj?.banner4)} alt="Ads" />
         </>
-      ) : null}
+      ) : null} */}
 
       <div className="bg-[#F6EFEF] dark:bg-dark-300 py-8">
         <div className="desktop-container">
