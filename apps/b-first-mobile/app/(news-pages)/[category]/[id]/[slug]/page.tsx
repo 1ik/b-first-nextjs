@@ -144,7 +144,7 @@ export default async function NewsDetails({ params }) {
 
       <div className="px-3">
         {/* TRENDING TOPICS */}
-        <Ads className="my-4" src={getAdsUrl(ads_obj?.banner1)} alt="Ads" />
+        {/* <Ads className="my-4" src={getAdsUrl(ads_obj?.banner1)} alt="Ads" /> */}
         <TrendingTopics className="mb-8" items={trendingTopics} title="Trending" />
 
         {/* BREADCRUMB */}
@@ -200,7 +200,7 @@ export default async function NewsDetails({ params }) {
                 ))}
             </div>
 
-            <Ads className="my-8" src={getAdsUrl(ads_obj?.square3)} alt="Ads" />
+            <Ads className="my-8" src={getAdsUrl(ads_obj?.square2)} alt="Ads" />
 
             {/* LATEST NEWS SECTION LIST */}
             <div>
@@ -214,10 +214,10 @@ export default async function NewsDetails({ params }) {
               />
             </div>
 
-            <Ads className="my-8" src={getAdsUrl(ads_obj?.square4)} alt="Ads" />
+            {/* <Ads className="my-8" src={getAdsUrl(ads_obj?.square4)} alt="Ads" /> */}
 
             {/* TOP NEWS SECTION LIST */}
-            <div>
+            <div className="mt-8">
               <AccentHeader header="Top News" color="#119F9F" />
               <ItemList listType="number" data={topNews?.slice(0, 6)} titleFontSize="16px" />
             </div>

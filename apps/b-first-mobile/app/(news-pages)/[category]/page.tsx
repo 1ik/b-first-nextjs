@@ -62,7 +62,7 @@ export default async function CategoryPage({ params }) {
 
       <Navbar activeLink={`/${category}`} />
       <div className="px-3">
-        <Ads className="my-6" src={getAdsUrl(ads_obj?.banner1)} alt="Ads" />
+        {/* <Ads className="my-6" src={getAdsUrl(ads_obj?.banner1)} alt="Ads" /> */}
         <TrendingTopics className="my-4" title="Trending" items={trendingTopics?.data} />
         <BreadCrumb
           className="my-10"
@@ -116,7 +116,7 @@ export default async function CategoryPage({ params }) {
           </div>
           <div>
             <div>
-              <Ads className="my-8" src={getAdsUrl(ads_obj?.square1)} alt="Ads" />
+              <Ads className="my-8" src={getAdsUrl(ads_obj?.square2)} alt="Ads" />
               <AccentHeader header="Latest News" color="#5D26D1" />
               <ItemList
                 listType="circle"
@@ -130,7 +130,7 @@ export default async function CategoryPage({ params }) {
               <Ads className="my-8" src={getAdsUrl(ads_obj?.square2)} alt="Ads" />
               <AccentHeader header="Top News" color="#119F9F" />
               <ItemList data={topNews?.data.slice(0, 6)} listType="number" titleFontSize="16px" />
-              <Ads className="my-8" src={getAdsUrl(ads_obj?.square3)} alt="Ads" />
+              <Ads className="my-8" src={getAdsUrl(ads_obj?.square2)} alt="Ads" />
             </div>
           </div>
         </div>

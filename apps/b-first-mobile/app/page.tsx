@@ -93,7 +93,7 @@ export default async function Index() {
 
       <Navbar />
       <div className="px-3">
-        <Ads className="my-6" src={getAdsUrl(ads_obj?.banner1)} alt="Ads" />
+        {/* <Ads className="my-6" src={getAdsUrl(ads_obj?.banner1)} alt="Ads" /> */}
         <TrendingTopics className="my-4" items={trendingTopics} title="Trending" />
 
         {/* TOP NEWS SECTION */}
@@ -180,8 +180,8 @@ export default async function Index() {
         {/* ON THIS DAY SECTION */}
         <div className="grid grid-cols-1 sm:grid-cols-7 gap-4 mt-5">
           <div className="sm:col-span-3 flex flex-col items-center gap-4">
-            <Ads src={getAdsUrl(ads_obj?.square3)} alt="Ads" />
-            <Ads src={getAdsUrl(ads_obj?.square4)} alt="Ads" />
+            <Ads src={getAdsUrl(ads_obj?.square2)} alt="Ads" />
+            {/* <Ads src={getAdsUrl(ads_obj?.square2)} alt="Ads" /> */}
           </div>
           <div className="sm:col-span-4">
             <AccentHeader header="On this day" color="#A49A46" />
@@ -200,7 +200,7 @@ export default async function Index() {
         {/* GRID LIST SECTION */}
         <Ads className="my-6" src={getAdsUrl(ads_obj?.banner10)} alt="Ads" />
         <ListGridMob className="desktop-container" data={[bangladeshNews, worldNews, sportsNews, techNews]} />
-        <Ads className="my-6" src={getAdsUrl(ads_obj?.banner11)} alt="Ads" />
+        <Ads className="my-6" src={getAdsUrl(ads_obj?.banner2)} alt="Ads" />
       </div>
     </>
   );

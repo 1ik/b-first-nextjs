@@ -30,7 +30,7 @@ export default async function Latest() {
     <>
       <Navbar />
       <TrendingTopics className="desktop-container mb-8" items={trendingTopics} title="Trending Topics" />
-      <Ads className="my-4" src={getAdsUrl(ads_obj?.banner1)} alt="Ads" />
+      {/* <Ads className="my-4" src={getAdsUrl(ads_obj?.banner1)} alt="Ads" /> */}
       <div className="desktop-container">
         {/*============= BREDCRUMB ========== */}
         <BreadCrumb
@@ -72,7 +72,7 @@ export default async function Latest() {
               <ItemList data={topNews.data?.slice(0, 6)} listType="number" />
             </div>
 
-            <Ads className="mb-6" src={getAdsUrl(ads_obj?.square2)} alt="Ads" />
+            {/* <Ads className="mb-6" src={getAdsUrl(ads_obj?.square1)} alt="Ads" /> */}
           </div>
         </div>
       </div>

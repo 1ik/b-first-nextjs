@@ -98,13 +98,13 @@ export default async function Index() {
       <Navbar />
       <TrendingTopics className="desktop-container mb-8" items={trendingTopics} title="Trending Topics" />
 
-      <Ads className="my-10" src={getAdsUrl(ads_obj?.banner1)} alt="Ads" />
+      {/* <Ads className="my-10" src={getAdsUrl(ads_obj?.banner1)} alt="Ads" /> */}
 
       <BlockNews
         className="desktop-container"
         data={topNews?.slice(0, 8)}
-        ads1={ads_obj?.square1}
-        ads2={ads_obj?.square2}
+        ads1={ads_obj?.square2}
+        ads2={ads_obj?.square5}
       />
       <Ads className="my-10" src={getAdsUrl(ads_obj?.banner2)} alt="Ads" />
 
@@ -120,7 +120,7 @@ export default async function Index() {
         </div>
       </div>
 
-      <Ads className="my-12" src={getAdsUrl(ads_obj?.banner3)} alt="Ads" />
+      <Ads className="my-12" src={getAdsUrl(ads_obj?.banner2)} alt="Ads" />
 
       {/* {videoGalleryNews?.length ? (
         <>
@@ -161,7 +161,7 @@ export default async function Index() {
               moreNewsLink="/latest"
               titleFontSize="18px"
             />
-            <Ads className="mt-6" src={getAdsUrl(ads_obj?.square3)} alt="Ads" />
+            <Ads className="mt-6" src={getAdsUrl(ads_obj?.square2)} alt="Ads" />
           </div>
         </div>
       </div>
@@ -176,7 +176,7 @@ export default async function Index() {
             <ItemList data={latestNews?.slice(6, 12)} listType="number" titleFontSize="18px" />
           </div>
         </div>
-        <Ads className="mt-4" src={getAdsUrl(ads_obj?.banner7)} alt="Ads" />
+        <Ads className="mt-4" src={getAdsUrl(ads_obj?.banner2)} alt="Ads" />
       </div>
 
       <div className="desktop-container my-10">
@@ -190,7 +190,7 @@ export default async function Index() {
             <ItemList data={educationNews?.slice(0, 7)} listType="circle" moreNewsLink="/latest" titleFontSize="18px" />
           </div>
         </div>
-        <Ads className="my-10" src={getAdsUrl(ads_obj?.banner8)} alt="Ads" />
+        {/* <Ads className="my-10" src={getAdsUrl(ads_obj?.banner8)} alt="Ads" /> */}
       </div>
 
       <div className="desktop-container mt-10">
@@ -205,25 +205,25 @@ export default async function Index() {
             <AccentHeader header="On this day" color="#A49A46" />
             <ItemList showImage showDate data={onThisDay} />
             <div className="flex flex-col mt-8 gap-y-8 items-center">
-              <Ads className="mt-4" src={getAdsUrl(ads_obj?.square4)} alt="Ads" />
+              {/* <Ads className="mt-4" src={getAdsUrl(ads_obj?.square4)} alt="Ads" /> */}
               <Ads className="mt-4" src={getAdsUrl(ads_obj?.square5)} alt="Ads" />
             </div>
           </div>
         </div>
-        <Ads className="my-8" src={getAdsUrl(ads_obj?.banner9)} alt="Ads" />
+        <Ads className="my-8" src={getAdsUrl(ads_obj?.banner2)} alt="Ads" />
       </div>
 
       <BlockNews5
         sectionHeader="entertainment"
         headerColor="#5D26D1"
         className="desktop-container"
-        ads1={ads_obj?.square6}
-        ads2={ads_obj?.square7}
+        ads1={ads_obj?.square2}
+        ads2={ads_obj?.square5}
         data={entertainmentNews}
       />
       <Ads className="my-16" src={getAdsUrl(ads_obj?.banner10)} alt="Ads" />
       <ListGrid className="desktop-container" data={[bangladeshNews, worldNews, sportsNews, techNews]} />
-      <Ads className="my-12" src={getAdsUrl(ads_obj?.banner11)} alt="Ads" />
+      {/* <Ads className="my-12" src={getAdsUrl(ads_obj?.banner11)} alt="Ads" /> */}
     </>
   );
 }

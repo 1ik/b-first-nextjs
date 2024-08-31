@@ -25,7 +25,7 @@ export function BlockNewsMob({ data, className, ads1,ads2 }: BlockNewsMobProps) 
                 <div className={`mt-5 pt-5 border-t dark:border-dark-300`}>
                   <ItemCardHorizontal data={item} size="sm" />
                 </div>
-                {index === 1 && <Ads className="my-4 sm:hidden" src={getAdsUrl(ads1)} alt="Ads" />}
+                {/* {index === 1 && <Ads className="my-4 sm:hidden" src={getAdsUrl(ads1)} alt="Ads" />} */}
               </div>
             ))}
             <Ads className="my-4 sm:hidden" src={getAdsUrl(ads2)} alt="Ads" />

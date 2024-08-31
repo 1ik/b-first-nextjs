@@ -145,7 +145,7 @@ export default async function NewsDetails({ params }) {
       <TrendingTopics className="desktop-container mb-8" title="Trending Topics" items={trendingTopics} />
 
       <div className="desktop-container">
-        <Ads src={getAdsUrl(ads_obj?.banner1)} alt="Ads" />
+        {/* <Ads src={getAdsUrl(ads_obj?.banner1)} alt="Ads" /> */}
 
         <BreadCrumb
           links={[
@@ -214,7 +214,7 @@ export default async function NewsDetails({ params }) {
                 ))}
             </div>
 
-            <Ads className="my-8" src={getAdsUrl(ads_obj?.square2)} alt="Ads" />
+            <Ads className="my-8" src={getAdsUrl(ads_obj?.square1)} alt="Ads" />
           </div>
           <div className="col-span-2">
             <div
@@ -258,7 +258,7 @@ export default async function NewsDetails({ params }) {
             ) : null}
           </div>
           <div>
-            <Ads className="my-10" src={getAdsUrl(ads_obj?.square3)} alt="Ads" />
+            {/* <Ads className="my-10" src={getAdsUrl(ads_obj?.square2)} alt="Ads" /> */}
             <div>
               <AccentHeader header="Latest News" color="#5D26D1" />
               <ItemList
@@ -270,7 +270,7 @@ export default async function NewsDetails({ params }) {
               />
             </div>
             <div>
-              <Ads className="my-10" src={getAdsUrl(ads_obj?.square4)} alt="Ads" />
+              <Ads className="my-10" src={getAdsUrl(ads_obj?.square1)} alt="Ads" />
               <AccentHeader header="Top News" color="#119F9F" />
               <ItemList data={topNews?.slice(0, 6)} listType="number" titleFontSize="18px" />
             </div>

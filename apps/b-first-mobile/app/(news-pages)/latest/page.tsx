@@ -29,7 +29,7 @@ export default async function Latest() {
     <>
       <Navbar />
       <div className="px-3">
-        <Ads className="mx-auto my-4" src={getAdsUrl(ads_obj?.banner1)} alt="Ads" />
+        {/* <Ads className="mx-auto my-4" src={getAdsUrl(ads_obj?.banner1)} alt="Ads" /> */}
         <TrendingTopics className="desktop-container mb-8" items={trendingTopics} title="Trending Topics" />
         {/*============= BREDCRUMB ========== */}
         <div className="mt-4">

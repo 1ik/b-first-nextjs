@@ -34,7 +34,7 @@ export default async function Topic({ params }) {
     <>
       <Navbar />
       <div className="px-3">
-        <Ads className="my-4" src={getAdsUrl(ads_obj?.banner1)} alt="Ads" />
+        {/* <Ads className="my-4" src={getAdsUrl(ads_obj?.banner1)} alt="Ads" /> */}
         <TrendingTopics className="mb-8" items={trendingTopics} title="Trending" />
         <div>
           <BreadCrumb

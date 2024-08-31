@@ -63,7 +63,7 @@ export default async function CategoryPage({ params }) {
       <Navbar activeLink={`/${category}`} />
       <TrendingTopics className="desktop-container mb-8" title="Trending Topics" items={trendingTopics?.data} />
       <div className="desktop-container">
-        <Ads src={getAdsUrl(ads_obj?.banner1)} alt="Ads" />
+        {/* <Ads src={getAdsUrl(ads_obj?.banner1)} alt="Ads" /> */}
         <BreadCrumb
           className="my-10"
           links={[
@@ -74,8 +74,8 @@ export default async function CategoryPage({ params }) {
           ]}
         />
         <BlockNews6 data={categroyNews?.data.slice(0, 4)} />
-        <Ads className="my-10" src={getAdsUrl(ads_obj?.banner2)} alt="Ads" />
-        <div className="grid grid-cols-4 gap-x-10">
+        {/* <Ads className="my-10" src={getAdsUrl(ads_obj?.banner3)} alt="Ads" /> */}
+        <div className="grid grid-cols-4 gap-x-10 mt-10">
           <div className="col-span-3 flex flex-col">
             {categroyNews?.data.slice(4).map((news) => (
               <ItemCardHorizontal
@@ -91,7 +91,7 @@ export default async function CategoryPage({ params }) {
             <LoadMore initialPage={2} lastPage={categroyNews?.meta.last_page} url={`categories/${category}/stories`} />
           </div>
           <div>
-            <Ads className="mb-8" src={getAdsUrl(ads_obj?.square1)} alt="Ads" />
+            <Ads className="mb-8" src={getAdsUrl(ads_obj?.square2)} alt="Ads" />
             <div>
               <AccentHeader header="Latest News" color="#5D26D1" />
               <ItemList
@@ -108,7 +108,7 @@ export default async function CategoryPage({ params }) {
               <AccentHeader header="Top News" color="#119F9F" />
               <ItemList data={topNews?.data.slice(0, 6)} listType="number" titleFontSize="18px" />
             </div>
-            <Ads className="my-10 sticky top-20" src={getAdsUrl(ads_obj?.square3)} alt="Ads" />
+            {/* <Ads className="my-10 sticky top-20" src={getAdsUrl(ads_obj?.square3)} alt="Ads" /> */}
           </div>
         </div>
       </div>
