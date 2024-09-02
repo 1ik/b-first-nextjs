@@ -13,12 +13,27 @@ export const getImageUrl = (path: string, w?: number, h?: number, q?: number) =>
   return baseUrl + `/smartcrop?width=${w}&height=${h}&format=webp&quality=${q}&path=${path}`;
 };
 
+export const getAdsUrl = (path: string) => {
+  const baseUrl = `https://backend.bangladeshfirst.com`;
+  return baseUrl + `/${path}`;
+};
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const getNewsUrl = (news: any) =>
-  `/news/${news?.id}/${news?.title
+export const getNewsUrl = (news: any) => {
+  let slug: string;
+
+  if (news?.categories?.find((c: { name: string }) => c.name === "Video_Gallery")) {
+    slug = "video_gallery";
+  } else if (news?.categories?.find((c: { name: string }) => c.name === "Photo_Gallery")) {
+    slug = "photo_gallery";
+  } else {
+    slug = news?.categories?.[0].name.toLowerCase();
+  }
+  return `/${slug}/${news?.id}/${news?.title
     .replaceAll(" ", "-")
     .replace(/[^\w\s-]/g, "")
     .toLowerCase()}`;
+};
 
 export const getAuthorProfileUrl = (author: any) =>
   `/author/${author?.id}/${author?.name

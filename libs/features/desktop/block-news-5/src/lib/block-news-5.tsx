@@ -2,15 +2,18 @@ import { AccentHeader } from "@bfirst/components-accent-header";
 import { Ads } from "@bfirst/components-ads";
 import { ItemCardHorizontal } from "@bfirst/components-item-card-horizontal";
 import { ItemCardVertical } from "@bfirst/components-item-card-vertical";
+import { getAdsUrl } from "@bfirst/utilities";
 
 export interface BlockNews5Props {
   data: any;
   sectionHeader?: string;
   headerColor?: string;
   className?: string;
+  ads1?: any;
+  ads2?: any;
 }
 
-export function BlockNews5({ data, sectionHeader, headerColor, className }: BlockNews5Props) {
+export function BlockNews5({ data, sectionHeader, headerColor, className, ads1, ads2 }: BlockNews5Props) {
   return (
     <div className={className}>
       {sectionHeader && <AccentHeader header={sectionHeader} color={headerColor} />}
@@ -28,8 +31,8 @@ export function BlockNews5({ data, sectionHeader, headerColor, className }: Bloc
           <ItemCardVertical className="col-span-2" data={data?.[0]} size="lg" titleBold />
 
           <div className="flex flex-col gap-y-2 items-center">
-            <Ads src="/ads/Global.gif" alt="Ads" showHeader={false} />
-            <Ads src="/ads/sibl.png" alt="Ads" showHeader={false} />
+            <Ads className="mt-4" src={getAdsUrl(ads1)} alt="Ads" />
+            <Ads className="mt-4" src={getAdsUrl(ads2)} alt="Ads" />
           </div>
           {data?.slice(1, 4).map((item: any, index: number) => (
             <ItemCardVertical

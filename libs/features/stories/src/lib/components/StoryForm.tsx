@@ -19,7 +19,6 @@ export type Inputs = {
   altheadline?: string;
   standfirst: string;
   imageCaption?: string;
-  videoLink?: string;
 };
 
 export type StoryInputs = {
@@ -74,7 +73,6 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
     authors: "",
     tags: "",
     categories: "",
-    body: "",
     featuredImage: "",
     featuredVideo: "",
   });
@@ -120,7 +118,6 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
   };
 
   const onValidate = function (data: Inputs) {
-    if (!body) setError((cur) => ({ ...cur, body: "Body is required" }));
     if (featuredElement === "video" && !featuredVideo)
       return setError((cur) => ({ ...cur, featuredVideo: "Featured Video is required" }));
     if (!featuredImgUrl) return setError((cur) => ({ ...cur, featuredImage: "Featured Image is required" }));
@@ -141,7 +138,6 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
         altheadline: data.altheadline,
         intro: data.standfirst,
         more_images: moreImages,
-        video_link: data.videoLink,
       },
       authors: selectedAuthors.map((author) => (author as { id: number }).id),
       tags: selectedTags.map((tag) => (tag as { id: number }).id),
@@ -280,11 +276,9 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
                 onOpenEmbedLink={setIsOpenEmbedLink}
                 onChange={(content) => {
                   setBody(content);
-                  setError((cur) => ({ ...cur, body: "" }));
                 }}
                 defaultValue={defaultData && defaultData.story.content}
               />
-              <p className="text-xs p-1 font-light">{error.body}</p>
             </div>
 
             {/* ========== tags ========== */}
@@ -317,13 +311,6 @@ export function StoryForm({ btnLabel, onSubmit, loading, isError, defaultData }:
               />
               <p className="text-xs p-1 font-light">{error.categories}</p>
             </div>
-
-            {/* ======== Video embed link ======== */}
-            <Input
-              defaultValue={defaultData?.story.meta.video_link}
-              {...register("videoLink")}
-              label="Video Embed Link"
-            />
 
             {/* ========== media browser for more images ======= */}
             <div>

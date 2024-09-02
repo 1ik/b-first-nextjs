@@ -1,9 +1,7 @@
-"use client";
-
 import { useEffect, useRef, useState } from "react";
 
 // Import Swiper React components
-import { Swiper, SwiperClass, SwiperSlide } from "swiper/react";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
 import "swiper/css";
@@ -11,51 +9,28 @@ import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
 
-// import required modules
-import { FreeMode, Navigation, Thumbs } from "swiper/modules";
+// Import Swiper required modules
+import { FreeMode, Navigation } from "swiper/modules";
 
-// import LightGallery React components
-import LightGallery from "lightgallery/react";
-
-// Import LightGallery styles
-import "lightgallery/css/lg-fullscreen.css";
-import "lightgallery/css/lg-zoom.css";
-import "lightgallery/css/lightgallery.css";
-
-// Import LightGallery plugins
-import lgFullScreen from "lightgallery/plugins/fullscreen";
-import lgZoom from "lightgallery/plugins/zoom";
-
-import { Loader } from "@bfirst/components-loader";
+import { ImagePreview } from "@bfirst/components-image-preview";
 import { getImageUrl } from "@bfirst/utilities";
-import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
+import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
 
 export interface PhotoAlbumMobileProps {
-  images: any;
-  bottomSlidesPerView?: number;
+  data: any;
 }
 
-const lgSettings = {
-  counter: false,
-  enableSwipe: false,
-  enableDrag: false,
-  controls: false,
-  infiniteZoom: true,
-  showZoomInOutIcons: true,
-  actualSize: false,
-  plugins: [lgZoom, lgFullScreen],
-};
-
-export function PhotoAlbumMobile({ images, bottomSlidesPerView = 2 }: PhotoAlbumMobileProps) {
-  const [thumbsSwiper, setThumbsSwiper] = useState<SwiperClass | null>(null);
+export function PhotoAlbumMobile({ data }: PhotoAlbumMobileProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isMounted, setIsMounted] = useState(false);
 
-  const slides = [...images];
-
-  while (slides.length < bottomSlidesPerView) {
-    slides.push({});
-  }
+  const images = [
+    {
+      imageUrl: data?.meta?.featured_image,
+      imageCaption: data?.meta?.imageCaption,
+    },
+    ...(data?.meta?.more_images || []),
+  ];
 
   const nextButtonRef = useRef(null);
   const prevButtonRef = useRef(null);
@@ -71,20 +46,12 @@ export function PhotoAlbumMobile({ images, bottomSlidesPerView = 2 }: PhotoAlbum
           <Swiper
             onActiveIndexChange={(e) => setActiveIndex(e.activeIndex)}
             spaceBetween={10}
-            thumbs={{ swiper: thumbsSwiper }}
-            modules={[FreeMode, Navigation, Thumbs]}
+            modules={[FreeMode, Navigation]}
+            navigation={{ prevEl: prevButtonRef.current, nextEl: nextButtonRef.current }}
           >
             {images?.map((image: any, index: number) => (
               <SwiperSlide key={index}>
-                <LightGallery {...lgSettings}>
-                  <div data-src={getImageUrl(image.imageUrl)}>
-                    <img
-                      className="w-full aspect-video object-cover cursor-pointer"
-                      src={getImageUrl(image.imageUrl)}
-                      alt={image?.image_caption}
-                    />
-                  </div>
-                </LightGallery>
+                <ImagePreview imageUrl={getImageUrl(image.imageUrl)} imageCaption={image.imageCaption} />
               </SwiperSlide>
             ))}
           </Swiper>
@@ -95,57 +62,30 @@ export function PhotoAlbumMobile({ images, bottomSlidesPerView = 2 }: PhotoAlbum
             alt={images?.[0]?.image_caption}
           />
         )}
-        <p className="montserrat-regular text-xs mt-2">{images?.[activeIndex].imageCaption}</p>
       </div>
-
-      <div className="flex items-center gap-x-2 my-4">
-        {isMounted ? (
-          <>
-            {images?.length > bottomSlidesPerView && (
-              <button className="text-3xl disabled:opacity-30" ref={prevButtonRef}>
-                <FaAngleLeft />
-              </button>
-            )}
-
-            <Swiper
-              onSwiper={setThumbsSwiper}
-              spaceBetween={10}
-              slidesPerView={bottomSlidesPerView}
-              freeMode={true}
-              watchSlidesProgress={true}
-              modules={[FreeMode, Navigation, Thumbs]}
-              navigation={{
-                nextEl: nextButtonRef.current,
-                prevEl: prevButtonRef.current,
-              }}
+      <div className="my-2 flex items-center justify-between gap-x-3">
+        <p className="montserrat-bold text-sm py-2">
+          {activeIndex + 1} of {images?.length}
+        </p>
+        {images.length > 1 ? (
+          <div className="flex gap-x-0.5 text-xl">
+            <button
+              className="px-4 py-2 rounded-md hover:bg-dark-300/25 disabled:hover:bg-transparent disabled:opacity-50"
+              ref={prevButtonRef}
             >
-              {slides?.map((image: any, index: number) => (
-                <SwiperSlide key={index}>
-                  {image?.imageUrl ? (
-                    <img
-                      className={`${
-                        activeIndex === index ? "opacity-100" : "opacity-70"
-                      } border-red-600 w-full aspect-video object-cover cursor-pointer`}
-                      src={getImageUrl(image.imageUrl)}
-                      alt={image?.imageCaption}
-                    />
-                  ) : (
-                    <div></div>
-                  )}
-                </SwiperSlide>
-              ))}
-            </Swiper>
-            {images?.length > bottomSlidesPerView && (
-              <button className="text-3xl disabled:opacity-30" ref={nextButtonRef}>
-                <FaAngleRight />
-              </button>
-            )}
-          </>
-        ) : (
-          <div className="w-full h-20">
-            <Loader />
+              <FaArrowLeftLong />
+            </button>
+            <button
+              className="px-3 py-2 rounded-md hover:bg-dark-300/25 disabled:hover:bg-transparent disabled:opacity-50"
+              ref={nextButtonRef}
+            >
+              <FaArrowRightLong />
+            </button>
           </div>
-        )}
+        ) : null}
+      </div>
+      <div>
+        <p>{images[activeIndex]?.imageCaption}</p>
       </div>
     </>
   );

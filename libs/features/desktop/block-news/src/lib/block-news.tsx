@@ -1,13 +1,15 @@
 import { Ads } from "@bfirst/components-ads";
 import { ItemCardHorizontal } from "@bfirst/components-item-card-horizontal";
 import { ItemCardVertical } from "@bfirst/components-item-card-vertical";
+import { getAdsUrl } from "@bfirst/utilities";
 import { Key } from "react";
 
 /* eslint-disable-next-line */
 export interface BlockNewsProps {
   data: any;
-  ads1?: string;
-  ads2?: string;
+  ads1?: any;
+  ads2?: any;
+  sectionHeader?: string;
   className?: string;
 }
 
@@ -44,8 +46,8 @@ export function BlockNews({ data, ads1, ads2, className }: BlockNewsProps) {
       </div>
 
       <div className="w-[20%] flex flex-col gap-y-2 justify-between text-center">
-        <Ads src={ads1} alt="Ads" showHeader={false} />
-        <Ads src={ads2} alt="Ads" showHeader={false} />
+        <Ads src={getAdsUrl(ads1)} alt="Ads" />
+        <Ads src={getAdsUrl(ads2)} alt="Ads" />
       </div>
     </div>
   );

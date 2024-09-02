@@ -30,3 +30,23 @@ iframe {
   height: auto !important;
   aspect-ratio: 16/9 !important;
 }
+
+/* css for embeded related news */
+@media (max-width: 768px) {
+  #embeded-related-news p {
+    font-size: 14px !important;
+    font-weight: 500 !important;
+  }
+}
+
+#embeded-related-news a {
+  transition: 300ms;
+  -webkit-transition: 300ms;
+  -moz-transition: 300ms;
+  -ms-transition: 300ms;
+  -o-transition: 300ms;
+}
+
+#embeded-related-news a:hover {
+  color: #1779ba;
+}
