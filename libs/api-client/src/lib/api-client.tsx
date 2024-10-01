@@ -34,10 +34,13 @@ export function useGet(uri: string, options?: any) {
     queryFn: () =>
       axios.get(`${baseUrl}/${uri}`, {
         ...options,
+        timeout: 5000, // Timeout of 5 seconds for the request
         headers: {
           Authorization: token ? `Bearer ${token}` : null,
         },
       }),
+    retry: 3,  // Retry failed requests up to 3 times
+    retryDelay: attempt => Math.min(1000 * 2 ** attempt, 3000), // Exponential backoff, with a max of 3 seconds
   });
 
   return { isError, isSuccess, isPending, data: data?.data, error, refetch };
@@ -61,11 +64,14 @@ export function usePost(uri: string) {
     mutationKey: [uri],
     mutationFn: (body: any) => {
       return axios.post(`${baseUrl}/${uri}`, body, {
+        timeout: 5000,  // Timeout of 5 seconds for the request
         headers: {
           Authorization: token ? `Bearer ${token}` : null,
         },
       });
     },
+    retry: 3,  // Retry failed requests up to 3 times
+    retryDelay: attempt => Math.min(1000 * 2 ** attempt, 3000), // Exponential backoff, with a max of 3 seconds
   });
 
   return { request, requestAsync, isError, isSuccess, isPending, data, error };
@@ -87,11 +93,14 @@ export function usePut(uri: string) {
   } = useMutation({
     mutationFn: (payload: any) => {
       return axios.put(`${baseUrl}/${uri}`, payload, {
+        timeout: 5000,  // Timeout of 5 seconds for the request
         headers: {
           Authorization: token ? `Bearer ${token}` : null,
         },
       });
     },
+    retry: 3,  // Retry failed requests up to 3 times
+    retryDelay: attempt => Math.min(1000 * 2 ** attempt, 3000), // Exponential backoff, with a max of 3 seconds
   });
 
   return { request, isError, isSuccess, isPending, data, error };
@@ -113,11 +122,14 @@ export function useDelete(uri: string) {
   } = useMutation({
     mutationFn: () => {
       return axios.delete(`${baseUrl}/${uri}`, {
+        timeout: 5000,  // Timeout of 5 seconds for the request
         headers: {
           Authorization: token ? `Bearer ${token}` : null,
         },
       });
     },
+    retry: 3,  // Retry failed requests up to 3 times
+    retryDelay: attempt => Math.min(1000 * 2 ** attempt, 3000), // Exponential backoff, with a max of 3 seconds
   });
 
   return { request, isError, isSuccess, isPending, data, error };
