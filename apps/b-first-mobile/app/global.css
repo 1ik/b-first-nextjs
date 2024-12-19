@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Styles for news details body (removed by default due to tailwind preflight) */
+
+.story-body table,
+.story-body table th,
+.story-body table td {
+  border: 1px solid gray;
+}
+
+.story-body ul {
+  list-style: disc inside;
+}
+
+.story-body ol {
+  list-style: decimal inside;
+}
+
+/* wihtout '!important' news body iframes overflows */
+iframe {
+  width: 100% !important;
+  max-height: 400px !important;
+}
+
+/* need iframe related css for youtube embeded video to maintain the ratio on the view */
+.featured_video > iframe {
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 16/9 !important;
+}
+
+/* css for embeded related news */
+@media (max-width: 768px) {
+  #embeded-related-news p {
+    font-size: 14px !important;
+    font-weight: 500 !important;
+  }
+}
+
+#embeded-related-news a {
+  transition: 300ms;
+  -webkit-transition: 300ms;
+  -moz-transition: 300ms;
+  -ms-transition: 300ms;
+  -o-transition: 300ms;
+}
+
+#embeded-related-news a:hover {
+  color: #1779ba;
+}
